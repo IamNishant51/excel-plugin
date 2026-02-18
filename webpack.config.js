@@ -24,6 +24,7 @@ module.exports = async (env, options) => {
     },
     output: {
       clean: true,
+      path: require("path").resolve(__dirname, "docs"), // Build to 'docs' for GitHub Pages hosting
     },
     resolve: {
       extensions: [".ts", ".html", ".js"],

@@ -38,6 +38,7 @@ const CATEGORIZED_ACTIONS: Record<ActionCategory, { icon: string; label: string;
 
   // ── Data Cleanup ──
   cleanup: [
+    { icon: "eraser",      label: "Smart Clean 🧹",       prompt: "Analyze the used range. Perform 'Smart Cleaning': (1) Trim all whitespace. (2) Convert text-numbers to real numbers. (3) Standardize dates to Short Date format. (4) Remove completely empty rows. (5) Remove duplicate rows. (6) Convert text columns to Proper Case. Write a summary of changes in a new cell comment." },
     { icon: "eraser",      label: "Remove Duplicates",    prompt: "Find and remove duplicate rows from the data, keeping the first occurrence of each." },
     { icon: "eraser",      label: "Trim Spaces",          prompt: "Trim all leading and trailing whitespace from every cell in the used range." },
     { icon: "eraser",      label: "Fix Empty Rows",       prompt: "Find and delete all completely empty rows within the used data range." },
@@ -50,6 +51,7 @@ const CATEGORIZED_ACTIONS: Record<ActionCategory, { icon: string; label: string;
 
   // ── Natural Language Formula Generator ──
   formulas: [
+    { icon: "formula",     label: "Formula Doctor 🚑",    prompt: "Analyze the active cell/formula. (1) Explain the logic in a cell note. (2) If there is an error (#VALUE, #REF), FIX it and explain the fix. (3) If it's a value, suggest a formula. Expertly debug." },
     { icon: "formula",     label: "Auto SUM",             prompt: "Add a SUM formula at the bottom of each numeric column with a bold TOTAL label in column A." },
     { icon: "formula",     label: "AVERAGE Row",          prompt: "Add an AVERAGE formula at the bottom of each numeric column with a bold AVERAGE label." },
     { icon: "formula",     label: "COUNT & COUNTA",       prompt: "Add COUNT and COUNTA formulas at the bottom to count numeric and non-empty cells in each column." },
@@ -76,6 +78,7 @@ const CATEGORIZED_ACTIONS: Record<ActionCategory, { icon: string; label: string;
 
   // ── Report Automation Engine ──
   reports: [
+    { icon: "barChart",    label: "Instant Dashboard 📊", prompt: "Analyze the dataset. Create a new sheet 'Dashboard'. Generate 3 professional charts (Bar, Line, Pie) for key trends. Add 'Big Number' cards at top for Totals. Apply modern theme. Make it executive-ready." },
     { icon: "barChart",    label: "Sales Report",         prompt: "Generate a professional monthly sales report from the existing data. Do ALL of this: (1) Add a report title row at the top: 'Monthly Sales Report' in bold, font size 14, merged across all columns. (2) Add today's date below the title, right-aligned. (3) Format the data with professional headers (dark navy background, white bold text) and alternating row colors. (4) Add SUM, AVERAGE, MAX, and MIN summary rows at the bottom with labels. (5) Create a clustered column chart from the data showing performance by category. Position it below the summary. (6) Add thin borders throughout and auto-fit all columns." },
     { icon: "barChart",    label: "Financial Summary",    prompt: "Build a financial summary report from the data. (1) Add a 'Financial Summary' title merged at top, bold, font size 14. (2) Format headers professionally with dark green (#1B4D3E) background and white text. (3) Format all currency columns as $#,##0.00. (4) Add a TOTAL row with SUM formulas, bold, with a top border. (5) Add a 'Net' or 'Difference' calculation if applicable. (6) Apply conditional formatting: positive numbers in green, negative in red. (7) Create a pie chart showing the breakdown. (8) Auto-fit columns and freeze header row." },
     { icon: "trendUp",     label: "Performance Review",   prompt: "Create a team performance report from the data. (1) Add a 'Team Performance Report' title at top, merged, bold, font size 14. (2) Professional header formatting with indigo (#2B3A67) background, white text. (3) Add RANK column based on the primary numeric metric column. (4) Add conditional formatting: top 3 rows highlighted in light green (#E6F4EA), bottom 3 in light red (#FDE8E8). (5) Add AVERAGE, MAX, MIN summary rows at bottom. (6) Create a bar chart showing individual performance, sorted high to low. (7) Auto-fit and add borders." },
