@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
-  <Id>1012d631-21e7-4926-b20c-84c6c296efd4</Id>
+  <Id>5552d631-21e7-4926-b20c-84c6c296efd5</Id>
   <Version>1.0.0.0</Version>
-  <ProviderName>Contoso</ProviderName>
+  <ProviderName>SheetCraft AI Team</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="SheetCraft AI"/>
-  <Description DefaultValue="AI-powered Excel automation agent."/>
+  <Description DefaultValue="Your professional AI assistant for Excel automation, analysis, and formatting."/>
   <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-64.png"/>
-  <SupportUrl DefaultValue="https://www.contoso.com/help"/>
+  <SupportUrl DefaultValue="https://localhost:3000/help"/>
   <AppDomains>
-    <AppDomain>https://www.contoso.com</AppDomain>
+    <AppDomain>https://localhost:3000</AppDomain>
     <AppDomain>https://api.groq.com</AppDomain>
   </AppDomains>
   <Hosts>
@@ -68,18 +68,18 @@
         <bt:Image id="Icon.80x80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
+        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://localhost:3000/help"/>
         <bt:Url id="Commands.Url" DefaultValue="https://localhost:3000/commands.html"/>
         <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GetStarted.Title" DefaultValue="Get started with SheetCraft AI!"/>
+        <bt:String id="GetStarted.Title" DefaultValue="Get started with SheetCraft AI"/>
         <bt:String id="CommandsGroup.Label" DefaultValue="SheetCraft AI"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Open SheetCraft AI"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Launch SheetCraft"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="GetStarted.Description" DefaultValue="Your AI assistant is ready. Go to the HOME tab and click 'Open SheetCraft AI' to start automating."/>
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Open the SheetCraft AI Assistant"/>
+        <bt:String id="GetStarted.Description" DefaultValue="Your AI assistant is ready. Click 'Launch SheetCraft' on the Home tab to start."/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Open SheetCraft AI sidebar"/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>

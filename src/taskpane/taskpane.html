@@ -27,18 +27,17 @@
             <div id="docs-panel" class="panel" style="display: none;">
                 <h3>What can SheetCraft AI do?</h3>
                 <div class="docs-grid">
-                    <div class="doc-item"><span class="doc-icon" data-icon="barChart"></span><div><strong>Charts</strong><p>Create any chart type — column, bar, line, pie, area, scatter, radar, doughnut</p></div></div>
-                    <div class="doc-item"><span class="doc-icon" data-icon="table"></span><div><strong>Tables</strong><p>Generate formatted tables, add headers, totals row, styles</p></div></div>
-                    <div class="doc-item"><span class="doc-icon" data-icon="paintbrush"></span><div><strong>Formatting</strong><p>Bold, colors, borders, alignment, number formats, merge cells, zebra stripes</p></div></div>
-                    <div class="doc-item"><span class="doc-icon" data-icon="formula"></span><div><strong>Formulas</strong><p>SUM, AVERAGE, VLOOKUP, IF, COUNTIF, SUMIF, and any Excel formula</p></div></div>
+                    <div class="doc-item"><span class="doc-icon" data-icon="paintbrush"></span><div><strong>Smart Formatter</strong><p>Say "make this professional" and get instant clean formatting, spacing, fonts, colors, alignment</p></div></div>
+                    <div class="doc-item"><span class="doc-icon" data-icon="formula"></span><div><strong>Formula Generator</strong><p>Describe what you need in plain English — get VLOOKUP, SUMIF, INDEX/MATCH, any formula</p></div></div>
+                    <div class="doc-item"><span class="doc-icon" data-icon="barChart"></span><div><strong>Report Automation</strong><p>Generate monthly sales, financial, or performance reports with charts in one click</p></div></div>
+                    <div class="doc-item"><span class="doc-icon" data-icon="table"></span><div><strong>Tables & Charts</strong><p>Create formatted tables, column/bar/line/pie charts, dashboards</p></div></div>
                     <div class="doc-item"><span class="doc-icon" data-icon="sortAsc"></span><div><strong>Sort & Filter</strong><p>Sort by any column, apply AutoFilter, multi-column sorting</p></div></div>
                     <div class="doc-item"><span class="doc-icon" data-icon="checkSquare"></span><div><strong>Validation</strong><p>Dropdown lists, number constraints, date limits, error alerts</p></div></div>
                     <div class="doc-item"><span class="doc-icon" data-icon="trendUp"></span><div><strong>Conditional Formatting</strong><p>Color scales, data bars, icon sets, highlight rules</p></div></div>
-                    <div class="doc-item"><span class="doc-icon" data-icon="snowflake"></span><div><strong>Freeze Panes</strong><p>Freeze header rows or columns for better navigation</p></div></div>
+                    <div class="doc-item"><span class="doc-icon" data-icon="eraser"></span><div><strong>Data Cleanup</strong><p>Remove duplicates, trim spaces, fix formats, standardize case</p></div></div>
+                    <div class="doc-item"><span class="doc-icon" data-icon="snowflake"></span><div><strong>Freeze & Protect</strong><p>Freeze header rows, protect sheets with custom permissions</p></div></div>
                     <div class="doc-item"><span class="doc-icon" data-icon="columns"></span><div><strong>Worksheets</strong><p>Add, rename, delete, copy sheets, change tab colors</p></div></div>
-                    <div class="doc-item"><span class="doc-icon" data-icon="lock"></span><div><strong>Protection</strong><p>Protect/unprotect sheets with custom permissions</p></div></div>
-                    <div class="doc-item"><span class="doc-icon" data-icon="search"></span><div><strong>Find & Highlight</strong><p>Search for values and highlight matches</p></div></div>
-                    <div class="doc-item"><span class="doc-icon" data-icon="eraser"></span><div><strong>Clean Data</strong><p>Clear formatting, contents, or everything. Remove duplicates</p></div></div>
+                    <div class="doc-item"><span class="doc-icon" data-icon="fileTemplate"></span><div><strong>Templates</strong><p>Budget trackers, invoices, employee lists, project trackers, grade books</p></div></div>
                 </div>
                 <p class="docs-hint">Just describe what you need in plain English — SheetCraft handles the rest.</p>
             </div>
@@ -162,13 +161,17 @@
                             <span class="cat-icon" data-icon="broom"></span>
                             <span>Cleanup</span>
                         </button>
-                        <button class="category-tab" data-category="analysis">
-                            <span class="cat-icon" data-icon="pieChart"></span>
-                            <span>Analysis</span>
+                        <button class="category-tab" data-category="formulas">
+                            <span class="cat-icon" data-icon="formula"></span>
+                            <span>Formulas</span>
                         </button>
                         <button class="category-tab" data-category="format">
                             <span class="cat-icon" data-icon="palette"></span>
                             <span>Format</span>
+                        </button>
+                        <button class="category-tab" data-category="reports">
+                            <span class="cat-icon" data-icon="barChart"></span>
+                            <span>Reports</span>
                         </button>
                         <button class="category-tab" data-category="templates">
                             <span class="cat-icon" data-icon="fileTemplate"></span>
@@ -246,10 +249,35 @@
                 </div>
 
                 <!-- Loading Status -->
-                <div class="sideload-status">
+                <div class="sideload-status" id="loading-status">
                     <div class="sideload-pulse"></div>
-                    <span>Connecting to Excel...</span>
+                    <span id="loading-text">Initializing SheetCraft...</span>
                 </div>
+                
+                <!-- Fallback Script for Loading Issues -->
+                <script>
+                    setTimeout(function() {
+                        var appBody = document.getElementById("app-body");
+                        if (!appBody || appBody.style.display === "none") {
+                            var status = document.getElementById("loading-status");
+                            if (status) {
+                                document.getElementById("loading-text").innerText = "Taking a while...";
+                                var help = document.createElement("div");
+                                help.style.cssText = "margin-top:12px;font-size:11px;color:#d32f2f;background:#ffebee;padding:8px;border-radius:6px;max-width:260px;line-height:1.4;";
+                                help.innerHTML = "<strong>Stuck?</strong><br>1. Open this link in Edge/Chrome<br>2. Accept 'Unsafe' certificate<br>3. Restart Excel";
+                                
+                                var link = document.createElement("a");
+                                link.href = "https://localhost:3000/taskpane.html";
+                                link.target = "_blank";
+                                link.innerText = "Open Debug Link";
+                                link.style.cssText = "display:block;margin-top:8px;font-weight:600;color:#d32f2f;text-decoration:underline;";
+                                
+                                help.appendChild(link);
+                                status.appendChild(help);
+                            }
+                        }
+                    }, 4000); // Show help after 4 seconds
+                </script>
             </div>
         </section>
     </body>

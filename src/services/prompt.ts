@@ -10,21 +10,24 @@ ENVIRONMENT (already declared, do NOT redeclare):
 - Excel: namespace for enums
 
 CRITICAL RULES:
-1. Output ONLY code. No markdown, no explanations, no comments.
-2. Do NOT use Excel.run or redeclare sheet/context.
-3. EVERY row in a data array MUST have the EXACT same number of columns. Double-check this.
-4. Dates must be strings like "01/15/2020" or "2020-01-15", NEVER numeric serial numbers.
-5. ALWAYS call r.format.autofitColumns() AND r.format.autofitRows() after writing data.
-6. Use getResizedRange: startCell.getResizedRange(data.length-1, data[0].length-1)
-7. NEVER read properties without .load() + await context.sync() first.
-8. numberFormat MUST be a 2D array matching dimensions. For N rows: Array.from({length:N},()=>["fmt"])
-9. Do NOT call .select() on large ranges.
+1. Output ONLY execution-ready JS code. No markdown.
+2. Do NOT redeclare: context, sheet, Excel.
+3. SAFETY: NEVER use variables (cr, ws, rng) without calculating/defining them first.
+4. READ DATA: To read entire sheet, use: const usedRange = sheet.getUsedRange(); usedRange.load("values,rowCount,columnCount"); await context.sync();
+5. WRITE DATA: Ensure arrays are perfectly rectangular (same column count).
+6. DATES: Use strings "YYYY-MM-DD". DO NOT use serial numbers.
+7. FORMATTING: ALWAYS call sheet.getUsedRange().format.autofitColumns() as the FINAL step.
+8. CHARTS: Define data range explicitly (const chartRange = sheet.getRange("..."));
+9. SYNC: Await context.sync() frequently, esp. after loading properties.
 
-BANNED (crashes):
-chart.setTitle() → chart.title.text="X"
-range.setValues() → range.values=[...]
+BANNED (Will Crash):
+r.getColumnCount() / r.getRowCount() → usage of non-existent methods (use .columnCount / .rowCount property)
+message.alert() / console.log() → UI not visible
+range.select() → performance kill
+chart.setTitle → chart.title.text
+range.setValues → range.values
 range.font.bold → range.format.font.bold
-range.merge() → range.merge(false)
+range.getItem() → range.getCell(row, col)
 range.getColumnCount → load("columnCount")+sync
 SpreadsheetApp → NOT Google Apps Script
 

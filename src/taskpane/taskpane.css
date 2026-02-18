@@ -207,9 +207,22 @@ html, body {
 }
 
 
-/* ═══════════════════════════════════════════════════════════════ */
-/* PANELS — Docs & Settings                                        */
-/* ═══════════════════════════════════════════════════════════════ */
+/* ─── Header ─── */
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 16px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--card-border);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+/* ... (skip unchanged) ... */
+
+/* ─── Panels (Docs / Settings) ─── */
 .panel {
     padding: 16px;
     background: var(--card);
@@ -219,7 +232,7 @@ html, body {
 
 .panel h3 {
     font-size: 11px;
-    font-weight: 650;
+    font-weight: 700; /* Fixed from 650 */
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--text-3);
