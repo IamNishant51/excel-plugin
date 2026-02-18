@@ -1,10 +1,19 @@
-/* global console, document, Excel, Office */
+/* global console, Excel, document, window, Office */
 import "./taskpane.css";
+import { callLLM, getConfig, saveConfig, fetchOllamaModels, GROQ_MODELS, LLMConfig } from "../services/llm.service";
 import { SYSTEM_PROMPT } from "../services/prompt";
 import { CHAT_PROMPT } from "../services/chat-prompt";
-import { callLLM, getConfig, saveConfig, fetchOllamaModels, LLMConfig } from "../services/llm.service";
 import { getCachedResponse, cacheResponse } from "../services/cache";
+import * as pdfjsLib from 'pdfjs-dist';
 import { Icons } from "../services/icons";
+
+// Worker setup for PDF.js
+try {
+  // @ts-ignore
+  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+} catch (e) {
+  console.warn("PDF Worker setup failed:", e);
+}
 
 // ─── Types ─────────────────────────────────────────────────────
 type Mode = "planning" | "agent";
@@ -22,6 +31,7 @@ let currentCategory: ActionCategory = "cleanup";
 const chatHistory: ChatMessage[] = [];
 let chatConversation: { role: "system" | "user" | "assistant"; content: string }[] = [];
 let isChatBusy = false;
+let attachedFile: { name: string; type: "image" | "pdf"; data: string[] } | null = null; // state for file uploads
 
 // ─── Quick Actions by Category ─────────────────────────────────
 const CATEGORIZED_ACTIONS: Record<ActionCategory, { icon: string; label: string; prompt: string }[]> = {
@@ -150,11 +160,19 @@ Office.onReady((info) => {
 
   // Chat Actions
   document.getElementById("chat-send").onclick = sendChatMessage;
-  // document.getElementById("chat-clear").onclick = clearChat; // Check ID match
   const clearBtn = document.getElementById("chat-clear");
   if (clearBtn) clearBtn.onclick = clearChat;
   
   setupChatInput();
+
+  // File Upload Handlers
+  document.getElementById("file-upload-btn").onclick = () => document.getElementById("file-input").click();
+  document.getElementById("file-input").onchange = (e) => handleFileSelect(e, false);
+  document.getElementById("file-remove").onclick = () => clearFile(false);
+
+  document.getElementById("agent-file-btn").onclick = () => document.getElementById("agent-file-input").click();
+  document.getElementById("agent-file-input").onchange = (e) => handleFileSelect(e, true);
+  document.getElementById("agent-file-remove").onclick = () => clearFile(true);
 
   // Category Tabs
   document.querySelectorAll(".category-tab").forEach((tab) => {
@@ -614,10 +632,17 @@ export async function runAICommand(): Promise<void> {
   const promptInput = document.getElementById("prompt-input") as HTMLTextAreaElement;
   const button = document.getElementById("run") as HTMLButtonElement;
 
-  const userPrompt = promptInput.value.trim();
-  if (!userPrompt) {
-    showStatus(statusEl, "info", "Please enter a command.");
+  let userPrompt = promptInput.value.trim();
+
+  // Handle File Input
+  if (!userPrompt && !attachedFile) {
+    showStatus(statusEl, "info", "Please enter a command or attach a file.");
     return;
+  }
+  
+  // Default prompt for files
+  if (attachedFile && !userPrompt) {
+    userPrompt = `Analyze the attached ${attachedFile.type}. Extract all tabular data and write valid Excel JS code to populate the active sheet. Format headers and auto-fit columns.`;
   }
 
   // UI: loading
@@ -633,17 +658,43 @@ export async function runAICommand(): Promise<void> {
     let code: string;
     let fromCache = false;
 
-    // Check cache first
-    const cached = getCachedResponse(userPrompt);
+    // Check cache (SKIP if file attached)
+    const cached = !attachedFile ? getCachedResponse(userPrompt) : null;
+    
     if (cached) {
       code = cached;
       fromCache = true;
       cacheBadge.style.display = "inline-block";
     } else {
-      code = await callLLM([
-        { role: "system", content: SYSTEM_PROMPT },
-        { role: "user", content: userPrompt },
-      ]);
+      // Construct Message
+      const messages: any[] = [{ role: "system", content: SYSTEM_PROMPT }];
+      
+      if (attachedFile) {
+          // Force AI to reconstruct the FULL document, not just tables
+          const systemDirective = `
+IMPORTANT INSTRUCTION: 
+1. Recreate the ENTIRE document content in Excel. Do NOT just extract tables.
+2. Extract all Titles, Paragraphs, Lists, and Footer text.
+3. Layout: Use merged cells for main titles. Use separate rows for sections. Wrap text for paragraphs.
+4. Tables: Create standard Excel Tables for data.
+5. Formatting: Match bold/italic/colors (e.g. Red for errors).
+6. Goal: The Excel sheet should start with "TEMPLATING BASICS", then "INTRODUCTION", etc. down to the table.`;
+
+          const contentText = (userPrompt || "Recreate this document perfectly in Excel.") + "\n\n" + systemDirective;
+          const contentParts: any[] = [{ type: "text", text: contentText }];
+          
+          attachedFile.data.forEach(url => {
+            contentParts.push({ type: "image_url", image_url: { url } });
+          });
+          messages.push({ role: "user", content: contentParts });
+      } else {
+          messages.push({ role: "user", content: userPrompt });
+      }
+
+      code = await callLLM(messages);
+      
+      // Don't cache file uploads (too strict)
+      if (attachedFile) fromCache = true; // Hack to prevent caching below
     }
 
     debugEl.innerText = code;
@@ -737,4 +788,93 @@ async function executeExcelCode(code: string): Promise<void> {
     }
     await context.sync();
   });
+}
+// ─── File Handling Logic ───────────────────────────────────────
+async function handleFileSelect(event: Event, isAgent: boolean = false) {
+  const input = event.target as HTMLInputElement;
+  if (!input.files || input.files.length === 0) return;
+  const file = input.files[0];
+
+  const btnId = isAgent ? "agent-file-btn" : "file-upload-btn";
+  const btn = document.getElementById(btnId);
+  const originalHtml = btn.innerHTML;
+  btn.innerHTML = `<span class="btn-spinner"></span>`;
+
+  try {
+    if (file.type === "application/pdf") {
+      const arrayBuffer = await file.arrayBuffer();
+      const images = await renderPdfToImages(arrayBuffer);
+      attachedFile = { name: file.name, type: "pdf", data: images };
+    } else if (file.type.startsWith("image/")) {
+      const base64 = await fileToBase64(file);
+      attachedFile = { name: file.name, type: "image", data: [base64] };
+    } else {
+      throw new Error("Unsupported file type. Please upload PDF or Image.");
+    }
+    updateFilePreview(true, isAgent);
+  } catch (error: any) {
+    console.error(error);
+    showStatus(document.getElementById("status-message"), "error", "Error reading file: " + error.message);
+    input.value = ""; 
+    updateFilePreview(false, isAgent);
+  } finally {
+    btn.innerHTML = originalHtml;
+  }
+}
+
+function updateFilePreview(show: boolean, isAgent: boolean = false) {
+  const wrapperId = isAgent ? "agent-file-preview" : "file-preview-container";
+  const nameId = isAgent ? "agent-file-name" : "file-preview-name";
+  const inputId = isAgent ? "agent-file-input" : "file-input";
+
+  const container = document.getElementById(wrapperId);
+  if (!show || !attachedFile) {
+    container.style.display = "none";
+    if (!isAgent) attachedFile = null; // Clear state if removing? 
+    // Wait, removing clears state. Uploading overwrites.
+    (document.getElementById(inputId) as HTMLInputElement).value = "";
+    return;
+  }
+  
+  container.style.display = "flex";
+  document.getElementById(nameId).innerText = attachedFile.name;
+  
+  // Also clear the OTHER mode's file if any? No, let's keep it simple.
+  // Ideally we share state but only show preview in active mode.
+}
+
+function clearFile(isAgent: boolean = false) {
+    attachedFile = null;
+    updateFilePreview(false, isAgent);
+}
+
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+async function renderPdfToImages(buffer: ArrayBuffer): Promise<string[]> {
+  // @ts-ignore
+  const pdf = await pdfjsLib.getDocument(buffer).promise;
+  const images: string[] = [];
+  // Limit to 2 pages to save memory (especially for local AI)
+  const maxPages = Math.min(pdf.numPages, 2); 
+  
+  for (let i = 1; i <= maxPages; i++) {
+    const page = await pdf.getPage(i);
+    // Use 1.0 scale to keep image size manageable for local vision models
+    const viewport = page.getViewport({ scale: 1.0 }); 
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    if (!context) continue;
+    canvas.height = viewport.height;
+    canvas.width = viewport.width;
+    await page.render({ canvasContext: context, viewport }).promise;
+    images.push(canvas.toDataURL("image/png"));
+  }
+  return images;
 }

@@ -689,15 +689,77 @@ select.form-input {
     background: transparent;
     font-family: var(--font);
     font-size: 13px;
-    color: var(--text);
-    padding: 8px 0;
+    line-height: 1.4;
+    padding: 6px 0;
+    color: var(--text-1);
     resize: none;
     outline: none;
+    max-height: 120px;
     min-height: 20px;
-    max-height: 84px;
-    line-height: 1.5;
 }
 
+/* Agent Footer Layout */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Original btn-clip (updated) */
+.btn-clip {
+    background: none;
+    border: none;
+    color: var(--text-3);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+.btn-clip:hover {
+    background: var(--surface-hover);
+    color: var(--primary);
+}
+
+.file-preview {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-1);
+}
+.file-thumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-right: 8px;
+}
+.file-remove {
+    background: none;
+    border: none;
+    color: var(--text-3);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+}
+.file-center {
+    display: flex;
+    align-items: center;
+}
 #chat-input::placeholder { color: var(--text-3); }
 
 .btn-send {

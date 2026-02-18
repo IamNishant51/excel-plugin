@@ -31,33 +31,53 @@ range.getItem() → range.getCell(row, col)
 range.getColumnCount → load("columnCount")+sync
 SpreadsheetApp → NOT Google Apps Script
 
-EXAMPLE — Employee/Teacher Sheet (FOLLOW THIS EXACT PATTERN):
-const data = [
-  ["Name", "Role", "Salary", "Joining Date"],
-  ["John Doe", "Teacher", 55000, "03/15/2019"],
-  ["Jane Smith", "Principal", 72000, "01/08/2015"],
-  ["Bob Johnson", "Teacher", 48000, "06/22/2020"],
-  ["Alice Brown", "Teacher", 51000, "09/10/2018"],
-  ["Mike Davis", "Teacher", 46000, "11/03/2021"]
+MANDATORY HELPER FUNCTION (Copy/Paste this EXACTLY at start of your code):
+function writeData(sheet, startCell, data) {
+    if (!data || data.length === 0) return null;
+    const rows = data.length;
+    // Find max columns (handle ragged arrays)
+    const cols = Math.max(...data.map(r => r ? r.length : 0)); 
+    if (cols === 0) return null;
+    // Normalize data (pad with empty string)
+    const normalized = data.map(r => {
+        const row = r ? [...r] : [];
+        while (row.length < cols) row.push("");
+        return row;
+    });
+    // Write to safe range
+    const range = sheet.getRange(startCell).getResizedRange(rows - 1, cols - 1);
+    range.values = normalized;
+    range.format.autofitColumns();
+    return range; // Return range for further formatting
+}
+
+EXAMPLE USAGE:
+// 1. Write Title
+writeData(sheet, "A1", [["TEMPLATING BASICS"]]); // Single cell writing is safe
+
+// 2. Write Table Data (Ragged rows are auto-fixed)
+const tableData = [
+  ["Item", "Qty", "Price"],
+  ["Apple", 5, 1.2],
+  ["Banana", 10] // Missing column is auto-padded with ""
 ];
-const r = sheet.getRange("A1").getResizedRange(data.length - 1, data[0].length - 1);
-r.values = data;
-const hdr = r.getRow(0);
-hdr.format.font.bold = true;
-hdr.format.font.color = "#FFFFFF";
-hdr.format.fill.color = "#4472C4";
-const salaryCol = sheet.getRange("C2").getResizedRange(data.length - 2, 0);
-salaryCol.numberFormat = Array.from({length: data.length - 1}, () => ["$#,##0"]);
-const dateCol = sheet.getRange("D2").getResizedRange(data.length - 2, 0);
-dateCol.numberFormat = Array.from({length: data.length - 1}, () => ["mm/dd/yyyy"]);
-r.format.autofitColumns();
-r.format.autofitRows();
-r.format.borders.getItem("InsideHorizontal").style = Excel.BorderLineStyle.thin;
-r.format.borders.getItem("InsideVertical").style = Excel.BorderLineStyle.thin;
-r.format.borders.getItem("EdgeTop").style = Excel.BorderLineStyle.thin;
-r.format.borders.getItem("EdgeBottom").style = Excel.BorderLineStyle.thin;
-r.format.borders.getItem("EdgeLeft").style = Excel.BorderLineStyle.thin;
-r.format.borders.getItem("EdgeRight").style = Excel.BorderLineStyle.thin;
+const r = writeData(sheet, "A5", tableData);
+
+if (r) {
+  const hdr = r.getRow(0);
+  hdr.format.font.bold = true;
+  hdr.format.fill.color = "#4472C4";
+  hdr.format.font.color = "#FFFFFF";
+  
+  // Borders
+  const borderStyle = "Thin"; // Excel.BorderLineStyle.thin
+  r.format.borders.getItem("InsideHorizontal").style = borderStyle;
+  r.format.borders.getItem("InsideVertical").style = borderStyle;
+  r.format.borders.getItem("EdgeTop").style = borderStyle;
+  r.format.borders.getItem("EdgeBottom").style = borderStyle;
+  r.format.borders.getItem("EdgeLeft").style = borderStyle;
+  r.format.borders.getItem("EdgeRight").style = borderStyle;
+}
 
 OTHER PATTERNS:
 Chart: const ch=sheet.charts.add(Excel.ChartType.columnClustered,sheet.getRange("A1:C5"),Excel.ChartSeriesBy.auto); ch.title.text="Title"; ch.setPosition("F2","N18");

@@ -13,20 +13,25 @@ export interface LLMConfig {
   localModel?: string;  // Stored separately
 }
 
+interface ChatContentPart {
+  type: "text" | "image_url";
+  text?: string;
+  image_url?: { url: string };
+}
+
 interface ChatMessage {
   role: "system" | "user" | "assistant";
-  content: string;
+  content: string | ChatContentPart[];
 }
 
 const DEFAULT_GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 const DEFAULT_LOCAL_URL = "http://localhost:11434/v1/chat/completions";
-const DEFAULT_GROQ_MODEL = "llama-3.1-8b-instant";
-const DEFAULT_LOCAL_MODEL = "llama3";
+const DEFAULT_GROQ_MODEL = "llama-3.3-70b-versatile"; 
 
 // Valid Groq models (guaranteed to work)
 export const GROQ_MODELS = [
-  { id: "llama-3.1-8b-instant",      label: "Llama 3.1 8B (Fast, 131K TPM)" },
-  { id: "llama-3.3-70b-versatile",    label: "Llama 3.3 70B (Smart, 12K TPM)" },
+  { id: "llama-3.3-70b-versatile",    label: "Llama 3.3 70B (Smart, Text-Only)" },
+  { id: "meta-llama/llama-4-maverick-17b-128e-instruct", label: "Llama 4 Maverick (Vision)" },
   { id: "gemma2-9b-it",              label: "Gemma 2 9B (15K TPM)" },
   { id: "mixtral-8x7b-32768",        label: "Mixtral 8x7B (5K TPM)" },
 ];
@@ -47,8 +52,8 @@ export function getConfig(): LLMConfig {
   return {
     provider: "groq",
     apiKey: (typeof process !== "undefined" && process.env && process.env.GROQ_API_KEY) || "",
-    groqModel: DEFAULT_GROQ_MODEL,
-    localModel: DEFAULT_LOCAL_MODEL,
+    groqModel: "llama-3.3-70b-versatile",
+    localModel: "llama3",
   };
 }
 
@@ -65,15 +70,29 @@ function sleep(ms: number): Promise<void> {
 
 /**
  * Resolve the correct model for the active provider.
+ * Automatically handles Vision model selection.
  */
-function resolveModel(cfg: LLMConfig): string {
+function resolveModel(cfg: LLMConfig, hasImages: boolean = false): string {
   if (cfg.provider === "groq") {
-    const model = cfg.groqModel || cfg.model || DEFAULT_GROQ_MODEL;
-    // Validate: if it looks like a local model name (has ':'), use default
-    if (model.includes(":")) return DEFAULT_GROQ_MODEL;
+    // Force Llama 4 for Vision (Llama 3.3 Text Only rejects arrays)
+    if (hasImages) {
+        return "meta-llama/llama-4-maverick-17b-128e-instruct";
+    }
+
+    // Determine target model for text
+    let model = cfg.groqModel || "llama-3.3-70b-versatile";
+    
+    // Sanitize decommissioned models
+    if (model.includes("llama-3.2") && (model.includes("vision") || model.includes("preview"))) {
+        model = "llama-3.3-70b-versatile";
+    }
+    
+    if (model.includes(":")) return "llama-3.3-70b-versatile";
     return model;
   } else {
-    return cfg.localModel || cfg.model || DEFAULT_LOCAL_MODEL;
+    // Local Ollama usually handles multimodal via 'llava' or similar if installed
+    // We'll trust user config for now or fallback
+    return cfg.localModel || cfg.model || "llama3";
   }
 }
 
@@ -94,13 +113,15 @@ export async function callLLM(messages: ChatMessage[], config?: LLMConfig): Prom
     if (cfg.apiKey) headers["Authorization"] = `Bearer ${cfg.apiKey}`;
   }
 
-  const model = resolveModel(cfg);
+  // Check for images in the messages payload
+  const hasImages = messages.some(m => Array.isArray(m.content) && m.content.some(p => p.type === "image_url"));
+  const model = resolveModel(cfg, hasImages);
 
   const body = JSON.stringify({
     messages,
     model,
     temperature: 0.1,
-    max_tokens: 2048,
+    max_tokens: 4096, // Increased for long code gen from images
   });
 
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
@@ -125,12 +146,12 @@ export async function callLLM(messages: ChatMessage[], config?: LLMConfig): Prom
       throw new Error(`Model "${model}" not found. Go to Settings ⚙️ and select a valid model.`);
     }
 
-    // Other errors
+      // Other errors
     if (!response.ok) {
       const errText = await response.text();
-      // Friendly GPU OOM message
-      if (errText.includes("out of memory") || errText.includes("cudaMalloc")) {
-        throw new Error("GPU out of memory. Select a smaller model in Settings ⚙️ or switch to Groq (cloud).");
+      // Friendly OOM message (GPU/CPU/RAM)
+      if (errText.includes("out of memory") || errText.includes("cudaMalloc") || errText.includes("unable to allocate")) {
+        throw new Error("Local AI ran out of memory (RAM/VRAM). Try selecting a smaller model (e.g. 7b/8b), closing other apps, or switching to Groq (Cloud).");
       }
       throw new Error(`AI Error (${response.status}): ${errText.substring(0, 120)}`);
     }
