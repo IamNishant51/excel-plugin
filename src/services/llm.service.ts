@@ -5,12 +5,16 @@
  */
 
 export interface LLMConfig {
-  provider: "groq" | "local";
-  apiKey?: string;
+  provider: "groq" | "local" | "gemini" | "openai";
+  apiKey?: string;        // Storage for Groq Key (legacy name)
+  geminiKey?: string;     // Storage for Gemini Key
+  openaiKey?: string;     // Storage for OpenAI Key
   baseUrl?: string;
   model?: string;
-  groqModel?: string;   // Stored separately
-  localModel?: string;  // Stored separately
+  groqModel?: string;     
+  localModel?: string;    
+  geminiModel?: string;   
+  openaiModel?: string;   
 }
 
 interface ChatContentPart {
@@ -74,26 +78,75 @@ function sleep(ms: number): Promise<void> {
  */
 function resolveModel(cfg: LLMConfig, hasImages: boolean = false): string {
   if (cfg.provider === "groq") {
-    // Force Llama 4 for Vision (Llama 3.3 Text Only rejects arrays)
-    if (hasImages) {
-        return "meta-llama/llama-4-maverick-17b-128e-instruct";
-    }
-
-    // Determine target model for text
+    if (hasImages) return "meta-llama/llama-4-maverick-17b-128e-instruct";
     let model = cfg.groqModel || "llama-3.3-70b-versatile";
-    
-    // Sanitize decommissioned models
-    if (model.includes("llama-3.2") && (model.includes("vision") || model.includes("preview"))) {
-        model = "llama-3.3-70b-versatile";
-    }
-    
+    if (model.includes("llama-3.2") && (model.includes("vision") || model.includes("preview"))) return "llama-3.3-70b-versatile";
     if (model.includes(":")) return "llama-3.3-70b-versatile";
     return model;
+  } else if (cfg.provider === "gemini") {
+    return cfg.geminiModel || "gemini-1.5-flash";
+  } else if (cfg.provider === "openai") {
+    return cfg.openaiModel || "gpt-4o";
   } else {
-    // Local Ollama usually handles multimodal via 'llava' or similar if installed
-    // We'll trust user config for now or fallback
     return cfg.localModel || cfg.model || "llama3";
   }
+}
+
+async function callGemini(messages: ChatMessage[], model: string, apiKey: string): Promise<string> {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+    
+    // Transform messages to Gemini format
+    // System prompt not supported in basic messages, prepend to first user message
+    const contents: any[] = [];
+    let systemPrompt = "";
+
+    messages.forEach(msg => {
+        if (msg.role === "system") {
+            // Extract text from system prompt
+            const content = Array.isArray(msg.content) 
+                ? msg.content.map(c => c.text || "").join("") 
+                : msg.content;
+            systemPrompt += content + "\n\n";
+        } else {
+            const parts: any[] = [];
+            
+            // Add system prompt to first user message context if exists
+            if (systemPrompt && msg.role === "user" && contents.length === 0) {
+                 parts.push({ text: "SYSTEM INSTRUCTIONS:\n" + systemPrompt });
+                 systemPrompt = ""; // Clear it
+            }
+
+            if (typeof msg.content === "string") {
+                parts.push({ text: msg.content });
+            } else {
+                msg.content.forEach(c => {
+                    if (c.type === "text") parts.push({ text: c.text });
+                    if (c.type === "image_url" && c.image_url) {
+                        // Extract base64 (remove data:image/png;base64, prefix)
+                        const base64 = c.image_url.url.split(",")[1];
+                        if (base64) {
+                            parts.push({ inline_data: { mime_type: "image/png", data: base64 }});
+                        }
+                    }
+                });
+            }
+            contents.push({ role: msg.role === "assistant" ? "model" : "user", parts });
+        }
+    });
+
+    const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contents })
+    });
+
+    if (!response.ok) {
+        const err = await response.text();
+        throw new Error(`Gemini Error (${response.status}): ${err}`);
+    }
+
+    const data = await response.json();
+    return data.candidates?.[0]?.content?.parts?.[0]?.text || "";
 }
 
 /**
@@ -101,7 +154,35 @@ function resolveModel(cfg: LLMConfig, hasImages: boolean = false): string {
  */
 export async function callLLM(messages: ChatMessage[], config?: LLMConfig): Promise<string> {
   const cfg = config || getConfig();
+  
+  // Check for images in the messages payload
+  const hasImages = messages.some(m => Array.isArray(m.content) && m.content.some(p => p.type === "image_url"));
+  const model = resolveModel(cfg, hasImages);
 
+  // Gemini Handler
+  if (cfg.provider === "gemini") {
+      if (!cfg.geminiKey) throw new Error("Please enter your Google Gemini API Key in Settings.");
+      return callGemini(messages, model, cfg.geminiKey);
+  }
+
+  // OpenAI Handler
+  if (cfg.provider === "openai") {
+      if (!cfg.openaiKey) throw new Error("Please enter your OpenAI API Key in Settings.");
+      // Standard OpenAI format
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: { 
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${cfg.openaiKey}` 
+          },
+          body: JSON.stringify({ messages, model, temperature: 0.1, max_tokens: 4096 })
+      });
+      if (!response.ok) throw new Error(`OpenAI Error: ${await response.text()}`);
+      const data = await response.json();
+      return data.choices?.[0]?.message?.content || "";
+  }
+
+  // Legacy Handlers (Groq / Local)
   let url: string;
   const headers: Record<string, string> = { "Content-Type": "application/json" };
 
@@ -113,15 +194,11 @@ export async function callLLM(messages: ChatMessage[], config?: LLMConfig): Prom
     if (cfg.apiKey) headers["Authorization"] = `Bearer ${cfg.apiKey}`;
   }
 
-  // Check for images in the messages payload
-  const hasImages = messages.some(m => Array.isArray(m.content) && m.content.some(p => p.type === "image_url"));
-  const model = resolveModel(cfg, hasImages);
-
   const body = JSON.stringify({
     messages,
     model,
     temperature: 0.1,
-    max_tokens: 4096, // Increased for long code gen from images
+    max_tokens: 4096, 
   });
 
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {

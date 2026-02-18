@@ -324,24 +324,49 @@ function togglePanel(panelId: string): void {
 }
 
 // ─── Settings ──────────────────────────────────────────────────
+// ─── Settings ──────────────────────────────────────────────────
 function loadSettingsUI(): void {
   const config = getConfig();
-  (document.getElementById("setting-provider") as HTMLSelectElement).value = config.provider;
-  (document.getElementById("setting-api-key") as HTMLInputElement).value = config.apiKey || "";
-  (document.getElementById("setting-base-url") as HTMLInputElement).value = config.baseUrl || "";
-  (document.getElementById("setting-groq-model") as HTMLSelectElement).value = config.groqModel || config.model || "llama-3.1-8b-instant";
+  const providerSelect = document.getElementById("setting-provider") as HTMLSelectElement;
+  if (providerSelect) {
+      providerSelect.value = config.provider;
+      providerSelect.onchange = (e) => {
+        const p = (e.target as HTMLSelectElement).value;
+        updateProviderFields(p);
+        if (p === "local") loadOllamaModels();
+      };
+  }
+
+  // Populate inputs (safe checks)
+  const setVal = (id: string, val: string) => {
+      const el = document.getElementById(id) as HTMLInputElement | HTMLSelectElement;
+      if (el) el.value = val || "";
+  };
+
+  setVal("setting-api-key", config.apiKey); // Groq
+  setVal("setting-groq-model", config.groqModel || "llama-3.3-70b-versatile");
+  
+  setVal("setting-gemini-key", config.geminiKey);
+  setVal("setting-gemini-model", config.geminiModel || "gemini-1.5-flash");
+  
+  setVal("setting-openai-key", config.openaiKey);
+  setVal("setting-openai-model", config.openaiModel || "gpt-4o-mini");
+
+  setVal("setting-base-url", config.baseUrl);
+  // Local model is populated async
 
   updateProviderFields(config.provider);
-  (document.getElementById("setting-provider") as HTMLSelectElement).onchange = (e) => {
-    const p = (e.target as HTMLSelectElement).value as "groq" | "local";
-    updateProviderFields(p);
-    if (p === "local") loadOllamaModels();
-  };
 }
 
 function updateProviderFields(p: string): void {
-  document.getElementById("groq-fields").style.display = p === "groq" ? "block" : "none";
-  document.getElementById("local-fields").style.display = p === "local" ? "block" : "none";
+  const setDisplay = (id: string, show: boolean) => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = show ? "block" : "none";
+  };
+  setDisplay("groq-fields", p === "groq");
+  setDisplay("gemini-fields", p === "gemini");
+  setDisplay("openai-fields", p === "openai");
+  setDisplay("local-fields", p === "local");
 }
 
 async function loadOllamaModels(): Promise<void> {
@@ -349,15 +374,21 @@ async function loadOllamaModels(): Promise<void> {
   const statusEl = document.getElementById("model-status");
   const host = (document.getElementById("setting-base-url") as HTMLInputElement).value.trim() || "http://localhost:11434";
 
+  if (!select) return;
+
   select.innerHTML = `<option value="" disabled selected>Loading...</option>`;
-  statusEl.textContent = "";
-  statusEl.className = "model-status";
+  if (statusEl) {
+      statusEl.textContent = "";
+      statusEl.className = "model-status";
+  }
 
   const models = await fetchOllamaModels(host);
   if (models.length === 0) {
     select.innerHTML = `<option value="" disabled selected>No models found</option>`;
-    statusEl.textContent = "Ollama not running or no models installed";
-    statusEl.className = "model-status model-status-warn";
+    if (statusEl) {
+        statusEl.textContent = "Ollama not running or no models installed";
+        statusEl.className = "model-status model-status-warn";
+    }
     return;
   }
 
@@ -370,34 +401,53 @@ async function loadOllamaModels(): Promise<void> {
     if ((config.localModel || config.model) === m.name) opt.selected = true;
     select.appendChild(opt);
   });
-  statusEl.textContent = `${models.length} model${models.length > 1 ? "s" : ""} found`;
-  statusEl.className = "model-status model-status-ok";
+  if (statusEl) {
+      statusEl.textContent = `${models.length} model${models.length > 1 ? "s" : ""} found`;
+      statusEl.className = "model-status model-status-ok";
+  }
 }
 
 function handleSaveSettings(): void {
-  const provider = (document.getElementById("setting-provider") as HTMLSelectElement).value as "groq" | "local";
-  let config: LLMConfig;
+  const provider = (document.getElementById("setting-provider") as HTMLSelectElement).value as any;
+  const current = getConfig();
 
-  if (provider === "groq") {
-    config = {
-      provider: "groq",
-      apiKey: (document.getElementById("setting-api-key") as HTMLInputElement).value.trim(),
-      groqModel: (document.getElementById("setting-groq-model") as HTMLSelectElement).value || "llama-3.1-8b-instant",
-    };
-  } else {
-    const host = (document.getElementById("setting-base-url") as HTMLInputElement).value.trim() || "http://localhost:11434";
-    config = {
-      provider: "local",
-      baseUrl: `${host}/v1/chat/completions`,
-      localModel: (document.getElementById("setting-local-model") as HTMLSelectElement).value,
-    };
-  }
+  // Helper to read val
+  const getVal = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLSelectElement)?.value?.trim() || "";
 
-  saveConfig(config);
+  const newConfig: LLMConfig = {
+    ...current,
+    provider: provider,
+    
+    // Groq
+    apiKey: getVal("setting-api-key"),
+    groqModel: getVal("setting-groq-model"),
+
+    // Gemini
+    geminiKey: getVal("setting-gemini-key"),
+    geminiModel: getVal("setting-gemini-model"),
+
+    // OpenAI
+    openaiKey: getVal("setting-openai-key"),
+    openaiModel: getVal("setting-openai-model"),
+
+    // Local
+    baseUrl: getVal("setting-base-url") ? `${getVal("setting-base-url").replace(/\/v1.*$/, "")}/v1/chat/completions` : undefined,
+    localModel: getVal("setting-local-model") || current.localModel
+  };
+
+  saveConfig(newConfig);
+  
   const btn = document.getElementById("save-settings");
-  btn.textContent = "Saved ✓";
-  setTimeout(() => { btn.textContent = "Save"; }, 1200);
-  setTimeout(() => togglePanel("settings-panel"), 600);
+  if (btn) {
+      const originalText = btn.textContent;
+      btn.textContent = "Saved ✓";
+      setTimeout(() => { btn.textContent = originalText || "Save"; }, 1200);
+  }
+  
+  setTimeout(() => {
+      const panel = document.getElementById("settings-panel");
+      if (panel) panel.style.display = "none";
+  }, 600);
 }
 
 
