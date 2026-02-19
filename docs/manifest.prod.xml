@@ -75,13 +75,13 @@
         <bt:Url id="Taskpane.Url" DefaultValue="https://iamnishant51.github.io/excel-plugin/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GetStarted.Title" DefaultValue="Get started with SheetCraft AI"/>
-        <bt:String id="CommandsGroup.Label" DefaultValue="SheetCraft AI"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Launch SheetCraft"/>
+        <bt:String id="GetStarted.Title" DefaultValue="Get started with SheetOS AI"/>
+        <bt:String id="CommandsGroup.Label" DefaultValue="SheetOS AI"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Launch SheetOS"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="GetStarted.Description" DefaultValue="Your AI assistant is ready. Click 'Launch SheetCraft' on the Home tab to start."/>
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Open SheetCraft AI sidebar"/>
+        <bt:String id="GetStarted.Description" DefaultValue="Your AI assistant is ready. Click 'Launch SheetOS' on the Home tab to start."/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Open SheetOS AI sidebar"/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>

@@ -6,8 +6,8 @@
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="SheetOS AI"/>
   <Description DefaultValue="Your professional AI assistant for Excel automation, analysis, and formatting."/>
-  <IconUrl DefaultValue="https://[YOUR_HTTPS_DOMAIN]/assets/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://[YOUR_HTTPS_DOMAIN]/assets/icon-64.png"/>
+  <IconUrl DefaultValue="https://[YOUR_HTTPS_DOMAIN]/assets/icon-32-v2.png"/>
+  <HighResolutionIconUrl DefaultValue="https://[YOUR_HTTPS_DOMAIN]/assets/icon-64-v2.png"/>
   <SupportUrl DefaultValue="https://[YOUR_HTTPS_DOMAIN]/help"/>
   <AppDomains>
     <AppDomain>https://localhost:3000</AppDomain>
@@ -63,9 +63,9 @@
     </Hosts>
     <Resources>
       <bt:Images>
-        <bt:Image id="Icon.16x16" DefaultValue="https://[YOUR_HTTPS_DOMAIN]/assets/icon-16.png"/>
-        <bt:Image id="Icon.32x32" DefaultValue="https://[YOUR_HTTPS_DOMAIN]/assets/icon-32.png"/>
-        <bt:Image id="Icon.80x80" DefaultValue="https://[YOUR_HTTPS_DOMAIN]/assets/icon-80.png"/>
+        <bt:Image id="Icon.16x16" DefaultValue="https://[YOUR_HTTPS_DOMAIN]/assets/icon-16-v2.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://[YOUR_HTTPS_DOMAIN]/assets/icon-32-v2.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://[YOUR_HTTPS_DOMAIN]/assets/icon-80-v2.png"/>
       </bt:Images>
       <bt:Urls>
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://[YOUR_HTTPS_DOMAIN]/help"/>
@@ -73,13 +73,13 @@
         <bt:Url id="Taskpane.Url" DefaultValue="https://[YOUR_HTTPS_DOMAIN]/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GetStarted.Title" DefaultValue="Get started with SheetCraft AI"/>
-        <bt:String id="CommandsGroup.Label" DefaultValue="SheetCraft AI"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Launch SheetCraft"/>
+        <bt:String id="GetStarted.Title" DefaultValue="Get started with SheetOS AI"/>
+        <bt:String id="CommandsGroup.Label" DefaultValue="SheetOS AI"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Launch SheetOS"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="GetStarted.Description" DefaultValue="Your AI assistant is ready. Click 'Launch SheetCraft' on the Home tab to start."/>
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Open SheetCraft AI sidebar"/>
+        <bt:String id="GetStarted.Description" DefaultValue="Your AI assistant is ready. Click 'Launch SheetOS' on the Home tab to start."/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Open SheetOS AI sidebar"/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
