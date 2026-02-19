@@ -8,10 +8,12 @@
   <Description DefaultValue="Your professional AI assistant for Excel automation, analysis, and formatting."/>
   <IconUrl DefaultValue="https://iamnishant51.github.io/excel-plugin/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://iamnishant51.github.io/excel-plugin/assets/icon-64.png"/>
-  <SupportUrl DefaultValue="https://iamnishant51.github.io/excel-plugin/help"/>
+  <SupportUrl DefaultValue="https://iamnishant51.github.io/excel-plugin/help.html"/>
   <AppDomains>
     <AppDomain>https://iamnishant51.github.io/excel-plugin</AppDomain>
     <AppDomain>https://api.groq.com</AppDomain>
+    <AppDomain>https://api.openai.com</AppDomain>
+    <AppDomain>https://generativelanguage.googleapis.com</AppDomain>
   </AppDomains>
   <Hosts>
     <Host Name="Workbook"/>
@@ -68,7 +70,7 @@
         <bt:Image id="Icon.80x80" DefaultValue="https://iamnishant51.github.io/excel-plugin/assets/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://iamnishant51.github.io/excel-plugin/help"/>
+        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://iamnishant51.github.io/excel-plugin/help.html"/>
         <bt:Url id="Commands.Url" DefaultValue="https://iamnishant51.github.io/excel-plugin/commands.html"/>
         <bt:Url id="Taskpane.Url" DefaultValue="https://iamnishant51.github.io/excel-plugin/taskpane.html"/>
       </bt:Urls>
