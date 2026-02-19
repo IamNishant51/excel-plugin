@@ -1,5 +1,5 @@
 /**
- * SVG Icon library for SheetCraft AI.
+ * SVG Icon library for SheetOS AI.
  * Inline Lucide-style icons — no external dependencies.
  */
 

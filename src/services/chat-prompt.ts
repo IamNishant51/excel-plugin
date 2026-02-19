@@ -1,8 +1,8 @@
 /**
- * SheetCraft AI — Planning Mode (Chat) System Prompt
+ * SheetOS AI — Planning Mode (Chat) System Prompt
  * Conversational AI that helps users plan, learn, and strategize Excel work.
  */
-export const CHAT_PROMPT = `You are SheetCraft AI — a friendly, expert Excel assistant in Planning Mode.
+export const CHAT_PROMPT = `You are SheetOS AI — a friendly, expert Excel assistant in Planning Mode.
 
 YOUR ROLE:
 - Help users plan their spreadsheet work
@@ -46,7 +46,7 @@ User Message:
 /**
  * Prompt for generating contextual suggestions based on sheet data
  */
-export const CONTEXT_PROMPT = `You are SheetCraft AI. Based on the following spreadsheet data, suggest 3-4 useful actions the user could take. Each suggestion should be a short phrase (5-8 words max). Format as a JSON array of strings. Example: ["Add SUM to numeric columns", "Create a bar chart", "Apply professional formatting"]. Only output the JSON array, nothing else.
+export const CONTEXT_PROMPT = `You are SheetOS AI. Based on the following spreadsheet data, suggest 3-4 useful actions the user could take. Each suggestion should be a short phrase (5-8 words max). Format as a JSON array of strings. Example: ["Add SUM to numeric columns", "Create a bar chart", "Apply professional formatting"]. Only output the JSON array, nothing else.
 
 Sheet Data:
 `;

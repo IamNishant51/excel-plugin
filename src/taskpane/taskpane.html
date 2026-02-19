@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>SheetCraft AI</title>
+        <title>SheetOS AI</title>
         <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,8 +14,7 @@
         <main id="app-body" style="display: none;">
             <header class="app-header">
                 <div class="brand">
-                    <div class="logo" id="logo-icon"></div>
-                    <h1>SheetCraft <span class="highlight-text">AI</span></h1>
+                    <h1>SheetOS <span class="highlight-text">AI</span></h1>
                 </div>
                 <div class="header-actions">
                     <button id="docs-toggle" class="btn-icon" title="What can I do?"></button>
@@ -25,7 +24,7 @@
 
             <!-- Docs Panel -->
             <div id="docs-panel" class="panel" style="display: none;">
-                <h3>What can SheetCraft AI do?</h3>
+                <h3>What can SheetOS AI do?</h3>
                 <div class="docs-grid">
                     <div class="doc-item"><span class="doc-icon" data-icon="paintbrush"></span><div><strong>Smart Formatter</strong><p>Say "make this professional" and get instant clean formatting, spacing, fonts, colors, alignment</p></div></div>
                     <div class="doc-item"><span class="doc-icon" data-icon="formula"></span><div><strong>Formula Generator</strong><p>Describe what you need in plain English — get VLOOKUP, SUMIF, INDEX/MATCH, any formula</p></div></div>
@@ -39,7 +38,7 @@
                     <div class="doc-item"><span class="doc-icon" data-icon="columns"></span><div><strong>Worksheets</strong><p>Add, rename, delete, copy sheets, change tab colors</p></div></div>
                     <div class="doc-item"><span class="doc-icon" data-icon="fileTemplate"></span><div><strong>Templates</strong><p>Budget trackers, invoices, employee lists, project trackers, grade books</p></div></div>
                 </div>
-                <p class="docs-hint">Just describe what you need in plain English — SheetCraft handles the rest.</p>
+                <p class="docs-hint">Just describe what you need in plain English — SheetOS handles the rest.</p>
             </div>
 
             <!-- Settings Panel -->
@@ -83,8 +82,11 @@
                     <div class="form-group">
                         <label for="setting-gemini-model">Model</label>
                         <select id="setting-gemini-model" class="form-input">
-                            <option value="gemini-1.5-flash" selected>Gemini 1.5 Flash (Fast)</option>
-                            <option value="gemini-1.5-pro">Gemini 1.5 Pro (Smart)</option>
+                            <option value="gemini-1.5-flash" selected>Gemini 1.5 Flash (Latest)</option>
+                            <option value="gemini-1.5-flash-001">Gemini 1.5 Flash-001</option>
+                            <option value="gemini-1.5-flash-002">Gemini 1.5 Flash-002</option>
+                            <option value="gemini-1.5-flash-8b">Gemini 1.5 Flash-8B</option>
+                            <option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
                         </select>
                     </div>
                 </div>
@@ -149,9 +151,8 @@
                 <div id="chat-messages" class="chat-messages">
                     <!-- Welcome message -->
                     <div class="chat-welcome">
-                        <div class="welcome-icon" id="welcome-sparkle"></div>
+                        <img src="../../assets/icon-80-v2.png" alt="SheetOS Logo" style="width: 64px; height: 64px; margin-bottom: 16px;">
                         <h2>What are you working on?</h2>
-                        <p>I'm your spreadsheet thinking partner. Ask me about formulas, data strategies, best practices, or let me help you plan your next step.</p>
                         <div class="welcome-suggestions" id="chat-suggestions">
                             <!-- Dynamically populated -->
                         </div>
@@ -160,18 +161,12 @@
 
                 <!-- Chat Input -->
                 <div class="chat-input-area">
-                    <!-- File Preview -->
-                    <div id="file-preview-container" class="file-preview" style="display: none;">
-                        <div class="file-thumb">
-                            <span id="file-preview-icon"></span>
-                            <span id="file-preview-name" class="file-name">filename.pdf</span>
-                            <button id="file-remove" class="file-remove">×</button>
-                        </div>
-                    </div>
+                        <!-- File Preview -->
+                        <div id="file-preview-list" class="file-preview-list"></div>
                     
                     <div class="chat-input-card">
-                        <input type="file" id="file-input" accept="image/png, image/jpeg, application/pdf" style="display: none;" />
-                        <button id="file-upload-btn" class="btn-clip" title="Attach Image or PDF">
+                        <input type="file" id="file-input" accept="image/png, image/jpeg, application/pdf" multiple style="display: none;" />
+                        <button id="file-upload-btn" class="btn-clip" title="Attach Images or PDFs">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
                         </button>
                         <textarea id="chat-input" placeholder="Ask or upload file..." rows="1" spellcheck="false"></textarea>
@@ -197,18 +192,12 @@
                         <textarea id="prompt-input" placeholder="Describe what you want to do in Excel..." spellcheck="false"></textarea>
                         
                         <!-- File Preview (Agent Mode) -->
-                        <div id="agent-file-preview" class="file-preview" style="display: none; margin-top: 8px;">
-                            <div class="file-thumb">
-                                <span class="upload-icon-svg">📄</span>
-                                <span id="agent-file-name" class="file-name">filename.pdf</span>
-                                <button id="agent-file-remove" class="file-remove">×</button>
-                            </div>
-                        </div>
+                        <div id="agent-file-preview-list" class="file-preview-list"></div>
 
                         <div class="card-footer">
                             <div class="footer-left">
-                                <input type="file" id="agent-file-input" accept="image/png, image/jpeg, application/pdf" style="display: none;" />
-                                <button id="agent-file-btn" class="btn-clip" title="Extract from Image/PDF">
+                                <input type="file" id="agent-file-input" accept="image/png, image/jpeg, application/pdf" multiple style="display: none;" />
+                                <button id="agent-file-btn" class="btn-clip" title="Extract from Images/PDFs">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
                                 </button>
                                 <span id="cache-badge" class="cache-badge" style="display:none;">⚡ cached</span>
@@ -242,6 +231,10 @@
                             <span class="cat-icon" data-icon="fileTemplate"></span>
                             <span>Templates</span>
                         </button>
+                        <button class="category-tab" data-category="analysis">
+                            <span class="cat-icon" data-icon="trendUp"></span>
+                            <span>Analysis</span>
+                        </button>
                     </div>
 
                     <!-- Quick Actions -->
@@ -272,78 +265,74 @@
         </main>
         
         <section id="sideload-msg" class="sideload-container">
-            <!-- Skeleton UI mimicking the real app layout -->
-            <div class="sideload-skeleton">
-                <!-- Skeleton Header -->
-                <div class="sk-header">
-                    <div class="sk-brand">
-                        <div class="sk-logo sk-shimmer"></div>
-                        <div class="sk-title sk-shimmer"></div>
-                    </div>
-                    <div class="sk-header-actions">
-                        <div class="sk-icon-btn sk-shimmer"></div>
-                        <div class="sk-icon-btn sk-shimmer"></div>
-                    </div>
+            <!-- High-Fidelity Skeleton Screen -->
+    <div id="sideload-msg" class="sideload-container">
+        <div class="sideload-skeleton">
+            <!-- Header Skeleton -->
+            <div class="sk-header">
+                <div class="sk-brand">
+                    <div class="sk-logo sk-shimmer"></div>
+                    <div class="sk-title sk-shimmer"></div>
                 </div>
+                <div class="sk-header-actions">
+                    <div class="sk-icon-btn sk-shimmer"></div>
+                    <div class="sk-icon-btn sk-shimmer"></div>
+                </div>
+            </div>
 
-                <!-- Skeleton Mode Toggle -->
+            <!-- Mode Toggle Skeleton -->
+            <div style="padding: 0 16px;">
                 <div class="sk-mode-toggle">
                     <div class="sk-mode-tab sk-shimmer"></div>
                     <div class="sk-mode-tab sk-shimmer"></div>
                 </div>
+            </div>
 
-                <!-- Skeleton Welcome -->
-                <div class="sk-welcome">
-                    <div class="sk-welcome-icon sk-shimmer"></div>
-                    <div class="sk-welcome-title sk-shimmer"></div>
-                    <div class="sk-welcome-desc sk-shimmer"></div>
-                    <div class="sk-welcome-desc short sk-shimmer"></div>
-                </div>
+            <!-- Welcome/Chat Skeleton -->
+            <div class="sk-welcome">
+                <div class="sk-welcome-icon sk-shimmer"></div>
+                <div class="sk-welcome-title sk-shimmer"></div>
+                <div class="sk-welcome-desc sk-shimmer"></div>
+                <div class="sk-welcome-desc short sk-shimmer"></div>
+            </div>
 
-                <!-- Skeleton Suggestions -->
-                <div class="sk-suggestions">
-                    <div class="sk-suggestion sk-shimmer"></div>
-                    <div class="sk-suggestion sk-shimmer"></div>
-                    <div class="sk-suggestion sk-shimmer"></div>
-                    <div class="sk-suggestion sk-shimmer"></div>
-                </div>
+            <div class="sk-suggestions">
+                <div class="sk-suggestion sk-shimmer"></div>
+                <div class="sk-suggestion sk-shimmer"></div>
+                <div class="sk-suggestion sk-shimmer"></div>
+            </div>
 
-                <!-- Skeleton Input -->
-                <div class="sk-input-area">
+            <div class="sk-input-area">
+                <div style="padding: 0 16px;">
                     <div class="sk-input sk-shimmer"></div>
                 </div>
-
-                <!-- Loading Status -->
-                <div class="sideload-status" id="loading-status">
-                    <div class="sideload-pulse"></div>
-                    <span id="loading-text">Initializing SheetCraft...</span>
-                </div>
-                
-                <!-- Fallback Script for Loading Issues -->
-                <script>
-                    setTimeout(function() {
-                        var appBody = document.getElementById("app-body");
-                        if (!appBody || appBody.style.display === "none") {
-                            var status = document.getElementById("loading-status");
-                            if (status) {
-                                document.getElementById("loading-text").innerText = "Taking a while...";
-                                var help = document.createElement("div");
-                                help.style.cssText = "margin-top:12px;font-size:11px;color:#d32f2f;background:#ffebee;padding:8px;border-radius:6px;max-width:260px;line-height:1.4;";
-                                help.innerHTML = "<strong>Stuck?</strong><br>1. Open this link in Edge/Chrome<br>2. Accept 'Unsafe' certificate<br>3. Restart Excel";
-                                
-                                var link = document.createElement("a");
-                                link.href = "https://localhost:3000/taskpane.html";
-                                link.target = "_blank";
-                                link.innerText = "Open Debug Link";
-                                link.style.cssText = "display:block;margin-top:8px;font-weight:600;color:#d32f2f;text-decoration:underline;";
-                                
-                                help.appendChild(link);
-                                status.appendChild(help);
-                            }
-                        }
-                    }, 4000); // Show help after 4 seconds
-                </script>
             </div>
-        </section>
-    </body>
+            
+            <div class="sideload-status">
+                <div class="sideload-pulse"></div>
+                <span>Initializing SheetOS AI...</span>
+            </div>
+        </div>
+        
+        <!-- Fallback Link (Only shown if REALLY stuck) -->
+        <div id="debug-fallback" style="display:none; position:absolute; top:80px; left:20px; right:20px; background:rgba(255,50,50,0.1); border:1px solid rgba(255,50,50,0.3); padding:15px; border-radius:8px; font-size:12px; color:#c00;">
+            <strong>Taking longer than expected?</strong><br><br>
+            If the app doesn't load:<br>
+            1. Open <a href="https://localhost:3000/taskpane.html" target="_blank" style="color:#d00;font-weight:bold;">Debug Link</a> in browser<br>
+            2. Accept the 'Unsafe' certificate<br>
+            3. Restart Excel
+        </div>
+    </div>
+
+    <!-- Fallback Script -->
+    <script>
+        setTimeout(function() {
+            var app = document.getElementById("app-body");
+            var fb = document.getElementById("debug-fallback");
+            if ((!app || app.style.display === "none") && fb) {
+                fb.style.display = "block";
+            }
+        }, 12000); // 12 seconds timeout before showing scary red box
+    </script>
+</body>
 </html>

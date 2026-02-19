@@ -40,6 +40,11 @@ export const GROQ_MODELS = [
   { id: "mixtral-8x7b-32768",        label: "Mixtral 8x7B (5K TPM)" },
 ];
 
+export const GEMINI_MODELS = [
+  { id: "gemini-1.5-flash", label: "Gemini 1.5 Flash (Fast, Free)" },
+  { id: "gemini-1.5-pro",   label: "Gemini 1.5 Pro (Smarter)" },
+];
+
 const MAX_RETRIES = 3;
 const BASE_DELAY_MS = 2000;
 
@@ -96,13 +101,12 @@ async function callGemini(messages: ChatMessage[], model: string, apiKey: string
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
     
     // Transform messages to Gemini format
-    // System prompt not supported in basic messages, prepend to first user message
+    // Simple approach: Combine system prompt into first user message
     const contents: any[] = [];
     let systemPrompt = "";
 
     messages.forEach(msg => {
         if (msg.role === "system") {
-            // Extract text from system prompt
             const content = Array.isArray(msg.content) 
                 ? msg.content.map(c => c.text || "").join("") 
                 : msg.content;
@@ -122,22 +126,27 @@ async function callGemini(messages: ChatMessage[], model: string, apiKey: string
                 msg.content.forEach(c => {
                     if (c.type === "text") parts.push({ text: c.text });
                     if (c.type === "image_url" && c.image_url) {
-                        // Extract base64 (remove data:image/png;base64, prefix)
-                        const base64 = c.image_url.url.split(",")[1];
+                        const base64 = c.image_url.url.split(",")[1]; // Remove data:image/png;base64,
                         if (base64) {
                             parts.push({ inline_data: { mime_type: "image/png", data: base64 }});
                         }
                     }
                 });
             }
+            // Map 'assistant' to 'model' for Gemini
             contents.push({ role: msg.role === "assistant" ? "model" : "user", parts });
         }
     });
 
+    // Fallback: If no user message yet (only system), we can't send. Gemini needs at least one message.
+    if (contents.length === 0 && systemPrompt) {
+        contents.push({ role: "user", parts: [{ text: "SYSTEM INSTRUCTIONS:\n" + systemPrompt }] });
+    }
+
     const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contents })
+        body: JSON.stringify({ contents, generationConfig: { temperature: 0.1 } })
     });
 
     if (!response.ok) {
@@ -146,7 +155,9 @@ async function callGemini(messages: ChatMessage[], model: string, apiKey: string
     }
 
     const data = await response.json();
-    return data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!text) throw new Error("Gemini returned empty response.");
+    return text;
 }
 
 /**

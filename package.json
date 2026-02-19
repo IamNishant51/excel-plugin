@@ -1,6 +1,7 @@
 {
-  "name": "office-addin-taskpane",
-  "version": "0.0.1",
+  "name": "sheetos-ai",
+  "version": "1.0.0",
+  "description": "Your professional AI assistant for Excel automation, analysis, and formatting.",
   "repository": {
     "type": "git",
     "url": "https://github.com/OfficeDev/Office-Addin-TaskPane.git"

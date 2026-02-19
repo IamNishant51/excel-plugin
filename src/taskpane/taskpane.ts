@@ -17,7 +17,7 @@ try {
 
 // ─── Types ─────────────────────────────────────────────────────
 type Mode = "planning" | "agent";
-type ActionCategory = "cleanup" | "formulas" | "format" | "reports" | "templates";
+type ActionCategory = "cleanup" | "formulas" | "format" | "reports" | "templates" | "analysis";
 
 interface ChatMessage {
   role: "user" | "ai";
@@ -31,7 +31,7 @@ let currentCategory: ActionCategory = "cleanup";
 const chatHistory: ChatMessage[] = [];
 let chatConversation: { role: "system" | "user" | "assistant"; content: string }[] = [];
 let isChatBusy = false;
-let attachedFile: { name: string; type: "image" | "pdf"; data: string[] } | null = null; // state for file uploads
+let attachedFiles: { name: string; type: "image" | "pdf"; data: string[] }[] = []; // Array of attached files
 
 // ─── Quick Actions by Category ─────────────────────────────────
 const CATEGORIZED_ACTIONS: Record<ActionCategory, { icon: string; label: string; prompt: string }[]> = {
@@ -97,6 +97,20 @@ const CATEGORIZED_ACTIONS: Record<ActionCategory, { icon: string; label: string;
     { icon: "fileTemplate", label: "Attendance Sheet",     prompt: "Create a monthly attendance sheet for 10 employees with dates as columns (1-31). Mark P for present, A for absent, L for leave. Add summary columns for Total Present, Absent, and Leave. Apply conditional formatting." },
     { icon: "fileTemplate", label: "Grade Book",           prompt: "Create a student grade book for 8 students with 5 assignments, Midterm, Final, and Total/Grade columns. Add weighted average formulas and letter grade calculation (A/B/C/D/F). Apply professional formatting with conditional colors." },
     { icon: "fileTemplate", label: "Weekly Schedule",      prompt: "Create a weekly schedule template with time slots from 8 AM to 6 PM (1-hour intervals) and columns for Mon-Fri. Add borders, colored header, and merge the title cell. Apply a clean, readable format." },
+  ],
+
+  // ── Advanced Analysis (Master Level) ──
+  analysis: [
+    { icon: "trendUp",     label: "Pivot Analysis",        prompt: "Create a new sheet named 'Pivot Analysis'. Select the entire current dataset. Insert a Pivot Table starting at A3. Automatically detect the categorical column for Rows and the numeric column for Values (Sum). Apply the 'PivotStyleMedium9' style." },
+    { icon: "barChart",    label: "Pareto Chart",          prompt: "Create a Pareto analysis. (1) Copy the data to a new sheet 'Pareto'. (2) Sort by the numeric metric descending. (3) Calculate cumulative percentage. (4) Create a Pareto chart (combo chart: bars for values, line for cumulative %). Add data labels." },
+    { icon: "search",      label: "Find Outliers",         prompt: "Analyze the numeric column. Calculate Mean and Standard Deviation. Highlight any cell that is more than 2 Standard Deviations away from the Mean in RED (#FFCCCC). Add a note to the cell 'Outlier'." },
+    { icon: "sortAsc",     label: "Correlation Matrix",    prompt: "Analyze all numeric columns. Create a correlation matrix in a new sheet 'Correlations'. Calculate the correlation coefficient (CORREL) between every pair of numeric variables. Use Conditional Formatting (Color Scale) to highlight strong positive (green) and negative (red) correlations." },
+    { icon: "calendar",    label: "Date Intelligence",     prompt: "Find the Date column. Insert 4 new columns to the right: Year, Quarter, Month Name, Week Number. Use formulas (=YEAR, =ROUNDUP(MONTH(.)/3,0), =TEXT(.,'mmmm'), =ISOWEEKNUM) to populate them for all rows. Copy and Paste Values to finalize." },
+    { icon: "trendUp",     label: "Forecast 12M",          prompt: "Analyze the time-series data. Create a new sheet 'Forecast'. Use the FORECAST.ETS function to predict the next 12 months based on historical data. Create a Line Chart showing history (solid) and forecast (dotted) with confidence intervals." },
+    { icon: "copy",        label: "Transpose & Link",      prompt: "Copy the selected table. Create a new sheet 'Transposed'. Paste the data linked/transposed (=TRANSPOSE(Original!Range)) so it updates automatically. Apply professional formatting." },
+    { icon: "filter",      label: "Advanced Filter",       prompt: "Create a 'Search' area above the data. Set up a dynamic visual filter: when user types in cell B1, filter the main table rows where the text content contains that value (wildcard match). Use conditional formatting to hide non-matching rows if Filter function is not available." },
+    { icon: "hash",        label: "Frequency Dist",        prompt: "Create a frequency distribution (histogram data) for the main numeric column. Create bins (groups) automatically. Count the frequency of items in each bin. Output a summary table and a Histogram chart in a new sheet." },
+    { icon: "zap",         label: "Regex Extract",         prompt: "Analyze the text column. If it contains emails, extract them to a new column 'Email'. If it contains phone numbers, extract and format them. If it contains IDs (like #1234), extract them. Use Flash Fill logic or pattern matching formulas." },
   ],
 };
 
@@ -169,13 +183,22 @@ Office.onReady((info) => {
   setupChatInput();
 
   // File Upload Handlers
-  document.getElementById("file-upload-btn").onclick = () => document.getElementById("file-input").click();
-  document.getElementById("file-input").onchange = (e) => handleFileSelect(e, false);
-  document.getElementById("file-remove").onclick = () => clearFile(false);
+  const bindClick = (id: string, handler: () => void) => {
+      const el = document.getElementById(id);
+      if (el) el.onclick = handler;
+  };
+  const bindChange = (id: string, handler: (e: Event) => void) => {
+      const el = document.getElementById(id);
+      if (el) el.onchange = handler;
+  };
 
-  document.getElementById("agent-file-btn").onclick = () => document.getElementById("agent-file-input").click();
-  document.getElementById("agent-file-input").onchange = (e) => handleFileSelect(e, true);
-  document.getElementById("agent-file-remove").onclick = () => clearFile(true);
+  bindClick("file-upload-btn", () => document.getElementById("file-input").click());
+  bindChange("file-input", (e) => handleFileSelect(e, false));
+  bindClick("file-remove", () => clearFile(false));
+
+  bindClick("agent-file-btn", () => document.getElementById("agent-file-input").click());
+  bindChange("agent-file-input", (e) => handleFileSelect(e, true));
+  bindClick("agent-file-remove", () => clearFile(true));
 
   // Category Tabs
   document.querySelectorAll(".category-tab").forEach((tab) => {
@@ -271,7 +294,12 @@ function buildQuickActions(): void {
   if (!container) return;
   container.innerHTML = "";
 
-  const actions = CATEGORIZED_ACTIONS[currentCategory] || [];
+  const actions = CATEGORIZED_ACTIONS[currentCategory];
+  if (!actions) {
+     console.warn(`No quick actions found for category: ${currentCategory}`);
+     return;
+  }
+
   actions.forEach((action) => {
     const chip = document.createElement("button");
     chip.className = "chip";
@@ -279,12 +307,15 @@ function buildQuickActions(): void {
     chip.innerHTML = `${Icons[iconKey] || ""}<span>${action.label}</span>`;
     chip.onclick = () => {
       const input = document.getElementById("prompt-input") as HTMLTextAreaElement;
-      input.value = action.prompt;
-      input.focus();
+      if (input) {
+        input.value = action.prompt;
+        input.focus();
+      }
     };
     container.appendChild(chip);
   });
 }
+
 
 // ─── Chat Suggestions (Planning Mode) ──────────────────────────
 function buildChatSuggestions(): void {
@@ -298,8 +329,10 @@ function buildChatSuggestions(): void {
     btn.innerHTML = `${Icons[iconKey] || ""}${s.text}`;
     btn.onclick = () => {
       const input = document.getElementById("chat-input") as HTMLTextAreaElement;
-      input.value = s.text;
-      sendChatMessage();
+      if (input) {
+        input.value = s.text;
+        sendChatMessage();
+      }
     };
     container.appendChild(btn);
   });
@@ -308,17 +341,17 @@ function buildChatSuggestions(): void {
 // ─── Panel Toggle ──────────────────────────────────────────────
 function togglePanel(panelId: string): void {
   const panel = document.getElementById(panelId);
-  const isHidden = panel.style.display === "none" || !panel.style.display;
+  const isHidden = panel?.style.display === "none" || !panel?.style.display;
   
   document.querySelectorAll(".panel").forEach((p: HTMLElement) => {
     p.style.display = "none";
   });
 
-  if (isHidden) {
+  if (isHidden && panel) {
     panel.style.display = "block";
     if (panelId === "settings-panel") {
-      const provider = (document.getElementById("setting-provider") as HTMLSelectElement).value;
-      if (provider === "local") loadOllamaModels();
+      const providerSelect = document.getElementById("setting-provider") as HTMLSelectElement;
+      if (providerSelect && providerSelect.value === "local") loadOllamaModels();
     }
   }
 }
@@ -372,7 +405,7 @@ function updateProviderFields(p: string): void {
 async function loadOllamaModels(): Promise<void> {
   const select = document.getElementById("setting-local-model") as HTMLSelectElement;
   const statusEl = document.getElementById("model-status");
-  const host = (document.getElementById("setting-base-url") as HTMLInputElement).value.trim() || "http://localhost:11434";
+  const host = (document.getElementById("setting-base-url") as HTMLInputElement)?.value?.trim() || "http://localhost:11434";
 
   if (!select) return;
 
@@ -408,7 +441,7 @@ async function loadOllamaModels(): Promise<void> {
 }
 
 function handleSaveSettings(): void {
-  const provider = (document.getElementById("setting-provider") as HTMLSelectElement).value as any;
+  const provider = (document.getElementById("setting-provider") as HTMLSelectElement)?.value as any;
   const current = getConfig();
 
   // Helper to read val
@@ -457,6 +490,7 @@ function handleSaveSettings(): void {
 
 function setupChatInput(): void {
   const input = document.getElementById("chat-input") as HTMLTextAreaElement;
+  if (!input) return;
   
   // Auto-resize textarea
   input.addEventListener("input", () => {
@@ -477,6 +511,7 @@ async function sendChatMessage(): Promise<void> {
   if (isChatBusy) return;
 
   const input = document.getElementById("chat-input") as HTMLTextAreaElement;
+  if (!input) return;
   const message = input.value.trim();
   if (!message) return;
 
@@ -501,18 +536,24 @@ async function sendChatMessage(): Promise<void> {
   // Show typing indicator
   const typingEl = showTypingIndicator();
   isChatBusy = true;
-  (document.getElementById("chat-send") as HTMLButtonElement).disabled = true;
+  const chatSendButton = document.getElementById("chat-send") as HTMLButtonElement;
+  if (chatSendButton) chatSendButton.disabled = true;
 
   try {
     const response = await callLLM(chatConversation);
     
-    // Remove typing indicator
+    // Format AI response
+    const formattedResponse = formatChatResponse(response);
+    
+    // Add AI bubble with empty content first
+    const bubbleDiv = addChatBubble("ai", "", response);
+    
+    // Stream content
+    await typewriterEffect(bubbleDiv, formattedResponse);
+    
+    // Remove typing indicator after streaming is complete
     typingEl.remove();
 
-    // Format and display AI response
-    const formattedResponse = formatChatResponse(response);
-    addChatBubble("ai", formattedResponse, response);
-    
     chatConversation.push({ role: "assistant", content: response });
     chatHistory.push({ role: "ai", content: response, timestamp: Date.now() });
 
@@ -521,12 +562,41 @@ async function sendChatMessage(): Promise<void> {
     addChatBubble("ai", `<p style="color:var(--error)">⚠️ ${error.message}</p>`);
   } finally {
     isChatBusy = false;
-    (document.getElementById("chat-send") as HTMLButtonElement).disabled = false;
+    const chatSendButton = document.getElementById("chat-send") as HTMLButtonElement;
+    if (chatSendButton) chatSendButton.disabled = false;
   }
 }
 
-function addChatBubble(role: "user" | "ai", htmlContent: string, rawContent?: string): void {
+async function typewriterEffect(element: HTMLElement, html: string): Promise<void> {
+    // 1. Reveal element immediately
+    element.innerHTML = "";
+    
+    // 2. Parse into tokens (simple tag-preserving tokenizer)
+    // We split by tags so we can print text content progressively, but print tags instantly.
+    const tokens = html.split(/(<[^>]+>)/g);
+    
+    for (const token of tokens) {
+        if (token.startsWith("<") && token.endsWith(">")) {
+            // It's a tag, append immediately
+            element.innerHTML += token;
+        } else if (token.trim().length > 0) {
+            // It's text, type it out word by word for speed
+             const words = token.split(/(\s+)/); // Keep spaces
+             for (const word of words) {
+                 element.innerHTML += word;
+                 // Scroll to bottom
+                 const container = document.getElementById("chat-messages");
+                 if(container) container.scrollTop = container.scrollHeight;
+                 // Variable delay for realism
+                 await new Promise(r => setTimeout(r, Math.random() * 10 + 5)); 
+             }
+        }
+    }
+}
+
+function addChatBubble(role: "user" | "ai", htmlContent: string, rawContent?: string): HTMLElement {
   const container = document.getElementById("chat-messages");
+  if (!container) throw new Error("Chat messages container not found.");
   
   const msgDiv = document.createElement("div");
   msgDiv.className = `chat-msg ${role}`;
@@ -539,7 +609,7 @@ function addChatBubble(role: "user" | "ai", htmlContent: string, rawContent?: st
   bubbleDiv.className = "chat-bubble";
   bubbleDiv.innerHTML = htmlContent;
 
-  // If AI message, add "Execute in Agent" button
+  // If AI message, add "Execute in Agent" button (hidden initially if typing)
   if (role === "ai" && rawContent) {
     const actionBar = document.createElement("div");
     actionBar.className = "chat-action-bar";
@@ -548,12 +618,12 @@ function addChatBubble(role: "user" | "ai", htmlContent: string, rawContent?: st
     execBtn.className = "btn-execute-from-chat";
     execBtn.innerHTML = `${Icons.zap} Switch to Agent`;
     execBtn.onclick = () => {
-      // Extract any actionable text and put it in agent mode
       const agentPromptInput = document.getElementById("prompt-input") as HTMLTextAreaElement;
-      // Try to find a practical suggestion from the AI response
-      agentPromptInput.value = extractActionablePrompt(rawContent);
-      switchMode("agent");
-      agentPromptInput.focus();
+      if (agentPromptInput) {
+        agentPromptInput.value = extractActionablePrompt(rawContent);
+        switchMode("agent");
+        agentPromptInput.focus();
+      }
     };
     actionBar.appendChild(execBtn);
     bubbleDiv.appendChild(actionBar);
@@ -565,10 +635,13 @@ function addChatBubble(role: "user" | "ai", htmlContent: string, rawContent?: st
 
   // Scroll to bottom
   container.scrollTop = container.scrollHeight;
+  
+  return bubbleDiv; // Return bubble for typewriter
 }
 
 function showTypingIndicator(): HTMLElement {
   const container = document.getElementById("chat-messages");
+  if (!container) throw new Error("Chat messages container not found.");
   
   const msgDiv = document.createElement("div");
   msgDiv.className = "chat-msg ai";
@@ -660,9 +733,8 @@ function clearChat(): void {
   // Re-add welcome screen
   const welcomeHTML = `
     <div class="chat-welcome">
-      <div class="welcome-icon">${Icons.sparkles}</div>
+      <img src="assets/icon-80-v2.png" alt="SheetOS Logo" style="width: 64px; height: 64px; margin-bottom: 16px;">
       <h2>What are you working on?</h2>
-      <p>I'm your spreadsheet thinking partner. Ask me about formulas, data strategies, best practices, or let me help you plan your next step.</p>
       <div class="welcome-suggestions" id="chat-suggestions"></div>
     </div>
   `;
@@ -688,14 +760,16 @@ export async function runAICommand(): Promise<void> {
   let userPrompt = promptInput.value.trim();
 
   // Handle File Input
-  if (!userPrompt && !attachedFile) {
+  if (!userPrompt && attachedFiles.length === 0) {
     showStatus(statusEl, "info", "Please enter a command or attach a file.");
     return;
   }
   
   // Default prompt for files
-  if (attachedFile && !userPrompt) {
-    userPrompt = `Analyze the attached ${attachedFile.type}. Extract all tabular data and write valid Excel JS code to populate the active sheet. Format headers and auto-fit columns.`;
+  if (attachedFiles.length > 0 && !userPrompt) {
+    userPrompt = attachedFiles.length > 1 
+      ? `Analyze the ${attachedFiles.length} attached files. Extract and merge all tabular data into a single master table. Standardize headers and columns.`
+      : `Analyze the attached ${attachedFiles[0].type}. Extract all tabular data and write valid Excel JS code to populate the active sheet. Format headers and auto-fit columns.`;
   }
 
   // UI: loading
@@ -712,7 +786,7 @@ export async function runAICommand(): Promise<void> {
     let fromCache = false;
 
     // Check cache (SKIP if file attached)
-    const cached = !attachedFile ? getCachedResponse(userPrompt) : null;
+    const cached = attachedFiles.length === 0 ? getCachedResponse(userPrompt) : null;
     
     if (cached) {
       code = cached;
@@ -722,23 +796,47 @@ export async function runAICommand(): Promise<void> {
       // Construct Message
       const messages: any[] = [{ role: "system", content: SYSTEM_PROMPT }];
       
-      if (attachedFile) {
-          // Force AI to reconstruct the FULL document, not just tables
-          const systemDirective = `
+      if (attachedFiles.length > 0) {
+          // Smart Prompting Logic
+          const isMergeRequest = attachedFiles.length > 1 || /merge|combine|consolidate|table|database|list/i.test(userPrompt);
+          
+          let systemDirective = "";
+          
+          if (isMergeRequest) {
+            systemDirective = `
+IMPORTANT INSTRUCTION (DATA MERGE MODE):
+1. Consolidate ALL data from the attached documents into a SINGLE structured Excel worksheet.
+2. Ignore non-tabular content (like cover pages, policies) unless it contains key metadata.
+3. Create ONE master table with consistent headers.
+4. If columns vary between files, unify them intelligently (e.g. "Inv #" and "Invoice No" -> "Invoice Number").
+5. Format as a clean Excel Table.
+6. Do not create multiple sheets unless explicitly asked.`;
+          } else {
+            // Single file recreation mode
+            systemDirective = `
 IMPORTANT INSTRUCTION: 
 1. Recreate the ENTIRE document content in Excel. Do NOT just extract tables.
 2. Extract all Titles, Paragraphs, Lists, and Footer text.
 3. Layout: Use merged cells for main titles. Use separate rows for sections. Wrap text for paragraphs.
 4. Tables: Create standard Excel Tables for data.
 5. Formatting: Match bold/italic/colors (e.g. Red for errors).
-6. Goal: The Excel sheet should start with "TEMPLATING BASICS", then "INTRODUCTION", etc. down to the table.`;
+6. Goal: The Excel sheet should start with "TEMPLATING BASICS", then "INTRODUCTION", instruction text, etc. down to the table.`;
+          }
 
-          const contentText = (userPrompt || "Recreate this document perfectly in Excel.") + "\n\n" + systemDirective;
+          const contentText = (userPrompt || "Process these files.") + "\n\n" + systemDirective;
           const contentParts: any[] = [{ type: "text", text: contentText }];
           
-          attachedFile.data.forEach(url => {
-            contentParts.push({ type: "image_url", image_url: { url } });
+          // Add all images from all files
+          let totalImages = 0;
+          attachedFiles.forEach(file => {
+            file.data.forEach(url => {
+              if (totalImages < 20) { // Safety limit to prevent payload explosion
+                 contentParts.push({ type: "image_url", image_url: { url } });
+                 totalImages++;
+              }
+            });
           });
+          
           messages.push({ role: "user", content: contentParts });
       } else {
           messages.push({ role: "user", content: userPrompt });
@@ -747,11 +845,12 @@ IMPORTANT INSTRUCTION:
       code = await callLLM(messages);
       
       // Don't cache file uploads (too strict)
-      if (attachedFile) fromCache = true; // Hack to prevent caching below
+      if (attachedFiles.length > 0) fromCache = true; // Hack to prevent caching below
     }
 
     debugEl.innerText = code;
     skeletonEl.style.display = "none";
+
 
     // Execute with retry
     let lastError: Error | null = null;
@@ -846,58 +945,97 @@ async function executeExcelCode(code: string): Promise<void> {
 async function handleFileSelect(event: Event, isAgent: boolean = false) {
   const input = event.target as HTMLInputElement;
   if (!input.files || input.files.length === 0) return;
-  const file = input.files[0];
-
+  
   const btnId = isAgent ? "agent-file-btn" : "file-upload-btn";
   const btn = document.getElementById(btnId);
-  const originalHtml = btn.innerHTML;
-  btn.innerHTML = `<span class="btn-spinner"></span>`;
+  if (btn) btn.innerHTML = `<span class="btn-spinner"></span>`;
 
   try {
-    if (file.type === "application/pdf") {
-      const arrayBuffer = await file.arrayBuffer();
-      const images = await renderPdfToImages(arrayBuffer);
-      attachedFile = { name: file.name, type: "pdf", data: images };
-    } else if (file.type.startsWith("image/")) {
-      const base64 = await fileToBase64(file);
-      attachedFile = { name: file.name, type: "image", data: [base64] };
-    } else {
-      throw new Error("Unsupported file type. Please upload PDF or Image.");
+    const newFiles = [];
+    
+    // Process all selected files
+    for (let i = 0; i < input.files.length; i++) {
+        const file = input.files[i];
+        if (file.type === "application/pdf") {
+            const arrayBuffer = await file.arrayBuffer();
+            const images = await renderPdfToImages(arrayBuffer);
+            newFiles.push({ name: file.name, type: "pdf", data: images });
+        } else if (file.type.startsWith("image/")) {
+            const base64 = await fileToBase64(file);
+            newFiles.push({ name: file.name, type: "image", data: [base64] });
+        }
     }
-    updateFilePreview(true, isAgent);
+    
+    if (newFiles.length > 0) {
+        // Append to existing files
+        attachedFiles = [...attachedFiles, ...newFiles];
+        updateFilePreview(true, isAgent);
+    } else {
+        throw new Error("Unsupported file type. Please upload PDF or Image.");
+    }
   } catch (error: any) {
     console.error(error);
     showStatus(document.getElementById("status-message"), "error", "Error reading file: " + error.message);
-    input.value = ""; 
-    updateFilePreview(false, isAgent);
   } finally {
-    btn.innerHTML = originalHtml;
+     // Reset input so same file can be selected again if needed
+    input.value = ""; 
+    if (btn) {
+         // Restore icon
+         const icon = isAgent 
+            ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>`
+            : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>`;
+         btn.innerHTML = icon;
+    }
   }
 }
 
 function updateFilePreview(show: boolean, isAgent: boolean = false) {
-  const wrapperId = isAgent ? "agent-file-preview" : "file-preview-container";
-  const nameId = isAgent ? "agent-file-name" : "file-preview-name";
-  const inputId = isAgent ? "agent-file-input" : "file-input";
+  const listId = isAgent ? "agent-file-preview-list" : "file-preview-list";
+  const container = document.getElementById(listId);
+  
+  if (!container) return;
+  container.innerHTML = "";
 
-  const container = document.getElementById(wrapperId);
-  if (!show || !attachedFile) {
-    container.style.display = "none";
-    if (!isAgent) attachedFile = null; // Clear state if removing? 
-    // Wait, removing clears state. Uploading overwrites.
-    (document.getElementById(inputId) as HTMLInputElement).value = "";
+  if (attachedFiles.length === 0) {
     return;
   }
   
-  container.style.display = "flex";
-  document.getElementById(nameId).innerText = attachedFile.name;
-  
-  // Also clear the OTHER mode's file if any? No, let's keep it simple.
-  // Ideally we share state but only show preview in active mode.
+  // Render chips
+  attachedFiles.forEach((file, index) => {
+      const chip = document.createElement("div");
+      chip.className = "file-chip";
+      
+      const icon = document.createElement("span");
+      icon.className = "file-chip-icon";
+      icon.innerHTML = file.type === "pdf" ? "📄" : "🖼️";
+      
+      const name = document.createElement("span");
+      name.className = "file-chip-name";
+      name.innerText = file.name;
+      
+      const remove = document.createElement("button");
+      remove.className = "file-chip-remove";
+      remove.innerHTML = "×";
+      remove.title = "Remove file";
+      remove.onclick = (e) => {
+          e.stopPropagation();
+          removeFile(index, isAgent);
+      };
+      
+      chip.appendChild(icon);
+      chip.appendChild(name);
+      chip.appendChild(remove);
+      container.appendChild(chip);
+  });
+}
+
+function removeFile(index: number, isAgent: boolean) {
+    attachedFiles.splice(index, 1);
+    updateFilePreview(true, isAgent);
 }
 
 function clearFile(isAgent: boolean = false) {
-    attachedFile = null;
+    attachedFiles = [];
     updateFilePreview(false, isAgent);
 }
 
@@ -914,8 +1052,8 @@ async function renderPdfToImages(buffer: ArrayBuffer): Promise<string[]> {
   // @ts-ignore
   const pdf = await pdfjsLib.getDocument(buffer).promise;
   const images: string[] = [];
-  // Limit to 2 pages to save memory (especially for local AI)
-  const maxPages = Math.min(pdf.numPages, 2); 
+  // Limit to 3 pages to balance context vs token usage
+  const maxPages = Math.min(pdf.numPages, 3); 
   
   for (let i = 1; i <= maxPages; i++) {
     const page = await pdf.getPage(i);
