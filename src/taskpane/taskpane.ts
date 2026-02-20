@@ -5,6 +5,15 @@ import { SYSTEM_PROMPT } from "../services/prompt";
 import { CHAT_PROMPT } from "../services/chat-prompt";
 import { getCachedResponse, cacheResponse } from "../services/cache";
 import { getSchemaExtractionPrompt, parseExtractionResponse, generateExcelCode, buildEnhancedPrompt, normalizeColumnName } from "../services/document-extractor";
+import { 
+  runAgent, 
+  validateCode, 
+  executeWithRecovery, 
+  readSheetContext,
+  SheetContext,
+  OrchestratorResult,
+  ValidationResult 
+} from "../services/agent-orchestrator";
 import * as pdfjsLib from 'pdfjs-dist';
 import { Icons } from "../services/icons";
 
@@ -66,16 +75,242 @@ const CATEGORIZED_ACTIONS: Record<ActionCategory, { icon: string; label: string;
 
   // ── Smart Formatter (Canva for Excel) ──
   format: [
-    { icon: "paintbrush",  label: "Make Professional",    prompt: "Make this sheet look completely professional. Do ALL of the following: (1) Bold the header row with dark navy (#1B2A4A) background and white text, font size 11. (2) Apply alternating row colors — white and light gray (#F4F5F7). (3) Add thin borders to all cells — edges and inside lines. (4) Auto-fit all columns with slight extra width. (5) Center-align headers. (6) Left-align text columns, right-align number columns. (7) Add a subtle bottom border (medium thickness, navy) under the header row. (8) Freeze the first row." },
-    { icon: "paintbrush",  label: "Executive Style",      prompt: "Apply executive presentation style: (1) Merge and center a title row at the top with the sheet name, font size 14, bold, dark charcoal (#2C3E50) text. (2) Headers in row 2 with dark slate (#34495E) background, white text, bold, font size 10. (3) Data rows with subtle alternating tints (#F8F9FA and white). (4) All borders thin, light gray. (5) Number columns formatted with commas and 2 decimals. (6) Add a subtle dark bottom border under headers. (7) Auto-fit all columns. (8) Freeze row 2." },
-    { icon: "paintbrush",  label: "Minimal Clean",        prompt: "Apply minimal, modern formatting: (1) No borders except a thin bottom border under the header row (color #D1D5DB). (2) Header row: bold, font size 11, no background color, dark text (#111827). (3) Data rows: font size 10, color (#374151), generous row height (22px). (4) Remove all fill colors for a clean white look. (5) Right-align number columns, left-align text. (6) Auto-fit all columns." },
-    { icon: "paintbrush",  label: "Dark Theme",           prompt: "Apply dark theme formatting: dark gray (#1E1E1E) background for ALL cells in used range, header row with slightly lighter (#2D2D2D) background and gold (#F0C75E) bold text, data rows with light gray (#CCCCCC) text, alternating between (#1E1E1E) and (#252525). Thin borders (#3A3A3A). Auto-fit all columns." },
-    { icon: "paintbrush",  label: "Colorful",             prompt: "Apply colorful formatting: header with deep teal (#0D7377) background and white bold text, alternating rows with very light teal (#E8F6F3) and white, all thin borders. Auto-fit columns. Freeze the first row." },
-    { icon: "snowflake",   label: "Freeze Header",        prompt: "Freeze the first row so headers stay visible when scrolling." },
-    { icon: "table",       label: "Excel Table",          prompt: "Convert the data into a formatted Excel Table with TableStyleMedium9 style and auto-fit columns." },
-    { icon: "paintbrush",  label: "Borders All",          prompt: "Add thin borders to all cells in the used range — inside horizontal, inside vertical, and all edges." },
-    { icon: "hash",        label: "Currency $",           prompt: "Format all numeric columns as currency ($#,##0.00) and auto-fit." },
-    { icon: "hash",        label: "Percentage %",         prompt: "Format the last numeric column as percentage (0.00%) and auto-fit." },
+    { icon: "paintbrush",  label: "Make Professional",    prompt: `Apply professional formatting to the sheet. Use this EXACT safe pattern:
+
+// Step 1: Get used range and load properties
+const usedRange = sheet.getUsedRange();
+usedRange.load("values,rowCount,columnCount,address");
+await context.sync();
+
+// Step 2: Check if sheet has data
+if (!usedRange || usedRange.rowCount < 1 || usedRange.columnCount < 1) {
+  throw new Error("Sheet appears empty. Add some data first.");
+}
+
+const rowCount = usedRange.rowCount;
+const colCount = usedRange.columnCount;
+
+// Step 3: Format header row (row 1)
+const headerRow = usedRange.getRow(0);
+headerRow.format.font.bold = true;
+headerRow.format.font.size = 11;
+headerRow.format.font.color = "#FFFFFF";
+headerRow.format.fill.color = "#1B2A4A";
+headerRow.format.horizontalAlignment = "Center";
+headerRow.format.verticalAlignment = "Center";
+headerRow.format.rowHeight = 28;
+
+// Step 4: Format data rows with alternating colors
+for (let i = 1; i < rowCount; i++) {
+  const row = usedRange.getRow(i);
+  row.format.fill.color = i % 2 === 0 ? "#F4F5F7" : "#FFFFFF";
+  row.format.rowHeight = 22;
+}
+
+// Step 5: Add borders to all cells
+usedRange.format.borders.getItem("InsideHorizontal").style = "Thin";
+usedRange.format.borders.getItem("InsideVertical").style = "Thin";
+usedRange.format.borders.getItem("EdgeTop").style = "Thin";
+usedRange.format.borders.getItem("EdgeBottom").style = "Thin";
+usedRange.format.borders.getItem("EdgeLeft").style = "Thin";
+usedRange.format.borders.getItem("EdgeRight").style = "Thin";
+
+// Step 6: Add medium bottom border under header
+headerRow.format.borders.getItem("EdgeBottom").style = "Medium";
+headerRow.format.borders.getItem("EdgeBottom").color = "#1B2A4A";
+
+// Step 7: Freeze first row
+sheet.freezePanes.freezeRows(1);
+
+// Step 8: Auto-fit columns
+usedRange.format.autofitColumns();
+await context.sync();` },
+    { icon: "paintbrush",  label: "Executive Style",      prompt: `Apply executive presentation style using this EXACT safe pattern:
+
+const usedRange = sheet.getUsedRange();
+usedRange.load("values,rowCount,columnCount");
+await context.sync();
+
+if (!usedRange || usedRange.rowCount < 1) {
+  throw new Error("Sheet appears empty.");
+}
+
+const rowCount = usedRange.rowCount;
+
+// Header styling
+const headerRow = usedRange.getRow(0);
+headerRow.format.font.bold = true;
+headerRow.format.font.size = 11;
+headerRow.format.font.color = "#FFFFFF";
+headerRow.format.fill.color = "#34495E";
+headerRow.format.horizontalAlignment = "Center";
+headerRow.format.rowHeight = 30;
+
+// Data rows with subtle alternating
+for (let i = 1; i < rowCount; i++) {
+  const row = usedRange.getRow(i);
+  row.format.fill.color = i % 2 === 0 ? "#F8F9FA" : "#FFFFFF";
+  row.format.rowHeight = 22;
+}
+
+// Light gray borders
+usedRange.format.borders.getItem("InsideHorizontal").style = "Thin";
+usedRange.format.borders.getItem("InsideHorizontal").color = "#DEE2E6";
+usedRange.format.borders.getItem("InsideVertical").style = "Thin";
+usedRange.format.borders.getItem("InsideVertical").color = "#DEE2E6";
+usedRange.format.borders.getItem("EdgeTop").style = "Thin";
+usedRange.format.borders.getItem("EdgeBottom").style = "Thin";
+usedRange.format.borders.getItem("EdgeLeft").style = "Thin";
+usedRange.format.borders.getItem("EdgeRight").style = "Thin";
+
+// Freeze header
+sheet.freezePanes.freezeRows(1);
+usedRange.format.autofitColumns();
+await context.sync();` },
+    { icon: "paintbrush",  label: "Minimal Clean",        prompt: `Apply minimal modern formatting:
+
+const usedRange = sheet.getUsedRange();
+usedRange.load("rowCount,columnCount");
+await context.sync();
+
+if (!usedRange || usedRange.rowCount < 1) {
+  throw new Error("Sheet appears empty.");
+}
+
+// Clear existing formatting
+usedRange.format.fill.clear();
+usedRange.format.borders.getItem("InsideHorizontal").style = "None";
+usedRange.format.borders.getItem("InsideVertical").style = "None";
+usedRange.format.borders.getItem("EdgeTop").style = "None";
+usedRange.format.borders.getItem("EdgeBottom").style = "None";
+usedRange.format.borders.getItem("EdgeLeft").style = "None";
+usedRange.format.borders.getItem("EdgeRight").style = "None";
+
+// Header: bold, dark text, bottom border only
+const headerRow = usedRange.getRow(0);
+headerRow.format.font.bold = true;
+headerRow.format.font.size = 11;
+headerRow.format.font.color = "#111827";
+headerRow.format.borders.getItem("EdgeBottom").style = "Thin";
+headerRow.format.borders.getItem("EdgeBottom").color = "#D1D5DB";
+headerRow.format.rowHeight = 28;
+
+// Data rows: smaller font, gray text
+for (let i = 1; i < usedRange.rowCount; i++) {
+  const row = usedRange.getRow(i);
+  row.format.font.size = 10;
+  row.format.font.color = "#374151";
+  row.format.rowHeight = 22;
+}
+
+usedRange.format.autofitColumns();
+await context.sync();` },
+    { icon: "paintbrush",  label: "Dark Theme",           prompt: `Apply dark theme formatting:
+
+const usedRange = sheet.getUsedRange();
+usedRange.load("rowCount,columnCount");
+await context.sync();
+
+if (!usedRange || usedRange.rowCount < 1) {
+  throw new Error("Sheet appears empty.");
+}
+
+const rowCount = usedRange.rowCount;
+
+// All cells: dark background, light text
+usedRange.format.fill.color = "#1E1E1E";
+usedRange.format.font.color = "#CCCCCC";
+
+// Header: gold text
+const headerRow = usedRange.getRow(0);
+headerRow.format.fill.color = "#2D2D2D";
+headerRow.format.font.bold = true;
+headerRow.format.font.color = "#F0C75E";
+headerRow.format.rowHeight = 28;
+
+// Alternating dark rows
+for (let i = 1; i < rowCount; i++) {
+  const row = usedRange.getRow(i);
+  row.format.fill.color = i % 2 === 0 ? "#252525" : "#1E1E1E";
+}
+
+// Dark borders
+usedRange.format.borders.getItem("InsideHorizontal").style = "Thin";
+usedRange.format.borders.getItem("InsideHorizontal").color = "#3A3A3A";
+usedRange.format.borders.getItem("InsideVertical").style = "Thin";
+usedRange.format.borders.getItem("InsideVertical").color = "#3A3A3A";
+usedRange.format.borders.getItem("EdgeTop").style = "Thin";
+usedRange.format.borders.getItem("EdgeBottom").style = "Thin";
+usedRange.format.borders.getItem("EdgeLeft").style = "Thin";
+usedRange.format.borders.getItem("EdgeRight").style = "Thin";
+
+usedRange.format.autofitColumns();
+await context.sync();` },
+    { icon: "paintbrush",  label: "Colorful Teal",        prompt: `Apply colorful teal formatting:
+
+const usedRange = sheet.getUsedRange();
+usedRange.load("rowCount");
+await context.sync();
+
+if (!usedRange || usedRange.rowCount < 1) {
+  throw new Error("Sheet appears empty.");
+}
+
+// Header: teal background
+const headerRow = usedRange.getRow(0);
+headerRow.format.fill.color = "#0D7377";
+headerRow.format.font.bold = true;
+headerRow.format.font.color = "#FFFFFF";
+headerRow.format.horizontalAlignment = "Center";
+headerRow.format.rowHeight = 28;
+
+// Alternating light teal and white
+for (let i = 1; i < usedRange.rowCount; i++) {
+  const row = usedRange.getRow(i);
+  row.format.fill.color = i % 2 === 0 ? "#E8F6F3" : "#FFFFFF";
+}
+
+// Thin borders
+usedRange.format.borders.getItem("InsideHorizontal").style = "Thin";
+usedRange.format.borders.getItem("InsideVertical").style = "Thin";
+usedRange.format.borders.getItem("EdgeTop").style = "Thin";
+usedRange.format.borders.getItem("EdgeBottom").style = "Thin";
+usedRange.format.borders.getItem("EdgeLeft").style = "Thin";
+usedRange.format.borders.getItem("EdgeRight").style = "Thin";
+
+sheet.freezePanes.freezeRows(1);
+usedRange.format.autofitColumns();
+await context.sync();` },
+    { icon: "snowflake",   label: "Freeze Header",        prompt: `Freeze the first row:
+
+sheet.freezePanes.freezeRows(1);
+await context.sync();` },
+    { icon: "table",       label: "Excel Table",          prompt: `Convert data to Excel Table:
+
+const usedRange = sheet.getUsedRange();
+usedRange.load("address");
+await context.sync();
+
+if (!usedRange) {
+  throw new Error("No data found in sheet.");
+}
+
+const table = sheet.tables.add(usedRange, true);
+table.style = "TableStyleMedium9";
+usedRange.format.autofitColumns();
+await context.sync();` },
+    { icon: "paintbrush",  label: "Borders All",          prompt: `Add thin borders to all cells:
+
+const usedRange = sheet.getUsedRange();
+usedRange.format.borders.getItem("InsideHorizontal").style = "Thin";
+usedRange.format.borders.getItem("InsideVertical").style = "Thin";
+usedRange.format.borders.getItem("EdgeTop").style = "Thin";
+usedRange.format.borders.getItem("EdgeBottom").style = "Thin";
+usedRange.format.borders.getItem("EdgeLeft").style = "Thin";
+usedRange.format.borders.getItem("EdgeRight").style = "Thin";
+await context.sync();` },
+    { icon: "hash",        label: "Currency $",           prompt: `Format numeric columns as currency. First read the data to detect numeric columns, then apply $#,##0.00 format.` },
+    { icon: "hash",        label: "Percentage %",         prompt: `Format the last numeric column as percentage (0.00%) and auto-fit columns.` },
   ],
 
   // ── Report Automation Engine ──
@@ -998,10 +1233,10 @@ The code should use the writeData helper function and format the data profession
 
 
 // ═══════════════════════════════════════════════════════════════
-// AGENT MODE — Execute Functions (Existing + Enhanced)
+// AGENT MODE — Execute Functions (Enhanced with Orchestrator)
 // ═══════════════════════════════════════════════════════════════
 
-const MAX_RETRIES = 1;
+const MAX_EXECUTION_RETRIES = 3;
 
 export async function runAICommand(): Promise<void> {
   const statusEl = document.getElementById("status-message");
@@ -1032,7 +1267,7 @@ export async function runAICommand(): Promise<void> {
   // UI: loading
   const originalHTML = button.innerHTML;
   button.disabled = true;
-  button.innerHTML = `<span class="btn-spinner"></span><span>${isSchemaMode ? "Reading Schema..." : "Generating..."}</span>`;
+  button.innerHTML = `<span class="btn-spinner"></span><span>Planning...</span>`;
   statusEl.style.display = "none";
   skeletonEl.style.display = "flex";
   cacheBadge.style.display = "none";
@@ -1042,15 +1277,25 @@ export async function runAICommand(): Promise<void> {
     let code: string;
     let fromCache = false;
     
+    // ─── Read Sheet Context for Intelligent Assistance ───
+    let sheetContext: SheetContext | null = null;
+    try {
+      sheetContext = await readSheetContext();
+      if (sheetContext?.hasData) {
+        console.log(`[Agent] Sheet context: ${sheetContext.rowCount}x${sheetContext.columnCount}`);
+      }
+    } catch (e) {
+      console.warn("[Agent] Could not read sheet context:", e);
+    }
+    
     // ─── Schema Extraction Mode ───
     let existingColumns: string[] = [];
     if (isSchemaMode && attachedFiles.length > 0) {
       try {
         existingColumns = await getExcelColumnHeaders();
-        console.log("Schema columns detected:", existingColumns);
+        console.log("[Agent] Schema columns detected:", existingColumns);
         
         if (existingColumns.length === 0) {
-          // No headers — show helpful message
           showStatus(statusEl, "info", "⚠️ No column headers found in Row 1. Add headers first or use 'HR Database Setup' to create them.");
           skeletonEl.style.display = "none";
           button.disabled = false;
@@ -1058,142 +1303,220 @@ export async function runAICommand(): Promise<void> {
           return;
         }
         
-        // Update UI to show detected columns
-        button.innerHTML = `<span class="btn-spinner"></span><span>Extracting (${existingColumns.length} columns)...</span>`;
+        button.innerHTML = `<span class="btn-spinner"></span><span>Extracting (${existingColumns.length} cols)...</span>`;
       } catch (e) {
-        console.warn("Could not read Excel headers:", e);
+        console.warn("[Agent] Could not read Excel headers:", e);
       }
     }
 
-    // Check cache (SKIP if file attached or schema mode)
+    // ─── Check Cache (Skip for files/schema mode) ───
     const cached = (attachedFiles.length === 0 && !isSchemaMode) ? getCachedResponse(userPrompt) : null;
     
     if (cached) {
       code = cached;
       fromCache = true;
       cacheBadge.style.display = "inline-block";
-    } else {
-      // Construct Message
+      
+      // Still validate cached code
+      const validation = validateCode(code);
+      if (!validation.isValid) {
+        console.warn("[Agent] Cached code failed validation, regenerating...");
+        fromCache = false;
+        code = ""; // Will regenerate
+      } else {
+        code = validation.sanitizedCode;
+      }
+    }
+    
+    // ─── Generate Code (if not from cache) ───
+    if (!fromCache) {
+      button.innerHTML = `<span class="btn-spinner"></span><span>Generating...</span>`;
+      
+      // Construct messages for LLM
       const messages: any[] = [{ role: "system", content: SYSTEM_PROMPT }];
       
       if (attachedFiles.length > 0) {
-          // ─── SCHEMA-AWARE EXTRACTION ───
-          if (isSchemaMode && existingColumns.length > 0) {
-            const schemaDirective = buildSchemaExtractionDirective(existingColumns);
-            const cleanPrompt = userPrompt.replace("SCHEMA_EXTRACTION_MODE:", "").trim();
-            
-            const contentText = `${cleanPrompt}\n\nEXISTING_COLUMNS: ${JSON.stringify(existingColumns)}\n\n${schemaDirective}`;
-            const contentParts: any[] = [{ type: "text", text: contentText }];
-            
-            // Add all images from all files
-            let totalImages = 0;
-            attachedFiles.forEach(file => {
-              file.data.forEach(url => {
-                if (totalImages < 20) {
-                  contentParts.push({ type: "image_url", image_url: { url } });
-                  totalImages++;
-                }
-              });
+        // ─── File-based Extraction ───
+        if (isSchemaMode && existingColumns.length > 0) {
+          const schemaDirective = buildSchemaExtractionDirective(existingColumns);
+          const cleanPrompt = userPrompt.replace("SCHEMA_EXTRACTION_MODE:", "").trim();
+          
+          const contentText = `${cleanPrompt}\n\nEXISTING_COLUMNS: ${JSON.stringify(existingColumns)}\n\n${schemaDirective}`;
+          const contentParts: any[] = [{ type: "text", text: contentText }];
+          
+          let totalImages = 0;
+          attachedFiles.forEach(file => {
+            file.data.forEach(url => {
+              if (totalImages < 20) {
+                contentParts.push({ type: "image_url", image_url: { url } });
+                totalImages++;
+              }
             });
-            
-            messages.push({ role: "user", content: contentParts });
-          } else {
-            // ─── LEGACY EXTRACTION (Non-Schema Mode) ───
-            const isMergeRequest = attachedFiles.length > 1 || /merge|combine|consolidate|table|database|list/i.test(userPrompt);
-            
-            let systemDirective = "";
-            
-            if (isMergeRequest) {
-              systemDirective = `
-IMPORTANT INSTRUCTION (EXTREME EXTRACTION MODE):
-1. FULL COVERAGE: Your goal is to extract EVERY significant piece of information from each resume.
-2. SCHEMA: Even if not specified, extract: [Candidate Name, Email, Phone, LinkedIn, Location, Summary, Total Years Exp, Most Recent Company, Most Recent Role, Top 5 Skills, Highest Education, Last Degree Year].
-3. ACCURACY: Do NOT hallucinate. If a field isn't present, leave it blank ("").
-4. ONE ROW PER FILE: Ensure each resume gets exactly one detailed row in the master table.
-5. FORMATTING: Wrap text for long summary/skills cells. Apply 'TableStyleMedium9'.`;
-            } else {
-              // Single file recreation mode
-              systemDirective = `
-IMPORTANT INSTRUCTION: 
-1. Recreate the ENTIRE document content in Excel. Do NOT just extract tables.
-2. Extract all Titles, Paragraphs, Lists, and Footer text.
-3. Layout: Use merged cells for main titles. Use separate rows for sections. Wrap text for paragraphs.
-4. Tables: Create standard Excel Tables for data.
-5. Formatting: Match bold/italic/colors (e.g. Red for errors).
-6. Goal: The Excel sheet should start with "TEMPLATING BASICS", then "INTRODUCTION", instruction text, etc. down to the table.`;
-            }
+          });
+          
+          messages.push({ role: "user", content: contentParts });
+        } else {
+          // Legacy extraction
+          const isMergeRequest = attachedFiles.length > 1 || /merge|combine|consolidate|table|database|list/i.test(userPrompt);
+          
+          let systemDirective = isMergeRequest ? `
+EXTREME EXTRACTION MODE:
+1. Extract EVERY significant piece of information from each document
+2. Default schema: [Name, Email, Phone, LinkedIn, Location, Summary, Experience Years, Company, Role, Skills, Education]
+3. NO HALLUCINATION: If a field isn't visible, leave it as "" (empty string)
+4. ONE ROW PER FILE: Each document = exactly one data row
+5. Apply professional formatting with TableStyleMedium9` : `
+DOCUMENT RECREATION MODE:
+1. Recreate the ENTIRE document content in Excel
+2. Extract all Titles, Paragraphs, Lists, Tables
+3. Use merged cells for main titles, separate rows for sections
+4. Apply professional formatting matching the original`;
 
-            const contentText = (userPrompt || "Process these files.") + "\n\n" + systemDirective;
-            const contentParts: any[] = [{ type: "text", text: contentText }];
-            
-            // Add all images from all files
-            let totalImages = 0;
-            attachedFiles.forEach(file => {
-              file.data.forEach(url => {
-                if (totalImages < 20) { // Safety limit to prevent payload explosion
-                   contentParts.push({ type: "image_url", image_url: { url } });
-                   totalImages++;
-                }
-              });
+          const contentText = (userPrompt || "Process these files.") + "\n\n" + systemDirective;
+          const contentParts: any[] = [{ type: "text", text: contentText }];
+          
+          let totalImages = 0;
+          attachedFiles.forEach(file => {
+            file.data.forEach(url => {
+              if (totalImages < 20) {
+                contentParts.push({ type: "image_url", image_url: { url } });
+                totalImages++;
+              }
             });
-            
-            messages.push({ role: "user", content: contentParts });
-          }
+          });
+          
+          messages.push({ role: "user", content: contentParts });
+        }
       } else {
-          messages.push({ role: "user", content: userPrompt });
+        // ─── Text-only Prompt ───
+        // Add sheet context if available
+        let enhancedPrompt = userPrompt;
+        if (sheetContext?.hasData) {
+          enhancedPrompt += `\n\n[CURRENT SHEET DATA]
+Sheet: "${sheetContext.sheetName}"
+Size: ${sheetContext.rowCount} rows × ${sheetContext.columnCount} columns
+Headers: ${JSON.stringify(sheetContext.headers)}
+Data Types: ${JSON.stringify(sheetContext.dataTypes)}`;
+        }
+        messages.push({ role: "user", content: enhancedPrompt });
       }
 
       code = await callLLM(messages);
       
-      // Don't cache file uploads (too strict)
-      if (attachedFiles.length > 0 || isSchemaMode) fromCache = true; // Hack to prevent caching below
+      // ─── VALIDATION PHASE ───
+      button.innerHTML = `<span class="btn-spinner"></span><span>Validating...</span>`;
+      
+      let validation = validateCode(code);
+      let validationAttempts = 0;
+      const MAX_VALIDATION_FIXES = 2;
+      
+      while (!validation.isValid && validationAttempts < MAX_VALIDATION_FIXES) {
+        console.warn(`[Agent] Validation failed (attempt ${validationAttempts + 1}):`, validation.errors);
+        
+        // Show validation warnings
+        const errorSummary = validation.errors.map(e => `${e.message} → ${e.suggestion}`).join("\n");
+        
+        // Ask AI to fix
+        code = await callLLM([
+          { role: "system", content: SYSTEM_PROMPT },
+          { role: "user", content: userPrompt },
+          { role: "assistant", content: code },
+          { role: "user", content: `VALIDATION ERRORS:\n${errorSummary}\n\nFix these errors. Output ONLY the corrected code.` },
+        ]);
+        
+        validation = validateCode(code);
+        validationAttempts++;
+      }
+      
+      // Use sanitized code even if some warnings remain
+      code = validation.sanitizedCode;
+      
+      // Log validation result
+      if (validation.warnings.length > 0) {
+        console.log("[Agent] Validation warnings:", validation.warnings);
+      }
     }
 
     debugEl.innerText = code;
     skeletonEl.style.display = "none";
 
-
-    // Execute with retry
+    // ─── EXECUTION PHASE with Advanced Recovery ───
+    button.innerHTML = `<span class="btn-spinner"></span><span>Running...</span>`;
+    showStatus(statusEl, "info", `<div class="spinner"></div><span>Executing code...</span>`);
+    
     let lastError: Error | null = null;
     let success = false;
 
-    for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    for (let attempt = 0; attempt <= MAX_EXECUTION_RETRIES; attempt++) {
       try {
-        button.innerHTML = `<span class="btn-spinner"></span><span>${attempt > 0 ? "Retrying..." : "Running..."}</span>`;
-        showStatus(statusEl, "info", `<div class="spinner"></div><span>${attempt > 0 ? "Auto-fixing..." : "Executing..."}</span>`);
+        if (attempt > 0) {
+          button.innerHTML = `<span class="btn-spinner"></span><span>Retry ${attempt}/${MAX_EXECUTION_RETRIES}...</span>`;
+          showStatus(statusEl, "info", `<div class="spinner"></div><span>Retrying (${attempt}/${MAX_EXECUTION_RETRIES})...</span>`);
+        }
 
         await executeExcelCode(code);
         success = true;
         break;
-      } catch (execError) {
+      } catch (execError: any) {
         lastError = execError;
-        console.warn(`Attempt ${attempt + 1} failed:`, execError.message);
+        console.warn(`[Agent] Execution attempt ${attempt + 1} failed:`, execError.message);
 
-        if (attempt < MAX_RETRIES) {
-          showStatus(statusEl, "info", '<div class="spinner"></div><span>AI is fixing the error...</span>');
-          button.innerHTML = `<span class="btn-spinner"></span><span>Fixing...</span>`;
+        if (attempt < MAX_EXECUTION_RETRIES) {
+          showStatus(statusEl, "info", '<div class="spinner"></div><span>AI is auto-fixing...</span>');
+          button.innerHTML = `<span class="btn-spinner"></span><span>Fixing error...</span>`;
+          
+          // Enhanced error context for fixing
+          const errorContext = `
+RUNTIME ERROR: "${execError.message}"
+
+COMMON FIXES:
+- "is not a function" → Check if you're calling .getValues() instead of .values
+- "InvalidArgument" → Check range references (no A0, valid dimensions)
+- "is not defined" → Check variable declarations and scope
+- "Cannot read property" → Add null checks or ensure .load() + await context.sync()
+
+Fix the code. Output ONLY the corrected JavaScript code:`;
+
           code = await callLLM([
             { role: "system", content: SYSTEM_PROMPT },
             { role: "user", content: userPrompt },
             { role: "assistant", content: code },
-            { role: "user", content: `Error: "${execError.message}". Fix the code. Output ONLY corrected code.` },
+            { role: "user", content: errorContext },
           ]);
+          
+          // Re-validate fixed code
+          const revalidation = validateCode(code);
+          code = revalidation.sanitizedCode;
+          
           debugEl.innerText = code;
         }
       }
     }
 
     if (success) {
-      if (!fromCache) cacheResponse(userPrompt, code);
+      if (!fromCache && attachedFiles.length === 0 && !isSchemaMode) {
+        cacheResponse(userPrompt, code);
+      }
       showStatus(statusEl, "success", `${Icons.check}<span>Done</span>`);
     } else {
       throw lastError;
     }
 
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error("[Agent] Fatal error:", error);
     skeletonEl.style.display = "none";
-    showStatus(statusEl, "error", `${Icons.alertCircle}<span>${error.message}</span>`);
+    
+    // User-friendly error message
+    let errorMsg = error.message || String(error);
+    if (errorMsg.includes("Rate limited")) {
+      errorMsg = "⏳ Rate limit reached. Please wait a moment and try again.";
+    } else if (errorMsg.includes("API Key")) {
+      errorMsg = "🔑 API Key issue. Check Settings → Provider configuration.";
+    } else if (errorMsg.length > 100) {
+      errorMsg = errorMsg.substring(0, 100) + "...";
+    }
+    
+    showStatus(statusEl, "error", `${Icons.alertCircle}<span>${errorMsg}</span>`);
   } finally {
     button.disabled = false;
     button.innerHTML = originalHTML;
@@ -1207,20 +1530,58 @@ function showStatus(el: HTMLElement, type: "info" | "success" | "error", html: s
   el.style.display = "flex";
 }
 
+/**
+ * Execute AI-generated Excel JavaScript code with safety wrappers.
+ * Provides:
+ * - Pre-declared context, sheet, Excel variables
+ * - writeData helper function
+ * - Auto-fit columns on completion
+ * - Enhanced error messages
+ */
 async function executeExcelCode(code: string): Promise<void> {
   await Excel.run(async (context) => {
     const sheet = context.workbook.worksheets.getActiveWorksheet();
 
+    // Mandatory writeData helper that all generated code can use
+    const writeDataHelper = `
+function writeData(sheet, startCell, data) {
+  if (!data || data.length === 0) return null;
+  const rows = data.length;
+  const cols = Math.max(...data.map(r => r ? r.length : 0));
+  if (cols === 0) return null;
+  const normalized = data.map(r => {
+    const row = r ? [...r] : [];
+    while (row.length < cols) row.push("");
+    return row;
+  });
+  try {
+    const range = sheet.getRange(startCell).getResizedRange(rows - 1, cols - 1);
+    range.values = normalized;
+    range.format.font.name = "Segoe UI";
+    range.format.font.size = 10;
+    range.format.verticalAlignment = "Center";
+    return range;
+  } catch (e) {
+    console.error("writeData error:", e);
+    return null;
+  }
+}
+`;
+
     const wrappedCode = `
+      ${writeDataHelper}
+      
       try {
-        // AI Generated Code
+        // ═══ AI Generated Code ═══
         ${code}
         
-        // ─── Safety Net ───
-        // Ensure columns are readable (fixes ##### issues)
-        sheet.getUsedRange().format.autofitColumns();
+        // ═══ Safety Finalization ═══
+        try {
+          sheet.getUsedRange().format.autofitColumns();
+        } catch(_) { /* Sheet might be empty */ }
+        
       } catch(_innerErr) {
-        console.error("AI Role Runtime Error:", _innerErr);
+        console.error("[Agent] Runtime Error:", _innerErr);
         try { await context.sync(); } catch(_) {}
         throw _innerErr;
       }
@@ -1234,24 +1595,37 @@ async function executeExcelCode(code: string): Promise<void> {
             ${wrappedCode}
             await context.sync();
           } catch (inner) {
+            // Enhance error messages for common issues
             if (inner.code === "InvalidArgument") {
-              inner.message = "Invalid Command: " + inner.message + " (Check if range or cell index is valid)";
+              const original = inner.message || "";
+              if (original.includes("A0") || original.includes("row 0")) {
+                inner.message = "Invalid range: Row 0 doesn't exist. Excel rows start at 1.";
+              } else if (original.includes("getResizedRange")) {
+                inner.message = "Invalid range size: Check that data dimensions match the range.";
+              } else {
+                inner.message = "Invalid argument: " + original;
+              }
+            } else if (inner.message?.includes("is not a function")) {
+              const fnMatch = inner.message.match(/(\w+) is not a function/);
+              const fn = fnMatch ? fnMatch[1] : "method";
+              inner.message = "API Error: ." + fn + "() doesn't exist. Use correct Excel JS API methods.";
+            } else if (inner.message?.includes("is not defined")) {
+              const varMatch = inner.message.match(/(\w+) is not defined/);
+              const v = varMatch ? varMatch[1] : "variable";
+              inner.message = "Undefined: '" + v + "' was used before being declared.";
+            } else if (inner.message?.includes("Cannot read property")) {
+              inner.message = "Null reference: Tried to read property of undefined. Add null checks or ensure .load() was called.";
             }
             throw inner;
           }
         })()`
       )(context, sheet, Excel);
     } catch (e: any) {
-      // Enhance error message for common AI mistakes
-      console.error("Execution Error:", e);
-      if (e.message && (e.message.includes("is not a function") || e.message.includes("is not defined"))) {
-        e.message = `AI Code Error: ${e.message}. (Try rephrasing your prompt)`;
-      } else if (e.code === "InvalidArgument") {
-        e.message = `Setup Error: The AI used an invalid Excel range or format. (Retrying...)`;
-      }
+      console.error("[Agent] Execution Error:", e);
       try { await context.sync(); } catch (_) {}
       throw e;
     }
+    
     await context.sync();
   });
 }
