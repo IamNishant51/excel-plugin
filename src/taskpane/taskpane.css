@@ -617,6 +617,24 @@ select.form-input {
 .chat-bubble p { margin: 0 0 8px; }
 .chat-bubble p:last-child { margin: 0; }
 
+/* ── Context Badge ── */
+.context-badge {
+    display: block;
+    margin-top: 8px;
+    padding: 4px 8px;
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    letter-spacing: 0.2px;
+}
+
+.chat-msg.ai .context-badge {
+    color: var(--text-2);
+    background: var(--primary-bg);
+}
+
 
 /* ── Execute from Chat ── */
 .chat-action-bar {
@@ -970,6 +988,133 @@ select.form-input {
 }
 
 .category-tab svg { width: 12px; height: 12px; }
+
+
+/* ── Schema Info Banner (Extract Mode) ── */
+.schema-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, var(--primary-bg), rgba(74, 144, 226, 0.06));
+    border: 1px solid var(--primary-glow);
+    border-radius: 10px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.schema-icon {
+    font-size: 18px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.schema-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.schema-text strong {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.schema-text span {
+    font-size: 10.5px;
+    color: var(--text-2);
+    line-height: 1.4;
+}
+
+.btn-detect {
+    padding: 5px 10px;
+    font-size: 10px;
+    font-weight: 600;
+    font-family: var(--font);
+    color: var(--primary);
+    background: var(--card);
+    border: 1px solid var(--primary-glow);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+.btn-detect:hover {
+    background: var(--primary-bg);
+    transform: translateY(-1px);
+}
+
+.btn-detect:active {
+    transform: scale(0.96);
+}
+
+/* ── Detected Columns Preview ── */
+.detected-columns {
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.detected-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.detected-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--text-2);
+}
+
+.column-count {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--primary);
+    background: var(--primary-bg);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.column-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.column-chip {
+    padding: 3px 8px;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-2);
+    background: var(--input-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+}
+
+.column-chip.empty-warning {
+    color: var(--warning);
+    background: var(--warning-bg);
+    border-color: rgba(192, 139, 45, 0.2);
+}
+
+/* ── Extract Category Highlight ── */
+.category-tab[data-category="extract"].active {
+    color: #C4603D;
+    background: rgba(196, 96, 61, 0.08);
+    border-color: rgba(196, 96, 61, 0.15);
+}
+
+.category-tab[data-category="extract"]:hover {
+    color: #A8502F;
+}
 
 
 /* ── Quick Action Chips ── */

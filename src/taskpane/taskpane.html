@@ -235,6 +235,31 @@
                             <span class="cat-icon" data-icon="trendUp"></span>
                             <span>Analysis</span>
                         </button>
+                        <button class="category-tab" data-category="extract">
+                            <span class="cat-icon" data-icon="upload"></span>
+                            <span>Extract</span>
+                        </button>
+                    </div>
+
+                    <!-- Schema Info Banner (shown in Extract mode) -->
+                    <div id="schema-info" class="schema-info" style="display: none;">
+                        <div class="schema-icon">📋</div>
+                        <div class="schema-text">
+                            <strong>Schema-Aware Mode</strong>
+                            <span>Data will only be extracted for columns defined in Row 1 of your sheet</span>
+                        </div>
+                        <button id="detect-columns-btn" class="btn-detect" title="Detect column headers">
+                            🔍 Detect
+                        </button>
+                    </div>
+                    
+                    <!-- Detected Columns Preview (shown after detection) -->
+                    <div id="detected-columns" class="detected-columns" style="display: none;">
+                        <div class="detected-header">
+                            <span class="detected-label">Detected Columns:</span>
+                            <span id="column-count" class="column-count">0</span>
+                        </div>
+                        <div id="column-chips" class="column-chips"></div>
                     </div>
 
                     <!-- Quick Actions -->
@@ -266,63 +291,64 @@
         
         <section id="sideload-msg" class="sideload-container">
             <!-- High-Fidelity Skeleton Screen -->
-    <div id="sideload-msg" class="sideload-container">
-        <div class="sideload-skeleton">
-            <!-- Header Skeleton -->
-            <div class="sk-header">
-                <div class="sk-brand">
-                    <div class="sk-logo sk-shimmer"></div>
-                    <div class="sk-title sk-shimmer"></div>
+            <div class="sideload-skeleton">
+                <!-- Header Skeleton -->
+                <div class="sk-header">
+                    <div class="sk-brand">
+                        <div class="sk-logo sk-shimmer"></div>
+                        <div class="sk-title sk-shimmer"></div>
+                    </div>
+                    <div class="sk-header-actions">
+                        <div class="sk-icon-btn sk-shimmer"></div>
+                        <div class="sk-icon-btn sk-shimmer"></div>
+                    </div>
                 </div>
-                <div class="sk-header-actions">
-                    <div class="sk-icon-btn sk-shimmer"></div>
-                    <div class="sk-icon-btn sk-shimmer"></div>
-                </div>
-            </div>
 
-            <!-- Mode Toggle Skeleton -->
-            <div style="padding: 0 16px;">
-                <div class="sk-mode-toggle">
-                    <div class="sk-mode-tab sk-shimmer"></div>
-                    <div class="sk-mode-tab sk-shimmer"></div>
-                </div>
-            </div>
-
-            <!-- Welcome/Chat Skeleton -->
-            <div class="sk-welcome">
-                <div class="sk-welcome-icon sk-shimmer"></div>
-                <div class="sk-welcome-title sk-shimmer"></div>
-                <div class="sk-welcome-desc sk-shimmer"></div>
-                <div class="sk-welcome-desc short sk-shimmer"></div>
-            </div>
-
-            <div class="sk-suggestions">
-                <div class="sk-suggestion sk-shimmer"></div>
-                <div class="sk-suggestion sk-shimmer"></div>
-                <div class="sk-suggestion sk-shimmer"></div>
-            </div>
-
-            <div class="sk-input-area">
+                <!-- Mode Toggle Skeleton -->
                 <div style="padding: 0 16px;">
-                    <div class="sk-input sk-shimmer"></div>
+                    <div class="sk-mode-toggle">
+                        <div class="sk-mode-tab sk-shimmer"></div>
+                        <div class="sk-mode-tab sk-shimmer"></div>
+                    </div>
+                </div>
+
+                <!-- Welcome/Chat Skeleton -->
+                <div class="sk-welcome">
+                    <div class="sk-welcome-icon sk-shimmer"></div>
+                    <div class="sk-welcome-title sk-shimmer"></div>
+                    <div class="sk-welcome-desc sk-shimmer"></div>
+                    <div class="sk-welcome-desc short sk-shimmer"></div>
+                </div>
+
+                <div class="sk-suggestions">
+                    <div class="sk-suggestion sk-shimmer"></div>
+                    <div class="sk-suggestion sk-shimmer"></div>
+                    <div class="sk-suggestion sk-shimmer"></div>
+                </div>
+
+                <div class="sk-input-area">
+                    <div style="padding: 0 16px;">
+                        <div class="sk-input sk-shimmer"></div>
+                    </div>
+                </div>
+                
+                <div class="sideload-status">
+                    <div class="sideload-pulse"></div>
+                    <span id="loading-status">Initializing SheetOS AI...</span>
                 </div>
             </div>
             
-            <div class="sideload-status">
-                <div class="sideload-pulse"></div>
-                <span>Initializing SheetOS AI...</span>
+            <!-- Fallback Link (Only shown if REALLY stuck) -->
+            <div id="debug-fallback" style="display:none; position:absolute; top:80px; left:20px; right:20px; background:rgba(255,50,50,0.1); border:1px solid rgba(255,50,50,0.3); padding:15px; border-radius:8px; font-size:12px; color:#c00; z-index: 9999;">
+                <strong style="font-size: 14px;">Connection Blocked?</strong><br><br>
+                Windows is blocking the Add-in from connecting. To fix this:<br><br>
+                1. Open <strong>PowerShell as Admin</strong><br>
+                2. Run: <code>CheckNetIsolation.exe LoopbackExempt -a -n="Microsoft.Win32WebViewHost_cw5n1h2txyewy"</code><br><br>
+                If that doesn't work:<br>
+                - Open <a href="https://localhost:3000/taskpane.html" target="_blank" style="color:#d00;font-weight:bold;">Debug Link</a> and accept 'Unsafe' cert.<br>
+                - Restart Excel.
             </div>
-        </div>
-        
-        <!-- Fallback Link (Only shown if REALLY stuck) -->
-        <div id="debug-fallback" style="display:none; position:absolute; top:80px; left:20px; right:20px; background:rgba(255,50,50,0.1); border:1px solid rgba(255,50,50,0.3); padding:15px; border-radius:8px; font-size:12px; color:#c00;">
-            <strong>Taking longer than expected?</strong><br><br>
-            If the app doesn't load:<br>
-            1. Open <a href="https://localhost:3000/taskpane.html" target="_blank" style="color:#d00;font-weight:bold;">Debug Link</a> in browser<br>
-            2. Accept the 'Unsafe' certificate<br>
-            3. Restart Excel
-        </div>
-    </div>
+        </section>
 
     <!-- Fallback Script -->
     <script>

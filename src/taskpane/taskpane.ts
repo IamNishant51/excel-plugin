@@ -4,6 +4,7 @@ import { callLLM, getConfig, saveConfig, fetchOllamaModels, GROQ_MODELS, LLMConf
 import { SYSTEM_PROMPT } from "../services/prompt";
 import { CHAT_PROMPT } from "../services/chat-prompt";
 import { getCachedResponse, cacheResponse } from "../services/cache";
+import { getSchemaExtractionPrompt, parseExtractionResponse, generateExcelCode, buildEnhancedPrompt, normalizeColumnName } from "../services/document-extractor";
 import * as pdfjsLib from 'pdfjs-dist';
 import { Icons } from "../services/icons";
 
@@ -17,7 +18,7 @@ try {
 
 // ─── Types ─────────────────────────────────────────────────────
 type Mode = "planning" | "agent";
-type ActionCategory = "cleanup" | "formulas" | "format" | "reports" | "templates" | "analysis";
+type ActionCategory = "cleanup" | "formulas" | "format" | "reports" | "templates" | "analysis" | "extract";
 
 interface ChatMessage {
   role: "user" | "ai";
@@ -28,6 +29,7 @@ interface ChatMessage {
 // ─── State ─────────────────────────────────────────────────────
 let currentMode: Mode = "planning";
 let currentCategory: ActionCategory = "cleanup";
+let schemaExtractionMode: boolean = false; // When true, use column headers from Excel
 const chatHistory: ChatMessage[] = [];
 let chatConversation: { role: "system" | "user" | "assistant"; content: string }[] = [];
 let isChatBusy = false;
@@ -111,6 +113,16 @@ const CATEGORIZED_ACTIONS: Record<ActionCategory, { icon: string; label: string;
     { icon: "filter",      label: "Advanced Filter",       prompt: "Create a 'Search' area above the data. Set up a dynamic visual filter: when user types in cell B1, filter the main table rows where the text content contains that value (wildcard match). Use conditional formatting to hide non-matching rows if Filter function is not available." },
     { icon: "hash",        label: "Frequency Dist",        prompt: "Create a frequency distribution (histogram data) for the main numeric column. Create bins (groups) automatically. Count the frequency of items in each bin. Output a summary table and a Histogram chart in a new sheet." },
     { icon: "zap",         label: "Regex Extract",         prompt: "Analyze the text column. If it contains emails, extract them to a new column 'Email'. If it contains phone numbers, extract and format them. If it contains IDs (like #1234), extract them. Use Flash Fill logic or pattern matching formulas." },
+  ],
+
+  // ── Document Extraction (Resume/CV Import) ──
+  extract: [
+    { icon: "fileText",    label: "📄 Import to Schema",    prompt: "SCHEMA_EXTRACTION_MODE: Read the column headers in row 1 of the current sheet. For each attached PDF/resume, extract ONLY the data that matches those columns. If a column's data doesn't exist in the PDF, leave it blank. Append each candidate as a new row." },
+    { icon: "users",       label: "📋 Bulk Resume Import",  prompt: "SCHEMA_EXTRACTION_MODE: Import all attached resumes/CVs. First read existing column headers. If no headers exist, create: Name, Email, Phone, Skills, Experience, Education. Extract data from each PDF and add one row per candidate. Never hallucinate — if data is missing, leave blank." },
+    { icon: "fileTemplate", label: "📝 HR Database Setup",   prompt: "Create a professional HR candidate database template with columns: Name, Email, Phone, LinkedIn, Current Company, Current Role, Skills, Years of Experience, Highest Education, Expected Salary, Notes. Apply formatting with filters and freeze header row." },
+    { icon: "search",      label: "🔍 Smart Extract",       prompt: "SCHEMA_EXTRACTION_MODE: Intelligently analyze the attached documents. Read column headers from the sheet. Match document content to columns using smart aliases (e.g., 'Mobile No' matches 'Phone' column). Only extract what exists — no guessing." },
+    { icon: "table",       label: "📊 Create Schema First", prompt: "Before importing, set up your columns: Create header row with: Name, Email, Mobile No, Age, Address, Skills, Experience. Format as a proper table with filters. Now attach PDFs and click 'Import to Schema'." },
+    { icon: "checkSquare", label: "✅ Validate & Clean",    prompt: "Validate the extracted data: Check for blank required fields (Name, Email). Highlight rows with missing data in yellow. Add a 'Status' column marking 'Complete' or 'Incomplete' for each row." },
   ],
 };
 
@@ -208,6 +220,9 @@ Office.onReady((info) => {
     };
   });
 
+  // Detect Columns Button (Extract Mode)
+  bindClick("detect-columns-btn", detectAndShowColumns);
+
   // Initial UI Build
   buildQuickActions();
   buildChatSuggestions();
@@ -284,6 +299,21 @@ function switchCategory(category: ActionCategory): void {
   document.querySelectorAll(".category-tab").forEach((tab) => {
     tab.classList.toggle("active", (tab as HTMLElement).dataset.category === category);
   });
+
+  // Show/hide schema info banner for Extract mode
+  const schemaInfo = document.getElementById("schema-info");
+  const detectedColumns = document.getElementById("detected-columns");
+  
+  if (schemaInfo) {
+    schemaInfo.style.display = category === "extract" ? "flex" : "none";
+  }
+  
+  if (detectedColumns) {
+    detectedColumns.style.display = category === "extract" ? detectedColumns.style.display : "none";
+  }
+  
+  // Update extraction mode flag
+  schemaExtractionMode = category === "extract";
 
   buildQuickActions();
 }
@@ -527,7 +557,31 @@ async function sendChatMessage(): Promise<void> {
   if (chatConversation.length === 0) {
     chatConversation.push({ role: "system", content: CHAT_PROMPT });
   }
-  chatConversation.push({ role: "user", content: message });
+  
+  // 🔥 CONTEXT AWARENESS: Auto-detect if user is asking about their sheet
+  const needsSheetContext = /\b(this|my|current|opened?)\s+(sheet|data|table|workbook|excel|spreadsheet)|what\s+(do|can|should)|improve|analyze|suggest|help|better|optimize/i.test(message);
+  
+  let userMessage = message;
+  if (needsSheetContext) {
+    try {
+      const sheetContext = await getSheetContext();
+      if (sheetContext) {
+        userMessage = `${message}\n\n[SHEET CONTEXT]\n${sheetContext}`;
+        // Show context indicator
+        const lastBubble = document.querySelector('.chat-msg.user:last-child .chat-bubble');
+        if (lastBubble) {
+          const badge = document.createElement('span');
+          badge.className = 'context-badge';
+          badge.innerHTML = '📊 Sheet context loaded';
+          lastBubble.appendChild(badge);
+        }
+      }
+    } catch (e) {
+      console.warn('Could not load sheet context:', e);
+    }
+  }
+  
+  chatConversation.push({ role: "user", content: userMessage });
 
   // Clear input
   input.value = "";
@@ -744,6 +798,206 @@ function clearChat(): void {
 
 
 // ═══════════════════════════════════════════════════════════════
+// CONTEXT AWARENESS — Read Excel Sheet Data
+// ═══════════════════════════════════════════════════════════════
+
+/**
+ * Get comprehensive sheet context for AI analysis
+ * Returns formatted string with sheet data, structure, and stats
+ */
+async function getSheetContext(): Promise<string | null> {
+  try {
+    return await Excel.run(async (context) => {
+      const sheet = context.workbook.worksheets.getActiveWorksheet();
+      sheet.load("name");
+      
+      const usedRange = sheet.getUsedRange();
+      usedRange.load("values,rowCount,columnCount,address");
+      await context.sync();
+      
+      if (usedRange.rowCount === 0 || usedRange.columnCount === 0) {
+        return "Sheet is empty.";
+      }
+      
+      const values = usedRange.values;
+      const headers = values[0].map(h => String(h || "").trim());
+      
+      // Sample data (max 15 rows)
+      const sampleSize = Math.min(15, values.length);
+      const sampleData = values.slice(0, sampleSize);
+      
+      // Data type detection
+      const columnTypes: string[] = [];
+      if (values.length > 1) {
+        for (let col = 0; col < usedRange.columnCount; col++) {
+          const columnValues = values.slice(1).map(row => row[col]).filter(v => v !== null && v !== "");
+          if (columnValues.length === 0) {
+            columnTypes.push("empty");
+          } else if (columnValues.every(v => !isNaN(Number(v)))) {
+            columnTypes.push("number");
+          } else if (columnValues.every(v => /^\d{1,4}[-\/]\d{1,2}[-\/]\d{1,4}/.test(String(v)))) {
+            columnTypes.push("date");
+          } else {
+            columnTypes.push("text");
+          }
+        }
+      }
+      
+      // Build context string
+      let contextStr = `Sheet Name: "${sheet.name}"\n`;
+      contextStr += `Dimensions: ${usedRange.rowCount} rows × ${usedRange.columnCount} columns\n`;
+      contextStr += `Range: ${usedRange.address}\n\n`;
+      
+      contextStr += `COLUMNS:\n`;
+      headers.forEach((h, i) => {
+        const type = columnTypes[i] || "unknown";
+        contextStr += `  ${i + 1}. "${h || `Column${i+1}`}" (${type})\n`;
+      });
+      
+      contextStr += `\nDATA SAMPLE (first ${sampleSize} rows):\n`;
+      sampleData.forEach((row, i) => {
+        if (i === 0) {
+          contextStr += `  [Headers] ${row.map(c => `"${c}"`).join(" | ")}\n`;
+        } else {
+          contextStr += `  Row ${i}: ${row.map(c => c === null || c === "" ? "(empty)" : `"${c}"`).join(" | ")}\n`;
+        }
+      });
+      
+      if (values.length > sampleSize) {
+        contextStr += `  ... (${values.length - sampleSize} more rows not shown)\n`;
+      }
+      
+      return contextStr;
+    });
+  } catch (error) {
+    console.error("Error reading sheet context:", error);
+    return null;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SCHEMA-AWARE EXTRACTION — Read Column Headers from Excel
+// ═══════════════════════════════════════════════════════════════
+
+/**
+ * Read existing column headers from row 1 of the active Excel sheet
+ * Returns array of non-empty header names
+ */
+async function getExcelColumnHeaders(): Promise<string[]> {
+  return Excel.run(async (context) => {
+    const sheet = context.workbook.worksheets.getActiveWorksheet();
+    
+    // Read first row (A1:Z1) for headers - covers up to 26 columns
+    const headerRange = sheet.getRange("A1:Z1");
+    headerRange.load("values");
+    await context.sync();
+    
+    const headers = headerRange.values[0]
+      .map((cell: any) => (cell ? String(cell).trim() : ""))
+      .filter((header: string) => header !== "");
+    
+    return headers;
+  });
+}
+
+/**
+ * Get count of existing data rows (excluding header)
+ */
+async function getExistingDataRowCount(): Promise<number> {
+  return Excel.run(async (context) => {
+    const sheet = context.workbook.worksheets.getActiveWorksheet();
+    const usedRange = sheet.getUsedRange();
+    usedRange.load("rowCount");
+    await context.sync();
+    return Math.max(0, usedRange.rowCount - 1); // Subtract header row
+  });
+}
+
+/**
+ * Detect and display column headers in the UI
+ */
+async function detectAndShowColumns(): Promise<void> {
+  const btn = document.getElementById("detect-columns-btn") as HTMLButtonElement;
+  const detectedSection = document.getElementById("detected-columns");
+  const columnChips = document.getElementById("column-chips");
+  const columnCount = document.getElementById("column-count");
+  
+  if (!detectedSection || !columnChips || !columnCount) return;
+  
+  // Show loading state
+  if (btn) btn.innerHTML = "⏳ Loading...";
+  
+  try {
+    const columns = await getExcelColumnHeaders();
+    
+    if (columns.length === 0) {
+      // No columns found
+      columnChips.innerHTML = '<span class="column-chip empty-warning">⚠️ No headers in Row 1 — add columns first</span>';
+      columnCount.textContent = "0";
+      detectedSection.style.display = "block";
+    } else {
+      // Show detected columns as chips
+      columnChips.innerHTML = columns.map(col => 
+        `<span class="column-chip">${col}</span>`
+      ).join("");
+      columnCount.textContent = String(columns.length);
+      detectedSection.style.display = "block";
+    }
+  } catch (e) {
+    console.error("Error detecting columns:", e);
+    columnChips.innerHTML = '<span class="column-chip empty-warning">⚠️ Error reading Excel</span>';
+    columnCount.textContent = "0";
+    detectedSection.style.display = "block";
+  } finally {
+    if (btn) btn.innerHTML = "🔍 Detect";
+  }
+}
+
+/**
+ * Build the schema-aware extraction prompt with existing column headers
+ */
+function buildSchemaExtractionDirective(columns: string[]): string {
+  const columnList = columns.map((c, i) => `${i + 1}. "${c}"`).join("\n");
+  const enhancedHints = buildEnhancedPrompt(columns);
+  
+  return `
+═══════════════════════════════════════════════════════════════════════════════
+🔒 SCHEMA-LOCKED EXTRACTION MODE — CRITICAL INSTRUCTIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+The user has PRE-DEFINED these columns in their Excel sheet. You MUST extract data ONLY for these columns:
+
+${columnList}
+
+${enhancedHints}
+
+EXTRACTION RULES (MEMORIZE THESE):
+1. ONE ROW PER DOCUMENT: Each attached PDF/image represents ONE candidate/record.
+2. EXACT COLUMN MATCHING: Only fill data for the columns listed above.
+3. NO HALLUCINATION: If information for a column is NOT visible in the document, use "" (empty string).
+4. NO NEW COLUMNS: Do NOT add any columns that aren't in the list above.
+5. PROPER FORMATTING:
+   - Names: Proper Case (John Smith)
+   - Emails: lowercase
+   - Phones: Keep original format or +X-XXX-XXX-XXXX
+   - Skills: Comma-separated list
+
+BANNED BEHAVIORS:
+❌ Guessing email addresses (e.g., firstname@company.com)
+❌ Fabricating phone numbers
+❌ Making up skills not explicitly listed
+❌ Using "N/A", "Not Found", "Unknown" — use "" instead
+❌ Adding extra columns
+
+OUTPUT: Generate Excel JS code that writes the extracted data starting from the first empty row.
+The code should use the writeData helper function and format the data professionally.
+
+═══════════════════════════════════════════════════════════════════════════════
+`;
+}
+
+
+// ═══════════════════════════════════════════════════════════════
 // AGENT MODE — Execute Functions (Existing + Enhanced)
 // ═══════════════════════════════════════════════════════════════
 
@@ -772,10 +1026,13 @@ export async function runAICommand(): Promise<void> {
       : `Analyze the attached ${attachedFiles[0].type}. Extract all tabular data and write valid Excel JS code to populate the active sheet. Format headers and auto-fit columns.`;
   }
 
+  // Detect Schema Extraction Mode
+  const isSchemaMode = userPrompt.includes("SCHEMA_EXTRACTION_MODE") || currentCategory === "extract";
+
   // UI: loading
   const originalHTML = button.innerHTML;
   button.disabled = true;
-  button.innerHTML = `<span class="btn-spinner"></span><span>Generating...</span>`;
+  button.innerHTML = `<span class="btn-spinner"></span><span>${isSchemaMode ? "Reading Schema..." : "Generating..."}</span>`;
   statusEl.style.display = "none";
   skeletonEl.style.display = "flex";
   cacheBadge.style.display = "none";
@@ -784,9 +1041,32 @@ export async function runAICommand(): Promise<void> {
   try {
     let code: string;
     let fromCache = false;
+    
+    // ─── Schema Extraction Mode ───
+    let existingColumns: string[] = [];
+    if (isSchemaMode && attachedFiles.length > 0) {
+      try {
+        existingColumns = await getExcelColumnHeaders();
+        console.log("Schema columns detected:", existingColumns);
+        
+        if (existingColumns.length === 0) {
+          // No headers — show helpful message
+          showStatus(statusEl, "info", "⚠️ No column headers found in Row 1. Add headers first or use 'HR Database Setup' to create them.");
+          skeletonEl.style.display = "none";
+          button.disabled = false;
+          button.innerHTML = originalHTML;
+          return;
+        }
+        
+        // Update UI to show detected columns
+        button.innerHTML = `<span class="btn-spinner"></span><span>Extracting (${existingColumns.length} columns)...</span>`;
+      } catch (e) {
+        console.warn("Could not read Excel headers:", e);
+      }
+    }
 
-    // Check cache (SKIP if file attached)
-    const cached = attachedFiles.length === 0 ? getCachedResponse(userPrompt) : null;
+    // Check cache (SKIP if file attached or schema mode)
+    const cached = (attachedFiles.length === 0 && !isSchemaMode) ? getCachedResponse(userPrompt) : null;
     
     if (cached) {
       code = cached;
@@ -797,23 +1077,43 @@ export async function runAICommand(): Promise<void> {
       const messages: any[] = [{ role: "system", content: SYSTEM_PROMPT }];
       
       if (attachedFiles.length > 0) {
-          // Smart Prompting Logic
-          const isMergeRequest = attachedFiles.length > 1 || /merge|combine|consolidate|table|database|list/i.test(userPrompt);
-          
-          let systemDirective = "";
-          
-          if (isMergeRequest) {
-            systemDirective = `
-IMPORTANT INSTRUCTION (DATA MERGE MODE):
-1. Consolidate ALL data from the attached documents into a SINGLE structured Excel worksheet.
-2. Ignore non-tabular content (like cover pages, policies) unless it contains key metadata.
-3. Create ONE master table with consistent headers.
-4. If columns vary between files, unify them intelligently (e.g. "Inv #" and "Invoice No" -> "Invoice Number").
-5. Format as a clean Excel Table.
-6. Do not create multiple sheets unless explicitly asked.`;
+          // ─── SCHEMA-AWARE EXTRACTION ───
+          if (isSchemaMode && existingColumns.length > 0) {
+            const schemaDirective = buildSchemaExtractionDirective(existingColumns);
+            const cleanPrompt = userPrompt.replace("SCHEMA_EXTRACTION_MODE:", "").trim();
+            
+            const contentText = `${cleanPrompt}\n\nEXISTING_COLUMNS: ${JSON.stringify(existingColumns)}\n\n${schemaDirective}`;
+            const contentParts: any[] = [{ type: "text", text: contentText }];
+            
+            // Add all images from all files
+            let totalImages = 0;
+            attachedFiles.forEach(file => {
+              file.data.forEach(url => {
+                if (totalImages < 20) {
+                  contentParts.push({ type: "image_url", image_url: { url } });
+                  totalImages++;
+                }
+              });
+            });
+            
+            messages.push({ role: "user", content: contentParts });
           } else {
-            // Single file recreation mode
-            systemDirective = `
+            // ─── LEGACY EXTRACTION (Non-Schema Mode) ───
+            const isMergeRequest = attachedFiles.length > 1 || /merge|combine|consolidate|table|database|list/i.test(userPrompt);
+            
+            let systemDirective = "";
+            
+            if (isMergeRequest) {
+              systemDirective = `
+IMPORTANT INSTRUCTION (EXTREME EXTRACTION MODE):
+1. FULL COVERAGE: Your goal is to extract EVERY significant piece of information from each resume.
+2. SCHEMA: Even if not specified, extract: [Candidate Name, Email, Phone, LinkedIn, Location, Summary, Total Years Exp, Most Recent Company, Most Recent Role, Top 5 Skills, Highest Education, Last Degree Year].
+3. ACCURACY: Do NOT hallucinate. If a field isn't present, leave it blank ("").
+4. ONE ROW PER FILE: Ensure each resume gets exactly one detailed row in the master table.
+5. FORMATTING: Wrap text for long summary/skills cells. Apply 'TableStyleMedium9'.`;
+            } else {
+              // Single file recreation mode
+              systemDirective = `
 IMPORTANT INSTRUCTION: 
 1. Recreate the ENTIRE document content in Excel. Do NOT just extract tables.
 2. Extract all Titles, Paragraphs, Lists, and Footer text.
@@ -821,23 +1121,24 @@ IMPORTANT INSTRUCTION:
 4. Tables: Create standard Excel Tables for data.
 5. Formatting: Match bold/italic/colors (e.g. Red for errors).
 6. Goal: The Excel sheet should start with "TEMPLATING BASICS", then "INTRODUCTION", instruction text, etc. down to the table.`;
-          }
+            }
 
-          const contentText = (userPrompt || "Process these files.") + "\n\n" + systemDirective;
-          const contentParts: any[] = [{ type: "text", text: contentText }];
-          
-          // Add all images from all files
-          let totalImages = 0;
-          attachedFiles.forEach(file => {
-            file.data.forEach(url => {
-              if (totalImages < 20) { // Safety limit to prevent payload explosion
-                 contentParts.push({ type: "image_url", image_url: { url } });
-                 totalImages++;
-              }
+            const contentText = (userPrompt || "Process these files.") + "\n\n" + systemDirective;
+            const contentParts: any[] = [{ type: "text", text: contentText }];
+            
+            // Add all images from all files
+            let totalImages = 0;
+            attachedFiles.forEach(file => {
+              file.data.forEach(url => {
+                if (totalImages < 20) { // Safety limit to prevent payload explosion
+                   contentParts.push({ type: "image_url", image_url: { url } });
+                   totalImages++;
+                }
+              });
             });
-          });
-          
-          messages.push({ role: "user", content: contentParts });
+            
+            messages.push({ role: "user", content: contentParts });
+          }
       } else {
           messages.push({ role: "user", content: userPrompt });
       }
@@ -845,7 +1146,7 @@ IMPORTANT INSTRUCTION:
       code = await callLLM(messages);
       
       // Don't cache file uploads (too strict)
-      if (attachedFiles.length > 0) fromCache = true; // Hack to prevent caching below
+      if (attachedFiles.length > 0 || isSchemaMode) fromCache = true; // Hack to prevent caching below
     }
 
     debugEl.innerText = code;
@@ -928,12 +1229,25 @@ async function executeExcelCode(code: string): Promise<void> {
     try {
       await new Function(
         "context", "sheet", "Excel",
-        `return (async () => { ${wrappedCode}\nawait context.sync(); })()`
+        `return (async () => { 
+          try {
+            ${wrappedCode}
+            await context.sync();
+          } catch (inner) {
+            if (inner.code === "InvalidArgument") {
+              inner.message = "Invalid Command: " + inner.message + " (Check if range or cell index is valid)";
+            }
+            throw inner;
+          }
+        })()`
       )(context, sheet, Excel);
     } catch (e: any) {
       // Enhance error message for common AI mistakes
+      console.error("Execution Error:", e);
       if (e.message && (e.message.includes("is not a function") || e.message.includes("is not defined"))) {
         e.message = `AI Code Error: ${e.message}. (Try rephrasing your prompt)`;
+      } else if (e.code === "InvalidArgument") {
+        e.message = `Setup Error: The AI used an invalid Excel range or format. (Retrying...)`;
       }
       try { await context.sync(); } catch (_) {}
       throw e;
@@ -1052,8 +1366,8 @@ async function renderPdfToImages(buffer: ArrayBuffer): Promise<string[]> {
   // @ts-ignore
   const pdf = await pdfjsLib.getDocument(buffer).promise;
   const images: string[] = [];
-  // Limit to 3 pages to balance context vs token usage
-  const maxPages = Math.min(pdf.numPages, 3); 
+  // Limit to 5 pages per PDF for better coverage of long CVs
+  const maxPages = Math.min(pdf.numPages, 5); 
   
   for (let i = 1; i <= maxPages; i++) {
     const page = await pdf.getPage(i);
