@@ -146,7 +146,7 @@ async function callGemini(messages: ChatMessage[], model: string, apiKey: string
     const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contents, generationConfig: { temperature: 0.1 } })
+        body: JSON.stringify({ contents, generationConfig: { temperature: 0, topP: 1 } })  // FORCED TO 0 for deterministic output
     });
 
     if (!response.ok) {
@@ -179,14 +179,14 @@ export async function callLLM(messages: ChatMessage[], config?: LLMConfig): Prom
   // OpenAI Handler
   if (cfg.provider === "openai") {
       if (!cfg.openaiKey) throw new Error("Please enter your OpenAI API Key in Settings.");
-      // Standard OpenAI format
+      // Standard OpenAI format - FORCED TO temperature=0 and top_p=1 for deterministic output
       const response = await fetch("https://api.openai.com/v1/chat/completions", {
           method: "POST",
           headers: { 
               "Content-Type": "application/json",
               "Authorization": `Bearer ${cfg.openaiKey}` 
           },
-          body: JSON.stringify({ messages, model, temperature: 0.1, max_tokens: 4096 })
+          body: JSON.stringify({ messages, model, temperature: 0, top_p: 1, max_tokens: 4096 })
       });
       if (!response.ok) throw new Error(`OpenAI Error: ${await response.text()}`);
       const data = await response.json();
@@ -208,7 +208,8 @@ export async function callLLM(messages: ChatMessage[], config?: LLMConfig): Prom
   const body = JSON.stringify({
     messages,
     model,
-    temperature: 0.1,
+    temperature: 0,  // FORCED TO 0 FOR DETERMINISTIC OUTPUT
+    top_p: 1,        // FORCED TO 1 FOR DETERMINISTIC OUTPUT
     max_tokens: 4096, 
   });
 

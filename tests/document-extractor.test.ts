@@ -59,12 +59,18 @@ describe('Document Extractor - parseExtractionResponse', () => {
     expect(result).toEqual([]);
   });
 
-  test('should return empty array for response wrapped in object (non-array root)', () => {
+  test('should extract data array from response wrapped in object', () => {
     const response = '{"data": [{"Name": "Wrapped User", "Email": "wrap@test.com", "Phone": "", "Skills": ""}]}';
     
     const result = parseExtractionResponse(response);
     
-    expect(result).toEqual([]);
+    // The improved parser correctly extracts arrays from nested objects
+    expect(result).toEqual([{
+      Name: 'Wrapped User',
+      Email: 'wrap@test.com',
+      Phone: '',
+      Skills: ''
+    }]);
   });
 
   test('should parse a large valid JSON response', () => {
