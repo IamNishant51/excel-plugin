@@ -1930,6 +1930,7 @@ function writeData(sheet, startCell, data) {
       if (val.length > 30000) val = val.substring(0, 30000) + "...";
       return val;
     });
+    });
   });
   try {
     const range = sheet.getRange(startCell).getResizedRange(rows - 1, cols - 1);
@@ -1943,7 +1944,29 @@ function writeData(sheet, startCell, data) {
     return null;
   }
 }
-`;
+
+  function formatTableStyle(usedRange, headerColor, fontColor) {
+    if (!usedRange) return;
+    try {
+      if (usedRange.rowCount < 1) return;
+      const headerRow = usedRange.getRow(0);
+      headerRow.format.set({
+        font: { bold: true, size: 11, color: fontColor },
+        fill: { color: headerColor },
+        horizontalAlignment: "Center",
+        verticalAlignment: "Center"
+      });
+      // Try resolving body
+      if (usedRange.rowCount > 1) {
+        const bodyRange = usedRange.getOffsetRange(1, 0).getResizedRange(-1, 0);
+        bodyRange.format.font.color = "#000000";
+        bodyRange.format.wrapText = true;
+      }
+    } catch (e) {
+      console.error("formatTableStyle error: ", e);
+    }
+  }
+  `;
 
     const wrappedCode = `
       ${writeDataHelper}
@@ -1961,41 +1984,44 @@ function writeData(sheet, startCell, data) {
         console.error("[Agent] Runtime Error:", _innerErr);
         try { await context.sync(); } catch(_) {}
         throw _innerErr;
-      }
     `;
+
+    console.log("=== EXECUTING AI CODE ===");
+    console.log(wrappedCode.split("\\n").map((l, i) => `${i + 1}: ${l}`).join("\\n"));
+    console.log("=========================");
 
     try {
       await new Function(
         "context", "sheet", "Excel",
-        `return (async () => { 
+        `return (async () => {
           try {
             ${wrappedCode}
-            await context.sync();
-          } catch (inner) {
-            // Enhance error messages for common issues
-            if (inner.code === "InvalidArgument") {
-              const original = inner.message || "";
-              if (original.includes("A0") || original.includes("row 0")) {
-                inner.message = "Invalid range: Row 0 doesn't exist. Excel rows start at 1.";
-              } else if (original.includes("getResizedRange")) {
-                inner.message = "Invalid range size: Check that data dimensions match the range.";
-              } else {
-                inner.message = "Invalid argument: " + original;
-              }
-            } else if (inner.message?.includes("is not a function")) {
-              const fnMatch = inner.message.match(/(\\w+) is not a function/);
-              const fn = fnMatch ? fnMatch[1] : (inner.stack?.match(/at\\s+.*\\.(.*)\\s+\\(/)?.[1] || "method");
-              inner.message = "API Error: ." + fn + "() doesn't exist. Use correct Excel JS API methods.";
-            } else if (inner.message?.includes("is not defined")) {
-              const varMatch = inner.message.match(/(\\w+) is not defined/);
-              const v = varMatch ? varMatch[1] : "variable";
-              inner.message = "Undefined: '" + v + "' was used before being declared.";
-            } else if (inner.message?.includes("Cannot read property")) {
-              inner.message = "Null reference: Tried to read property of undefined. Add null checks or ensure .load() was called.";
-            }
-            throw inner;
+        await context.sync();
+      } catch (inner) {
+        // Enhance error messages for common issues
+        if (inner.code === "InvalidArgument") {
+          const original = inner.message || "";
+          if (original.includes("A0") || original.includes("row 0")) {
+            inner.message = "Invalid range: Row 0 doesn't exist. Excel rows start at 1.";
+          } else if (original.includes("getResizedRange")) {
+            inner.message = "Invalid range size: Check that data dimensions match the range.";
+          } else {
+            inner.message = "Invalid argument: " + original;
           }
-        })()`
+        } else if (inner.message?.includes("is not a function")) {
+          const fnMatch = inner.message.match(/(\\w+) is not a function/);
+          const fn = fnMatch ? fnMatch[1] : (inner.stack?.match(/at\\s+.*\\.(.*)\\s+\\(/)?.[1] || "method");
+          inner.message = "API Error: ." + fn + "() doesn't exist. Use correct Excel JS API methods.";
+        } else if (inner.message?.includes("is not defined")) {
+          const varMatch = inner.message.match(/(\\w+) is not defined/);
+          const v = varMatch ? varMatch[1] : "variable";
+          inner.message = "Undefined: '" + v + "' was used before being declared.";
+        } else if (inner.message?.includes("Cannot read property")) {
+          inner.message = "Null reference: Tried to read property of undefined. Add null checks or ensure .load() was called.";
+        }
+        throw inner;
+      }
+    })()`
       )(context, sheet, Excel);
     } catch (e: any) {
       console.error("[Agent] Execution Error:", e);
@@ -2013,7 +2039,7 @@ async function handleFileSelect(event: Event, isAgent: boolean = false) {
 
   const btnId = isAgent ? "agent-file-btn" : "file-upload-btn";
   const btn = document.getElementById(btnId);
-  if (btn) btn.innerHTML = `<span class="btn-spinner"></span>`;
+  if (btn) btn.innerHTML = `< span class="btn-spinner" > </span>`;
 
   try {
     const newFiles = [];

@@ -427,30 +427,9 @@ BANNED (will crash):
 - const sheet = ... → Already declared
 - const context = ... → Already declared
 
-MANDATORY writeData HELPER (include this in all code):
-function writeData(sheet, startCell, data) {
-  if (!data || data.length === 0) return null;
-  const rows = data.length;
-  const cols = Math.max(...data.map(r => r ? r.length : 0));
-  if (cols === 0) return null;
-  const normalized = data.map(r => {
-    const row = r ? [...r] : [];
-    while (row.length < cols) row.push("");
-    // Office.js rejects null/undefined/objects in range.values 
-    return row.map(cell => {
-      if (cell === null || cell === undefined) return "";
-      let val = typeof cell === "object" ? (Array.isArray(cell) ? cell.join(", ") : JSON.stringify(cell)) : String(cell);
-      // Prevent formula evaluation crashes (like '@' or '-') and string length limits
-      if (/^[=+\-@]/.test(val)) val = "'" + val;
-      if (val.length > 30000) val = val.substring(0, 30000) + "...";
-      return val;
-    });
-  });
-  const range = sheet.getRange(startCell).getResizedRange(rows - 1, cols - 1);
-  range.values = normalized;
-  range.format.autofitColumns();
-  return range;
-}
+MANDATORY HELPERS (available in environment, use them):
+function writeData(sheet, startCell, data): Range // Safely writes 2D array and expands matrix
+function formatTableStyle(usedRange, headerColor, fontColor): void // Safely styles the table and handles row bounds without throwing properties errors
 
 SAFE FORMATTING TEMPLATE (adapt details based on sheet type):
 // Step 1: Get used range, track it to prevent expiration, and load properties
@@ -464,28 +443,9 @@ if (!usedRange || usedRange.rowCount < 1 || usedRange.columnCount < 1) {
   throw new Error("Sheet appears empty. Add some data first.");
 }
 
-const rowCount = usedRange.rowCount;
-const colCount = usedRange.columnCount;
-
-// Step 3: Format header row (row 1)
-const headerRow = usedRange.getRow(0);
-headerRow.format.set({
-  font: { bold: true, size: 11, color: "#FFFFFF" },
-  fill: { color: "#1B2A4A" },
-  horizontalAlignment: "Center",
-  verticalAlignment: "Center",
-  rowHeight: 28
-});
-
-// Step 4: Format data rows with alternating colors — ALWAYS set font color to black
-for (let i = 1; i < rowCount; i++) {
-  const row = usedRange.getRow(i);
-  row.format.set({
-    fill: { color: i % 2 === 0 ? "#F4F5F7" : "#FFFFFF" },
-    font: { color: "#000000" },
-    wrapText: true // allow row to expand for multi-line text
-  });
-}
+// Step 3: Format the range efficiently using the built-in helper
+formatTableStyle(usedRange, "#1B2A4A", "#FFFFFF");
+await context.sync();
 
 // Step 5: Add borders to all cells
 usedRange.format.borders.getItem("InsideHorizontal").style = "Thin";
