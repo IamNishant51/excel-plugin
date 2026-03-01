@@ -297,6 +297,28 @@
                     <!-- File Preview (Agent Mode) -->
                     <div id="agent-file-preview-list" class="file-preview-list"></div>
 
+                    <!-- Batch PDF Extraction Panel (shown in Extract mode with PDFs attached) -->
+                    <div id="batch-extraction-panel" class="batch-panel" style="display:none;">
+                        <div class="batch-panel-header">
+                            <span class="batch-panel-title">🧠 Batch PDF Extraction</span>
+                            <span id="batch-file-count" class="batch-file-count">0 PDFs</span>
+                        </div>
+                        <textarea id="batch-instruction" class="batch-instruction"
+                            placeholder="Describe what to extract, e.g: These are resumes. Extract Name, Email, Phone, Skills, and Experience."
+                            rows="2"></textarea>
+                        <button id="batch-extract-btn" class="btn-primary btn-batch-extract">
+                            <span id="batch-icon">🚀</span>
+                            <span id="batch-btn-text">Extract All PDFs</span>
+                        </button>
+                        <div id="batch-progress-wrap" class="batch-progress-wrap" style="display:none;">
+                            <div class="batch-progress-bar-track">
+                                <div id="batch-progress-bar" class="batch-progress-bar" style="width:0%"></div>
+                            </div>
+                            <div id="batch-progress-label" class="batch-progress-label">0 / 0</div>
+                        </div>
+                        <div id="batch-log" class="batch-log"></div>
+                    </div>
+
                     <div class="card-footer">
                         <div class="footer-left">
                             <input type="file" id="agent-file-input" accept="image/png, image/jpeg, application/pdf"

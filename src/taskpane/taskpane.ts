@@ -5,6 +5,7 @@ import { SYSTEM_PROMPT } from "../services/prompt";
 import { CHAT_PROMPT } from "../services/chat-prompt";
 import { getCachedResponse, cacheResponse } from "../services/cache";
 import { getSchemaExtractionPrompt, parseExtractionResponse, generateExcelCode, buildEnhancedPrompt, normalizeColumnName } from "../services/document-extractor";
+import { extractTextFromPDFFile } from "../services/pdfService";
 import {
   runAgent,
   validateCode,
@@ -43,6 +44,8 @@ let isChatBusy = false;
 let attachedFiles: { name: string; type: "image" | "pdf"; data: string[] }[] = []; // Array of attached files
 let chatAbortController: AbortController | null = null;
 let agentAbortController: AbortController | null = null;
+let rawPDFFiles: File[] = []; // Store raw File objects for text-based batch extraction
+let batchAbortController: AbortController | null = null;
 
 // ─── Quick Actions by Category ─────────────────────────────────
 const CATEGORIZED_ACTIONS: Record<ActionCategory, { icon: string; label: string; prompt: string }[]> = {
@@ -509,6 +512,9 @@ Office.onReady((info) => {
   bindChange("agent-file-input", (e) => handleFileSelect(e, true));
   bindClick("agent-file-remove", () => clearFile(true));
 
+  // Batch PDF Extraction
+  bindClick("batch-extract-btn", runBatchPDFExtraction);
+
   // Category Tabs
   document.querySelectorAll(".category-tab").forEach((tab) => {
     (tab as HTMLElement).onclick = () => {
@@ -613,6 +619,8 @@ function switchCategory(category: ActionCategory): void {
   schemaExtractionMode = category === "extract";
 
   buildQuickActions();
+  // Show/hide batch panel when switching to/from extract
+  showBatchPanel(category === "extract" && rawPDFFiles.length > 0);
 }
 
 // ─── Quick Actions (Agent Mode) ────────────────────────────────
@@ -2003,6 +2011,7 @@ async function handleFileSelect(event: Event, isAgent: boolean = false) {
     for (let i = 0; i < input.files.length; i++) {
       const file = input.files[i];
       if (file.type === "application/pdf") {
+        rawPDFFiles.push(file); // Keep raw file for text extraction
         const arrayBuffer = await file.arrayBuffer();
         const images = await renderPdfToImages(arrayBuffer);
         newFiles.push({ name: file.name, type: "pdf", data: images });
@@ -2015,6 +2024,10 @@ async function handleFileSelect(event: Event, isAgent: boolean = false) {
     if (newFiles.length > 0) {
       // Append to existing files
       attachedFiles = [...attachedFiles, ...newFiles];
+      // Show batch panel if in extract mode and we have PDFs
+      if (currentCategory === "extract" && rawPDFFiles.length > 0) {
+        showBatchPanel(true);
+      }
       updateFilePreview(true, isAgent);
     } else {
       throw new Error("Unsupported file type. Please upload PDF or Image.");
@@ -2082,6 +2095,8 @@ function removeFile(index: number, isAgent: boolean) {
 
 function clearFile(isAgent: boolean = false) {
   attachedFiles = [];
+  rawPDFFiles = [];
+  showBatchPanel(false);
   updateFilePreview(false, isAgent);
 }
 
@@ -2115,3 +2130,277 @@ async function renderPdfToImages(buffer: ArrayBuffer): Promise<string[]> {
   }
   return images;
 }
+
+// ═══════════════════════════════════════════════════════════════
+// BATCH PDF EXTRACTION ENGINE
+// ═══════════════════════════════════════════════════════════════
+
+/**
+ * Shows or hides the batch extraction panel and updates the file count badge.
+ */
+function showBatchPanel(show: boolean): void {
+  const panel = document.getElementById("batch-extraction-panel");
+  const badge = document.getElementById("batch-file-count");
+  if (!panel) return;
+  panel.style.display = show ? "block" : "none";
+  if (show && badge) {
+    const count = rawPDFFiles.length;
+    badge.textContent = `${count} PDF${count !== 1 ? "s" : ""}`;
+  }
+}
+
+/**
+ * Parses field names from natural language instruction using regex heuristics.
+ * E.g. "Extract Name, Email, Phone, Skills and Experience" → ["Name","Email","Phone","Skills","Experience"]
+ */
+function parseFieldsFromInstruction(instruction: string): string[] {
+  // Look for explicit list patterns: "extract X, Y, Z" or "find X, Y and Z"
+  const listPattern = /(?:extract|find|get|pull|identify|return|capture|include)[:\s]+([^.!?]+)/i;
+  const match = instruction.match(listPattern);
+  if (match) {
+    return match[1]
+      .split(/[,;&]| and /i)
+      .map(f => f.trim().replace(/^["'\-•]+|["'\-•]+$/g, ""))
+      .filter(f => f.length > 1 && f.length < 50);
+  }
+
+  // Fallback: detect capitalised or quoted words as field names
+  const capitalWords = instruction.match(/\b[A-Z][a-z]{2,}(?:\s[A-Z][a-z]{2,})?\b/g) || [];
+  const filtered = capitalWords.filter(w =>
+    !/^(These|This|The|And|From|With|For|All|Each|Into|Then|After|Before|Upload|File|Excel|Sheet|Row|Column|PDF|Resume|CV)$/.test(w)
+  );
+  if (filtered.length > 0) return Array.from(new Set(filtered));
+
+  // Default for resumes if nothing detected
+  return ["Name", "Email", "Phone", "Skills", "Experience"];
+}
+
+/**
+ * Ensures the first row of the active sheet has the given fields as headers.
+ * If the sheet is empty, writes them in row 1. If headers already exist, leaves them.
+ * Returns the final, authoritative list of headers in sheet order.
+ */
+async function ensureExcelHeaders(fields: string[]): Promise<string[]> {
+  return Excel.run(async (context) => {
+    const sheet = context.workbook.worksheets.getActiveWorksheet();
+    const headerRange = sheet.getRange(`A1:${String.fromCharCode(64 + fields.length)}1`);
+    headerRange.load("values");
+    await context.sync();
+
+    const existing = (headerRange.values[0] as any[]).map(v => String(v || "").trim()).filter(v => v);
+    if (existing.length > 0) {
+      // Headers already exist — respect them
+      return existing;
+    }
+
+    // Write new headers
+    headerRange.values = [fields.map(f => f.trim())];
+    headerRange.format.set({ font: { bold: true }, fill: { color: "#1B2A4A" }, horizontalAlignment: "Center" });
+    headerRange.format.font.color = "#FFFFFF";
+    headerRange.format.autofitColumns();
+    await context.sync();
+    return fields;
+  });
+}
+
+/**
+ * Calls the LLM to extract structured fields from raw PDF text.
+ * Returns a parsed object { fieldName: value } or null on failure.
+ */
+async function extractStructuredData(
+  pdfText: string,
+  userInstruction: string,
+  fields: string[],
+  signal?: AbortSignal
+): Promise<Record<string, string> | null> {
+  const fieldList = fields.join(", ");
+  const systemPrompt = `You are a precision data extraction engine. Your ONLY output is valid JSON.
+
+Given a document, extract the following fields: ${fieldList}
+
+Rules:
+- Output ONLY a JSON object. No markdown, no explanation, no extra text.
+- Use exact field names as keys: ${JSON.stringify(fields)}
+- If a field is not found in the document, use null as the value.
+- For "Skills": list as a comma-separated string.
+- For "Experience": summarize the most recent role: "Title at Company (Years)" or list companies.
+- Never hallucinate or guess information not in the document.
+
+Example output:
+{"Name": "John Smith", "Email": "john@email.com", "Phone": "9876543210", "Skills": "Python, React, SQL", "Experience": "Software Engineer at Google (3 yrs)"}`;
+
+  const userMessage = `Instruction: ${userInstruction}\n\nDOCUMENT TEXT:\n${pdfText.substring(0, 8000)}`;
+
+  try {
+    const response = await callLLM(
+      [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userMessage }
+      ],
+      undefined,
+      signal
+    );
+
+    // Strip markdown fences if model added them
+    const cleaned = response.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
+    const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) return null;
+    return JSON.parse(jsonMatch[0]);
+  } catch (e) {
+    console.error("[Batch] LLM extraction failed:", e);
+    return null;
+  }
+}
+
+/**
+ * Appends a single data row to the Excel sheet below the header.
+ * Detects the next empty row automatically.
+ */
+async function appendExcelRow(headers: string[], data: Record<string, string | null>): Promise<void> {
+  await Excel.run(async (context) => {
+    const sheet = context.workbook.worksheets.getActiveWorksheet();
+    const usedRange = sheet.getUsedRangeOrNullObject();
+    usedRange.load("rowCount,isNullObject");
+    await context.sync();
+
+    const nextRow = usedRange.isNullObject ? 1 : usedRange.rowCount + 1; // 1-indexed
+
+    const rowValues = headers.map(h => {
+      const val = data[h] ?? data[h.toLowerCase()] ?? data[Object.keys(data).find(
+        k => k.toLowerCase() === h.toLowerCase()
+      ) || ""] ?? "";
+      return String(val === null || val === undefined ? "" : val);
+    });
+
+    const startCell = `A${nextRow}`;
+    const endCell = `${String.fromCharCode(64 + headers.length)}${nextRow}`;
+    const range = sheet.getRange(`${startCell}:${endCell}`);
+    range.values = [rowValues];
+    range.format.autofitColumns();
+    // Subtle alternating row colour
+    range.format.fill.color = nextRow % 2 === 0 ? "#F4F5F7" : "#FFFFFF";
+    await context.sync();
+  });
+}
+
+/**
+ * Adds a log entry to the batch log panel.
+ */
+function batchLog(message: string, type: "success" | "error" | "info" = "info"): void {
+  const log = document.getElementById("batch-log");
+  if (!log) return;
+  const entry = document.createElement("div");
+  entry.className = `batch-log-entry ${type}`;
+  entry.textContent = `${type === "success" ? "✓" : type === "error" ? "✗" : "•"} ${message}`;
+  log.appendChild(entry);
+  log.scrollTop = log.scrollHeight;
+}
+
+/**
+ * Main batch PDF extraction orchestrator.
+ * Reads instruction, parses fields, creates headers, loops through PDFs, extracts data, appends rows.
+ */
+async function runBatchPDFExtraction(): Promise<void> {
+  const btn = document.getElementById("batch-extract-btn") as HTMLButtonElement;
+  const btnText = document.getElementById("batch-btn-text");
+  const progressWrap = document.getElementById("batch-progress-wrap");
+  const progressBar = document.getElementById("batch-progress-bar");
+  const progressLabel = document.getElementById("batch-progress-label");
+  const logEl = document.getElementById("batch-log");
+  const instructionEl = document.getElementById("batch-instruction") as HTMLTextAreaElement;
+
+  // Handle stop
+  if (batchAbortController) {
+    batchAbortController.abort();
+    batchAbortController = null;
+    if (btnText) btnText.textContent = "Extract All PDFs";
+    if (btn) btn.disabled = false;
+    return;
+  }
+
+  const instruction = instructionEl?.value?.trim() ||
+    "These are documents. Extract Name, Email, Phone, Skills, and Experience.";
+
+  const pdfsToProcess = [...rawPDFFiles]; // snapshot
+  if (pdfsToProcess.length === 0) {
+    showToast("error", "No PDFs attached. Please upload PDFs first.");
+    return;
+  }
+
+  // Parse target fields
+  const fields = parseFieldsFromInstruction(instruction);
+  if (fields.length === 0) {
+    showToast("error", "Could not detect fields to extract. Please be more specific.");
+    return;
+  }
+
+  batchAbortController = new AbortController();
+  const signal = batchAbortController.signal;
+
+  // Setup UI
+  if (btn) { btn.disabled = false; }
+  if (btnText) btnText.textContent = "⏹ Stop Extraction";
+  if (progressWrap) progressWrap.style.display = "block";
+  if (logEl) logEl.innerHTML = "";
+
+  batchLog(`Starting extraction of ${pdfsToProcess.length} PDF(s)…`, "info");
+  batchLog(`Detected fields: ${fields.join(", ")}`, "info");
+
+  let successCount = 0;
+  let errorCount = 0;
+  let headers: string[] = [];
+
+  try {
+    // Ensure Excel headers are ready
+    headers = await ensureExcelHeaders(fields);
+    batchLog(`Excel headers ready: ${headers.join(", ")}`, "info");
+
+    for (let i = 0; i < pdfsToProcess.length; i++) {
+      if (signal.aborted) break;
+
+      const file = pdfsToProcess[i];
+      const pct = Math.round(((i) / pdfsToProcess.length) * 100);
+      if (progressBar) progressBar.style.width = `${pct}%`;
+      if (progressLabel) progressLabel.textContent = `${i} / ${pdfsToProcess.length}`;
+      batchLog(`[${i + 1}/${pdfsToProcess.length}] Processing: ${file.name}`, "info");
+
+      try {
+        // Step 1: Extract text from PDF
+        const extracted = await extractTextFromPDFFile(file);
+        if (!extracted.text || extracted.text.length < 20) {
+          throw new Error("PDF appears empty or unreadable");
+        }
+
+        // Step 2: Call LLM for structured data
+        const data = await extractStructuredData(extracted.text, instruction, fields, signal);
+        if (!data) throw new Error("LLM returned no data");
+
+        // Step 3: Write to Excel
+        await appendExcelRow(headers, data);
+
+        successCount++;
+        batchLog(`✓ ${file.name} → ${Object.values(data).filter(v => v).length}/${fields.length} fields extracted`, "success");
+      } catch (fileError: any) {
+        if (fileError.name === "AbortError") break;
+        errorCount++;
+        batchLog(`✗ ${file.name}: ${fileError.message}`, "error");
+      }
+    }
+  } catch (fatalError: any) {
+    batchLog(`Fatal error: ${fatalError.message}`, "error");
+  } finally {
+    // Final UI update
+    const finalPct = Math.round((successCount / pdfsToProcess.length) * 100);
+    if (progressBar) progressBar.style.width = "100%";
+    if (progressLabel) progressLabel.textContent = `${pdfsToProcess.length} / ${pdfsToProcess.length}`;
+
+    const msg = `✅ Done! ${successCount} rows added${errorCount > 0 ? `, ${errorCount} failed` : ""}.`;
+    batchLog(msg, successCount > 0 ? "success" : "error");
+    showToast(successCount > 0 ? "success" : "error", msg);
+
+    batchAbortController = null;
+    if (btn) btn.disabled = false;
+    if (btnText) btnText.textContent = "Extract All PDFs";
+  }
+}
+

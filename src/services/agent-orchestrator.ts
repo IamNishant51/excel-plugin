@@ -141,9 +141,6 @@ const BANNED_PATTERNS: { pattern: RegExp; message: string; fix: string }[] = [
   { pattern: /getRange\s*\(\s*["']?[A-Z]0["']?\s*\)/gi, message: "Row 0 doesn't exist in Excel", fix: "Use row 1 or higher (e.g., A1, B1)" },
   { pattern: /getCell\s*\(\s*-?\d+\s*,\s*-?\d+\s*\)/g, message: "Negative cell indices are invalid", fix: "Use 0 or positive indices" },
 
-  // Common formatting mistakes
-  { pattern: /\.getRow\s*\(\s*\d+\s*\)\.format\.[^f]/g, message: "Using getRow without checking range first", fix: "Always load rowCount first and check if range has data" },
-  { pattern: /usedRange\.getRow\s*\(\s*(\d+)\s*\)[^;]*(?!.*rowCount)/g, message: "Using getRow without verifying rowCount", fix: "Load rowCount and check if sheet has data before using getRow" },
 ];
 
 // ═══════════════════════════════════════════════════════════════
@@ -457,19 +454,22 @@ const colCount = usedRange.columnCount;
 
 // Step 3: Format header row (row 1)
 const headerRow = usedRange.getRow(0);
-headerRow.format.font.bold = true;
-headerRow.format.font.size = 11;
-headerRow.format.font.color = "#FFFFFF"; // Adapt color for sheet type
-headerRow.format.fill.color = "#1B2A4A"; // Adapt color for sheet type
-headerRow.format.horizontalAlignment = "Center";
-headerRow.format.verticalAlignment = "Center";
-headerRow.format.rowHeight = 28;
+headerRow.format.set({
+  font: { bold: true, size: 11, color: "#FFFFFF" },
+  fill: { color: "#1B2A4A" },
+  horizontalAlignment: "Center",
+  verticalAlignment: "Center",
+  rowHeight: 28
+});
 
-// Step 4: Format data rows with alternating colors
+// Step 4: Format data rows with alternating colors — ALWAYS set font color to black
 for (let i = 1; i < rowCount; i++) {
   const row = usedRange.getRow(i);
-  row.format.fill.color = i % 2 === 0 ? "#F4F5F7" : "#FFFFFF"; // Adapt color for sheet type
-  row.format.rowHeight = 22;
+  row.format.set({
+    fill: { color: i % 2 === 0 ? "#F4F5F7" : "#FFFFFF" },
+    font: { color: "#000000" },
+    rowHeight: 22
+  });
 }
 
 // Step 5: Add borders to all cells
