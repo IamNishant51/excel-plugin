@@ -45,11 +45,11 @@ export function initializePDFExtraction(): void {
   fileInput?.addEventListener("change", (event) => {
     const target = event.target as HTMLInputElement;
     const files = target.files;
-    
+
     if (files && files.length > 0) {
       processButton.disabled = false;
       processButton.textContent = `Process ${files.length} PDF${files.length > 1 ? "s" : ""}`;
-      
+
       // Show file list
       if (progressDiv) {
         progressDiv.innerHTML = `<div class="file-list-preview">Selected: ${Array.from(files).map(f => f.name).join(", ")}</div>`;
@@ -105,7 +105,7 @@ export function initializePDFExtraction(): void {
  */
 function updateProgress(status: DocumentProcessingStatus, container: HTMLDivElement): void {
   const existingStatus = container.querySelector(`[data-doc-id="${status.documentId}"]`);
-  
+
   if (existingStatus) {
     existingStatus.className = `status-item status-${status.status}`;
     existingStatus.innerHTML = getStatusHTML(status);
@@ -124,7 +124,7 @@ function updateProgress(status: DocumentProcessingStatus, container: HTMLDivElem
 function getStatusHTML(status: DocumentProcessingStatus): string {
   const icon = getStatusIcon(status.status);
   const fileName = status.fileName || status.documentId.split("_").slice(2).join("_");
-  
+
   let html = `
     <div class="status-header">
       <span class="status-icon">${icon}</span>
@@ -133,11 +133,11 @@ function getStatusHTML(status: DocumentProcessingStatus): string {
       ${status.confidence > 0 ? `<span class="confidence-badge">${(status.confidence * 100).toFixed(0)}%</span>` : ""}
     </div>
   `;
-  
+
   if (status.error) {
     html += `<div class="error-message">${status.error}</div>`;
   }
-  
+
   if (status.validation) {
     const { isValid, needsReview, errors } = status.validation;
     html += `
@@ -150,7 +150,7 @@ function getStatusHTML(status: DocumentProcessingStatus): string {
       </div>
     `;
   }
-  
+
   // Show extraction method breakdown
   if (status.regexExtractedFields || status.llmExtractedFields) {
     html += `
@@ -160,7 +160,7 @@ function getStatusHTML(status: DocumentProcessingStatus): string {
       </div>
     `;
   }
-  
+
   return html;
 }
 
@@ -176,28 +176,6 @@ function formatStatus(status: string): string {
     case "pending": return "Pending";
     default: return status;
   }
-}
-    </div>
-  `;
-  
-  if (status.error) {
-    html += `<div class="error-message">${status.error}</div>`;
-  }
-  
-  if (status.validation) {
-    const { isValid, needsReview, errors } = status.validation;
-    html += `
-      <div class="validation-info">
-        <span class="validation-badge ${isValid ? 'valid' : 'invalid'}">
-          ${isValid ? '✓ Valid' : '✗ Invalid'}
-        </span>
-        ${needsReview ? '<span class="review-badge">⚠ Needs Review</span>' : ''}
-        ${errors.length > 0 ? `<span class="error-count">${errors.length} error(s)</span>` : ''}
-      </div>
-    `;
-  }
-  
-  return html;
 }
 
 /**
@@ -219,7 +197,7 @@ function getStatusIcon(status: string): string {
  */
 function displayResults(statuses: DocumentProcessingStatus[], container: HTMLDivElement, processingTimeMs?: number): void {
   const stats = getPipelineStats(statuses);
-  
+
   const html = `
     <div class="results-summary">
       <h3>Extraction Complete</h3>
@@ -256,7 +234,7 @@ function displayResults(statuses: DocumentProcessingStatus[], container: HTMLDiv
       </p>
     </div>
   `;
-  
+
   container.innerHTML = html;
 }
 
@@ -269,14 +247,14 @@ export async function processSingleFile(file: File): Promise<DocumentProcessingS
     PRODUCTION_CONFIG,
     getConfig()
   );
-  
+
   console.log("═══════════════════════════════════════════════════════════════════════════════");
   console.log("SINGLE DOCUMENT PROCESSING RESULT");
   console.log("═══════════════════════════════════════════════════════════════════════════════");
   console.log(`File: ${file.name}`);
   console.log(`Status: ${status.status}`);
   console.log(`Confidence: ${(status.confidence * 100).toFixed(0)}%`);
-  
+
   if (status.status === "completed" || status.status === "needs_review") {
     console.log("Extracted data:", status.extractedData);
     console.log(`Regex fields: ${status.regexExtractedFields?.join(", ") || "none"}`);
@@ -291,9 +269,9 @@ export async function processSingleFile(file: File): Promise<DocumentProcessingS
   } else if (status.error) {
     console.error("Processing failed:", status.error);
   }
-  
+
   console.log("═══════════════════════════════════════════════════════════════════════════════");
-  
+
   return status;
 }
 
@@ -303,10 +281,10 @@ export async function processSingleFile(file: File): Promise<DocumentProcessingS
 export async function processWithCustomProgress(files: File[]): Promise<DocumentProcessingStatus[]> {
   const progressBar = document.getElementById("progress-bar") as HTMLProgressElement;
   const statusText = document.getElementById("status-text") as HTMLSpanElement;
-  
+
   let completed = 0;
   const total = files.length;
-  
+
   const statuses = await processDocuments(
     files,
     PRODUCTION_CONFIG,
@@ -324,12 +302,12 @@ export async function processWithCustomProgress(files: File[]): Promise<Document
       }
     }
   );
-  
+
   if (statusText) {
     const stats = getPipelineStats(statuses);
     statusText.textContent = `Complete! ${stats.completed} successful, ${stats.failed} failed, ${stats.needsReviewCount} need review`;
   }
-  
+
   return statuses;
 }
 

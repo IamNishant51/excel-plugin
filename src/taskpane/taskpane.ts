@@ -1923,7 +1923,13 @@ function writeData(sheet, startCell, data) {
   const normalized = data.map(r => {
     const row = r ? [...r] : [];
     while (row.length < cols) row.push("");
-    return row;
+    return row.map(cell => {
+      if (cell === null || cell === undefined) return "";
+      let val = typeof cell === "object" ? (Array.isArray(cell) ? cell.join(", ") : JSON.stringify(cell)) : String(cell);
+      if (/^[=+\\-@]/.test(val)) val = "'" + val;
+      if (val.length > 30000) val = val.substring(0, 30000) + "...";
+      return val;
+    });
   });
   try {
     const range = sheet.getRange(startCell).getResizedRange(rows - 1, cols - 1);
@@ -2271,17 +2277,24 @@ async function appendExcelRow(headers: string[], data: Record<string, string | n
     const nextRow = usedRange.isNullObject ? 1 : usedRange.rowCount + 1; // 1-indexed
 
     const rowValues = headers.map(h => {
-      const val = data[h] ?? data[h.toLowerCase()] ?? data[Object.keys(data).find(
+      const rawVal = data[h] ?? data[h.toLowerCase()] ?? data[Object.keys(data).find(
         k => k.toLowerCase() === h.toLowerCase()
       ) || ""] ?? "";
-      return String(val === null || val === undefined ? "" : val);
+
+      const safeVal = rawVal === null ? "" : rawVal;
+      let val = (typeof safeVal === "object" && safeVal !== null)
+        ? (Array.isArray(safeVal) ? (safeVal as any).join(", ") : JSON.stringify(safeVal))
+        : String(safeVal || "");
+      if (/^[=+\-@]/.test(val)) val = "'" + val;
+      if (val.length > 30000) val = val.substring(0, 30000) + "...";
+      return val;
     });
 
     const startCell = `A${nextRow}`;
     const endCell = `${String.fromCharCode(64 + headers.length)}${nextRow}`;
     const range = sheet.getRange(`${startCell}:${endCell}`);
     range.values = [rowValues];
-    range.format.autofitColumns();
+    range.format.wrapText = true;
     // Subtle alternating row colour
     range.format.fill.color = nextRow % 2 === 0 ? "#F4F5F7" : "#FFFFFF";
     await context.sync();

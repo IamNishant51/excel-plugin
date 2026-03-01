@@ -415,6 +415,7 @@ CRITICAL API RULES:
 9. Charts: sheet.charts.add(Excel.ChartType.xxx, dataRange, Excel.ChartSeriesBy.auto)
 10. Tables: sheet.tables.add(range, hasHeaders)
 11. Document Extraction: ALWAYS extract data as a flat HORIZONTAL table (Headers in row 1, data appended below). NEVER mimic vertical document layouts or create key-value lists (e.g., "Name: Bob" in column A). All data text must be a visible color (e.g. black).
+12. Memory Lifetime: If saving an object (like usedRange) to a variable used across multiple context.sync() calls, ALWAYS pin it: context.trackedObjects.add(usedRange)
 
 BANNED (will crash):
 - sheet.clear() → Worksheet lacks this method. Use sheet.getUsedRange().clear()
@@ -452,8 +453,9 @@ function writeData(sheet, startCell, data) {
 }
 
 SAFE FORMATTING TEMPLATE (adapt details based on sheet type):
-// Step 1: Get used range and load properties
+// Step 1: Get used range, track it to prevent expiration, and load properties
 const usedRange = sheet.getUsedRange();
+context.trackedObjects.add(usedRange);
 usedRange.load("values,rowCount,columnCount,address");
 await context.sync();
 

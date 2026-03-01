@@ -25,7 +25,7 @@ export interface ExtractionResult {
  */
 export function getSchemaExtractionPrompt(schema: ExtractionSchema): string {
   const columnList = schema.columns.map((c, i) => `${i + 1}. "${c}"`).join("\n");
-  
+
   return `You are a PRECISION DATA EXTRACTOR. Your job is to extract information from documents with ZERO hallucination.
 
 ═══════════════════════════════════════════════════════════════════════════════
@@ -99,30 +99,6 @@ export function generateExcelCode(columns: string[], data: ExtractedRow[]): stri
 // ─── Schema-Aware Resume Extraction ───
 // Columns: ${columns.join(", ")}
 // Records: ${data.length}
-
-function writeData(sheet, startCell, data) {
-    if (!data || data.length === 0) return null;
-    const rows = data.length;
-    const cols = Math.max(...data.map(r => r ? r.length : 0)); 
-    if (cols === 0) return null;
-    const normalized = data.map(r => {
-        const row = r ? [...r] : [];
-        while (row.length < cols) row.push("");
-        return row;
-    });
-    try {
-        const range = sheet.getRange(startCell).getResizedRange(rows - 1, cols - 1);
-        range.values = normalized;
-        range.format.font.name = "Segoe UI";
-        range.format.font.size = 10;
-        range.format.verticalAlignment = "Center";
-        range.format.autofitColumns();
-        return range;
-    } catch (e) {
-        console.error("writeData error:", e);
-        return null;
-    }
-}
 
 // Extracted Data
 const columns = ${serializedColumns};
@@ -201,14 +177,14 @@ export function parseExtractionResponse(response: string): ExtractedRow[] {
   cleaned = cleaned.replace(/^```json?\s*/i, "");
   cleaned = cleaned.replace(/\s*```$/i, "");
   cleaned = cleaned.trim();
-  
+
   // Try to find JSON array in the response
   const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
   if (!jsonMatch) {
     console.warn("No JSON array found in response:", cleaned.substring(0, 200));
     return [];
   }
-  
+
   try {
     const parsed = JSON.parse(jsonMatch[0]);
     if (!Array.isArray(parsed)) {
@@ -228,7 +204,7 @@ export function parseExtractionResponse(response: string): ExtractedRow[] {
 export function validateExtraction(data: ExtractedRow[], schema: ExtractionSchema): ExtractionResult {
   const warnings: string[] = [];
   const unmappedFields: string[] = [];
-  
+
   // Check each row for unmapped fields
   data.forEach((row, index) => {
     Object.keys(row).forEach(key => {
@@ -236,7 +212,7 @@ export function validateExtraction(data: ExtractedRow[], schema: ExtractionSchem
         unmappedFields.push(key);
       }
     });
-    
+
     // Check for empty required fields
     schema.columns.forEach(col => {
       if (!row[col] || row[col].toString().trim() === "") {
@@ -244,11 +220,11 @@ export function validateExtraction(data: ExtractedRow[], schema: ExtractionSchem
       }
     });
   });
-  
+
   if (unmappedFields.length > 0) {
     warnings.push(`Found data for columns not in schema: ${unmappedFields.join(", ")}`);
   }
-  
+
   return {
     success: data.length > 0,
     data,
@@ -280,19 +256,19 @@ export const COLUMN_ALIASES: Record<string, string[]> = {
  */
 export function normalizeColumnName(columnName: string): string {
   const normalized = columnName.trim();
-  
+
   // Check direct match first
   if (COLUMN_ALIASES[normalized]) {
     return normalized;
   }
-  
+
   // Check aliases
   for (const [standard, aliases] of Object.entries(COLUMN_ALIASES)) {
     if (aliases.some(alias => alias.toLowerCase() === normalized.toLowerCase())) {
       return standard;
     }
   }
-  
+
   return normalized;
 }
 
@@ -305,7 +281,7 @@ export function buildEnhancedPrompt(columns: string[]): string {
     const aliasHint = aliases.length > 0 ? ` (also look for: ${aliases.slice(0, 3).join(", ")})` : "";
     return `• "${col}"${aliasHint}`;
   }).join("\n");
-  
+
   return `
 COLUMNS TO EXTRACT:
 ${columnDetails}
