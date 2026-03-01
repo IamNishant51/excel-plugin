@@ -100,6 +100,17 @@ module.exports = async (env, options) => {
         chunks: ["polyfill", "commands"],
       }),
     ],
+    optimization: {
+      splitChunks: {
+        chunks: "all",
+        name: "vendor",
+      },
+    },
+    performance: {
+      hints: dev ? false : "warning",
+      maxEntrypointSize: 1024000,
+      maxAssetSize: 1024000,
+    },
     devServer: {
       headers: {
         "Access-Control-Allow-Origin": "*",
