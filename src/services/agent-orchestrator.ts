@@ -435,8 +435,12 @@ function writeData(sheet, startCell, data) {
   const normalized = data.map(r => {
     const row = r ? [...r] : [];
     while (row.length < cols) row.push("");
-    // Office.js rejects null/undefined in range.values 
-    return row.map(cell => (cell === null || cell === undefined) ? "" : cell);
+    // Office.js rejects null/undefined/objects in range.values 
+    return row.map(cell => {
+      if (cell === null || cell === undefined) return "";
+      if (typeof cell === "object") return Array.isArray(cell) ? cell.join(", ") : JSON.stringify(cell);
+      return String(cell);
+    });
   });
   const range = sheet.getRange(startCell).getResizedRange(rows - 1, cols - 1);
   range.values = normalized;
@@ -474,7 +478,7 @@ for (let i = 1; i < rowCount; i++) {
   row.format.set({
     fill: { color: i % 2 === 0 ? "#F4F5F7" : "#FFFFFF" },
     font: { color: "#000000" },
-    rowHeight: 22
+    wrapText: true // allow row to expand for multi-line text
   });
 }
 
