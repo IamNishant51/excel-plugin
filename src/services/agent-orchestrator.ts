@@ -138,9 +138,12 @@ const BANNED_PATTERNS: { pattern: RegExp; message: string; fix: string }[] = [
   { pattern: /(?:const|let|var)\s+sheet\s*=\s*context\.workbook/g, message: "sheet is already declared", fix: "Remove declaration - sheet is provided" },
 
   // Invalid range references
+  // Invalid range references
   { pattern: /getRange\s*\(\s*["']?[A-Z]0["']?\s*\)/gi, message: "Row 0 doesn't exist in Excel", fix: "Use row 1 or higher (e.g., A1, B1)" },
   { pattern: /getCell\s*\(\s*-?\d+\s*,\s*-?\d+\s*\)/g, message: "Negative cell indices are invalid", fix: "Use 0 or positive indices" },
 
+  // Invalid worksheet methods
+  { pattern: /sheet\.clear\s*\(/g, message: "sheet.clear() doesn't exist in Excel JS API", fix: "Use sheet.getUsedRange().clear()" },
 ];
 
 // ═══════════════════════════════════════════════════════════════
@@ -408,12 +411,13 @@ CRITICAL API RULES:
 5. Always check rowCount and columnCount before using getRow or formatting
 6. Use context-aware formatting: adapt colors, fonts, borders, and row heights based on sheet type (office, banking, school, etc.)
 7. Clearing Formats ONLY: range.clear(Excel.ClearApplyTo.Formats)
-8. Clearing ALL: range.clear()
+8. Clearing ALL content in sheer: sheet.getUsedRange().clear()
 9. Charts: sheet.charts.add(Excel.ChartType.xxx, dataRange, Excel.ChartSeriesBy.auto)
 10. Tables: sheet.tables.add(range, hasHeaders)
 11. Document Extraction: ALWAYS extract data as a flat HORIZONTAL table (Headers in row 1, data appended below). NEVER mimic vertical document layouts or create key-value lists (e.g., "Name: Bob" in column A). All data text must be a visible color (e.g. black).
 
 BANNED (will crash):
+- sheet.clear() → Worksheet lacks this method. Use sheet.getUsedRange().clear()
 - .getValues(), .getRowCount(), .getColumnCount(), .getAddress() → Use properties after load+sync
 - .setValues(), .setFormula() → Use property assignment
 - .clearFormats() → Use .clear(Excel.ClearApplyTo.formats)
