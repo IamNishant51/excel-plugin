@@ -431,7 +431,8 @@ function writeData(sheet, startCell, data) {
   const normalized = data.map(r => {
     const row = r ? [...r] : [];
     while (row.length < cols) row.push("");
-    return row;
+    // Office.js rejects null/undefined in range.values 
+    return row.map(cell => (cell === null || cell === undefined) ? "" : cell);
   });
   const range = sheet.getRange(startCell).getResizedRange(rows - 1, cols - 1);
   range.values = normalized;
