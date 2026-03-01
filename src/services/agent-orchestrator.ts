@@ -411,6 +411,7 @@ CRITICAL API RULES:
 8. Clearing ALL: range.clear()
 9. Charts: sheet.charts.add(Excel.ChartType.xxx, dataRange, Excel.ChartSeriesBy.auto)
 10. Tables: sheet.tables.add(range, hasHeaders)
+11. Document Extraction: ALWAYS extract data as a flat HORIZONTAL table (Headers in row 1, data appended below). NEVER mimic vertical document layouts or create key-value lists (e.g., "Name: Bob" in column A). All data text must be a visible color (e.g. black).
 
 BANNED (will crash):
 - .getValues(), .getRowCount(), .getColumnCount(), .getAddress() → Use properties after load+sync

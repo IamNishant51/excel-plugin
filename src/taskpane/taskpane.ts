@@ -1686,6 +1686,11 @@ export async function runAICommand(): Promise<void> {
   // Detect Schema Extraction Mode
   const isSchemaMode = userPrompt.includes("SCHEMA_EXTRACTION_MODE") || currentCategory === "extract";
 
+  // Enforce table format if processing a document
+  if (attachedFiles.length > 0 && !isSchemaMode) {
+    userPrompt += `\n\n[FORMATTING STRICT RULE]: You are extracting data from a document. ALWAYS output the data as a clean, flat 2D HORIZONTAL table at the top of the sheet. Put Column Headers in Row A1...X1. Append the extracted data underneath. NEVER output a vertical key-value list mimicking a document. Ensure data rows have { font: { color: "#000000" } }.`;
+  }
+
   // UI: loading
   if (agentAbortController) {
     agentAbortController.abort();
