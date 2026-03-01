@@ -1,0 +1,95 @@
+:root{
+  --bg:#ffffff;
+  --fg:#1b1b1b;
+  --muted:#6b7280;
+  --accent:#107c10; /* subtle Excel green */
+  --border: #e6e6e6;
+  --danger:#b91c1c;
+  --radius:4px;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  --font-mono: 'SFMono-Regular', Menlo, Monaco, 'Courier New', monospace;
+}
+
+body .main-root{font-family:var(--font-sans);color:var(--fg);background:var(--bg);}
+.main-header{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-bottom:1px solid var(--border)}
+.logo-area{display:flex;align-items:center;gap:8px}
+.app-logo{width:28px;height:28px}
+.brand-text{display:flex;flex-direction:column}
+.brand-name{font-weight:600}
+.app-mode{font-size:11px;color:var(--muted)}
+.header-actions{display:flex;align-items:center;gap:8px}
+.icon-btn{background:transparent;border:none;padding:6px;cursor:pointer}
+.status-badge{padding:4px 8px;border-radius:3px;border:1px solid var(--border);font-size:12px}
+.status-badge.ready{background:transparent;color:var(--accent);border-color:rgba(16,124,16,0.12)}
+.status-badge.analyzing{color:#b45309}
+.status-badge.risk{color:var(--danger)}
+.status-badge.executing{color:#0b5394}
+
+.main-body{display:flex;height:calc(100vh - 56px);gap:12px;padding:8px}
+.sidebar{width:150px;border-right:1px solid var(--border);padding-right:8px}
+.engine-card{padding:8px;border:1px solid var(--border);border-radius:var(--radius);background:#fff}
+.engine-card .kv{display:flex;justify-content:space-between;padding:4px 0;font-size:13px}
+.pipeline-nav{margin-top:12px}
+.pipeline-nav ul{list-style:none;padding:0;margin:0}
+.pipeline-nav .stage{padding:6px 4px;border-left:3px solid transparent;color:var(--muted);font-size:13px}
+.pipeline-nav .stage.active{border-left-color:var(--accent);color:var(--fg);font-weight:600}
+
+.main-panel{flex:1;display:flex;flex-direction:column;gap:8px}
+.command-row{display:flex;gap:8px}
+.prompt-input{flex:1;padding:6px 8px;border:1px solid var(--border);border-radius:4px}
+.btn{padding:6px 10px;border:1px solid var(--border);background:transparent;border-radius:4px;cursor:pointer}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn.sm{padding:4px 8px;font-size:13px}
+
+.btn.primary, .btn.sm, .btn {
+  transition: background 0.18s, color 0.18s, border 0.18s;
+}
+.btn.primary:hover, .btn.primary:focus {
+  background: #0e6c0e;
+  border-color: #0e6c0e;
+}
+.btn:active {
+  filter: brightness(0.95);
+}
+
+.eye-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: -28px;
+  color: var(--muted);
+  padding: 0 6px;
+  transition: color 0.15s;
+}
+.eye-btn:focus, .eye-btn:hover {
+  color: var(--accent);
+}
+.input-eye-wrap {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.input-eye-wrap input {
+  flex: 1;
+  padding-right: 32px;
+}
+
+.cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.card{padding:8px;border:1px solid var(--border);border-radius:var(--radius);background:#fff}
+.schema-snapshot .meta-row{display:flex;justify-content:space-between}
+.monospace{font-family:var(--font-mono)}
+.small{font-size:12px;color:var(--muted)}
+
+.impact-meter .big{font-size:20px;font-weight:700;margin-right:8px}
+.risk-panel .findings{margin:8px 0;padding-left:18px}
+
+.console-panel{margin-top:8px;border-top:1px solid var(--border);padding-top:8px}
+.console-header{display:flex;justify-content:space-between;align-items:center}
+.console-body{max-height:140px;overflow:auto;padding-top:6px}
+
+/* dense layout for small widths */
+@media (max-width: 420px){
+  .cards-grid{grid-template-columns:1fr}
+  .sidebar{display:none}
+}
