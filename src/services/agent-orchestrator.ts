@@ -438,8 +438,11 @@ function writeData(sheet, startCell, data) {
     // Office.js rejects null/undefined/objects in range.values 
     return row.map(cell => {
       if (cell === null || cell === undefined) return "";
-      if (typeof cell === "object") return Array.isArray(cell) ? cell.join(", ") : JSON.stringify(cell);
-      return String(cell);
+      let val = typeof cell === "object" ? (Array.isArray(cell) ? cell.join(", ") : JSON.stringify(cell)) : String(cell);
+      // Prevent formula evaluation crashes (like '@' or '-') and string length limits
+      if (/^[=+\-@]/.test(val)) val = "'" + val;
+      if (val.length > 30000) val = val.substring(0, 30000) + "...";
+      return val;
     });
   });
   const range = sheet.getRange(startCell).getResizedRange(rows - 1, cols - 1);
