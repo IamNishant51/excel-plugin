@@ -19,20 +19,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   validateCode: function() { return /* binding */ validateCode; }
 /* harmony export */ });
 /* harmony import */ var _llm_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./llm.service */ "./src/services/llm.service.ts");
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _regeneratorValues(e) { if (null != e) { var t = e["function" == typeof Symbol && Symbol.iterator || "@@iterator"], r = 0; if (t) return t.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) return { next: function next() { return e && r >= e.length && (e = void 0), { value: e && e[r++], done: !e }; } }; } throw new TypeError(_typeof(e) + " is not iterable"); }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i.return) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
-function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
-function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
-function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
-function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 /**
  * SheetOS AI — Agent Orchestrator
  * LangChain-inspired intelligent agent system for bulletproof Excel automation.
@@ -61,7 +47,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 // BANNED PATTERNS — These cause runtime errors in Excel JS API
 // ═══════════════════════════════════════════════════════════════
 
-var BANNED_PATTERNS = [
+const BANNED_PATTERNS = [
 // Method calls that don't exist
 {
   pattern: /\.getColumnCount\s*\(\s*\)/g,
@@ -222,7 +208,7 @@ var BANNED_PATTERNS = [
 // ALLOWED API WHITELIST — Only these Excel JS API calls are safe
 // ═══════════════════════════════════════════════════════════════
 
-var ALLOWED_API_PATTERNS = [
+const ALLOWED_API_PATTERNS = [
 // Core objects
 /context\.workbook/, /context\.sync\(\)/, /sheet\./, /Excel\./,
 // Range operations
@@ -251,10 +237,10 @@ var ALLOWED_API_PATTERNS = [
 // ═══════════════════════════════════════════════════════════════
 
 function validateCode(code) {
-  var errors = [];
-  var warnings = [];
-  var apiCallsDetected = [];
-  var sanitizedCode = code;
+  const errors = [];
+  const warnings = [];
+  const apiCallsDetected = [];
+  let sanitizedCode = code;
 
   // 1. Remove markdown fences if present
   sanitizedCode = sanitizedCode.replace(/^```(?:javascript|js|typescript|ts)?\n?/gi, "");
@@ -262,39 +248,30 @@ function validateCode(code) {
   sanitizedCode = sanitizedCode.trim();
 
   // 2. Check for banned patterns and apply auto-fixes
-  var _iterator = _createForOfIteratorHelper(BANNED_PATTERNS),
-    _step;
-  try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-      var banned = _step.value;
-      var matches = sanitizedCode.match(banned.pattern);
-      if (matches) {
-        // Priority fixes (Auto-replace common hallucinations)
-        if (banned.message.includes("clearFormats")) {
-          sanitizedCode = sanitizedCode.replace(banned.pattern, ".clear(Excel.ClearApplyTo.Formats)");
-        } else if (banned.message.includes("clearValue")) {
-          sanitizedCode = sanitizedCode.replace(banned.pattern, ".clear(Excel.ClearApplyTo.Contents)");
-        } else if (banned.pattern.source.includes("redeclare")) {
-          sanitizedCode = sanitizedCode.replace(banned.pattern, "// [REMOVED] ");
-        } else {
-          // Only add error if we couldn't auto-fix it
-          errors.push({
-            type: "banned_api",
-            message: banned.message,
-            suggestion: banned.fix
-          });
-        }
+  for (const banned of BANNED_PATTERNS) {
+    const matches = sanitizedCode.match(banned.pattern);
+    if (matches) {
+      // Priority fixes (Auto-replace common hallucinations)
+      if (banned.message.includes("clearFormats")) {
+        sanitizedCode = sanitizedCode.replace(banned.pattern, ".clear(Excel.ClearApplyTo.Formats)");
+      } else if (banned.message.includes("clearValue")) {
+        sanitizedCode = sanitizedCode.replace(banned.pattern, ".clear(Excel.ClearApplyTo.Contents)");
+      } else if (banned.pattern.source.includes("redeclare")) {
+        sanitizedCode = sanitizedCode.replace(banned.pattern, "// [REMOVED] ");
+      } else {
+        // Only add error if we couldn't auto-fix it
+        errors.push({
+          type: "banned_api",
+          message: banned.message,
+          suggestion: banned.fix
+        });
       }
     }
-
-    // 3. Check for missing context.sync() calls
-  } catch (err) {
-    _iterator.e(err);
-  } finally {
-    _iterator.f();
   }
-  var loadCalls = (sanitizedCode.match(/\.load\s*\(/g) || []).length;
-  var syncCalls = (sanitizedCode.match(/context\.sync\s*\(\s*\)/g) || []).length;
+
+  // 3. Check for missing context.sync() calls
+  const loadCalls = (sanitizedCode.match(/\.load\s*\(/g) || []).length;
+  const syncCalls = (sanitizedCode.match(/context\.sync\s*\(\s*\)/g) || []).length;
   if (loadCalls > 0 && syncCalls === 0) {
     errors.push({
       type: "missing_sync",
@@ -309,7 +286,7 @@ function validateCode(code) {
   // 4. Check for basic syntax errors
   try {
     // Try to parse as function body
-    new Function("context", "sheet", "Excel", "return (async () => { ".concat(sanitizedCode, " })();"));
+    new Function("context", "sheet", "Excel", `return (async () => { ${sanitizedCode} })();`);
   } catch (syntaxError) {
     errors.push({
       type: "syntax",
@@ -319,23 +296,14 @@ function validateCode(code) {
   }
 
   // 5. Detect API calls being used
-  var _iterator2 = _createForOfIteratorHelper(ALLOWED_API_PATTERNS),
-    _step2;
-  try {
-    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-      var pattern = _step2.value;
-      var _match = sanitizedCode.match(pattern);
-      if (_match) {
-        apiCallsDetected.push(_match[0]);
-      }
+  for (const pattern of ALLOWED_API_PATTERNS) {
+    const match = sanitizedCode.match(pattern);
+    if (match) {
+      apiCallsDetected.push(match[0]);
     }
-
-    // 6. Check for dangerous patterns
-  } catch (err) {
-    _iterator2.e(err);
-  } finally {
-    _iterator2.f();
   }
+
+  // 6. Check for dangerous patterns
   if (/eval\s*\(/i.test(sanitizedCode)) {
     errors.push({
       type: "unsafe_pattern",
@@ -356,12 +324,12 @@ function validateCode(code) {
     });
   }
   if (/values\s*=\s*[^[]/i.test(sanitizedCode) && !/values\s*=\s*\[\[/i.test(sanitizedCode)) {
-    var match = sanitizedCode.match(/values\s*=\s*("[^"]*"|'[^']*'|\d+)/);
+    const match = sanitizedCode.match(/values\s*=\s*("[^"]*"|'[^']*'|\d+)/);
     if (match) {
       errors.push({
         type: "type_error",
         message: "values must be a 2D array",
-        suggestion: "Use range.values = [[".concat(match[1], "]] (2D array)")
+        suggestion: `Use range.values = [[${match[1]}]] (2D array)`
       });
     }
   }
@@ -370,10 +338,10 @@ function validateCode(code) {
   sanitizedCode = sanitizedCode.replace(/(?:const|let|var)\s+sheet\s*=\s*context\.workbook\.worksheets\.getActiveWorksheet\(\)\s*;?/g, "// sheet already available");
   return {
     isValid: errors.length === 0,
-    errors: errors,
-    warnings: warnings,
-    sanitizedCode: sanitizedCode,
-    apiCallsDetected: apiCallsDetected
+    errors,
+    warnings,
+    sanitizedCode,
+    apiCallsDetected
   };
 }
 
@@ -381,537 +349,436 @@ function validateCode(code) {
 // PLANNER — Analyzes task and creates execution plan
 // ═══════════════════════════════════════════════════════════════
 
-var PLANNER_PROMPT = "You are an Excel automation planning expert. Analyze the user's request and create a brief execution plan.\n\nOUTPUT FORMAT (JSON only, no markdown):\n{\n  \"understanding\": \"One sentence summary of what user wants\",\n  \"steps\": [\"Step 1\", \"Step 2\", \"Step 3\"],\n  \"dataNeeded\": [\"What data needs to be read from sheet\"],\n  \"expectedOutput\": \"What the sheet should look like after\",\n  \"complexity\": \"simple|moderate|complex\",\n  \"warnings\": [\"Any potential issues or edge cases\"]\n}\n\nRULES:\n- Keep steps actionable and specific\n- Identify if data needs to be read first\n- Flag complexity based on operations needed\n- Note any ambiguities in the request";
-function createPlan(_x, _x2, _x3) {
-  return _createPlan.apply(this, arguments);
+const PLANNER_PROMPT = `You are an Excel automation planning expert. Analyze the user's request and create a brief execution plan.
+
+OUTPUT FORMAT (JSON only, no markdown):
+{
+  "understanding": "One sentence summary of what user wants",
+  "steps": ["Step 1", "Step 2", "Step 3"],
+  "dataNeeded": ["What data needs to be read from sheet"],
+  "expectedOutput": "What the sheet should look like after",
+  "complexity": "simple|moderate|complex",
+  "warnings": ["Any potential issues or edge cases"]
+}
+
+RULES:
+- Keep steps actionable and specific
+- Identify if data needs to be read first
+- Flag complexity based on operations needed
+- Note any ambiguities in the request`;
+async function createPlan(task, sheetContext, signal) {
+  let contextInfo = "";
+  if (sheetContext && sheetContext.hasData) {
+    contextInfo = `\n\nCURRENT SHEET CONTEXT:
+- Sheet: "${sheetContext.sheetName}"
+- Size: ${sheetContext.rowCount} rows × ${sheetContext.columnCount} columns
+- Headers: ${sheetContext.headers.join(", ")}
+- Data Types: ${sheetContext.dataTypes.join(", ")}`;
+  }
+  const messages = [{
+    role: "system",
+    content: PLANNER_PROMPT
+  }, {
+    role: "user",
+    content: task + contextInfo
+  }];
+  const response = await (0,_llm_service__WEBPACK_IMPORTED_MODULE_0__.callLLM)(messages, undefined, signal);
+  try {
+    // Extract JSON from response
+    const jsonMatch = response.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      return JSON.parse(jsonMatch[0]);
+    }
+  } catch (e) {
+    console.warn("Failed to parse plan:", e);
+  }
+
+  // Fallback plan
+  return {
+    understanding: task,
+    steps: ["Execute the requested operation"],
+    dataNeeded: [],
+    expectedOutput: "Modified spreadsheet",
+    complexity: "moderate",
+    warnings: []
+  };
 }
 
 // ═══════════════════════════════════════════════════════════════
 // CODER — Generates validated Excel JavaScript code
 // ═══════════════════════════════════════════════════════════════
-function _createPlan() {
-  _createPlan = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(task, sheetContext, signal) {
-    var contextInfo, messages, response, jsonMatch, _t;
-    return _regenerator().w(function (_context) {
-      while (1) switch (_context.p = _context.n) {
-        case 0:
-          contextInfo = "";
-          if (sheetContext && sheetContext.hasData) {
-            contextInfo = "\n\nCURRENT SHEET CONTEXT:\n- Sheet: \"".concat(sheetContext.sheetName, "\"\n- Size: ").concat(sheetContext.rowCount, " rows \xD7 ").concat(sheetContext.columnCount, " columns\n- Headers: ").concat(sheetContext.headers.join(", "), "\n- Data Types: ").concat(sheetContext.dataTypes.join(", "));
-          }
-          messages = [{
-            role: "system",
-            content: PLANNER_PROMPT
-          }, {
-            role: "user",
-            content: task + contextInfo
-          }];
-          _context.n = 1;
-          return (0,_llm_service__WEBPACK_IMPORTED_MODULE_0__.callLLM)(messages, undefined, signal);
-        case 1:
-          response = _context.v;
-          _context.p = 2;
-          // Extract JSON from response
-          jsonMatch = response.match(/\{[\s\S]*\}/);
-          if (!jsonMatch) {
-            _context.n = 3;
-            break;
-          }
-          return _context.a(2, JSON.parse(jsonMatch[0]));
-        case 3:
-          _context.n = 5;
-          break;
-        case 4:
-          _context.p = 4;
-          _t = _context.v;
-          console.warn("Failed to parse plan:", _t);
-        case 5:
-          return _context.a(2, {
-            understanding: task,
-            steps: ["Execute the requested operation"],
-            dataNeeded: [],
-            expectedOutput: "Modified spreadsheet",
-            complexity: "moderate",
-            warnings: []
-          });
-      }
-    }, _callee, null, [[2, 4]]);
-  }));
-  return _createPlan.apply(this, arguments);
+
+const CODER_SYSTEM_PROMPT = `You are an Excel JavaScript API expert. Generate ONLY executable code.
+
+ENVIRONMENT (pre-declared, DO NOT redeclare):
+- context: Excel.RequestContext
+- sheet: Active worksheet (already loaded)
+- Excel: Namespace for enums
+
+CRITICAL API RULES:
+1. Properties require .load() + await context.sync() before reading
+2. Writing: range.values = [[...]] (2D array always)
+3. Reading: range.load("values"); await context.sync(); // then access range.values
+4. Formats: range.format.font.bold, range.format.fill.color, range.format.horizontalAlignment
+5. Always check rowCount and columnCount before using getRow or formatting
+6. Use context-aware formatting: adapt colors, fonts, borders, and row heights based on sheet type (office, banking, school, etc.)
+7. Clearing Formats ONLY: range.clear(Excel.ClearApplyTo.Formats)
+8. Clearing ALL content in sheer: sheet.getUsedRange().clear()
+9. Charts: sheet.charts.add(Excel.ChartType.xxx, dataRange, Excel.ChartSeriesBy.auto)
+10. Tables: sheet.tables.add(range, hasHeaders)
+11. Document Extraction: ALWAYS extract data as a flat HORIZONTAL table (Headers in row 1, data appended below). NEVER mimic vertical document layouts or create key-value lists (e.g., "Name: Bob" in column A). All data text must be a visible color (e.g. black).
+12. Memory Lifetime: If saving an object (like usedRange) to a variable used across multiple context.sync() calls, ALWAYS pin it: context.trackedObjects.add(usedRange)
+
+BANNED (will crash):
+- sheet.clear() → Worksheet lacks this method. Use sheet.getUsedRange().clear()
+- .getValues(), .getRowCount(), .getColumnCount(), .getAddress() → Use properties after load+sync
+- .setValues(), .setFormula() → Use property assignment
+- .clearFormats() → Use .clear(Excel.ClearApplyTo.formats)
+- SpreadsheetApp, Logger.log → Wrong platform
+- alert(), confirm(), prompt() → Blocked in add-ins
+- const sheet = ... → Already declared
+- const context = ... → Already declared
+
+MANDATORY HELPERS (available in environment, use them):
+function writeData(sheet, startCell, data): Range // Safely writes 2D array and expands matrix
+function formatTableStyle(usedRange, headerColor, fontColor): void // Safely styles the table and handles row bounds without throwing properties errors
+
+SAFE FORMATTING TEMPLATE (adapt details based on sheet type):
+// Step 1: Get used range, track it to prevent expiration, and load properties
+const usedRange = sheet.getUsedRange();
+context.trackedObjects.add(usedRange);
+usedRange.load("values,rowCount,columnCount,address");
+await context.sync();
+
+// Step 2: Check if sheet has data
+if (!usedRange || usedRange.rowCount < 1 || usedRange.columnCount < 1) {
+  throw new Error("Sheet appears empty. Add some data first.");
 }
-var CODER_SYSTEM_PROMPT = "You are an Excel JavaScript API expert. Generate ONLY executable code.\n\nENVIRONMENT (pre-declared, DO NOT redeclare):\n- context: Excel.RequestContext\n- sheet: Active worksheet (already loaded)\n- Excel: Namespace for enums\n\nCRITICAL API RULES:\n1. Properties require .load() + await context.sync() before reading\n2. Writing: range.values = [[...]] (2D array always)\n3. Reading: range.load(\"values\"); await context.sync(); // then access range.values\n4. Formats: range.format.font.bold, range.format.fill.color, range.format.horizontalAlignment\n5. Always check rowCount and columnCount before using getRow or formatting\n6. Use context-aware formatting: adapt colors, fonts, borders, and row heights based on sheet type (office, banking, school, etc.)\n7. Clearing Formats ONLY: range.clear(Excel.ClearApplyTo.Formats)\n8. Clearing ALL content in sheer: sheet.getUsedRange().clear()\n9. Charts: sheet.charts.add(Excel.ChartType.xxx, dataRange, Excel.ChartSeriesBy.auto)\n10. Tables: sheet.tables.add(range, hasHeaders)\n11. Document Extraction: ALWAYS extract data as a flat HORIZONTAL table (Headers in row 1, data appended below). NEVER mimic vertical document layouts or create key-value lists (e.g., \"Name: Bob\" in column A). All data text must be a visible color (e.g. black).\n12. Memory Lifetime: If saving an object (like usedRange) to a variable used across multiple context.sync() calls, ALWAYS pin it: context.trackedObjects.add(usedRange)\n\nBANNED (will crash):\n- sheet.clear() \u2192 Worksheet lacks this method. Use sheet.getUsedRange().clear()\n- .getValues(), .getRowCount(), .getColumnCount(), .getAddress() \u2192 Use properties after load+sync\n- .setValues(), .setFormula() \u2192 Use property assignment\n- .clearFormats() \u2192 Use .clear(Excel.ClearApplyTo.formats)\n- SpreadsheetApp, Logger.log \u2192 Wrong platform\n- alert(), confirm(), prompt() \u2192 Blocked in add-ins\n- const sheet = ... \u2192 Already declared\n- const context = ... \u2192 Already declared\n\nMANDATORY HELPERS (available in environment, use them):\nfunction writeData(sheet, startCell, data): Range // Safely writes 2D array and expands matrix\nfunction formatTableStyle(usedRange, headerColor, fontColor): void // Safely styles the table and handles row bounds without throwing properties errors\n\nSAFE FORMATTING TEMPLATE (adapt details based on sheet type):\n// Step 1: Get used range, track it to prevent expiration, and load properties\nconst usedRange = sheet.getUsedRange();\ncontext.trackedObjects.add(usedRange);\nusedRange.load(\"values,rowCount,columnCount,address\");\nawait context.sync();\n\n// Step 2: Check if sheet has data\nif (!usedRange || usedRange.rowCount < 1 || usedRange.columnCount < 1) {\n  throw new Error(\"Sheet appears empty. Add some data first.\");\n}\n\n// Step 3: Format the range efficiently using the built-in helper\nformatTableStyle(usedRange, \"#1B2A4A\", \"#FFFFFF\");\nawait context.sync();\n\n// Step 5: Add borders to all cells\nusedRange.format.borders.getItem(\"InsideHorizontal\").style = \"Thin\";\nusedRange.format.borders.getItem(\"InsideVertical\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeTop\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeBottom\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeLeft\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeRight\").style = \"Thin\";\n\n// Step 6: Add medium bottom border under header\nheaderRow.format.borders.getItem(\"EdgeBottom\").style = \"Medium\";\nheaderRow.format.borders.getItem(\"EdgeBottom\").color = \"#1B2A4A\"; // Adapt color for sheet type\n\n// Step 7: Freeze first row\nsheet.freezePanes.freezeRows(1);\n\n// Step 8: Auto-fit columns\nusedRange.format.autofitColumns();\nawait context.sync();\n\nOUTPUT: Raw JavaScript code only. No markdown, no explanation.";
-function generateCode(_x4, _x5, _x6, _x7, _x8, _x9) {
-  return _generateCode.apply(this, arguments);
+
+// Step 3: Format the range efficiently using the built-in helper
+formatTableStyle(usedRange, "#1B2A4A", "#FFFFFF");
+await context.sync();
+
+// Step 5: Add borders to all cells
+usedRange.format.borders.getItem("InsideHorizontal").style = "Thin";
+usedRange.format.borders.getItem("InsideVertical").style = "Thin";
+usedRange.format.borders.getItem("EdgeTop").style = "Thin";
+usedRange.format.borders.getItem("EdgeBottom").style = "Thin";
+usedRange.format.borders.getItem("EdgeLeft").style = "Thin";
+usedRange.format.borders.getItem("EdgeRight").style = "Thin";
+
+// Step 6: Add medium bottom border under header
+headerRow.format.borders.getItem("EdgeBottom").style = "Medium";
+headerRow.format.borders.getItem("EdgeBottom").color = "#1B2A4A"; // Adapt color for sheet type
+
+// Step 7: Freeze first row
+sheet.freezePanes.freezeRows(1);
+
+// Step 8: Auto-fit columns
+usedRange.format.autofitColumns();
+await context.sync();
+
+OUTPUT: Raw JavaScript code only. No markdown, no explanation.`;
+async function generateCode(task, plan, sheetContext, attachedFiles, previousError, signal) {
+  let prompt = task;
+
+  // Add plan context
+  // (Removed problematic template string, use only string concatenation below)
+
+  // Add plan context
+  if (plan) {
+    prompt += '\n\nPLAN:\n';
+    for (let i = 0; i < plan.steps.length; i++) {
+      prompt += i + 1 + '. ' + plan.steps[i] + '\n';
+    }
+    if (plan.warnings.length > 0) {
+      prompt += '\n\nWATCH OUT FOR:\n';
+      for (let i = 0; i < plan.warnings.length; i++) {
+        prompt += plan.warnings[i] + '\n';
+      }
+    }
+  }
+
+  // Add sheet context
+  if (sheetContext && sheetContext.hasData) {
+    prompt += '\n\nSHEET DATA:\n';
+    prompt += '- Headers: ' + JSON.stringify(sheetContext.headers) + '\n';
+    prompt += '- Rows: ' + sheetContext.rowCount + '\n';
+    prompt += '- Sample: ' + JSON.stringify(sheetContext.sampleData.slice(0, 3)) + '\n';
+  }
+
+  // Add error context for retry
+  if (previousError) {
+    prompt += '\n\nPREVIOUS ERROR: "' + previousError + '"\nFIX THIS ERROR. Output only corrected code.';
+  }
+  // Prepare LLM messages with coder system prompt
+  const messages = [{
+    role: "system",
+    content: CODER_SYSTEM_PROMPT
+  }];
+  if (attachedFiles.length > 0) {
+    const contentParts = [{
+      type: "text",
+      text: prompt
+    }];
+    attachedFiles.forEach(file => {
+      file.data.slice(0, 10).forEach(imageUrl => {
+        contentParts.push({
+          type: "image_url",
+          image_url: {
+            url: imageUrl
+          }
+        });
+      });
+    });
+    messages.push({
+      role: "user",
+      content: contentParts
+    });
+  } else {
+    messages.push({
+      role: "user",
+      content: prompt
+    });
+  }
+  let code = await (0,_llm_service__WEBPACK_IMPORTED_MODULE_0__.callLLM)(messages, undefined, signal);
+
+  // Clean up response: remove surrounding triple-backtick fences and optional language tag
+  if (code.startsWith('```')) {
+    const firstNewline = code.indexOf('\n');
+    if (firstNewline >= 0) {
+      code = code.slice(firstNewline + 1);
+    } else {
+      code = code.slice(3);
+    }
+  }
+  if (code.endsWith('```')) {
+    code = code.slice(0, -3);
+  }
+  code = code.trim();
+  return code;
 }
 
 // ═══════════════════════════════════════════════════════════════
 // FIXER — Repairs code based on validation or runtime errors
 // ═══════════════════════════════════════════════════════════════
-function _generateCode() {
-  _generateCode = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(task, plan, sheetContext, attachedFiles, previousError, signal) {
-    var prompt, i, _i, messages, contentParts, code, firstNewline;
-    return _regenerator().w(function (_context2) {
-      while (1) switch (_context2.n) {
-        case 0:
-          prompt = task; // Add plan context
-          // (Removed problematic template string, use only string concatenation below)
-          // Add plan context
-          if (plan) {
-            prompt += '\n\nPLAN:\n';
-            for (i = 0; i < plan.steps.length; i++) {
-              prompt += i + 1 + '. ' + plan.steps[i] + '\n';
-            }
-            if (plan.warnings.length > 0) {
-              prompt += '\n\nWATCH OUT FOR:\n';
-              for (_i = 0; _i < plan.warnings.length; _i++) {
-                prompt += plan.warnings[_i] + '\n';
-              }
-            }
-          }
 
-          // Add sheet context
-          if (sheetContext && sheetContext.hasData) {
-            prompt += '\n\nSHEET DATA:\n';
-            prompt += '- Headers: ' + JSON.stringify(sheetContext.headers) + '\n';
-            prompt += '- Rows: ' + sheetContext.rowCount + '\n';
-            prompt += '- Sample: ' + JSON.stringify(sheetContext.sampleData.slice(0, 3)) + '\n';
-          }
+const FIXER_SYSTEM_PROMPT = `You are an Excel JavaScript API debugger. Fix the broken code.
 
-          // Add error context for retry
-          if (previousError) {
-            prompt += '\n\nPREVIOUS ERROR: "' + previousError + '"\nFIX THIS ERROR. Output only corrected code.';
-          }
-          // Prepare LLM messages with coder system prompt
-          messages = [{
-            role: "system",
-            content: CODER_SYSTEM_PROMPT
-          }];
-          if (attachedFiles.length > 0) {
-            contentParts = [{
-              type: "text",
-              text: prompt
-            }];
-            attachedFiles.forEach(function (file) {
-              file.data.slice(0, 10).forEach(function (imageUrl) {
-                contentParts.push({
-                  type: "image_url",
-                  image_url: {
-                    url: imageUrl
-                  }
-                });
-              });
-            });
-            messages.push({
-              role: "user",
-              content: contentParts
-            });
-          } else {
-            messages.push({
-              role: "user",
-              content: prompt
-            });
-          }
-          _context2.n = 1;
-          return (0,_llm_service__WEBPACK_IMPORTED_MODULE_0__.callLLM)(messages, undefined, signal);
-        case 1:
-          code = _context2.v;
-          // Clean up response: remove surrounding triple-backtick fences and optional language tag
-          if (code.startsWith('```')) {
-            firstNewline = code.indexOf('\n');
-            if (firstNewline >= 0) {
-              code = code.slice(firstNewline + 1);
-            } else {
-              code = code.slice(3);
-            }
-          }
-          if (code.endsWith('```')) {
-            code = code.slice(0, -3);
-          }
-          code = code.trim();
-          return _context2.a(2, code);
-      }
-    }, _callee2);
-  }));
-  return _generateCode.apply(this, arguments);
-}
-var FIXER_SYSTEM_PROMPT = "You are an Excel JavaScript API debugger. Fix the broken code.\n\nCOMMON FIXES:\n1. .getValues() \u2192 .load(\"values\") + await context.sync() + .values\n2. .getRowCount() \u2192 .load(\"rowCount\") + await context.sync() + .rowCount\n3. range.values = \"text\" \u2192 range.values = [[\"text\"]]\n4. const sheet = ... \u2192 REMOVE (already declared)\n5. SpreadsheetApp \u2192 Use sheet (Excel JS API)\n6. chart.setTitle() \u2192 chart.title.text = \"...\"\n\nOUTPUT: Fixed code only. No explanation, no markdown fences.";
-function fixCode(_x0, _x1, _x10, _x11) {
-  return _fixCode.apply(this, arguments);
+COMMON FIXES:
+1. .getValues() → .load("values") + await context.sync() + .values
+2. .getRowCount() → .load("rowCount") + await context.sync() + .rowCount
+3. range.values = "text" → range.values = [["text"]]
+4. const sheet = ... → REMOVE (already declared)
+5. SpreadsheetApp → Use sheet (Excel JS API)
+6. chart.setTitle() → chart.title.text = "..."
+
+OUTPUT: Fixed code only. No explanation, no markdown fences.`;
+async function fixCode(originalCode, errors, runtimeError, signal) {
+  let errorSummary = "";
+  if (errors.length > 0) {
+    errorSummary = "VALIDATION ERRORS:\n" + errors.map(e => `- ${e.message} → ${e.suggestion}`).join("\n");
+  }
+  if (runtimeError) {
+    errorSummary += (errorSummary ? "\n\n" : "") + `RUNTIME ERROR: ${runtimeError}`;
+  }
+  const messages = [{
+    role: "system",
+    content: FIXER_SYSTEM_PROMPT
+  }, {
+    role: "user",
+    content: `BROKEN CODE:\n${originalCode}\n\n${errorSummary}\n\nFix the code:`
+  }];
+  let fixedCode = await (0,_llm_service__WEBPACK_IMPORTED_MODULE_0__.callLLM)(messages, undefined, signal);
+
+  // Clean response
+  fixedCode = fixedCode.replace(/^```(?:javascript|js|typescript|ts)?\n?/gi, "");
+  fixedCode = fixedCode.replace(/\n?```$/gi, "");
+  return fixedCode.trim();
 }
 
 // ═══════════════════════════════════════════════════════════════
 // ORCHESTRATOR — Main agent loop (LangGraph-inspired)
 // ═══════════════════════════════════════════════════════════════
-function _fixCode() {
-  _fixCode = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(originalCode, errors, runtimeError, signal) {
-    var errorSummary, messages, fixedCode;
-    return _regenerator().w(function (_context3) {
-      while (1) switch (_context3.n) {
-        case 0:
-          errorSummary = "";
-          if (errors.length > 0) {
-            errorSummary = "VALIDATION ERRORS:\n" + errors.map(function (e) {
-              return "- ".concat(e.message, " \u2192 ").concat(e.suggestion);
-            }).join("\n");
-          }
-          if (runtimeError) {
-            errorSummary += (errorSummary ? "\n\n" : "") + "RUNTIME ERROR: ".concat(runtimeError);
-          }
-          messages = [{
-            role: "system",
-            content: FIXER_SYSTEM_PROMPT
-          }, {
-            role: "user",
-            content: "BROKEN CODE:\n".concat(originalCode, "\n\n").concat(errorSummary, "\n\nFix the code:")
-          }];
-          _context3.n = 1;
-          return (0,_llm_service__WEBPACK_IMPORTED_MODULE_0__.callLLM)(messages, undefined, signal);
-        case 1:
-          fixedCode = _context3.v;
-          // Clean response
-          fixedCode = fixedCode.replace(/^```(?:javascript|js|typescript|ts)?\n?/gi, "");
-          fixedCode = fixedCode.replace(/\n?```$/gi, "");
-          return _context3.a(2, fixedCode.trim());
-      }
-    }, _callee3);
-  }));
-  return _fixCode.apply(this, arguments);
-}
-var DEFAULT_CONFIG = {
+
+const DEFAULT_CONFIG = {
   maxRetries: 3,
   enablePlanning: true,
   strictValidation: true,
   timeout: 30000
 };
-function runAgent(_x12, _x13, _x14) {
-  return _runAgent.apply(this, arguments);
+async function runAgent(task, sheetContext, attachedFiles) {
+  let config = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+  let signal = arguments.length > 4 ? arguments[4] : undefined;
+  const cfg = {
+    ...DEFAULT_CONFIG,
+    ...config
+  };
+  const startTime = Date.now();
+  let plan = null;
+  let code = "";
+  let validation = null;
+  let retries = 0;
+  try {
+    // ═══ PHASE 1: PLANNING ═══
+    if (cfg.enablePlanning && !attachedFiles.length) {
+      try {
+        plan = await createPlan(task, sheetContext, signal);
+        console.log("[Agent] Plan created:", plan);
+      } catch (e) {
+        if (e.name === 'AbortError') throw e;
+        console.warn("[Agent] Planning failed, proceeding without plan:", e);
+      }
+    }
+
+    // ═══ PHASE 2: CODE GENERATION ═══
+    code = await generateCode(task, plan, sheetContext, attachedFiles, undefined, signal);
+    console.log("[Agent] Initial code generated");
+
+    // ═══ PHASE 3: VALIDATION LOOP ═══
+    for (let attempt = 0; attempt <= cfg.maxRetries; attempt++) {
+      validation = validateCode(code);
+      if (validation.isValid) {
+        console.log(`[Agent] Code validated successfully on attempt ${attempt + 1}`);
+        break;
+      }
+      if (attempt < cfg.maxRetries) {
+        console.log(`[Agent] Validation failed (attempt ${attempt + 1}), fixing...`);
+        code = await fixCode(code, validation.errors, undefined, signal);
+        retries++;
+      }
+    }
+
+    // Final validation check
+    validation = validateCode(code);
+    if (!validation.isValid && cfg.strictValidation) {
+      throw new Error(`Code validation failed: ${validation.errors.map(e => e.message).join("; ")}`);
+    }
+
+    // Use sanitized code
+    code = validation.sanitizedCode;
+    return {
+      success: true,
+      code,
+      plan,
+      validation,
+      retries,
+      duration: Date.now() - startTime
+    };
+  } catch (error) {
+    return {
+      success: false,
+      code,
+      plan,
+      validation,
+      error: error.message,
+      retries,
+      duration: Date.now() - startTime
+    };
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════
 // EXECUTE WITH RECOVERY — Safe code execution with auto-fix
 // ═══════════════════════════════════════════════════════════════
-function _runAgent() {
-  _runAgent = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4(task, sheetContext, attachedFiles) {
-    var config,
-      signal,
-      cfg,
-      startTime,
-      plan,
-      code,
-      validation,
-      retries,
-      attempt,
-      _args4 = arguments,
-      _t2,
-      _t3;
-    return _regenerator().w(function (_context4) {
-      while (1) switch (_context4.p = _context4.n) {
-        case 0:
-          config = _args4.length > 3 && _args4[3] !== undefined ? _args4[3] : {};
-          signal = _args4.length > 4 ? _args4[4] : undefined;
-          cfg = _objectSpread(_objectSpread({}, DEFAULT_CONFIG), config);
-          startTime = Date.now();
-          plan = null;
-          code = "";
-          validation = null;
-          retries = 0;
-          _context4.p = 1;
-          if (!(cfg.enablePlanning && !attachedFiles.length)) {
-            _context4.n = 6;
-            break;
-          }
-          _context4.p = 2;
-          _context4.n = 3;
-          return createPlan(task, sheetContext, signal);
-        case 3:
-          plan = _context4.v;
-          console.log("[Agent] Plan created:", plan);
-          _context4.n = 6;
-          break;
-        case 4:
-          _context4.p = 4;
-          _t2 = _context4.v;
-          if (!(_t2.name === 'AbortError')) {
-            _context4.n = 5;
-            break;
-          }
-          throw _t2;
-        case 5:
-          console.warn("[Agent] Planning failed, proceeding without plan:", _t2);
-        case 6:
-          _context4.n = 7;
-          return generateCode(task, plan, sheetContext, attachedFiles, undefined, signal);
-        case 7:
-          code = _context4.v;
-          console.log("[Agent] Initial code generated");
 
-          // ═══ PHASE 3: VALIDATION LOOP ═══
-          attempt = 0;
-        case 8:
-          if (!(attempt <= cfg.maxRetries)) {
-            _context4.n = 12;
-            break;
-          }
-          validation = validateCode(code);
-          if (!validation.isValid) {
-            _context4.n = 9;
-            break;
-          }
-          console.log("[Agent] Code validated successfully on attempt ".concat(attempt + 1));
-          return _context4.a(3, 12);
-        case 9:
-          if (!(attempt < cfg.maxRetries)) {
-            _context4.n = 11;
-            break;
-          }
-          console.log("[Agent] Validation failed (attempt ".concat(attempt + 1, "), fixing..."));
-          _context4.n = 10;
-          return fixCode(code, validation.errors, undefined, signal);
-        case 10:
-          code = _context4.v;
-          retries++;
-        case 11:
-          attempt++;
-          _context4.n = 8;
-          break;
-        case 12:
-          // Final validation check
-          validation = validateCode(code);
-          if (!(!validation.isValid && cfg.strictValidation)) {
-            _context4.n = 13;
-            break;
-          }
-          throw new Error("Code validation failed: ".concat(validation.errors.map(function (e) {
-            return e.message;
-          }).join("; ")));
-        case 13:
-          // Use sanitized code
-          code = validation.sanitizedCode;
-          return _context4.a(2, {
-            success: true,
-            code: code,
-            plan: plan,
-            validation: validation,
-            retries: retries,
-            duration: Date.now() - startTime
-          });
-        case 14:
-          _context4.p = 14;
-          _t3 = _context4.v;
-          return _context4.a(2, {
-            success: false,
-            code: code,
-            plan: plan,
-            validation: validation,
-            error: _t3.message,
-            retries: retries,
-            duration: Date.now() - startTime
-          });
+async function executeWithRecovery(code, executor) {
+  let maxRetries = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 2;
+  let signal = arguments.length > 3 ? arguments[3] : undefined;
+  let currentCode = code;
+  let lastError = "";
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    if (signal !== null && signal !== void 0 && signal.aborted) {
+      throw new DOMException("Execution cancelled", "AbortError");
+    }
+    try {
+      await executor(currentCode);
+      return {
+        success: true,
+        finalCode: currentCode
+      };
+    } catch (error) {
+      lastError = error.message || String(error);
+      console.warn(`[Agent] Execution failed (attempt ${attempt + 1}):`, lastError);
+      if (attempt < maxRetries) {
+        // Try to fix based on runtime error
+        currentCode = await fixCode(currentCode, [], lastError, signal);
+
+        // Re-validate fixed code
+        const validation = validateCode(currentCode);
+        if (validation.isValid) {
+          currentCode = validation.sanitizedCode;
+        } else {
+          // If still invalid, try one more fix round
+          currentCode = await fixCode(currentCode, validation.errors, undefined, signal);
+        }
       }
-    }, _callee4, null, [[2, 4], [1, 14]]);
-  }));
-  return _runAgent.apply(this, arguments);
-}
-function executeWithRecovery(_x15, _x16) {
-  return _executeWithRecovery.apply(this, arguments);
+    }
+  }
+  return {
+    success: false,
+    error: lastError,
+    finalCode: currentCode
+  };
 }
 
 // ═══════════════════════════════════════════════════════════════
 // UTILITY: Read current sheet context
 // ═══════════════════════════════════════════════════════════════
-function _executeWithRecovery() {
-  _executeWithRecovery = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5(code, executor) {
-    var maxRetries,
-      signal,
-      currentCode,
-      lastError,
-      attempt,
-      validation,
-      _args5 = arguments,
-      _t4;
-    return _regenerator().w(function (_context5) {
-      while (1) switch (_context5.p = _context5.n) {
-        case 0:
-          maxRetries = _args5.length > 2 && _args5[2] !== undefined ? _args5[2] : 2;
-          signal = _args5.length > 3 ? _args5[3] : undefined;
-          currentCode = code;
-          lastError = "";
-          attempt = 0;
-        case 1:
-          if (!(attempt <= maxRetries)) {
-            _context5.n = 9;
-            break;
-          }
-          if (!(signal !== null && signal !== void 0 && signal.aborted)) {
-            _context5.n = 2;
-            break;
-          }
-          throw new DOMException("Execution cancelled", "AbortError");
-        case 2:
-          _context5.p = 2;
-          _context5.n = 3;
-          return executor(currentCode);
-        case 3:
-          return _context5.a(2, {
-            success: true,
-            finalCode: currentCode
-          });
-        case 4:
-          _context5.p = 4;
-          _t4 = _context5.v;
-          lastError = _t4.message || String(_t4);
-          console.warn("[Agent] Execution failed (attempt ".concat(attempt + 1, "):"), lastError);
-          if (!(attempt < maxRetries)) {
-            _context5.n = 8;
-            break;
-          }
-          _context5.n = 5;
-          return fixCode(currentCode, [], lastError, signal);
-        case 5:
-          currentCode = _context5.v;
-          // Re-validate fixed code
-          validation = validateCode(currentCode);
-          if (!validation.isValid) {
-            _context5.n = 6;
-            break;
-          }
-          currentCode = validation.sanitizedCode;
-          _context5.n = 8;
-          break;
-        case 6:
-          _context5.n = 7;
-          return fixCode(currentCode, validation.errors, undefined, signal);
-        case 7:
-          currentCode = _context5.v;
-        case 8:
-          attempt++;
-          _context5.n = 1;
-          break;
-        case 9:
-          return _context5.a(2, {
-            success: false,
-            error: lastError,
-            finalCode: currentCode
-          });
+
+async function readSheetContext() {
+  try {
+    // @ts-ignore - Excel is global in Office Add-ins
+    return await Excel.run(async context => {
+      const sheet = context.workbook.worksheets.getActiveWorksheet();
+      sheet.load("name");
+      const usedRange = sheet.getUsedRangeOrNullObject();
+      usedRange.load("values,rowCount,columnCount,isNullObject");
+      await context.sync();
+      if (usedRange.isNullObject || usedRange.rowCount === 0 || usedRange.columnCount === 0) {
+        return {
+          sheetName: sheet.name,
+          rowCount: 0,
+          columnCount: 0,
+          headers: [],
+          sampleData: [],
+          dataTypes: [],
+          hasData: false
+        };
       }
-    }, _callee5, null, [[2, 4]]);
-  }));
-  return _executeWithRecovery.apply(this, arguments);
-}
-function readSheetContext() {
-  return _readSheetContext.apply(this, arguments);
-}
-function _readSheetContext() {
-  _readSheetContext = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7() {
-    var _t5;
-    return _regenerator().w(function (_context8) {
-      while (1) switch (_context8.p = _context8.n) {
-        case 0:
-          _context8.p = 0;
-          _context8.n = 1;
-          return Excel.run(/*#__PURE__*/function () {
-            var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6(context) {
-              var sheet, usedRange, values, headers, dataTypes, _loop, col;
-              return _regenerator().w(function (_context7) {
-                while (1) switch (_context7.n) {
-                  case 0:
-                    sheet = context.workbook.worksheets.getActiveWorksheet();
-                    sheet.load("name");
-                    usedRange = sheet.getUsedRangeOrNullObject();
-                    usedRange.load("values,rowCount,columnCount,isNullObject");
-                    _context7.n = 1;
-                    return context.sync();
-                  case 1:
-                    if (!(usedRange.isNullObject || usedRange.rowCount === 0 || usedRange.columnCount === 0)) {
-                      _context7.n = 2;
-                      break;
-                    }
-                    return _context7.a(2, {
-                      sheetName: sheet.name,
-                      rowCount: 0,
-                      columnCount: 0,
-                      headers: [],
-                      sampleData: [],
-                      dataTypes: [],
-                      hasData: false
-                    });
-                  case 2:
-                    values = usedRange.values;
-                    headers = values[0].map(function (h) {
-                      return String(h || "").trim();
-                    }); // Detect data types
-                    dataTypes = [];
-                    if (!(values.length > 1)) {
-                      _context7.n = 5;
-                      break;
-                    }
-                    _loop = /*#__PURE__*/_regenerator().m(function _loop(col) {
-                      var colValues;
-                      return _regenerator().w(function (_context6) {
-                        while (1) switch (_context6.n) {
-                          case 0:
-                            colValues = values.slice(1).map(function (row) {
-                              return row[col];
-                            }).filter(function (v) {
-                              return v != null && v !== "";
-                            });
-                            if (colValues.length === 0) {
-                              dataTypes.push("empty");
-                            } else if (colValues.every(function (v) {
-                              return !isNaN(Number(v));
-                            })) {
-                              dataTypes.push("number");
-                            } else if (colValues.every(function (v) {
-                              return /^\d{1,4}[-\/]\d{1,2}[-\/]\d{1,4}/.test(String(v));
-                            })) {
-                              dataTypes.push("date");
-                            } else {
-                              dataTypes.push("text");
-                            }
-                          case 1:
-                            return _context6.a(2);
-                        }
-                      }, _loop);
-                    });
-                    col = 0;
-                  case 3:
-                    if (!(col < usedRange.columnCount)) {
-                      _context7.n = 5;
-                      break;
-                    }
-                    return _context7.d(_regeneratorValues(_loop(col)), 4);
-                  case 4:
-                    col++;
-                    _context7.n = 3;
-                    break;
-                  case 5:
-                    return _context7.a(2, {
-                      sheetName: sheet.name,
-                      rowCount: usedRange.rowCount,
-                      columnCount: usedRange.columnCount,
-                      headers: headers,
-                      sampleData: values.slice(0, 10),
-                      dataTypes: dataTypes,
-                      hasData: true
-                    });
-                }
-              }, _callee6);
-            }));
-            return function (_x17) {
-              return _ref.apply(this, arguments);
-            };
-          }());
-        case 1:
-          return _context8.a(2, _context8.v);
-        case 2:
-          _context8.p = 2;
-          _t5 = _context8.v;
-          console.error("Failed to read sheet context:", _t5);
-          return _context8.a(2, null);
+      const values = usedRange.values;
+      const headers = values[0].map(h => String(h || "").trim());
+
+      // Detect data types
+      const dataTypes = [];
+      if (values.length > 1) {
+        for (let col = 0; col < usedRange.columnCount; col++) {
+          const colValues = values.slice(1).map(row => row[col]).filter(v => v != null && v !== "");
+          if (colValues.length === 0) {
+            dataTypes.push("empty");
+          } else if (colValues.every(v => !isNaN(Number(v)))) {
+            dataTypes.push("number");
+          } else if (colValues.every(v => /^\d{1,4}[-\/]\d{1,2}[-\/]\d{1,4}/.test(String(v)))) {
+            dataTypes.push("date");
+          } else {
+            dataTypes.push("text");
+          }
+        }
       }
-    }, _callee7, null, [[0, 2]]);
-  }));
-  return _readSheetContext.apply(this, arguments);
+      return {
+        sheetName: sheet.name,
+        rowCount: usedRange.rowCount,
+        columnCount: usedRange.columnCount,
+        headers,
+        sampleData: values.slice(0, 10),
+        dataTypes,
+        hasData: true
+      };
+    });
+  } catch (e) {
+    console.error("Failed to read sheet context:", e);
+    return null;
+  }
 }
 
 /***/ }),
@@ -931,12 +798,70 @@ __webpack_require__.r(__webpack_exports__);
  * SheetOS AI — Planning Mode (Chat) System Prompt
  * Conversational AI that helps users plan, learn, and strategize Excel work.
  */
-var CHAT_PROMPT = "You are SheetOS AI \u2014 a friendly, expert Excel assistant in Planning Mode.\n\nYOUR ROLE:\n- Help users plan their spreadsheet work\n- Explain Excel concepts, formulas, and best practices\n- Suggest approaches before executing\n- Answer questions about data organization, analysis, and visualization\n- Provide formula examples and explanations\n- When given sheet context, analyze the USER'S ACTUAL DATA and answer questions directly using the data provided\n- If the user asks for details about a person or entity (e.g., \"What are John's contact details?\"), and you see that entity in the \uD83D\uDEA8 SEARCH HITS, provide all relevant information from that row.\n\nCONTEXT AWARENESS:\nWhen a message includes [SHEET CONTEXT], you have access to the user's ACTUAL Excel data!\n- Analyze the real column names, data types, and sample values\n- Give SPECIFIC answers or suggestions based on their actual data structure\n- Reference their exact column names in your response\n- Suggest improvements tailored to their dataset\n- Point out data quality issues you observe (empty cells, inconsistent formats, etc.)\n- You CAN see their sheet \u2014 do NOT say \"I don't have access to your sheet\"\n- If you see \uD83D\uDEA8 SEARCH HITS in the context, these are specific values found in the sheet. Use them to answer questions like \"Where is X?\", \"Does Y exist?\", or \"Give me details on Z\". Reference the exact cell address shown in the match.\n- Answering questions about existing data should be done DIRECTLY in chat. You do NOT need Agent Mode for simple information retrieval.\n\nRESPONSE FORMAT RULES:\n1. Respond in natural, conversational language\n2. Use markdown-style formatting for emphasis: **bold**, *italic*, `code`\n3. When showing formulas, wrap them in backticks: `=VLOOKUP(A2, Sheet2!A:B, 2, FALSE)`\n4. Use bullet points and numbered lists for clarity\n5. Keep responses concise but thorough (aim for 2-5 paragraphs max)\n6. If the user's request requires MODIFYING the sheet (formatting, inserting, complex calculations), mention that they can switch to \u26A1 Agent Mode to execute it\n7. When you have sheet context, ALWAYS reference the user's actual column names and data\n\nEXCEL EXPERTISE AREAS:\n- Information retrieval from the current sheet\n- Formula writing & debugging (VLOOKUP, INDEX/MATCH, IF, SUMIFS, etc.)\n- Data organization best practices\n- Chart type selection guidance\n- PivotTable planning\n- Data validation strategies\n- Conditional formatting approaches\n- Dashboard design principles\n- Data cleaning strategies\n- Performance optimization tips\n- Cross-sheet referencing patterns\n\nPERSONALITY:\n- Friendly and encouraging\n- Uses concrete examples when explaining\n- Proactive \u2014 suggest improvements the user might not have thought of\n- Mentions potential pitfalls or common mistakes to avoid\n\nIf the user asks you to MODIFY or EXECUTE something (create, format, calculate), remind them:\n\"\uD83D\uDCA1 Switch to \u26A1 Agent Mode to execute this! I can help you plan it here first.\"\n(Remember: Reading data and answering questions about it can be done here in Chat.)\n\nUser Message:\n";
+const CHAT_PROMPT = `You are SheetOS AI — a friendly, expert Excel assistant in Planning Mode.
+
+YOUR ROLE:
+- Help users plan their spreadsheet work
+- Explain Excel concepts, formulas, and best practices
+- Suggest approaches before executing
+- Answer questions about data organization, analysis, and visualization
+- Provide formula examples and explanations
+- When given sheet context, analyze the USER'S ACTUAL DATA and answer questions directly using the data provided
+- If the user asks for details about a person or entity (e.g., "What are John's contact details?"), and you see that entity in the 🚨 SEARCH HITS, provide all relevant information from that row.
+
+CONTEXT AWARENESS:
+When a message includes [SHEET CONTEXT], you have access to the user's ACTUAL Excel data!
+- Analyze the real column names, data types, and sample values
+- Give SPECIFIC answers or suggestions based on their actual data structure
+- Reference their exact column names in your response
+- Suggest improvements tailored to their dataset
+- Point out data quality issues you observe (empty cells, inconsistent formats, etc.)
+- You CAN see their sheet — do NOT say "I don't have access to your sheet"
+- If you see 🚨 SEARCH HITS in the context, these are specific values found in the sheet. Use them to answer questions like "Where is X?", "Does Y exist?", or "Give me details on Z". Reference the exact cell address shown in the match.
+- Answering questions about existing data should be done DIRECTLY in chat. You do NOT need Agent Mode for simple information retrieval.
+
+RESPONSE FORMAT RULES:
+1. Respond in natural, conversational language
+2. Use markdown-style formatting for emphasis: **bold**, *italic*, \`code\`
+3. When showing formulas, wrap them in backticks: \`=VLOOKUP(A2, Sheet2!A:B, 2, FALSE)\`
+4. Use bullet points and numbered lists for clarity
+5. Keep responses concise but thorough (aim for 2-5 paragraphs max)
+6. If the user's request requires MODIFYING the sheet (formatting, inserting, complex calculations), mention that they can switch to ⚡ Agent Mode to execute it
+7. When you have sheet context, ALWAYS reference the user's actual column names and data
+
+EXCEL EXPERTISE AREAS:
+- Information retrieval from the current sheet
+- Formula writing & debugging (VLOOKUP, INDEX/MATCH, IF, SUMIFS, etc.)
+- Data organization best practices
+- Chart type selection guidance
+- PivotTable planning
+- Data validation strategies
+- Conditional formatting approaches
+- Dashboard design principles
+- Data cleaning strategies
+- Performance optimization tips
+- Cross-sheet referencing patterns
+
+PERSONALITY:
+- Friendly and encouraging
+- Uses concrete examples when explaining
+- Proactive — suggest improvements the user might not have thought of
+- Mentions potential pitfalls or common mistakes to avoid
+
+If the user asks you to MODIFY or EXECUTE something (create, format, calculate), remind them:
+"💡 Switch to ⚡ Agent Mode to execute this! I can help you plan it here first."
+(Remember: Reading data and answering questions about it can be done here in Chat.)
+
+User Message:
+`;
 
 /**
  * Prompt for generating contextual suggestions based on sheet data
  */
-var CONTEXT_PROMPT = "You are SheetOS AI. Based on the following spreadsheet data, suggest 3-4 useful actions the user could take. Each suggestion should be a short phrase (5-8 words max). Format as a JSON array of strings. Example: [\"Add SUM to numeric columns\", \"Create a bar chart\", \"Apply professional formatting\"]. Only output the JSON array, nothing else.\n\nSheet Data:\n";
+const CONTEXT_PROMPT = `You are SheetOS AI. Based on the following spreadsheet data, suggest 3-4 useful actions the user could take. Each suggestion should be a short phrase (5-8 words max). Format as a JSON array of strings. Example: ["Add SUM to numeric columns", "Create a bar chart", "Apply professional formatting"]. Only output the JSON array, nothing else.
+
+Sheet Data:
+`;
 
 /***/ }),
 
@@ -956,12 +881,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   parseExtractionResponse: function() { return /* binding */ parseExtractionResponse; },
 /* harmony export */   validateExtraction: function() { return /* binding */ validateExtraction; }
 /* harmony export */ });
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 /**
  * Document Extractor Service
  * Schema-aware extraction from PDFs/CVs that only extracts data for specified columns.
@@ -972,10 +891,66 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
  * Get the schema-aware extraction prompt
  */
 function getSchemaExtractionPrompt(schema) {
-  var columnList = schema.columns.map(function (c, i) {
-    return "".concat(i + 1, ". \"").concat(c, "\"");
-  }).join("\n");
-  return "You are a PRECISION DATA EXTRACTOR. Your job is to extract information from documents with ZERO hallucination.\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nCRITICAL RULES \u2014 MEMORIZE THESE:\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\n1. **SCHEMA LOCKED**: The user has predefined these columns in Excel. You MUST ONLY extract data for these columns:\n".concat(columnList, "\n\n2. **NO FABRICATION**: If a piece of information is NOT explicitly present in the document, return an EMPTY STRING (\"\"). Do NOT guess, infer, or make up data.\n\n3. **EXACT MATCHING**: \n   - \"Name\" \u2192 Look for full name (first + last)\n   - \"Email\" \u2192 Look for @email patterns\n   - \"Phone\" / \"Mobile\" / \"Contact\" \u2192 Look for phone numbers\n   - \"Age\" \u2192 Look for age OR calculate from DOB if present\n   - \"Address\" \u2192 Full address if available\n   - \"Skills\" \u2192 Technical skills, languages, tools\n   - \"Experience\" \u2192 Years or job titles\n   - \"Education\" \u2192 Degrees, institutions\n   - \"LinkedIn\" \u2192 LinkedIn URLs only\n\n4. **DATA CLEANING**:\n   - Names: Proper Case (John Smith, not JOHN SMITH)\n   - Phones: Keep original format or standardize to +1-XXX-XXX-XXXX\n   - Emails: Lowercase\n   - Dates: Keep as found (Jan 2020 - Dec 2022)\n\n5. **ONE ROW PER DOCUMENT**: Each uploaded PDF/image represents ONE candidate/record. Output exactly one row of data per document.\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nOUTPUT FORMAT:\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\nReturn a JSON array of objects. Each object has keys matching the column names EXACTLY.\n\nExample for columns [\"Name\", \"Email\", \"Phone\", \"Skills\"]:\n[\n  {\"Name\": \"John Smith\", \"Email\": \"john@email.com\", \"Phone\": \"+1-555-123-4567\", \"Skills\": \"Python, Excel, SQL\"},\n  {\"Name\": \"Jane Doe\", \"Email\": \"jane.doe@company.com\", \"Phone\": \"\", \"Skills\": \"JavaScript, React\"}\n]\n\nNote: Jane Doe had no phone number visible in her resume, so it's left as \"\".\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nWHAT NOT TO DO:\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\n\u274C Do NOT add columns that aren't in the schema\n\u274C Do NOT guess email addresses (e.g., firstname.lastname@company.com)\n\u274C Do NOT fabricate phone numbers\n\u274C Do NOT hallucinate skills or experience not mentioned\n\u274C Do NOT include \"N/A\", \"Not Found\", \"Unknown\" \u2014 use \"\" instead\n\u274C Do NOT include markdown formatting \u2014 ONLY raw JSON\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nNOW EXTRACT FROM THE ATTACHED DOCUMENTS:\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n");
+  const columnList = schema.columns.map((c, i) => `${i + 1}. "${c}"`).join("\n");
+  return `You are a PRECISION DATA EXTRACTOR. Your job is to extract information from documents with ZERO hallucination.
+
+═══════════════════════════════════════════════════════════════════════════════
+CRITICAL RULES — MEMORIZE THESE:
+═══════════════════════════════════════════════════════════════════════════════
+
+1. **SCHEMA LOCKED**: The user has predefined these columns in Excel. You MUST ONLY extract data for these columns:
+${columnList}
+
+2. **NO FABRICATION**: If a piece of information is NOT explicitly present in the document, return an EMPTY STRING (""). Do NOT guess, infer, or make up data.
+
+3. **EXACT MATCHING**: 
+   - "Name" → Look for full name (first + last)
+   - "Email" → Look for @email patterns
+   - "Phone" / "Mobile" / "Contact" → Look for phone numbers
+   - "Age" → Look for age OR calculate from DOB if present
+   - "Address" → Full address if available
+   - "Skills" → Technical skills, languages, tools
+   - "Experience" → Years or job titles
+   - "Education" → Degrees, institutions
+   - "LinkedIn" → LinkedIn URLs only
+
+4. **DATA CLEANING**:
+   - Names: Proper Case (John Smith, not JOHN SMITH)
+   - Phones: Keep original format or standardize to +1-XXX-XXX-XXXX
+   - Emails: Lowercase
+   - Dates: Keep as found (Jan 2020 - Dec 2022)
+
+5. **ONE ROW PER DOCUMENT**: Each uploaded PDF/image represents ONE candidate/record. Output exactly one row of data per document.
+
+═══════════════════════════════════════════════════════════════════════════════
+OUTPUT FORMAT:
+═══════════════════════════════════════════════════════════════════════════════
+
+Return a JSON array of objects. Each object has keys matching the column names EXACTLY.
+
+Example for columns ["Name", "Email", "Phone", "Skills"]:
+[
+  {"Name": "John Smith", "Email": "john@email.com", "Phone": "+1-555-123-4567", "Skills": "Python, Excel, SQL"},
+  {"Name": "Jane Doe", "Email": "jane.doe@company.com", "Phone": "", "Skills": "JavaScript, React"}
+]
+
+Note: Jane Doe had no phone number visible in her resume, so it's left as "".
+
+═══════════════════════════════════════════════════════════════════════════════
+WHAT NOT TO DO:
+═══════════════════════════════════════════════════════════════════════════════
+
+❌ Do NOT add columns that aren't in the schema
+❌ Do NOT guess email addresses (e.g., firstname.lastname@company.com)
+❌ Do NOT fabricate phone numbers
+❌ Do NOT hallucinate skills or experience not mentioned
+❌ Do NOT include "N/A", "Not Found", "Unknown" — use "" instead
+❌ Do NOT include markdown formatting — ONLY raw JSON
+
+═══════════════════════════════════════════════════════════════════════════════
+NOW EXTRACT FROM THE ATTACHED DOCUMENTS:
+═══════════════════════════════════════════════════════════════════════════════
+`;
 }
 
 /**
@@ -983,9 +958,79 @@ function getSchemaExtractionPrompt(schema) {
  */
 function generateExcelCode(columns, data) {
   // Serialize data for JS injection
-  var serializedData = JSON.stringify(data, null, 2);
-  var serializedColumns = JSON.stringify(columns);
-  return "\n// \u2500\u2500\u2500 Schema-Aware Resume Extraction \u2500\u2500\u2500\n// Columns: ".concat(columns.join(", "), "\n// Records: ").concat(data.length, "\n\n// Extracted Data\nconst columns = ").concat(serializedColumns, ";\nconst extractedData = ").concat(serializedData, ";\n\n// Check if headers exist (row 1)\nconst headerRange = sheet.getRange(\"A1\").getResizedRange(0, columns.length - 1);\nheaderRange.load(\"values\");\nawait context.sync();\n\nconst existingHeaders = headerRange.values[0];\nconst hasHeaders = existingHeaders.some(h => h && h.toString().trim() !== \"\");\n\nlet startRow = 2; // Default: after headers\n\nif (!hasHeaders) {\n    // No headers \u2014 write them first\n    const headerData = [columns];\n    const headerWriteRange = writeData(sheet, \"A1\", headerData);\n    if (headerWriteRange) {\n        headerWriteRange.format.font.bold = true;\n        headerWriteRange.format.fill.color = \"#2D6A4F\";\n        headerWriteRange.format.font.color = \"#FFFFFF\";\n        headerWriteRange.format.rowHeight = 28;\n    }\n} else {\n    // Headers exist \u2014 find the last row with data\n    const usedRange = sheet.getUsedRange();\n    usedRange.load(\"rowCount\");\n    await context.sync();\n    startRow = usedRange.rowCount + 1;\n}\n\n// Convert extracted objects to 2D array matching column order\nconst dataRows = extractedData.map(record => {\n    return columns.map(col => {\n        const value = record[col];\n        return value !== undefined && value !== null ? String(value) : \"\";\n    });\n});\n\nif (dataRows.length > 0) {\n    const dataRange = writeData(sheet, \"A\" + startRow, dataRows);\n    \n    if (dataRange) {\n        // Apply alternating row colors\n        for (let i = 0; i < dataRows.length; i++) {\n            const row = dataRange.getRow(i);\n            if (i % 2 === 0) {\n                row.format.fill.color = \"#F0FAF5\";\n            }\n        }\n        \n        // Apply borders\n        const borderStyle = \"Thin\";\n        dataRange.format.borders.getItem(\"InsideHorizontal\").style = borderStyle;\n        dataRange.format.borders.getItem(\"InsideVertical\").style = borderStyle;\n        dataRange.format.borders.getItem(\"EdgeTop\").style = borderStyle;\n        dataRange.format.borders.getItem(\"EdgeBottom\").style = borderStyle;\n        dataRange.format.borders.getItem(\"EdgeLeft\").style = borderStyle;\n        dataRange.format.borders.getItem(\"EdgeRight\").style = borderStyle;\n    }\n}\n\n// Final autofit\nsheet.getUsedRange().format.autofitColumns();\n");
+  const serializedData = JSON.stringify(data, null, 2);
+  const serializedColumns = JSON.stringify(columns);
+  return `
+// ─── Schema-Aware Resume Extraction ───
+// Columns: ${columns.join(", ")}
+// Records: ${data.length}
+
+// Extracted Data
+const columns = ${serializedColumns};
+const extractedData = ${serializedData};
+
+// Check if headers exist (row 1)
+const headerRange = sheet.getRange("A1").getResizedRange(0, columns.length - 1);
+headerRange.load("values");
+await context.sync();
+
+const existingHeaders = headerRange.values[0];
+const hasHeaders = existingHeaders.some(h => h && h.toString().trim() !== "");
+
+let startRow = 2; // Default: after headers
+
+if (!hasHeaders) {
+    // No headers — write them first
+    const headerData = [columns];
+    const headerWriteRange = writeData(sheet, "A1", headerData);
+    if (headerWriteRange) {
+        headerWriteRange.format.font.bold = true;
+        headerWriteRange.format.fill.color = "#2D6A4F";
+        headerWriteRange.format.font.color = "#FFFFFF";
+        headerWriteRange.format.rowHeight = 28;
+    }
+} else {
+    // Headers exist — find the last row with data
+    const usedRange = sheet.getUsedRange();
+    usedRange.load("rowCount");
+    await context.sync();
+    startRow = usedRange.rowCount + 1;
+}
+
+// Convert extracted objects to 2D array matching column order
+const dataRows = extractedData.map(record => {
+    return columns.map(col => {
+        const value = record[col];
+        return value !== undefined && value !== null ? String(value) : "";
+    });
+});
+
+if (dataRows.length > 0) {
+    const dataRange = writeData(sheet, "A" + startRow, dataRows);
+    
+    if (dataRange) {
+        // Apply alternating row colors
+        for (let i = 0; i < dataRows.length; i++) {
+            const row = dataRange.getRow(i);
+            if (i % 2 === 0) {
+                row.format.fill.color = "#F0FAF5";
+            }
+        }
+        
+        // Apply borders
+        const borderStyle = "Thin";
+        dataRange.format.borders.getItem("InsideHorizontal").style = borderStyle;
+        dataRange.format.borders.getItem("InsideVertical").style = borderStyle;
+        dataRange.format.borders.getItem("EdgeTop").style = borderStyle;
+        dataRange.format.borders.getItem("EdgeBottom").style = borderStyle;
+        dataRange.format.borders.getItem("EdgeLeft").style = borderStyle;
+        dataRange.format.borders.getItem("EdgeRight").style = borderStyle;
+    }
+}
+
+// Final autofit
+sheet.getUsedRange().format.autofitColumns();
+`;
 }
 
 /**
@@ -993,19 +1038,19 @@ function generateExcelCode(columns, data) {
  */
 function parseExtractionResponse(response) {
   // Clean the response - remove markdown code blocks
-  var cleaned = response.trim();
+  let cleaned = response.trim();
   cleaned = cleaned.replace(/^```json?\s*/i, "");
   cleaned = cleaned.replace(/\s*```$/i, "");
   cleaned = cleaned.trim();
 
   // Try to find JSON array in the response
-  var jsonMatch = cleaned.match(/\[[\s\S]*\]/);
+  const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
   if (!jsonMatch) {
     console.warn("No JSON array found in response:", cleaned.substring(0, 200));
     return [];
   }
   try {
-    var parsed = JSON.parse(jsonMatch[0]);
+    const parsed = JSON.parse(jsonMatch[0]);
     if (!Array.isArray(parsed)) {
       console.warn("Parsed result is not an array");
       return [];
@@ -1021,39 +1066,39 @@ function parseExtractionResponse(response) {
  * Validate extracted data against schema
  */
 function validateExtraction(data, schema) {
-  var warnings = [];
-  var unmappedFields = [];
+  const warnings = [];
+  const unmappedFields = [];
 
   // Check each row for unmapped fields
-  data.forEach(function (row, index) {
-    Object.keys(row).forEach(function (key) {
+  data.forEach((row, index) => {
+    Object.keys(row).forEach(key => {
       if (!schema.columns.includes(key) && !unmappedFields.includes(key)) {
         unmappedFields.push(key);
       }
     });
 
     // Check for empty required fields
-    schema.columns.forEach(function (col) {
+    schema.columns.forEach(col => {
       if (!row[col] || row[col].toString().trim() === "") {
-        warnings.push("Row ".concat(index + 1, ": \"").concat(col, "\" is empty"));
+        warnings.push(`Row ${index + 1}: "${col}" is empty`);
       }
     });
   });
   if (unmappedFields.length > 0) {
-    warnings.push("Found data for columns not in schema: ".concat(unmappedFields.join(", ")));
+    warnings.push(`Found data for columns not in schema: ${unmappedFields.join(", ")}`);
   }
   return {
     success: data.length > 0,
-    data: data,
-    warnings: warnings,
-    unmappedFields: unmappedFields
+    data,
+    warnings,
+    unmappedFields
   };
 }
 
 /**
  * Common column name mappings for intelligent matching
  */
-var COLUMN_ALIASES = {
+const COLUMN_ALIASES = {
   "Name": ["Full Name", "Candidate Name", "Applicant Name", "First Name", "First", "Naam"],
   "Email": ["E-mail", "Email Address", "E-Mail", "Mail", "Contact Email"],
   "Phone": ["Mobile", "Mobile No", "Mobile Number", "Contact", "Contact No", "Phone Number", "Tel", "Telephone"],
@@ -1072,7 +1117,7 @@ var COLUMN_ALIASES = {
  * Normalize column name to standard form
  */
 function normalizeColumnName(columnName) {
-  var normalized = columnName.trim();
+  const normalized = columnName.trim();
 
   // Check direct match first
   if (COLUMN_ALIASES[normalized]) {
@@ -1080,13 +1125,8 @@ function normalizeColumnName(columnName) {
   }
 
   // Check aliases
-  for (var _i = 0, _Object$entries = Object.entries(COLUMN_ALIASES); _i < _Object$entries.length; _i++) {
-    var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
-      standard = _Object$entries$_i[0],
-      aliases = _Object$entries$_i[1];
-    if (aliases.some(function (alias) {
-      return alias.toLowerCase() === normalized.toLowerCase();
-    })) {
+  for (const [standard, aliases] of Object.entries(COLUMN_ALIASES)) {
+    if (aliases.some(alias => alias.toLowerCase() === normalized.toLowerCase())) {
       return standard;
     }
   }
@@ -1097,12 +1137,17 @@ function normalizeColumnName(columnName) {
  * Build extraction prompt with column aliases for better matching
  */
 function buildEnhancedPrompt(columns) {
-  var columnDetails = columns.map(function (col) {
-    var aliases = COLUMN_ALIASES[col] || [];
-    var aliasHint = aliases.length > 0 ? " (also look for: ".concat(aliases.slice(0, 3).join(", "), ")") : "";
-    return "\u2022 \"".concat(col, "\"").concat(aliasHint);
+  const columnDetails = columns.map(col => {
+    const aliases = COLUMN_ALIASES[col] || [];
+    const aliasHint = aliases.length > 0 ? ` (also look for: ${aliases.slice(0, 3).join(", ")})` : "";
+    return `• "${col}"${aliasHint}`;
   }).join("\n");
-  return "\nCOLUMNS TO EXTRACT:\n".concat(columnDetails, "\n\nRemember: If you cannot find data for a column, return \"\". Never guess or fabricate.\n");
+  return `
+COLUMNS TO EXTRACT:
+${columnDetails}
+
+Remember: If you cannot find data for a column, return "". Never guess or fabricate.
+`;
 }
 
 /***/ }),
@@ -1127,7 +1172,221 @@ __webpack_require__.r(__webpack_exports__);
  * - Better error prevention
  * - Anti-hallucination guards
  */
-var SYSTEM_PROMPT = "You are SheetOS AI, an Excel JavaScript API expert. Generate ONLY executable JS code.\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nENVIRONMENT (Already available \u2014 DO NOT redeclare these):\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n- context: Excel.RequestContext (ready to use)\n- sheet: Active worksheet (already loaded)\n- Excel: Namespace for enums (Excel.ChartType, Excel.BorderLineStyle, etc.)\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nCRITICAL RULES (MUST FOLLOW):\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n1. OUTPUT: Raw executable JavaScript ONLY. No markdown, no explanations.\n2. NO REDECLARATIONS: Never write \"const context = ...\" or \"const sheet = ...\"\n3. LOAD BEFORE READ: Properties like .values, .rowCount require .load() + await context.sync()\n4. 2D ARRAYS: range.values and range.formulas MUST be 2D arrays: [[value]]\n5. SYNC OFTEN: Call await context.sync() after every .load() before accessing properties\n6. SAFETY: Always check if range/data exists before operating on it\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nBANNED PATTERNS (WILL CRASH \u2014 NEVER USE):\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\u274C .getValues()         \u2192 Use: range.load(\"values\"); await context.sync(); range.values\n\u274C .getRowCount()       \u2192 Use: range.load(\"rowCount\"); await context.sync(); range.rowCount\n\u274C .getColumnCount()    \u2192 Use: range.load(\"columnCount\"); await context.sync(); range.columnCount\n\u274C .getAddress()        \u2192 Use: range.load(\"address\"); await context.sync(); range.address\n\u274C .getText()           \u2192 Use: range.load(\"text\"); await context.sync(); range.text\n\u274C .setValues(x)        \u2192 Use: range.values = [[x]]\n\u274C .setFormula(x)       \u2192 Use: range.formulas = [[\"=SUM(A:A)\"]]\n\u274C .setValue(x)         \u2192 Use: range.values = [[x]]\n\u274C range.font.bold      \u2192 Use: range.format.font.bold\n\u274C range.alignment      \u2192 Use: range.format.horizontalAlignment\n\u274C chart.setTitle(x)    \u2192 Use: chart.title.text = x\n\u274C chart.add()          \u2192 Use: sheet.charts.add()\n\u274C range.getItem()      \u2192 Use: range.getCell(row, col)\n\u274C range.select()       \u2192 REMOVE (causes performance issues)\n\u274C range.activate()     \u2192 REMOVE (not needed)\n\u274C SpreadsheetApp       \u2192 WRONG PLATFORM (this is Google Apps Script)\n\u274C Logger.log()         \u2192 REMOVE or use console.log\n\u274C Browser.msgBox()     \u2192 REMOVE (not available)\n\u274C alert() / confirm()  \u2192 REMOVE (blocked in add-ins)\n\u274C message.alert()      \u2192 REMOVE (doesn't exist)\n\u274C getRange(\"A0\")       \u2192 Row 0 doesn't exist. Use A1 or higher.\n\u274C const context = ...  \u2192 ALREADY DECLARED\n\u274C const sheet = ...    \u2192 ALREADY DECLARED\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nCORRECT PATTERNS (COPY THESE):\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\n// \u2500\u2500\u2500 Read Data from Sheet \u2500\u2500\u2500\nconst usedRange = sheet.getUsedRange();\nusedRange.load(\"values,rowCount,columnCount\");\nawait context.sync();\nconst data = usedRange.values; // Now accessible\nconst rows = usedRange.rowCount;\nconst cols = usedRange.columnCount;\n\n// \u2500\u2500\u2500 Write Data (Single Cell) \u2500\u2500\u2500\nsheet.getRange(\"A1\").values = [[\"Hello World\"]];\n\n// \u2500\u2500\u2500 Write Data (Multiple Cells) \u2500\u2500\u2500\nsheet.getRange(\"A1:C2\").values = [\n  [\"Name\", \"Age\", \"City\"],\n  [\"John\", 25, \"NYC\"]\n];\n\n// \u2500\u2500\u2500 Formulas \u2500\u2500\u2500\nsheet.getRange(\"D2\").formulas = [[\"=SUM(B2:C2)\"]];\n// Multiple formulas:\nsheet.getRange(\"D2:D5\").formulas = [\n  [\"=SUM(B2:C2)\"],\n  [\"=SUM(B3:C3)\"],\n  [\"=SUM(B4:C4)\"],\n  [\"=SUM(B5:C5)\"]\n];\n\n// \u2500\u2500\u2500 Formatting \u2500\u2500\u2500\nconst r = sheet.getRange(\"A1:D1\");\nr.format.font.bold = true;\nr.format.font.color = \"#FFFFFF\";\nr.format.fill.color = \"#4472C4\";\nr.format.horizontalAlignment = \"Center\";\nr.format.verticalAlignment = \"Center\";\nr.format.rowHeight = 28;\n\n// \u2500\u2500\u2500 Borders \u2500\u2500\u2500\nconst range = sheet.getRange(\"A1:D10\");\nrange.format.borders.getItem(\"InsideHorizontal\").style = \"Thin\";\nrange.format.borders.getItem(\"InsideVertical\").style = \"Thin\";\nrange.format.borders.getItem(\"EdgeTop\").style = \"Thin\";\nrange.format.borders.getItem(\"EdgeBottom\").style = \"Thin\";\nrange.format.borders.getItem(\"EdgeLeft\").style = \"Thin\";\nrange.format.borders.getItem(\"EdgeRight\").style = \"Thin\";\n\n// \u2500\u2500\u2500 Charts \u2500\u2500\u2500\nconst chartRange = sheet.getRange(\"A1:B5\");\nconst chart = sheet.charts.add(Excel.ChartType.columnClustered, chartRange, Excel.ChartSeriesBy.auto);\nchart.title.text = \"Sales Report\";\nchart.setPosition(\"E2\", \"L15\");\n\n// \u2500\u2500\u2500 Tables \u2500\u2500\u2500\nconst tableRange = sheet.getRange(\"A1:D10\");\nconst table = sheet.tables.add(tableRange, true);\ntable.name = \"SalesTable\";\ntable.style = \"TableStyleMedium9\";\n\n// \u2500\u2500\u2500 Conditional Formatting \u2500\u2500\u2500\nconst cfRange = sheet.getRange(\"C2:C100\");\nconst cf = cfRange.conditionalFormats.add(Excel.ConditionalFormatType.cellValue);\ncf.cellValue.format.fill.color = \"#92D050\";\ncf.cellValue.rule = { formula1: \"=50\", operator: \"GreaterThan\" };\n\n// \u2500\u2500\u2500 Data Validation (Dropdown) \u2500\u2500\u2500\nsheet.getRange(\"E2:E100\").dataValidation.rule = {\n  list: { inCellDropDown: true, source: \"Yes,No,Maybe\" }\n};\n\n// \u2500\u2500\u2500 Sort \u2500\u2500\u2500\nsheet.getUsedRange().sort.apply([{ key: 0, ascending: true }]);\n\n// \u2500\u2500\u2500 Filter \u2500\u2500\u2500\nconst filterRange = sheet.getUsedRange();\nfilterRange.autoFilter.apply(filterRange, 0);\n\n// \u2500\u2500\u2500 Freeze Panes \u2500\u2500\u2500\nsheet.freezePanes.freezeRows(1);\n\n// \u2500\u2500\u2500 Number Format \u2500\u2500\u2500\nsheet.getRange(\"B2:B100\").numberFormat = [[\"$#,##0.00\"]];\nsheet.getRange(\"C2:C100\").numberFormat = [[\"0.0%\"]];\n\n// \u2500\u2500\u2500 Clear Contents \u2500\u2500\u2500\nsheet.getUsedRange().clear(Excel.ClearApplyTo.Contents);\n\n// \u2500\u2500\u2500 New Worksheet \u2500\u2500\u2500\nconst newSheet = context.workbook.worksheets.add(\"Report\");\nnewSheet.activate();\n\n// \u2500\u2500\u2500 Autofit Columns (ALWAYS DO THIS AT END) \u2500\u2500\u2500\nsheet.getUsedRange().format.autofitColumns();\n\n// \u2500\u2500\u2500 Data Cleanup (Trim Whitespace) \u2500\u2500\u2500\nconst range = sheet.getUsedRange();\nrange.load(\"values\");\nawait context.sync();\nconst cleanValues = range.values.map(row => \n  row.map(cell => (typeof cell === \"string\" ? cell.trim() : cell))\n);\nrange.values = cleanValues;\nawait context.sync();\n\n// \u2500\u2500\u2500 Data Cleanup (Remove Empty Rows) \u2500\u2500\u2500\nconst rangeToClean = sheet.getUsedRange();\nrangeToClean.load(\"values,rowCount\");\nawait context.sync();\nfor (let i = rangeToClean.rowCount - 1; i >= 0; i--) {\n  const rowVals = rangeToClean.values[i];\n  if (rowVals.every(v => v === null || v === \"\")) {\n    sheet.getRange((i + 1) + \":\" + (i + 1)).delete(Excel.DeleteShiftDirection.up);\n  }\n}\nawait context.sync();\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nMANDATORY writeData HELPER (Include this for any data writing):\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nfunction writeData(sheet, startCell, data) {\n  if (!data || data.length === 0) return null;\n  const rows = data.length;\n  const cols = Math.max(...data.map(r => r ? r.length : 0));\n  if (cols === 0) return null;\n  const normalized = data.map(r => {\n    const row = r ? [...r] : [];\n    while (row.length < cols) row.push(\"\");\n    return row;\n  });\n  const range = sheet.getRange(startCell).getResizedRange(rows - 1, cols - 1);\n  range.values = normalized;\n  range.format.autofitColumns();\n  return range;\n}\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nANTI-HALLUCINATION RULES (For Document/PDF Extraction):\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n1. EXTRACT ONLY WHAT YOU SEE: Never invent data that isn't in the image/PDF\n2. EMPTY IF MISSING: If a field (phone, email, etc.) isn't visible, use \"\" not \"N/A\"\n3. NO GUESSING: Don't make up names, numbers, or dates\n4. PRESERVE EXACT TEXT: Copy text exactly as shown (don't \"fix\" typos unless asked)\n5. ONE ROW PER DOCUMENT: Each PDF/resume = exactly one data row\n6. MATCH SCHEMA: If column headers exist, ONLY extract data for those columns\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nDESIGN BEST PRACTICES:\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n1. HEADERS: Bold, dark background (#1B4D3E or #2D6A4F), white text\n2. NUMBERS: Currency \"$#,##0.00\", Percentage \"0.0%\", Integer \"#,##0\"\n3. DATES: Format as \"Short Date\" or \"YYYY-MM-DD\" string\n4. COLORS: Professional muted tones \u2014 no neon, no pure red/blue\n5. ZEBRA STRIPES: White and light gray (#F5F5F5) alternating rows\n6. ROW HEIGHT: Headers 28px, Data 20px\n7. ALWAYS: End with sheet.getUsedRange().format.autofitColumns()\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nSCHEMA-AWARE EXTRACTION (When EXISTING_COLUMNS provided):\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nWhen given \"EXISTING_COLUMNS: [...]\":\n1. Extract ONLY data matching those columns\n2. Use intelligent matching: \"Phone\" = \"Mobile No\" = \"Contact Number\"\n3. Leave cells empty (\"\") if data not found \u2014 NEVER write \"Not Found\"\n4. Append to first empty row after existing data\n\nUser Prompt:\n";
+const SYSTEM_PROMPT = `You are SheetOS AI, an Excel JavaScript API expert. Generate ONLY executable JS code.
+
+═══════════════════════════════════════════════════════════════════════════════
+ENVIRONMENT (Already available — DO NOT redeclare these):
+═══════════════════════════════════════════════════════════════════════════════
+- context: Excel.RequestContext (ready to use)
+- sheet: Active worksheet (already loaded)
+- Excel: Namespace for enums (Excel.ChartType, Excel.BorderLineStyle, etc.)
+
+═══════════════════════════════════════════════════════════════════════════════
+CRITICAL RULES (MUST FOLLOW):
+═══════════════════════════════════════════════════════════════════════════════
+1. OUTPUT: Raw executable JavaScript ONLY. No markdown, no explanations.
+2. NO REDECLARATIONS: Never write "const context = ..." or "const sheet = ..."
+3. LOAD BEFORE READ: Properties like .values, .rowCount require .load() + await context.sync()
+4. 2D ARRAYS: range.values and range.formulas MUST be 2D arrays: [[value]]
+5. SYNC OFTEN: Call await context.sync() after every .load() before accessing properties
+6. SAFETY: Always check if range/data exists before operating on it
+
+═══════════════════════════════════════════════════════════════════════════════
+BANNED PATTERNS (WILL CRASH — NEVER USE):
+═══════════════════════════════════════════════════════════════════════════════
+❌ .getValues()         → Use: range.load("values"); await context.sync(); range.values
+❌ .getRowCount()       → Use: range.load("rowCount"); await context.sync(); range.rowCount
+❌ .getColumnCount()    → Use: range.load("columnCount"); await context.sync(); range.columnCount
+❌ .getAddress()        → Use: range.load("address"); await context.sync(); range.address
+❌ .getText()           → Use: range.load("text"); await context.sync(); range.text
+❌ .setValues(x)        → Use: range.values = [[x]]
+❌ .setFormula(x)       → Use: range.formulas = [["=SUM(A:A)"]]
+❌ .setValue(x)         → Use: range.values = [[x]]
+❌ range.font.bold      → Use: range.format.font.bold
+❌ range.alignment      → Use: range.format.horizontalAlignment
+❌ chart.setTitle(x)    → Use: chart.title.text = x
+❌ chart.add()          → Use: sheet.charts.add()
+❌ range.getItem()      → Use: range.getCell(row, col)
+❌ range.select()       → REMOVE (causes performance issues)
+❌ range.activate()     → REMOVE (not needed)
+❌ SpreadsheetApp       → WRONG PLATFORM (this is Google Apps Script)
+❌ Logger.log()         → REMOVE or use console.log
+❌ Browser.msgBox()     → REMOVE (not available)
+❌ alert() / confirm()  → REMOVE (blocked in add-ins)
+❌ message.alert()      → REMOVE (doesn't exist)
+❌ getRange("A0")       → Row 0 doesn't exist. Use A1 or higher.
+❌ const context = ...  → ALREADY DECLARED
+❌ const sheet = ...    → ALREADY DECLARED
+
+═══════════════════════════════════════════════════════════════════════════════
+CORRECT PATTERNS (COPY THESE):
+═══════════════════════════════════════════════════════════════════════════════
+
+// ─── Read Data from Sheet ───
+const usedRange = sheet.getUsedRange();
+usedRange.load("values,rowCount,columnCount");
+await context.sync();
+const data = usedRange.values; // Now accessible
+const rows = usedRange.rowCount;
+const cols = usedRange.columnCount;
+
+// ─── Write Data (Single Cell) ───
+sheet.getRange("A1").values = [["Hello World"]];
+
+// ─── Write Data (Multiple Cells) ───
+sheet.getRange("A1:C2").values = [
+  ["Name", "Age", "City"],
+  ["John", 25, "NYC"]
+];
+
+// ─── Formulas ───
+sheet.getRange("D2").formulas = [["=SUM(B2:C2)"]];
+// Multiple formulas:
+sheet.getRange("D2:D5").formulas = [
+  ["=SUM(B2:C2)"],
+  ["=SUM(B3:C3)"],
+  ["=SUM(B4:C4)"],
+  ["=SUM(B5:C5)"]
+];
+
+// ─── Formatting ───
+const r = sheet.getRange("A1:D1");
+r.format.font.bold = true;
+r.format.font.color = "#FFFFFF";
+r.format.fill.color = "#4472C4";
+r.format.horizontalAlignment = "Center";
+r.format.verticalAlignment = "Center";
+r.format.rowHeight = 28;
+
+// ─── Borders ───
+const range = sheet.getRange("A1:D10");
+range.format.borders.getItem("InsideHorizontal").style = "Thin";
+range.format.borders.getItem("InsideVertical").style = "Thin";
+range.format.borders.getItem("EdgeTop").style = "Thin";
+range.format.borders.getItem("EdgeBottom").style = "Thin";
+range.format.borders.getItem("EdgeLeft").style = "Thin";
+range.format.borders.getItem("EdgeRight").style = "Thin";
+
+// ─── Charts ───
+const chartRange = sheet.getRange("A1:B5");
+const chart = sheet.charts.add(Excel.ChartType.columnClustered, chartRange, Excel.ChartSeriesBy.auto);
+chart.title.text = "Sales Report";
+chart.setPosition("E2", "L15");
+
+// ─── Tables ───
+const tableRange = sheet.getRange("A1:D10");
+const table = sheet.tables.add(tableRange, true);
+table.name = "SalesTable";
+table.style = "TableStyleMedium9";
+
+// ─── Conditional Formatting ───
+const cfRange = sheet.getRange("C2:C100");
+const cf = cfRange.conditionalFormats.add(Excel.ConditionalFormatType.cellValue);
+cf.cellValue.format.fill.color = "#92D050";
+cf.cellValue.rule = { formula1: "=50", operator: "GreaterThan" };
+
+// ─── Data Validation (Dropdown) ───
+sheet.getRange("E2:E100").dataValidation.rule = {
+  list: { inCellDropDown: true, source: "Yes,No,Maybe" }
+};
+
+// ─── Sort ───
+sheet.getUsedRange().sort.apply([{ key: 0, ascending: true }]);
+
+// ─── Filter ───
+const filterRange = sheet.getUsedRange();
+filterRange.autoFilter.apply(filterRange, 0);
+
+// ─── Freeze Panes ───
+sheet.freezePanes.freezeRows(1);
+
+// ─── Number Format ───
+sheet.getRange("B2:B100").numberFormat = [["$#,##0.00"]];
+sheet.getRange("C2:C100").numberFormat = [["0.0%"]];
+
+// ─── Clear Contents ───
+sheet.getUsedRange().clear(Excel.ClearApplyTo.Contents);
+
+// ─── New Worksheet ───
+const newSheet = context.workbook.worksheets.add("Report");
+newSheet.activate();
+
+// ─── Autofit Columns (ALWAYS DO THIS AT END) ───
+sheet.getUsedRange().format.autofitColumns();
+
+// ─── Data Cleanup (Trim Whitespace) ───
+const range = sheet.getUsedRange();
+range.load("values");
+await context.sync();
+const cleanValues = range.values.map(row => 
+  row.map(cell => (typeof cell === "string" ? cell.trim() : cell))
+);
+range.values = cleanValues;
+await context.sync();
+
+// ─── Data Cleanup (Remove Empty Rows) ───
+const rangeToClean = sheet.getUsedRange();
+rangeToClean.load("values,rowCount");
+await context.sync();
+for (let i = rangeToClean.rowCount - 1; i >= 0; i--) {
+  const rowVals = rangeToClean.values[i];
+  if (rowVals.every(v => v === null || v === "")) {
+    sheet.getRange((i + 1) + ":" + (i + 1)).delete(Excel.DeleteShiftDirection.up);
+  }
+}
+await context.sync();
+
+═══════════════════════════════════════════════════════════════════════════════
+MANDATORY writeData HELPER (Include this for any data writing):
+═══════════════════════════════════════════════════════════════════════════════
+function writeData(sheet, startCell, data) {
+  if (!data || data.length === 0) return null;
+  const rows = data.length;
+  const cols = Math.max(...data.map(r => r ? r.length : 0));
+  if (cols === 0) return null;
+  const normalized = data.map(r => {
+    const row = r ? [...r] : [];
+    while (row.length < cols) row.push("");
+    return row;
+  });
+  const range = sheet.getRange(startCell).getResizedRange(rows - 1, cols - 1);
+  range.values = normalized;
+  range.format.autofitColumns();
+  return range;
+}
+
+═══════════════════════════════════════════════════════════════════════════════
+ANTI-HALLUCINATION RULES (For Document/PDF Extraction):
+═══════════════════════════════════════════════════════════════════════════════
+1. EXTRACT ONLY WHAT YOU SEE: Never invent data that isn't in the image/PDF
+2. EMPTY IF MISSING: If a field (phone, email, etc.) isn't visible, use "" not "N/A"
+3. NO GUESSING: Don't make up names, numbers, or dates
+4. PRESERVE EXACT TEXT: Copy text exactly as shown (don't "fix" typos unless asked)
+5. ONE ROW PER DOCUMENT: Each PDF/resume = exactly one data row
+6. MATCH SCHEMA: If column headers exist, ONLY extract data for those columns
+
+═══════════════════════════════════════════════════════════════════════════════
+DESIGN BEST PRACTICES:
+═══════════════════════════════════════════════════════════════════════════════
+1. HEADERS: Bold, dark background (#1B4D3E or #2D6A4F), white text
+2. NUMBERS: Currency "$#,##0.00", Percentage "0.0%", Integer "#,##0"
+3. DATES: Format as "Short Date" or "YYYY-MM-DD" string
+4. COLORS: Professional muted tones — no neon, no pure red/blue
+5. ZEBRA STRIPES: White and light gray (#F5F5F5) alternating rows
+6. ROW HEIGHT: Headers 28px, Data 20px
+7. ALWAYS: End with sheet.getUsedRange().format.autofitColumns()
+
+═══════════════════════════════════════════════════════════════════════════════
+SCHEMA-AWARE EXTRACTION (When EXISTING_COLUMNS provided):
+═══════════════════════════════════════════════════════════════════════════════
+When given "EXISTING_COLUMNS: [...]":
+1. Extract ONLY data matching those columns
+2. Use intelligent matching: "Phone" = "Mobile No" = "Contact Number"
+3. Leave cells empty ("") if data not found — NEVER write "Not Found"
+4. Append to first empty row after existing data
+
+User Prompt:
+`;
 
 /***/ }),
 
@@ -1152,24 +1411,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var pdfjs_dist__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! pdfjs-dist */ "./node_modules/pdfjs-dist/build/pdf.js");
 /* harmony import */ var pdfjs_dist__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(pdfjs_dist__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _services_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/icons */ "./src/services/icons.ts");
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _regeneratorValues(e) { if (null != e) { var t = e["function" == typeof Symbol && Symbol.iterator || "@@iterator"], r = 0; if (t) return t.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) return { next: function next() { return e && r >= e.length && (e = void 0), { value: e && e[r++], done: !e }; } }; } throw new TypeError(_typeof(e) + " is not iterable"); }
-function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i.return) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
-function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
-function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
-function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 /* global console, Excel, document, window, Office */
 
 
@@ -1185,7 +1426,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 // Worker setup for PDF.js
 try {
   // @ts-ignore
-  pdfjs_dist__WEBPACK_IMPORTED_MODULE_8__.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/".concat(pdfjs_dist__WEBPACK_IMPORTED_MODULE_8__.version, "/pdf.worker.min.js");
+  pdfjs_dist__WEBPACK_IMPORTED_MODULE_8__.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs_dist__WEBPACK_IMPORTED_MODULE_8__.version}/pdf.worker.min.js`;
 } catch (e) {
   console.warn("PDF Worker setup failed:", e);
 }
@@ -1193,20 +1434,20 @@ try {
 // ─── Types ─────────────────────────────────────────────────────
 
 // ─── State ─────────────────────────────────────────────────────
-var currentMode = "planning";
-var currentCategory = "cleanup";
-var schemaExtractionMode = false; // When true, use column headers from Excel
-var chatHistory = [];
-var chatConversation = [];
-var isChatBusy = false;
-var attachedFiles = []; // Array of attached files
-var chatAbortController = null;
-var agentAbortController = null;
-var rawPDFFiles = []; // Store raw File objects for text-based batch extraction
-var batchAbortController = null;
+let currentMode = "planning";
+let currentCategory = "cleanup";
+let schemaExtractionMode = false; // When true, use column headers from Excel
+const chatHistory = [];
+let chatConversation = [];
+let isChatBusy = false;
+let attachedFiles = []; // Array of attached files
+let chatAbortController = null;
+let agentAbortController = null;
+let rawPDFFiles = []; // Store raw File objects for text-based batch extraction
+let batchAbortController = null;
 
 // ─── Quick Actions by Category ─────────────────────────────────
-var CATEGORIZED_ACTIONS = {
+const CATEGORIZED_ACTIONS = {
   // ── Data Cleanup ──
   cleanup: [{
     icon: "eraser",
@@ -1291,43 +1532,267 @@ var CATEGORIZED_ACTIONS = {
   format: [{
     icon: "paintbrush",
     label: "Make Professional",
-    prompt: "Apply professional formatting to the sheet. Use this EXACT safe pattern:\n\n// Step 1: Get used range and load properties\nconst usedRange = sheet.getUsedRange();\nusedRange.load(\"values,rowCount,columnCount,address\");\nawait context.sync();\n\n// Step 2: Check if sheet has data\nif (!usedRange || usedRange.rowCount < 1 || usedRange.columnCount < 1) {\n  throw new Error(\"Sheet appears empty. Add some data first.\");\n}\n\nconst rowCount = usedRange.rowCount;\nconst colCount = usedRange.columnCount;\n\n// Step 3: Format header row (row 1)\nconst headerRow = usedRange.getRow(0);\nheaderRow.format.set({\n  font: { bold: true, size: 11, color: \"#FFFFFF\" },\n  fill: { color: \"#1B2A4A\" },\n  horizontalAlignment: \"Center\",\n  verticalAlignment: \"Center\",\n  rowHeight: 28\n});\n\n// Step 4: Format data rows with alternating colors\nfor (let i = 1; i < rowCount; i++) {\n  const row = usedRange.getRow(i);\n  row.format.set({\n    fill: { color: i % 2 === 0 ? \"#F4F5F7\" : \"#FFFFFF\" },\n    rowHeight: 22\n  });\n}\n\n// Step 5: Add borders and freeze pane\nusedRange.format.borders.getItem(\"InsideHorizontal\").style = \"Thin\";\nusedRange.format.borders.getItem(\"InsideVertical\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeTop\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeBottom\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeLeft\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeRight\").style = \"Thin\";\n\nheaderRow.format.borders.getItem(\"EdgeBottom\").style = \"Medium\";\nheaderRow.format.borders.getItem(\"EdgeBottom\").color = \"#1B2A4A\";\n\nsheet.freezePanes.freezeRows(1);\nusedRange.format.autofitColumns();\nawait context.sync();"
+    prompt: `Apply professional formatting to the sheet. Use this EXACT safe pattern:
+
+// Step 1: Get used range and load properties
+const usedRange = sheet.getUsedRange();
+usedRange.load("values,rowCount,columnCount,address");
+await context.sync();
+
+// Step 2: Check if sheet has data
+if (!usedRange || usedRange.rowCount < 1 || usedRange.columnCount < 1) {
+  throw new Error("Sheet appears empty. Add some data first.");
+}
+
+const rowCount = usedRange.rowCount;
+const colCount = usedRange.columnCount;
+
+// Step 3: Format header row (row 1)
+const headerRow = usedRange.getRow(0);
+headerRow.format.set({
+  font: { bold: true, size: 11, color: "#FFFFFF" },
+  fill: { color: "#1B2A4A" },
+  horizontalAlignment: "Center",
+  verticalAlignment: "Center",
+  rowHeight: 28
+});
+
+// Step 4: Format data rows with alternating colors
+for (let i = 1; i < rowCount; i++) {
+  const row = usedRange.getRow(i);
+  row.format.set({
+    fill: { color: i % 2 === 0 ? "#F4F5F7" : "#FFFFFF" },
+    rowHeight: 22
+  });
+}
+
+// Step 5: Add borders and freeze pane
+usedRange.format.borders.getItem("InsideHorizontal").style = "Thin";
+usedRange.format.borders.getItem("InsideVertical").style = "Thin";
+usedRange.format.borders.getItem("EdgeTop").style = "Thin";
+usedRange.format.borders.getItem("EdgeBottom").style = "Thin";
+usedRange.format.borders.getItem("EdgeLeft").style = "Thin";
+usedRange.format.borders.getItem("EdgeRight").style = "Thin";
+
+headerRow.format.borders.getItem("EdgeBottom").style = "Medium";
+headerRow.format.borders.getItem("EdgeBottom").color = "#1B2A4A";
+
+sheet.freezePanes.freezeRows(1);
+usedRange.format.autofitColumns();
+await context.sync();`
   }, {
     icon: "paintbrush",
     label: "Executive Style",
-    prompt: "Apply executive presentation style using this EXACT safe pattern:\n\nconst usedRange = sheet.getUsedRange();\nusedRange.load(\"values,rowCount,columnCount\");\nawait context.sync();\n\nif (!usedRange || usedRange.rowCount < 1) {\n  throw new Error(\"Sheet appears empty.\");\n}\n\nconst rowCount = usedRange.rowCount;\n\n// Header styling\nconst headerRow = usedRange.getRow(0);\nheaderRow.format.font.bold = true;\nheaderRow.format.font.size = 11;\nheaderRow.format.font.color = \"#FFFFFF\";\nheaderRow.format.fill.color = \"#34495E\";\nheaderRow.format.horizontalAlignment = \"Center\";\nheaderRow.format.rowHeight = 30;\n\n// Data rows with subtle alternating\nfor (let i = 1; i < rowCount; i++) {\n  const row = usedRange.getRow(i);\n  row.format.fill.color = i % 2 === 0 ? \"#F8F9FA\" : \"#FFFFFF\";\n  row.format.rowHeight = 22;\n}\n\n// Light gray borders\nusedRange.format.borders.getItem(\"InsideHorizontal\").style = \"Thin\";\nusedRange.format.borders.getItem(\"InsideHorizontal\").color = \"#DEE2E6\";\nusedRange.format.borders.getItem(\"InsideVertical\").style = \"Thin\";\nusedRange.format.borders.getItem(\"InsideVertical\").color = \"#DEE2E6\";\nusedRange.format.borders.getItem(\"EdgeTop\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeBottom\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeLeft\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeRight\").style = \"Thin\";\n\n// Freeze header\nsheet.freezePanes.freezeRows(1);\nusedRange.format.autofitColumns();\nawait context.sync();"
+    prompt: `Apply executive presentation style using this EXACT safe pattern:
+
+const usedRange = sheet.getUsedRange();
+usedRange.load("values,rowCount,columnCount");
+await context.sync();
+
+if (!usedRange || usedRange.rowCount < 1) {
+  throw new Error("Sheet appears empty.");
+}
+
+const rowCount = usedRange.rowCount;
+
+// Header styling
+const headerRow = usedRange.getRow(0);
+headerRow.format.font.bold = true;
+headerRow.format.font.size = 11;
+headerRow.format.font.color = "#FFFFFF";
+headerRow.format.fill.color = "#34495E";
+headerRow.format.horizontalAlignment = "Center";
+headerRow.format.rowHeight = 30;
+
+// Data rows with subtle alternating
+for (let i = 1; i < rowCount; i++) {
+  const row = usedRange.getRow(i);
+  row.format.fill.color = i % 2 === 0 ? "#F8F9FA" : "#FFFFFF";
+  row.format.rowHeight = 22;
+}
+
+// Light gray borders
+usedRange.format.borders.getItem("InsideHorizontal").style = "Thin";
+usedRange.format.borders.getItem("InsideHorizontal").color = "#DEE2E6";
+usedRange.format.borders.getItem("InsideVertical").style = "Thin";
+usedRange.format.borders.getItem("InsideVertical").color = "#DEE2E6";
+usedRange.format.borders.getItem("EdgeTop").style = "Thin";
+usedRange.format.borders.getItem("EdgeBottom").style = "Thin";
+usedRange.format.borders.getItem("EdgeLeft").style = "Thin";
+usedRange.format.borders.getItem("EdgeRight").style = "Thin";
+
+// Freeze header
+sheet.freezePanes.freezeRows(1);
+usedRange.format.autofitColumns();
+await context.sync();`
   }, {
     icon: "paintbrush",
     label: "Minimal Clean",
-    prompt: "Apply minimal modern formatting:\n\nconst usedRange = sheet.getUsedRange();\nusedRange.load(\"rowCount,columnCount\");\nawait context.sync();\n\nif (!usedRange || usedRange.rowCount < 1) {\n  throw new Error(\"Sheet appears empty.\");\n}\n\n// Clear existing formatting\nusedRange.format.fill.clear();\nusedRange.format.borders.getItem(\"InsideHorizontal\").style = \"None\";\nusedRange.format.borders.getItem(\"InsideVertical\").style = \"None\";\nusedRange.format.borders.getItem(\"EdgeTop\").style = \"None\";\nusedRange.format.borders.getItem(\"EdgeBottom\").style = \"None\";\nusedRange.format.borders.getItem(\"EdgeLeft\").style = \"None\";\nusedRange.format.borders.getItem(\"EdgeRight\").style = \"None\";\n\n// Header: bold, dark text, bottom border only\nconst headerRow = usedRange.getRow(0);\nheaderRow.format.font.bold = true;\nheaderRow.format.font.size = 11;\nheaderRow.format.font.color = \"#111827\";\nheaderRow.format.borders.getItem(\"EdgeBottom\").style = \"Thin\";\nheaderRow.format.borders.getItem(\"EdgeBottom\").color = \"#D1D5DB\";\nheaderRow.format.rowHeight = 28;\n\n// Data rows: smaller font, gray text\nfor (let i = 1; i < usedRange.rowCount; i++) {\n  const row = usedRange.getRow(i);\n  row.format.font.size = 10;\n  row.format.font.color = \"#374151\";\n  row.format.rowHeight = 22;\n}\n\nusedRange.format.autofitColumns();\nawait context.sync();"
+    prompt: `Apply minimal modern formatting:
+
+const usedRange = sheet.getUsedRange();
+usedRange.load("rowCount,columnCount");
+await context.sync();
+
+if (!usedRange || usedRange.rowCount < 1) {
+  throw new Error("Sheet appears empty.");
+}
+
+// Clear existing formatting
+usedRange.format.fill.clear();
+usedRange.format.borders.getItem("InsideHorizontal").style = "None";
+usedRange.format.borders.getItem("InsideVertical").style = "None";
+usedRange.format.borders.getItem("EdgeTop").style = "None";
+usedRange.format.borders.getItem("EdgeBottom").style = "None";
+usedRange.format.borders.getItem("EdgeLeft").style = "None";
+usedRange.format.borders.getItem("EdgeRight").style = "None";
+
+// Header: bold, dark text, bottom border only
+const headerRow = usedRange.getRow(0);
+headerRow.format.font.bold = true;
+headerRow.format.font.size = 11;
+headerRow.format.font.color = "#111827";
+headerRow.format.borders.getItem("EdgeBottom").style = "Thin";
+headerRow.format.borders.getItem("EdgeBottom").color = "#D1D5DB";
+headerRow.format.rowHeight = 28;
+
+// Data rows: smaller font, gray text
+for (let i = 1; i < usedRange.rowCount; i++) {
+  const row = usedRange.getRow(i);
+  row.format.font.size = 10;
+  row.format.font.color = "#374151";
+  row.format.rowHeight = 22;
+}
+
+usedRange.format.autofitColumns();
+await context.sync();`
   }, {
     icon: "paintbrush",
     label: "Dark Theme",
-    prompt: "Apply dark theme formatting:\n\nconst usedRange = sheet.getUsedRange();\nusedRange.load(\"rowCount,columnCount\");\nawait context.sync();\n\nif (!usedRange || usedRange.rowCount < 1) {\n  throw new Error(\"Sheet appears empty.\");\n}\n\nconst rowCount = usedRange.rowCount;\n\n// All cells: dark background, light text\nusedRange.format.fill.color = \"#1E1E1E\";\nusedRange.format.font.color = \"#CCCCCC\";\n\n// Header: gold text\nconst headerRow = usedRange.getRow(0);\nheaderRow.format.fill.color = \"#2D2D2D\";\nheaderRow.format.font.bold = true;\nheaderRow.format.font.color = \"#F0C75E\";\nheaderRow.format.rowHeight = 28;\n\n// Alternating dark rows\nfor (let i = 1; i < rowCount; i++) {\n  const row = usedRange.getRow(i);\n  row.format.fill.color = i % 2 === 0 ? \"#252525\" : \"#1E1E1E\";\n}\n\n// Dark borders\nusedRange.format.borders.getItem(\"InsideHorizontal\").style = \"Thin\";\nusedRange.format.borders.getItem(\"InsideHorizontal\").color = \"#3A3A3A\";\nusedRange.format.borders.getItem(\"InsideVertical\").style = \"Thin\";\nusedRange.format.borders.getItem(\"InsideVertical\").color = \"#3A3A3A\";\nusedRange.format.borders.getItem(\"EdgeTop\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeBottom\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeLeft\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeRight\").style = \"Thin\";\n\nusedRange.format.autofitColumns();\nawait context.sync();"
+    prompt: `Apply dark theme formatting:
+
+const usedRange = sheet.getUsedRange();
+usedRange.load("rowCount,columnCount");
+await context.sync();
+
+if (!usedRange || usedRange.rowCount < 1) {
+  throw new Error("Sheet appears empty.");
+}
+
+const rowCount = usedRange.rowCount;
+
+// All cells: dark background, light text
+usedRange.format.fill.color = "#1E1E1E";
+usedRange.format.font.color = "#CCCCCC";
+
+// Header: gold text
+const headerRow = usedRange.getRow(0);
+headerRow.format.fill.color = "#2D2D2D";
+headerRow.format.font.bold = true;
+headerRow.format.font.color = "#F0C75E";
+headerRow.format.rowHeight = 28;
+
+// Alternating dark rows
+for (let i = 1; i < rowCount; i++) {
+  const row = usedRange.getRow(i);
+  row.format.fill.color = i % 2 === 0 ? "#252525" : "#1E1E1E";
+}
+
+// Dark borders
+usedRange.format.borders.getItem("InsideHorizontal").style = "Thin";
+usedRange.format.borders.getItem("InsideHorizontal").color = "#3A3A3A";
+usedRange.format.borders.getItem("InsideVertical").style = "Thin";
+usedRange.format.borders.getItem("InsideVertical").color = "#3A3A3A";
+usedRange.format.borders.getItem("EdgeTop").style = "Thin";
+usedRange.format.borders.getItem("EdgeBottom").style = "Thin";
+usedRange.format.borders.getItem("EdgeLeft").style = "Thin";
+usedRange.format.borders.getItem("EdgeRight").style = "Thin";
+
+usedRange.format.autofitColumns();
+await context.sync();`
   }, {
     icon: "paintbrush",
     label: "Colorful Teal",
-    prompt: "Apply colorful teal formatting:\n\nconst usedRange = sheet.getUsedRange();\nusedRange.load(\"rowCount\");\nawait context.sync();\n\nif (!usedRange || usedRange.rowCount < 1) {\n  throw new Error(\"Sheet appears empty.\");\n}\n\n// Header: teal background\nconst headerRow = usedRange.getRow(0);\nheaderRow.format.fill.color = \"#0D7377\";\nheaderRow.format.font.bold = true;\nheaderRow.format.font.color = \"#FFFFFF\";\nheaderRow.format.horizontalAlignment = \"Center\";\nheaderRow.format.rowHeight = 28;\n\n// Alternating light teal and white\nfor (let i = 1; i < usedRange.rowCount; i++) {\n  const row = usedRange.getRow(i);\n  row.format.fill.color = i % 2 === 0 ? \"#E8F6F3\" : \"#FFFFFF\";\n}\n\n// Thin borders\nusedRange.format.borders.getItem(\"InsideHorizontal\").style = \"Thin\";\nusedRange.format.borders.getItem(\"InsideVertical\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeTop\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeBottom\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeLeft\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeRight\").style = \"Thin\";\n\nsheet.freezePanes.freezeRows(1);\nusedRange.format.autofitColumns();\nawait context.sync();"
+    prompt: `Apply colorful teal formatting:
+
+const usedRange = sheet.getUsedRange();
+usedRange.load("rowCount");
+await context.sync();
+
+if (!usedRange || usedRange.rowCount < 1) {
+  throw new Error("Sheet appears empty.");
+}
+
+// Header: teal background
+const headerRow = usedRange.getRow(0);
+headerRow.format.fill.color = "#0D7377";
+headerRow.format.font.bold = true;
+headerRow.format.font.color = "#FFFFFF";
+headerRow.format.horizontalAlignment = "Center";
+headerRow.format.rowHeight = 28;
+
+// Alternating light teal and white
+for (let i = 1; i < usedRange.rowCount; i++) {
+  const row = usedRange.getRow(i);
+  row.format.fill.color = i % 2 === 0 ? "#E8F6F3" : "#FFFFFF";
+}
+
+// Thin borders
+usedRange.format.borders.getItem("InsideHorizontal").style = "Thin";
+usedRange.format.borders.getItem("InsideVertical").style = "Thin";
+usedRange.format.borders.getItem("EdgeTop").style = "Thin";
+usedRange.format.borders.getItem("EdgeBottom").style = "Thin";
+usedRange.format.borders.getItem("EdgeLeft").style = "Thin";
+usedRange.format.borders.getItem("EdgeRight").style = "Thin";
+
+sheet.freezePanes.freezeRows(1);
+usedRange.format.autofitColumns();
+await context.sync();`
   }, {
     icon: "snowflake",
     label: "Freeze Header",
-    prompt: "Freeze the first row:\n\nsheet.freezePanes.freezeRows(1);\nawait context.sync();"
+    prompt: `Freeze the first row:
+
+sheet.freezePanes.freezeRows(1);
+await context.sync();`
   }, {
     icon: "table",
     label: "Excel Table",
-    prompt: "Convert data to Excel Table:\n\nconst usedRange = sheet.getUsedRange();\nusedRange.load(\"address\");\nawait context.sync();\n\nif (!usedRange) {\n  throw new Error(\"No data found in sheet.\");\n}\n\nconst table = sheet.tables.add(usedRange, true);\ntable.style = \"TableStyleMedium9\";\nusedRange.format.autofitColumns();\nawait context.sync();"
+    prompt: `Convert data to Excel Table:
+
+const usedRange = sheet.getUsedRange();
+usedRange.load("address");
+await context.sync();
+
+if (!usedRange) {
+  throw new Error("No data found in sheet.");
+}
+
+const table = sheet.tables.add(usedRange, true);
+table.style = "TableStyleMedium9";
+usedRange.format.autofitColumns();
+await context.sync();`
   }, {
     icon: "paintbrush",
     label: "Borders All",
-    prompt: "Add thin borders to all cells:\n\nconst usedRange = sheet.getUsedRange();\nusedRange.format.borders.getItem(\"InsideHorizontal\").style = \"Thin\";\nusedRange.format.borders.getItem(\"InsideVertical\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeTop\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeBottom\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeLeft\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeRight\").style = \"Thin\";\nawait context.sync();"
+    prompt: `Add thin borders to all cells:
+
+const usedRange = sheet.getUsedRange();
+usedRange.format.borders.getItem("InsideHorizontal").style = "Thin";
+usedRange.format.borders.getItem("InsideVertical").style = "Thin";
+usedRange.format.borders.getItem("EdgeTop").style = "Thin";
+usedRange.format.borders.getItem("EdgeBottom").style = "Thin";
+usedRange.format.borders.getItem("EdgeLeft").style = "Thin";
+usedRange.format.borders.getItem("EdgeRight").style = "Thin";
+await context.sync();`
   }, {
     icon: "hash",
     label: "Currency $",
-    prompt: "Format numeric columns as currency. First read the data to detect numeric columns, then apply $#,##0.00 format."
+    prompt: `Format numeric columns as currency. First read the data to detect numeric columns, then apply $#,##0.00 format.`
   }, {
     icon: "hash",
     label: "Percentage %",
-    prompt: "Format the last numeric column as percentage (0.00%) and auto-fit columns."
+    prompt: `Format the last numeric column as percentage (0.00%) and auto-fit columns.`
   }],
   // ── Report Automation Engine ──
   reports: [{
@@ -1465,48 +1930,83 @@ var CATEGORIZED_ACTIONS = {
   smart: [{
     icon: "brain",
     label: "Data Profiler 🔬",
-    prompt: "Analyze the entire dataset and create a comprehensive Data Profile report on a NEW sheet called \"Data Profile\". For each column, calculate: (1) Column Name, (2) Data Type (text/number/date/mixed), (3) Total Count, (4) Blank Count, (5) Blank %, (6) Unique Values Count, (7) Most Common Value, (8) For numeric columns: Min, Max, Mean, Median. Create this as a formatted table with headers. Add a \"Data Quality Score\" at the top calculated as (100 - average blank %). Apply professional formatting: dark header row, alternating rows, conditional formatting on blank % (green < 5%, yellow 5-20%, red > 20%). Auto-fit all columns."
+    prompt: `Analyze the entire dataset and create a comprehensive Data Profile report on a NEW sheet called "Data Profile". For each column, calculate: (1) Column Name, (2) Data Type (text/number/date/mixed), (3) Total Count, (4) Blank Count, (5) Blank %, (6) Unique Values Count, (7) Most Common Value, (8) For numeric columns: Min, Max, Mean, Median. Create this as a formatted table with headers. Add a "Data Quality Score" at the top calculated as (100 - average blank %). Apply professional formatting: dark header row, alternating rows, conditional formatting on blank % (green < 5%, yellow 5-20%, red > 20%). Auto-fit all columns.`
   }, {
     icon: "highlight",
     label: "Highlight Duplicates",
-    prompt: "Find and highlight ALL duplicate values in the first data column (column A, excluding header).\n\nconst usedRange = sheet.getUsedRange();\nusedRange.load(\"values,rowCount,columnCount\");\nawait context.sync();\n\nif (!usedRange || usedRange.rowCount < 2) throw new Error(\"Need at least 2 rows of data.\");\n\nconst values = usedRange.values;\nconst col = 0; // Check column A\nconst seen = {};\nconst dupes = new Set();\n\n// Pass 1: find duplicates\nfor (let i = 1; i < values.length; i++) {\n  const val = String(values[i][col]).trim().toLowerCase();\n  if (val === \"\") continue;\n  if (seen[val] !== undefined) {\n    dupes.add(val);\n  }\n  seen[val] = i;\n}\n\n// Pass 2: highlight them\nlet count = 0;\nfor (let i = 1; i < values.length; i++) {\n  const val = String(values[i][col]).trim().toLowerCase();\n  if (dupes.has(val)) {\n    const cell = usedRange.getRow(i);\n    cell.format.fill.color = \"#FECACA\";\n    cell.format.font.color = \"#991B1B\";\n    count++;\n  }\n}\nawait context.sync();\n// Done: highlighted duplicates"
+    prompt: `Find and highlight ALL duplicate values in the first data column (column A, excluding header).
+
+const usedRange = sheet.getUsedRange();
+usedRange.load("values,rowCount,columnCount");
+await context.sync();
+
+if (!usedRange || usedRange.rowCount < 2) throw new Error("Need at least 2 rows of data.");
+
+const values = usedRange.values;
+const col = 0; // Check column A
+const seen = {};
+const dupes = new Set();
+
+// Pass 1: find duplicates
+for (let i = 1; i < values.length; i++) {
+  const val = String(values[i][col]).trim().toLowerCase();
+  if (val === "") continue;
+  if (seen[val] !== undefined) {
+    dupes.add(val);
+  }
+  seen[val] = i;
+}
+
+// Pass 2: highlight them
+let count = 0;
+for (let i = 1; i < values.length; i++) {
+  const val = String(values[i][col]).trim().toLowerCase();
+  if (dupes.has(val)) {
+    const cell = usedRange.getRow(i);
+    cell.format.fill.color = "#FECACA";
+    cell.format.font.color = "#991B1B";
+    count++;
+  }
+}
+await context.sync();
+// Done: highlighted duplicates`
   }, {
     icon: "columns",
     label: "Compare Columns",
-    prompt: "Compare columns A and B to find differences. For each row, if A \u2260 B, highlight both cells in light red (#FEE2E2). If they match, highlight in light green (#DCFCE7). Add a new column C with 'Match' or 'Mismatch' labels. Add a summary at the bottom showing total matches and mismatches. Format the summary row in bold."
+    prompt: `Compare columns A and B to find differences. For each row, if A ≠ B, highlight both cells in light red (#FEE2E2). If they match, highlight in light green (#DCFCE7). Add a new column C with 'Match' or 'Mismatch' labels. Add a summary at the bottom showing total matches and mismatches. Format the summary row in bold.`
   }, {
     icon: "formula",
     label: "Auto Summary Row ⚡",
-    prompt: "Analyze ALL columns. For each NUMERIC column, add 4 summary rows at the bottom: SUM, AVERAGE, MIN, MAX \u2014 with formula labels in column A. Make the summary section visually distinct: add a thick top border, bold labels, and light blue (#EFF6FF) background. Format numbers with commas and 2 decimal places. Auto-fit all columns."
+    prompt: `Analyze ALL columns. For each NUMERIC column, add 4 summary rows at the bottom: SUM, AVERAGE, MIN, MAX — with formula labels in column A. Make the summary section visually distinct: add a thick top border, bold labels, and light blue (#EFF6FF) background. Format numbers with commas and 2 decimal places. Auto-fit all columns.`
   }, {
     icon: "crosshair",
     label: "Top/Bottom 5 🎯",
-    prompt: "Find the main numeric column in the data. Identify the Top 5 values and highlight their entire rows in green (#DCFCE7). Identify the Bottom 5 values and highlight their rows in red (#FEE2E2). Add a 'Rank' column at the end. Sort the data by the numeric column descending. Auto-fit columns."
+    prompt: `Find the main numeric column in the data. Identify the Top 5 values and highlight their entire rows in green (#DCFCE7). Identify the Bottom 5 values and highlight their rows in red (#FEE2E2). Add a 'Rank' column at the end. Sort the data by the numeric column descending. Auto-fit columns.`
   }, {
     icon: "mail",
     label: "Extract Emails & Phones",
-    prompt: "Scan ALL cells in the used range. Extract any email addresses (containing @) and phone numbers (10+ digit patterns). Create a new sheet called \"Contacts\" with columns: Source Cell, Name (if adjacent), Email, Phone. Remove duplicates. Format as a professional table with filters. Auto-fit columns."
+    prompt: `Scan ALL cells in the used range. Extract any email addresses (containing @) and phone numbers (10+ digit patterns). Create a new sheet called "Contacts" with columns: Source Cell, Name (if adjacent), Email, Phone. Remove duplicates. Format as a professional table with filters. Auto-fit columns.`
   }, {
     icon: "layers",
     label: "Unpivot Data",
-    prompt: "Convert wide-format data to long format (unpivot). Take the first column as the ID column. Treat all remaining columns as value columns. Create a new sheet \"Unpivoted\" with 3 columns: the original ID, \"Category\" (original column header), and \"Value\" (the cell value). Skip blank values. Apply professional formatting."
+    prompt: `Convert wide-format data to long format (unpivot). Take the first column as the ID column. Treat all remaining columns as value columns. Create a new sheet "Unpivoted" with 3 columns: the original ID, "Category" (original column header), and "Value" (the cell value). Skip blank values. Apply professional formatting.`
   }, {
     icon: "shield",
     label: "Data Validation Rules",
-    prompt: "Analyze column headers and add smart data validation rules. For columns that look like: (1) Email \u2014 add text validation requiring '@', (2) Phone \u2014 allow only numbers with length 10-15, (3) Date columns \u2014 add date validation, (4) Status/Type columns \u2014 create dropdown lists from unique existing values, (5) Numeric columns \u2014 add number validation (>= 0). Highlight validated columns with a subtle blue header to indicate protection is active."
+    prompt: `Analyze column headers and add smart data validation rules. For columns that look like: (1) Email — add text validation requiring '@', (2) Phone — allow only numbers with length 10-15, (3) Date columns — add date validation, (4) Status/Type columns — create dropdown lists from unique existing values, (5) Numeric columns — add number validation (>= 0). Highlight validated columns with a subtle blue header to indicate protection is active.`
   }, {
     icon: "dollarSign",
     label: "Number to Words 💰",
-    prompt: "Add a new column next to the main numeric/currency column. For each row, convert the number to words in English (e.g., 1234 \u2192 \"One Thousand Two Hundred Thirty Four\"). This is useful for invoices and checks. Use a helper function that handles numbers up to 999,999,999. Format the words column with proper case and auto-fit."
+    prompt: `Add a new column next to the main numeric/currency column. For each row, convert the number to words in English (e.g., 1234 → "One Thousand Two Hundred Thirty Four"). This is useful for invoices and checks. Use a helper function that handles numbers up to 999,999,999. Format the words column with proper case and auto-fit.`
   }, {
     icon: "copy",
     label: "Smart Merge Sheets",
-    prompt: "Merge data from ALL worksheets in the workbook into a new sheet called \"Merged Data\". For each sheet: read the headers and data, align columns by header name (smart matching), and append all rows. Remove exact duplicate rows from the final merged data. Add a \"Source Sheet\" column to track where each row came from. Apply professional formatting with alternating rows."
+    prompt: `Merge data from ALL worksheets in the workbook into a new sheet called "Merged Data". For each sheet: read the headers and data, align columns by header name (smart matching), and append all rows. Remove exact duplicate rows from the final merged data. Add a "Source Sheet" column to track where each row came from. Apply professional formatting with alternating rows.`
   }]
 };
 
 // Chat Suggestions (shown on welcome screen)
-var CHAT_SUGGESTIONS = [{
+const CHAT_SUGGESTIONS = [{
   icon: "brain",
   text: "Analyze my data and tell me what's interesting"
 }, {
@@ -1529,9 +2029,9 @@ var CHAT_SUGGESTIONS = [{
 // ─── Initialization ────────────────────────────────────────────
 // ─── Global Error Handler ───
 window.onerror = function (msg, url, line) {
-  var statusEl = document.getElementById("loading-status");
+  const statusEl = document.getElementById("loading-status");
   if (statusEl) {
-    statusEl.innerHTML += "<br><span style=\"color:#d32f2f;font-weight:bold;font-size:11px;\">".concat(msg, " (Line ").concat(line, ")</span>");
+    statusEl.innerHTML += `<br><span style="color:#d32f2f;font-weight:bold;font-size:11px;">${msg} (Line ${line})</span>`;
     document.getElementById("sideload-msg").style.display = "none";
     document.getElementById("app-body").style.display = "flex";
   }
@@ -1539,10 +2039,10 @@ window.onerror = function (msg, url, line) {
 };
 
 // ─── Initialization ────────────────────────────────────────────
-Office.onReady(function (info) {
+Office.onReady(info => {
   // Always show app to prevent hang
-  var sideloadMsg = document.getElementById("sideload-msg");
-  var appBody = document.getElementById("app-body");
+  const sideloadMsg = document.getElementById("sideload-msg");
+  const appBody = document.getElementById("app-body");
   if (sideloadMsg) sideloadMsg.style.display = "none";
   if (appBody) appBody.style.display = "flex";
   if (info.host === Office.HostType.Excel) {
@@ -1560,13 +2060,13 @@ Office.onReady(function (info) {
   document.getElementById("run").onclick = runAICommand;
 
   // Settings & Docs Toggles
-  document.getElementById("settings-toggle").onclick = function () {
-    var panel = document.getElementById("settings-panel");
+  document.getElementById("settings-toggle").onclick = () => {
+    const panel = document.getElementById("settings-panel");
     panel.style.display = panel.style.display === "none" ? "block" : "none";
     document.getElementById("docs-panel").style.display = "none";
   };
-  document.getElementById("docs-toggle").onclick = function () {
-    var panel = document.getElementById("docs-panel");
+  document.getElementById("docs-toggle").onclick = () => {
+    const panel = document.getElementById("docs-panel");
     panel.style.display = panel.style.display === "none" ? "block" : "none";
     document.getElementById("settings-panel").style.display = "none";
   };
@@ -1574,16 +2074,12 @@ Office.onReady(function (info) {
   document.getElementById("refresh-models").onclick = loadOllamaModels;
 
   // Mode Toggles
-  document.getElementById("mode-planning").onclick = function () {
-    return switchMode("planning");
-  };
-  document.getElementById("mode-agent").onclick = function () {
-    return switchMode("agent");
-  };
+  document.getElementById("mode-planning").onclick = () => switchMode("planning");
+  document.getElementById("mode-agent").onclick = () => switchMode("agent");
 
   // Chat Actions
   document.getElementById("chat-send").onclick = sendChatMessage;
-  var clearBtn = document.getElementById("chat-clear");
+  const clearBtn = document.getElementById("chat-clear");
   if (clearBtn) clearBtn.onclick = clearChat;
   setupChatInput();
   setupScrollToBottom();
@@ -1591,40 +2087,28 @@ Office.onReady(function (info) {
   setupCharCount();
 
   // File Upload Handlers
-  var bindClick = function bindClick(id, handler) {
-    var el = document.getElementById(id);
+  const bindClick = (id, handler) => {
+    const el = document.getElementById(id);
     if (el) el.onclick = handler;
   };
-  var bindChange = function bindChange(id, handler) {
-    var el = document.getElementById(id);
+  const bindChange = (id, handler) => {
+    const el = document.getElementById(id);
     if (el) el.onchange = handler;
   };
-  bindClick("file-upload-btn", function () {
-    return document.getElementById("file-input").click();
-  });
-  bindChange("file-input", function (e) {
-    return handleFileSelect(e, false);
-  });
-  bindClick("file-remove", function () {
-    return clearFile(false);
-  });
-  bindClick("agent-file-btn", function () {
-    return document.getElementById("agent-file-input").click();
-  });
-  bindChange("agent-file-input", function (e) {
-    return handleFileSelect(e, true);
-  });
-  bindClick("agent-file-remove", function () {
-    return clearFile(true);
-  });
+  bindClick("file-upload-btn", () => document.getElementById("file-input").click());
+  bindChange("file-input", e => handleFileSelect(e, false));
+  bindClick("file-remove", () => clearFile(false));
+  bindClick("agent-file-btn", () => document.getElementById("agent-file-input").click());
+  bindChange("agent-file-input", e => handleFileSelect(e, true));
+  bindClick("agent-file-remove", () => clearFile(true));
 
   // Batch PDF Extraction
   bindClick("batch-extract-btn", runBatchPDFExtraction);
 
   // Category Tabs
-  document.querySelectorAll(".category-tab").forEach(function (tab) {
-    tab.onclick = function () {
-      var cat = tab.dataset.category;
+  document.querySelectorAll(".category-tab").forEach(tab => {
+    tab.onclick = () => {
+      const cat = tab.dataset.category;
       switchCategory(cat);
     };
   });
@@ -1640,8 +2124,8 @@ Office.onReady(function (info) {
 
 // ─── Icon Injection ────────────────────────────────────────────
 function injectIcons() {
-  var el = function el(id, html) {
-    var node = document.getElementById(id);
+  const el = (id, html) => {
+    const node = document.getElementById(id);
     if (node) node.innerHTML = html;
   };
   el("logo-icon", _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.fileText);
@@ -1657,14 +2141,14 @@ function injectIcons() {
   el("welcome-sparkle", _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.sparkles);
 }
 function injectDocIcons() {
-  document.querySelectorAll(".doc-icon[data-icon]").forEach(function (el) {
-    var key = el.getAttribute("data-icon");
+  document.querySelectorAll(".doc-icon[data-icon]").forEach(el => {
+    const key = el.getAttribute("data-icon");
     if (_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons[key]) el.innerHTML = _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons[key];
   });
 }
 function injectCategoryIcons() {
-  document.querySelectorAll(".cat-icon[data-icon]").forEach(function (el) {
-    var key = el.getAttribute("data-icon");
+  document.querySelectorAll(".cat-icon[data-icon]").forEach(el => {
+    const key = el.getAttribute("data-icon");
     if (_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons[key]) el.innerHTML = _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons[key];
   });
 }
@@ -1675,12 +2159,12 @@ function switchMode(mode) {
   currentMode = mode;
 
   // Update tabs
-  document.querySelectorAll(".mode-tab").forEach(function (tab) {
+  document.querySelectorAll(".mode-tab").forEach(tab => {
     tab.classList.toggle("active", tab.dataset.mode === mode);
   });
 
   // Update indicator
-  var indicator = document.getElementById("mode-indicator");
+  const indicator = document.getElementById("mode-indicator");
   if (mode === "agent") {
     indicator.classList.add("right");
   } else {
@@ -1693,26 +2177,22 @@ function switchMode(mode) {
 
   // Focus appropriate input
   if (mode === "planning") {
-    setTimeout(function () {
-      return document.getElementById("chat-input").focus();
-    }, 200);
+    setTimeout(() => document.getElementById("chat-input").focus(), 200);
   } else {
-    setTimeout(function () {
-      return document.getElementById("prompt-input").focus();
-    }, 200);
+    setTimeout(() => document.getElementById("prompt-input").focus(), 200);
   }
 }
 
 // ─── Category Switching ────────────────────────────────────────
 function switchCategory(category) {
   currentCategory = category;
-  document.querySelectorAll(".category-tab").forEach(function (tab) {
+  document.querySelectorAll(".category-tab").forEach(tab => {
     tab.classList.toggle("active", tab.dataset.category === category);
   });
 
   // Show/hide schema info banner for Extract mode
-  var schemaInfo = document.getElementById("schema-info");
-  var detectedColumns = document.getElementById("detected-columns");
+  const schemaInfo = document.getElementById("schema-info");
+  const detectedColumns = document.getElementById("detected-columns");
   if (schemaInfo) {
     schemaInfo.style.display = category === "extract" ? "flex" : "none";
   }
@@ -1729,26 +2209,26 @@ function switchCategory(category) {
 
 // ─── Quick Actions (Agent Mode) ────────────────────────────────
 function buildQuickActions() {
-  var container = document.getElementById("quick-actions");
+  const container = document.getElementById("quick-actions");
   if (!container) return;
   container.innerHTML = "";
-  var actions = CATEGORIZED_ACTIONS[currentCategory];
+  const actions = CATEGORIZED_ACTIONS[currentCategory];
   if (!actions) {
-    console.warn("No quick actions found for category: ".concat(currentCategory));
+    console.warn(`No quick actions found for category: ${currentCategory}`);
     return;
   }
-  actions.forEach(function (action) {
-    var chip = document.createElement("button");
+  actions.forEach(action => {
+    const chip = document.createElement("button");
     chip.className = "chip";
-    var iconKey = action.icon;
-    chip.innerHTML = "".concat(_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons[iconKey] || "", "<span>").concat(action.label, "</span>");
-    chip.onclick = function () {
-      var input = document.getElementById("prompt-input");
+    const iconKey = action.icon;
+    chip.innerHTML = `${_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons[iconKey] || ""}<span>${action.label}</span>`;
+    chip.onclick = () => {
+      const input = document.getElementById("prompt-input");
       if (input) {
         input.value = action.prompt;
         input.focus();
         // Clear status when switching action
-        var statusEl = document.getElementById("status-message");
+        const statusEl = document.getElementById("status-message");
         if (statusEl) statusEl.style.display = "none";
       }
     };
@@ -1758,15 +2238,15 @@ function buildQuickActions() {
 
 // ─── Chat Suggestions (Planning Mode) ──────────────────────────
 function buildChatSuggestions() {
-  var container = document.getElementById("chat-suggestions");
+  const container = document.getElementById("chat-suggestions");
   if (!container) return;
-  CHAT_SUGGESTIONS.forEach(function (s) {
-    var btn = document.createElement("button");
+  CHAT_SUGGESTIONS.forEach(s => {
+    const btn = document.createElement("button");
     btn.className = "suggestion-chip";
-    var iconKey = s.icon;
-    btn.innerHTML = "".concat(_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons[iconKey] || "").concat(s.text);
-    btn.onclick = function () {
-      var input = document.getElementById("chat-input");
+    const iconKey = s.icon;
+    btn.innerHTML = `${_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons[iconKey] || ""}${s.text}`;
+    btn.onclick = () => {
+      const input = document.getElementById("chat-input");
       if (input) {
         input.value = s.text;
         sendChatMessage();
@@ -1778,15 +2258,15 @@ function buildChatSuggestions() {
 
 // ─── Panel Toggle ──────────────────────────────────────────────
 function togglePanel(panelId) {
-  var panel = document.getElementById(panelId);
-  var isHidden = (panel === null || panel === void 0 ? void 0 : panel.style.display) === "none" || !(panel !== null && panel !== void 0 && panel.style.display);
-  document.querySelectorAll(".panel").forEach(function (p) {
+  const panel = document.getElementById(panelId);
+  const isHidden = (panel === null || panel === void 0 ? void 0 : panel.style.display) === "none" || !(panel !== null && panel !== void 0 && panel.style.display);
+  document.querySelectorAll(".panel").forEach(p => {
     p.style.display = "none";
   });
   if (isHidden && panel) {
     panel.style.display = "block";
     if (panelId === "settings-panel") {
-      var providerSelect = document.getElementById("setting-provider");
+      const providerSelect = document.getElementById("setting-provider");
       if (providerSelect && providerSelect.value === "local") loadOllamaModels();
     }
   }
@@ -1795,20 +2275,20 @@ function togglePanel(panelId) {
 // ─── Settings ──────────────────────────────────────────────────
 // ─── Settings ──────────────────────────────────────────────────
 function loadSettingsUI() {
-  var config = (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.getConfig)();
-  var providerSelect = document.getElementById("setting-provider");
+  const config = (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.getConfig)();
+  const providerSelect = document.getElementById("setting-provider");
   if (providerSelect) {
     providerSelect.value = config.provider;
-    providerSelect.onchange = function (e) {
-      var p = e.target.value;
+    providerSelect.onchange = e => {
+      const p = e.target.value;
       updateProviderFields(p);
       if (p === "local") loadOllamaModels();
     };
   }
 
   // Populate inputs (safe checks)
-  var setVal = function setVal(id, val) {
-    var el = document.getElementById(id);
+  const setVal = (id, val) => {
+    const el = document.getElementById(id);
     if (el) el.value = val || "";
   };
   setVal("setting-api-key", config.apiKey); // Groq
@@ -1827,8 +2307,8 @@ function loadSettingsUI() {
   updateProviderFields(config.provider);
 }
 function updateProviderFields(p) {
-  var setDisplay = function setDisplay(id, show) {
-    var el = document.getElementById(id);
+  const setDisplay = (id, show) => {
+    const el = document.getElementById(id);
     if (el) el.style.display = show ? "block" : "none";
   };
   setDisplay("groq-fields", p === "groq");
@@ -1838,76 +2318,52 @@ function updateProviderFields(p) {
   setDisplay("openrouter-fields", p === "openrouter");
   setDisplay("local-fields", p === "local");
 }
-function loadOllamaModels() {
-  return _loadOllamaModels.apply(this, arguments);
-}
-function _loadOllamaModels() {
-  _loadOllamaModels = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-    var _document$getElementB3;
-    var select, statusEl, host, models, config;
-    return _regenerator().w(function (_context) {
-      while (1) switch (_context.n) {
-        case 0:
-          select = document.getElementById("setting-local-model");
-          statusEl = document.getElementById("model-status");
-          host = ((_document$getElementB3 = document.getElementById("setting-base-url")) === null || _document$getElementB3 === void 0 || (_document$getElementB3 = _document$getElementB3.value) === null || _document$getElementB3 === void 0 ? void 0 : _document$getElementB3.trim()) || "http://localhost:11434";
-          if (select) {
-            _context.n = 1;
-            break;
-          }
-          return _context.a(2);
-        case 1:
-          select.innerHTML = "<option value=\"\" disabled selected>Loading...</option>";
-          if (statusEl) {
-            statusEl.textContent = "";
-            statusEl.className = "model-status";
-          }
-          _context.n = 2;
-          return (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.fetchOllamaModels)(host);
-        case 2:
-          models = _context.v;
-          if (!(models.length === 0)) {
-            _context.n = 3;
-            break;
-          }
-          select.innerHTML = "<option value=\"\" disabled selected>No models found</option>";
-          if (statusEl) {
-            statusEl.textContent = "Ollama not running or no models installed";
-            statusEl.className = "model-status model-status-warn";
-          }
-          return _context.a(2);
-        case 3:
-          config = (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.getConfig)();
-          select.innerHTML = "";
-          models.forEach(function (m) {
-            var opt = document.createElement("option");
-            opt.value = m.name;
-            opt.textContent = "".concat(m.name, " (").concat((m.size / 1e9).toFixed(1), "GB)");
-            if ((config.localModel || config.model) === m.name) opt.selected = true;
-            select.appendChild(opt);
-          });
-          if (statusEl) {
-            statusEl.textContent = "".concat(models.length, " model").concat(models.length > 1 ? "s" : "", " found");
-            statusEl.className = "model-status model-status-ok";
-          }
-        case 4:
-          return _context.a(2);
-      }
-    }, _callee);
-  }));
-  return _loadOllamaModels.apply(this, arguments);
+async function loadOllamaModels() {
+  var _document$getElementB;
+  const select = document.getElementById("setting-local-model");
+  const statusEl = document.getElementById("model-status");
+  const host = ((_document$getElementB = document.getElementById("setting-base-url")) === null || _document$getElementB === void 0 || (_document$getElementB = _document$getElementB.value) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.trim()) || "http://localhost:11434";
+  if (!select) return;
+  select.innerHTML = `<option value="" disabled selected>Loading...</option>`;
+  if (statusEl) {
+    statusEl.textContent = "";
+    statusEl.className = "model-status";
+  }
+  const models = await (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.fetchOllamaModels)(host);
+  if (models.length === 0) {
+    select.innerHTML = `<option value="" disabled selected>No models found</option>`;
+    if (statusEl) {
+      statusEl.textContent = "Ollama not running or no models installed";
+      statusEl.className = "model-status model-status-warn";
+    }
+    return;
+  }
+  const config = (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.getConfig)();
+  select.innerHTML = "";
+  models.forEach(m => {
+    const opt = document.createElement("option");
+    opt.value = m.name;
+    opt.textContent = `${m.name} (${(m.size / 1e9).toFixed(1)}GB)`;
+    if ((config.localModel || config.model) === m.name) opt.selected = true;
+    select.appendChild(opt);
+  });
+  if (statusEl) {
+    statusEl.textContent = `${models.length} model${models.length > 1 ? "s" : ""} found`;
+    statusEl.className = "model-status model-status-ok";
+  }
 }
 function handleSaveSettings() {
-  var _document$getElementB;
-  var provider = (_document$getElementB = document.getElementById("setting-provider")) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.value;
-  var current = (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.getConfig)();
+  var _document$getElementB2;
+  const provider = (_document$getElementB2 = document.getElementById("setting-provider")) === null || _document$getElementB2 === void 0 ? void 0 : _document$getElementB2.value;
+  const current = (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.getConfig)();
 
   // Helper to read val
-  var getVal = function getVal(id) {
-    var _document$getElementB2;
-    return ((_document$getElementB2 = document.getElementById(id)) === null || _document$getElementB2 === void 0 || (_document$getElementB2 = _document$getElementB2.value) === null || _document$getElementB2 === void 0 ? void 0 : _document$getElementB2.trim()) || "";
+  const getVal = id => {
+    var _document$getElementB3;
+    return ((_document$getElementB3 = document.getElementById(id)) === null || _document$getElementB3 === void 0 || (_document$getElementB3 = _document$getElementB3.value) === null || _document$getElementB3 === void 0 ? void 0 : _document$getElementB3.trim()) || "";
   };
-  var newConfig = _objectSpread(_objectSpread({}, current), {}, {
+  const newConfig = {
+    ...current,
     provider: provider,
     // Groq
     apiKey: getVal("setting-api-key"),
@@ -1925,25 +2381,25 @@ function handleSaveSettings() {
     openrouterKey: getVal("setting-openrouter-key"),
     openrouterModel: getVal("setting-openrouter-model"),
     // Local
-    baseUrl: getVal("setting-base-url") ? "".concat(getVal("setting-base-url").replace(/\/v1.*$/, ""), "/v1/chat/completions") : undefined,
+    baseUrl: getVal("setting-base-url") ? `${getVal("setting-base-url").replace(/\/v1.*$/, "")}/v1/chat/completions` : undefined,
     localModel: getVal("setting-local-model") || current.localModel
-  });
+  };
   (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.saveConfig)(newConfig);
 
   // Animated save feedback
-  var btn = document.getElementById("save-settings");
+  const btn = document.getElementById("save-settings");
   if (btn) {
-    var originalText = btn.textContent;
+    const originalText = btn.textContent;
     btn.textContent = "✓ Saved";
     btn.classList.add("saved");
-    setTimeout(function () {
+    setTimeout(() => {
       btn.textContent = originalText || "Save";
       btn.classList.remove("saved");
     }, 1500);
   }
   showToast("success", "Settings saved successfully");
-  setTimeout(function () {
-    var panel = document.getElementById("settings-panel");
+  setTimeout(() => {
+    const panel = document.getElementById("settings-panel");
     if (panel) panel.style.display = "none";
   }, 800);
 }
@@ -1953,363 +2409,242 @@ function handleSaveSettings() {
 // ═══════════════════════════════════════════════════════════════
 
 function setupChatInput() {
-  var input = document.getElementById("chat-input");
+  const input = document.getElementById("chat-input");
   if (!input) return;
 
   // Auto-resize textarea
-  input.addEventListener("input", function () {
+  input.addEventListener("input", () => {
     input.style.height = "auto";
     input.style.height = Math.min(input.scrollHeight, 80) + "px";
   });
 
   // Enter to send (Shift+Enter for newline)
-  input.addEventListener("keydown", function (e) {
+  input.addEventListener("keydown", e => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       sendChatMessage();
     }
   });
 }
-function sendChatMessage() {
-  return _sendChatMessage.apply(this, arguments);
-}
-function _sendChatMessage() {
-  _sendChatMessage = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
-    var input, message, welcome, initialPrompt, overview, needsSheetContext, contextResult, text, hits, lastBubble, badge, skeletonEl, chatSendButton, chatSendIcon, response, formattedResponse, newBubble, bubbleContent, _error$message, sendIcon, _t, _t2, _t3;
-    return _regenerator().w(function (_context2) {
-      while (1) switch (_context2.p = _context2.n) {
-        case 0:
-          if (!isChatBusy) {
-            _context2.n = 1;
-            break;
-          }
-          stopChatGeneration();
-          return _context2.a(2);
-        case 1:
-          input = document.getElementById("chat-input");
-          if (input) {
-            _context2.n = 2;
-            break;
-          }
-          return _context2.a(2);
-        case 2:
-          message = input.value.trim();
-          if (message) {
-            _context2.n = 3;
-            break;
-          }
-          return _context2.a(2);
-        case 3:
-          // Clear welcome screen on first message
-          welcome = document.querySelector(".chat-welcome");
-          if (welcome) welcome.remove();
+async function sendChatMessage() {
+  if (isChatBusy) {
+    stopChatGeneration();
+    return;
+  }
+  const input = document.getElementById("chat-input");
+  if (!input) return;
+  const message = input.value.trim();
+  if (!message) return;
 
-          // Add user message
-          addChatBubble("user", message);
-          chatHistory.push({
-            role: "user",
-            content: message,
-            timestamp: Date.now()
-          });
+  // Clear welcome screen on first message
+  const welcome = document.querySelector(".chat-welcome");
+  if (welcome) welcome.remove();
 
-          // Build conversation context with initial sheet overview
-          if (!(chatConversation.length === 0)) {
-            _context2.n = 8;
-            break;
-          }
-          initialPrompt = _services_chat_prompt__WEBPACK_IMPORTED_MODULE_3__.CHAT_PROMPT;
-          _context2.p = 4;
-          _context2.n = 5;
-          return getSheetContext();
-        case 5:
-          overview = _context2.v;
-          if (overview && overview.hits === 0 && overview.text.length > 20) {
-            initialPrompt += "\n\n[INITIAL SHEET OVERVIEW]\n" + overview.text;
-          }
-          _context2.n = 7;
-          break;
-        case 6:
-          _context2.p = 6;
-          _t = _context2.v;
-          console.warn("Could not load initial sheet overview:", _t);
-        case 7:
-          chatConversation.push({
-            role: "system",
-            content: initialPrompt
-          });
-        case 8:
-          // 🔥 CONTEXT AWARENESS: Auto-detect if user is asking about their sheet or searching for data
-          needsSheetContext = /\b(this|my|current|opened?)\s+(sheet|data|table|workbook|excel|spreadsheet|sheeet|spreadsheat)\b|\b(find|search|where|is|check|lookup|contains?|exist|details|about|located|who|tell|give)\b|what\s+(do|can|should)|improve|analyze|suggest|help|better|optimize|\b\d{5,}\b|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/i.test(message) || /\b[A-Z]{2,}(?:\s+[A-Z]{2,})+\b/.test(message) ||
-          // ALL CAPS sequences (Names/IDs)
-          /\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\b/.test(message); // Title Case sequences (Names)
-          if (!needsSheetContext) {
-            _context2.n = 12;
-            break;
-          }
-          _context2.p = 9;
-          _context2.n = 10;
-          return getSheetContext(message);
-        case 10:
-          contextResult = _context2.v;
-          if (contextResult) {
-            text = contextResult.text, hits = contextResult.hits; // Add to persistent conversation context
-            chatConversation.push({
-              role: "system",
-              content: "The following data was retrieved from the user's sheet for this query:\n".concat(text)
-            });
+  // Add user message
+  addChatBubble("user", message);
+  chatHistory.push({
+    role: "user",
+    content: message,
+    timestamp: Date.now()
+  });
 
-            // Show context indicator
-            lastBubble = document.querySelector('.chat-msg.user:last-child .chat-bubble');
-            if (lastBubble) {
-              badge = document.createElement('span');
-              badge.className = 'context-badge';
-              badge.innerHTML = hits > 0 ? "\uD83D\uDD0D Found ".concat(hits, " search hits in sheet") : '📊 Sheet context loaded';
-              lastBubble.appendChild(badge);
-            }
-          }
-          _context2.n = 12;
-          break;
-        case 11:
-          _context2.p = 11;
-          _t2 = _context2.v;
-          console.warn('Could not load sheet context:', _t2);
-        case 12:
-          chatConversation.push({
-            role: "user",
-            content: message
-          });
-
-          // Clear input
-          input.value = "";
-          input.style.height = "auto";
-
-          // Show skeleton loader
-          skeletonEl = showTypingIndicator();
-          isChatBusy = true;
-
-          // Toggle button to Stop
-          chatSendButton = document.getElementById("chat-send");
-          chatSendIcon = document.getElementById("chat-send-icon");
-          if (chatSendButton) {
-            if (chatSendIcon) chatSendIcon.innerHTML = _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.stop;
-            chatSendButton.classList.add("is-busy");
-          }
-
-          // Create AbortController
-          chatAbortController = new AbortController();
-          _context2.p = 13;
-          _context2.n = 14;
-          return (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.callLLM)(chatConversation, undefined, chatAbortController.signal);
-        case 14:
-          response = _context2.v;
-          // Format AI response
-          formattedResponse = formatChatResponse(response); // Create the real bubble
-          newBubble = createChatBubble("ai", "", response); // Replace skeleton with the real bubble
-          if (skeletonEl) skeletonEl.replaceWith(newBubble);
-
-          // Find the content part of the new bubble to apply the typewriter effect
-          bubbleContent = newBubble.querySelector('.chat-bubble'); // Stream content
-          if (!bubbleContent) {
-            _context2.n = 15;
-            break;
-          }
-          _context2.n = 15;
-          return typewriterEffect(bubbleContent, formattedResponse);
-        case 15:
-          chatConversation.push({
-            role: "assistant",
-            content: response
-          });
-          chatHistory.push({
-            role: "ai",
-            content: response,
-            timestamp: Date.now()
-          });
-          _context2.n = 17;
-          break;
-        case 16:
-          _context2.p = 16;
-          _t3 = _context2.v;
-          if (_t3.name === 'AbortError') {
-            if (skeletonEl) skeletonEl.remove();
-            addChatBubble("ai", "<p style=\"color:var(--text-3)\"><i>Generation stopped.</i></p>");
-          } else {
-            if (skeletonEl) skeletonEl.remove();
-            addChatBubble("ai", "<p style=\"color:var(--error)\">\u26A0\uFE0F ".concat(_t3.message, "</p>"));
-            showToast("error", ((_error$message = _t3.message) === null || _error$message === void 0 ? void 0 : _error$message.substring(0, 80)) || "Something went wrong");
-          }
-        case 17:
-          _context2.p = 17;
-          isChatBusy = false;
-          chatAbortController = null;
-          // Reuse outer chatSendButton reference (avoid redeclaring)
-          if (chatSendButton) {
-            sendIcon = document.getElementById("chat-send-icon");
-            if (sendIcon) sendIcon.innerHTML = _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.send;
-            chatSendButton.classList.remove("is-busy");
-          }
-          return _context2.f(17);
-        case 18:
-          return _context2.a(2);
+  // Build conversation context with initial sheet overview
+  if (chatConversation.length === 0) {
+    let initialPrompt = _services_chat_prompt__WEBPACK_IMPORTED_MODULE_3__.CHAT_PROMPT;
+    try {
+      // Proactively give the AI an overview of the sheet columns at the start
+      const overview = await getSheetContext();
+      if (overview && overview.hits === 0 && overview.text.length > 20) {
+        initialPrompt += "\n\n[INITIAL SHEET OVERVIEW]\n" + overview.text;
       }
-    }, _callee2, null, [[13, 16, 17, 18], [9, 11], [4, 6]]);
-  }));
-  return _sendChatMessage.apply(this, arguments);
-}
-function stopChatGeneration() {
-  return _stopChatGeneration.apply(this, arguments);
-}
-function _stopChatGeneration() {
-  _stopChatGeneration = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
-    return _regenerator().w(function (_context3) {
-      while (1) switch (_context3.n) {
-        case 0:
-          if (chatAbortController) {
-            chatAbortController.abort();
-          }
-        case 1:
-          return _context3.a(2);
-      }
-    }, _callee3);
-  }));
-  return _stopChatGeneration.apply(this, arguments);
-}
-function typewriterEffect(_x, _x2) {
-  return _typewriterEffect.apply(this, arguments);
-}
-function _typewriterEffect() {
-  _typewriterEffect = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4(element, html) {
-    var tokens, _iterator2, _step2, token, words, _iterator3, _step3, word, container, _t4, _t5;
-    return _regenerator().w(function (_context4) {
-      while (1) switch (_context4.p = _context4.n) {
-        case 0:
-          // 1. Reveal element immediately
-          element.innerHTML = "";
+    } catch (e) {
+      console.warn("Could not load initial sheet overview:", e);
+    }
+    chatConversation.push({
+      role: "system",
+      content: initialPrompt
+    });
+  }
 
-          // 2. Parse into tokens (simple tag-preserving tokenizer)
-          // We split by tags so we can print text content progressively, but print tags instantly.
-          tokens = html.split(/(<[^>]+>)/g);
-          _iterator2 = _createForOfIteratorHelper(tokens);
-          _context4.p = 1;
-          _iterator2.s();
-        case 2:
-          if ((_step2 = _iterator2.n()).done) {
-            _context4.n = 11;
-            break;
-          }
-          token = _step2.value;
-          if (!(token.startsWith("<") && token.endsWith(">"))) {
-            _context4.n = 3;
-            break;
-          }
-          // It's a tag, append immediately
-          element.innerHTML += token;
-          _context4.n = 10;
-          break;
-        case 3:
-          if (!(token.trim().length > 0)) {
-            _context4.n = 10;
-            break;
-          }
-          // It's text, type it out word by word for speed
-          words = token.split(/(\s+)/); // Keep spaces
-          _iterator3 = _createForOfIteratorHelper(words);
-          _context4.p = 4;
-          _iterator3.s();
-        case 5:
-          if ((_step3 = _iterator3.n()).done) {
-            _context4.n = 7;
-            break;
-          }
-          word = _step3.value;
-          element.innerHTML += word;
-          // Scroll to bottom
-          container = document.getElementById("chat-messages");
-          if (container) container.scrollTop = container.scrollHeight;
-          // Variable delay for realism
-          _context4.n = 6;
-          return new Promise(function (r) {
-            return setTimeout(r, Math.random() * 10 + 5);
-          });
-        case 6:
-          _context4.n = 5;
-          break;
-        case 7:
-          _context4.n = 9;
-          break;
-        case 8:
-          _context4.p = 8;
-          _t4 = _context4.v;
-          _iterator3.e(_t4);
-        case 9:
-          _context4.p = 9;
-          _iterator3.f();
-          return _context4.f(9);
-        case 10:
-          _context4.n = 2;
-          break;
-        case 11:
-          _context4.n = 13;
-          break;
-        case 12:
-          _context4.p = 12;
-          _t5 = _context4.v;
-          _iterator2.e(_t5);
-        case 13:
-          _context4.p = 13;
-          _iterator2.f();
-          return _context4.f(13);
-        case 14:
-          return _context4.a(2);
+  // 🔥 CONTEXT AWARENESS: Auto-detect if user is asking about their sheet or searching for data
+  const needsSheetContext = /\b(this|my|current|opened?)\s+(sheet|data|table|workbook|excel|spreadsheet|sheeet|spreadsheat)\b|\b(find|search|where|is|check|lookup|contains?|exist|details|about|located|who|tell|give)\b|what\s+(do|can|should)|improve|analyze|suggest|help|better|optimize|\b\d{5,}\b|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/i.test(message) || /\b[A-Z]{2,}(?:\s+[A-Z]{2,})+\b/.test(message) ||
+  // ALL CAPS sequences (Names/IDs)
+  /\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\b/.test(message); // Title Case sequences (Names)
+
+  if (needsSheetContext) {
+    try {
+      const contextResult = await getSheetContext(message);
+      if (contextResult) {
+        const {
+          text,
+          hits
+        } = contextResult;
+
+        // Add to persistent conversation context
+        chatConversation.push({
+          role: "system",
+          content: `The following data was retrieved from the user's sheet for this query:\n${text}`
+        });
+
+        // Show context indicator
+        const lastBubble = document.querySelector('.chat-msg.user:last-child .chat-bubble');
+        if (lastBubble) {
+          const badge = document.createElement('span');
+          badge.className = 'context-badge';
+          badge.innerHTML = hits > 0 ? `🔍 Found ${hits} search hits in sheet` : '📊 Sheet context loaded';
+          lastBubble.appendChild(badge);
+        }
       }
-    }, _callee4, null, [[4, 8, 9, 10], [1, 12, 13, 14]]);
-  }));
-  return _typewriterEffect.apply(this, arguments);
+    } catch (e) {
+      console.warn('Could not load sheet context:', e);
+    }
+  }
+  chatConversation.push({
+    role: "user",
+    content: message
+  });
+
+  // Clear input
+  input.value = "";
+  input.style.height = "auto";
+
+  // Show skeleton loader
+  const skeletonEl = showTypingIndicator();
+  isChatBusy = true;
+
+  // Toggle button to Stop
+  const chatSendButton = document.getElementById("chat-send");
+  const chatSendIcon = document.getElementById("chat-send-icon");
+  if (chatSendButton) {
+    if (chatSendIcon) chatSendIcon.innerHTML = _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.stop;
+    chatSendButton.classList.add("is-busy");
+  }
+
+  // Create AbortController
+  chatAbortController = new AbortController();
+  try {
+    const response = await (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.callLLM)(chatConversation, undefined, chatAbortController.signal);
+
+    // Format AI response
+    const formattedResponse = formatChatResponse(response);
+
+    // Create the real bubble
+    const newBubble = createChatBubble("ai", "", response);
+
+    // Replace skeleton with the real bubble
+    if (skeletonEl) skeletonEl.replaceWith(newBubble);
+
+    // Find the content part of the new bubble to apply the typewriter effect
+    const bubbleContent = newBubble.querySelector('.chat-bubble');
+
+    // Stream content
+    if (bubbleContent) {
+      await typewriterEffect(bubbleContent, formattedResponse);
+    }
+    chatConversation.push({
+      role: "assistant",
+      content: response
+    });
+    chatHistory.push({
+      role: "ai",
+      content: response,
+      timestamp: Date.now()
+    });
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      if (skeletonEl) skeletonEl.remove();
+      addChatBubble("ai", `<p style="color:var(--text-3)"><i>Generation stopped.</i></p>`);
+    } else {
+      var _error$message;
+      if (skeletonEl) skeletonEl.remove();
+      addChatBubble("ai", `<p style="color:var(--error)">⚠️ ${error.message}</p>`);
+      showToast("error", ((_error$message = error.message) === null || _error$message === void 0 ? void 0 : _error$message.substring(0, 80)) || "Something went wrong");
+    }
+  } finally {
+    isChatBusy = false;
+    chatAbortController = null;
+    // Reuse outer chatSendButton reference (avoid redeclaring)
+    if (chatSendButton) {
+      const sendIcon = document.getElementById("chat-send-icon");
+      if (sendIcon) sendIcon.innerHTML = _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.send;
+      chatSendButton.classList.remove("is-busy");
+    }
+  }
+}
+async function stopChatGeneration() {
+  if (chatAbortController) {
+    chatAbortController.abort();
+  }
+}
+async function typewriterEffect(element, html) {
+  // 1. Reveal element immediately
+  element.innerHTML = "";
+
+  // 2. Parse into tokens (simple tag-preserving tokenizer)
+  // We split by tags so we can print text content progressively, but print tags instantly.
+  const tokens = html.split(/(<[^>]+>)/g);
+  for (const token of tokens) {
+    if (token.startsWith("<") && token.endsWith(">")) {
+      // It's a tag, append immediately
+      element.innerHTML += token;
+    } else if (token.trim().length > 0) {
+      // It's text, type it out word by word for speed
+      const words = token.split(/(\s+)/); // Keep spaces
+      for (const word of words) {
+        element.innerHTML += word;
+        // Scroll to bottom
+        const container = document.getElementById("chat-messages");
+        if (container) container.scrollTop = container.scrollHeight;
+        // Variable delay for realism
+        await new Promise(r => setTimeout(r, Math.random() * 10 + 5));
+      }
+    }
+  }
 }
 function createChatBubble(role, htmlContent, rawContent) {
-  var msgDiv = document.createElement("div");
-  msgDiv.className = "chat-msg ".concat(role);
-  var bubbleDiv = document.createElement("div");
+  const msgDiv = document.createElement("div");
+  msgDiv.className = `chat-msg ${role}`;
+  const bubbleDiv = document.createElement("div");
   bubbleDiv.className = "chat-bubble";
   bubbleDiv.innerHTML = htmlContent;
 
   // If AI message, add action buttons
   if (role === "ai" && rawContent) {
     // Actions bar with copy + switch to agent
-    var actionsDiv = document.createElement("div");
+    const actionsDiv = document.createElement("div");
     actionsDiv.className = "chat-bubble-actions";
 
     // Copy button
-    var copyBtn = document.createElement("button");
+    const copyBtn = document.createElement("button");
     copyBtn.className = "btn-copy";
-    copyBtn.innerHTML = "".concat(_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.copy, " Copy");
-    copyBtn.onclick = function () {
-      navigator.clipboard.writeText(rawContent).then(function () {
-        copyBtn.innerHTML = "".concat(_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.check, " Copied");
+    copyBtn.innerHTML = `${_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.copy} Copy`;
+    copyBtn.onclick = () => {
+      navigator.clipboard.writeText(rawContent).then(() => {
+        copyBtn.innerHTML = `${_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.check} Copied`;
         copyBtn.classList.add("copied");
-        setTimeout(function () {
-          copyBtn.innerHTML = "".concat(_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.copy, " Copy");
+        setTimeout(() => {
+          copyBtn.innerHTML = `${_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.copy} Copy`;
           copyBtn.classList.remove("copied");
         }, 2000);
-      }).catch(function () {
+      }).catch(() => {
         showToast("error", "Failed to copy");
       });
     };
     actionsDiv.appendChild(copyBtn);
 
     // Execute in Agent button
-    var execBtn = document.createElement("button");
+    const execBtn = document.createElement("button");
     execBtn.className = "btn-execute-from-chat";
-    execBtn.innerHTML = "".concat(_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.zap, " Switch to Agent");
-    execBtn.onclick = function () {
-      var agentPromptInput = document.getElementById("prompt-input");
+    execBtn.innerHTML = `${_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.zap} Switch to Agent`;
+    execBtn.onclick = () => {
+      const agentPromptInput = document.getElementById("prompt-input");
       if (agentPromptInput) {
         agentPromptInput.value = extractActionablePrompt(rawContent);
         switchMode("agent");
         agentPromptInput.focus();
       }
     };
-    var actionBar = document.createElement("div");
+    const actionBar = document.createElement("div");
     actionBar.className = "chat-action-bar";
     actionBar.appendChild(execBtn);
     bubbleDiv.appendChild(actionsDiv);
@@ -2319,9 +2654,9 @@ function createChatBubble(role, htmlContent, rawContent) {
   return msgDiv;
 }
 function addChatBubble(role, htmlContent, rawContent) {
-  var container = document.getElementById("chat-messages");
+  const container = document.getElementById("chat-messages");
   if (!container) throw new Error("Chat messages container not found.");
-  var msgDiv = createChatBubble(role, htmlContent, rawContent);
+  const msgDiv = createChatBubble(role, htmlContent, rawContent);
   container.appendChild(msgDiv);
 
   // Scroll to bottom
@@ -2329,22 +2664,22 @@ function addChatBubble(role, htmlContent, rawContent) {
   return msgDiv.querySelector('.chat-bubble'); // Return bubble for typewriter
 }
 function showTypingIndicator() {
-  var container = document.getElementById("chat-messages");
+  const container = document.getElementById("chat-messages");
   if (!container) throw new Error("Chat messages container not found.");
-  var template = document.getElementById("chat-skeleton-template");
+  const template = document.getElementById("chat-skeleton-template");
 
   // Fallback to old indicator if template is missing
   if (!template) {
-    var oldIndicator = document.createElement("div");
+    const oldIndicator = document.createElement("div");
     oldIndicator.className = "chat-msg ai";
     oldIndicator.id = "typing-msg";
-    oldIndicator.innerHTML = "<div class=\"chat-avatar\">".concat(_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.bot, "</div><div class=\"chat-bubble\"><div class=\"typing-indicator\"><div class=\"typing-dot\"></div><div class=\"typing-dot\"></div><div class=\"typing-dot\"></div></div></div>");
+    oldIndicator.innerHTML = `<div class="chat-avatar">${_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.bot}</div><div class="chat-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
     container.appendChild(oldIndicator);
     container.scrollTop = container.scrollHeight;
     return oldIndicator;
   }
-  var skeleton = template.content.cloneNode(true);
-  var skeletonElement = skeleton.firstElementChild;
+  const skeleton = template.content.cloneNode(true);
+  const skeletonElement = skeleton.firstElementChild;
   if (skeletonElement) {
     skeletonElement.id = 'typing-msg';
     container.appendChild(skeletonElement);
@@ -2354,7 +2689,7 @@ function showTypingIndicator() {
   return null; // Should not happen
 }
 function formatChatResponse(text) {
-  var html = text.trim();
+  let html = text.trim();
 
   // 1. Headers (### Heading)
   html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
@@ -2362,12 +2697,12 @@ function formatChatResponse(text) {
   html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
 
   // 2. Tables (| col | col |)
-  var lines = html.split('\n');
-  var inTable = false;
-  var tableHtml = '';
-  var processedLines = [];
-  var _loop = function _loop(i) {
-    var line = lines[i].trim();
+  const lines = html.split('\n');
+  let inTable = false;
+  let tableHtml = '';
+  const processedLines = [];
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
     if (line.startsWith('|') && line.endsWith('|')) {
       if (!inTable) {
         inTable = true;
@@ -2375,17 +2710,11 @@ function formatChatResponse(text) {
       }
 
       // Skip separator row (|---|---|)
-      if (line.includes('---')) return 1; // continue
-      var cells = line.split('|').filter(function (c) {
-        return c.trim() !== '' || line.indexOf('|' + c + '|') !== -1;
-      });
+      if (line.includes('---')) continue;
+      const cells = line.split('|').filter(c => c.trim() !== '' || line.indexOf('|' + c + '|') !== -1);
       // Clean cells of leading/trailing pipes
-      var cleanCells = line.split('|').slice(1, -1).map(function (c) {
-        return c.trim();
-      });
-      tableHtml += '<tr>' + cleanCells.map(function (c) {
-        return i === 0 || lines[i - 1] && !lines[i - 1].includes('|') ? "<th>".concat(c, "</th>") : "<td>".concat(c, "</td>");
-      }).join('') + '</tr>';
+      const cleanCells = line.split('|').slice(1, -1).map(c => c.trim());
+      tableHtml += '<tr>' + cleanCells.map(c => i === 0 || lines[i - 1] && !lines[i - 1].includes('|') ? `<th>${c}</th>` : `<td>${c}</td>`).join('') + '</tr>';
     } else {
       if (inTable) {
         inTable = false;
@@ -2395,9 +2724,6 @@ function formatChatResponse(text) {
       }
       processedLines.push(lines[i]);
     }
-  };
-  for (var i = 0; i < lines.length; i++) {
-    if (_loop(i)) continue;
   }
   if (inTable) {
     tableHtml += '</table>';
@@ -2426,19 +2752,19 @@ function formatChatResponse(text) {
 
   // 6.3 Wrap consecutive li items
   html = html.replace(/((?:<li>.*?<\/li>\n?)+)/g, '<ul>$1</ul>');
-  html = html.replace(/((?:<li class="ol-item">.*?<\/li>\n?)+)/g, function (match) {
-    return "<ol>".concat(match.replace(/ class="ol-item"/g, ''), "</ol>");
+  html = html.replace(/((?:<li class="ol-item">.*?<\/li>\n?)+)/g, match => {
+    return `<ol>${match.replace(/ class="ol-item"/g, '')}</ol>`;
   });
 
   // 7. Paragraphs
-  var blocks = html.split(/\n\n+/);
-  html = blocks.map(function (block) {
-    var b = block.trim();
+  const blocks = html.split(/\n\n+/);
+  html = blocks.map(block => {
+    const b = block.trim();
     if (!b) return '';
     // If it starts with a tag already, don't wrap in <p>
     if (/^<(h1|h2|h3|ul|ol|table|pre|p|li|div)/i.test(b)) return b;
     // Otherwise wrap in <p> and handle single newlines as <br>
-    return "<p>".concat(b.replace(/\n/g, '<br>'), "</p>");
+    return `<p>${b.replace(/\n/g, '<br>')}</p>`;
   }).join('');
 
   // 8. Visual Polish: Cleanup bullet and paragraph spacing
@@ -2449,35 +2775,32 @@ function formatChatResponse(text) {
 function extractActionablePrompt(aiResponse) {
   // Try to build a useful prompt from the AI's response for agent mode
   // Look for formula mentions or action keywords
-  var lines = aiResponse.split('\n');
-  var _iterator = _createForOfIteratorHelper(lines),
-    _step;
-  try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-      var line = _step.value;
-      if (line.includes('=') && line.includes('(') && !line.startsWith('#')) {
-        // Looks like a formula mention
-        return "Apply this formula: ".concat(line.trim());
-      }
+  const lines = aiResponse.split('\n');
+  for (const line of lines) {
+    if (line.includes('=') && line.includes('(') && !line.startsWith('#')) {
+      // Looks like a formula mention
+      return `Apply this formula: ${line.trim()}`;
     }
-    // Default: use a summary
-  } catch (err) {
-    _iterator.e(err);
-  } finally {
-    _iterator.f();
   }
-  var firstSentence = aiResponse.split(/[.!?]/)[0];
+  // Default: use a summary
+  const firstSentence = aiResponse.split(/[.!?]/)[0];
   return firstSentence.length > 120 ? firstSentence.substring(0, 120) : firstSentence;
 }
 function clearChat() {
-  var container = document.getElementById("chat-messages");
+  const container = document.getElementById("chat-messages");
   container.innerHTML = "";
   chatHistory.length = 0;
   chatConversation = [];
   isChatBusy = false;
 
   // Re-add welcome screen
-  var welcomeHTML = "\n    <div class=\"chat-welcome\">\n      <img src=\"assets/icon-80-v2.png\" alt=\"SheetOS Logo\" style=\"width: 64px; height: 64px; margin-bottom: 16px;\">\n      <h2>What are you working on?</h2>\n      <div class=\"welcome-suggestions\" id=\"chat-suggestions\"></div>\n    </div>\n  ";
+  const welcomeHTML = `
+    <div class="chat-welcome">
+      <img src="assets/icon-80-v2.png" alt="SheetOS Logo" style="width: 64px; height: 64px; margin-bottom: 16px;">
+      <h2>What are you working on?</h2>
+      <div class="welcome-suggestions" id="chat-suggestions"></div>
+    </div>
+  `;
   container.innerHTML = welcomeHTML;
   buildChatSuggestions();
 }
@@ -2486,25 +2809,23 @@ function clearChat() {
 // TOAST NOTIFICATION SYSTEM
 // ═══════════════════════════════════════════════════════════════
 function showToast(type, message) {
-  var duration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 3000;
-  var container = document.getElementById("toast-container");
+  let duration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 3000;
+  const container = document.getElementById("toast-container");
   if (!container) return;
-  var toast = document.createElement("div");
-  toast.className = "toast toast-".concat(type);
-  var iconMap = {
+  const toast = document.createElement("div");
+  toast.className = `toast toast-${type}`;
+  const iconMap = {
     success: _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.check,
     error: _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.alertCircle,
     info: _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.helpCircle
   };
-  toast.innerHTML = "".concat(iconMap[type] || "", "<span>").concat(message, "</span>");
+  toast.innerHTML = `${iconMap[type] || ""}<span>${message}</span>`;
   container.appendChild(toast);
 
   // Auto-dismiss
-  setTimeout(function () {
+  setTimeout(() => {
     toast.classList.add("toast-out");
-    setTimeout(function () {
-      return toast.remove();
-    }, 300);
+    setTimeout(() => toast.remove(), 300);
   }, duration);
 }
 
@@ -2512,18 +2833,18 @@ function showToast(type, message) {
 // SCROLL-TO-BOTTOM BUTTON
 // ═══════════════════════════════════════════════════════════════
 function setupScrollToBottom() {
-  var chatMessages = document.getElementById("chat-messages");
-  var scrollBtn = document.getElementById("scroll-to-bottom");
+  const chatMessages = document.getElementById("chat-messages");
+  const scrollBtn = document.getElementById("scroll-to-bottom");
   if (!chatMessages || !scrollBtn) return;
 
   // Show/hide based on scroll position
-  chatMessages.addEventListener("scroll", function () {
-    var isNearBottom = chatMessages.scrollHeight - chatMessages.scrollTop - chatMessages.clientHeight < 100;
+  chatMessages.addEventListener("scroll", () => {
+    const isNearBottom = chatMessages.scrollHeight - chatMessages.scrollTop - chatMessages.clientHeight < 100;
     scrollBtn.classList.toggle("visible", !isNearBottom);
   });
 
   // Click to scroll
-  scrollBtn.onclick = function () {
+  scrollBtn.onclick = () => {
     chatMessages.scrollTo({
       top: chatMessages.scrollHeight,
       behavior: "smooth"
@@ -2535,9 +2856,9 @@ function setupScrollToBottom() {
 // KEYBOARD SHORTCUTS
 // ═══════════════════════════════════════════════════════════════
 function setupAgentKeyboardShortcut() {
-  var promptInput = document.getElementById("prompt-input");
+  const promptInput = document.getElementById("prompt-input");
   if (!promptInput) return;
-  promptInput.addEventListener("keydown", function (e) {
+  promptInput.addEventListener("keydown", e => {
     // Ctrl+Enter to execute
     if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
       e.preventDefault();
@@ -2551,24 +2872,24 @@ function setupAgentKeyboardShortcut() {
 // ═══════════════════════════════════════════════════════════════
 function setupCharCount() {
   var _promptInput$closest;
-  var promptInput = document.getElementById("prompt-input");
+  const promptInput = document.getElementById("prompt-input");
   if (!promptInput) return;
 
   // Create and insert char count element
-  var charCount = document.createElement("span");
+  const charCount = document.createElement("span");
   charCount.className = "char-count";
   charCount.textContent = "";
-  var footerLeft = (_promptInput$closest = promptInput.closest(".input-card")) === null || _promptInput$closest === void 0 ? void 0 : _promptInput$closest.querySelector(".footer-left");
+  const footerLeft = (_promptInput$closest = promptInput.closest(".input-card")) === null || _promptInput$closest === void 0 ? void 0 : _promptInput$closest.querySelector(".footer-left");
   if (footerLeft) {
     footerLeft.appendChild(charCount);
   }
-  promptInput.addEventListener("input", function () {
-    var len = promptInput.value.length;
+  promptInput.addEventListener("input", () => {
+    const len = promptInput.value.length;
     if (len === 0) {
       charCount.textContent = "";
       charCount.className = "char-count";
     } else {
-      charCount.textContent = "".concat(len);
+      charCount.textContent = `${len}`;
       if (len > 3000) {
         charCount.className = "char-count danger";
       } else if (len > 2000) {
@@ -2588,623 +2909,433 @@ function setupCharCount() {
  * Get comprehensive sheet context for AI analysis
  * Returns { text: string, hits: number }
  */
-function getSheetContext(_x3) {
-  return _getSheetContext.apply(this, arguments);
-} // ═══════════════════════════════════════════════════════════════
+async function getSheetContext(query) {
+  try {
+    return await Excel.run(async context => {
+      const sheet = context.workbook.worksheets.getActiveWorksheet();
+      sheet.load("name");
+
+      // Use getUsedRangeOrNullObject for robustness
+      const usedRange = sheet.getUsedRangeOrNullObject();
+      usedRange.load("rowCount,columnCount,address,isNullObject");
+      await context.sync();
+      if (usedRange.isNullObject || usedRange.rowCount === 0 || usedRange.columnCount === 0) {
+        return {
+          text: "Sheet is empty.",
+          hits: 0
+        };
+      }
+
+      // 1. Get Headers (Row 1)
+      const headerRange = usedRange.getRow(0);
+      headerRange.load("values");
+      await context.sync();
+      const headers = headerRange.values[0].map(h => String(h || "").trim());
+
+      // 2. Perform Deep Search if query contains potential search terms
+      let deepSearchContext = "";
+      let hitsCount = 0;
+      if (query) {
+        const searchTerms = new Set();
+        // 1. ALL CAPS sequences (e.g., MD PRAVEJ ALAM)
+        (query.match(/\b[A-Z]{2,}(?:\s+[A-Z]{2,})+\b/g) || []).forEach(t => searchTerms.add(t));
+
+        // 2. Title Case sequences
+        (query.match(/\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\b/g) || []).forEach(t => searchTerms.add(t));
+
+        // 3. Numbers, Quoted strings, and Emails
+        (query.match(/\b\d{5,}\b/g) || []).forEach(t => searchTerms.add(t));
+        (query.match(/"([^"]+)"/g) || []).forEach(t => searchTerms.add(t.replace(/"/g, '')));
+        (query.match(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/gi) || []).forEach(t => searchTerms.add(t));
+
+        // 4. Fallback: Generic phrases
+        (query.match(/\b[A-Za-z]{3,}(?:\s+[A-Za-z]{3,}){1,2}\b/g) || []).forEach(t => {
+          const commonWords = /^(this|that|sheet|data|name|about|find|search|where|exist|check|lookup|improve|analyze|suggest|help|better|optimize|what|when|where|there|from|with|tell|your|mine|ours|will|shall|should|could|would|please|show|list|their|details|contact|given|into|some|those|these)$/i;
+          if (!t.split(/\s+/).every(word => commonWords.test(word))) {
+            searchTerms.add(t);
+          }
+        });
+        if (searchTerms.size > 0) {
+          const termsArray = Array.from(searchTerms);
+          for (const term of termsArray) {
+            // Ignore common query words
+            if (/^(Name|Sheet|Data|Candidate|Find|Is|This|My|Current|Column|Details|About)$/i.test(term)) continue;
+            let foundRange = usedRange.find(term, {
+              completeMatch: false,
+              matchCase: false
+            });
+            foundRange.load("address,isNullObject");
+            await context.sync();
+
+            // If full term not found, try searching for the longest word in the term
+            if (foundRange.isNullObject && term.includes(" ")) {
+              const words = term.split(/\s+/).sort((a, b) => b.length - a.length);
+              const bestWord = words[0];
+              if (bestWord.length > 3) {
+                foundRange = usedRange.find(bestWord, {
+                  completeMatch: false,
+                  matchCase: false
+                });
+                foundRange.load("address,isNullObject");
+                await context.sync();
+              }
+            }
+            if (!foundRange.isNullObject && hitsCount < 10) {
+              hitsCount++;
+              const row = foundRange.getEntireRow().getIntersection(usedRange);
+              row.load("values");
+              await context.sync();
+              const rowData = row.values[0].map((v, idx) => {
+                const header = headers[idx] || `Col ${idx + 1}`;
+                const val = v === "" || v === null ? "(empty)" : String(v);
+                return `${header}: ${val}`;
+              }).join(" | ");
+              deepSearchContext += `📌 MATCH [${term}] at ${foundRange.address}:\n   >> ${rowData}\n`;
+            }
+          }
+          if (hitsCount > 0) {
+            deepSearchContext += "=".repeat(40) + "\n";
+          } else {
+            deepSearchContext = "\n(I searched the sheet for your mentioned terms, but no exact matches were found in the current sheet.)\n";
+          }
+        }
+
+        // 3. Sample data (max 10 rows for general context)
+        const sampleSize = Math.min(10, usedRange.rowCount);
+        const sampleRange = usedRange.getResizedRange(sampleSize - 1, 0); // Headers included
+        sampleRange.load("values");
+        await context.sync();
+        const sampleData = sampleRange.values;
+
+        // Data type detection
+        const columnTypes = [];
+        if (sampleData.length > 1) {
+          for (let col = 0; col < usedRange.columnCount; col++) {
+            const columnValues = sampleData.slice(1).map(row => row[col]).filter(v => v !== null && v !== "");
+            if (columnValues.length === 0) {
+              columnTypes.push("empty");
+            } else if (columnValues.every(v => !isNaN(Number(v)))) {
+              columnTypes.push("number");
+            } else if (columnValues.every(v => /^\d{1,4}[-\/]\d{1,2}[-\/]\d{1,4}/.test(String(v)))) {
+              columnTypes.push("date");
+            } else {
+              columnTypes.push("text");
+            }
+          }
+        }
+
+        // Build context string
+        let contextStr = "";
+        if (deepSearchContext && deepSearchContext.length > 50) {
+          contextStr += `🚨 [CRITICAL DATA HIT] 🚨\n${deepSearchContext}\n\n`;
+        }
+        contextStr += `--- GENERAL SHEET INFO ---\n`;
+        contextStr += `Sheet: "${sheet.name}" (${usedRange.rowCount} rows × ${usedRange.columnCount} columns)\n`;
+        contextStr += `Location: ${usedRange.address}\n\n`;
+        contextStr += `COLUMNS:\n`;
+        headers.forEach((h, i) => {
+          const type = columnTypes[i] || "unknown";
+          contextStr += `  ${i + 1}. "${h || `Column${i + 1}`}" (${type})\n`;
+        });
+        contextStr += `\nDATA SAMPLE (First ${sampleSize} rows):\n`;
+        sampleData.forEach((row, i) => {
+          if (i === 0) {
+            contextStr += `  [Headers] ${row.map(c => `"${c}"`).join(" | ")}\n`;
+          } else {
+            contextStr += `  Row ${i}: ${row.map(c => c === null || c === "" ? "(empty)" : `"${c}"`).join(" | ")}\n`;
+          }
+        });
+        if (usedRange.rowCount > sampleSize) {
+          contextStr += `  ... (${usedRange.rowCount - sampleSize} more rows not shown)\n`;
+        }
+        return {
+          text: contextStr,
+          hits: hitsCount
+        };
+      }
+
+      // Even without a query, return a general sheet overview
+      const overviewHeaders = headers.filter(h => h.length > 0);
+      if (overviewHeaders.length > 0) {
+        return {
+          text: `Sheet: "${sheet.name}" (${usedRange.rowCount} rows × ${usedRange.columnCount} columns)\nColumns: ${overviewHeaders.join(", ")}`,
+          hits: 0
+        };
+      }
+      return null;
+    });
+  } catch (error) {
+    console.error("Error reading sheet context:", error);
+    return null;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
 // SCHEMA-AWARE EXTRACTION — Read Column Headers from Excel
 // ═══════════════════════════════════════════════════════════════
+
 /**
  * Read existing column headers from row 1 of the active Excel sheet
  * Returns array of non-empty header names
  */
-function _getSheetContext() {
-  _getSheetContext = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6(query) {
-    var _t6;
-    return _regenerator().w(function (_context7) {
-      while (1) switch (_context7.p = _context7.n) {
-        case 0:
-          _context7.p = 0;
-          _context7.n = 1;
-          return Excel.run(/*#__PURE__*/function () {
-            var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5(context) {
-              var sheet, usedRange, headerRange, headers, deepSearchContext, hitsCount, searchTerms, termsArray, _i, _termsArray, term, foundRange, words, bestWord, row, rowData, sampleSize, sampleRange, sampleData, columnTypes, _loop2, col, contextStr, overviewHeaders;
-              return _regenerator().w(function (_context6) {
-                while (1) switch (_context6.n) {
-                  case 0:
-                    sheet = context.workbook.worksheets.getActiveWorksheet();
-                    sheet.load("name");
+async function getExcelColumnHeaders() {
+  return Excel.run(async context => {
+    const sheet = context.workbook.worksheets.getActiveWorksheet();
 
-                    // Use getUsedRangeOrNullObject for robustness
-                    usedRange = sheet.getUsedRangeOrNullObject();
-                    usedRange.load("rowCount,columnCount,address,isNullObject");
-                    _context6.n = 1;
-                    return context.sync();
-                  case 1:
-                    if (!(usedRange.isNullObject || usedRange.rowCount === 0 || usedRange.columnCount === 0)) {
-                      _context6.n = 2;
-                      break;
-                    }
-                    return _context6.a(2, {
-                      text: "Sheet is empty.",
-                      hits: 0
-                    });
-                  case 2:
-                    // 1. Get Headers (Row 1)
-                    headerRange = usedRange.getRow(0);
-                    headerRange.load("values");
-                    _context6.n = 3;
-                    return context.sync();
-                  case 3:
-                    headers = headerRange.values[0].map(function (h) {
-                      return String(h || "").trim();
-                    }); // 2. Perform Deep Search if query contains potential search terms
-                    deepSearchContext = "";
-                    hitsCount = 0;
-                    if (!query) {
-                      _context6.n = 16;
-                      break;
-                    }
-                    searchTerms = new Set(); // 1. ALL CAPS sequences (e.g., MD PRAVEJ ALAM)
-                    (query.match(/\b[A-Z]{2,}(?:\s+[A-Z]{2,})+\b/g) || []).forEach(function (t) {
-                      return searchTerms.add(t);
-                    });
-
-                    // 2. Title Case sequences
-                    (query.match(/\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\b/g) || []).forEach(function (t) {
-                      return searchTerms.add(t);
-                    });
-
-                    // 3. Numbers, Quoted strings, and Emails
-                    (query.match(/\b\d{5,}\b/g) || []).forEach(function (t) {
-                      return searchTerms.add(t);
-                    });
-                    (query.match(/"([^"]+)"/g) || []).forEach(function (t) {
-                      return searchTerms.add(t.replace(/"/g, ''));
-                    });
-                    (query.match(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/gi) || []).forEach(function (t) {
-                      return searchTerms.add(t);
-                    });
-
-                    // 4. Fallback: Generic phrases
-                    (query.match(/\b[A-Za-z]{3,}(?:\s+[A-Za-z]{3,}){1,2}\b/g) || []).forEach(function (t) {
-                      var commonWords = /^(this|that|sheet|data|name|about|find|search|where|exist|check|lookup|improve|analyze|suggest|help|better|optimize|what|when|where|there|from|with|tell|your|mine|ours|will|shall|should|could|would|please|show|list|their|details|contact|given|into|some|those|these)$/i;
-                      if (!t.split(/\s+/).every(function (word) {
-                        return commonWords.test(word);
-                      })) {
-                        searchTerms.add(t);
-                      }
-                    });
-                    if (!(searchTerms.size > 0)) {
-                      _context6.n = 11;
-                      break;
-                    }
-                    termsArray = Array.from(searchTerms);
-                    _i = 0, _termsArray = termsArray;
-                  case 4:
-                    if (!(_i < _termsArray.length)) {
-                      _context6.n = 10;
-                      break;
-                    }
-                    term = _termsArray[_i];
-                    if (!/^(Name|Sheet|Data|Candidate|Find|Is|This|My|Current|Column|Details|About)$/i.test(term)) {
-                      _context6.n = 5;
-                      break;
-                    }
-                    return _context6.a(3, 9);
-                  case 5:
-                    foundRange = usedRange.find(term, {
-                      completeMatch: false,
-                      matchCase: false
-                    });
-                    foundRange.load("address,isNullObject");
-                    _context6.n = 6;
-                    return context.sync();
-                  case 6:
-                    if (!(foundRange.isNullObject && term.includes(" "))) {
-                      _context6.n = 7;
-                      break;
-                    }
-                    words = term.split(/\s+/).sort(function (a, b) {
-                      return b.length - a.length;
-                    });
-                    bestWord = words[0];
-                    if (!(bestWord.length > 3)) {
-                      _context6.n = 7;
-                      break;
-                    }
-                    foundRange = usedRange.find(bestWord, {
-                      completeMatch: false,
-                      matchCase: false
-                    });
-                    foundRange.load("address,isNullObject");
-                    _context6.n = 7;
-                    return context.sync();
-                  case 7:
-                    if (!(!foundRange.isNullObject && hitsCount < 10)) {
-                      _context6.n = 9;
-                      break;
-                    }
-                    hitsCount++;
-                    row = foundRange.getEntireRow().getIntersection(usedRange);
-                    row.load("values");
-                    _context6.n = 8;
-                    return context.sync();
-                  case 8:
-                    rowData = row.values[0].map(function (v, idx) {
-                      var header = headers[idx] || "Col ".concat(idx + 1);
-                      var val = v === "" || v === null ? "(empty)" : String(v);
-                      return "".concat(header, ": ").concat(val);
-                    }).join(" | ");
-                    deepSearchContext += "\uD83D\uDCCC MATCH [".concat(term, "] at ").concat(foundRange.address, ":\n   >> ").concat(rowData, "\n");
-                  case 9:
-                    _i++;
-                    _context6.n = 4;
-                    break;
-                  case 10:
-                    if (hitsCount > 0) {
-                      deepSearchContext += "=".repeat(40) + "\n";
-                    } else {
-                      deepSearchContext = "\n(I searched the sheet for your mentioned terms, but no exact matches were found in the current sheet.)\n";
-                    }
-                  case 11:
-                    // 3. Sample data (max 10 rows for general context)
-                    sampleSize = Math.min(10, usedRange.rowCount);
-                    sampleRange = usedRange.getResizedRange(sampleSize - 1, 0); // Headers included
-                    sampleRange.load("values");
-                    _context6.n = 12;
-                    return context.sync();
-                  case 12:
-                    sampleData = sampleRange.values; // Data type detection
-                    columnTypes = [];
-                    if (!(sampleData.length > 1)) {
-                      _context6.n = 15;
-                      break;
-                    }
-                    _loop2 = /*#__PURE__*/_regenerator().m(function _loop2(col) {
-                      var columnValues;
-                      return _regenerator().w(function (_context5) {
-                        while (1) switch (_context5.n) {
-                          case 0:
-                            columnValues = sampleData.slice(1).map(function (row) {
-                              return row[col];
-                            }).filter(function (v) {
-                              return v !== null && v !== "";
-                            });
-                            if (columnValues.length === 0) {
-                              columnTypes.push("empty");
-                            } else if (columnValues.every(function (v) {
-                              return !isNaN(Number(v));
-                            })) {
-                              columnTypes.push("number");
-                            } else if (columnValues.every(function (v) {
-                              return /^\d{1,4}[-\/]\d{1,2}[-\/]\d{1,4}/.test(String(v));
-                            })) {
-                              columnTypes.push("date");
-                            } else {
-                              columnTypes.push("text");
-                            }
-                          case 1:
-                            return _context5.a(2);
-                        }
-                      }, _loop2);
-                    });
-                    col = 0;
-                  case 13:
-                    if (!(col < usedRange.columnCount)) {
-                      _context6.n = 15;
-                      break;
-                    }
-                    return _context6.d(_regeneratorValues(_loop2(col)), 14);
-                  case 14:
-                    col++;
-                    _context6.n = 13;
-                    break;
-                  case 15:
-                    // Build context string
-                    contextStr = "";
-                    if (deepSearchContext && deepSearchContext.length > 50) {
-                      contextStr += "\uD83D\uDEA8 [CRITICAL DATA HIT] \uD83D\uDEA8\n".concat(deepSearchContext, "\n\n");
-                    }
-                    contextStr += "--- GENERAL SHEET INFO ---\n";
-                    contextStr += "Sheet: \"".concat(sheet.name, "\" (").concat(usedRange.rowCount, " rows \xD7 ").concat(usedRange.columnCount, " columns)\n");
-                    contextStr += "Location: ".concat(usedRange.address, "\n\n");
-                    contextStr += "COLUMNS:\n";
-                    headers.forEach(function (h, i) {
-                      var type = columnTypes[i] || "unknown";
-                      contextStr += "  ".concat(i + 1, ". \"").concat(h || "Column".concat(i + 1), "\" (").concat(type, ")\n");
-                    });
-                    contextStr += "\nDATA SAMPLE (First ".concat(sampleSize, " rows):\n");
-                    sampleData.forEach(function (row, i) {
-                      if (i === 0) {
-                        contextStr += "  [Headers] ".concat(row.map(function (c) {
-                          return "\"".concat(c, "\"");
-                        }).join(" | "), "\n");
-                      } else {
-                        contextStr += "  Row ".concat(i, ": ").concat(row.map(function (c) {
-                          return c === null || c === "" ? "(empty)" : "\"".concat(c, "\"");
-                        }).join(" | "), "\n");
-                      }
-                    });
-                    if (usedRange.rowCount > sampleSize) {
-                      contextStr += "  ... (".concat(usedRange.rowCount - sampleSize, " more rows not shown)\n");
-                    }
-                    return _context6.a(2, {
-                      text: contextStr,
-                      hits: hitsCount
-                    });
-                  case 16:
-                    // Even without a query, return a general sheet overview
-                    overviewHeaders = headers.filter(function (h) {
-                      return h.length > 0;
-                    });
-                    if (!(overviewHeaders.length > 0)) {
-                      _context6.n = 17;
-                      break;
-                    }
-                    return _context6.a(2, {
-                      text: "Sheet: \"".concat(sheet.name, "\" (").concat(usedRange.rowCount, " rows \xD7 ").concat(usedRange.columnCount, " columns)\nColumns: ").concat(overviewHeaders.join(", ")),
-                      hits: 0
-                    });
-                  case 17:
-                    return _context6.a(2, null);
-                }
-              }, _callee5);
-            }));
-            return function (_x12) {
-              return _ref.apply(this, arguments);
-            };
-          }());
-        case 1:
-          return _context7.a(2, _context7.v);
-        case 2:
-          _context7.p = 2;
-          _t6 = _context7.v;
-          console.error("Error reading sheet context:", _t6);
-          return _context7.a(2, null);
-      }
-    }, _callee6, null, [[0, 2]]);
-  }));
-  return _getSheetContext.apply(this, arguments);
+    // Read first row (A1:Z1) for headers - covers up to 26 columns
+    const headerRange = sheet.getRange("A1:Z1");
+    headerRange.load("values");
+    await context.sync();
+    const headers = headerRange.values[0].map(cell => cell ? String(cell).trim() : "").filter(header => header !== "");
+    return headers;
+  });
 }
-function getExcelColumnHeaders() {
-  return _getExcelColumnHeaders.apply(this, arguments);
-}
+
 /**
  * Get count of existing data rows (excluding header)
  */
-function _getExcelColumnHeaders() {
-  _getExcelColumnHeaders = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee8() {
-    return _regenerator().w(function (_context9) {
-      while (1) switch (_context9.n) {
-        case 0:
-          return _context9.a(2, Excel.run(/*#__PURE__*/function () {
-            var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7(context) {
-              var sheet, headerRange, headers;
-              return _regenerator().w(function (_context8) {
-                while (1) switch (_context8.n) {
-                  case 0:
-                    sheet = context.workbook.worksheets.getActiveWorksheet(); // Read first row (A1:Z1) for headers - covers up to 26 columns
-                    headerRange = sheet.getRange("A1:Z1");
-                    headerRange.load("values");
-                    _context8.n = 1;
-                    return context.sync();
-                  case 1:
-                    headers = headerRange.values[0].map(function (cell) {
-                      return cell ? String(cell).trim() : "";
-                    }).filter(function (header) {
-                      return header !== "";
-                    });
-                    return _context8.a(2, headers);
-                }
-              }, _callee7);
-            }));
-            return function (_x13) {
-              return _ref2.apply(this, arguments);
-            };
-          }()));
-      }
-    }, _callee8);
-  }));
-  return _getExcelColumnHeaders.apply(this, arguments);
+async function getExistingDataRowCount() {
+  return Excel.run(async context => {
+    const sheet = context.workbook.worksheets.getActiveWorksheet();
+    const usedRange = sheet.getUsedRange();
+    usedRange.load("rowCount");
+    await context.sync();
+    return Math.max(0, usedRange.rowCount - 1); // Subtract header row
+  });
 }
-function getExistingDataRowCount() {
-  return _getExistingDataRowCount.apply(this, arguments);
-}
+
 /**
  * Detect and display column headers in the UI
  */
-function _getExistingDataRowCount() {
-  _getExistingDataRowCount = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee0() {
-    return _regenerator().w(function (_context1) {
-      while (1) switch (_context1.n) {
-        case 0:
-          return _context1.a(2, Excel.run(/*#__PURE__*/function () {
-            var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee9(context) {
-              var sheet, usedRange;
-              return _regenerator().w(function (_context0) {
-                while (1) switch (_context0.n) {
-                  case 0:
-                    sheet = context.workbook.worksheets.getActiveWorksheet();
-                    usedRange = sheet.getUsedRange();
-                    usedRange.load("rowCount");
-                    _context0.n = 1;
-                    return context.sync();
-                  case 1:
-                    return _context0.a(2, Math.max(0, usedRange.rowCount - 1));
-                }
-              }, _callee9);
-            }));
-            return function (_x14) {
-              return _ref3.apply(this, arguments);
-            };
-          }()));
-      }
-    }, _callee0);
-  }));
-  return _getExistingDataRowCount.apply(this, arguments);
+async function detectAndShowColumns() {
+  const btn = document.getElementById("detect-columns-btn");
+  const detectedSection = document.getElementById("detected-columns");
+  const columnChips = document.getElementById("column-chips");
+  const columnCount = document.getElementById("column-count");
+  if (!detectedSection || !columnChips || !columnCount) return;
+
+  // Show loading state
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<span class="skeleton-pill sk-shimmer" style="width:80px;height:20px;display:inline-block;"></span>';
+  }
+  try {
+    const columns = await getExcelColumnHeaders();
+    if (columns.length === 0) {
+      // No columns found
+      columnChips.innerHTML = '<span class="column-chip empty-warning">⚠️ No headers in Row 1 — add columns first</span>';
+      columnCount.textContent = "0";
+      detectedSection.style.display = "block";
+    } else {
+      // Show detected columns as chips
+      columnChips.innerHTML = columns.map(col => `<span class="column-chip">${col}</span>`).join("");
+      columnCount.textContent = String(columns.length);
+      detectedSection.style.display = "block";
+    }
+  } catch (e) {
+    console.error("Error detecting columns:", e);
+    columnChips.innerHTML = '<span class="column-chip empty-warning">⚠️ Error reading Excel</span>';
+    columnCount.textContent = "0";
+    detectedSection.style.display = "block";
+  } finally {
+    if (btn) {
+      btn.innerHTML = "🔍 Detect";
+      btn.disabled = false;
+    }
+  }
 }
-function detectAndShowColumns() {
-  return _detectAndShowColumns.apply(this, arguments);
-}
+
 /**
  * Build the schema-aware extraction prompt with existing column headers
  */
-function _detectAndShowColumns() {
-  _detectAndShowColumns = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee1() {
-    var btn, detectedSection, columnChips, columnCount, columns, _t7;
-    return _regenerator().w(function (_context10) {
-      while (1) switch (_context10.p = _context10.n) {
-        case 0:
-          btn = document.getElementById("detect-columns-btn");
-          detectedSection = document.getElementById("detected-columns");
-          columnChips = document.getElementById("column-chips");
-          columnCount = document.getElementById("column-count");
-          if (!(!detectedSection || !columnChips || !columnCount)) {
-            _context10.n = 1;
-            break;
-          }
-          return _context10.a(2);
-        case 1:
-          // Show loading state
-          if (btn) btn.innerHTML = "⏳ Loading...";
-          _context10.p = 2;
-          _context10.n = 3;
-          return getExcelColumnHeaders();
-        case 3:
-          columns = _context10.v;
-          if (columns.length === 0) {
-            // No columns found
-            columnChips.innerHTML = '<span class="column-chip empty-warning">⚠️ No headers in Row 1 — add columns first</span>';
-            columnCount.textContent = "0";
-            detectedSection.style.display = "block";
-          } else {
-            // Show detected columns as chips
-            columnChips.innerHTML = columns.map(function (col) {
-              return "<span class=\"column-chip\">".concat(col, "</span>");
-            }).join("");
-            columnCount.textContent = String(columns.length);
-            detectedSection.style.display = "block";
-          }
-          _context10.n = 5;
-          break;
-        case 4:
-          _context10.p = 4;
-          _t7 = _context10.v;
-          console.error("Error detecting columns:", _t7);
-          columnChips.innerHTML = '<span class="column-chip empty-warning">⚠️ Error reading Excel</span>';
-          columnCount.textContent = "0";
-          detectedSection.style.display = "block";
-        case 5:
-          _context10.p = 5;
-          if (btn) btn.innerHTML = "🔍 Detect";
-          return _context10.f(5);
-        case 6:
-          return _context10.a(2);
-      }
-    }, _callee1, null, [[2, 4, 5, 6]]);
-  }));
-  return _detectAndShowColumns.apply(this, arguments);
-}
 function buildSchemaExtractionDirective(columns) {
-  var columnList = columns.map(function (c, i) {
-    return "".concat(i + 1, ". \"").concat(c, "\"");
-  }).join("\n");
-  var enhancedHints = (0,_services_document_extractor__WEBPACK_IMPORTED_MODULE_5__.buildEnhancedPrompt)(columns);
-  return "\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\uD83D\uDD12 SCHEMA-LOCKED EXTRACTION MODE \u2014 CRITICAL INSTRUCTIONS\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\nThe user has PRE-DEFINED these columns in their Excel sheet. You MUST extract data ONLY for these columns:\n\n".concat(columnList, "\n\n").concat(enhancedHints, "\n\nEXTRACTION RULES (MEMORIZE THESE):\n1. ONE ROW PER DOCUMENT: Each attached PDF/image represents ONE candidate/record.\n2. EXACT COLUMN MATCHING: Only fill data for the columns listed above.\n3. NO HALLUCINATION: If information for a column is NOT visible in the document, use \"\" (empty string).\n4. NO NEW COLUMNS: Do NOT add any columns that aren't in the list above.\n5. PROPER FORMATTING:\n   - Names: Proper Case (John Smith)\n   - Emails: lowercase\n   - Phones: Keep original format or +X-XXX-XXX-XXXX\n   - Skills: Comma-separated list\n\nBANNED BEHAVIORS:\n\u274C Guessing email addresses (e.g., firstname@company.com)\n\u274C Fabricating phone numbers\n\u274C Making up skills not explicitly listed\n\u274C Using \"N/A\", \"Not Found\", \"Unknown\" \u2014 use \"\" instead\n\u274C Adding extra columns\n\nOUTPUT: Generate Excel JS code that writes the extracted data starting from the first empty row.\nThe code should use the writeData helper function and format the data professionally.\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n");
+  const columnList = columns.map((c, i) => `${i + 1}. "${c}"`).join("\n");
+  const enhancedHints = (0,_services_document_extractor__WEBPACK_IMPORTED_MODULE_5__.buildEnhancedPrompt)(columns);
+  return `
+═══════════════════════════════════════════════════════════════════════════════
+🔒 SCHEMA-LOCKED EXTRACTION MODE — CRITICAL INSTRUCTIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+The user has PRE-DEFINED these columns in their Excel sheet. You MUST extract data ONLY for these columns:
+
+${columnList}
+
+${enhancedHints}
+
+EXTRACTION RULES (MEMORIZE THESE):
+1. ONE ROW PER DOCUMENT: Each attached PDF/image represents ONE candidate/record.
+2. EXACT COLUMN MATCHING: Only fill data for the columns listed above.
+3. NO HALLUCINATION: If information for a column is NOT visible in the document, use "" (empty string).
+4. NO NEW COLUMNS: Do NOT add any columns that aren't in the list above.
+5. PROPER FORMATTING:
+   - Names: Proper Case (John Smith)
+   - Emails: lowercase
+   - Phones: Keep original format or +X-XXX-XXX-XXXX
+   - Skills: Comma-separated list
+
+BANNED BEHAVIORS:
+❌ Guessing email addresses (e.g., firstname@company.com)
+❌ Fabricating phone numbers
+❌ Making up skills not explicitly listed
+❌ Using "N/A", "Not Found", "Unknown" — use "" instead
+❌ Adding extra columns
+
+OUTPUT: Generate Excel JS code that writes the extracted data starting from the first empty row.
+The code should use the writeData helper function and format the data professionally.
+
+═══════════════════════════════════════════════════════════════════════════════
+`;
 }
 
 // ═══════════════════════════════════════════════════════════════
 // AGENT MODE — Execute Functions (Enhanced with Orchestrator)
 // ═══════════════════════════════════════════════════════════════
 
-var MAX_EXECUTION_RETRIES = 3;
-function runAICommand() {
-  return _runAICommand.apply(this, arguments);
-}
+const MAX_EXECUTION_RETRIES = 3;
+async function runAICommand() {
+  const statusEl = document.getElementById("status-message");
+  const debugEl = document.getElementById("debug-code");
+  const skeletonEl = document.getElementById("skeleton");
+  const cacheBadge = document.getElementById("cache-badge");
+  const promptInput = document.getElementById("prompt-input");
+  const button = document.getElementById("run");
+  if (!statusEl || !debugEl || !skeletonEl || !cacheBadge || !promptInput || !button) {
+    console.error("Agent UI elements not found");
+    return;
+  }
+  let userPrompt = promptInput.value.trim();
 
-// ─── Helpers ───────────────────────────────────────────────────
-function _runAICommand() {
-  _runAICommand = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee11() {
-    var statusEl, debugEl, skeletonEl, cacheBadge, promptInput, button, userPrompt, isSchemaMode, signal, runText, runIcon, originalText, originalIcon, code, fromCache, sheetContext, _sheetContext, existingColumns, cached, validation, messages, schemaDirective, cleanPrompt, contentText, contentParts, totalImages, _validation, validationAttempts, MAX_VALIDATION_FIXES, errorSummary, orchestratorResult, recovery, _t8, _t9, _t0;
-    return _regenerator().w(function (_context12) {
-      while (1) switch (_context12.p = _context12.n) {
-        case 0:
-          statusEl = document.getElementById("status-message");
-          debugEl = document.getElementById("debug-code");
-          skeletonEl = document.getElementById("skeleton");
-          cacheBadge = document.getElementById("cache-badge");
-          promptInput = document.getElementById("prompt-input");
-          button = document.getElementById("run");
-          if (!(!statusEl || !debugEl || !skeletonEl || !cacheBadge || !promptInput || !button)) {
-            _context12.n = 1;
-            break;
-          }
-          console.error("Agent UI elements not found");
-          return _context12.a(2);
-        case 1:
-          userPrompt = promptInput.value.trim(); // Handle File Input
-          if (!(!userPrompt && attachedFiles.length === 0)) {
-            _context12.n = 2;
-            break;
-          }
-          showStatus(statusEl, "info", "Please enter a command or attach a file.");
-          return _context12.a(2);
-        case 2:
-          // Default prompt for files
-          if (attachedFiles.length > 0 && !userPrompt) {
-            userPrompt = attachedFiles.length > 1 ? "Analyze the ".concat(attachedFiles.length, " attached files. Extract and merge all tabular data into a single master table. Standardize headers and columns.") : "Analyze the attached ".concat(attachedFiles[0].type, ". Extract all tabular data and write valid Excel JS code to populate the active sheet. Format headers and auto-fit columns.");
-          }
+  // Handle File Input
+  if (!userPrompt && attachedFiles.length === 0) {
+    showStatus(statusEl, "info", "Please enter a command or attach a file.");
+    return;
+  }
 
-          // Detect Schema Extraction Mode
-          isSchemaMode = userPrompt.includes("SCHEMA_EXTRACTION_MODE") || currentCategory === "extract"; // Enforce table format if processing a document
-          if (attachedFiles.length > 0 && !isSchemaMode) {
-            userPrompt += "\n\n[FORMATTING STRICT RULE]: You are extracting data from a document. ALWAYS output the data as a clean, flat 2D HORIZONTAL table at the top of the sheet. Put Column Headers in Row A1...X1. Append the extracted data underneath. NEVER output a vertical key-value list mimicking a document. Ensure data rows have { font: { color: \"#000000\" } }.";
-          }
+  // Default prompt for files
+  if (attachedFiles.length > 0 && !userPrompt) {
+    userPrompt = attachedFiles.length > 1 ? `Analyze the ${attachedFiles.length} attached files. Extract and merge all tabular data into a single master table. Standardize headers and columns.` : `Analyze the attached ${attachedFiles[0].type}. Extract all tabular data and write valid Excel JS code to populate the active sheet. Format headers and auto-fit columns.`;
+  }
 
-          // UI: loading
-          if (!agentAbortController) {
-            _context12.n = 3;
-            break;
-          }
-          agentAbortController.abort();
-          return _context12.a(2);
-        case 3:
-          agentAbortController = new AbortController();
-          signal = agentAbortController.signal;
-          runText = document.getElementById("run-text");
-          runIcon = document.getElementById("run-icon");
-          originalText = runText ? runText.innerText : "Execute";
-          originalIcon = runIcon ? runIcon.innerHTML : "";
-          button.classList.add("is-busy");
-          button.classList.add("btn-stop");
-          if (runText) runText.innerText = "Stop Agent";
-          if (runIcon) runIcon.innerHTML = _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.stop;
-          statusEl.style.display = "none";
-          skeletonEl.style.display = "flex";
-          cacheBadge.style.display = "none";
-          debugEl.innerText = "";
-          _context12.p = 4;
-          fromCache = false; // ─── Read Sheet Context for Intelligent Assistance ───
-          sheetContext = null;
-          _context12.p = 5;
-          _context12.n = 6;
-          return (0,_services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__.readSheetContext)();
-        case 6:
-          sheetContext = _context12.v;
-          if ((_sheetContext = sheetContext) !== null && _sheetContext !== void 0 && _sheetContext.hasData) {
-            console.log("[Agent] Sheet context: ".concat(sheetContext.rowCount, "x").concat(sheetContext.columnCount));
-          }
-          _context12.n = 8;
-          break;
-        case 7:
-          _context12.p = 7;
-          _t8 = _context12.v;
-          console.warn("[Agent] Could not read sheet context:", _t8);
-        case 8:
-          // ─── Schema Extraction Mode ───
-          existingColumns = [];
-          if (!(isSchemaMode && attachedFiles.length > 0)) {
-            _context12.n = 13;
-            break;
-          }
-          _context12.p = 9;
-          _context12.n = 10;
-          return getExcelColumnHeaders();
-        case 10:
-          existingColumns = _context12.v;
-          console.log("[Agent] Schema columns detected:", existingColumns);
-          if (!(existingColumns.length === 0)) {
-            _context12.n = 11;
-            break;
-          }
+  // Detect Schema Extraction Mode
+  const isSchemaMode = userPrompt.includes("SCHEMA_EXTRACTION_MODE") || currentCategory === "extract";
+
+  // Enforce table format if processing a document
+  if (attachedFiles.length > 0 && !isSchemaMode) {
+    userPrompt += `\n\n[FORMATTING STRICT RULE]: You are extracting data from a document. ALWAYS output the data as a clean, flat 2D HORIZONTAL table at the top of the sheet. Put Column Headers in Row A1...X1. Append the extracted data underneath. NEVER output a vertical key-value list mimicking a document. Ensure data rows have { font: { color: "#000000" } }.`;
+  }
+
+  // UI: loading
+  if (agentAbortController) {
+    agentAbortController.abort();
+    return;
+  }
+  agentAbortController = new AbortController();
+  const signal = agentAbortController.signal;
+  const runText = document.getElementById("run-text");
+  const runIcon = document.getElementById("run-icon");
+  const originalText = runText ? runText.innerText : "Execute";
+  const originalIcon = runIcon ? runIcon.innerHTML : "";
+  button.classList.add("is-busy");
+  button.classList.add("btn-stop");
+  if (runText) runText.innerText = "Stop Agent";
+  if (runIcon) runIcon.innerHTML = _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.stop;
+  statusEl.style.display = "none";
+  skeletonEl.style.display = "flex";
+  cacheBadge.style.display = "none";
+  debugEl.innerText = "";
+  try {
+    let code;
+    let fromCache = false;
+
+    // ─── Read Sheet Context for Intelligent Assistance ───
+    let sheetContext = null;
+    try {
+      var _sheetContext;
+      sheetContext = await (0,_services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__.readSheetContext)();
+      if ((_sheetContext = sheetContext) !== null && _sheetContext !== void 0 && _sheetContext.hasData) {
+        console.log(`[Agent] Sheet context: ${sheetContext.rowCount}x${sheetContext.columnCount}`);
+      }
+    } catch (e) {
+      console.warn("[Agent] Could not read sheet context:", e);
+    }
+
+    // ─── Schema Extraction Mode ───
+    let existingColumns = [];
+    if (isSchemaMode && attachedFiles.length > 0) {
+      try {
+        existingColumns = await getExcelColumnHeaders();
+        console.log("[Agent] Schema columns detected:", existingColumns);
+        if (existingColumns.length === 0) {
           showStatus(statusEl, "info", "⚠️ No column headers found in Row 1. Add headers first or use 'HR Database Setup' to create them.");
           skeletonEl.style.display = "none";
-          return _context12.a(2);
-        case 11:
-          if (runText) runText.innerText = "Extracting (".concat(existingColumns.length, " cols)...");
-          _context12.n = 13;
-          break;
-        case 12:
-          _context12.p = 12;
-          _t9 = _context12.v;
-          console.warn("[Agent] Could not read Excel headers:", _t9);
-        case 13:
-          // ─── Check Cache (Skip for files/schema mode) ───
-          cached = attachedFiles.length === 0 && !isSchemaMode ? (0,_services_cache__WEBPACK_IMPORTED_MODULE_4__.getCachedResponse)(userPrompt) : null;
-          if (cached) {
-            code = cached;
-            fromCache = true;
-            cacheBadge.style.display = "inline-block";
+          return;
+        }
+        if (runText) runText.innerText = `Extracting (${existingColumns.length} cols)...`;
+      } catch (e) {
+        console.warn("[Agent] Could not read Excel headers:", e);
+      }
+    }
 
-            // Still validate cached code
-            validation = (0,_services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__.validateCode)(code);
-            if (!validation.isValid) {
-              console.warn("[Agent] Cached code failed validation, regenerating...");
-              fromCache = false;
-              code = ""; // Will regenerate
-            } else {
-              code = validation.sanitizedCode;
+    // ─── Check Cache (Skip for files/schema mode) ───
+    const cached = attachedFiles.length === 0 && !isSchemaMode ? (0,_services_cache__WEBPACK_IMPORTED_MODULE_4__.getCachedResponse)(userPrompt) : null;
+    if (cached) {
+      code = cached;
+      fromCache = true;
+      cacheBadge.style.display = "inline-block";
+
+      // Still validate cached code
+      const validation = (0,_services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__.validateCode)(code);
+      if (!validation.isValid) {
+        console.warn("[Agent] Cached code failed validation, regenerating...");
+        fromCache = false;
+        code = ""; // Will regenerate
+      } else {
+        code = validation.sanitizedCode;
+      }
+    }
+
+    // ─── Generate Code (if not from cache) ───
+    if (!fromCache) {
+      if (isSchemaMode && attachedFiles.length > 0) {
+        if (runText) runText.innerText = "Generating...";
+        const messages = [{
+          role: "system",
+          content: _services_prompt__WEBPACK_IMPORTED_MODULE_2__.SYSTEM_PROMPT
+        }];
+        const schemaDirective = buildSchemaExtractionDirective(existingColumns);
+        const cleanPrompt = userPrompt.replace("SCHEMA_EXTRACTION_MODE:", "").trim();
+        const contentText = `${cleanPrompt}\n\nEXISTING_COLUMNS: ${JSON.stringify(existingColumns)}\n\n${schemaDirective}`;
+        const contentParts = [{
+          type: "text",
+          text: contentText
+        }];
+        let totalImages = 0;
+        attachedFiles.forEach(file => {
+          file.data.forEach(url => {
+            if (totalImages < 20) {
+              contentParts.push({
+                type: "image_url",
+                image_url: {
+                  url
+                }
+              });
+              totalImages++;
             }
-          }
-
-          // ─── Generate Code (if not from cache) ───
-          if (fromCache) {
-            _context12.n = 21;
-            break;
-          }
-          if (!(isSchemaMode && attachedFiles.length > 0)) {
-            _context12.n = 18;
-            break;
-          }
-          if (runText) runText.innerText = "Generating...";
-          messages = [{
-            role: "system",
-            content: _services_prompt__WEBPACK_IMPORTED_MODULE_2__.SYSTEM_PROMPT
-          }];
-          schemaDirective = buildSchemaExtractionDirective(existingColumns);
-          cleanPrompt = userPrompt.replace("SCHEMA_EXTRACTION_MODE:", "").trim();
-          contentText = "".concat(cleanPrompt, "\n\nEXISTING_COLUMNS: ").concat(JSON.stringify(existingColumns), "\n\n").concat(schemaDirective);
-          contentParts = [{
-            type: "text",
-            text: contentText
-          }];
-          totalImages = 0;
-          attachedFiles.forEach(function (file) {
-            file.data.forEach(function (url) {
-              if (totalImages < 20) {
-                contentParts.push({
-                  type: "image_url",
-                  image_url: {
-                    url: url
-                  }
-                });
-                totalImages++;
-              }
-            });
           });
-          messages.push({
-            role: "user",
-            content: contentParts
-          });
-          _context12.n = 14;
-          return (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.callLLM)(messages, undefined, signal);
-        case 14:
-          code = _context12.v;
-          if (runText) runText.innerText = "Validating...";
-          _validation = (0,_services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__.validateCode)(code);
-          validationAttempts = 0;
-          MAX_VALIDATION_FIXES = 2;
-        case 15:
-          if (!(!_validation.isValid && validationAttempts < MAX_VALIDATION_FIXES)) {
-            _context12.n = 17;
-            break;
-          }
-          console.warn("[Agent] Validation failed (attempt ".concat(validationAttempts + 1, "):"), _validation.errors);
-          errorSummary = _validation.errors.map(function (e) {
-            return "".concat(e.message, " \u2192 ").concat(e.suggestion);
-          }).join("\n");
-          _context12.n = 16;
-          return (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.callLLM)([{
+        });
+        messages.push({
+          role: "user",
+          content: contentParts
+        });
+        code = await (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.callLLM)(messages, undefined, signal);
+        if (runText) runText.innerText = "Validating...";
+        let validation = (0,_services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__.validateCode)(code);
+        let validationAttempts = 0;
+        const MAX_VALIDATION_FIXES = 2;
+        while (!validation.isValid && validationAttempts < MAX_VALIDATION_FIXES) {
+          console.warn(`[Agent] Validation failed (attempt ${validationAttempts + 1}):`, validation.errors);
+          const errorSummary = validation.errors.map(e => `${e.message} → ${e.suggestion}`).join("\n");
+          code = await (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.callLLM)([{
             role: "system",
             content: _services_prompt__WEBPACK_IMPORTED_MODULE_2__.SYSTEM_PROMPT
           }, {
@@ -3215,113 +3346,72 @@ function _runAICommand() {
             content: code
           }, {
             role: "user",
-            content: "VALIDATION ERRORS:\n".concat(errorSummary, "\n\nFix these errors. Output ONLY the corrected code.")
+            content: `VALIDATION ERRORS:\n${errorSummary}\n\nFix these errors. Output ONLY the corrected code.`
           }], undefined, signal);
-        case 16:
-          code = _context12.v;
-          _validation = (0,_services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__.validateCode)(code);
+          validation = (0,_services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__.validateCode)(code);
           validationAttempts++;
-          _context12.n = 15;
-          break;
-        case 17:
-          code = _validation.sanitizedCode;
-          if (_validation.warnings.length > 0) {
-            console.log("[Agent] Validation warnings:", _validation.warnings);
-          }
-          _context12.n = 21;
-          break;
-        case 18:
-          if (runText) runText.innerText = "Planning...";
-          _context12.n = 19;
-          return (0,_services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__.runAgent)(userPrompt, sheetContext, attachedFiles, {
-            maxRetries: 2,
-            enablePlanning: true,
-            strictValidation: true
-          }, signal);
-        case 19:
-          orchestratorResult = _context12.v;
-          if (orchestratorResult.success) {
-            _context12.n = 20;
-            break;
-          }
+        }
+        code = validation.sanitizedCode;
+        if (validation.warnings.length > 0) {
+          console.log("[Agent] Validation warnings:", validation.warnings);
+        }
+      } else {
+        if (runText) runText.innerText = "Planning...";
+        const orchestratorResult = await (0,_services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__.runAgent)(userPrompt, sheetContext, attachedFiles, {
+          maxRetries: 2,
+          enablePlanning: true,
+          strictValidation: true
+        }, signal);
+        if (!orchestratorResult.success) {
           throw new Error(orchestratorResult.error || "Agent failed to generate valid code");
-        case 20:
-          code = orchestratorResult.code;
-        case 21:
-          debugEl.innerText = code;
-          skeletonEl.style.display = "none";
-
-          // ─── EXECUTION PHASE with Advanced Recovery ───
-          if (runText) runText.innerText = "Running...";
-          showStatus(statusEl, "info", "<div class=\"spinner\"></div><span>Executing code...</span>");
-          _context12.n = 22;
-          return (0,_services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__.executeWithRecovery)(code, /*#__PURE__*/function () {
-            var _ref4 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee10(candidateCode) {
-              return _regenerator().w(function (_context11) {
-                while (1) switch (_context11.n) {
-                  case 0:
-                    _context11.n = 1;
-                    return executeExcelCode(candidateCode);
-                  case 1:
-                    return _context11.a(2);
-                }
-              }, _callee10);
-            }));
-            return function (_x15) {
-              return _ref4.apply(this, arguments);
-            };
-          }(), MAX_EXECUTION_RETRIES, signal);
-        case 22:
-          recovery = _context12.v;
-          if (!recovery.success) {
-            _context12.n = 23;
-            break;
-          }
-          code = recovery.finalCode;
-          debugEl.innerText = code;
-          if (!fromCache && attachedFiles.length === 0 && !isSchemaMode) {
-            (0,_services_cache__WEBPACK_IMPORTED_MODULE_4__.cacheResponse)(userPrompt, code);
-          }
-          showStatus(statusEl, "success", "".concat(_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.check, "<span>Done</span>"));
-          showToast("success", "Executed successfully \u2713 (Press Ctrl+Z to undo)");
-          _context12.n = 24;
-          break;
-        case 23:
-          throw new Error(recovery.error || "Execution failed after retries");
-        case 24:
-          _context12.n = 26;
-          break;
-        case 25:
-          _context12.p = 25;
-          _t0 = _context12.v;
-          console.error("[Agent] Fatal error:", _t0);
-          skeletonEl.style.display = "none";
-          if (_t0.name === 'AbortError') {
-            showStatus(statusEl, "info", "Agent stopped by user.");
-            showToast("info", "Agent stopped");
-          } else {
-            showStatus(statusEl, "error", _t0.message || String(_t0));
-            showToast("error", (_t0.message || "Execution failed").substring(0, 80));
-          }
-        case 26:
-          _context12.p = 26;
-          button.disabled = false;
-          if (runText) runText.innerText = originalText;
-          if (runIcon) runIcon.innerHTML = originalIcon;
-          button.classList.remove("btn-stop");
-          button.classList.remove("is-busy");
-          agentAbortController = null;
-          return _context12.f(26);
-        case 27:
-          return _context12.a(2);
+        }
+        code = orchestratorResult.code;
       }
-    }, _callee11, null, [[9, 12], [5, 7], [4, 25, 26, 27]]);
-  }));
-  return _runAICommand.apply(this, arguments);
+    }
+    debugEl.innerText = code;
+    skeletonEl.style.display = "none";
+
+    // ─── EXECUTION PHASE with Advanced Recovery ───
+    if (runText) runText.innerText = "Running...";
+    showStatus(statusEl, "info", `<div class="spinner"></div><span>Executing code...</span>`);
+    const recovery = await (0,_services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__.executeWithRecovery)(code, async candidateCode => {
+      await executeExcelCode(candidateCode);
+    }, MAX_EXECUTION_RETRIES, signal);
+    if (recovery.success) {
+      code = recovery.finalCode;
+      debugEl.innerText = code;
+      if (!fromCache && attachedFiles.length === 0 && !isSchemaMode) {
+        (0,_services_cache__WEBPACK_IMPORTED_MODULE_4__.cacheResponse)(userPrompt, code);
+      }
+      showStatus(statusEl, "success", `${_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.check}<span>Done</span>`);
+      showToast("success", "Executed successfully \u2713 (Press Ctrl+Z to undo)");
+    } else {
+      throw new Error(recovery.error || "Execution failed after retries");
+    }
+  } catch (error) {
+    console.error("[Agent] Fatal error:", error);
+    skeletonEl.style.display = "none";
+    if (error.name === 'AbortError') {
+      showStatus(statusEl, "info", "Agent stopped by user.");
+      showToast("info", "Agent stopped");
+    } else {
+      showStatus(statusEl, "error", error.message || String(error));
+      showToast("error", (error.message || "Execution failed").substring(0, 80));
+    }
+  } finally {
+    button.disabled = false;
+    if (runText) runText.innerText = originalText;
+    if (runIcon) runIcon.innerHTML = originalIcon;
+    button.classList.remove("btn-stop");
+    button.classList.remove("is-busy");
+    agentAbortController = null;
+  }
 }
+
+// ─── Helpers ───────────────────────────────────────────────────
 function showStatus(el, type, html) {
   el.innerHTML = html;
-  el.className = "status-pill ".concat(type);
+  el.className = `status-pill ${type}`;
   el.style.display = "flex";
 }
 
@@ -3333,193 +3423,185 @@ function showStatus(el, type, html) {
  * - Auto-fit columns on completion
  * - Enhanced error messages
  */
-function executeExcelCode(_x4) {
-  return _executeExcelCode.apply(this, arguments);
-} // ─── File Handling Logic ───────────────────────────────────────
-function _executeExcelCode() {
-  _executeExcelCode = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee13(code) {
-    return _regenerator().w(function (_context14) {
-      while (1) switch (_context14.n) {
-        case 0:
-          _context14.n = 1;
-          return Excel.run(/*#__PURE__*/function () {
-            var _ref5 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee12(context) {
-              var sheet, writeDataHelper, wrappedCode, _t1, _t10;
-              return _regenerator().w(function (_context13) {
-                while (1) switch (_context13.p = _context13.n) {
-                  case 0:
-                    sheet = context.workbook.worksheets.getActiveWorksheet(); // Mandatory writeData helper that all generated code can use
-                    writeDataHelper = "\nfunction writeData(sheet, startCell, data) {\n  if (!data || data.length === 0) return null;\n  const rows = data.length;\n  const cols = Math.max(...data.map(r => r ? r.length : 0));\n  if (cols === 0) return null;\n  const normalized = data.map(r => {\n    const row = r ? [...r] : [];\n    while (row.length < cols) row.push(\"\");\n    return row.map(cell => {\n      if (cell === null || cell === undefined) return \"\";\n      let val = typeof cell === \"object\" ? (Array.isArray(cell) ? cell.join(\", \") : JSON.stringify(cell)) : String(cell);\n      if (/^[=+\\-@]/.test(val)) val = \"'\" + val;\n      if (val.length > 30000) val = val.substring(0, 30000) + \"...\";\n      return val;\n    });\n    });\n  });\n  try {\n    const range = sheet.getRange(startCell).getResizedRange(rows - 1, cols - 1);\n    range.values = normalized;\n    range.format.font.name = \"Segoe UI\";\n    range.format.font.size = 10;\n    range.format.verticalAlignment = \"Center\";\n    return range;\n  } catch (e) {\n    console.error(\"writeData error:\", e);\n    return null;\n  }\n}\n\n  function formatTableStyle(usedRange, headerColor, fontColor) {\n    if (!usedRange) return;\n    try {\n      if (usedRange.rowCount < 1) return;\n      const headerRow = usedRange.getRow(0);\n      headerRow.format.set({\n        font: { bold: true, size: 11, color: fontColor },\n        fill: { color: headerColor },\n        horizontalAlignment: \"Center\",\n        verticalAlignment: \"Center\"\n      });\n      // Try resolving body\n      if (usedRange.rowCount > 1) {\n        const bodyRange = usedRange.getOffsetRange(1, 0).getResizedRange(-1, 0);\n        bodyRange.format.font.color = \"#000000\";\n        bodyRange.format.wrapText = true;\n      }\n    } catch (e) {\n      console.error(\"formatTableStyle error: \", e);\n    }\n  }\n  ";
-                    wrappedCode = "\n      ".concat(writeDataHelper, "\n      \n      try {\n        // \u2550\u2550\u2550 AI Generated Code \u2550\u2550\u2550\n        ").concat(code, "\n        \n        // \u2550\u2550\u2550 Safety Finalization \u2550\u2550\u2550\n        try {\n          sheet.getUsedRange().format.autofitColumns();\n        } catch(_) { /* Sheet might be empty */ }\n        \n      } catch(_innerErr) {\n        console.error(\"[Agent] Runtime Error:\", _innerErr);\n        try { await context.sync(); } catch(_) {}\n        throw _innerErr;\n      }\n    ");
-                    console.log("=== EXECUTING AI CODE ===");
-                    console.log(wrappedCode.split("\\n").map(function (l, i) {
-                      return "".concat(i + 1, ": ").concat(l);
-                    }).join("\\n"));
-                    console.log("=========================");
-                    _context13.p = 1;
-                    _context13.n = 2;
-                    return new Function("context", "sheet", "Excel", "return (async () => {\n          try {\n            ".concat(wrappedCode, "\n            await context.sync();\n          } catch (inner) {\n        // Enhance error messages for common issues\n        if (inner.code === \"InvalidArgument\") {\n          const original = inner.message || \"\";\n          if (original.includes(\"A0\") || original.includes(\"row 0\")) {\n            inner.message = \"Invalid range: Row 0 doesn't exist. Excel rows start at 1.\";\n          } else if (original.includes(\"getResizedRange\")) {\n            inner.message = \"Invalid range size: Check that data dimensions match the range.\";\n          } else {\n            inner.message = \"Invalid argument: \" + original;\n          }\n        } else if (inner.message?.includes(\"is not a function\")) {\n          const fnMatch = inner.message.match(/(\\w+) is not a function/);\n          const fn = fnMatch ? fnMatch[1] : (inner.stack?.match(/at\\s+.*\\.(.*)\\s+\\(/)?.[1] || \"method\");\n          inner.message = \"API Error: .\" + fn + \"() doesn't exist. Use correct Excel JS API methods.\";\n        } else if (inner.message?.includes(\"is not defined\")) {\n          const varMatch = inner.message.match(/(\\w+) is not defined/);\n          const v = varMatch ? varMatch[1] : \"variable\";\n          inner.message = \"Undefined: '\" + v + \"' was used before being declared.\";\n        } else if (inner.message?.includes(\"Cannot read property\")) {\n          inner.message = \"Null reference: Tried to read property of undefined. Add null checks or ensure .load() was called.\";\n        }\n        throw inner;\n      }\n    })()"))(context, sheet, Excel);
-                  case 2:
-                    _context13.n = 8;
-                    break;
-                  case 3:
-                    _context13.p = 3;
-                    _t1 = _context13.v;
-                    console.error("[Agent] Execution Error:", _t1);
-                    _context13.p = 4;
-                    _context13.n = 5;
-                    return context.sync();
-                  case 5:
-                    _context13.n = 7;
-                    break;
-                  case 6:
-                    _context13.p = 6;
-                    _t10 = _context13.v;
-                  case 7:
-                    throw _t1;
-                  case 8:
-                    _context13.n = 9;
-                    return context.sync();
-                  case 9:
-                    return _context13.a(2);
-                }
-              }, _callee12, null, [[4, 6], [1, 3]]);
-            }));
-            return function (_x16) {
-              return _ref5.apply(this, arguments);
-            };
-          }());
-        case 1:
-          return _context14.a(2);
-      }
-    }, _callee13);
-  }));
-  return _executeExcelCode.apply(this, arguments);
+async function executeExcelCode(code) {
+  await Excel.run(async context => {
+    const sheet = context.workbook.worksheets.getActiveWorksheet();
+
+    // Mandatory writeData helper that all generated code can use
+    const writeDataHelper = `
+function writeData(sheet, startCell, data) {
+  if (!data || data.length === 0) return null;
+  const rows = data.length;
+  const cols = Math.max(...data.map(r => r ? r.length : 0));
+  if (cols === 0) return null;
+  const normalized = data.map(r => {
+    const row = r ? [...r] : [];
+    while (row.length < cols) row.push("");
+    return row.map(cell => {
+      if (cell === null || cell === undefined) return "";
+      let val = typeof cell === "object" ? (Array.isArray(cell) ? cell.join(", ") : JSON.stringify(cell)) : String(cell);
+      if (/^[=+\\-@]/.test(val)) val = "'" + val;
+      if (val.length > 30000) val = val.substring(0, 30000) + "...";
+      return val;
+    });
+    });
+  });
+  try {
+    const range = sheet.getRange(startCell).getResizedRange(rows - 1, cols - 1);
+    range.values = normalized;
+    range.format.font.name = "Segoe UI";
+    range.format.font.size = 10;
+    range.format.verticalAlignment = "Center";
+    return range;
+  } catch (e) {
+    console.error("writeData error:", e);
+    return null;
+  }
 }
-function handleFileSelect(_x5) {
-  return _handleFileSelect.apply(this, arguments);
-}
-function _handleFileSelect() {
-  _handleFileSelect = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee14(event) {
-    var isAgent,
-      input,
-      btnId,
-      btn,
-      newFiles,
-      i,
-      file,
-      arrayBuffer,
-      images,
-      base64,
-      icon,
-      _args15 = arguments,
-      _t11;
-    return _regenerator().w(function (_context15) {
-      while (1) switch (_context15.p = _context15.n) {
-        case 0:
-          isAgent = _args15.length > 1 && _args15[1] !== undefined ? _args15[1] : false;
-          input = event.target;
-          if (!(!input.files || input.files.length === 0)) {
-            _context15.n = 1;
-            break;
-          }
-          return _context15.a(2);
-        case 1:
-          btnId = isAgent ? "agent-file-btn" : "file-upload-btn";
-          btn = document.getElementById(btnId);
-          if (btn) btn.innerHTML = "< span class=\"btn-spinner\" > </span>";
-          _context15.p = 2;
-          newFiles = []; // Process all selected files
-          i = 0;
-        case 3:
-          if (!(i < input.files.length)) {
-            _context15.n = 9;
-            break;
-          }
-          file = input.files[i];
-          if (!(file.type === "application/pdf")) {
-            _context15.n = 6;
-            break;
-          }
-          rawPDFFiles.push(file); // Keep raw file for text extraction
-          _context15.n = 4;
-          return file.arrayBuffer();
-        case 4:
-          arrayBuffer = _context15.v;
-          _context15.n = 5;
-          return renderPdfToImages(arrayBuffer);
-        case 5:
-          images = _context15.v;
-          newFiles.push({
-            name: file.name,
-            type: "pdf",
-            data: images
-          });
-          _context15.n = 8;
-          break;
-        case 6:
-          if (!file.type.startsWith("image/")) {
-            _context15.n = 8;
-            break;
-          }
-          _context15.n = 7;
-          return fileToBase64(file);
-        case 7:
-          base64 = _context15.v;
-          newFiles.push({
-            name: file.name,
-            type: "image",
-            data: [base64]
-          });
-        case 8:
-          i++;
-          _context15.n = 3;
-          break;
-        case 9:
-          if (!(newFiles.length > 0)) {
-            _context15.n = 10;
-            break;
-          }
-          // Append to existing files
-          attachedFiles = [].concat(_toConsumableArray(attachedFiles), newFiles);
-          // Show batch panel if in extract mode and we have PDFs
-          if (currentCategory === "extract" && rawPDFFiles.length > 0) {
-            showBatchPanel(true);
-          }
-          updateFilePreview(true, isAgent);
-          _context15.n = 11;
-          break;
-        case 10:
-          throw new Error("Unsupported file type. Please upload PDF or Image.");
-        case 11:
-          _context15.n = 13;
-          break;
-        case 12:
-          _context15.p = 12;
-          _t11 = _context15.v;
-          console.error(_t11);
-          showStatus(document.getElementById("status-message"), "error", "Error reading file: " + _t11.message);
-        case 13:
-          _context15.p = 13;
-          // Reset input so same file can be selected again if needed
-          input.value = "";
-          if (btn) {
-            // Restore icon
-            icon = isAgent ? "<svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48\"></path></svg>" : "<svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48\"></path></svg>";
-            btn.innerHTML = icon;
-          }
-          return _context15.f(13);
-        case 14:
-          return _context15.a(2);
+
+  function formatTableStyle(usedRange, headerColor, fontColor) {
+    if (!usedRange) return;
+    try {
+      if (usedRange.rowCount < 1) return;
+      const headerRow = usedRange.getRow(0);
+      headerRow.format.set({
+        font: { bold: true, size: 11, color: fontColor },
+        fill: { color: headerColor },
+        horizontalAlignment: "Center",
+        verticalAlignment: "Center"
+      });
+      // Try resolving body
+      if (usedRange.rowCount > 1) {
+        const bodyRange = usedRange.getOffsetRange(1, 0).getResizedRange(-1, 0);
+        bodyRange.format.font.color = "#000000";
+        bodyRange.format.wrapText = true;
       }
-    }, _callee14, null, [[2, 12, 13, 14]]);
-  }));
-  return _handleFileSelect.apply(this, arguments);
+    } catch (e) {
+      console.error("formatTableStyle error: ", e);
+    }
+  }
+  `;
+    const wrappedCode = `
+      ${writeDataHelper}
+      
+      try {
+        // ═══ AI Generated Code ═══
+        ${code}
+        
+        // ═══ Safety Finalization ═══
+        try {
+          sheet.getUsedRange().format.autofitColumns();
+        } catch(_) { /* Sheet might be empty */ }
+        
+      } catch(_innerErr) {
+        console.error("[Agent] Runtime Error:", _innerErr);
+        try { await context.sync(); } catch(_) {}
+        throw _innerErr;
+      }
+    `;
+    console.log("=== EXECUTING AI CODE ===");
+    console.log(wrappedCode.split("\\n").map((l, i) => `${i + 1}: ${l}`).join("\\n"));
+    console.log("=========================");
+    try {
+      await new Function("context", "sheet", "Excel", `return (async () => {
+          try {
+            ${wrappedCode}
+            await context.sync();
+          } catch (inner) {
+        // Enhance error messages for common issues
+        if (inner.code === "InvalidArgument") {
+          const original = inner.message || "";
+          if (original.includes("A0") || original.includes("row 0")) {
+            inner.message = "Invalid range: Row 0 doesn't exist. Excel rows start at 1.";
+          } else if (original.includes("getResizedRange")) {
+            inner.message = "Invalid range size: Check that data dimensions match the range.";
+          } else {
+            inner.message = "Invalid argument: " + original;
+          }
+        } else if (inner.message?.includes("is not a function")) {
+          const fnMatch = inner.message.match(/(\\w+) is not a function/);
+          const fn = fnMatch ? fnMatch[1] : (inner.stack?.match(/at\\s+.*\\.(.*)\\s+\\(/)?.[1] || "method");
+          inner.message = "API Error: ." + fn + "() doesn't exist. Use correct Excel JS API methods.";
+        } else if (inner.message?.includes("is not defined")) {
+          const varMatch = inner.message.match(/(\\w+) is not defined/);
+          const v = varMatch ? varMatch[1] : "variable";
+          inner.message = "Undefined: '" + v + "' was used before being declared.";
+        } else if (inner.message?.includes("Cannot read property")) {
+          inner.message = "Null reference: Tried to read property of undefined. Add null checks or ensure .load() was called.";
+        }
+        throw inner;
+      }
+    })()`)(context, sheet, Excel);
+    } catch (e) {
+      console.error("[Agent] Execution Error:", e);
+      try {
+        await context.sync();
+      } catch (_) {}
+      throw e;
+    }
+    await context.sync();
+  });
+}
+// ─── File Handling Logic ───────────────────────────────────────
+async function handleFileSelect(event) {
+  let isAgent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  const input = event.target;
+  if (!input.files || input.files.length === 0) return;
+  const btnId = isAgent ? "agent-file-btn" : "file-upload-btn";
+  const btn = document.getElementById(btnId);
+  if (btn) btn.innerHTML = `< span class="btn-spinner" > </span>`;
+  try {
+    const newFiles = [];
+
+    // Process all selected files
+    for (let i = 0; i < input.files.length; i++) {
+      const file = input.files[i];
+      if (file.type === "application/pdf") {
+        rawPDFFiles.push(file); // Keep raw file for text extraction
+        const arrayBuffer = await file.arrayBuffer();
+        const images = await renderPdfToImages(arrayBuffer);
+        newFiles.push({
+          name: file.name,
+          type: "pdf",
+          data: images
+        });
+      } else if (file.type.startsWith("image/")) {
+        const base64 = await fileToBase64(file);
+        newFiles.push({
+          name: file.name,
+          type: "image",
+          data: [base64]
+        });
+      }
+    }
+    if (newFiles.length > 0) {
+      // Append to existing files
+      attachedFiles = [...attachedFiles, ...newFiles];
+      // Show batch panel if in extract mode and we have PDFs
+      if (currentCategory === "extract" && rawPDFFiles.length > 0) {
+        showBatchPanel(true);
+      }
+      updateFilePreview(true, isAgent);
+    } else {
+      throw new Error("Unsupported file type. Please upload PDF or Image.");
+    }
+  } catch (error) {
+    console.error(error);
+    showStatus(document.getElementById("status-message"), "error", "Error reading file: " + error.message);
+  } finally {
+    // Reset input so same file can be selected again if needed
+    input.value = "";
+    if (btn) {
+      // Restore icon
+      const icon = isAgent ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>` : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>`;
+      btn.innerHTML = icon;
+    }
+  }
 }
 function updateFilePreview(show) {
-  var isAgent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var listId = isAgent ? "agent-file-preview-list" : "file-preview-list";
-  var container = document.getElementById(listId);
+  let isAgent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  const listId = isAgent ? "agent-file-preview-list" : "file-preview-list";
+  const container = document.getElementById(listId);
   if (!container) return;
   container.innerHTML = "";
   if (attachedFiles.length === 0) {
@@ -3527,20 +3609,20 @@ function updateFilePreview(show) {
   }
 
   // Render chips
-  attachedFiles.forEach(function (file, index) {
-    var chip = document.createElement("div");
+  attachedFiles.forEach((file, index) => {
+    const chip = document.createElement("div");
     chip.className = "file-chip";
-    var icon = document.createElement("span");
+    const icon = document.createElement("span");
     icon.className = "file-chip-icon";
     icon.innerHTML = file.type === "pdf" ? "📄" : "🖼️";
-    var name = document.createElement("span");
+    const name = document.createElement("span");
     name.className = "file-chip-name";
     name.innerText = file.name;
-    var remove = document.createElement("button");
+    const remove = document.createElement("button");
     remove.className = "file-chip-remove";
     remove.innerHTML = "×";
     remove.title = "Remove file";
-    remove.onclick = function (e) {
+    remove.onclick = e => {
       e.stopPropagation();
       removeFile(index, isAgent);
     };
@@ -3555,92 +3637,61 @@ function removeFile(index, isAgent) {
   updateFilePreview(true, isAgent);
 }
 function clearFile() {
-  var isAgent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  let isAgent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
   attachedFiles = [];
   rawPDFFiles = [];
   showBatchPanel(false);
   updateFilePreview(false, isAgent);
 }
 function fileToBase64(file) {
-  return new Promise(function (resolve, reject) {
-    var reader = new FileReader();
-    reader.onload = function () {
-      return resolve(reader.result);
-    };
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
     reader.onerror = reject;
     reader.readAsDataURL(file);
   });
 }
-function renderPdfToImages(_x6) {
-  return _renderPdfToImages.apply(this, arguments);
-} // ═══════════════════════════════════════════════════════════════
+async function renderPdfToImages(buffer) {
+  // @ts-ignore
+  const pdf = await pdfjs_dist__WEBPACK_IMPORTED_MODULE_8__.getDocument(buffer).promise;
+  const images = [];
+  // Limit to 5 pages per PDF for better coverage of long CVs
+  const maxPages = Math.min(pdf.numPages, 5);
+  for (let i = 1; i <= maxPages; i++) {
+    const page = await pdf.getPage(i);
+    // Use 1.0 scale to keep image size manageable for local vision models
+    const viewport = page.getViewport({
+      scale: 1.0
+    });
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    if (!context) continue;
+    canvas.height = viewport.height;
+    canvas.width = viewport.width;
+    await page.render({
+      canvasContext: context,
+      viewport
+    }).promise;
+    images.push(canvas.toDataURL("image/png"));
+  }
+  return images;
+}
+
+// ═══════════════════════════════════════════════════════════════
 // BATCH PDF EXTRACTION ENGINE
 // ═══════════════════════════════════════════════════════════════
+
 /**
  * Shows or hides the batch extraction panel and updates the file count badge.
  */
-function _renderPdfToImages() {
-  _renderPdfToImages = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee15(buffer) {
-    var pdf, images, maxPages, i, page, viewport, canvas, context;
-    return _regenerator().w(function (_context16) {
-      while (1) switch (_context16.n) {
-        case 0:
-          _context16.n = 1;
-          return pdfjs_dist__WEBPACK_IMPORTED_MODULE_8__.getDocument(buffer).promise;
-        case 1:
-          pdf = _context16.v;
-          images = []; // Limit to 5 pages per PDF for better coverage of long CVs
-          maxPages = Math.min(pdf.numPages, 5);
-          i = 1;
-        case 2:
-          if (!(i <= maxPages)) {
-            _context16.n = 7;
-            break;
-          }
-          _context16.n = 3;
-          return pdf.getPage(i);
-        case 3:
-          page = _context16.v;
-          // Use 1.0 scale to keep image size manageable for local vision models
-          viewport = page.getViewport({
-            scale: 1.0
-          });
-          canvas = document.createElement("canvas");
-          context = canvas.getContext("2d");
-          if (context) {
-            _context16.n = 4;
-            break;
-          }
-          return _context16.a(3, 6);
-        case 4:
-          canvas.height = viewport.height;
-          canvas.width = viewport.width;
-          _context16.n = 5;
-          return page.render({
-            canvasContext: context,
-            viewport: viewport
-          }).promise;
-        case 5:
-          images.push(canvas.toDataURL("image/png"));
-        case 6:
-          i++;
-          _context16.n = 2;
-          break;
-        case 7:
-          return _context16.a(2, images);
-      }
-    }, _callee15);
-  }));
-  return _renderPdfToImages.apply(this, arguments);
-}
 function showBatchPanel(show) {
-  var panel = document.getElementById("batch-extraction-panel");
-  var badge = document.getElementById("batch-file-count");
+  const panel = document.getElementById("batch-extraction-panel");
+  const badge = document.getElementById("batch-file-count");
   if (!panel) return;
   panel.style.display = show ? "block" : "none";
   if (show && badge) {
-    var count = rawPDFFiles.length;
-    badge.textContent = "".concat(count, " PDF").concat(count !== 1 ? "s" : "");
+    const count = rawPDFFiles.length;
+    badge.textContent = `${count} PDF${count !== 1 ? "s" : ""}`;
   }
 }
 
@@ -3650,21 +3701,15 @@ function showBatchPanel(show) {
  */
 function parseFieldsFromInstruction(instruction) {
   // Look for explicit list patterns: "extract X, Y, Z" or "find X, Y and Z"
-  var listPattern = /(?:extract|find|get|pull|identify|return|capture|include)[:\s]+([^.!?]+)/i;
-  var match = instruction.match(listPattern);
+  const listPattern = /(?:extract|find|get|pull|identify|return|capture|include)[:\s]+([^.!?]+)/i;
+  const match = instruction.match(listPattern);
   if (match) {
-    return match[1].split(/[,;&]| and /i).map(function (f) {
-      return f.trim().replace(/^["'\-•]+|["'\-•]+$/g, "");
-    }).filter(function (f) {
-      return f.length > 1 && f.length < 50;
-    });
+    return match[1].split(/[,;&]| and /i).map(f => f.trim().replace(/^["'\-•]+|["'\-•]+$/g, "")).filter(f => f.length > 1 && f.length < 50);
   }
 
   // Fallback: detect capitalised or quoted words as field names
-  var capitalWords = instruction.match(/\b[A-Z][a-z]{2,}(?:\s[A-Z][a-z]{2,})?\b/g) || [];
-  var filtered = capitalWords.filter(function (w) {
-    return !/^(These|This|The|And|From|With|For|All|Each|Into|Then|After|Before|Upload|File|Excel|Sheet|Row|Column|PDF|Resume|CV)$/.test(w);
-  });
+  const capitalWords = instruction.match(/\b[A-Z][a-z]{2,}(?:\s[A-Z][a-z]{2,})?\b/g) || [];
+  const filtered = capitalWords.filter(w => !/^(These|This|The|And|From|With|For|All|Each|Into|Then|After|Before|Upload|File|Excel|Sheet|Row|Column|PDF|Resume|CV)$/.test(w));
   if (filtered.length > 0) return Array.from(new Set(filtered));
 
   // Default for resumes if nothing detected
@@ -3676,187 +3721,119 @@ function parseFieldsFromInstruction(instruction) {
  * If the sheet is empty, writes them in row 1. If headers already exist, leaves them.
  * Returns the final, authoritative list of headers in sheet order.
  */
-function ensureExcelHeaders(_x7) {
-  return _ensureExcelHeaders.apply(this, arguments);
+async function ensureExcelHeaders(fields) {
+  return Excel.run(async context => {
+    const sheet = context.workbook.worksheets.getActiveWorksheet();
+    const headerRange = sheet.getRange(`A1:${String.fromCharCode(64 + fields.length)}1`);
+    headerRange.load("values");
+    await context.sync();
+    const existing = headerRange.values[0].map(v => String(v || "").trim()).filter(v => v);
+    if (existing.length > 0) {
+      // Headers already exist — respect them
+      return existing;
+    }
+
+    // Write new headers
+    headerRange.values = [fields.map(f => f.trim())];
+    headerRange.format.set({
+      font: {
+        bold: true
+      },
+      fill: {
+        color: "#1B2A4A"
+      },
+      horizontalAlignment: "Center"
+    });
+    headerRange.format.font.color = "#FFFFFF";
+    headerRange.format.autofitColumns();
+    await context.sync();
+    return fields;
+  });
 }
+
 /**
  * Calls the LLM to extract structured fields from raw PDF text.
  * Returns a parsed object { fieldName: value } or null on failure.
  */
-function _ensureExcelHeaders() {
-  _ensureExcelHeaders = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee17(fields) {
-    return _regenerator().w(function (_context18) {
-      while (1) switch (_context18.n) {
-        case 0:
-          return _context18.a(2, Excel.run(/*#__PURE__*/function () {
-            var _ref6 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee16(context) {
-              var sheet, headerRange, existing;
-              return _regenerator().w(function (_context17) {
-                while (1) switch (_context17.n) {
-                  case 0:
-                    sheet = context.workbook.worksheets.getActiveWorksheet();
-                    headerRange = sheet.getRange("A1:".concat(String.fromCharCode(64 + fields.length), "1"));
-                    headerRange.load("values");
-                    _context17.n = 1;
-                    return context.sync();
-                  case 1:
-                    existing = headerRange.values[0].map(function (v) {
-                      return String(v || "").trim();
-                    }).filter(function (v) {
-                      return v;
-                    });
-                    if (!(existing.length > 0)) {
-                      _context17.n = 2;
-                      break;
-                    }
-                    return _context17.a(2, existing);
-                  case 2:
-                    // Write new headers
-                    headerRange.values = [fields.map(function (f) {
-                      return f.trim();
-                    })];
-                    headerRange.format.set({
-                      font: {
-                        bold: true
-                      },
-                      fill: {
-                        color: "#1B2A4A"
-                      },
-                      horizontalAlignment: "Center"
-                    });
-                    headerRange.format.font.color = "#FFFFFF";
-                    headerRange.format.autofitColumns();
-                    _context17.n = 3;
-                    return context.sync();
-                  case 3:
-                    return _context17.a(2, fields);
-                }
-              }, _callee16);
-            }));
-            return function (_x17) {
-              return _ref6.apply(this, arguments);
-            };
-          }()));
-      }
-    }, _callee17);
-  }));
-  return _ensureExcelHeaders.apply(this, arguments);
+async function extractStructuredData(pdfText, userInstruction, fields, signal) {
+  const fieldList = fields.join(", ");
+  const systemPrompt = `You are a precision data extraction engine. Your ONLY output is valid JSON.
+
+Given a document, extract the following fields: ${fieldList}
+
+Rules:
+- Output ONLY a JSON object. No markdown, no explanation, no extra text.
+- Use exact field names as keys: ${JSON.stringify(fields)}
+- If a field is not found in the document, use null as the value.
+- For "Skills": list as a comma-separated string.
+- For "Experience": summarize the most recent role: "Title at Company (Years)" or list companies.
+- Never hallucinate or guess information not in the document.
+
+Example output:
+{"Name": "John Smith", "Email": "john@email.com", "Phone": "9876543210", "Skills": "Python, React, SQL", "Experience": "Software Engineer at Google (3 yrs)"}`;
+  const userMessage = `Instruction: ${userInstruction}\n\nDOCUMENT TEXT:\n${pdfText.substring(0, 8000)}`;
+  try {
+    const response = await (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.callLLM)([{
+      role: "system",
+      content: systemPrompt
+    }, {
+      role: "user",
+      content: userMessage
+    }], undefined, signal);
+
+    // Strip markdown fences if model added them
+    const cleaned = response.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
+    const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) return null;
+    return JSON.parse(jsonMatch[0]);
+  } catch (e) {
+    console.error("[Batch] LLM extraction failed:", e);
+    return null;
+  }
 }
-function extractStructuredData(_x8, _x9, _x0, _x1) {
-  return _extractStructuredData.apply(this, arguments);
-}
+
 /**
  * Appends a single data row to the Excel sheet below the header.
  * Detects the next empty row automatically.
  */
-function _extractStructuredData() {
-  _extractStructuredData = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee18(pdfText, userInstruction, fields, signal) {
-    var fieldList, systemPrompt, userMessage, response, cleaned, jsonMatch, _t12;
-    return _regenerator().w(function (_context19) {
-      while (1) switch (_context19.p = _context19.n) {
-        case 0:
-          fieldList = fields.join(", ");
-          systemPrompt = "You are a precision data extraction engine. Your ONLY output is valid JSON.\n\nGiven a document, extract the following fields: ".concat(fieldList, "\n\nRules:\n- Output ONLY a JSON object. No markdown, no explanation, no extra text.\n- Use exact field names as keys: ").concat(JSON.stringify(fields), "\n- If a field is not found in the document, use null as the value.\n- For \"Skills\": list as a comma-separated string.\n- For \"Experience\": summarize the most recent role: \"Title at Company (Years)\" or list companies.\n- Never hallucinate or guess information not in the document.\n\nExample output:\n{\"Name\": \"John Smith\", \"Email\": \"john@email.com\", \"Phone\": \"9876543210\", \"Skills\": \"Python, React, SQL\", \"Experience\": \"Software Engineer at Google (3 yrs)\"}");
-          userMessage = "Instruction: ".concat(userInstruction, "\n\nDOCUMENT TEXT:\n").concat(pdfText.substring(0, 8000));
-          _context19.p = 1;
-          _context19.n = 2;
-          return (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.callLLM)([{
-            role: "system",
-            content: systemPrompt
-          }, {
-            role: "user",
-            content: userMessage
-          }], undefined, signal);
-        case 2:
-          response = _context19.v;
-          // Strip markdown fences if model added them
-          cleaned = response.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
-          jsonMatch = cleaned.match(/\{[\s\S]*\}/);
-          if (jsonMatch) {
-            _context19.n = 3;
-            break;
-          }
-          return _context19.a(2, null);
-        case 3:
-          return _context19.a(2, JSON.parse(jsonMatch[0]));
-        case 4:
-          _context19.p = 4;
-          _t12 = _context19.v;
-          console.error("[Batch] LLM extraction failed:", _t12);
-          return _context19.a(2, null);
-      }
-    }, _callee18, null, [[1, 4]]);
-  }));
-  return _extractStructuredData.apply(this, arguments);
+async function appendExcelRow(headers, data) {
+  await Excel.run(async context => {
+    const sheet = context.workbook.worksheets.getActiveWorksheet();
+    const usedRange = sheet.getUsedRangeOrNullObject();
+    usedRange.load("rowCount,isNullObject");
+    await context.sync();
+    const nextRow = usedRange.isNullObject ? 1 : usedRange.rowCount + 1; // 1-indexed
+
+    const rowValues = headers.map(h => {
+      var _ref, _ref2, _data$h;
+      const rawVal = (_ref = (_ref2 = (_data$h = data[h]) !== null && _data$h !== void 0 ? _data$h : data[h.toLowerCase()]) !== null && _ref2 !== void 0 ? _ref2 : data[Object.keys(data).find(k => k.toLowerCase() === h.toLowerCase()) || ""]) !== null && _ref !== void 0 ? _ref : "";
+      const safeVal = rawVal === null ? "" : rawVal;
+      let val = typeof safeVal === "object" && safeVal !== null ? Array.isArray(safeVal) ? safeVal.join(", ") : JSON.stringify(safeVal) : String(safeVal || "");
+      if (/^[=+\-@]/.test(val)) val = "'" + val;
+      if (val.length > 30000) val = val.substring(0, 30000) + "...";
+      return val;
+    });
+    const startCell = `A${nextRow}`;
+    const endCell = `${String.fromCharCode(64 + headers.length)}${nextRow}`;
+    const range = sheet.getRange(`${startCell}:${endCell}`);
+    range.values = [rowValues];
+    range.format.wrapText = true;
+    // Subtle alternating row colour
+    range.format.fill.color = nextRow % 2 === 0 ? "#F4F5F7" : "#FFFFFF";
+    await context.sync();
+  });
 }
-function appendExcelRow(_x10, _x11) {
-  return _appendExcelRow.apply(this, arguments);
-}
+
 /**
  * Adds a log entry to the batch log panel.
  */
-function _appendExcelRow() {
-  _appendExcelRow = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee20(headers, data) {
-    return _regenerator().w(function (_context21) {
-      while (1) switch (_context21.n) {
-        case 0:
-          _context21.n = 1;
-          return Excel.run(/*#__PURE__*/function () {
-            var _ref7 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee19(context) {
-              var sheet, usedRange, nextRow, rowValues, startCell, endCell, range;
-              return _regenerator().w(function (_context20) {
-                while (1) switch (_context20.n) {
-                  case 0:
-                    sheet = context.workbook.worksheets.getActiveWorksheet();
-                    usedRange = sheet.getUsedRangeOrNullObject();
-                    usedRange.load("rowCount,isNullObject");
-                    _context20.n = 1;
-                    return context.sync();
-                  case 1:
-                    nextRow = usedRange.isNullObject ? 1 : usedRange.rowCount + 1; // 1-indexed
-                    rowValues = headers.map(function (h) {
-                      var _ref8, _ref9, _data$h;
-                      var rawVal = (_ref8 = (_ref9 = (_data$h = data[h]) !== null && _data$h !== void 0 ? _data$h : data[h.toLowerCase()]) !== null && _ref9 !== void 0 ? _ref9 : data[Object.keys(data).find(function (k) {
-                        return k.toLowerCase() === h.toLowerCase();
-                      }) || ""]) !== null && _ref8 !== void 0 ? _ref8 : "";
-                      var safeVal = rawVal === null ? "" : rawVal;
-                      var val = _typeof(safeVal) === "object" && safeVal !== null ? Array.isArray(safeVal) ? safeVal.join(", ") : JSON.stringify(safeVal) : String(safeVal || "");
-                      if (/^[=+\-@]/.test(val)) val = "'" + val;
-                      if (val.length > 30000) val = val.substring(0, 30000) + "...";
-                      return val;
-                    });
-                    startCell = "A".concat(nextRow);
-                    endCell = "".concat(String.fromCharCode(64 + headers.length)).concat(nextRow);
-                    range = sheet.getRange("".concat(startCell, ":").concat(endCell));
-                    range.values = [rowValues];
-                    range.format.wrapText = true;
-                    // Subtle alternating row colour
-                    range.format.fill.color = nextRow % 2 === 0 ? "#F4F5F7" : "#FFFFFF";
-                    _context20.n = 2;
-                    return context.sync();
-                  case 2:
-                    return _context20.a(2);
-                }
-              }, _callee19);
-            }));
-            return function (_x18) {
-              return _ref7.apply(this, arguments);
-            };
-          }());
-        case 1:
-          return _context21.a(2);
-      }
-    }, _callee20);
-  }));
-  return _appendExcelRow.apply(this, arguments);
-}
 function batchLog(message) {
-  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "info";
-  var log = document.getElementById("batch-log");
+  let type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "info";
+  const log = document.getElementById("batch-log");
   if (!log) return;
-  var entry = document.createElement("div");
-  entry.className = "batch-log-entry ".concat(type);
-  entry.textContent = "".concat(type === "success" ? "✓" : type === "error" ? "✗" : "•", " ").concat(message);
+  const entry = document.createElement("div");
+  entry.className = `batch-log-entry ${type}`;
+  entry.textContent = `${type === "success" ? "✓" : type === "error" ? "✗" : "•"} ${message}`;
   log.appendChild(entry);
   log.scrollTop = log.scrollHeight;
 }
@@ -3865,158 +3842,98 @@ function batchLog(message) {
  * Main batch PDF extraction orchestrator.
  * Reads instruction, parses fields, creates headers, loops through PDFs, extracts data, appends rows.
  */
-function runBatchPDFExtraction() {
-  return _runBatchPDFExtraction.apply(this, arguments);
-}
-function _runBatchPDFExtraction() {
-  _runBatchPDFExtraction = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee21() {
-    var _instructionEl$value;
-    var btn, btnText, progressWrap, progressBar, progressLabel, logEl, instructionEl, instruction, pdfsToProcess, fields, signal, successCount, errorCount, headers, i, file, pct, extracted, data, finalPct, msg, _t13, _t14;
-    return _regenerator().w(function (_context22) {
-      while (1) switch (_context22.p = _context22.n) {
-        case 0:
-          btn = document.getElementById("batch-extract-btn");
-          btnText = document.getElementById("batch-btn-text");
-          progressWrap = document.getElementById("batch-progress-wrap");
-          progressBar = document.getElementById("batch-progress-bar");
-          progressLabel = document.getElementById("batch-progress-label");
-          logEl = document.getElementById("batch-log");
-          instructionEl = document.getElementById("batch-instruction"); // Handle stop
-          if (!batchAbortController) {
-            _context22.n = 1;
-            break;
-          }
-          batchAbortController.abort();
-          batchAbortController = null;
-          if (btnText) btnText.textContent = "Extract All PDFs";
-          if (btn) btn.disabled = false;
-          return _context22.a(2);
-        case 1:
-          instruction = (instructionEl === null || instructionEl === void 0 || (_instructionEl$value = instructionEl.value) === null || _instructionEl$value === void 0 ? void 0 : _instructionEl$value.trim()) || "These are documents. Extract Name, Email, Phone, Skills, and Experience.";
-          pdfsToProcess = _toConsumableArray(rawPDFFiles); // snapshot
-          if (!(pdfsToProcess.length === 0)) {
-            _context22.n = 2;
-            break;
-          }
-          showToast("error", "No PDFs attached. Please upload PDFs first.");
-          return _context22.a(2);
-        case 2:
-          // Parse target fields
-          fields = parseFieldsFromInstruction(instruction);
-          if (!(fields.length === 0)) {
-            _context22.n = 3;
-            break;
-          }
-          showToast("error", "Could not detect fields to extract. Please be more specific.");
-          return _context22.a(2);
-        case 3:
-          batchAbortController = new AbortController();
-          signal = batchAbortController.signal; // Setup UI
-          if (btn) {
-            btn.disabled = false;
-          }
-          if (btnText) btnText.textContent = "⏹ Stop Extraction";
-          if (progressWrap) progressWrap.style.display = "block";
-          if (logEl) logEl.innerHTML = "";
-          batchLog("Starting extraction of ".concat(pdfsToProcess.length, " PDF(s)\u2026"), "info");
-          batchLog("Detected fields: ".concat(fields.join(", ")), "info");
-          successCount = 0;
-          errorCount = 0;
-          headers = [];
-          _context22.p = 4;
-          _context22.n = 5;
-          return ensureExcelHeaders(fields);
-        case 5:
-          headers = _context22.v;
-          batchLog("Excel headers ready: ".concat(headers.join(", ")), "info");
-          i = 0;
-        case 6:
-          if (!(i < pdfsToProcess.length)) {
-            _context22.n = 17;
-            break;
-          }
-          if (!signal.aborted) {
-            _context22.n = 7;
-            break;
-          }
-          return _context22.a(3, 17);
-        case 7:
-          file = pdfsToProcess[i];
-          pct = Math.round(i / pdfsToProcess.length * 100);
-          if (progressBar) progressBar.style.width = "".concat(pct, "%");
-          if (progressLabel) progressLabel.textContent = "".concat(i, " / ").concat(pdfsToProcess.length);
-          batchLog("[".concat(i + 1, "/").concat(pdfsToProcess.length, "] Processing: ").concat(file.name), "info");
-          _context22.p = 8;
-          _context22.n = 9;
-          return (0,_services_pdfService__WEBPACK_IMPORTED_MODULE_6__.extractTextFromPDFFile)(file);
-        case 9:
-          extracted = _context22.v;
-          if (!(!extracted.text || extracted.text.length < 20)) {
-            _context22.n = 10;
-            break;
-          }
+async function runBatchPDFExtraction() {
+  var _instructionEl$value;
+  const btn = document.getElementById("batch-extract-btn");
+  const btnText = document.getElementById("batch-btn-text");
+  const progressWrap = document.getElementById("batch-progress-wrap");
+  const progressBar = document.getElementById("batch-progress-bar");
+  const progressLabel = document.getElementById("batch-progress-label");
+  const logEl = document.getElementById("batch-log");
+  const instructionEl = document.getElementById("batch-instruction");
+
+  // Handle stop
+  if (batchAbortController) {
+    batchAbortController.abort();
+    batchAbortController = null;
+    if (btnText) btnText.textContent = "Extract All PDFs";
+    if (btn) btn.disabled = false;
+    return;
+  }
+  const instruction = (instructionEl === null || instructionEl === void 0 || (_instructionEl$value = instructionEl.value) === null || _instructionEl$value === void 0 ? void 0 : _instructionEl$value.trim()) || "These are documents. Extract Name, Email, Phone, Skills, and Experience.";
+  const pdfsToProcess = [...rawPDFFiles]; // snapshot
+  if (pdfsToProcess.length === 0) {
+    showToast("error", "No PDFs attached. Please upload PDFs first.");
+    return;
+  }
+
+  // Parse target fields
+  const fields = parseFieldsFromInstruction(instruction);
+  if (fields.length === 0) {
+    showToast("error", "Could not detect fields to extract. Please be more specific.");
+    return;
+  }
+  batchAbortController = new AbortController();
+  const signal = batchAbortController.signal;
+
+  // Setup UI
+  if (btn) {
+    btn.disabled = false;
+  }
+  if (btnText) btnText.textContent = "⏹ Stop Extraction";
+  if (progressWrap) progressWrap.style.display = "block";
+  if (logEl) logEl.innerHTML = "";
+  batchLog(`Starting extraction of ${pdfsToProcess.length} PDF(s)…`, "info");
+  batchLog(`Detected fields: ${fields.join(", ")}`, "info");
+  let successCount = 0;
+  let errorCount = 0;
+  let headers = [];
+  try {
+    // Ensure Excel headers are ready
+    headers = await ensureExcelHeaders(fields);
+    batchLog(`Excel headers ready: ${headers.join(", ")}`, "info");
+    for (let i = 0; i < pdfsToProcess.length; i++) {
+      if (signal.aborted) break;
+      const file = pdfsToProcess[i];
+      const pct = Math.round(i / pdfsToProcess.length * 100);
+      if (progressBar) progressBar.style.width = `${pct}%`;
+      if (progressLabel) progressLabel.textContent = `${i} / ${pdfsToProcess.length}`;
+      batchLog(`[${i + 1}/${pdfsToProcess.length}] Processing: ${file.name}`, "info");
+      try {
+        // Step 1: Extract text from PDF
+        const extracted = await (0,_services_pdfService__WEBPACK_IMPORTED_MODULE_6__.extractTextFromPDFFile)(file);
+        if (!extracted.text || extracted.text.length < 20) {
           throw new Error("PDF appears empty or unreadable");
-        case 10:
-          _context22.n = 11;
-          return extractStructuredData(extracted.text, instruction, fields, signal);
-        case 11:
-          data = _context22.v;
-          if (data) {
-            _context22.n = 12;
-            break;
-          }
-          throw new Error("LLM returned no data");
-        case 12:
-          _context22.n = 13;
-          return appendExcelRow(headers, data);
-        case 13:
-          successCount++;
-          batchLog("\u2713 ".concat(file.name, " \u2192 ").concat(Object.values(data).filter(function (v) {
-            return v;
-          }).length, "/").concat(fields.length, " fields extracted"), "success");
-          _context22.n = 16;
-          break;
-        case 14:
-          _context22.p = 14;
-          _t13 = _context22.v;
-          if (!(_t13.name === "AbortError")) {
-            _context22.n = 15;
-            break;
-          }
-          return _context22.a(3, 17);
-        case 15:
-          errorCount++;
-          batchLog("\u2717 ".concat(file.name, ": ").concat(_t13.message), "error");
-        case 16:
-          i++;
-          _context22.n = 6;
-          break;
-        case 17:
-          _context22.n = 19;
-          break;
-        case 18:
-          _context22.p = 18;
-          _t14 = _context22.v;
-          batchLog("Fatal error: ".concat(_t14.message), "error");
-        case 19:
-          _context22.p = 19;
-          // Final UI update
-          finalPct = Math.round(successCount / pdfsToProcess.length * 100);
-          if (progressBar) progressBar.style.width = "100%";
-          if (progressLabel) progressLabel.textContent = "".concat(pdfsToProcess.length, " / ").concat(pdfsToProcess.length);
-          msg = "\u2705 Done! ".concat(successCount, " rows added").concat(errorCount > 0 ? ", ".concat(errorCount, " failed") : "", ".");
-          batchLog(msg, successCount > 0 ? "success" : "error");
-          showToast(successCount > 0 ? "success" : "error", msg);
-          batchAbortController = null;
-          if (btn) btn.disabled = false;
-          if (btnText) btnText.textContent = "Extract All PDFs";
-          return _context22.f(19);
-        case 20:
-          return _context22.a(2);
+        }
+
+        // Step 2: Call LLM for structured data
+        const data = await extractStructuredData(extracted.text, instruction, fields, signal);
+        if (!data) throw new Error("LLM returned no data");
+
+        // Step 3: Write to Excel
+        await appendExcelRow(headers, data);
+        successCount++;
+        batchLog(`✓ ${file.name} → ${Object.values(data).filter(v => v).length}/${fields.length} fields extracted`, "success");
+      } catch (fileError) {
+        if (fileError.name === "AbortError") break;
+        errorCount++;
+        batchLog(`✗ ${file.name}: ${fileError.message}`, "error");
       }
-    }, _callee21, null, [[8, 14], [4, 18, 19, 20]]);
-  }));
-  return _runBatchPDFExtraction.apply(this, arguments);
+    }
+  } catch (fatalError) {
+    batchLog(`Fatal error: ${fatalError.message}`, "error");
+  } finally {
+    // Final UI update
+    const finalPct = Math.round(successCount / pdfsToProcess.length * 100);
+    if (progressBar) progressBar.style.width = "100%";
+    if (progressLabel) progressLabel.textContent = `${pdfsToProcess.length} / ${pdfsToProcess.length}`;
+    const msg = `✅ Done! ${successCount} rows added${errorCount > 0 ? `, ${errorCount} failed` : ""}.`;
+    batchLog(msg, successCount > 0 ? "success" : "error");
+    showToast(successCount > 0 ? "success" : "error", msg);
+    batchAbortController = null;
+    if (btn) btn.disabled = false;
+    if (btnText) btnText.textContent = "Extract All PDFs";
+  }
 }
 
 /***/ }),

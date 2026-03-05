@@ -1442,17 +1442,11 @@ textarea {
     width: 140px;
     height: 28px;
     border-radius: 9px;
-    background: linear-gradient(90deg, var(--card-border) 25%, var(--input-bg) 50%, var(--card-border) 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.6s ease-in-out infinite;
 }
 
 .skeleton-line {
     height: 13px;
     border-radius: 5px;
-    background: linear-gradient(90deg, var(--card-border) 25%, var(--input-bg) 50%, var(--card-border) 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.6s ease-in-out infinite;
 }
 
 .skeleton-line.w80 {
@@ -1488,12 +1482,6 @@ textarea {
     gap: 10px;
     box-shadow: var(--shadow-sm);
     margin-left: 4px;
-}
-
-.sk-shimmer {
-    background: linear-gradient(90deg, var(--card-border) 25%, var(--input-bg) 50%, var(--card-border) 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.6s ease-in-out infinite;
 }
 
 
@@ -1671,6 +1659,34 @@ pre {
 
 
 /* ═══════════════════════════════════════════════════════════════ */
+/* PERFORMANCE — Skip rendering of offscreen/hidden content        */
+/* ═══════════════════════════════════════════════════════════════ */
+
+/* Hidden panels should not trigger layout/paint until opened */
+#settings-panel[style*="display: none"],
+#docs-panel[style*="display: none"] {
+    content-visibility: hidden;
+}
+
+/* Offscreen scrollable areas: skip rendering until scrolled into view */
+.agent-scroll-area,
+.chat-messages {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
+}
+
+/* Reduce paint complexity during transitions: composite-only props */
+.chip,
+.suggestion-chip,
+.category-tab,
+.btn-icon,
+.btn-primary,
+.btn-send {
+    contain: layout style;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════ */
 /* SIDELOAD — Skeleton Loading Screen                              */
 /* ═══════════════════════════════════════════════════════════════ */
 .sideload-container {
@@ -1689,12 +1705,88 @@ pre {
     animation: fadeIn 0.3s ease-out;
 }
 
-.sk-shimmer {
-    background: linear-gradient(90deg, var(--card-border) 25%, var(--input-bg) 50%, var(--card-border) 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.8s ease-in-out infinite;
-    border-radius: 7px;
+/* ── Premium Shimmer — GPU-accelerated glass wave ── */
+.sk-shimmer,
+.skeleton-line,
+.skeleton-pill {
+    position: relative;
+    overflow: hidden;
+    background: var(--card-border);
 }
+
+.sk-shimmer::after,
+.skeleton-line::after,
+.skeleton-pill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.08) 25%,
+        rgba(255, 255, 255, 0.45) 50%,
+        rgba(255, 255, 255, 0.08) 75%,
+        transparent 100%
+    );
+    animation: shimmerWave 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Staggered wave within groups */
+.sk-brand .sk-shimmer:nth-child(2)::after,
+.sk-welcome .sk-shimmer:nth-child(2)::after,
+.skeleton-line:nth-child(2)::after { animation-delay: 0.12s; }
+
+.sk-welcome .sk-shimmer:nth-child(3)::after,
+.skeleton-line:nth-child(3)::after { animation-delay: 0.24s; }
+
+.sk-welcome .sk-shimmer:nth-child(4)::after { animation-delay: 0.36s; }
+
+.sk-suggestions .sk-shimmer:nth-child(2)::after { animation-delay: 0.1s; }
+.sk-suggestions .sk-shimmer:nth-child(3)::after { animation-delay: 0.2s; }
+
+.sk-mode-toggle .sk-shimmer:nth-child(2)::after { animation-delay: 0.1s; }
+
+/* ── Panel Skeleton — loading state for panels ── */
+.panel-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+}
+
+.panel-skeleton .sk-heading {
+    width: 55%;
+    height: 18px;
+    border-radius: 6px;
+}
+
+.panel-skeleton .sk-badge {
+    width: 90px;
+    height: 22px;
+    border-radius: 12px;
+}
+
+.panel-skeleton .sk-row {
+    display: flex;
+    gap: 12px;
+}
+
+.panel-skeleton .sk-block {
+    flex: 1;
+    height: 56px;
+    border-radius: 10px;
+}
+
+.panel-skeleton .sk-bar {
+    height: 13px;
+    border-radius: 5px;
+}
+
+.panel-skeleton .sk-bar.w70 { width: 70%; }
+.panel-skeleton .sk-bar.w50 { width: 50%; }
+.panel-skeleton .sk-bar.w85 { width: 85%; }
+.panel-skeleton .sk-bar.w40 { width: 40%; }
 
 .sk-header {
     display: flex;
@@ -1867,13 +1959,13 @@ pre {
     }
 }
 
-@keyframes shimmer {
+@keyframes shimmerWave {
     0% {
-        background-position: 200% 0;
+        transform: translateX(-100%);
     }
 
     100% {
-        background-position: -200% 0;
+        transform: translateX(100%);
     }
 }
 
@@ -1980,21 +2072,18 @@ pre {
 /* PRODUCTION OPTIMIZATIONS (RESPONSIVE & PERFORMANCE)             */
 /* ═══════════════════════════════════════════════════════════════ */
 
-/* 1. Hardware Acceleration for Animations */
-.chat-msg,
-.panel,
-.sideload-container {
+/* 1. Hardware Acceleration for Animations (targeted, not global) */
+.chat-msg {
     will-change: transform, opacity;
     backface-visibility: hidden;
-    /* sharpen animations */
-    transform: translateZ(0);
-    /* trigger GPU */
 }
 
-.chip,
-.category-tab,
-.btn-icon {
-    transform: translateZ(0);
+/* Only apply GPU hints on hover/active states to avoid memory overhead */
+.chip:hover,
+.suggestion-chip:hover,
+.category-tab:hover,
+.btn-icon:hover {
+    will-change: transform;
 }
 
 /* 2. Responsive Tweaks for Narrow Taskpanes (< 360px) */
@@ -2662,10 +2751,10 @@ pre {
     width: 60%;
     height: 100%;
     background: rgba(255, 255, 255, 0.3);
-    animation: shimmer 1.2s linear infinite;
+    animation: shimmerSlide 1.2s linear infinite;
 }
 
-@keyframes shimmer {
+@keyframes shimmerSlide {
     to {
         left: 160%;
     }

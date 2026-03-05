@@ -3,7 +3,13 @@ import { SheetSchema } from "../../core/types/sheetos";
 
 export class AnalyzePanel {
     render(schema?: SheetSchema): string {
-        if (!schema) return `<div class="panel-loading">Analyzing sheet environment...</div>`;
+        if (!schema) return `<div class="panel-skeleton">
+            <div class="sk-heading sk-shimmer"></div>
+            <div class="sk-row"><div class="sk-block sk-shimmer"></div><div class="sk-block sk-shimmer"></div></div>
+            <div class="sk-bar w85 sk-shimmer"></div>
+            <div class="sk-bar w70 sk-shimmer"></div>
+            <div class="sk-bar w50 sk-shimmer"></div>
+        </div>`;
 
         return `
             <div class="panel-content">

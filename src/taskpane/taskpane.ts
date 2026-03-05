@@ -1577,7 +1577,7 @@ async function detectAndShowColumns(): Promise<void> {
   if (!detectedSection || !columnChips || !columnCount) return;
 
   // Show loading state
-  if (btn) btn.innerHTML = "⏳ Loading...";
+  if (btn) { btn.disabled = true; btn.innerHTML = '<span class="skeleton-pill sk-shimmer" style="width:80px;height:20px;display:inline-block;"></span>'; }
 
   try {
     const columns = await getExcelColumnHeaders();
@@ -1601,7 +1601,7 @@ async function detectAndShowColumns(): Promise<void> {
     columnCount.textContent = "0";
     detectedSection.style.display = "block";
   } finally {
-    if (btn) btn.innerHTML = "🔍 Detect";
+    if (btn) { btn.innerHTML = "🔍 Detect"; btn.disabled = false; }
   }
 }
 

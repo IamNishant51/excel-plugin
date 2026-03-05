@@ -13,11 +13,26 @@ import {
     WordAttachedFile,
 } from "../services/word-orchestrator";
 import { Icons } from "../services/icons";
-import * as pdfjsLib from "pdfjs-dist";
-import { extractTextFromPDFFile } from "../services/pdfService";
 
-// Configure PDF.js worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+// PDF.js is lazy-loaded on first PDF file attachment to avoid blocking initial load
+let _pdfjsLib: typeof import("pdfjs-dist") | null = null;
+let _extractTextFromPDFFile: typeof import("../services/pdfService").extractTextFromPDFFile | null = null;
+
+async function getPdfJs() {
+    if (!_pdfjsLib) {
+        _pdfjsLib = await import("pdfjs-dist");
+        _pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${_pdfjsLib.version}/pdf.worker.min.js`;
+    }
+    return _pdfjsLib;
+}
+
+async function getPdfExtractor() {
+    if (!_extractTextFromPDFFile) {
+        const mod = await import("../services/pdfService");
+        _extractTextFromPDFFile = mod.extractTextFromPDFFile;
+    }
+    return _extractTextFromPDFFile;
+}
 
 // ─── Types ─────────────────────────────────────────────────────
 type Mode = "planning" | "agent";
@@ -173,6 +188,8 @@ window.onerror = function (msg, url, line) {
 Office.onReady((info) => {
     const sideloadMsg = document.getElementById("sideload-msg");
     const appBody = document.getElementById("app-body");
+
+    // Show app immediately — don't block on anything
     if (sideloadMsg) sideloadMsg.style.display = "none";
     if (appBody) appBody.style.display = "flex";
 
@@ -182,71 +199,77 @@ Office.onReady((info) => {
         console.warn("Running outside Word — host:", info.host);
     }
 
-    // Inject Icons
-    injectIcons();
-    injectDocIcons();
-    injectCategoryIcons();
-
-    // Wire up UI Actions
-    document.getElementById("run").onclick = runWordAICommand;
-
-    // Settings & Docs
-    document.getElementById("settings-toggle").onclick = () => {
-        const panel = document.getElementById("settings-panel");
-        panel.style.display = panel.style.display === "none" ? "block" : "none";
-        document.getElementById("docs-panel").style.display = "none";
-    };
-    document.getElementById("docs-toggle").onclick = () => {
-        const panel = document.getElementById("docs-panel");
-        panel.style.display = panel.style.display === "none" ? "block" : "none";
-        document.getElementById("settings-panel").style.display = "none";
+    // ── CRITICAL PATH: Wire up interactive elements first ──
+    // These are needed immediately for user interaction
+    document.getElementById("run").onclick = () => {
+        const input = document.getElementById("prompt-input") as HTMLTextAreaElement;
+        if (input && (input.value.trim() || attachedFiles.length > 0)) {
+            runWordAICommand();
+        }
     };
 
-    document.getElementById("save-settings").onclick = handleSaveSettings;
-    document.getElementById("refresh-models").onclick = loadOllamaModels;
-
-    // File Upload Handlers
-    const bindClick = (id: string, handler: () => void) => {
-        const el = document.getElementById(id);
-        if (el) el.onclick = handler;
-    };
-    const bindChange = (id: string, handler: (e: Event) => void) => {
-        const el = document.getElementById(id);
-        if (el) el.onchange = handler;
-    };
-
-    bindClick("file-upload-btn", () => document.getElementById("file-input").click());
-    bindChange("file-input", (e) => handleFileSelect(e, false));
-
-    bindClick("agent-file-btn", () => document.getElementById("agent-file-input").click());
-    bindChange("agent-file-input", (e) => handleFileSelect(e, true));
-
-    // Mode Toggles
     document.getElementById("mode-planning").onclick = () => switchMode("planning");
     document.getElementById("mode-agent").onclick = () => switchMode("agent");
-
-    // Chat Actions
     document.getElementById("chat-send").onclick = sendChatMessage;
     const clearBtn = document.getElementById("chat-clear");
     if (clearBtn) clearBtn.onclick = clearChat;
 
     setupChatInput();
-    setupScrollToBottom();
     setupAgentKeyboardShortcut();
-    setupDiffDismiss();
 
-    // Category Tabs
-    document.querySelectorAll(".category-tab").forEach((tab) => {
-        (tab as HTMLElement).onclick = () => {
-            const cat = (tab as HTMLElement).dataset.category as WordActionCategory;
-            switchCategory(cat);
+    // ── FAST PATH: Inject essential icons (header only) ──
+    injectIcons();
+
+    // ── DEFERRED: Non-critical UI work after first paint ──
+    requestAnimationFrame(() => {
+        // Settings & Docs toggles
+        document.getElementById("settings-toggle").onclick = () => {
+            const panel = document.getElementById("settings-panel");
+            panel.style.display = panel.style.display === "none" ? "block" : "none";
+            document.getElementById("docs-panel").style.display = "none";
         };
-    });
+        document.getElementById("docs-toggle").onclick = () => {
+            const panel = document.getElementById("docs-panel");
+            panel.style.display = panel.style.display === "none" ? "block" : "none";
+            document.getElementById("settings-panel").style.display = "none";
+        };
 
-    // Initial UI
-    buildQuickActions();
-    buildChatSuggestions();
-    loadSettingsUI();
+        document.getElementById("save-settings").onclick = handleSaveSettings;
+        document.getElementById("refresh-models").onclick = loadOllamaModels;
+
+        // File Upload Handlers
+        const bindClick = (id: string, handler: () => void) => {
+            const el = document.getElementById(id);
+            if (el) el.onclick = handler;
+        };
+        const bindChange = (id: string, handler: (e: Event) => void) => {
+            const el = document.getElementById(id);
+            if (el) el.onchange = handler;
+        };
+
+        bindClick("file-upload-btn", () => document.getElementById("file-input").click());
+        bindChange("file-input", (e) => handleFileSelect(e, false));
+        bindClick("agent-file-btn", () => document.getElementById("agent-file-input").click());
+        bindChange("agent-file-input", (e) => handleFileSelect(e, true));
+
+        // Category Tabs
+        document.querySelectorAll(".category-tab").forEach((tab) => {
+            (tab as HTMLElement).onclick = () => {
+                const cat = (tab as HTMLElement).dataset.category as WordActionCategory;
+                switchCategory(cat);
+            };
+        });
+
+        setupScrollToBottom();
+        setupDiffDismiss();
+
+        // Build UI content and inject remaining icons
+        injectDocIcons();
+        injectCategoryIcons();
+        buildQuickActions();
+        buildChatSuggestions();
+        loadSettingsUI();
+    });
 });
 
 // ─── Icon Injection ────────────────────────────────────────────
@@ -760,14 +783,42 @@ function setupScrollToBottom(): void {
 
 function setupAgentKeyboardShortcut(): void {
     const input = document.getElementById("prompt-input") as HTMLTextAreaElement;
+    const button = document.getElementById("run") as HTMLButtonElement;
     if (!input) return;
 
+    // Auto-resize textarea as user types
+    input.addEventListener("input", () => {
+        input.style.height = "auto";
+        input.style.height = Math.min(input.scrollHeight, 80) + "px";
+        // Enable/disable Execute button based on input content
+        updateExecuteButtonState();
+    });
+
+    // Enter to submit (Shift+Enter for newline)
     input.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" && e.ctrlKey) {
+        if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
-            runWordAICommand();
+            if (input.value.trim() || attachedFiles.length > 0) {
+                runWordAICommand();
+            }
         }
     });
+
+    // Initial button state
+    updateExecuteButtonState();
+}
+
+function updateExecuteButtonState(): void {
+    const input = document.getElementById("prompt-input") as HTMLTextAreaElement;
+    const button = document.getElementById("run") as HTMLButtonElement;
+    if (!input || !button) return;
+
+    const hasContent = input.value.trim().length > 0 || attachedFiles.length > 0;
+    // Don't disable if agent is running (it becomes a Stop button)
+    if (button.classList.contains("is-busy")) return;
+    button.disabled = !hasContent;
+    button.style.opacity = hasContent ? "1" : "0.5";
+    button.style.cursor = hasContent ? "pointer" : "not-allowed";
 }
 
 // ─── Diff dismiss handler ──────────────────────────────────────
@@ -791,9 +842,25 @@ function setupDiffDismiss(): void {
 async function tryHardcodedAction(userPrompt: string): Promise<{ handled: boolean; message?: string }> {
     const lower = userPrompt.toLowerCase();
 
+    // Skip hardcoded actions when files are attached — user wants to CREATE content, not fix existing
+    if (attachedFiles.length > 0) {
+        return { handled: false };
+    }
+
     // ── Make Links Clickable ──────────────────────────────────
-    const isLinkAction = lower.includes("clickable") || lower.includes("hyperlink") ||
-        (lower.includes("link") && (lower.includes("make") || lower.includes("all")));
+    // Only match when the PRIMARY intent is about making links clickable,
+    // not when "link" or "clickable" appear as part of a larger creation request
+    const isLinkAction = (
+        (lower.includes("clickable") || lower.includes("hyperlink")) &&
+        !lower.includes("resume") && !lower.includes("create") &&
+        !lower.includes("build") && !lower.includes("make me") &&
+        !lower.includes("generate") && !lower.includes("write")
+    ) || (
+        lower.includes("link") && (lower.includes("make") || lower.includes("all")) &&
+        !lower.includes("resume") && !lower.includes("create") &&
+        !lower.includes("build") && !lower.includes("make me") &&
+        !lower.includes("generate") && !lower.includes("write")
+    );
 
     if (isLinkAction) {
         let count = 0;
@@ -1137,6 +1204,7 @@ async function runWordAICommand(): Promise<void> {
         button.classList.remove("btn-stop");
         if (runText) runText.innerText = originalText;
         if (runIcon) runIcon.innerHTML = originalIcon;
+        updateExecuteButtonState();
     }
 }
 
@@ -1488,7 +1556,8 @@ async function handleFileSelect(event: Event, isAgent: boolean = false): Promise
                 // Extract actual text from the PDF for content-based tasks
                 let extractedText = "";
                 try {
-                    const pdfResult = await extractTextFromPDFFile(file);
+                    const extractFn = await getPdfExtractor();
+                    const pdfResult = await extractFn(file);
                     extractedText = pdfResult.text;
                 } catch (e) {
                     console.warn("PDF text extraction failed, falling back to image mode:", e);
@@ -1647,7 +1716,10 @@ function updateFilePreview(show: boolean, isAgent: boolean = false): void {
 
     container.innerHTML = "";
 
-    if (attachedFiles.length === 0) return;
+    if (attachedFiles.length === 0) {
+        updateExecuteButtonState();
+        return;
+    }
 
     attachedFiles.forEach((file, index) => {
         const chip = document.createElement("div");
@@ -1675,6 +1747,8 @@ function updateFilePreview(show: boolean, isAgent: boolean = false): void {
         chip.appendChild(remove);
         container.appendChild(chip);
     });
+
+    updateExecuteButtonState();
 }
 
 function removeFile(index: number, isAgent: boolean): void {
@@ -1692,6 +1766,7 @@ function fileToBase64(file: File): Promise<string> {
 }
 
 async function renderPdfToImages(buffer: ArrayBuffer): Promise<string[]> {
+    const pdfjsLib = await getPdfJs();
     const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
     const images: string[] = [];
     const maxPages = Math.min(pdf.numPages, 5);

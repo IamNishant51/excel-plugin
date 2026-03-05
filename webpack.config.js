@@ -18,7 +18,7 @@ module.exports = async (env, options) => {
   const config = {
     devtool: dev ? "source-map" : "hidden-source-map", // Secure source maps in production
     entry: {
-      polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
+      polyfill: ["regenerator-runtime/runtime"],
       taskpane: ["./src/taskpane/taskpane.ts", "./src/taskpane/taskpane.html"],
       "word-taskpane": ["./src/word-taskpane/taskpane.ts", "./src/word-taskpane/taskpane.html"],
       commands: "./src/commands/commands.ts",

@@ -8,7 +8,7 @@
  */
 
 /* global Office */
-Office.onReady(function () {
+Office.onReady(() => {
   // If needed, Office.js is ready to be called.
 });
 /**
@@ -16,7 +16,7 @@ Office.onReady(function () {
  * @param event
  */
 function action(event) {
-  var message = {
+  const message = {
     type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
     message: "Performed action.",
     icon: "Icon.80x80",

@@ -3,7 +3,14 @@ import { UserIntent } from "../../core/types/sheetos";
 
 export class PlanPanel {
     render(intent?: UserIntent): string {
-        if (!intent) return `<div class="panel-loading">Generating execution graph...</div>`;
+        if (!intent) return `<div class="panel-skeleton">
+            <div class="sk-heading sk-shimmer"></div>
+            <div class="sk-badge sk-shimmer"></div>
+            <div class="sk-bar w85 sk-shimmer"></div>
+            <div class="sk-bar w70 sk-shimmer"></div>
+            <div class="sk-row"><div class="sk-block sk-shimmer"></div><div class="sk-block sk-shimmer"></div></div>
+            <div class="sk-bar w50 sk-shimmer"></div>
+        </div>`;
 
         const badgeClass = this.getIntentBadge(intent.type);
 

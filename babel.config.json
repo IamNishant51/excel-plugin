@@ -4,8 +4,12 @@
       "@babel/preset-env",
       {
         "targets": {
-          "esmodules": false
-        }
+          "edge": "79",
+          "chrome": "80",
+          "safari": "14"
+        },
+        "useBuiltIns": "usage",
+        "corejs": 3
       }
     ],
     "@babel/preset-typescript"
