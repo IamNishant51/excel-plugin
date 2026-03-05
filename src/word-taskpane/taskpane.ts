@@ -59,11 +59,11 @@ const WORD_ACTIONS: Record<WordActionCategory, { icon: string; label: string; pr
 
     // ── Resume & CV Tools ──
     resume: [
-        { icon: "fileText", label: "Make ATS Friendly 🎯", prompt: "DO NOT use body.clear(). Read paragraphs with .load('items/text,items/font,items/style'). Sync. Modify in-place for a COMPACT 1-2 page resume. Rules: 1) Very first paragraph (Name) must be font.size=18, font.bold=true (DO NOT shrink the name!). 2) Other body text: font.name='Arial' or 'Calibri', font.size=10.5, lineSpacing=12 (single), spaceAfter=2, spaceBefore=0. 3) Section Headings (like WORK EXPERIENCE): Set font.size=12, font.bold=true, font.color='#000000', spaceBefore=12, spaceAfter=4. DO NOT use 'Heading 1' style as it adds massive blank gaps. Delete any extra empty paragraphs to save space. Keep all content." },
+        { icon: "fileText", label: "Make ATS Friendly", prompt: "DO NOT use body.clear(). Read paragraphs with .load('items/text,items/font,items/style'). Sync. Modify in-place for a COMPACT 1-2 page resume. Rules: 1) Very first paragraph (Name) must be font.size=18, font.bold=true (DO NOT shrink the name!). 2) Other body text: font.name='Arial' or 'Calibri', font.size=10.5, lineSpacing=12 (single), spaceAfter=2, spaceBefore=0. 3) Section Headings (like WORK EXPERIENCE): Set font.size=12, font.bold=true, font.color='#000000', spaceBefore=12, spaceAfter=4. DO NOT use 'Heading 1' style as it adds massive blank gaps. Delete any extra empty paragraphs to save space. Keep all content." },
         { icon: "zap", label: "Optimize Keywords", prompt: "DO NOT use body.clear(). Read the document paragraphs. Identify the job role from the content. At the END of the document, insert a bolded paragraph 'Suggested Keywords', followed by a compact bullet list of recommended ATS keywords. Use font.size=10.5, lineSpacing=12. Do not modify existing content." },
         { icon: "paintbrush", label: "Professional Format", prompt: "DO NOT use body.clear(). Load all paragraphs. Sync. Make it a TIGHT, professional document. The very first paragraph (title/name) must stay large (font.size=18+). Body text: font.size=11, font.name='Calibri', lineSpacing=12 (single), spaceAfter=2. Section headings: font.size=12, font.bold=true, spaceBefore=10, spaceAfter=4. DO NOT use 'Heading 1' style to avoid massive spacing gaps. Delete empty lines. Sync." },
         { icon: "sortAsc", label: "Add Section Headers", prompt: "DO NOT use body.clear(). Identify paragraphs that look like resume sections ('Work Experience', 'Education', 'Skills'). Set their font.bold=true, font.size=12, text.toUpperCase(), spaceBefore=12, spaceAfter=4. DO NOT use 'Heading 1' style to prevent huge gaps. Keep existing text." },
-        { icon: "checkSquare", label: "Resume Checklist ✅", prompt: "DO NOT use body.clear(). Read paragraphs. At the END, insert standard paragraphs (not Heading style) analyzing: Contact info ✅/❌, Summary ✅/❌, Experience ✅/❌, Education ✅/❌, Skills ✅/❌, Action verbs ✅/❌, Compact format ✅/❌. Use font.size=10.5, lineSpacing=12." },
+        { icon: "checkSquare", label: "Resume Checklist", prompt: "DO NOT use body.clear(). Read paragraphs. At the END, insert standard paragraphs (not Heading style) analyzing: Contact info [YES/NO], Summary [YES/NO], Experience [YES/NO], Education [YES/NO], Skills [YES/NO], Action verbs [YES/NO], Compact format [YES/NO]. Use font.size=10.5, lineSpacing=12." },
         { icon: "trendUp", label: "Add Action Verbs", prompt: "DO NOT use body.clear(). Read all paragraphs. For bullet-point paragraphs in work experience sections, use search and replace to ensure each starts with a strong action verb. Use body.search() to find weak starts and replace with stronger alternatives via insertText with Word.InsertLocation.replace." },
         { icon: "users", label: "Add Summary", prompt: "DO NOT use body.clear(). Read the document to understand the background. Insert a 'Professional Summary' heading and 3-4 sentence summary paragraph at the START of the document (using Word.InsertLocation.start). Set the heading font to bold, size 12. Do NOT use 'Heading 1' style. Use industry-relevant keywords." },
         { icon: "barChart", label: "Quantify Achievements", prompt: "DO NOT use body.clear(). Read all paragraphs. At the END of the document, insert a section titled 'Suggested Metrics' (bold, size 12). For each work experience bullet that lacks numbers, insert a paragraph suggesting how to add quantified achievements. Example: 'Line: Managed team → Suggestion: Managed team of [X] members, achieving [Y]% growth'." },
@@ -73,7 +73,7 @@ const WORD_ACTIONS: Record<WordActionCategory, { icon: string; label: string; pr
 
     // ── Writing Tools ──
     writing: [
-        { icon: "brain", label: "Improve Writing ✍️", prompt: "DO NOT use body.clear(). Read all paragraphs. Use body.search() to find and replace weak phrases with stronger alternatives. For example, search for passive voice patterns and replace with active voice. Use insertText with Word.InsertLocation.replace for each match. Preserve all original meaning." },
+        { icon: "brain", label: "Improve Writing", prompt: "DO NOT use body.clear(). Read all paragraphs. Use body.search() to find and replace weak phrases with stronger alternatives. For example, search for passive voice patterns and replace with active voice. Use insertText with Word.InsertLocation.replace for each match. Preserve all original meaning." },
         { icon: "sortAsc", label: "Make Formal", prompt: "DO NOT use body.clear(). Read all paragraphs. Use body.search() to find casual words/phrases and replace them with formal equivalents. Examples: 'got' → 'received', 'a lot' → 'significantly', 'things' → 'elements', 'stuff' → 'materials'. Use insertText with Word.InsertLocation.replace." },
         { icon: "columns", label: "Make Concise", prompt: "DO NOT use body.clear(). Read all paragraphs. Use body.search() to find and remove filler words: 'very', 'really', 'basically', 'actually', 'in order to' → 'to', 'due to the fact that' → 'because'. Use insertText with Word.InsertLocation.replace." },
         { icon: "trendUp", label: "Expand Content", prompt: "DO NOT use body.clear(). Read the document. At the END, insert new paragraphs expanding on the key topics identified. Add supporting details, examples, and transitions as new paragraphs using body.insertParagraph with Word.InsertLocation.end." },
@@ -102,7 +102,7 @@ const WORD_ACTIONS: Record<WordActionCategory, { icon: string; label: string; pr
     // ── Insert Tools ──
     insert: [
         { icon: "divider", label: "Page Break", prompt: "Insert a page break at the end of the document using body.insertBreak(Word.BreakType.page, Word.InsertLocation.end). Then await context.sync()." },
-        { icon: "table", label: "Blank Table 📊", prompt: "Insert a blank 4x3 table at the end of the document. Use body.insertTable(4, 3, Word.InsertLocation.end, [['Column 1','Column 2','Column 3'],['','',''],['','',''],['','',' ']]). Set table style: table.styleBuiltIn = Word.BuiltInStyleName.gridTable4_Accent1. Then table.autoFitWindow(). Sync." },
+        { icon: "table", label: "Blank Table", prompt: "Insert a blank 4x3 table at the end of the document. Use body.insertTable(4, 3, Word.InsertLocation.end, [['Column 1','Column 2','Column 3'],['','',''],['','',''],['','',' ']]). Set table style: table.styleBuiltIn = Word.BuiltInStyleName.gridTable4_Accent1. Then table.autoFitWindow(). Sync." },
         { icon: "minus", label: "Horizontal Line", prompt: "Insert a horizontal rule at the end of the document. Use body.insertHtml('<hr style=\"border:none;border-top:2px solid #cccccc;margin:12px 0;\">', Word.InsertLocation.end). Sync." },
         { icon: "calendar", label: "Date & Time", prompt: "Insert today's date in a formatted paragraph at the end. Calculate the date: const now = new Date(); const dateStr = now.toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'long', day:'numeric'}); Insert with body.insertParagraph(dateStr, Word.InsertLocation.end). Set font.size=11, alignment right. Sync." },
         { icon: "hash", label: "Page Numbers", prompt: "DO NOT use body.clear(). Load sections. Get footer via sections.items[0].getFooter(Word.HeaderFooterType.primary). Insert 'Page ' paragraph with font.size=9, alignment=Word.Alignment.centered, font.color='#666666'. Sync." },
@@ -110,7 +110,7 @@ const WORD_ACTIONS: Record<WordActionCategory, { icon: string; label: string; pr
         { icon: "list", label: "Bullet List", prompt: "Insert a new bulleted list at the end with 5 items: const b1 = body.insertParagraph('First item', Word.InsertLocation.end); b1.startNewList(); body.insertParagraph('Second item', Word.InsertLocation.end); body.insertParagraph('Third item', Word.InsertLocation.end); body.insertParagraph('Fourth item', Word.InsertLocation.end); body.insertParagraph('Fifth item', Word.InsertLocation.end); Sync." },
         { icon: "hash", label: "Numbered List", prompt: "Insert a new numbered list at the end using HTML: body.insertHtml('<ol><li>First item</li><li>Second item</li><li>Third item</li><li>Fourth item</li><li>Fifth item</li></ol>', Word.InsertLocation.end). Sync." },
         { icon: "bookmark", label: "Table of Contents", prompt: "DO NOT use body.clear(). Read all paragraphs and their styles. Identify paragraphs with 'Heading' in their style name. At the START, insert 'Table of Contents' with style='Heading 1', then for each heading found, insert a paragraph with the heading text prefixed by its level number. Use Word.InsertLocation.start in reverse order. Sync." },
-        { icon: "checkSquare", label: "Checkbox List ☑️", prompt: "Insert a checkbox-style list at the end using HTML. Use body.insertHtml('<p>☐ Task item 1</p><p>☐ Task item 2</p><p>☐ Task item 3</p><p>☐ Task item 4</p><p>☐ Task item 5</p>', Word.InsertLocation.end). Sync." },
+        { icon: "checkSquare", label: "Checkbox List", prompt: "Insert a checkbox-style list at the end using HTML. Use body.insertHtml('<p>☐ Task item 1</p><p>☐ Task item 2</p><p>☐ Task item 3</p><p>☐ Task item 4</p><p>☐ Task item 5</p>', Word.InsertLocation.end). Sync." },
     ],
 
     // ── Layout Tools ──
@@ -127,7 +127,7 @@ const WORD_ACTIONS: Record<WordActionCategory, { icon: string; label: string; pr
 
     // ── Cleanup Tools ──
     cleanup: [
-        { icon: "eraser", label: "Smart Clean 🧹", prompt: "DO NOT use body.clear(). Load all paragraphs. For each paragraph: if text.trim() is empty and the next paragraph is also empty, delete the empty one with paragraph.delete(). For non-empty paragraphs: set font.name='Calibri', font.size=11, lineSpacing=15, spaceAfter=6. Use body.search('  ') to find double spaces and replace with single space via insertText(Word.InsertLocation.replace). Then await context.sync()." },
+        { icon: "eraser", label: "Smart Clean", prompt: "DO NOT use body.clear(). Load all paragraphs. For each paragraph: if text.trim() is empty and the next paragraph is also empty, delete the empty one with paragraph.delete(). For non-empty paragraphs: set font.name='Calibri', font.size=11, lineSpacing=15, spaceAfter=6. Use body.search('  ') to find double spaces and replace with single space via insertText(Word.InsertLocation.replace). Then await context.sync()." },
         { icon: "eraser", label: "Remove Formatting", prompt: "DO NOT use body.clear(). Load all paragraphs. For each: set style='Normal', font.name='Calibri', font.size=11, font.bold=false, font.italic=false, font.underline='None', font.color='#000000', lineSpacing=15, spaceAfter=6. Then await context.sync()." },
         { icon: "eraser", label: "Fix Spacing", prompt: "DO NOT use body.clear(). Load all paragraphs. For empty paragraphs that are consecutive, delete the extras (keep max 1 between sections). For all paragraphs: set lineSpacing=15, spaceAfter=6, spaceBefore=0. Then await context.sync()." },
         { icon: "search", label: "Find & Replace", prompt: "DO NOT use body.clear(). Use body.search() to find and replace: double spaces → single space, triple dots '...' → ellipsis '…'. For each search, load items, sync, then loop and use insertText with Word.InsertLocation.replace." },
@@ -151,8 +151,8 @@ const WORD_ACTIONS: Record<WordActionCategory, { icon: string; label: string; pr
 
     // ── Smart Tools ──
     smart: [
-        { icon: "brain", label: "Document Analyzer 🔬", prompt: "DO NOT use body.clear(). Read all paragraphs with body.paragraphs.load('items/text,items/style'). Sync. Calculate word count, paragraph count, estimated reading time (250 WPM), avg words per paragraph, sentence count (approx by counting periods). At the END, insert a styled 'Document Analysis Report' section with these stats as a formatted table using body.insertTable. Use Word.InsertLocation.end." },
-        { icon: "zap", label: "Make Links Clickable 🔗", prompt: "DO NOT use body.clear(). DO NOT use getSelection(). DO NOT insert or append any URL text. DO NOT use body.search('http') because that only matches the 4-char substring, NOT the full URL. Instead: 1) Load paragraphs: const paras = body.paragraphs; paras.load('items/text'); await context.sync(); 2) Extract full URLs with JS regex: const urlRegex = /https?:\\/\\/[^\\s,)>\\]]+/g; const foundUrls = []; for (let i = 0; i < paras.items.length; i++) { const txt = paras.items[i].text || ''; let m; while ((m = urlRegex.exec(txt)) !== null) foundUrls.push(m[0]); } 3) For each URL, search and hyperlink: for (let j = 0; j < foundUrls.length; j++) { const sr = body.search(foundUrls[j], {matchCase:false, matchWholeWord:false}); sr.load('items'); await context.sync(); for (let k = 0; k < sr.items.length; k++) sr.items[k].hyperlink = foundUrls[j]; await context.sync(); } NEVER use insertText, insertParagraph, or insertHtml to write URL text." },
+        { icon: "brain", label: "Document Analyzer", prompt: "DO NOT use body.clear(). Read all paragraphs with body.paragraphs.load('items/text,items/style'). Sync. Calculate word count, paragraph count, estimated reading time (250 WPM), avg words per paragraph, sentence count (approx by counting periods). At the END, insert a styled 'Document Analysis Report' section with these stats as a formatted table using body.insertTable. Use Word.InsertLocation.end." },
+        { icon: "zap", label: "Make Links Clickable", prompt: "DO NOT use body.clear(). DO NOT use getSelection(). DO NOT insert or append any URL text. DO NOT use body.search('http') because that only matches the 4-char substring, NOT the full URL. Instead: 1) Load paragraphs: const paras = body.paragraphs; paras.load('items/text'); await context.sync(); 2) Extract full URLs with JS regex: const urlRegex = /https?:\\/\\/[^\\s,)>\\]]+/g; const foundUrls = []; for (let i = 0; i < paras.items.length; i++) { const txt = paras.items[i].text || ''; let m; while ((m = urlRegex.exec(txt)) !== null) foundUrls.push(m[0]); } 3) For each URL, search and hyperlink: for (let j = 0; j < foundUrls.length; j++) { const sr = body.search(foundUrls[j], {matchCase:false, matchWholeWord:false}); sr.load('items'); await context.sync(); for (let k = 0; k < sr.items.length; k++) sr.items[k].hyperlink = foundUrls[j]; await context.sync(); } NEVER use insertText, insertParagraph, or insertHtml to write URL text." },
         { icon: "trendUp", label: "Readability Score", prompt: "DO NOT use body.clear(). Read all paragraphs. Count total words, total sentences (periods+exclamation+question marks), and total syllables (approximate: count vowel groups in each word). Calculate Flesch-Kincaid grade level and reading ease. At the END, insert a 'Readability Report' section with the scores and interpretation. Use insertParagraph with Word.InsertLocation.end." },
         { icon: "search", label: "Extract Key Points", prompt: "DO NOT use body.clear(). Read all paragraphs. At the START of the document, insert 'Key Takeaways' heading (bold, font.size=14) followed by numbered key points extracted from the content. Use insertParagraph with Word.InsertLocation.start. Insert in reverse order so they appear correctly." },
         { icon: "copy", label: "Compare Sections", prompt: "DO NOT use body.clear(). Read all paragraphs. Identify sections by headings. At the END, insert a comparison table using body.insertTable() showing: Section Name, Word Count, Paragraph Count, Avg Sentence Length. Style the table. Use Word.InsertLocation.end." },
@@ -441,7 +441,7 @@ async function loadOllamaModels(): Promise<void> {
 
     if (!select) return;
 
-    select.innerHTML = `<option value="" disabled selected>Loading...</option>`;
+    select.innerHTML = `<option value="" disabled selected>Loading models…</option>`;
     if (statusEl) { statusEl.textContent = ""; statusEl.className = "model-status"; }
 
     const models = await fetchOllamaModels(host);
@@ -491,7 +491,7 @@ function handleSaveSettings(): void {
     const btn = document.getElementById("save-settings");
     if (btn) {
         const originalText = btn.textContent;
-        btn.textContent = "✓ Saved";
+        btn.textContent = "Saved";
         btn.classList.add("saved");
         setTimeout(() => { btn.textContent = originalText || "Save"; btn.classList.remove("saved"); }, 1500);
     }
@@ -572,7 +572,7 @@ async function sendChatMessage(): Promise<void> {
                 if (lastBubble) {
                     const badge = document.createElement('span');
                     badge.className = 'context-badge';
-                    badge.innerHTML = '📄 Document context loaded';
+                    badge.innerHTML = '${Icons.fileText} Document context loaded';
                     lastBubble.appendChild(badge);
                 }
             }
@@ -601,7 +601,7 @@ async function sendChatMessage(): Promise<void> {
             if (lastBubble) {
                 const badge = document.createElement('span');
                 badge.className = 'context-badge';
-                badge.innerHTML = `📎 ${attachedFiles.length} file(s) attached`;
+                badge.innerHTML = `${Icons.fileText} ${attachedFiles.length} file(s) attached`;
                 lastBubble.appendChild(badge);
             }
         }
@@ -642,7 +642,7 @@ async function sendChatMessage(): Promise<void> {
         if (error.name === 'AbortError') {
             addChatBubble("ai", `<p style="color:var(--text-3)"><i>Generation stopped.</i></p>`);
         } else {
-            addChatBubble("ai", `<p style="color:var(--error)">⚠️ ${error.message}</p>`);
+            addChatBubble("ai", `<p style="color:var(--error)">${Icons.alertTriangle} ${error.message}</p>`);
             showToast("error", error.message?.substring(0, 80) || "Something went wrong");
         }
     } finally {
@@ -971,9 +971,9 @@ async function tryHardcodedAction(userPrompt: string): Promise<{ handled: boolea
         });
 
         if (count === 0) {
-            return { handled: true, message: "⚠️ No URLs found. Make sure the text contains links starting with http://, https://, or www." };
+            return { handled: true, message: `${Icons.alertTriangle} No URLs found. Make sure the text contains links starting with http://, https://, or www.` };
         }
-        return { handled: true, message: `✅ Made ${count} link${count !== 1 ? "s" : ""} clickable!` };
+        return { handled: true, message: `${Icons.checkCircle} Made ${count} link${count !== 1 ? "s" : ""} clickable!` };
     }
 
     // Not a hardcoded action — fall through to LLM
@@ -1054,8 +1054,8 @@ async function runWordAICommand(): Promise<void> {
                 skeletonEl.style.display = "none";
                 debugEl.innerText = "// Executed via hardcoded action (no LLM needed)";
                 hideEditingOverlay();
-                const isError = hardcoded.message?.startsWith("⚠️") || hardcoded.message?.startsWith("❌");
-                showStatus(statusEl, isError ? "info" : "success", hardcoded.message || "✅ Done!");
+                const isError = hardcoded.message?.includes('alertTriangle') || hardcoded.message?.includes('xCircle');
+                showStatus(statusEl, isError ? "info" : "success", hardcoded.message || `${Icons.checkCircle} Done!`);
                 if (!isError) showToast("success", hardcoded.message || "Done!");
                 // Show diff
                 try {
@@ -1167,7 +1167,7 @@ async function runWordAICommand(): Promise<void> {
         hideEditingOverlay();
 
         if (executionResult.success) {
-            showStatus(statusEl, "success", "✅ Done! Document updated successfully.");
+            showStatus(statusEl, "success", `${Icons.checkCircle} Done! Document updated successfully.`);
             showToast("success", "Document updated!");
 
             // Capture AFTER text and show diff
@@ -1185,7 +1185,7 @@ async function runWordAICommand(): Promise<void> {
                 }
             } catch (e) { console.warn("[Diff] Could not capture after-text:", e); }
         } else {
-            showStatus(statusEl, "error", `❌ Error: ${executionResult.error}`);
+            showStatus(statusEl, "error", `${Icons.xCircle} Error: ${executionResult.error}`);
             showToast("error", executionResult.error?.substring(0, 80) || "Execution failed");
         }
 
@@ -1193,9 +1193,9 @@ async function runWordAICommand(): Promise<void> {
         skeletonEl.style.display = "none";
         hideEditingOverlay();
         if (error.name === 'AbortError') {
-            showStatus(statusEl, "info", "⏹ Agent stopped.");
+            showStatus(statusEl, "info", "Agent stopped.");
         } else {
-            showStatus(statusEl, "error", `❌ ${error.message}`);
+            showStatus(statusEl, "error", `${Icons.xCircle} ${error.message}`);
             showToast("error", error.message?.substring(0, 80) || "Something went wrong");
         }
     } finally {
@@ -1521,7 +1521,7 @@ function showToast(type: string, message: string): void {
     const toast = document.createElement("div");
     toast.className = `toast toast-${type}`;
     toast.innerHTML = `
-    <span class="toast-icon">${type === "success" ? "✅" : type === "error" ? "❌" : "ℹ️"}</span>
+    <span class="toast-icon">${type === "success" ? Icons.checkCircle : type === "error" ? Icons.xCircle : Icons.info}</span>
     <span class="toast-text">${message}</span>
   `;
     container.appendChild(toast);

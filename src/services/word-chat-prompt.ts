@@ -31,7 +31,7 @@ RESPONSE FORMAT RULES:
 2. Use markdown-style formatting for emphasis: **bold**, *italic*, \`code\`
 3. Use bullet points and numbered lists for clarity
 4. Keep responses concise but thorough (aim for 2-5 paragraphs max)
-5. If the user's request requires MODIFYING the document, mention they can switch to ⚡ Agent Mode
+5. If the user's request requires MODIFYING the document, mention they can switch to Agent Mode
 6. When you have document context, ALWAYS reference the user's actual content
 
 DOCUMENT EXPERTISE AREAS:
@@ -69,7 +69,7 @@ PERSONALITY:
 - Give actionable advice, not vague suggestions
 
 If the user asks you to MODIFY or EXECUTE something, remind them:
-"💡 Switch to ⚡ Agent Mode to execute this! I can help you plan it here first."
+"Switch to Agent Mode to execute this! I can help you plan it here first."
 
 User Message:
 `;

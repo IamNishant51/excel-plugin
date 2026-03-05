@@ -44,12 +44,12 @@ DATA CLEANING RULES:
 FORBIDDEN BEHAVIORS:
 ═══════════════════════════════════════════════════════════════════════════════
 
-❌ Do NOT generate email addresses (e.g., firstname.lastname@company.com)
-❌ Do NOT fabricate phone numbers
-❌ Do NOT hallucinate skills, experience, or qualifications
-❌ Do NOT include "N/A", "Not Found", "Unknown", or similar — use null instead
-❌ Do NOT include markdown formatting
-❌ Do NOT add explanatory text
+- Do NOT generate email addresses (e.g., firstname.lastname@company.com)
+- Do NOT fabricate phone numbers
+- Do NOT hallucinate skills, experience, or qualifications
+- Do NOT include "N/A", "Not Found", "Unknown", or similar — use null instead
+- Do NOT include markdown formatting
+- Do NOT add explanatory text
 
 You are NOT creative. You are PRECISE and DETERMINISTIC.`;
 

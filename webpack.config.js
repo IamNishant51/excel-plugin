@@ -16,7 +16,15 @@ async function getHttpsOptions() {
 module.exports = async (env, options) => {
   const dev = options.mode === "development";
   const config = {
-    devtool: dev ? "source-map" : "hidden-source-map", // Secure source maps in production
+    devtool: dev ? "eval-source-map" : "hidden-source-map",
+    ...(dev ? {
+      cache: {
+        type: "filesystem",
+        buildDependencies: {
+          config: [__filename],
+        },
+      },
+    } : {}),
     entry: {
       polyfill: ["regenerator-runtime/runtime"],
       taskpane: ["./src/taskpane/taskpane.ts", "./src/taskpane/taskpane.html"],
@@ -36,7 +44,10 @@ module.exports = async (env, options) => {
           test: /\.ts$/,
           exclude: /node_modules/,
           use: {
-            loader: "babel-loader"
+            loader: "babel-loader",
+            options: {
+              cacheDirectory: true,
+            },
           },
         },
         {

@@ -1,3 +1,4 @@
+import { Icons } from "../../services/icons";
 import { getConfig, GROQ_MODELS, GEMINI_MODELS, LLMConfig } from "../../services/llm.service";
 
 declare global {
@@ -15,7 +16,7 @@ export class SettingsPanel {
             <div class="panel-content settings-panel">
                 <div class="panel-header">
                     <h2>Engine Configuration</h2>
-                    <button id="close-settings" class="close-btn">✕</button>
+                    <button id="close-settings" class="close-btn">${Icons.x}</button>
                 </div>
 
                 <div class="card">
@@ -46,7 +47,7 @@ export class SettingsPanel {
                     <label for="groq-key">Groq API Key</label>
                     <div class="input-eye-wrap">
                         <input type="password" id="groq-key" class="form-control" value="${config.apiKey || ''}" placeholder="gsk_..." autocomplete="off">
-                        <button type="button" id="toggle-groq-key" class="eye-btn" aria-label="Show/Hide API Key" tabindex="0">👁️</button>
+                        <button type="button" id="toggle-groq-key" class="eye-btn" aria-label="Show/Hide API Key" tabindex="0">${Icons.eye}</button>
                     </div>
                 </div>
                 <div class="card">
@@ -85,7 +86,7 @@ export class SettingsPanel {
             `;
         } else if (provider === 'local') {
             // Show all downloaded Ollama models
-            let modelsHtml = '<option value="">Loading...</option>';
+            let modelsHtml = '<option value="">Loading models\u2026</option>';
             if (window.__OLLAMA_MODELS__) {
                 modelsHtml = window.__OLLAMA_MODELS__.map((m: any) => `<option value="${m.name}" ${config.localModel === m.name ? 'selected' : ''}>${m.name}</option>`).join('');
             }

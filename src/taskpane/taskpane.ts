@@ -52,7 +52,7 @@ const CATEGORIZED_ACTIONS: Record<ActionCategory, { icon: string; label: string;
 
   // ── Data Cleanup ──
   cleanup: [
-    { icon: "eraser", label: "Smart Clean 🧹", prompt: "Analyze the used range. Perform 'Smart Cleaning': (1) Trim all whitespace. (2) Convert text-numbers to real numbers. (3) Standardize dates to Short Date format. (4) Remove completely empty rows. (5) Remove duplicate rows. (6) Convert text columns to Proper Case. Write a summary of changes in a new cell comment." },
+    { icon: "eraser", label: "Smart Clean", prompt: "Analyze the used range. Perform 'Smart Cleaning': (1) Trim all whitespace. (2) Convert text-numbers to real numbers. (3) Standardize dates to Short Date format. (4) Remove completely empty rows. (5) Remove duplicate rows. (6) Convert text columns to Proper Case. Write a summary of changes in a new cell comment." },
     { icon: "eraser", label: "Remove Duplicates", prompt: "Find and remove duplicate rows from the data, keeping the first occurrence of each." },
     { icon: "eraser", label: "Trim Spaces", prompt: "Trim all leading and trailing whitespace from every cell in the used range." },
     { icon: "eraser", label: "Fix Empty Rows", prompt: "Find and delete all completely empty rows within the used data range." },
@@ -66,7 +66,7 @@ const CATEGORIZED_ACTIONS: Record<ActionCategory, { icon: string; label: string;
 
   // ── Natural Language Formula Generator ──
   formulas: [
-    { icon: "formula", label: "Formula Doctor 🚑", prompt: "Analyze the active cell/formula. (1) Explain the logic in a cell note. (2) If there is an error (#VALUE, #REF), FIX it and explain the fix. (3) If it's a value, suggest a formula. Expertly debug." },
+    { icon: "formula", label: "Formula Doctor", prompt: "Analyze the active cell/formula. (1) Explain the logic in a cell note. (2) If there is an error (#VALUE, #REF), FIX it and explain the fix. (3) If it's a value, suggest a formula. Expertly debug." },
     { icon: "formula", label: "Auto SUM", prompt: "Add a SUM formula at the bottom of each numeric column with a bold TOTAL label in column A." },
     { icon: "formula", label: "AVERAGE Row", prompt: "Add an AVERAGE formula at the bottom of each numeric column with a bold AVERAGE label." },
     { icon: "formula", label: "COUNT & COUNTA", prompt: "Add COUNT and COUNTA formulas at the bottom to count numeric and non-empty cells in each column." },
@@ -325,7 +325,7 @@ await context.sync();` },
 
   // ── Report Automation Engine ──
   reports: [
-    { icon: "barChart", label: "Instant Dashboard 📊", prompt: "Analyze the dataset. Create a new sheet 'Dashboard'. Generate 3 professional charts (Bar, Line, Pie) for key trends. Add 'Big Number' cards at top for Totals. Apply modern theme. Make it executive-ready." },
+    { icon: "barChart", label: "Instant Dashboard", prompt: "Analyze the dataset. Create a new sheet 'Dashboard'. Generate 3 professional charts (Bar, Line, Pie) for key trends. Add 'Big Number' cards at top for Totals. Apply modern theme. Make it executive-ready." },
     { icon: "barChart", label: "Sales Report", prompt: "Generate a professional monthly sales report from the existing data. Do ALL of this: (1) Add a report title row at the top: 'Monthly Sales Report' in bold, font size 14, merged across all columns. (2) Add today's date below the title, right-aligned. (3) Format the data with professional headers (dark navy background, white bold text) and alternating row colors. (4) Add SUM, AVERAGE, MAX, and MIN summary rows at the bottom with labels. (5) Create a clustered column chart from the data showing performance by category. Position it below the summary. (6) Add thin borders throughout and auto-fit all columns." },
     { icon: "barChart", label: "Financial Summary", prompt: "Build a financial summary report from the data. (1) Add a 'Financial Summary' title merged at top, bold, font size 14. (2) Format headers professionally with dark green (#1B4D3E) background and white text. (3) Format all currency columns as $#,##0.00. (4) Add a TOTAL row with SUM formulas, bold, with a top border. (5) Add a 'Net' or 'Difference' calculation if applicable. (6) Apply conditional formatting: positive numbers in green, negative in red. (7) Create a pie chart showing the breakdown. (8) Auto-fit columns and freeze header row." },
     { icon: "trendUp", label: "Performance Review", prompt: "Create a team performance report from the data. (1) Add a 'Team Performance Report' title at top, merged, bold, font size 14. (2) Professional header formatting with indigo (#2B3A67) background, white text. (3) Add RANK column based on the primary numeric metric column. (4) Add conditional formatting: top 3 rows highlighted in light green (#E6F4EA), bottom 3 in light red (#FDE8E8). (5) Add AVERAGE, MAX, MIN summary rows at bottom. (6) Create a bar chart showing individual performance, sorted high to low. (7) Auto-fit and add borders." },
@@ -362,17 +362,17 @@ await context.sync();` },
 
   // ── Document Extraction (Resume/CV Import) ──
   extract: [
-    { icon: "fileText", label: "📄 Import to Schema", prompt: "SCHEMA_EXTRACTION_MODE: Read the column headers in row 1 of the current sheet. For each attached PDF/resume, extract ONLY the data that matches those columns. If a column's data doesn't exist in the PDF, leave it blank. Append each candidate as a new row." },
-    { icon: "users", label: "📋 Bulk Resume Import", prompt: "SCHEMA_EXTRACTION_MODE: Import all attached resumes/CVs. First read existing column headers. If no headers exist, create: Name, Email, Phone, Skills, Experience, Education. Extract data from each PDF and add one row per candidate. Never hallucinate — if data is missing, leave blank." },
-    { icon: "fileTemplate", label: "📝 HR Database Setup", prompt: "Create a professional HR candidate database template with columns: Name, Email, Phone, LinkedIn, Current Company, Current Role, Skills, Years of Experience, Highest Education, Expected Salary, Notes. Apply formatting with filters and freeze header row." },
-    { icon: "search", label: "🔍 Smart Extract", prompt: "SCHEMA_EXTRACTION_MODE: Intelligently analyze the attached documents. Read column headers from the sheet. Match document content to columns using smart aliases (e.g., 'Mobile No' matches 'Phone' column). Only extract what exists — no guessing." },
-    { icon: "table", label: "📊 Create Schema First", prompt: "Before importing, set up your columns: Create header row with: Name, Email, Mobile No, Age, Address, Skills, Experience. Format as a proper table with filters. Now attach PDFs and click 'Import to Schema'." },
-    { icon: "checkSquare", label: "✅ Validate & Clean", prompt: "Validate the extracted data: Check for blank required fields (Name, Email). Highlight rows with missing data in yellow. Add a 'Status' column marking 'Complete' or 'Incomplete' for each row." },
+    { icon: "fileText", label: "Import to Schema", prompt: "SCHEMA_EXTRACTION_MODE: Read the column headers in row 1 of the current sheet. For each attached PDF/resume, extract ONLY the data that matches those columns. If a column's data doesn't exist in the PDF, leave it blank. Append each candidate as a new row." },
+    { icon: "users", label: "Bulk Resume Import", prompt: "SCHEMA_EXTRACTION_MODE: Import all attached resumes/CVs. First read existing column headers. If no headers exist, create: Name, Email, Phone, Skills, Experience, Education. Extract data from each PDF and add one row per candidate. Never hallucinate — if data is missing, leave blank." },
+    { icon: "fileTemplate", label: "HR Database Setup", prompt: "Create a professional HR candidate database template with columns: Name, Email, Phone, LinkedIn, Current Company, Current Role, Skills, Years of Experience, Highest Education, Expected Salary, Notes. Apply formatting with filters and freeze header row." },
+    { icon: "search", label: "Smart Extract", prompt: "SCHEMA_EXTRACTION_MODE: Intelligently analyze the attached documents. Read column headers from the sheet. Match document content to columns using smart aliases (e.g., 'Mobile No' matches 'Phone' column). Only extract what exists — no guessing." },
+    { icon: "table", label: "Create Schema First", prompt: "Before importing, set up your columns: Create header row with: Name, Email, Mobile No, Age, Address, Skills, Experience. Format as a proper table with filters. Now attach PDFs and click 'Import to Schema'." },
+    { icon: "checkSquare", label: "Validate & Clean", prompt: "Validate the extracted data: Check for blank required fields (Name, Email). Highlight rows with missing data in yellow. Add a 'Status' column marking 'Complete' or 'Incomplete' for each row." },
   ],
 
   // ── Smart Tools (Power User Headache Solvers) ──
   smart: [
-    { icon: "brain", label: "Data Profiler 🔬", prompt: `Analyze the entire dataset and create a comprehensive Data Profile report on a NEW sheet called "Data Profile". For each column, calculate: (1) Column Name, (2) Data Type (text/number/date/mixed), (3) Total Count, (4) Blank Count, (5) Blank %, (6) Unique Values Count, (7) Most Common Value, (8) For numeric columns: Min, Max, Mean, Median. Create this as a formatted table with headers. Add a "Data Quality Score" at the top calculated as (100 - average blank %). Apply professional formatting: dark header row, alternating rows, conditional formatting on blank % (green < 5%, yellow 5-20%, red > 20%). Auto-fit all columns.` },
+    { icon: "brain", label: "Data Profiler", prompt: `Analyze the entire dataset and create a comprehensive Data Profile report on a NEW sheet called "Data Profile". For each column, calculate: (1) Column Name, (2) Data Type (text/number/date/mixed), (3) Total Count, (4) Blank Count, (5) Blank %, (6) Unique Values Count, (7) Most Common Value, (8) For numeric columns: Min, Max, Mean, Median. Create this as a formatted table with headers. Add a "Data Quality Score" at the top calculated as (100 - average blank %). Apply professional formatting: dark header row, alternating rows, conditional formatting on blank % (green < 5%, yellow 5-20%, red > 20%). Auto-fit all columns.` },
     {
       icon: "highlight", label: "Highlight Duplicates", prompt: `Find and highlight ALL duplicate values in the first data column (column A, excluding header).
 
@@ -411,12 +411,12 @@ for (let i = 1; i < values.length; i++) {
 await context.sync();
 // Done: highlighted duplicates` },
     { icon: "columns", label: "Compare Columns", prompt: `Compare columns A and B to find differences. For each row, if A ≠ B, highlight both cells in light red (#FEE2E2). If they match, highlight in light green (#DCFCE7). Add a new column C with 'Match' or 'Mismatch' labels. Add a summary at the bottom showing total matches and mismatches. Format the summary row in bold.` },
-    { icon: "formula", label: "Auto Summary Row ⚡", prompt: `Analyze ALL columns. For each NUMERIC column, add 4 summary rows at the bottom: SUM, AVERAGE, MIN, MAX — with formula labels in column A. Make the summary section visually distinct: add a thick top border, bold labels, and light blue (#EFF6FF) background. Format numbers with commas and 2 decimal places. Auto-fit all columns.` },
-    { icon: "crosshair", label: "Top/Bottom 5 🎯", prompt: `Find the main numeric column in the data. Identify the Top 5 values and highlight their entire rows in green (#DCFCE7). Identify the Bottom 5 values and highlight their rows in red (#FEE2E2). Add a 'Rank' column at the end. Sort the data by the numeric column descending. Auto-fit columns.` },
+    { icon: "formula", label: "Auto Summary Row", prompt: `Analyze ALL columns. For each NUMERIC column, add 4 summary rows at the bottom: SUM, AVERAGE, MIN, MAX — with formula labels in column A. Make the summary section visually distinct: add a thick top border, bold labels, and light blue (#EFF6FF) background. Format numbers with commas and 2 decimal places. Auto-fit all columns.` },
+    { icon: "crosshair", label: "Top/Bottom 5", prompt: `Find the main numeric column in the data. Identify the Top 5 values and highlight their entire rows in green (#DCFCE7). Identify the Bottom 5 values and highlight their rows in red (#FEE2E2). Add a 'Rank' column at the end. Sort the data by the numeric column descending. Auto-fit columns.` },
     { icon: "mail", label: "Extract Emails & Phones", prompt: `Scan ALL cells in the used range. Extract any email addresses (containing @) and phone numbers (10+ digit patterns). Create a new sheet called "Contacts" with columns: Source Cell, Name (if adjacent), Email, Phone. Remove duplicates. Format as a professional table with filters. Auto-fit columns.` },
     { icon: "layers", label: "Unpivot Data", prompt: `Convert wide-format data to long format (unpivot). Take the first column as the ID column. Treat all remaining columns as value columns. Create a new sheet "Unpivoted" with 3 columns: the original ID, "Category" (original column header), and "Value" (the cell value). Skip blank values. Apply professional formatting.` },
     { icon: "shield", label: "Data Validation Rules", prompt: `Analyze column headers and add smart data validation rules. For columns that look like: (1) Email — add text validation requiring '@', (2) Phone — allow only numbers with length 10-15, (3) Date columns — add date validation, (4) Status/Type columns — create dropdown lists from unique existing values, (5) Numeric columns — add number validation (>= 0). Highlight validated columns with a subtle blue header to indicate protection is active.` },
-    { icon: "dollarSign", label: "Number to Words 💰", prompt: `Add a new column next to the main numeric/currency column. For each row, convert the number to words in English (e.g., 1234 → "One Thousand Two Hundred Thirty Four"). This is useful for invoices and checks. Use a helper function that handles numbers up to 999,999,999. Format the words column with proper case and auto-fit.` },
+    { icon: "dollarSign", label: "Number to Words", prompt: `Add a new column next to the main numeric/currency column. For each row, convert the number to words in English (e.g., 1234 → "One Thousand Two Hundred Thirty Four"). This is useful for invoices and checks. Use a helper function that handles numbers up to 999,999,999. Format the words column with proper case and auto-fit.` },
     { icon: "copy", label: "Smart Merge Sheets", prompt: `Merge data from ALL worksheets in the workbook into a new sheet called "Merged Data". For each sheet: read the headers and data, align columns by header name (smart matching), and append all rows. Remove exact duplicate rows from the final merged data. Add a "Source Sheet" column to track where each row came from. Apply professional formatting with alternating rows.` },
   ],
 };
@@ -755,7 +755,7 @@ async function loadOllamaModels(): Promise<void> {
 
   if (!select) return;
 
-  select.innerHTML = `<option value="" disabled selected>Loading...</option>`;
+  select.innerHTML = `<option value="" disabled selected>Loading models…</option>`;
   if (statusEl) {
     statusEl.textContent = "";
     statusEl.className = "model-status";
@@ -828,7 +828,7 @@ function handleSaveSettings(): void {
   const btn = document.getElementById("save-settings");
   if (btn) {
     const originalText = btn.textContent;
-    btn.textContent = "✓ Saved";
+    btn.textContent = "Saved";
     btn.classList.add("saved");
     setTimeout(() => {
       btn.textContent = originalText || "Save";
@@ -902,7 +902,7 @@ async function sendChatMessage(): Promise<void> {
     chatConversation.push({ role: "system", content: initialPrompt });
   }
 
-  // 🔥 CONTEXT AWARENESS: Auto-detect if user is asking about their sheet or searching for data
+  // CONTEXT AWARENESS: Auto-detect if user is asking about their sheet or searching for data
   const needsSheetContext = /\b(this|my|current|opened?)\s+(sheet|data|table|workbook|excel|spreadsheet|sheeet|spreadsheat)\b|\b(find|search|where|is|check|lookup|contains?|exist|details|about|located|who|tell|give)\b|what\s+(do|can|should)|improve|analyze|suggest|help|better|optimize|\b\d{5,}\b|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/i.test(message) ||
     /\b[A-Z]{2,}(?:\s+[A-Z]{2,})+\b/.test(message) || // ALL CAPS sequences (Names/IDs)
     /\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\b/.test(message); // Title Case sequences (Names)
@@ -924,7 +924,7 @@ async function sendChatMessage(): Promise<void> {
         if (lastBubble) {
           const badge = document.createElement('span');
           badge.className = 'context-badge';
-          badge.innerHTML = hits > 0 ? `🔍 Found ${hits} search hits in sheet` : '📊 Sheet context loaded';
+          badge.innerHTML = hits > 0 ? `${Icons.search} Found ${hits} search hits in sheet` : `${Icons.barChart} Sheet context loaded`;
           lastBubble.appendChild(badge);
         }
       }
@@ -983,7 +983,7 @@ async function sendChatMessage(): Promise<void> {
       addChatBubble("ai", `<p style="color:var(--text-3)"><i>Generation stopped.</i></p>`);
     } else {
       if (skeletonEl) skeletonEl.remove();
-      addChatBubble("ai", `<p style="color:var(--error)">⚠️ ${error.message}</p>`);
+      addChatBubble("ai", `<p style="color:var(--error)">${Icons.alertTriangle} ${error.message}</p>`);
       showToast("error", error.message?.substring(0, 80) || "Something went wrong");
     }
   } finally {
@@ -1445,7 +1445,7 @@ async function getSheetContext(query?: string): Promise<{ text: string, hits: nu
                 return `${header}: ${val}`;
               }).join(" | ");
 
-              deepSearchContext += `📌 MATCH [${term}] at ${foundRange.address}:\n   >> ${rowData}\n`;
+              deepSearchContext += `[MATCH] [${term}] at ${foundRange.address}:\n   >> ${rowData}\n`;
             }
           }
           if (hitsCount > 0) {
@@ -1482,7 +1482,7 @@ async function getSheetContext(query?: string): Promise<{ text: string, hits: nu
         // Build context string
         let contextStr = "";
         if (deepSearchContext && deepSearchContext.length > 50) {
-          contextStr += `🚨 [CRITICAL DATA HIT] 🚨\n${deepSearchContext}\n\n`;
+          contextStr += `[CRITICAL DATA HIT]\n${deepSearchContext}\n\n`;
         }
 
         contextStr += `--- GENERAL SHEET INFO ---\n`;
@@ -1584,7 +1584,7 @@ async function detectAndShowColumns(): Promise<void> {
 
     if (columns.length === 0) {
       // No columns found
-      columnChips.innerHTML = '<span class="column-chip empty-warning">⚠️ No headers in Row 1 — add columns first</span>';
+      columnChips.innerHTML = '<span class="column-chip empty-warning">No headers in Row 1 — add columns first</span>';
       columnCount.textContent = "0";
       detectedSection.style.display = "block";
     } else {
@@ -1597,11 +1597,11 @@ async function detectAndShowColumns(): Promise<void> {
     }
   } catch (e) {
     console.error("Error detecting columns:", e);
-    columnChips.innerHTML = '<span class="column-chip empty-warning">⚠️ Error reading Excel</span>';
+    columnChips.innerHTML = '<span class="column-chip empty-warning">Error reading Excel</span>';
     columnCount.textContent = "0";
     detectedSection.style.display = "block";
   } finally {
-    if (btn) { btn.innerHTML = "🔍 Detect"; btn.disabled = false; }
+    if (btn) { btn.innerHTML = "Detect"; btn.disabled = false; }
   }
 }
 
@@ -1614,7 +1614,7 @@ function buildSchemaExtractionDirective(columns: string[]): string {
 
   return `
 ═══════════════════════════════════════════════════════════════════════════════
-🔒 SCHEMA-LOCKED EXTRACTION MODE — CRITICAL INSTRUCTIONS
+SCHEMA-LOCKED EXTRACTION MODE — CRITICAL INSTRUCTIONS
 ═══════════════════════════════════════════════════════════════════════════════
 
 The user has PRE-DEFINED these columns in their Excel sheet. You MUST extract data ONLY for these columns:
@@ -1635,11 +1635,11 @@ EXTRACTION RULES (MEMORIZE THESE):
    - Skills: Comma-separated list
 
 BANNED BEHAVIORS:
-❌ Guessing email addresses (e.g., firstname@company.com)
-❌ Fabricating phone numbers
-❌ Making up skills not explicitly listed
-❌ Using "N/A", "Not Found", "Unknown" — use "" instead
-❌ Adding extra columns
+- DO NOT guess email addresses (e.g., firstname@company.com)
+- DO NOT fabricate phone numbers
+- DO NOT make up skills not explicitly listed
+- DO NOT use "N/A", "Not Found", "Unknown" — use "" instead
+- DO NOT add extra columns
 
 OUTPUT: Generate Excel JS code that writes the extracted data starting from the first empty row.
 The code should use the writeData helper function and format the data professionally.
@@ -1739,7 +1739,7 @@ export async function runAICommand(): Promise<void> {
         console.log("[Agent] Schema columns detected:", existingColumns);
 
         if (existingColumns.length === 0) {
-          showStatus(statusEl, "info", "⚠️ No column headers found in Row 1. Add headers first or use 'HR Database Setup' to create them.");
+          showStatus(statusEl, "info", "No column headers found in Row 1. Add headers first or use 'HR Database Setup' to create them.");
           skeletonEl.style.display = "none";
           return;
         }
@@ -2104,7 +2104,7 @@ function updateFilePreview(show: boolean, isAgent: boolean = false) {
 
     const icon = document.createElement("span");
     icon.className = "file-chip-icon";
-    icon.innerHTML = file.type === "pdf" ? "📄" : "🖼️";
+    icon.innerHTML = file.type === "pdf" ? Icons.fileText : Icons.image;
 
     const name = document.createElement("span");
     name.className = "file-chip-name";
@@ -2384,7 +2384,7 @@ async function runBatchPDFExtraction(): Promise<void> {
 
   // Setup UI
   if (btn) { btn.disabled = false; }
-  if (btnText) btnText.textContent = "⏹ Stop Extraction";
+  if (btnText) btnText.textContent = "Stop Extraction";
   if (progressWrap) progressWrap.style.display = "block";
   if (logEl) logEl.innerHTML = "";
 
@@ -2424,11 +2424,11 @@ async function runBatchPDFExtraction(): Promise<void> {
         await appendExcelRow(headers, data);
 
         successCount++;
-        batchLog(`✓ ${file.name} → ${Object.values(data).filter(v => v).length}/${fields.length} fields extracted`, "success");
+        batchLog(`${file.name} → ${Object.values(data).filter(v => v).length}/${fields.length} fields extracted`, "success");
       } catch (fileError: any) {
         if (fileError.name === "AbortError") break;
         errorCount++;
-        batchLog(`✗ ${file.name}: ${fileError.message}`, "error");
+        batchLog(`${file.name}: ${fileError.message}`, "error");
       }
     }
   } catch (fatalError: any) {
@@ -2439,7 +2439,7 @@ async function runBatchPDFExtraction(): Promise<void> {
     if (progressBar) progressBar.style.width = "100%";
     if (progressLabel) progressLabel.textContent = `${pdfsToProcess.length} / ${pdfsToProcess.length}`;
 
-    const msg = `✅ Done! ${successCount} rows added${errorCount > 0 ? `, ${errorCount} failed` : ""}.`;
+    const msg = `Done! ${successCount} rows added${errorCount > 0 ? `, ${errorCount} failed` : ""}.`;
     batchLog(msg, successCount > 0 ? "success" : "error");
     showToast(successCount > 0 ? "success" : "error", msg);
 

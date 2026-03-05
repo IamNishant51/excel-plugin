@@ -1,4 +1,4 @@
-
+import { Icons } from "../../services/icons";
 import { ExecutionMetrics } from "../state/types";
 
 export class ExecutePanel {
@@ -11,11 +11,11 @@ export class ExecutePanel {
                         <h3>Engine Executing...</h3>
                         <p>Performing atomic operations on worksheet</p>
                     ` : status === 'SUCCESS' ? `
-                        <div class="success-icon">✓</div>
+                        <div class="success-icon">${Icons.checkCircle}</div>
                         <h3>Automation Complete</h3>
                         <p>Integrity check passed.</p>
                     ` : `
-                        <div class="error-icon">✕</div>
+                        <div class="error-icon">${Icons.xCircle}</div>
                         <h3>Execution Failed</h3>
                         <p>Automatic rollback initiated.</p>
                     `}

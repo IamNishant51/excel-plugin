@@ -1,3 +1,5 @@
+import { Icons } from "../../services/icons";
+
 export class BusinessModulesPanel {
     render(): string {
         return `
@@ -9,7 +11,7 @@ export class BusinessModulesPanel {
 
                 <div class="modules-grid">
                     <div class="module-card" id="mod-reconcile">
-                        <div class="module-icon">💰</div>
+                        <div class="module-icon">${Icons.dollarSign}</div>
                         <div class="module-info">
                             <h3>Reconcile Invoices</h3>
                             <p>Match invoice sheet with bank statements using deterministic rules.</p>
@@ -18,7 +20,7 @@ export class BusinessModulesPanel {
                     </div>
 
                     <div class="module-card" id="mod-resumes">
-                        <div class="module-icon">📄</div>
+                        <div class="module-icon">${Icons.fileText}</div>
                         <div class="module-info">
                             <h3>Parse Resumes</h3>
                             <p>Extract candidates and score against JD using keyword mapping.</p>
@@ -27,7 +29,7 @@ export class BusinessModulesPanel {
                     </div>
 
                     <div class="module-card" id="mod-audit">
-                        <div class="module-icon">🛡️</div>
+                        <div class="module-icon">${Icons.shield}</div>
                         <div class="module-info">
                             <h3>Risk Health Audit</h3>
                             <p>Scan for formula inconsistencies, merge debt, and hidden risks.</p>
@@ -36,7 +38,7 @@ export class BusinessModulesPanel {
                     </div>
 
                     <div class="module-card" id="mod-clean">
-                        <div class="module-icon">🧹</div>
+                        <div class="module-icon">${Icons.eraser}</div>
                         <div class="module-info">
                             <h3>Smart Clean</h3>
                             <p>Normalize phone numbers, trim spaces, and fix date formats.</p>

@@ -1,4 +1,4 @@
-
+import { Icons } from "../../services/icons";
 import { DryRunResult } from "../../core/types/sheetos";
 
 export class PreviewPanel {
@@ -47,7 +47,7 @@ export class PreviewPanel {
 
                 ${dryRun.warnings.length > 0 ? `
                     <div class="warning-box">
-                        <i class="icon">⚠️</i>
+                        <i class="icon">${Icons.alertTriangle}</i>
                         <div class="warnings">
                             ${dryRun.warnings.map(w => `<p>${w}</p>`).join('')}
                         </div>

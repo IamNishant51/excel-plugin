@@ -4,7 +4,7 @@
   <Version>1.0.0.0</Version>
   <ProviderName>SheetOS AI Team</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="DocOS AI"/>
+  <DisplayName DefaultValue="DocOS"/>
   <Description DefaultValue="Your professional AI assistant for Word document automation, resume optimization, and writing."/>
   <IconUrl DefaultValue="https://localhost:3000/assets/icon-32-v2.png"/>
   <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-64-v2.png"/>

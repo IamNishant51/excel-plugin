@@ -93,7 +93,7 @@ export interface WordAttachedFile {
 // ═══════════════════════════════════════════════════════════════
 
 const BANNED_PATTERNS: { pattern: RegExp; message: string; fix: string }[] = [
-    // ⚠️ CRITICAL: Prevent content destruction
+    // CRITICAL: Prevent content destruction
     { pattern: /body\.clear\s*\(/g, message: "body.clear() DELETES ALL CONTENT — NEVER use this", fix: "To reformat, iterate body.paragraphs and modify each one in-place. Never clear the document." },
 
     // Excel-contamination
@@ -585,7 +585,7 @@ await context.sync();
 // NEVER modify anything outside the selection.
 
 ═══ HYPERLINKS / MAKE ALL LINKS CLICKABLE ═══
-// 🚨 NEVER insert/append URL text — ONLY set .hyperlink on existing range
+// NEVER insert/append URL text — ONLY set .hyperlink on existing range
 // CORRECT approach: scan paragraphs with JS regex, then search for each full URL:
 const paras = body.paragraphs;
 paras.load("items/text");
@@ -606,7 +606,7 @@ for (let j = 0; j < foundUrls.length; j++) {
   }
   await context.sync();
 }
-// ⚠️ body.search("http") only matches the 4-char "http" substring, NOT the full URL!
+// body.search("http") only matches the 4-char "http" substring, NOT the full URL!
 // Always search for the FULL URL string to get the correct range.
 
 ═══ LISTS (BULLETS & NUMBERED) ═══
@@ -762,7 +762,7 @@ export async function generateWordCode(
         prompt += '- Headings: ' + JSON.stringify(docContext.headings) + '\n';
         if (docContext.selectedText) {
             prompt += '- USER SELECTED/HIGHLIGHTED TEXT: "' + docContext.selectedText + '"\n';
-            prompt += '\n🚨 SELECTION-SCOPED OPERATION: The user has selected specific text in the document.\n';
+            prompt += '\nSELECTION-SCOPED OPERATION: The user has selected specific text in the document.\n';
             prompt += 'RULES FOR SELECTED TEXT:\n';
             prompt += '1. The user\'s command applies ONLY to the selected text, NOT the entire document.\n';
             prompt += '2. Use context.document.getSelection() to get the selected range.\n';
@@ -785,7 +785,7 @@ export async function generateWordCode(
         // Detect "make links clickable" without selection — scan entire document
         const linkKeywordsNoSel = /\b(clickable|hyperlink|link|url)\b/i;
         if ((!docContext.selectedText || docContext.selectedText.trim() === '') && linkKeywordsNoSel.test(task) && /\b(all|every|document|whole)\b/i.test(task)) {
-            prompt += '\n🚨 NO TEXT SELECTED — SCAN ENTIRE DOCUMENT FOR URLs:\n';
+            prompt += '\nNO TEXT SELECTED — SCAN ENTIRE DOCUMENT FOR URLs:\n';
             prompt += 'DO NOT use getSelection(). DO NOT use body.search("http") — that only matches the 4-char substring, not the full URL.\n';
             prompt += 'Instead, use this EXACT approach:\n';
             prompt += '  const paras = body.paragraphs;\n';
@@ -807,13 +807,13 @@ export async function generateWordCode(
             prompt += '    }\n';
             prompt += '    await context.sync();\n';
             prompt += '  }\n';
-            prompt += '🚨 DO NOT use getSelection(). DO NOT use body.search("http"). Search for the FULL URL string.\n';
+            prompt += 'DO NOT use getSelection(). DO NOT use body.search("http"). Search for the FULL URL string.\n';
         }
         prompt += '- Full text: "' + docContext.sampleText + '"\n';
         if (isCreationTask && docIsEmpty) {
             prompt += '\nThis is a CREATION task. Generate NEW content using insertParagraph. Do NOT use body.clear().\n';
         } else {
-            prompt += '\n⚠️ PRESERVE ALL EXISTING CONTENT. Modify paragraphs in-place. NEVER use body.clear().\n';
+            prompt += '\nPRESERVE ALL EXISTING CONTENT. Modify paragraphs in-place. NEVER use body.clear().\n';
         }
     }
 

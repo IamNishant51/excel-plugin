@@ -1,3 +1,4 @@
+import { Icons } from "../../services/icons";
 
 export class Header {
     render(status: string = 'READY'): string {
@@ -12,8 +13,8 @@ export class Header {
                 </div>
                 <div class="header-actions">
                     <div id="engine-status" class="status-badge ${status.toLowerCase()}">${status}</div>
-                    <button id="refresh-context" title="Refresh Sheet Analysis" class="icon-btn">↻</button>
-                    <button id="view-settings" title="Settings" class="icon-btn">⚙</button>
+                    <button id="refresh-context" title="Refresh Sheet Analysis" class="icon-btn">${Icons.refresh}</button>
+                    <button id="view-settings" title="Settings" class="icon-btn">${Icons.settings}</button>
                 </div>
             </header>
         `;

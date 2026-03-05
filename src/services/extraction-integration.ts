@@ -145,7 +145,7 @@ function getStatusHTML(status: DocumentProcessingStatus): string {
         <span class="validation-badge ${isValid ? 'valid' : 'invalid'}">
           ${isValid ? '✓ Valid' : '✗ Invalid'}
         </span>
-        ${needsReview ? '<span class="review-badge">⚠ Needs Review</span>' : ''}
+        ${needsReview ? '<span class="review-badge">Needs Review</span>' : ''}
         ${errors.length > 0 ? `<span class="error-count">${errors.length} issue(s)</span>` : ''}
       </div>
     `;
@@ -184,8 +184,8 @@ function formatStatus(status: string): string {
 function getStatusIcon(status: string): string {
   switch (status) {
     case "completed": return "✓";
-    case "needs_review": return "⚠";
-    case "processing": return "⏳";
+    case "needs_review": return "!";
+    case "processing": return "•••";
     case "failed": return "✗";
     case "pending": return "⋯";
     default: return "•";
@@ -574,7 +574,7 @@ export const exampleHTML = `
   
   <div class="upload-section">
     <label for="pdf-file-input" class="file-label">
-      📄 Select PDF files to extract data
+      Select PDF files to extract data
     </label>
     <input 
       type="file" 

@@ -511,7 +511,7 @@ select.form-input {
     color: var(--text-2);
     margin: 0 0 18px;
     line-height: 1.65;
-    max-width: 270px;
+    max-width: min(270px, 100%);
     margin-left: auto;
     margin-right: auto;
 }
@@ -522,7 +522,7 @@ select.form-input {
     display: flex;
     flex-direction: column;
     gap: 7px;
-    max-width: 280px;
+    max-width: min(280px, 100%);
     margin: 0 auto;
 }
 
@@ -2086,26 +2086,174 @@ pre {
     will-change: transform;
 }
 
-/* 2. Responsive Tweaks for Narrow Taskpanes (< 360px) */
+/* ═══════════════════════════════════════════════════════════════ */
+/* RESPONSIVE — Fully fluid taskpane                               */
+/* ═══════════════════════════════════════════════════════════════ */
+
+/* ── Base: ensure all boxes respect container ── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html, body, #app-body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* ── Fluid images / media ── */
+img, svg, video, canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ── Wider taskpane (> 450px) — take advantage of space ── */
+@media (min-width: 451px) {
+    .chat-welcome {
+        padding: 36px 24px 24px;
+    }
+
+    .chat-welcome h2 {
+        font-size: 20px;
+    }
+
+    .welcome-suggestions {
+        max-width: 340px;
+    }
+
+    .suggestion-chip {
+        padding: 12px 16px;
+        font-size: 12.5px;
+    }
+
+    .chat-bubble {
+        max-width: 80%;
+    }
+
+    .chat-messages {
+        padding: 18px 18px 8px;
+    }
+
+    .mode-toggle {
+        margin: 12px 18px;
+    }
+
+    .chip {
+        padding: 9px 16px;
+        font-size: 12.5px;
+    }
+
+    .input-card {
+        margin: 16px 18px 0;
+    }
+
+    .agent-scroll-area {
+        padding: 12px 18px 18px;
+    }
+
+    textarea {
+        min-height: 90px;
+        font-size: 13.5px;
+    }
+}
+
+/* ── Medium taskpane (361–450px) — default spacing is fine ── */
+
+/* ── Narrow taskpane (< 360px) ── */
 @media (max-width: 360px) {
     :root {
         --radius-lg: 10px;
-        /* Tighter corners */
+        --radius-xl: 16px;
     }
 
     .app-header {
-        padding: 8px 12px;
+        padding: 8px 10px;
+    }
+
+    .brand h1 {
+        font-size: 13.5px;
+    }
+
+    .btn-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+    }
+
+    .mode-toggle {
+        margin: 8px 10px;
+        padding: 4px;
+        border-radius: 10px;
+    }
+
+    .mode-tab {
+        padding: 8px 6px;
+        font-size: 12px;
+        gap: 5px;
+    }
+
+    .chat-welcome {
+        padding: 18px 12px 14px;
+    }
+
+    .chat-welcome h2 {
+        font-size: 15px;
+    }
+
+    .chat-welcome img {
+        width: 48px !important;
+        height: 48px !important;
+    }
+
+    .welcome-suggestions {
+        max-width: 100%;
+    }
+
+    .suggestion-chip {
+        padding: 8px 10px;
+        font-size: 11px;
+        gap: 7px;
+    }
+
+    .chat-messages {
+        padding: 10px 10px 4px;
+        gap: 10px;
     }
 
     .chat-bubble {
         font-size: 11.5px;
         padding: 8px 12px;
-        max-width: 88%;
+        max-width: 90%;
+    }
+
+    .chat-bubble pre {
+        font-size: 10px;
+        padding: 8px;
+    }
+
+    .chat-input-area {
+        padding: 8px 10px;
+    }
+
+    .chat-input-card {
+        padding: 4px 4px 4px 12px;
+        gap: 6px;
+        border-radius: 16px;
+    }
+
+    #chat-input {
+        font-size: 12px;
+    }
+
+    .chat-footer {
+        padding: 2px 0 0;
     }
 
     .chip {
-        font-size: 10px;
-        padding: 5px 9px;
+        font-size: 10.5px;
+        padding: 6px 10px;
     }
 
     .category-tab {
@@ -2113,19 +2261,135 @@ pre {
         font-size: 10px;
     }
 
-    /* Stack form groups tighter */
+    .input-card {
+        margin: 10px 10px 0;
+        border-radius: 16px;
+    }
+
+    textarea {
+        min-height: 60px;
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+    .agent-scroll-area {
+        padding: 8px 10px 10px;
+        gap: 8px;
+    }
+
     .form-group {
         margin-bottom: 10px;
     }
 
-    /* Ensure code blocks don't overflow */
-    .chat-bubble pre {
+    .panel {
+        padding: 12px;
+    }
+
+    .panel h3 {
         font-size: 10px;
-        padding: 8px;
+    }
+
+    .btn-primary {
+        font-size: 12px;
+        padding: 8px 14px;
+    }
+
+    .card-footer {
+        margin-top: 8px;
+    }
+
+    .kbd-hint {
+        font-size: 9px;
     }
 }
 
-/* 3. High-DPI Screens (Retina) Text Sharpness */
+/* ── Very narrow (< 280px) ── */
+@media (max-width: 280px) {
+    .app-header {
+        padding: 6px 8px;
+    }
+
+    .brand h1 {
+        font-size: 12px;
+    }
+
+    .header-actions {
+        gap: 3px;
+    }
+
+    .btn-icon {
+        width: 26px;
+        height: 26px;
+    }
+
+    .mode-toggle {
+        margin: 6px 8px;
+    }
+
+    .mode-tab {
+        font-size: 11px;
+        padding: 6px 4px;
+    }
+
+    .chat-welcome h2 {
+        font-size: 14px;
+    }
+
+    .suggestion-chip {
+        font-size: 10.5px;
+        padding: 7px 9px;
+    }
+
+    .chip {
+        font-size: 10px;
+        padding: 5px 8px;
+    }
+
+    .category-tab {
+        padding: 4px 7px;
+        font-size: 9px;
+    }
+
+    .input-card {
+        margin: 8px;
+    }
+
+    .agent-scroll-area {
+        padding: 6px 8px 8px;
+    }
+}
+
+/* ── Short viewport height — compact vertical spacing ── */
+@media (max-height: 500px) {
+    .chat-welcome {
+        padding: 12px 14px 10px;
+    }
+
+    .chat-welcome img {
+        width: 40px !important;
+        height: 40px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .chat-welcome h2 {
+        font-size: 15px;
+        margin-bottom: 6px;
+    }
+
+    .suggestion-chip {
+        padding: 7px 10px;
+    }
+
+    .mode-toggle {
+        margin: 6px 14px;
+    }
+
+    .mode-tab {
+        padding: 7px;
+    }
+}
+
+/* ── Retina / High-DPI sharpness ── */
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
     body {

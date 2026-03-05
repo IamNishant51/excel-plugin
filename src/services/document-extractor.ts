@@ -74,12 +74,12 @@ Note: Jane Doe had no phone number visible in her resume, so it's left as "".
 WHAT NOT TO DO:
 ═══════════════════════════════════════════════════════════════════════════════
 
-❌ Do NOT add columns that aren't in the schema
-❌ Do NOT guess email addresses (e.g., firstname.lastname@company.com)
-❌ Do NOT fabricate phone numbers
-❌ Do NOT hallucinate skills or experience not mentioned
-❌ Do NOT include "N/A", "Not Found", "Unknown" — use "" instead
-❌ Do NOT include markdown formatting — ONLY raw JSON
+- Do NOT add columns that aren't in the schema
+- Do NOT guess email addresses (e.g., firstname.lastname@company.com)
+- Do NOT fabricate phone numbers
+- Do NOT hallucinate skills or experience not mentioned
+- Do NOT include "N/A", "Not Found", "Unknown" — use "" instead
+- Do NOT include markdown formatting — ONLY raw JSON
 
 ═══════════════════════════════════════════════════════════════════════════════
 NOW EXTRACT FROM THE ATTACHED DOCUMENTS:

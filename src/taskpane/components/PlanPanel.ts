@@ -1,4 +1,4 @@
-
+import { Icons } from "../../services/icons";
 import { UserIntent } from "../../core/types/sheetos";
 
 export class PlanPanel {
@@ -30,17 +30,17 @@ export class PlanPanel {
                     <div class="graph-placeholder" id="action-graph">
                         <!-- Logic for dynamic Action Graph nodes -->
                         <div class="graph-node">
-                            <i class="node-icon">🔍</i>
+                            <i class="node-icon">${Icons.search}</i>
                             <span>Read Values</span>
                         </div>
                         <div class="graph-arrow">↓</div>
                         <div class="graph-node">
-                            <i class="node-icon">⚙</i>
+                            <i class="node-icon">${Icons.settings}</i>
                             <span>Processing Logic</span>
                         </div>
                         <div class="graph-arrow">↓</div>
                         <div class="graph-node active">
-                            <i class="node-icon">✍</i>
+                            <i class="node-icon">${Icons.check}</i>
                             <span>Atomic Write</span>
                         </div>
                     </div>
