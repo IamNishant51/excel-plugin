@@ -446,7 +446,7 @@ function _createWordPlan() {
   }));
   return _createWordPlan.apply(this, arguments);
 }
-var CODER_SYSTEM_PROMPT = "You are a Word JavaScript API expert coder. Generate ONLY raw executable JavaScript code.\n\nENVIRONMENT (pre-declared \u2014 DO NOT redeclare these variables):\n- context: Word.RequestContext (ready to use)\n- body: context.document.body (ready to use)\n- Word: Namespace for all enums & types\n\n\u2550\u2550\u2550 ABSOLUTE RULES \u2550\u2550\u2550\n1. Output RAW JavaScript ONLY. No markdown fences. No explanations.\n2. NEVER write: const context = ... | const body = ... (ALREADY DECLARED)\n3. ALWAYS call .load(\"prop1,prop2\") + await context.sync() BEFORE reading any property.\n4. Call await context.sync() after writes to push changes to the document.\n5. NEVER use body.clear() \u2014 it DESTROYS the entire document. FORBIDDEN.\n6. Always null-check arrays: if (items.length > 0) before looping.\n7. Style names require spaces: \"Heading 1\", \"Heading 2\", \"Normal\", \"List Bullet\", \"List Number\".\n\n\u2550\u2550\u2550 PARAGRAPH OPERATIONS \u2550\u2550\u2550\n// Insert at end/start\nbody.insertParagraph(\"text\", Word.InsertLocation.end);\nbody.insertParagraph(\"text\", Word.InsertLocation.start);\n// Insert relative to another paragraph\nparagraphs.items[i].insertParagraph(\"text\", Word.InsertLocation.after);\nparagraphs.items[0].insertParagraph(\"text\", Word.InsertLocation.before);\n// Replace text in a range\nrange.insertText(\"new\", Word.InsertLocation.replace);\n// Read existing paragraphs\nconst paragraphs = body.paragraphs;\nparagraphs.load(\"items/text,items/style,items/font\"); await context.sync();\nfor (let i = 0; i < paragraphs.items.length; i++) { const p = paragraphs.items[i]; /* modify p */ }\nawait context.sync();\n\n\u2550\u2550\u2550 FONT FORMATTING (all properties on paragraph.font) \u2550\u2550\u2550\np.font.name = \"Calibri\";       p.font.size = 11;\np.font.bold = true;            p.font.italic = true;\np.font.underline = Word.UnderlineType.single; // .double, .dotted, .wave, .none\np.font.strikeThrough = true;   p.font.color = \"#2D6A4F\";\np.font.highlightColor = \"Yellow\"; // Red, Green, Cyan, Magenta, Blue, DarkYellow, Turquoise\np.font.subscript = true;       p.font.superscript = true;\n\n\u2550\u2550\u2550 PARAGRAPH FORMATTING \u2550\u2550\u2550\np.alignment = Word.Alignment.centered;  // .left, .right, .justified\np.lineSpacing = 12;     // 12=single, 18=1.5, 24=double, 36=triple\np.spaceAfter = 6;       p.spaceBefore = 12;\np.firstLineIndent = 36; // first line indent in points (36pt = 0.5in)\np.leftIndent = 36;      p.rightIndent = 0;\np.keepWithNext = true;   p.keepTogether = true;\np.outlineLevel = Word.OutlineLevel.outlineLevel1;\n\n\u2550\u2550\u2550 STYLES \u2550\u2550\u2550\np.style = \"Heading 1\";     p.style = \"Heading 2\";    p.style = \"Heading 3\";\np.style = \"Normal\";        p.style = \"Title\";         p.style = \"Subtitle\";\np.style = \"List Bullet\";   p.style = \"List Number\";   p.style = \"List Bullet 2\";\np.style = \"Quote\";         p.style = \"Intense Quote\"; p.style = \"No Spacing\";\np.style = \"TOC Heading\";   p.style = \"Header\";        p.style = \"Footer\";\n\n\u2550\u2550\u2550 TABLES \u2550\u2550\u2550\n// Create\nconst data = [[\"Name\",\"Age\",\"Email\"],[\"Alice\",\"30\",\"a@b.com\"]];\nconst table = body.insertTable(data.length, data[0].length, Word.InsertLocation.end, data);\ntable.styleBuiltIn = Word.BuiltInStyleName.gridTable5Dark_Accent1;\ntable.autoFitWindow(); // Fit to page width\n// Access cells\ntable.getCell(0, 0).body.insertParagraph(\"text\", Word.InsertLocation.replace);\n// Cell shading, alignment\ntable.getCell(0, 0).shadingColor = \"#2D6A4F\";\ntable.getCell(0, 0).verticalAlignment = Word.VerticalAlignment.center;\n// Row operations\ntable.rows.load(\"items\"); await context.sync();\ntable.addRows(Word.InsertLocation.end, 1, [[\"New\",\"Row\",\"Data\"]]);\n// Header row bold\nconst headerRow = table.rows.items[0]; headerRow.load(\"cells\"); await context.sync();\nfor(let c=0;c<headerRow.cells.items.length;c++){headerRow.cells.items[c].body.paragraphs.load(\"items/font\");} await context.sync();\ntable.headerRowCount = 1;\n// Borders\nconst border = table.getBorder(Word.BorderLocation.all);\nborder.type = Word.BorderType.single; border.color = \"#000000\"; border.width = 1;\nawait context.sync();\n\n\u2550\u2550\u2550 SEARCH & REPLACE \u2550\u2550\u2550\nconst results = body.search(\"oldText\", {matchCase: false, matchWholeWord: false});\nresults.load(\"items/text\"); await context.sync();\nfor (let i = 0; i < results.items.length; i++) {\n  results.items[i].insertText(\"newText\", Word.InsertLocation.replace);\n}\nawait context.sync();\n// Search with wildcards: body.search(\"pattern\", {matchWildcards: true})\n\n\u2550\u2550\u2550 HYPERLINKS / MAKE ALL LINKS CLICKABLE \u2550\u2550\u2550\n// \uD83D\uDEA8 NEVER insert/append URL text \u2014 ONLY set .hyperlink on existing range\n// CORRECT approach: scan paragraphs with JS regex, then search for each full URL:\nconst paras = body.paragraphs;\nparas.load(\"items/text\");\nawait context.sync();\nconst urlRegex = /https?://[^s,)>]]+/g;\nconst foundUrls = [];\nfor (let i = 0; i < paras.items.length; i++) {\n  const txt = paras.items[i].text || \"\";\n  let m;\n  while ((m = urlRegex.exec(txt)) !== null) { foundUrls.push(m[0]); }\n}\nfor (let j = 0; j < foundUrls.length; j++) {\n  const searchResults = body.search(foundUrls[j], {matchCase: false, matchWholeWord: false});\n  searchResults.load(\"items\");\n  await context.sync();\n  for (let k = 0; k < searchResults.items.length; k++) {\n    searchResults.items[k].hyperlink = foundUrls[j];\n  }\n  await context.sync();\n}\n// \u26A0\uFE0F body.search(\"http\") only matches the 4-char \"http\" substring, NOT the full URL!\n// Always search for the FULL URL string to get the correct range.\n\n\u2550\u2550\u2550 LISTS (BULLETS & NUMBERED) \u2550\u2550\u2550\nconst b1 = body.insertParagraph(\"First item\", Word.InsertLocation.end);\nb1.startNewList(); // starts a new bulleted list\nbody.insertParagraph(\"Second item\", Word.InsertLocation.end);\nbody.insertParagraph(\"Third item\", Word.InsertLocation.end);\nawait context.sync();\n// Styled lists:\n// p.style = \"List Bullet\"; p.style = \"List Number\"; p.style = \"List Bullet 2\";\n\n\u2550\u2550\u2550 HEADERS & FOOTERS \u2550\u2550\u2550\nconst sections = context.document.sections;\nsections.load(\"items\"); await context.sync();\nconst section = sections.items[0];\n// Primary header\nconst header = section.getHeader(Word.HeaderFooterType.primary);\nconst hPara = header.insertParagraph(\"Document Header\", Word.InsertLocation.end);\nhPara.font.size = 9; hPara.font.color = \"#888888\"; hPara.alignment = Word.Alignment.right;\n// Primary footer\nconst footer = section.getFooter(Word.HeaderFooterType.primary);\nconst fPara = footer.insertParagraph(\"Page \", Word.InsertLocation.end);\nfPara.font.size = 9; fPara.alignment = Word.Alignment.centered;\n// First page different: section.getHeader(Word.HeaderFooterType.firstPage)\n// Even pages: section.getHeader(Word.HeaderFooterType.evenPages)\nawait context.sync();\n\n\u2550\u2550\u2550 PAGE BREAKS & SECTION BREAKS \u2550\u2550\u2550\nbody.insertBreak(Word.BreakType.page, Word.InsertLocation.end);\nbody.insertBreak(Word.BreakType.sectionNext, Word.InsertLocation.end); // New section on next page\nbody.insertBreak(Word.BreakType.sectionContinuous, Word.InsertLocation.end); // New section same page\n// Column break: Word.BreakType.column\n// Line break (within paragraph): p.insertBreak(Word.BreakType.line, Word.InsertLocation.end);\n\n\u2550\u2550\u2550 PAGE LAYOUT (via section pageSetup) \u2550\u2550\u2550\nconst secs = context.document.sections;\nsecs.load(\"items\"); await context.sync();\n// Margins (in points: 72pt = 1 inch)\n// Read current: secs.items[0].load(\"pageSetup\"); await context.sync();\n// Normal: top=72, bottom=72, left=72, right=72\n// Narrow: top=36, bottom=36, left=36, right=36\n// Wide: top=72, bottom=72, left=144, right=144\n\n\u2550\u2550\u2550 IMAGES / INLINE PICTURES \u2550\u2550\u2550\n// Insert from base64 (strip \"data:image/...\" prefix first)\nconst pic = body.insertInlinePictureFromBase64(base64String, Word.InsertLocation.end);\npic.width = 300; pic.height = 200;\npic.altTextTitle = \"Description\";\n// Read existing pictures:\nconst pics = body.inlinePictures; pics.load(\"items/width,items/height\"); await context.sync();\n\n\u2550\u2550\u2550 CONTENT CONTROLS \u2550\u2550\u2550\nconst cc = body.insertContentControl(Word.ContentControlType.richText);\ncc.title = \"Section Name\"; cc.tag = \"section1\";\ncc.appearance = Word.ContentControlAppearance.tags;\n// Types: richText, plainText, checkBox, dropDownList, datePicker, picture\n\n\u2550\u2550\u2550 INSERT HTML (for complex formatting) \u2550\u2550\u2550\nbody.insertHtml(\"<h1>Title</h1><p>Content here</p>\", Word.InsertLocation.end);\nbody.insertHtml('<table border=\"1\"><tr><td>A</td><td>B</td></tr></table>', Word.InsertLocation.end);\nbody.insertHtml('<ul><li>Item 1</li><li>Item 2</li></ul>', Word.InsertLocation.end);\nbody.insertHtml('<p style=\"border-bottom:2px solid #333;padding-bottom:4px;\">With border</p>', Word.InsertLocation.end);\n// HTML is ideal for: complex tables, colored backgrounds, styled lists, horizontal rules\n\n\u2550\u2550\u2550 HORIZONTAL RULE / SEPARATOR \u2550\u2550\u2550\nbody.insertHtml('<hr style=\"border:none;border-top:1px solid #ccc;margin:12px 0;\">', Word.InsertLocation.end);\n// Or: insert a paragraph with bottom border via HTML\n\n\u2550\u2550\u2550 FOOTNOTES & ENDNOTES \u2550\u2550\u2550\nconst range = context.document.getSelection();\nrange.insertFootnote(\"Footnote text.\");\n// range.insertEndnote(\"Endnote text.\");\nawait context.sync();\n\n\u2550\u2550\u2550 DELETE EMPTY PARAGRAPHS (space saving) \u2550\u2550\u2550\nconst allParas = body.paragraphs;\nallParas.load(\"items/text\"); await context.sync();\nfor (let i = allParas.items.length - 1; i >= 0; i--) {\n  if (allParas.items[i].text.trim() === \"\") allParas.items[i].delete();\n}\nawait context.sync();\n\n\u2550\u2550\u2550 CREATING DOCUMENTS FROM ATTACHED FILE DATA \u2550\u2550\u2550\nWhen the user attaches a file (PDF, DOCX) and asks you to create/build something from it:\n1. The file's extracted text will be provided in [ATTACHED FILE CONTENT] section.\n2. Use ALL data from the file \u2014 names, contacts, dates, skills, every detail. Do NOT skip or summarize.\n3. Generate code that creates a COMPLETE, fully-formatted Word document using insertParagraph, font styling, tables, etc.\n4. Structure the output professionally with proper sections, headings, spacing, and formatting.\n5. For resumes: Include name (large, bold), contact info, summary, skills, experience with bullet points, projects with descriptions & links, education \u2014 ALL from the source data.\n6. Make all URLs clickable by setting .hyperlink on the range after inserting the text.\n7. Use body.insertParagraph() for each new paragraph/line. Format each one appropriately.\n8. Use insertHtml() for complex layouts like contact info rows, horizontal rules, or multi-column sections.\n\n\u2550\u2550\u2550 ATS RESUME FORMATTING RULES \u2550\u2550\u2550\n- Name: font.size=22, bold=true, alignment=centered, font.color=\"#1a1a1a\".\n- Contact line: font.size=10, centered, include phone | email | location, separated by \" | \".\n- Section headings: font.size=13, bold=true, font.color=\"#2B547E\", spaceAfter=4, spaceBefore=12. Add a horizontal rule below via insertHtml.\n- Body text: Calibri 10.5pt, lineSpacing=14, spaceAfter=2.\n- Bullet points: Use \"List Bullet\" style for items under experience/projects.\n- Links (GitHub, LinkedIn, NPM, Live Demo): Insert the text first, then search for the URL and set .hyperlink.\n- Delete consecutive empty paragraphs to save space.\n\n\u2550\u2550\u2550 CONTENT PRESERVATION (when editing existing docs) \u2550\u2550\u2550\n- Reformatting: Read \u2192 modify font/style/spacing \u2192 sync. NEVER delete text content.\n- Adding: Word.InsertLocation.end or .start. Do NOT replace existing.\n- Only delete truly empty paragraphs (p.text.trim() === \"\").\n\n\u2550\u2550\u2550 BANNED (CRASH/DATA LOSS) \u2550\u2550\u2550\nbody.clear(), Excel.*, sheet.*, .getUsedRange(), .getCell() (for non-tables),\n.addText(), .addLink(), .addPage(), .setText(), .setFont(),\nSpreadsheetApp, DocumentApp, alert(), confirm(), prompt(),\nconst context=..., const body=..., \"Heading1\" (no space), fetch(), require(), import\n\nOUTPUT: Raw JavaScript code only. No markdown, no explanation.";
+var CODER_SYSTEM_PROMPT = "You are a Word JavaScript API expert coder. Generate ONLY raw executable JavaScript code.\n\nENVIRONMENT (pre-declared \u2014 DO NOT redeclare these variables):\n- context: Word.RequestContext (ready to use)\n- body: context.document.body (ready to use)\n- Word: Namespace for all enums & types\n\n\u2550\u2550\u2550 ABSOLUTE RULES \u2550\u2550\u2550\n1. Output RAW JavaScript ONLY. No markdown fences. No explanations.\n2. NEVER write: const context = ... | const body = ... (ALREADY DECLARED)\n3. ALWAYS call .load(\"prop1,prop2\") + await context.sync() BEFORE reading any property.\n4. Call await context.sync() after writes to push changes to the document.\n5. NEVER use body.clear() \u2014 it DESTROYS the entire document. FORBIDDEN.\n6. Always null-check arrays: if (items.length > 0) before looping.\n7. Style names require spaces: \"Heading 1\", \"Heading 2\", \"Normal\", \"List Bullet\", \"List Number\".\n\n\u2550\u2550\u2550 PARAGRAPH OPERATIONS \u2550\u2550\u2550\n// Insert at end/start\nbody.insertParagraph(\"text\", Word.InsertLocation.end);\nbody.insertParagraph(\"text\", Word.InsertLocation.start);\n// Insert relative to another paragraph\nparagraphs.items[i].insertParagraph(\"text\", Word.InsertLocation.after);\nparagraphs.items[0].insertParagraph(\"text\", Word.InsertLocation.before);\n// Replace text in a range\nrange.insertText(\"new\", Word.InsertLocation.replace);\n// Read existing paragraphs\nconst paragraphs = body.paragraphs;\nparagraphs.load(\"items/text,items/style,items/font\"); await context.sync();\nfor (let i = 0; i < paragraphs.items.length; i++) { const p = paragraphs.items[i]; /* modify p */ }\nawait context.sync();\n\n\u2550\u2550\u2550 FONT FORMATTING (all properties on paragraph.font) \u2550\u2550\u2550\np.font.name = \"Calibri\";       p.font.size = 11;\np.font.bold = true;            p.font.italic = true;\np.font.underline = Word.UnderlineType.single; // .double, .dotted, .wave, .none\np.font.strikeThrough = true;   p.font.color = \"#2D6A4F\";\np.font.highlightColor = \"Yellow\"; // Red, Green, Cyan, Magenta, Blue, DarkYellow, Turquoise\np.font.subscript = true;       p.font.superscript = true;\n\n\u2550\u2550\u2550 PARAGRAPH FORMATTING \u2550\u2550\u2550\np.alignment = Word.Alignment.centered;  // .left, .right, .justified\np.lineSpacing = 12;     // 12=single, 18=1.5, 24=double, 36=triple\np.spaceAfter = 6;       p.spaceBefore = 12;\np.firstLineIndent = 36; // first line indent in points (36pt = 0.5in)\np.leftIndent = 36;      p.rightIndent = 0;\np.keepWithNext = true;   p.keepTogether = true;\np.outlineLevel = Word.OutlineLevel.outlineLevel1;\n\n\u2550\u2550\u2550 STYLES \u2550\u2550\u2550\np.style = \"Heading 1\";     p.style = \"Heading 2\";    p.style = \"Heading 3\";\np.style = \"Normal\";        p.style = \"Title\";         p.style = \"Subtitle\";\np.style = \"List Bullet\";   p.style = \"List Number\";   p.style = \"List Bullet 2\";\np.style = \"Quote\";         p.style = \"Intense Quote\"; p.style = \"No Spacing\";\np.style = \"TOC Heading\";   p.style = \"Header\";        p.style = \"Footer\";\n\n\u2550\u2550\u2550 TABLES \u2550\u2550\u2550\n// Create\nconst data = [[\"Name\",\"Age\",\"Email\"],[\"Alice\",\"30\",\"a@b.com\"]];\nconst table = body.insertTable(data.length, data[0].length, Word.InsertLocation.end, data);\ntable.styleBuiltIn = Word.BuiltInStyleName.gridTable5Dark_Accent1;\ntable.autoFitWindow(); // Fit to page width\n// Access cells\ntable.getCell(0, 0).body.insertParagraph(\"text\", Word.InsertLocation.replace);\n// Cell shading, alignment\ntable.getCell(0, 0).shadingColor = \"#2D6A4F\";\ntable.getCell(0, 0).verticalAlignment = Word.VerticalAlignment.center;\n// Row operations\ntable.rows.load(\"items\"); await context.sync();\ntable.addRows(Word.InsertLocation.end, 1, [[\"New\",\"Row\",\"Data\"]]);\n// Header row bold\nconst headerRow = table.rows.items[0]; headerRow.load(\"cells\"); await context.sync();\nfor(let c=0;c<headerRow.cells.items.length;c++){headerRow.cells.items[c].body.paragraphs.load(\"items/font\");} await context.sync();\ntable.headerRowCount = 1;\n// Borders\nconst border = table.getBorder(Word.BorderLocation.all);\nborder.type = Word.BorderType.single; border.color = \"#000000\"; border.width = 1;\nawait context.sync();\n\n\u2550\u2550\u2550 SEARCH & REPLACE \u2550\u2550\u2550\nconst results = body.search(\"oldText\", {matchCase: false, matchWholeWord: false});\nresults.load(\"items/text\"); await context.sync();\nfor (let i = 0; i < results.items.length; i++) {\n  results.items[i].insertText(\"newText\", Word.InsertLocation.replace);\n}\nawait context.sync();\n// Search with wildcards: body.search(\"pattern\", {matchWildcards: true})\n\n\u2550\u2550\u2550 SELECTION-SCOPED OPERATIONS \u2550\u2550\u2550\n// When user has SELECTED text, ALL operations must target ONLY the selection:\nconst sel = context.document.getSelection();\nsel.load(\"text,font\");\nawait context.sync();\n// Format selection: sel.font.bold = true; sel.font.size = 14; sel.font.color = \"#000\";\n// Hyperlink on selection: sel.hyperlink = \"https://\" + sel.text.trim();\n// NEVER scan body.paragraphs when the user selected specific text.\n// NEVER modify anything outside the selection.\n\n\u2550\u2550\u2550 HYPERLINKS / MAKE ALL LINKS CLICKABLE \u2550\u2550\u2550\n// \uD83D\uDEA8 NEVER insert/append URL text \u2014 ONLY set .hyperlink on existing range\n// CORRECT approach: scan paragraphs with JS regex, then search for each full URL:\nconst paras = body.paragraphs;\nparas.load(\"items/text\");\nawait context.sync();\nconst urlRegex = /https?://[^s,)>]]+/g;\nconst foundUrls = [];\nfor (let i = 0; i < paras.items.length; i++) {\n  const txt = paras.items[i].text || \"\";\n  let m;\n  while ((m = urlRegex.exec(txt)) !== null) { foundUrls.push(m[0]); }\n}\nfor (let j = 0; j < foundUrls.length; j++) {\n  const searchResults = body.search(foundUrls[j], {matchCase: false, matchWholeWord: false});\n  searchResults.load(\"items\");\n  await context.sync();\n  for (let k = 0; k < searchResults.items.length; k++) {\n    searchResults.items[k].hyperlink = foundUrls[j];\n  }\n  await context.sync();\n}\n// \u26A0\uFE0F body.search(\"http\") only matches the 4-char \"http\" substring, NOT the full URL!\n// Always search for the FULL URL string to get the correct range.\n\n\u2550\u2550\u2550 LISTS (BULLETS & NUMBERED) \u2550\u2550\u2550\nconst b1 = body.insertParagraph(\"First item\", Word.InsertLocation.end);\nb1.startNewList(); // starts a new bulleted list\nbody.insertParagraph(\"Second item\", Word.InsertLocation.end);\nbody.insertParagraph(\"Third item\", Word.InsertLocation.end);\nawait context.sync();\n// Styled lists:\n// p.style = \"List Bullet\"; p.style = \"List Number\"; p.style = \"List Bullet 2\";\n\n\u2550\u2550\u2550 HEADERS & FOOTERS \u2550\u2550\u2550\nconst sections = context.document.sections;\nsections.load(\"items\"); await context.sync();\nconst section = sections.items[0];\n// Primary header\nconst header = section.getHeader(Word.HeaderFooterType.primary);\nconst hPara = header.insertParagraph(\"Document Header\", Word.InsertLocation.end);\nhPara.font.size = 9; hPara.font.color = \"#888888\"; hPara.alignment = Word.Alignment.right;\n// Primary footer\nconst footer = section.getFooter(Word.HeaderFooterType.primary);\nconst fPara = footer.insertParagraph(\"Page \", Word.InsertLocation.end);\nfPara.font.size = 9; fPara.alignment = Word.Alignment.centered;\n// First page different: section.getHeader(Word.HeaderFooterType.firstPage)\n// Even pages: section.getHeader(Word.HeaderFooterType.evenPages)\nawait context.sync();\n\n\u2550\u2550\u2550 PAGE BREAKS & SECTION BREAKS \u2550\u2550\u2550\nbody.insertBreak(Word.BreakType.page, Word.InsertLocation.end);\nbody.insertBreak(Word.BreakType.sectionNext, Word.InsertLocation.end); // New section on next page\nbody.insertBreak(Word.BreakType.sectionContinuous, Word.InsertLocation.end); // New section same page\n// Column break: Word.BreakType.column\n// Line break (within paragraph): p.insertBreak(Word.BreakType.line, Word.InsertLocation.end);\n\n\u2550\u2550\u2550 PAGE LAYOUT (via section pageSetup) \u2550\u2550\u2550\nconst secs = context.document.sections;\nsecs.load(\"items\"); await context.sync();\n// Margins (in points: 72pt = 1 inch)\n// Read current: secs.items[0].load(\"pageSetup\"); await context.sync();\n// Normal: top=72, bottom=72, left=72, right=72\n// Narrow: top=36, bottom=36, left=36, right=36\n// Wide: top=72, bottom=72, left=144, right=144\n\n\u2550\u2550\u2550 IMAGES / INLINE PICTURES \u2550\u2550\u2550\n// Insert from base64 (strip \"data:image/...\" prefix first)\nconst pic = body.insertInlinePictureFromBase64(base64String, Word.InsertLocation.end);\npic.width = 300; pic.height = 200;\npic.altTextTitle = \"Description\";\n// Read existing pictures:\nconst pics = body.inlinePictures; pics.load(\"items/width,items/height\"); await context.sync();\n\n\u2550\u2550\u2550 CONTENT CONTROLS \u2550\u2550\u2550\nconst cc = body.insertContentControl(Word.ContentControlType.richText);\ncc.title = \"Section Name\"; cc.tag = \"section1\";\ncc.appearance = Word.ContentControlAppearance.tags;\n// Types: richText, plainText, checkBox, dropDownList, datePicker, picture\n\n\u2550\u2550\u2550 INSERT HTML (for complex formatting) \u2550\u2550\u2550\nbody.insertHtml(\"<h1>Title</h1><p>Content here</p>\", Word.InsertLocation.end);\nbody.insertHtml('<table border=\"1\"><tr><td>A</td><td>B</td></tr></table>', Word.InsertLocation.end);\nbody.insertHtml('<ul><li>Item 1</li><li>Item 2</li></ul>', Word.InsertLocation.end);\nbody.insertHtml('<p style=\"border-bottom:2px solid #333;padding-bottom:4px;\">With border</p>', Word.InsertLocation.end);\n// HTML is ideal for: complex tables, colored backgrounds, styled lists, horizontal rules\n\n\u2550\u2550\u2550 HORIZONTAL RULE / SEPARATOR \u2550\u2550\u2550\nbody.insertHtml('<hr style=\"border:none;border-top:1px solid #ccc;margin:12px 0;\">', Word.InsertLocation.end);\n// Or: insert a paragraph with bottom border via HTML\n\n\u2550\u2550\u2550 FOOTNOTES & ENDNOTES \u2550\u2550\u2550\nconst range = context.document.getSelection();\nrange.insertFootnote(\"Footnote text.\");\n// range.insertEndnote(\"Endnote text.\");\nawait context.sync();\n\n\u2550\u2550\u2550 DELETE EMPTY PARAGRAPHS (space saving) \u2550\u2550\u2550\nconst allParas = body.paragraphs;\nallParas.load(\"items/text\"); await context.sync();\nfor (let i = allParas.items.length - 1; i >= 0; i--) {\n  if (allParas.items[i].text.trim() === \"\") allParas.items[i].delete();\n}\nawait context.sync();\n\n\u2550\u2550\u2550 CREATING DOCUMENTS FROM ATTACHED FILE DATA \u2550\u2550\u2550\nWhen the user attaches a file (PDF, DOCX) and asks you to create/build something from it:\n1. The file's extracted text will be provided in [ATTACHED FILE CONTENT] section.\n2. Use ALL data from the file \u2014 names, contacts, dates, skills, every detail. Do NOT skip or summarize.\n3. Generate code that creates a COMPLETE, fully-formatted Word document using insertParagraph, font styling, tables, etc.\n4. Structure the output professionally with proper sections, headings, spacing, and formatting.\n5. For resumes: Include name (large, bold), contact info, summary, skills, experience with bullet points, projects with descriptions & links, education \u2014 ALL from the source data.\n6. Make all URLs clickable by setting .hyperlink on the range after inserting the text.\n7. Use body.insertParagraph() for each new paragraph/line. Format each one appropriately.\n8. Use insertHtml() for complex layouts like contact info rows, horizontal rules, or multi-column sections.\n\n\u2550\u2550\u2550 ATS RESUME FORMATTING RULES \u2550\u2550\u2550\n- Name: font.size=22, bold=true, alignment=centered, font.color=\"#1a1a1a\".\n- Contact line: font.size=10, centered, include phone | email | location, separated by \" | \".\n- Section headings: font.size=13, bold=true, font.color=\"#2B547E\", spaceAfter=4, spaceBefore=12. Add a horizontal rule below via insertHtml.\n- Body text: Calibri 10.5pt, lineSpacing=14, spaceAfter=2.\n- Bullet points: Use \"List Bullet\" style for items under experience/projects.\n- Links (GitHub, LinkedIn, NPM, Live Demo): Insert the text first, then search for the URL and set .hyperlink.\n- Delete consecutive empty paragraphs to save space.\n\n\u2550\u2550\u2550 CONTENT PRESERVATION (when editing existing docs) \u2550\u2550\u2550\n- Reformatting: Read \u2192 modify font/style/spacing \u2192 sync. NEVER delete text content.\n- Adding: Word.InsertLocation.end or .start. Do NOT replace existing.\n- Only delete truly empty paragraphs (p.text.trim() === \"\").\n\n\u2550\u2550\u2550 BANNED (CRASH/DATA LOSS) \u2550\u2550\u2550\nbody.clear(), Excel.*, sheet.*, .getUsedRange(), .getCell() (for non-tables),\n.addText(), .addLink(), .addPage(), .setText(), .setFont(),\nSpreadsheetApp, DocumentApp, alert(), confirm(), prompt(),\nconst context=..., const body=..., \"Heading1\" (no space), fetch(), require(), import\n\nOUTPUT: Raw JavaScript code only. No markdown, no explanation.";
 function generateWordCode(_x4, _x5, _x6, _x7, _x8, _x9) {
   return _generateWordCode.apply(this, arguments);
 }
@@ -456,7 +456,7 @@ function generateWordCode(_x4, _x5, _x6, _x7, _x8, _x9) {
 // ═══════════════════════════════════════════════════════════════
 function _generateWordCode() {
   _generateWordCode = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(task, plan, docContext, attachedFiles, previousError, signal) {
-    var prompt, i, _i, isCreationTask, docIsEmpty, urlPattern, linkKeywords, linkKeywordsNoSel, messages, textParts, hasImages, contentParts, code, firstNewline;
+    var prompt, i, _i, isCreationTask, docIsEmpty, linkKeywordsNoSel, messages, textParts, hasImages, contentParts, code, firstNewline;
     return _regenerator().w(function (_context2) {
       while (1) switch (_context2.n) {
         case 0:
@@ -491,28 +491,30 @@ function _generateWordCode() {
             prompt += '- Word Count: ~' + docContext.wordCount + '\n';
             prompt += '- Headings: ' + JSON.stringify(docContext.headings) + '\n';
             if (docContext.selectedText) {
-              prompt += '- USER HIGHLIGHTED TEXT: "' + docContext.selectedText + '"\n';
-
-              // Detect if selected text contains URLs and task is about making links clickable
-              urlPattern = /(?:https?:\/\/|www\.)[^\s]+/i;
-              linkKeywords = /\b(clickable|hyperlink|link|url)\b/i;
-              if (urlPattern.test(docContext.selectedText) && linkKeywords.test(task)) {
-                prompt += '\n🚨 HYPERLINK INSTRUCTION: The user selected a URL and wants it clickable.\n';
-                prompt += 'DO THIS:\n';
-                prompt += '  const sel = context.document.getSelection();\n';
-                prompt += '  sel.load("text");\n';
-                prompt += '  await context.sync();\n';
-                prompt += '  let linkUrl = sel.text.trim();\n';
-                prompt += '  if (!linkUrl.startsWith("http")) linkUrl = "https://" + linkUrl;\n';
-                prompt += '  sel.hyperlink = linkUrl;\n';
-                prompt += '  await context.sync();\n';
-                prompt += '🚨 DO NOT insert, append, or write any URL text. ONLY set .hyperlink on the selection. Any insertText/insertParagraph/insertHtml that writes the URL will DUPLICATE it.\n';
-              }
+              prompt += '- USER SELECTED/HIGHLIGHTED TEXT: "' + docContext.selectedText + '"\n';
+              prompt += '\n🚨 SELECTION-SCOPED OPERATION: The user has selected specific text in the document.\n';
+              prompt += 'RULES FOR SELECTED TEXT:\n';
+              prompt += '1. The user\'s command applies ONLY to the selected text, NOT the entire document.\n';
+              prompt += '2. Use context.document.getSelection() to get the selected range.\n';
+              prompt += '3. Apply changes (formatting, hyperlinks, styling, etc.) ONLY to that range.\n';
+              prompt += '4. Do NOT scan the whole document. Do NOT modify other paragraphs.\n';
+              prompt += '5. For hyperlinks on selected text:\n';
+              prompt += '   const sel = context.document.getSelection();\n';
+              prompt += '   sel.load("text");\n';
+              prompt += '   await context.sync();\n';
+              prompt += '   let linkUrl = sel.text.trim();\n';
+              prompt += '   if (!linkUrl.startsWith("http")) linkUrl = "https://" + linkUrl;\n';
+              prompt += '   sel.hyperlink = linkUrl;\n';
+              prompt += '   sel.font.color = "#0563C1"; sel.font.underline = Word.UnderlineType.single;\n';
+              prompt += '   await context.sync();\n';
+              prompt += '6. For formatting selected text: sel.font.bold = true; sel.font.size = 14; etc.\n';
+              prompt += '7. NEVER use body.paragraphs loops when user has selected text. Work with the selection range ONLY.\n';
+              prompt += '8. Do NOT insert, append, or duplicate the selected text. Modify it IN-PLACE.\n\n';
             }
 
             // Detect "make links clickable" without selection — scan entire document
             linkKeywordsNoSel = /\b(clickable|hyperlink|link|url)\b/i;
-            if ((!docContext.selectedText || docContext.selectedText.trim() === '') && linkKeywordsNoSel.test(task)) {
+            if ((!docContext.selectedText || docContext.selectedText.trim() === '') && linkKeywordsNoSel.test(task) && /\b(all|every|document|whole)\b/i.test(task)) {
               prompt += '\n🚨 NO TEXT SELECTED — SCAN ENTIRE DOCUMENT FOR URLs:\n';
               prompt += 'DO NOT use getSelection(). DO NOT use body.search("http") — that only matches the 4-char substring, not the full URL.\n';
               prompt += 'Instead, use this EXACT approach:\n';
@@ -2104,104 +2106,187 @@ function _tryHardcodedAction() {
           _context4.n = 1;
           return Word.run(/*#__PURE__*/function () {
             var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(ctx) {
-              var body, paras, urlRegex, foundUrls, i, txt, m, url, j, _url, searchResults, k, wwwRegex, _i, _txt, _m, _url2, fullUrl, _searchResults, _k;
+              var selection, selectedText, urlRegex, wwwRegex, foundUrls, m, url, _url, _iterator3, _step3, _url2, fullUrl, searchResults, k, linkUrl, body, paras, _urlRegex, _foundUrls, i, txt, _m, _url3, j, _url4, _searchResults, _k, _wwwRegex, _i, _txt, _m2, _url5, _fullUrl, _searchResults2, _k2, _t4;
               return _regenerator().w(function (_context3) {
-                while (1) switch (_context3.n) {
+                while (1) switch (_context3.p = _context3.n) {
                   case 0:
-                    body = ctx.document.body;
-                    paras = body.paragraphs;
-                    paras.load("items/text");
+                    // Check if user has selected text — if so, only operate on the selection
+                    selection = ctx.document.getSelection();
+                    selection.load("text");
                     _context3.n = 1;
                     return ctx.sync();
                   case 1:
-                    // Step 1: Extract all full URLs from every paragraph via JS regex
-                    urlRegex = /https?:\/\/[^\s,)>\]"']+/g;
-                    foundUrls = [];
-                    for (i = 0; i < paras.items.length; i++) {
-                      txt = paras.items[i].text || "";
-                      m = void 0;
-                      while ((m = urlRegex.exec(txt)) !== null) {
-                        // Clean trailing punctuation
-                        url = m[0].replace(/[.,;:!?)]+$/, "");
-                        if (!foundUrls.includes(url)) foundUrls.push(url);
-                      }
-                    }
-                    console.log("[HardcodedAction] Found ".concat(foundUrls.length, " unique URLs:"), foundUrls);
-
-                    // Step 2: For each full URL, search the document to get its Range, then set .hyperlink
-                    j = 0;
-                  case 2:
-                    if (!(j < foundUrls.length)) {
-                      _context3.n = 5;
+                    selectedText = (selection.text || "").trim();
+                    if (!(selectedText.length > 0)) {
+                      _context3.n = 13;
                       break;
                     }
-                    _url = foundUrls[j];
-                    searchResults = body.search(_url, {
+                    // SELECTION MODE: Only make the selected text clickable
+                    console.log("[HardcodedAction] Selection mode \u2014 selected: \"".concat(selectedText, "\""));
+
+                    // Extract URLs from the selected text
+                    urlRegex = /https?:\/\/[^\s,)>\]"']+/g;
+                    wwwRegex = /(?<![\/\/])www\.[^\s,)>\]"']+/g;
+                    foundUrls = [];
+                    while ((m = urlRegex.exec(selectedText)) !== null) {
+                      url = m[0].replace(/[.,;:!?)]+$/, "");
+                      if (!foundUrls.includes(url)) foundUrls.push(url);
+                    }
+                    while ((m = wwwRegex.exec(selectedText)) !== null) {
+                      _url = m[0].replace(/[.,;:!?)]+$/, "");
+                      if (!foundUrls.includes(_url)) foundUrls.push(_url);
+                    }
+                    if (!(foundUrls.length > 0)) {
+                      _context3.n = 10;
+                      break;
+                    }
+                    // Search within the selection for each URL
+                    _iterator3 = _createForOfIteratorHelper(foundUrls);
+                    _context3.p = 2;
+                    _iterator3.s();
+                  case 3:
+                    if ((_step3 = _iterator3.n()).done) {
+                      _context3.n = 6;
+                      break;
+                    }
+                    _url2 = _step3.value;
+                    fullUrl = _url2.startsWith("http") ? _url2 : "https://" + _url2;
+                    searchResults = selection.search(_url2, {
                       matchCase: false,
                       matchWholeWord: false
                     });
                     searchResults.load("items");
-                    _context3.n = 3;
+                    _context3.n = 4;
                     return ctx.sync();
-                  case 3:
+                  case 4:
                     for (k = 0; k < searchResults.items.length; k++) {
-                      searchResults.items[k].hyperlink = _url;
-                      // Optional: make it look like a hyperlink visually
+                      searchResults.items[k].hyperlink = fullUrl;
                       searchResults.items[k].font.color = "#0563C1";
                       searchResults.items[k].font.underline = "Single";
                       count++;
                     }
-                    _context3.n = 4;
+                    _context3.n = 5;
                     return ctx.sync();
-                  case 4:
-                    j++;
-                    _context3.n = 2;
-                    break;
                   case 5:
-                    // Step 3: Also find www. links that don't start with http
-                    wwwRegex = /(?<![\/\/])www\.[^\s,)>\]"']+/g;
-                    _i = 0;
+                    _context3.n = 3;
+                    break;
                   case 6:
-                    if (!(_i < paras.items.length)) {
-                      _context3.n = 11;
-                      break;
-                    }
-                    _txt = paras.items[_i].text || "";
-                    _m = void 0;
+                    _context3.n = 8;
+                    break;
                   case 7:
-                    if (!((_m = wwwRegex.exec(_txt)) !== null)) {
-                      _context3.n = 10;
+                    _context3.p = 7;
+                    _t4 = _context3.v;
+                    _iterator3.e(_t4);
+                  case 8:
+                    _context3.p = 8;
+                    _iterator3.f();
+                    return _context3.f(8);
+                  case 9:
+                    _context3.n = 12;
+                    break;
+                  case 10:
+                    // The entire selection IS the URL (e.g. user selected "www.linkedin.com/in/nishant")
+                    linkUrl = selectedText;
+                    if (!linkUrl.startsWith("http")) linkUrl = "https://" + linkUrl;
+                    selection.hyperlink = linkUrl;
+                    selection.font.color = "#0563C1";
+                    selection.font.underline = "Single";
+                    _context3.n = 11;
+                    return ctx.sync();
+                  case 11:
+                    count = 1;
+                  case 12:
+                    _context3.n = 24;
+                    break;
+                  case 13:
+                    // NO SELECTION: Scan entire document
+                    body = ctx.document.body;
+                    paras = body.paragraphs;
+                    paras.load("items/text");
+                    _context3.n = 14;
+                    return ctx.sync();
+                  case 14:
+                    _urlRegex = /https?:\/\/[^\s,)>\]"']+/g;
+                    _foundUrls = [];
+                    for (i = 0; i < paras.items.length; i++) {
+                      txt = paras.items[i].text || "";
+                      _m = void 0;
+                      while ((_m = _urlRegex.exec(txt)) !== null) {
+                        _url3 = _m[0].replace(/[.,;:!?)]+$/, "");
+                        if (!_foundUrls.includes(_url3)) _foundUrls.push(_url3);
+                      }
+                    }
+                    j = 0;
+                  case 15:
+                    if (!(j < _foundUrls.length)) {
+                      _context3.n = 18;
                       break;
                     }
-                    _url2 = _m[0].replace(/[.,;:!?)]+$/, "");
-                    fullUrl = "https://" + _url2;
-                    _searchResults = body.search(_url2, {
+                    _url4 = _foundUrls[j];
+                    _searchResults = body.search(_url4, {
                       matchCase: false,
                       matchWholeWord: false
                     });
                     _searchResults.load("items");
-                    _context3.n = 8;
+                    _context3.n = 16;
                     return ctx.sync();
-                  case 8:
+                  case 16:
                     for (_k = 0; _k < _searchResults.items.length; _k++) {
-                      _searchResults.items[_k].hyperlink = fullUrl;
+                      _searchResults.items[_k].hyperlink = _url4;
                       _searchResults.items[_k].font.color = "#0563C1";
                       _searchResults.items[_k].font.underline = "Single";
                       count++;
                     }
-                    _context3.n = 9;
+                    _context3.n = 17;
                     return ctx.sync();
-                  case 9:
-                    _context3.n = 7;
+                  case 17:
+                    j++;
+                    _context3.n = 15;
                     break;
-                  case 10:
+                  case 18:
+                    _wwwRegex = /(?<![\/\/])www\.[^\s,)>\]"']+/g;
+                    _i = 0;
+                  case 19:
+                    if (!(_i < paras.items.length)) {
+                      _context3.n = 24;
+                      break;
+                    }
+                    _txt = paras.items[_i].text || "";
+                    _m2 = void 0;
+                  case 20:
+                    if (!((_m2 = _wwwRegex.exec(_txt)) !== null)) {
+                      _context3.n = 23;
+                      break;
+                    }
+                    _url5 = _m2[0].replace(/[.,;:!?)]+$/, "");
+                    _fullUrl = "https://" + _url5;
+                    _searchResults2 = body.search(_url5, {
+                      matchCase: false,
+                      matchWholeWord: false
+                    });
+                    _searchResults2.load("items");
+                    _context3.n = 21;
+                    return ctx.sync();
+                  case 21:
+                    for (_k2 = 0; _k2 < _searchResults2.items.length; _k2++) {
+                      _searchResults2.items[_k2].hyperlink = _fullUrl;
+                      _searchResults2.items[_k2].font.color = "#0563C1";
+                      _searchResults2.items[_k2].font.underline = "Single";
+                      count++;
+                    }
+                    _context3.n = 22;
+                    return ctx.sync();
+                  case 22:
+                    _context3.n = 20;
+                    break;
+                  case 23:
                     _i++;
-                    _context3.n = 6;
+                    _context3.n = 19;
                     break;
-                  case 11:
+                  case 24:
                     return _context3.a(2);
                 }
-              }, _callee3);
+              }, _callee3, null, [[2, 7, 8, 9]]);
             }));
             return function (_x7) {
               return _ref.apply(this, arguments);
@@ -2214,7 +2299,7 @@ function _tryHardcodedAction() {
           }
           return _context4.a(2, {
             handled: true,
-            message: "⚠️ No URLs found in the document. Make sure your document contains links starting with http:// or https://"
+            message: "⚠️ No URLs found. Make sure the text contains links starting with http://, https://, or www."
           });
         case 2:
           return _context4.a(2, {
@@ -2237,7 +2322,7 @@ function runWordAICommand() {
 // ═══════════════════════════════════════════════════════════════
 function _runWordAICommand() {
   _runWordAICommand = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee0() {
-    var statusEl, debugEl, skeletonEl, cacheBadge, promptInput, button, userPrompt, signal, runText, runIcon, originalText, originalIcon, beforeText, hardcoded, _hardcoded$message, _hardcoded$message2, isError, afterText, code, fromCache, docContext, _docContext, cached, validation, wordAttachedFiles, result, executionResult, _afterText, _executionResult$erro, _error$message2, _t4, _t5, _t6, _t7, _t8, _t9;
+    var statusEl, debugEl, skeletonEl, cacheBadge, promptInput, button, userPrompt, signal, runText, runIcon, originalText, originalIcon, beforeText, hardcoded, _hardcoded$message, _hardcoded$message2, isError, afterText, code, fromCache, docContext, _docContext, cached, validation, wordAttachedFiles, result, executionResult, _afterText, _executionResult$erro, _error$message2, _t5, _t6, _t7, _t8, _t9, _t0;
     return _regenerator().w(function (_context0) {
       while (1) switch (_context0.p = _context0.n) {
         case 0:
@@ -2321,8 +2406,8 @@ function _runWordAICommand() {
           break;
         case 6:
           _context0.p = 6;
-          _t4 = _context0.v;
-          console.warn("[Diff] Could not capture before-text:", _t4);
+          _t5 = _context0.v;
+          console.warn("[Diff] Could not capture before-text:", _t5);
         case 7:
           _context0.p = 7;
           _context0.p = 8;
@@ -2371,7 +2456,7 @@ function _runWordAICommand() {
           break;
         case 12:
           _context0.p = 12;
-          _t5 = _context0.v;
+          _t6 = _context0.v;
         case 13:
           return _context0.a(2);
         case 14:
@@ -2379,8 +2464,8 @@ function _runWordAICommand() {
           break;
         case 15:
           _context0.p = 15;
-          _t6 = _context0.v;
-          console.warn("[HardcodedAction] Failed, falling back to LLM:", _t6);
+          _t7 = _context0.v;
+          console.warn("[HardcodedAction] Failed, falling back to LLM:", _t7);
           // Fall through to normal LLM pipeline
         case 16:
           fromCache = false; // Read document context
@@ -2397,8 +2482,8 @@ function _runWordAICommand() {
           break;
         case 19:
           _context0.p = 19;
-          _t7 = _context0.v;
-          console.warn("[WordAgent] Could not read document context:", _t7);
+          _t8 = _context0.v;
+          console.warn("[WordAgent] Could not read document context:", _t8);
         case 20:
           // Check cache
           cached = (0,_services_cache__WEBPACK_IMPORTED_MODULE_3__.getCachedResponse)(userPrompt);
@@ -2541,8 +2626,8 @@ function _runWordAICommand() {
           break;
         case 27:
           _context0.p = 27;
-          _t8 = _context0.v;
-          console.warn("[Diff] Could not capture after-text:", _t8);
+          _t9 = _context0.v;
+          console.warn("[Diff] Could not capture after-text:", _t9);
         case 28:
           _context0.n = 30;
           break;
@@ -2554,14 +2639,14 @@ function _runWordAICommand() {
           break;
         case 31:
           _context0.p = 31;
-          _t9 = _context0.v;
+          _t0 = _context0.v;
           skeletonEl.style.display = "none";
           hideEditingOverlay();
-          if (_t9.name === 'AbortError') {
+          if (_t0.name === 'AbortError') {
             showStatus(statusEl, "info", "⏹ Agent stopped.");
           } else {
-            showStatus(statusEl, "error", "\u274C ".concat(_t9.message));
-            showToast("error", ((_error$message2 = _t9.message) === null || _error$message2 === void 0 ? void 0 : _error$message2.substring(0, 80)) || "Something went wrong");
+            showStatus(statusEl, "error", "\u274C ".concat(_t0.message));
+            showToast("error", ((_error$message2 = _t0.message) === null || _error$message2 === void 0 ? void 0 : _error$message2.substring(0, 80)) || "Something went wrong");
           }
         case 32:
           _context0.p = 32;
@@ -2951,9 +3036,9 @@ function _handleFileSelect() {
       _extractedText,
       base64,
       _args1 = arguments,
-      _t0,
       _t1,
-      _t10;
+      _t10,
+      _t11;
     return _regenerator().w(function (_context1) {
       while (1) switch (_context1.p = _context1.n) {
         case 0:
@@ -2993,8 +3078,8 @@ function _handleFileSelect() {
           break;
         case 6:
           _context1.p = 6;
-          _t0 = _context1.v;
-          console.warn("PDF text extraction failed, falling back to image mode:", _t0);
+          _t1 = _context1.v;
+          console.warn("PDF text extraction failed, falling back to image mode:", _t1);
         case 7:
           _context1.n = 8;
           return file.arrayBuffer();
@@ -3028,8 +3113,8 @@ function _handleFileSelect() {
           break;
         case 13:
           _context1.p = 13;
-          _t1 = _context1.v;
-          console.warn("DOCX text extraction failed:", _t1);
+          _t10 = _context1.v;
+          console.warn("DOCX text extraction failed:", _t10);
         case 14:
           newFiles.push({
             name: file.name,
@@ -3068,9 +3153,9 @@ function _handleFileSelect() {
           break;
         case 19:
           _context1.p = 19;
-          _t10 = _context1.v;
-          console.error("File handling error:", _t10);
-          showToast("error", "Error reading file: " + _t10.message);
+          _t11 = _context1.v;
+          console.error("File handling error:", _t11);
+          showToast("error", "Error reading file: " + _t11.message);
         case 20:
           _context1.p = 20;
           // Reset input so the same file can be selected again

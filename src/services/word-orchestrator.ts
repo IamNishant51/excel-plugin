@@ -574,6 +574,16 @@ for (let i = 0; i < results.items.length; i++) {
 await context.sync();
 // Search with wildcards: body.search("pattern", {matchWildcards: true})
 
+═══ SELECTION-SCOPED OPERATIONS ═══
+// When user has SELECTED text, ALL operations must target ONLY the selection:
+const sel = context.document.getSelection();
+sel.load("text,font");
+await context.sync();
+// Format selection: sel.font.bold = true; sel.font.size = 14; sel.font.color = "#000";
+// Hyperlink on selection: sel.hyperlink = "https://" + sel.text.trim();
+// NEVER scan body.paragraphs when the user selected specific text.
+// NEVER modify anything outside the selection.
+
 ═══ HYPERLINKS / MAKE ALL LINKS CLICKABLE ═══
 // 🚨 NEVER insert/append URL text — ONLY set .hyperlink on existing range
 // CORRECT approach: scan paragraphs with JS regex, then search for each full URL:
@@ -751,28 +761,30 @@ export async function generateWordCode(
         prompt += '- Word Count: ~' + docContext.wordCount + '\n';
         prompt += '- Headings: ' + JSON.stringify(docContext.headings) + '\n';
         if (docContext.selectedText) {
-            prompt += '- USER HIGHLIGHTED TEXT: "' + docContext.selectedText + '"\n';
-
-            // Detect if selected text contains URLs and task is about making links clickable
-            const urlPattern = /(?:https?:\/\/|www\.)[^\s]+/i;
-            const linkKeywords = /\b(clickable|hyperlink|link|url)\b/i;
-            if (urlPattern.test(docContext.selectedText) && linkKeywords.test(task)) {
-                prompt += '\n🚨 HYPERLINK INSTRUCTION: The user selected a URL and wants it clickable.\n';
-                prompt += 'DO THIS:\n';
-                prompt += '  const sel = context.document.getSelection();\n';
-                prompt += '  sel.load("text");\n';
-                prompt += '  await context.sync();\n';
-                prompt += '  let linkUrl = sel.text.trim();\n';
-                prompt += '  if (!linkUrl.startsWith("http")) linkUrl = "https://" + linkUrl;\n';
-                prompt += '  sel.hyperlink = linkUrl;\n';
-                prompt += '  await context.sync();\n';
-                prompt += '🚨 DO NOT insert, append, or write any URL text. ONLY set .hyperlink on the selection. Any insertText/insertParagraph/insertHtml that writes the URL will DUPLICATE it.\n';
-            }
+            prompt += '- USER SELECTED/HIGHLIGHTED TEXT: "' + docContext.selectedText + '"\n';
+            prompt += '\n🚨 SELECTION-SCOPED OPERATION: The user has selected specific text in the document.\n';
+            prompt += 'RULES FOR SELECTED TEXT:\n';
+            prompt += '1. The user\'s command applies ONLY to the selected text, NOT the entire document.\n';
+            prompt += '2. Use context.document.getSelection() to get the selected range.\n';
+            prompt += '3. Apply changes (formatting, hyperlinks, styling, etc.) ONLY to that range.\n';
+            prompt += '4. Do NOT scan the whole document. Do NOT modify other paragraphs.\n';
+            prompt += '5. For hyperlinks on selected text:\n';
+            prompt += '   const sel = context.document.getSelection();\n';
+            prompt += '   sel.load("text");\n';
+            prompt += '   await context.sync();\n';
+            prompt += '   let linkUrl = sel.text.trim();\n';
+            prompt += '   if (!linkUrl.startsWith("http")) linkUrl = "https://" + linkUrl;\n';
+            prompt += '   sel.hyperlink = linkUrl;\n';
+            prompt += '   sel.font.color = "#0563C1"; sel.font.underline = Word.UnderlineType.single;\n';
+            prompt += '   await context.sync();\n';
+            prompt += '6. For formatting selected text: sel.font.bold = true; sel.font.size = 14; etc.\n';
+            prompt += '7. NEVER use body.paragraphs loops when user has selected text. Work with the selection range ONLY.\n';
+            prompt += '8. Do NOT insert, append, or duplicate the selected text. Modify it IN-PLACE.\n\n';
         }
 
         // Detect "make links clickable" without selection — scan entire document
         const linkKeywordsNoSel = /\b(clickable|hyperlink|link|url)\b/i;
-        if ((!docContext.selectedText || docContext.selectedText.trim() === '') && linkKeywordsNoSel.test(task)) {
+        if ((!docContext.selectedText || docContext.selectedText.trim() === '') && linkKeywordsNoSel.test(task) && /\b(all|every|document|whole)\b/i.test(task)) {
             prompt += '\n🚨 NO TEXT SELECTED — SCAN ENTIRE DOCUMENT FOR URLs:\n';
             prompt += 'DO NOT use getSelection(). DO NOT use body.search("http") — that only matches the 4-char substring, not the full URL.\n';
             prompt += 'Instead, use this EXACT approach:\n';

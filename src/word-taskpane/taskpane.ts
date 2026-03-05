@@ -799,67 +799,112 @@ async function tryHardcodedAction(userPrompt: string): Promise<{ handled: boolea
         let count = 0;
         // @ts-ignore
         await Word.run(async (ctx: any) => {
-            const body = ctx.document.body;
-            const paras = body.paragraphs;
-            paras.load("items/text");
+            // Check if user has selected text — if so, only operate on the selection
+            const selection = ctx.document.getSelection();
+            selection.load("text");
             await ctx.sync();
+            const selectedText = (selection.text || "").trim();
 
-            // Step 1: Extract all full URLs from every paragraph via JS regex
-            const urlRegex = /https?:\/\/[^\s,)>\]"']+/g;
-            const foundUrls: string[] = [];
-            for (let i = 0; i < paras.items.length; i++) {
-                const txt = paras.items[i].text || "";
+            if (selectedText.length > 0) {
+                // SELECTION MODE: Only make the selected text clickable
+                console.log(`[HardcodedAction] Selection mode — selected: "${selectedText}"`);
+
+                // Extract URLs from the selected text
+                const urlRegex = /https?:\/\/[^\s,)>\]"']+/g;
+                const wwwRegex = /(?<![\/\/])www\.[^\s,)>\]"']+/g;
+                const foundUrls: string[] = [];
+
                 let m: RegExpExecArray | null;
-                while ((m = urlRegex.exec(txt)) !== null) {
-                    // Clean trailing punctuation
+                while ((m = urlRegex.exec(selectedText)) !== null) {
                     let url = m[0].replace(/[.,;:!?)]+$/, "");
                     if (!foundUrls.includes(url)) foundUrls.push(url);
                 }
-            }
-
-            console.log(`[HardcodedAction] Found ${foundUrls.length} unique URLs:`, foundUrls);
-
-            // Step 2: For each full URL, search the document to get its Range, then set .hyperlink
-            for (let j = 0; j < foundUrls.length; j++) {
-                const url = foundUrls[j];
-                const searchResults = body.search(url, { matchCase: false, matchWholeWord: false });
-                searchResults.load("items");
-                await ctx.sync();
-
-                for (let k = 0; k < searchResults.items.length; k++) {
-                    searchResults.items[k].hyperlink = url;
-                    // Optional: make it look like a hyperlink visually
-                    searchResults.items[k].font.color = "#0563C1";
-                    searchResults.items[k].font.underline = "Single";
-                    count++;
-                }
-                await ctx.sync();
-            }
-
-            // Step 3: Also find www. links that don't start with http
-            const wwwRegex = /(?<![\/\/])www\.[^\s,)>\]"']+/g;
-            for (let i = 0; i < paras.items.length; i++) {
-                const txt = paras.items[i].text || "";
-                let m: RegExpExecArray | null;
-                while ((m = wwwRegex.exec(txt)) !== null) {
+                while ((m = wwwRegex.exec(selectedText)) !== null) {
                     let url = m[0].replace(/[.,;:!?)]+$/, "");
-                    const fullUrl = "https://" + url;
+                    if (!foundUrls.includes(url)) foundUrls.push(url);
+                }
+
+                if (foundUrls.length > 0) {
+                    // Search within the selection for each URL
+                    for (const url of foundUrls) {
+                        const fullUrl = url.startsWith("http") ? url : "https://" + url;
+                        const searchResults = selection.search(url, { matchCase: false, matchWholeWord: false });
+                        searchResults.load("items");
+                        await ctx.sync();
+                        for (let k = 0; k < searchResults.items.length; k++) {
+                            searchResults.items[k].hyperlink = fullUrl;
+                            searchResults.items[k].font.color = "#0563C1";
+                            searchResults.items[k].font.underline = "Single";
+                            count++;
+                        }
+                        await ctx.sync();
+                    }
+                } else {
+                    // The entire selection IS the URL (e.g. user selected "www.linkedin.com/in/nishant")
+                    let linkUrl = selectedText;
+                    if (!linkUrl.startsWith("http")) linkUrl = "https://" + linkUrl;
+                    selection.hyperlink = linkUrl;
+                    selection.font.color = "#0563C1";
+                    selection.font.underline = "Single";
+                    await ctx.sync();
+                    count = 1;
+                }
+            } else {
+                // NO SELECTION: Scan entire document
+                const body = ctx.document.body;
+                const paras = body.paragraphs;
+                paras.load("items/text");
+                await ctx.sync();
+
+                const urlRegex = /https?:\/\/[^\s,)>\]"']+/g;
+                const foundUrls: string[] = [];
+                for (let i = 0; i < paras.items.length; i++) {
+                    const txt = paras.items[i].text || "";
+                    let m: RegExpExecArray | null;
+                    while ((m = urlRegex.exec(txt)) !== null) {
+                        let url = m[0].replace(/[.,;:!?)]+$/, "");
+                        if (!foundUrls.includes(url)) foundUrls.push(url);
+                    }
+                }
+
+                for (let j = 0; j < foundUrls.length; j++) {
+                    const url = foundUrls[j];
                     const searchResults = body.search(url, { matchCase: false, matchWholeWord: false });
                     searchResults.load("items");
                     await ctx.sync();
                     for (let k = 0; k < searchResults.items.length; k++) {
-                        searchResults.items[k].hyperlink = fullUrl;
+                        searchResults.items[k].hyperlink = url;
                         searchResults.items[k].font.color = "#0563C1";
                         searchResults.items[k].font.underline = "Single";
                         count++;
                     }
                     await ctx.sync();
                 }
+
+                const wwwRegex = /(?<![\/\/])www\.[^\s,)>\]"']+/g;
+                for (let i = 0; i < paras.items.length; i++) {
+                    const txt = paras.items[i].text || "";
+                    let m: RegExpExecArray | null;
+                    while ((m = wwwRegex.exec(txt)) !== null) {
+                        let url = m[0].replace(/[.,;:!?)]+$/, "");
+                        const fullUrl = "https://" + url;
+                        const searchResults = body.search(url, { matchCase: false, matchWholeWord: false });
+                        searchResults.load("items");
+                        await ctx.sync();
+                        for (let k = 0; k < searchResults.items.length; k++) {
+                            searchResults.items[k].hyperlink = fullUrl;
+                            searchResults.items[k].font.color = "#0563C1";
+                            searchResults.items[k].font.underline = "Single";
+                            count++;
+                        }
+                        await ctx.sync();
+                    }
+                }
             }
         });
 
         if (count === 0) {
-            return { handled: true, message: "⚠️ No URLs found in the document. Make sure your document contains links starting with http:// or https://" };
+            return { handled: true, message: "⚠️ No URLs found. Make sure the text contains links starting with http://, https://, or www." };
         }
         return { handled: true, message: `✅ Made ${count} link${count !== 1 ? "s" : ""} clickable!` };
     }
