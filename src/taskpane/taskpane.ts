@@ -1984,6 +1984,7 @@ function writeData(sheet, startCell, data) {
         console.error("[Agent] Runtime Error:", _innerErr);
         try { await context.sync(); } catch(_) {}
         throw _innerErr;
+      }
     `;
 
     console.log("=== EXECUTING AI CODE ===");
@@ -1996,8 +1997,8 @@ function writeData(sheet, startCell, data) {
         `return (async () => {
           try {
             ${wrappedCode}
-        await context.sync();
-      } catch (inner) {
+            await context.sync();
+          } catch (inner) {
         // Enhance error messages for common issues
         if (inner.code === "InvalidArgument") {
           const original = inner.message || "";

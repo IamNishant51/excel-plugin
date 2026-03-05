@@ -21,11 +21,15 @@
     "prettier": "office-addin-lint prettier",
     "signin": "office-addin-dev-settings m365-account login",
     "signout": "office-addin-dev-settings m365-account logout",
-    "start": "office-addin-debugging start manifest.xml",
+    "start": "node start-chooser.js",
+    "start:excel": "office-addin-debugging start manifest.xml",
+    "start:word": "office-addin-debugging start manifest-word.xml --app word",
     "stop": "office-addin-debugging stop manifest.xml",
+    "stop:word": "office-addin-debugging stop manifest-word.xml",
     "test": "jest",
     "test:watch": "jest --watch",
     "validate": "office-addin-manifest validate manifest.xml",
+    "validate:word": "office-addin-manifest validate manifest-word.xml",
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {

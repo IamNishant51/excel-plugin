@@ -1,2 +1,4615 @@
-/*! For license information please see taskpane.js.LICENSE.txt */
-!function(){var r,n={31096:function(r,n,e){"use strict";var t=e(85072),a=e.n(t),o=e(97825),i=e.n(o),A=e(77659),s=e.n(A),l=e(55056),c=e.n(l),d=e(10540),p=e.n(d),u=e(41113),g=e.n(u),m=e(93942),h={};function C(r){return C="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r},C(r)}function f(r){if(null!=r){var n=r["function"==typeof Symbol&&Symbol.iterator||"@@iterator"],e=0;if(n)return n.call(r);if("function"==typeof r.next)return r;if(!isNaN(r.length))return{next:function(){return r&&e>=r.length&&(r=void 0),{value:r&&r[e++],done:!r}}}}throw new TypeError(C(r)+" is not iterable")}function b(r,n){var e=Object.keys(r);if(Object.getOwnPropertySymbols){var t=Object.getOwnPropertySymbols(r);n&&(t=t.filter(function(n){return Object.getOwnPropertyDescriptor(r,n).enumerable})),e.push.apply(e,t)}return e}function B(r){for(var n=1;n<arguments.length;n++){var e=null!=arguments[n]?arguments[n]:{};n%2?b(Object(e),!0).forEach(function(n){x(r,n,e[n])}):Object.getOwnPropertyDescriptors?Object.defineProperties(r,Object.getOwnPropertyDescriptors(e)):b(Object(e)).forEach(function(n){Object.defineProperty(r,n,Object.getOwnPropertyDescriptor(e,n))})}return r}function x(r,n,e){return(n=function(r){var n=function(r){if("object"!=C(r)||!r)return r;var n=r[Symbol.toPrimitive];if(void 0!==n){var e=n.call(r,"string");if("object"!=C(e))return e;throw new TypeError("@@toPrimitive must return a primitive value.")}return String(r)}(r);return"symbol"==C(n)?n:n+""}(n))in r?Object.defineProperty(r,n,{value:e,enumerable:!0,configurable:!0,writable:!0}):r[n]=e,r}function I(){var r,n,e="function"==typeof Symbol?Symbol:{},t=e.iterator||"@@iterator",a=e.toStringTag||"@@toStringTag";function o(e,t,a,o){var s=t&&t.prototype instanceof A?t:A,l=Object.create(s.prototype);return y(l,"_invoke",function(e,t,a){var o,A,s,l=0,c=a||[],d=!1,p={p:0,n:0,v:r,a:u,f:u.bind(r,4),d:function(n,e){return o=n,A=0,s=r,p.n=e,i}};function u(e,t){for(A=e,s=t,n=0;!d&&l&&!a&&n<c.length;n++){var a,o=c[n],u=p.p,g=o[2];e>3?(a=g===t)&&(s=o[(A=o[4])?5:(A=3,3)],o[4]=o[5]=r):o[0]<=u&&((a=e<2&&u<o[1])?(A=0,p.v=t,p.n=o[1]):u<g&&(a=e<3||o[0]>t||t>g)&&(o[4]=e,o[5]=t,p.n=g,A=0))}if(a||e>1)return i;throw d=!0,t}return function(a,c,g){if(l>1)throw TypeError("Generator is already running");for(d&&1===c&&u(c,g),A=c,s=g;(n=A<2?r:s)||!d;){o||(A?A<3?(A>1&&(p.n=-1),u(A,s)):p.n=s:p.v=s);try{if(l=2,o){if(A||(a="next"),n=o[a]){if(!(n=n.call(o,s)))throw TypeError("iterator result is not an object");if(!n.done)return n;s=n.value,A<2&&(A=0)}else 1===A&&(n=o.return)&&n.call(o),A<2&&(s=TypeError("The iterator does not provide a '"+a+"' method"),A=1);o=r}else if((n=(d=p.n<0)?s:e.call(t,p))!==i)break}catch(n){o=r,A=1,s=n}finally{l=1}}return{value:n,done:d}}}(e,a,o),!0),l}var i={};function A(){}function s(){}function l(){}n=Object.getPrototypeOf;var c=[][t]?n(n([][t]())):(y(n={},t,function(){return this}),n),d=l.prototype=A.prototype=Object.create(c);function p(r){return Object.setPrototypeOf?Object.setPrototypeOf(r,l):(r.__proto__=l,y(r,a,"GeneratorFunction")),r.prototype=Object.create(d),r}return s.prototype=l,y(d,"constructor",l),y(l,"constructor",s),s.displayName="GeneratorFunction",y(l,a,"GeneratorFunction"),y(d),y(d,a,"Generator"),y(d,t,function(){return this}),y(d,"toString",function(){return"[object Generator]"}),(I=function(){return{w:o,m:p}})()}function y(r,n,e,t){var a=Object.defineProperty;try{a({},"",{})}catch(r){a=0}y=function(r,n,e,t){function o(n,e){y(r,n,function(r){return this._invoke(n,e,r)})}n?a?a(r,n,{value:e,enumerable:!t,configurable:!t,writable:!t}):r[n]=e:(o("next",0),o("throw",1),o("return",2))},y(r,n,e,t)}function v(r,n,e,t,a,o,i){try{var A=r[o](i),s=A.value}catch(r){return void e(r)}A.done?n(s):Promise.resolve(s).then(t,a)}function w(r){return function(){var n=this,e=arguments;return new Promise(function(t,a){var o=r.apply(n,e);function i(r){v(o,t,a,i,A,"next",r)}function A(r){v(o,t,a,i,A,"throw",r)}i(void 0)})}}function E(){try{var r=localStorage.getItem("sheetcraft_llm_config");if(r)return JSON.parse(r)}catch(r){console.warn("Failed to load LLM config:",r)}return{provider:"groq",apiKey:"undefined"!=typeof process&&"MISSING_ENV_VAR".GROQ_API_KEY||"",groqModel:"llama-3.3-70b-versatile",localModel:"qwen2.5-coder:7b"}}function k(r){return new Promise(function(n){return setTimeout(n,r)})}function S(r){var n=arguments.length>1&&void 0!==arguments[1]&&arguments[1];if("groq"===r.provider){if(n)return"meta-llama/llama-4-maverick-17b-128e-instruct";var e=r.groqModel||"llama-3.3-70b-versatile";return e.includes("llama-3.2")&&(e.includes("vision")||e.includes("preview"))||e.includes(":")?"llama-3.3-70b-versatile":e}return"gemini"===r.provider?r.geminiModel||"gemini-1.5-flash":"openai"===r.provider?r.openaiModel||"gpt-4o":"anthropic"===r.provider?r.anthropicModel||"claude-3-5-sonnet-20241022":"openrouter"===r.provider?r.openrouterModel||"anthropic/claude-3.5-sonnet:beta":r.localModel||r.model||"llama3"}function R(r,n,e,t){return T.apply(this,arguments)}function T(){return(T=w(I().m(function r(n,e,t,a){var o,i,A,s,l,c,d,p,u;return I().w(function(r){for(;;)switch(r.n){case 0:return i="https://generativelanguage.googleapis.com/v1beta/models/".concat(e,":generateContent?key=").concat(t),A=[],s=[],n.forEach(function(r){if("system"===r.role){var n=Array.isArray(r.content)?r.content.map(function(r){return"text"===r.type?r.text:""}).join(""):r.content;n&&s.push({text:n})}else{var e,t="assistant"===r.role?"model":"user",a=[];"string"==typeof r.content?r.content&&a.push({text:r.content}):r.content.forEach(function(r){if("text"===r.type&&r.text&&a.push({text:r.text}),"image_url"===r.type&&r.image_url){var n=r.image_url.url.split(",")[1];n&&a.push({inline_data:{mime_type:"image/png",data:n}})}}),a.length>0&&(A.length>0&&A[A.length-1].role===t?(e=A[A.length-1].parts).push.apply(e,a):A.push({role:t,parts:a}))}}),l={contents:A,generationConfig:{temperature:0,topP:1,maxOutputTokens:4096}},s.length>0&&(l.system_instruction={parts:s}),0===A.length&&A.push({role:"user",parts:[{text:"Hello. Please acknowledge system instructions."}]}),r.n=1,fetch(i,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(l),signal:a});case 1:if((c=r.v).ok){r.n=3;break}return r.n=2,c.text();case 2:throw d=r.v,new Error("Gemini Error (".concat(c.status,"): ").concat(d));case 3:return r.n=4,c.json();case 4:if(p=r.v,u=null===(o=p.candidates)||void 0===o||null===(o=o[0])||void 0===o||null===(o=o.content)||void 0===o||null===(o=o.parts)||void 0===o||null===(o=o[0])||void 0===o?void 0:o.text){r.n=5;break}throw new Error("Gemini returned empty response.");case 5:return r.a(2,u)}},r)}))).apply(this,arguments)}function O(r,n,e){return F.apply(this,arguments)}function F(){return(F=w(I().m(function r(n,e,t){var a,o,i,A,s,l;return I().w(function(r){for(;;)switch(r.n){case 0:a=e||E(),o=B({},a),i=n.some(function(r){return Array.isArray(r.content)&&r.content.some(function(r){return"image_url"===r.type})}),A=I().m(function r(){var e,a,A,s,c,d,p,u,g,m,h,C,f,b,B,x,y,v,w,E,T,O,F,D,z;return I().w(function(r){for(;;)switch(r.p=r.n){case 0:if(r.p=0,e=S(o,i),a="","gemini"!==o.provider){r.n=3;break}if(o.geminiKey){r.n=1;break}throw new Error("Missing Gemini API Key");case 1:return r.n=2,R(n,e,o.geminiKey,t);case 2:a=r.v,r.n=27;break;case 3:if("openai"!==o.provider){r.n=7;break}if(o.openaiKey){r.n=4;break}throw new Error("Missing OpenAI API Key");case 4:return r.n=5,fetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer ".concat(o.openaiKey)},body:JSON.stringify({messages:n,model:e,temperature:0,top_p:1,max_tokens:4096}),signal:t});case 5:return s=r.v,r.n=6,s.json();case 6:c=r.v,a=(null===(A=c.choices)||void 0===A||null===(A=A[0])||void 0===A||null===(A=A.message)||void 0===A?void 0:A.content)||"",r.n=27;break;case 7:if("anthropic"!==o.provider){r.n=14;break}if(o.anthropicKey){r.n=8;break}throw new Error("Missing Anthropic API Key");case 8:return p="",u=[],n.forEach(function(r){"system"===r.role?p="string"==typeof r.content?r.content:r.content.map(function(r){return r.text||""}).join(""):u.push({role:r.role,content:"string"==typeof r.content?r.content:r.content.map(function(r){return"text"===r.type?{type:"text",text:r.text}:"image_url"===r.type&&r.image_url?{type:"image",source:{type:"base64",media_type:"image/png",data:r.image_url.url.split(",")[1]}}:{type:"text",text:""}}).filter(function(r){return"text"!==r.type||r.text})})}),r.n=9,fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":o.anthropicKey,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify({messages:u,system:p||void 0,model:e,max_tokens:4096,temperature:0}),signal:t});case 9:if((g=r.v).ok){r.n=12;break}return r.n=10,g.text();case 10:if(m=r.v,429!==g.status){r.n=11;break}throw new Error("RATE_LIMIT");case 11:throw new Error("Anthropic Error (".concat(g.status,"): ").concat(m.substring(0,100)));case 12:return r.n=13,g.json();case 13:h=r.v,a=(null===(d=h.content)||void 0===d||null===(d=d[0])||void 0===d?void 0:d.text)||"",r.n=27;break;case 14:if("openrouter"!==o.provider){r.n=21;break}if(o.openrouterKey){r.n=15;break}throw new Error("Missing OpenRouter API Key");case 15:return r.n=16,fetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer ".concat(o.openrouterKey),"HTTP-Referer":window.location.origin,"X-Title":"SheetOS AI Plugin"},body:JSON.stringify({messages:n,model:e,temperature:0,top_p:1,max_tokens:4096}),signal:t});case 16:if((f=r.v).ok){r.n=19;break}return r.n=17,f.text();case 17:if(b=r.v,429!==f.status){r.n=18;break}throw new Error("RATE_LIMIT");case 18:throw new Error("OpenRouter Error (".concat(f.status,"): ").concat(b.substring(0,100)));case 19:return r.n=20,f.json();case 20:B=r.v,a=(null===(C=B.choices)||void 0===C||null===(C=C[0])||void 0===C||null===(C=C.message)||void 0===C?void 0:C.content)||"",r.n=27;break;case 21:return y="groq"===o.provider?"https://api.groq.com/openai/v1/chat/completions":o.baseUrl||"http://localhost:11434/v1/chat/completions",v={"Content-Type":"application/json"},o.apiKey&&(v.Authorization="Bearer ".concat(o.apiKey)),r.n=22,fetch(y,{method:"POST",headers:v,body:JSON.stringify({messages:n,model:e,temperature:0,top_p:1,max_tokens:4096}),signal:t});case 22:if((w=r.v).ok){r.n=25;break}return r.n=23,w.text();case 23:if(E=r.v,429!==(T=w.status)){r.n=24;break}throw new Error("RATE_LIMIT");case 24:throw new Error("AI Error (".concat(T,"): ").concat(E.substring(0,100)));case 25:return r.n=26,w.json();case 26:O=r.v,a=(null===(x=O.choices)||void 0===x||null===(x=x[0])||void 0===x||null===(x=x.message)||void 0===x?void 0:x.content)||"";case 27:if(a){r.n=28;break}throw new Error("Empty response from AI");case 28:return F=(F=(F=(F=(F=a.trim()).replace(/^```(?:javascript|js|typescript|ts)?\n?/i,"")).replace(/\n?```$/i,"")).trim()).replace(/(?:const|let|var)\s+sheet\s*=\s*.*?;/g,"// sheet redeclaration removed"),r.a(2,{v:F});case 29:if(r.p=29,"RATE_LIMIT"!==(z=r.v).message&&!z.message.includes("429")){r.n=31;break}if(!(l<3)){r.n=31;break}return D=2e3*Math.pow(2,l),console.warn("Rate limit retry ".concat(l+1,"/").concat(3," in ").concat(D,"ms...")),r.n=30,k(D);case 30:return r.a(2,0);case 31:throw z;case 32:return r.a(2)}},r,null,[[0,29]])}),l=0;case 1:if(!(l<=3)){r.n=5;break}return r.d(f(A()),2);case 2:if(0!==(s=r.v)){r.n=3;break}return r.a(3,4);case 3:if(!s){r.n=4;break}return r.a(2,s.v);case 4:l++,r.n=1;break;case 5:throw new Error("Failed after maximum retries and possible failover.");case 6:return r.a(2)}},r)}))).apply(this,arguments)}function D(r){return z.apply(this,arguments)}function z(){return(z=w(I().m(function r(n){var e,t,a,o;return I().w(function(r){for(;;)switch(r.p=r.n){case 0:return e=n||"http://localhost:11434",r.p=1,r.n=2,fetch("".concat(e,"/api/tags"),{method:"GET"});case 2:if((t=r.v).ok){r.n=3;break}throw new Error("Ollama returned ".concat(t.status));case 3:return r.n=4,t.json();case 4:return a=r.v,r.a(2,(a.models||[]).map(function(r){return{name:r.name,size:r.size||0,modified_at:r.modified_at||""}}));case 5:return r.p=5,o=r.v,console.warn("Could not fetch Ollama models:",o),r.a(2,[])}},r,null,[[1,5]])}))).apply(this,arguments)}h.styleTagTransform=g(),h.setAttributes=c(),h.insert=s().bind(null,"head"),h.domAPI=i(),h.insertStyleElement=p(),a()(m.A,h),m.A&&m.A.locals&&m.A.locals;var M='You are SheetOS AI, an Excel JavaScript API expert. Generate ONLY executable JS code.\n\n═══════════════════════════════════════════════════════════════════════════════\nENVIRONMENT (Already available — DO NOT redeclare these):\n═══════════════════════════════════════════════════════════════════════════════\n- context: Excel.RequestContext (ready to use)\n- sheet: Active worksheet (already loaded)\n- Excel: Namespace for enums (Excel.ChartType, Excel.BorderLineStyle, etc.)\n\n═══════════════════════════════════════════════════════════════════════════════\nCRITICAL RULES (MUST FOLLOW):\n═══════════════════════════════════════════════════════════════════════════════\n1. OUTPUT: Raw executable JavaScript ONLY. No markdown, no explanations.\n2. NO REDECLARATIONS: Never write "const context = ..." or "const sheet = ..."\n3. LOAD BEFORE READ: Properties like .values, .rowCount require .load() + await context.sync()\n4. 2D ARRAYS: range.values and range.formulas MUST be 2D arrays: [[value]]\n5. SYNC OFTEN: Call await context.sync() after every .load() before accessing properties\n6. SAFETY: Always check if range/data exists before operating on it\n\n═══════════════════════════════════════════════════════════════════════════════\nBANNED PATTERNS (WILL CRASH — NEVER USE):\n═══════════════════════════════════════════════════════════════════════════════\n❌ .getValues()         → Use: range.load("values"); await context.sync(); range.values\n❌ .getRowCount()       → Use: range.load("rowCount"); await context.sync(); range.rowCount\n❌ .getColumnCount()    → Use: range.load("columnCount"); await context.sync(); range.columnCount\n❌ .getAddress()        → Use: range.load("address"); await context.sync(); range.address\n❌ .getText()           → Use: range.load("text"); await context.sync(); range.text\n❌ .setValues(x)        → Use: range.values = [[x]]\n❌ .setFormula(x)       → Use: range.formulas = [["=SUM(A:A)"]]\n❌ .setValue(x)         → Use: range.values = [[x]]\n❌ range.font.bold      → Use: range.format.font.bold\n❌ range.alignment      → Use: range.format.horizontalAlignment\n❌ chart.setTitle(x)    → Use: chart.title.text = x\n❌ chart.add()          → Use: sheet.charts.add()\n❌ range.getItem()      → Use: range.getCell(row, col)\n❌ range.select()       → REMOVE (causes performance issues)\n❌ range.activate()     → REMOVE (not needed)\n❌ SpreadsheetApp       → WRONG PLATFORM (this is Google Apps Script)\n❌ Logger.log()         → REMOVE or use console.log\n❌ Browser.msgBox()     → REMOVE (not available)\n❌ alert() / confirm()  → REMOVE (blocked in add-ins)\n❌ message.alert()      → REMOVE (doesn\'t exist)\n❌ getRange("A0")       → Row 0 doesn\'t exist. Use A1 or higher.\n❌ const context = ...  → ALREADY DECLARED\n❌ const sheet = ...    → ALREADY DECLARED\n\n═══════════════════════════════════════════════════════════════════════════════\nCORRECT PATTERNS (COPY THESE):\n═══════════════════════════════════════════════════════════════════════════════\n\n// ─── Read Data from Sheet ───\nconst usedRange = sheet.getUsedRange();\nusedRange.load("values,rowCount,columnCount");\nawait context.sync();\nconst data = usedRange.values; // Now accessible\nconst rows = usedRange.rowCount;\nconst cols = usedRange.columnCount;\n\n// ─── Write Data (Single Cell) ───\nsheet.getRange("A1").values = [["Hello World"]];\n\n// ─── Write Data (Multiple Cells) ───\nsheet.getRange("A1:C2").values = [\n  ["Name", "Age", "City"],\n  ["John", 25, "NYC"]\n];\n\n// ─── Formulas ───\nsheet.getRange("D2").formulas = [["=SUM(B2:C2)"]];\n// Multiple formulas:\nsheet.getRange("D2:D5").formulas = [\n  ["=SUM(B2:C2)"],\n  ["=SUM(B3:C3)"],\n  ["=SUM(B4:C4)"],\n  ["=SUM(B5:C5)"]\n];\n\n// ─── Formatting ───\nconst r = sheet.getRange("A1:D1");\nr.format.font.bold = true;\nr.format.font.color = "#FFFFFF";\nr.format.fill.color = "#4472C4";\nr.format.horizontalAlignment = "Center";\nr.format.verticalAlignment = "Center";\nr.format.rowHeight = 28;\n\n// ─── Borders ───\nconst range = sheet.getRange("A1:D10");\nrange.format.borders.getItem("InsideHorizontal").style = "Thin";\nrange.format.borders.getItem("InsideVertical").style = "Thin";\nrange.format.borders.getItem("EdgeTop").style = "Thin";\nrange.format.borders.getItem("EdgeBottom").style = "Thin";\nrange.format.borders.getItem("EdgeLeft").style = "Thin";\nrange.format.borders.getItem("EdgeRight").style = "Thin";\n\n// ─── Charts ───\nconst chartRange = sheet.getRange("A1:B5");\nconst chart = sheet.charts.add(Excel.ChartType.columnClustered, chartRange, Excel.ChartSeriesBy.auto);\nchart.title.text = "Sales Report";\nchart.setPosition("E2", "L15");\n\n// ─── Tables ───\nconst tableRange = sheet.getRange("A1:D10");\nconst table = sheet.tables.add(tableRange, true);\ntable.name = "SalesTable";\ntable.style = "TableStyleMedium9";\n\n// ─── Conditional Formatting ───\nconst cfRange = sheet.getRange("C2:C100");\nconst cf = cfRange.conditionalFormats.add(Excel.ConditionalFormatType.cellValue);\ncf.cellValue.format.fill.color = "#92D050";\ncf.cellValue.rule = { formula1: "=50", operator: "GreaterThan" };\n\n// ─── Data Validation (Dropdown) ───\nsheet.getRange("E2:E100").dataValidation.rule = {\n  list: { inCellDropDown: true, source: "Yes,No,Maybe" }\n};\n\n// ─── Sort ───\nsheet.getUsedRange().sort.apply([{ key: 0, ascending: true }]);\n\n// ─── Filter ───\nconst filterRange = sheet.getUsedRange();\nfilterRange.autoFilter.apply(filterRange, 0);\n\n// ─── Freeze Panes ───\nsheet.freezePanes.freezeRows(1);\n\n// ─── Number Format ───\nsheet.getRange("B2:B100").numberFormat = [["$#,##0.00"]];\nsheet.getRange("C2:C100").numberFormat = [["0.0%"]];\n\n// ─── Clear Contents ───\nsheet.getUsedRange().clear(Excel.ClearApplyTo.Contents);\n\n// ─── New Worksheet ───\nconst newSheet = context.workbook.worksheets.add("Report");\nnewSheet.activate();\n\n// ─── Autofit Columns (ALWAYS DO THIS AT END) ───\nsheet.getUsedRange().format.autofitColumns();\n\n// ─── Data Cleanup (Trim Whitespace) ───\nconst range = sheet.getUsedRange();\nrange.load("values");\nawait context.sync();\nconst cleanValues = range.values.map(row => \n  row.map(cell => (typeof cell === "string" ? cell.trim() : cell))\n);\nrange.values = cleanValues;\nawait context.sync();\n\n// ─── Data Cleanup (Remove Empty Rows) ───\nconst rangeToClean = sheet.getUsedRange();\nrangeToClean.load("values,rowCount");\nawait context.sync();\nfor (let i = rangeToClean.rowCount - 1; i >= 0; i--) {\n  const rowVals = rangeToClean.values[i];\n  if (rowVals.every(v => v === null || v === "")) {\n    sheet.getRange((i + 1) + ":" + (i + 1)).delete(Excel.DeleteShiftDirection.up);\n  }\n}\nawait context.sync();\n\n═══════════════════════════════════════════════════════════════════════════════\nMANDATORY writeData HELPER (Include this for any data writing):\n═══════════════════════════════════════════════════════════════════════════════\nfunction writeData(sheet, startCell, data) {\n  if (!data || data.length === 0) return null;\n  const rows = data.length;\n  const cols = Math.max(...data.map(r => r ? r.length : 0));\n  if (cols === 0) return null;\n  const normalized = data.map(r => {\n    const row = r ? [...r] : [];\n    while (row.length < cols) row.push("");\n    return row;\n  });\n  const range = sheet.getRange(startCell).getResizedRange(rows - 1, cols - 1);\n  range.values = normalized;\n  range.format.autofitColumns();\n  return range;\n}\n\n═══════════════════════════════════════════════════════════════════════════════\nANTI-HALLUCINATION RULES (For Document/PDF Extraction):\n═══════════════════════════════════════════════════════════════════════════════\n1. EXTRACT ONLY WHAT YOU SEE: Never invent data that isn\'t in the image/PDF\n2. EMPTY IF MISSING: If a field (phone, email, etc.) isn\'t visible, use "" not "N/A"\n3. NO GUESSING: Don\'t make up names, numbers, or dates\n4. PRESERVE EXACT TEXT: Copy text exactly as shown (don\'t "fix" typos unless asked)\n5. ONE ROW PER DOCUMENT: Each PDF/resume = exactly one data row\n6. MATCH SCHEMA: If column headers exist, ONLY extract data for those columns\n\n═══════════════════════════════════════════════════════════════════════════════\nDESIGN BEST PRACTICES:\n═══════════════════════════════════════════════════════════════════════════════\n1. HEADERS: Bold, dark background (#1B4D3E or #2D6A4F), white text\n2. NUMBERS: Currency "$#,##0.00", Percentage "0.0%", Integer "#,##0"\n3. DATES: Format as "Short Date" or "YYYY-MM-DD" string\n4. COLORS: Professional muted tones — no neon, no pure red/blue\n5. ZEBRA STRIPES: White and light gray (#F5F5F5) alternating rows\n6. ROW HEIGHT: Headers 28px, Data 20px\n7. ALWAYS: End with sheet.getUsedRange().format.autofitColumns()\n\n═══════════════════════════════════════════════════════════════════════════════\nSCHEMA-AWARE EXTRACTION (When EXISTING_COLUMNS provided):\n═══════════════════════════════════════════════════════════════════════════════\nWhen given "EXISTING_COLUMNS: [...]":\n1. Extract ONLY data matching those columns\n2. Use intelligent matching: "Phone" = "Mobile No" = "Contact Number"\n3. Leave cells empty ("") if data not found — NEVER write "Not Found"\n4. Append to first empty row after existing data\n\nUser Prompt:\n',N="sheetcraft_cache",P="sheetcraft_cache_ver";function U(){try{var r=localStorage.getItem(N);return r?JSON.parse(r):[]}catch(r){return[]}}function j(r){!function(){try{localStorage.getItem(P)!==String(2)&&(localStorage.removeItem(N),localStorage.setItem(P,String(2)))}catch(r){}}();var n=U(),e=r.trim().toLowerCase(),t=n.find(function(r){return r.prompt===e});return t?Date.now()-t.timestamp>36e5?null:t.response:null}function L(r,n){var e=U(),t=r.trim().toLowerCase(),a=e.filter(function(r){return r.prompt!==t});a.push({prompt:t,response:n,timestamp:Date.now()}),function(r){var n=r.slice(-50);localStorage.setItem(N,JSON.stringify(n))}(a)}var Y={Name:["Full Name","Candidate Name","Applicant Name","First Name","First","Naam"],Email:["E-mail","Email Address","E-Mail","Mail","Contact Email"],Phone:["Mobile","Mobile No","Mobile Number","Contact","Contact No","Phone Number","Tel","Telephone"],Age:["Years","DOB","Date of Birth","Birth Date"],Address:["Location","City","Current Location","Residence"],Skills:["Technical Skills","Key Skills","Skillset","Expertise","Technologies"],Experience:["Work Experience","Total Experience","Years of Experience","Professional Experience"],Education:["Qualification","Degree","Academic","Educational Qualification"],LinkedIn:["LinkedIn URL","LinkedIn Profile","Profile URL"],Company:["Current Company","Organization","Employer","Current Employer"],Position:["Role","Job Title","Designation","Current Role","Title"],Summary:["Profile Summary","About","Objective","Career Objective"]},q=e(80748);function Q(){var r,n,e="function"==typeof Symbol?Symbol:{},t=e.iterator||"@@iterator",a=e.toStringTag||"@@toStringTag";function o(e,t,a,o){var s=t&&t.prototype instanceof A?t:A,l=Object.create(s.prototype);return H(l,"_invoke",function(e,t,a){var o,A,s,l=0,c=a||[],d=!1,p={p:0,n:0,v:r,a:u,f:u.bind(r,4),d:function(n,e){return o=n,A=0,s=r,p.n=e,i}};function u(e,t){for(A=e,s=t,n=0;!d&&l&&!a&&n<c.length;n++){var a,o=c[n],u=p.p,g=o[2];e>3?(a=g===t)&&(s=o[(A=o[4])?5:(A=3,3)],o[4]=o[5]=r):o[0]<=u&&((a=e<2&&u<o[1])?(A=0,p.v=t,p.n=o[1]):u<g&&(a=e<3||o[0]>t||t>g)&&(o[4]=e,o[5]=t,p.n=g,A=0))}if(a||e>1)return i;throw d=!0,t}return function(a,c,g){if(l>1)throw TypeError("Generator is already running");for(d&&1===c&&u(c,g),A=c,s=g;(n=A<2?r:s)||!d;){o||(A?A<3?(A>1&&(p.n=-1),u(A,s)):p.n=s:p.v=s);try{if(l=2,o){if(A||(a="next"),n=o[a]){if(!(n=n.call(o,s)))throw TypeError("iterator result is not an object");if(!n.done)return n;s=n.value,A<2&&(A=0)}else 1===A&&(n=o.return)&&n.call(o),A<2&&(s=TypeError("The iterator does not provide a '"+a+"' method"),A=1);o=r}else if((n=(d=p.n<0)?s:e.call(t,p))!==i)break}catch(n){o=r,A=1,s=n}finally{l=1}}return{value:n,done:d}}}(e,a,o),!0),l}var i={};function A(){}function s(){}function l(){}n=Object.getPrototypeOf;var c=[][t]?n(n([][t]())):(H(n={},t,function(){return this}),n),d=l.prototype=A.prototype=Object.create(c);function p(r){return Object.setPrototypeOf?Object.setPrototypeOf(r,l):(r.__proto__=l,H(r,a,"GeneratorFunction")),r.prototype=Object.create(d),r}return s.prototype=l,H(d,"constructor",l),H(l,"constructor",s),s.displayName="GeneratorFunction",H(l,a,"GeneratorFunction"),H(d),H(d,a,"Generator"),H(d,t,function(){return this}),H(d,"toString",function(){return"[object Generator]"}),(Q=function(){return{w:o,m:p}})()}function H(r,n,e,t){var a=Object.defineProperty;try{a({},"",{})}catch(r){a=0}H=function(r,n,e,t){function o(n,e){H(r,n,function(r){return this._invoke(n,e,r)})}n?a?a(r,n,{value:e,enumerable:!t,configurable:!t,writable:!t}):r[n]=e:(o("next",0),o("throw",1),o("return",2))},H(r,n,e,t)}function G(r,n,e,t,a,o,i){try{var A=r[o](i),s=A.value}catch(r){return void e(r)}A.done?n(s):Promise.resolve(s).then(t,a)}function W(r){return function(){var n=this,e=arguments;return new Promise(function(t,a){var o=r.apply(n,e);function i(r){G(o,t,a,i,A,"next",r)}function A(r){G(o,t,a,i,A,"throw",r)}i(void 0)})}}function V(r){return Z.apply(this,arguments)}function Z(){return(Z=W(Q().m(function r(n){var e,t,a,o,i,A,s,l,c,d,p;return Q().w(function(r){for(;;)switch(r.p=r.n){case 0:return r.p=0,e=q.getDocument({data:n}),r.n=1,e.promise;case 1:t=r.v,a=t.numPages,o="",i=1;case 2:if(!(i<=a)){r.n=6;break}return r.n=3,t.getPage(i);case 3:return A=r.v,r.n=4,A.getTextContent();case 4:s=r.v,l=s.items.map(function(r){return r.str}).join(" "),o+=l+"\n\n";case 5:i++,r.n=2;break;case 6:return r.n=7,t.getMetadata();case 7:return c=r.v,d=c.info,r.a(2,{text:J(o),pages:a,metadata:{title:null==d?void 0:d.Title,author:null==d?void 0:d.Author,subject:null==d?void 0:d.Subject,creator:null==d?void 0:d.Creator}});case 8:throw r.p=8,p=r.v,new Error("PDF extraction failed: ".concat(p instanceof Error?p.message:String(p)));case 9:return r.a(2)}},r,null,[[0,8]])}))).apply(this,arguments)}function X(r){return _.apply(this,arguments)}function _(){return(_=W(Q().m(function r(n){var e;return Q().w(function(r){for(;;)switch(r.n){case 0:return r.n=1,n.arrayBuffer();case 1:return e=r.v,r.a(2,V(e))}},r)}))).apply(this,arguments)}function J(r){return r.replace(/\s+/g," ").replace(/[\x00-\x08\x0B-\x0C\x0E-\x1F\x7F]/g,"").replace(/\r\n/g,"\n").replace(/\r/g,"\n").replace(/\n{3,}/g,"\n\n").trim()}function K(r){return K="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r},K(r)}function $(r){if(null!=r){var n=r["function"==typeof Symbol&&Symbol.iterator||"@@iterator"],e=0;if(n)return n.call(r);if("function"==typeof r.next)return r;if(!isNaN(r.length))return{next:function(){return r&&e>=r.length&&(r=void 0),{value:r&&r[e++],done:!r}}}}throw new TypeError(K(r)+" is not iterable")}function rr(r,n){var e=Object.keys(r);if(Object.getOwnPropertySymbols){var t=Object.getOwnPropertySymbols(r);n&&(t=t.filter(function(n){return Object.getOwnPropertyDescriptor(r,n).enumerable})),e.push.apply(e,t)}return e}function nr(r){for(var n=1;n<arguments.length;n++){var e=null!=arguments[n]?arguments[n]:{};n%2?rr(Object(e),!0).forEach(function(n){er(r,n,e[n])}):Object.getOwnPropertyDescriptors?Object.defineProperties(r,Object.getOwnPropertyDescriptors(e)):rr(Object(e)).forEach(function(n){Object.defineProperty(r,n,Object.getOwnPropertyDescriptor(e,n))})}return r}function er(r,n,e){return(n=function(r){var n=function(r){if("object"!=K(r)||!r)return r;var n=r[Symbol.toPrimitive];if(void 0!==n){var e=n.call(r,"string");if("object"!=K(e))return e;throw new TypeError("@@toPrimitive must return a primitive value.")}return String(r)}(r);return"symbol"==K(n)?n:n+""}(n))in r?Object.defineProperty(r,n,{value:e,enumerable:!0,configurable:!0,writable:!0}):r[n]=e,r}function tr(){var r,n,e="function"==typeof Symbol?Symbol:{},t=e.iterator||"@@iterator",a=e.toStringTag||"@@toStringTag";function o(e,t,a,o){var s=t&&t.prototype instanceof A?t:A,l=Object.create(s.prototype);return ar(l,"_invoke",function(e,t,a){var o,A,s,l=0,c=a||[],d=!1,p={p:0,n:0,v:r,a:u,f:u.bind(r,4),d:function(n,e){return o=n,A=0,s=r,p.n=e,i}};function u(e,t){for(A=e,s=t,n=0;!d&&l&&!a&&n<c.length;n++){var a,o=c[n],u=p.p,g=o[2];e>3?(a=g===t)&&(s=o[(A=o[4])?5:(A=3,3)],o[4]=o[5]=r):o[0]<=u&&((a=e<2&&u<o[1])?(A=0,p.v=t,p.n=o[1]):u<g&&(a=e<3||o[0]>t||t>g)&&(o[4]=e,o[5]=t,p.n=g,A=0))}if(a||e>1)return i;throw d=!0,t}return function(a,c,g){if(l>1)throw TypeError("Generator is already running");for(d&&1===c&&u(c,g),A=c,s=g;(n=A<2?r:s)||!d;){o||(A?A<3?(A>1&&(p.n=-1),u(A,s)):p.n=s:p.v=s);try{if(l=2,o){if(A||(a="next"),n=o[a]){if(!(n=n.call(o,s)))throw TypeError("iterator result is not an object");if(!n.done)return n;s=n.value,A<2&&(A=0)}else 1===A&&(n=o.return)&&n.call(o),A<2&&(s=TypeError("The iterator does not provide a '"+a+"' method"),A=1);o=r}else if((n=(d=p.n<0)?s:e.call(t,p))!==i)break}catch(n){o=r,A=1,s=n}finally{l=1}}return{value:n,done:d}}}(e,a,o),!0),l}var i={};function A(){}function s(){}function l(){}n=Object.getPrototypeOf;var c=[][t]?n(n([][t]())):(ar(n={},t,function(){return this}),n),d=l.prototype=A.prototype=Object.create(c);function p(r){return Object.setPrototypeOf?Object.setPrototypeOf(r,l):(r.__proto__=l,ar(r,a,"GeneratorFunction")),r.prototype=Object.create(d),r}return s.prototype=l,ar(d,"constructor",l),ar(l,"constructor",s),s.displayName="GeneratorFunction",ar(l,a,"GeneratorFunction"),ar(d),ar(d,a,"Generator"),ar(d,t,function(){return this}),ar(d,"toString",function(){return"[object Generator]"}),(tr=function(){return{w:o,m:p}})()}function ar(r,n,e,t){var a=Object.defineProperty;try{a({},"",{})}catch(r){a=0}ar=function(r,n,e,t){function o(n,e){ar(r,n,function(r){return this._invoke(n,e,r)})}n?a?a(r,n,{value:e,enumerable:!t,configurable:!t,writable:!t}):r[n]=e:(o("next",0),o("throw",1),o("return",2))},ar(r,n,e,t)}function or(r,n,e,t,a,o,i){try{var A=r[o](i),s=A.value}catch(r){return void e(r)}A.done?n(s):Promise.resolve(s).then(t,a)}function ir(r){return function(){var n=this,e=arguments;return new Promise(function(t,a){var o=r.apply(n,e);function i(r){or(o,t,a,i,A,"next",r)}function A(r){or(o,t,a,i,A,"throw",r)}i(void 0)})}}function Ar(r,n){var e="undefined"!=typeof Symbol&&r[Symbol.iterator]||r["@@iterator"];if(!e){if(Array.isArray(r)||(e=function(r,n){if(r){if("string"==typeof r)return sr(r,n);var e={}.toString.call(r).slice(8,-1);return"Object"===e&&r.constructor&&(e=r.constructor.name),"Map"===e||"Set"===e?Array.from(r):"Arguments"===e||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(e)?sr(r,n):void 0}}(r))||n&&r&&"number"==typeof r.length){e&&(r=e);var t=0,a=function(){};return{s:a,n:function(){return t>=r.length?{done:!0}:{done:!1,value:r[t++]}},e:function(r){throw r},f:a}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var o,i=!0,A=!1;return{s:function(){e=e.call(r)},n:function(){var r=e.next();return i=r.done,r},e:function(r){A=!0,o=r},f:function(){try{i||null==e.return||e.return()}finally{if(A)throw o}}}}function sr(r,n){(null==n||n>r.length)&&(n=r.length);for(var e=0,t=Array(n);e<n;e++)t[e]=r[e];return t}q.GlobalWorkerOptions.workerSrc="//cdnjs.cloudflare.com/ajax/libs/pdf.js/".concat(q.version,"/pdf.worker.min.js");var lr=[{pattern:/\.getColumnCount\s*\(\s*\)/g,message:"getColumnCount() doesn't exist",fix:"load('columnCount') then use .columnCount property"},{pattern:/\.getRowCount\s*\(\s*\)/g,message:"getRowCount() doesn't exist",fix:"load('rowCount') then use .rowCount property"},{pattern:/\.getAddress\s*\(\s*\)/g,message:"getAddress() doesn't exist",fix:"load('address') then use .address property"},{pattern:/\.getValues\s*\(\s*\)/g,message:"getValues() doesn't exist",fix:"load('values') then use .values property"},{pattern:/\.getText\s*\(\s*\)/g,message:"getText() doesn't exist",fix:"load('text') then use .text property"},{pattern:/\.setValues\s*\(/g,message:"setValues() doesn't exist",fix:"Use range.values = [[...]] assignment"},{pattern:/\.setFormula\s*\(/g,message:"setFormula() doesn't exist",fix:"Use range.formulas = [[...]] assignment"},{pattern:/\.setValue\s*\(/g,message:"setValue() doesn't exist",fix:"Use range.values = [[value]] assignment"},{pattern:/\.clearFormat\s*\(\s*\)/g,message:"clearFormat() doesn't exist",fix:"Use .clear(Excel.ClearApplyTo.Formats)"},{pattern:/\.clearFormats\s*\(\s*\)/g,message:"clearFormats() doesn't exist",fix:"Use .clear(Excel.ClearApplyTo.Formats)"},{pattern:/\.clearValue\s*\(\s*\)/g,message:"clearValue() doesn't exist",fix:"Use .clear(Excel.ClearApplyTo.Contents)"},{pattern:/\.clearValues\s*\(\s*\)/g,message:"clearValues() doesn't exist",fix:"Use .clear(Excel.ClearApplyTo.Contents)"},{pattern:/SpreadsheetApp/g,message:"SpreadsheetApp is Google Apps Script, not Excel",fix:"Use Excel JavaScript API (sheet, context, Excel namespace)"},{pattern:/Logger\.log/g,message:"Logger.log is Google Apps Script",fix:"Use console.log or remove logging"},{pattern:/Browser\.msgBox/g,message:"Browser.msgBox is Google Apps Script",fix:"Remove - UI dialogs not supported in Excel Add-ins"},{pattern:/Utilities\./g,message:"Utilities is Google Apps Script",fix:"Use native JavaScript methods"},{pattern:/chart\.setTitle\s*\(/g,message:"chart.setTitle() doesn't exist",fix:"Use chart.title.text = '...'"},{pattern:/chart\.add\s*\(/g,message:"chart.add() doesn't exist",fix:"Use sheet.charts.add()"},{pattern:/range\.getItem\s*\(/g,message:"range.getItem() doesn't exist",fix:"Use range.getCell(row, col)"},{pattern:/range\.select\s*\(\s*\)/g,message:"range.select() causes performance issues",fix:"Remove - selection not needed for automation"},{pattern:/range\.activate\s*\(\s*\)/g,message:"range.activate() causes performance issues",fix:"Remove - activation not needed for automation"},{pattern:/range\.font\.bold/g,message:"range.font.bold path is wrong",fix:"Use range.format.font.bold"},{pattern:/range\.alignment/g,message:"range.alignment doesn't exist",fix:"Use range.format.horizontalAlignment or range.format.verticalAlignment"},{pattern:/range\.format\.alignment/g,message:"range.format.alignment object doesn't exist",fix:"Use range.format.horizontalAlignment directly"},{pattern:/range\.horizontal/g,message:"range.horizontal doesn't exist",fix:"Use range.format.horizontalAlignment"},{pattern:/message\.alert\s*\(/g,message:"message.alert() doesn't exist in add-ins",fix:"Remove - use status messages in add-in UI instead"},{pattern:/alert\s*\(/g,message:"alert() doesn't work in add-ins",fix:"Remove - JavaScript alert blocked in Office Add-ins"},{pattern:/confirm\s*\(/g,message:"confirm() doesn't work in add-ins",fix:"Remove - JavaScript confirm blocked in Office Add-ins"},{pattern:/prompt\s*\(/g,message:"prompt() doesn't work in add-ins",fix:"Remove - JavaScript prompt blocked in Office Add-ins"},{pattern:/(?:const|let|var)\s+context\s*=/g,message:"context is already declared",fix:"Remove declaration - context is provided"},{pattern:/(?:const|let|var)\s+sheet\s*=\s*context\.workbook/g,message:"sheet is already declared",fix:"Remove declaration - sheet is provided"},{pattern:/getRange\s*\(\s*["']?[A-Z]0["']?\s*\)/gi,message:"Row 0 doesn't exist in Excel",fix:"Use row 1 or higher (e.g., A1, B1)"},{pattern:/getCell\s*\(\s*-?\d+\s*,\s*-?\d+\s*\)/g,message:"Negative cell indices are invalid",fix:"Use 0 or positive indices"},{pattern:/sheet\.clear\s*\(/g,message:"sheet.clear() doesn't exist in Excel JS API",fix:"Use sheet.getUsedRange().clear()"}],cr=[/context\.workbook/,/context\.sync\(\)/,/sheet\./,/Excel\./,/\.getRange\(/,/\.getUsedRange\(/,/\.getCell\(/,/\.getRow\(/,/\.getColumn\(/,/\.getResizedRange\(/,/\.getOffsetRange\(/,/\.getEntireRow\(/,/\.getEntireColumn\(/,/\.getLastCell\(/,/\.getLastRow\(/,/\.getLastColumn\(/,/\.getBoundingRect\(/,/\.getIntersection\(/,/\.load\(/,/\.values\s*=/,/\.formulas\s*=/,/\.numberFormat\s*=/,/\.format\./,/\.autofitColumns\(/,/\.autofitRows\(/,/\.tables\./,/\.charts\./,/\.sort\./,/\.autoFilter\./,/\.dataValidation\./,/\.conditionalFormats\./,/\.worksheets\./,/\.freezePanes\./,/\.clear\(/,/\.delete\(/,/\.insert\(/,/\.borders\./];function dr(r){var n=[],e=[],t=[],a=r;a=(a=(a=a.replace(/^```(?:javascript|js|typescript|ts)?\n?/gi,"")).replace(/\n?```$/gi,"")).trim();var o,i=Ar(lr);try{for(i.s();!(o=i.n()).done;){var A=o.value;a.match(A.pattern)&&(A.message.includes("clearFormats")?a=a.replace(A.pattern,".clear(Excel.ClearApplyTo.Formats)"):A.message.includes("clearValue")?a=a.replace(A.pattern,".clear(Excel.ClearApplyTo.Contents)"):A.pattern.source.includes("redeclare")?a=a.replace(A.pattern,"// [REMOVED] "):n.push({type:"banned_api",message:A.message,suggestion:A.fix}))}}catch(r){i.e(r)}finally{i.f()}var s=(a.match(/\.load\s*\(/g)||[]).length,l=(a.match(/context\.sync\s*\(\s*\)/g)||[]).length;s>0&&0===l&&n.push({type:"missing_sync",message:"Code loads properties but never calls context.sync()",suggestion:"Add 'await context.sync();' after .load() calls before accessing loaded properties"}),s>2*l&&e.push("Multiple .load() calls - consider batching with a single context.sync() for performance");try{new Function("context","sheet","Excel","return (async () => { ".concat(a," })();"))}catch(r){n.push({type:"syntax",message:r.message,suggestion:"Check for missing brackets, semicolons, or typos"})}var c,d=Ar(cr);try{for(d.s();!(c=d.n()).done;){var p=c.value,u=a.match(p);u&&t.push(u[0])}}catch(r){d.e(r)}finally{d.f()}if(/eval\s*\(/i.test(a)&&n.push({type:"unsafe_pattern",message:"eval() is not allowed for security reasons",suggestion:"Remove eval() call"}),/Function\s*\(/i.test(a)&&!/new\s+Function/.test(a)&&e.push("Direct Function constructor usage detected - ensure it's intentional"),/formulas\s*=\s*[^[]/i.test(a)&&n.push({type:"type_error",message:"formulas must be a 2D array",suggestion:'Use range.formulas = [["=SUM(A1:A10)"]] (2D array)'}),/values\s*=\s*[^[]/i.test(a)&&!/values\s*=\s*\[\[/i.test(a)){var g=a.match(/values\s*=\s*("[^"]*"|'[^']*'|\d+)/);g&&n.push({type:"type_error",message:"values must be a 2D array",suggestion:"Use range.values = [[".concat(g[1],"]] (2D array)")})}return a=a.replace(/(?:const|let|var)\s+sheet\s*=\s*context\.workbook\.worksheets\.getActiveWorksheet\(\)\s*;?/g,"// sheet already available"),{isValid:0===n.length,errors:n,warnings:e,sanitizedCode:a,apiCallsDetected:t}}function pr(r,n,e){return ur.apply(this,arguments)}function ur(){return(ur=ir(tr().m(function r(n,e,t){var a,o,i,A,s;return tr().w(function(r){for(;;)switch(r.p=r.n){case 0:return a="",e&&e.hasData&&(a='\n\nCURRENT SHEET CONTEXT:\n- Sheet: "'.concat(e.sheetName,'"\n- Size: ').concat(e.rowCount," rows × ").concat(e.columnCount," columns\n- Headers: ").concat(e.headers.join(", "),"\n- Data Types: ").concat(e.dataTypes.join(", "))),o=[{role:"system",content:'You are an Excel automation planning expert. Analyze the user\'s request and create a brief execution plan.\n\nOUTPUT FORMAT (JSON only, no markdown):\n{\n  "understanding": "One sentence summary of what user wants",\n  "steps": ["Step 1", "Step 2", "Step 3"],\n  "dataNeeded": ["What data needs to be read from sheet"],\n  "expectedOutput": "What the sheet should look like after",\n  "complexity": "simple|moderate|complex",\n  "warnings": ["Any potential issues or edge cases"]\n}\n\nRULES:\n- Keep steps actionable and specific\n- Identify if data needs to be read first\n- Flag complexity based on operations needed\n- Note any ambiguities in the request'},{role:"user",content:n+a}],r.n=1,O(o,void 0,t);case 1:if(i=r.v,r.p=2,!(A=i.match(/\{[\s\S]*\}/))){r.n=3;break}return r.a(2,JSON.parse(A[0]));case 3:r.n=5;break;case 4:r.p=4,s=r.v,console.warn("Failed to parse plan:",s);case 5:return r.a(2,{understanding:n,steps:["Execute the requested operation"],dataNeeded:[],expectedOutput:"Modified spreadsheet",complexity:"moderate",warnings:[]})}},r,null,[[2,4]])}))).apply(this,arguments)}function gr(r,n,e,t,a,o){return mr.apply(this,arguments)}function mr(){return mr=ir(tr().m(function r(n,e,t,a,o,i){var A,s,l,c,d,p,u;return tr().w(function(r){for(;;)switch(r.n){case 0:if(A=n,e){for(A+="\n\nPLAN:\n",s=0;s<e.steps.length;s++)A+=s+1+". "+e.steps[s]+"\n";if(e.warnings.length>0)for(A+="\n\nWATCH OUT FOR:\n",l=0;l<e.warnings.length;l++)A+=e.warnings[l]+"\n"}return t&&t.hasData&&(A+="\n\nSHEET DATA:\n",A+="- Headers: "+JSON.stringify(t.headers)+"\n",A+="- Rows: "+t.rowCount+"\n",A+="- Sample: "+JSON.stringify(t.sampleData.slice(0,3))+"\n"),o&&(A+='\n\nPREVIOUS ERROR: "'+o+'"\nFIX THIS ERROR. Output only corrected code.'),c=[{role:"system",content:'You are an Excel JavaScript API expert. Generate ONLY executable code.\n\nENVIRONMENT (pre-declared, DO NOT redeclare):\n- context: Excel.RequestContext\n- sheet: Active worksheet (already loaded)\n- Excel: Namespace for enums\n\nCRITICAL API RULES:\n1. Properties require .load() + await context.sync() before reading\n2. Writing: range.values = [[...]] (2D array always)\n3. Reading: range.load("values"); await context.sync(); // then access range.values\n4. Formats: range.format.font.bold, range.format.fill.color, range.format.horizontalAlignment\n5. Always check rowCount and columnCount before using getRow or formatting\n6. Use context-aware formatting: adapt colors, fonts, borders, and row heights based on sheet type (office, banking, school, etc.)\n7. Clearing Formats ONLY: range.clear(Excel.ClearApplyTo.Formats)\n8. Clearing ALL content in sheer: sheet.getUsedRange().clear()\n9. Charts: sheet.charts.add(Excel.ChartType.xxx, dataRange, Excel.ChartSeriesBy.auto)\n10. Tables: sheet.tables.add(range, hasHeaders)\n11. Document Extraction: ALWAYS extract data as a flat HORIZONTAL table (Headers in row 1, data appended below). NEVER mimic vertical document layouts or create key-value lists (e.g., "Name: Bob" in column A). All data text must be a visible color (e.g. black).\n12. Memory Lifetime: If saving an object (like usedRange) to a variable used across multiple context.sync() calls, ALWAYS pin it: context.trackedObjects.add(usedRange)\n\nBANNED (will crash):\n- sheet.clear() → Worksheet lacks this method. Use sheet.getUsedRange().clear()\n- .getValues(), .getRowCount(), .getColumnCount(), .getAddress() → Use properties after load+sync\n- .setValues(), .setFormula() → Use property assignment\n- .clearFormats() → Use .clear(Excel.ClearApplyTo.formats)\n- SpreadsheetApp, Logger.log → Wrong platform\n- alert(), confirm(), prompt() → Blocked in add-ins\n- const sheet = ... → Already declared\n- const context = ... → Already declared\n\nMANDATORY writeData HELPER (include this in all code):\nfunction writeData(sheet, startCell, data) {\n  if (!data || data.length === 0) return null;\n  const rows = data.length;\n  const cols = Math.max(...data.map(r => r ? r.length : 0));\n  if (cols === 0) return null;\n  const normalized = data.map(r => {\n    const row = r ? [...r] : [];\n    while (row.length < cols) row.push("");\n    // Office.js rejects null/undefined/objects in range.values \n    return row.map(cell => {\n      if (cell === null || cell === undefined) return "";\n      let val = typeof cell === "object" ? (Array.isArray(cell) ? cell.join(", ") : JSON.stringify(cell)) : String(cell);\n      // Prevent formula evaluation crashes (like \'@\' or \'-\') and string length limits\n      if (/^[=+-@]/.test(val)) val = "\'" + val;\n      if (val.length > 30000) val = val.substring(0, 30000) + "...";\n      return val;\n    });\n  });\n  const range = sheet.getRange(startCell).getResizedRange(rows - 1, cols - 1);\n  range.values = normalized;\n  range.format.autofitColumns();\n  return range;\n}\n\nSAFE FORMATTING TEMPLATE (adapt details based on sheet type):\n// Step 1: Get used range, track it to prevent expiration, and load properties\nconst usedRange = sheet.getUsedRange();\ncontext.trackedObjects.add(usedRange);\nusedRange.load("values,rowCount,columnCount,address");\nawait context.sync();\n\n// Step 2: Check if sheet has data\nif (!usedRange || usedRange.rowCount < 1 || usedRange.columnCount < 1) {\n  throw new Error("Sheet appears empty. Add some data first.");\n}\n\nconst rowCount = usedRange.rowCount;\nconst colCount = usedRange.columnCount;\n\n// Step 3: Format header row (row 1)\nconst headerRow = usedRange.getRow(0);\nheaderRow.format.set({\n  font: { bold: true, size: 11, color: "#FFFFFF" },\n  fill: { color: "#1B2A4A" },\n  horizontalAlignment: "Center",\n  verticalAlignment: "Center",\n  rowHeight: 28\n});\n\n// Step 4: Format data rows with alternating colors — ALWAYS set font color to black\nfor (let i = 1; i < rowCount; i++) {\n  const row = usedRange.getRow(i);\n  row.format.set({\n    fill: { color: i % 2 === 0 ? "#F4F5F7" : "#FFFFFF" },\n    font: { color: "#000000" },\n    wrapText: true // allow row to expand for multi-line text\n  });\n}\n\n// Step 5: Add borders to all cells\nusedRange.format.borders.getItem("InsideHorizontal").style = "Thin";\nusedRange.format.borders.getItem("InsideVertical").style = "Thin";\nusedRange.format.borders.getItem("EdgeTop").style = "Thin";\nusedRange.format.borders.getItem("EdgeBottom").style = "Thin";\nusedRange.format.borders.getItem("EdgeLeft").style = "Thin";\nusedRange.format.borders.getItem("EdgeRight").style = "Thin";\n\n// Step 6: Add medium bottom border under header\nheaderRow.format.borders.getItem("EdgeBottom").style = "Medium";\nheaderRow.format.borders.getItem("EdgeBottom").color = "#1B2A4A"; // Adapt color for sheet type\n\n// Step 7: Freeze first row\nsheet.freezePanes.freezeRows(1);\n\n// Step 8: Auto-fit columns\nusedRange.format.autofitColumns();\nawait context.sync();\n\nOUTPUT: Raw JavaScript code only. No markdown, no explanation.'}],a.length>0?(d=[{type:"text",text:A}],a.forEach(function(r){r.data.slice(0,10).forEach(function(r){d.push({type:"image_url",image_url:{url:r}})})}),c.push({role:"user",content:d})):c.push({role:"user",content:A}),r.n=1,O(c,void 0,i);case 1:return(p=r.v).startsWith("```")&&(u=p.indexOf("\n"),p=u>=0?p.slice(u+1):p.slice(3)),p.endsWith("```")&&(p=p.slice(0,-3)),p=p.trim(),r.a(2,p)}},r)})),mr.apply(this,arguments)}function hr(r,n,e,t){return Cr.apply(this,arguments)}function Cr(){return(Cr=ir(tr().m(function r(n,e,t,a){var o,i,A;return tr().w(function(r){for(;;)switch(r.n){case 0:return o="",e.length>0&&(o="VALIDATION ERRORS:\n"+e.map(function(r){return"- ".concat(r.message," → ").concat(r.suggestion)}).join("\n")),t&&(o+=(o?"\n\n":"")+"RUNTIME ERROR: ".concat(t)),i=[{role:"system",content:'You are an Excel JavaScript API debugger. Fix the broken code.\n\nCOMMON FIXES:\n1. .getValues() → .load("values") + await context.sync() + .values\n2. .getRowCount() → .load("rowCount") + await context.sync() + .rowCount\n3. range.values = "text" → range.values = [["text"]]\n4. const sheet = ... → REMOVE (already declared)\n5. SpreadsheetApp → Use sheet (Excel JS API)\n6. chart.setTitle() → chart.title.text = "..."\n\nOUTPUT: Fixed code only. No explanation, no markdown fences.'},{role:"user",content:"BROKEN CODE:\n".concat(n,"\n\n").concat(o,"\n\nFix the code:")}],r.n=1,O(i,void 0,a);case 1:return A=(A=(A=r.v).replace(/^```(?:javascript|js|typescript|ts)?\n?/gi,"")).replace(/\n?```$/gi,""),r.a(2,A.trim())}},r)}))).apply(this,arguments)}var fr={maxRetries:3,enablePlanning:!0,strictValidation:!0,timeout:3e4};function br(r,n,e){return Br.apply(this,arguments)}function Br(){return Br=ir(tr().m(function r(n,e,t){var a,o,i,A,s,l,c,d,p,u,g,m=arguments;return tr().w(function(r){for(;;)switch(r.p=r.n){case 0:if(a=m.length>3&&void 0!==m[3]?m[3]:{},o=m.length>4?m[4]:void 0,i=nr(nr({},fr),a),A=Date.now(),s=null,l="",c=null,d=0,r.p=1,!i.enablePlanning||t.length){r.n=6;break}return r.p=2,r.n=3,pr(n,e,o);case 3:s=r.v,console.log("[Agent] Plan created:",s),r.n=6;break;case 4:if(r.p=4,"AbortError"!==(u=r.v).name){r.n=5;break}throw u;case 5:console.warn("[Agent] Planning failed, proceeding without plan:",u);case 6:return r.n=7,gr(n,s,e,t,void 0,o);case 7:l=r.v,console.log("[Agent] Initial code generated"),p=0;case 8:if(!(p<=i.maxRetries)){r.n=12;break}if(!(c=dr(l)).isValid){r.n=9;break}return console.log("[Agent] Code validated successfully on attempt ".concat(p+1)),r.a(3,12);case 9:if(!(p<i.maxRetries)){r.n=11;break}return console.log("[Agent] Validation failed (attempt ".concat(p+1,"), fixing...")),r.n=10,hr(l,c.errors,void 0,o);case 10:l=r.v,d++;case 11:p++,r.n=8;break;case 12:if((c=dr(l)).isValid||!i.strictValidation){r.n=13;break}throw new Error("Code validation failed: ".concat(c.errors.map(function(r){return r.message}).join("; ")));case 13:return l=c.sanitizedCode,r.a(2,{success:!0,code:l,plan:s,validation:c,retries:d,duration:Date.now()-A});case 14:return r.p=14,g=r.v,r.a(2,{success:!1,code:l,plan:s,validation:c,error:g.message,retries:d,duration:Date.now()-A})}},r,null,[[2,4],[1,14]])})),Br.apply(this,arguments)}function xr(r,n){return Ir.apply(this,arguments)}function Ir(){return Ir=ir(tr().m(function r(n,e){var t,a,o,i,A,s,l,c=arguments;return tr().w(function(r){for(;;)switch(r.p=r.n){case 0:t=c.length>2&&void 0!==c[2]?c[2]:2,a=c.length>3?c[3]:void 0,o=n,i="",A=0;case 1:if(!(A<=t)){r.n=9;break}if(null==a||!a.aborted){r.n=2;break}throw new DOMException("Execution cancelled","AbortError");case 2:return r.p=2,r.n=3,e(o);case 3:return r.a(2,{success:!0,finalCode:o});case 4:if(r.p=4,l=r.v,i=l.message||String(l),console.warn("[Agent] Execution failed (attempt ".concat(A+1,"):"),i),!(A<t)){r.n=8;break}return r.n=5,hr(o,[],i,a);case 5:if(o=r.v,!(s=dr(o)).isValid){r.n=6;break}o=s.sanitizedCode,r.n=8;break;case 6:return r.n=7,hr(o,s.errors,void 0,a);case 7:o=r.v;case 8:A++,r.n=1;break;case 9:return r.a(2,{success:!1,error:i,finalCode:o})}},r,null,[[2,4]])})),Ir.apply(this,arguments)}function yr(){return vr.apply(this,arguments)}function vr(){return vr=ir(tr().m(function r(){var n;return tr().w(function(r){for(;;)switch(r.p=r.n){case 0:return r.p=0,r.n=1,Excel.run(function(){var r=ir(tr().m(function r(n){var e,t,a,o,i,A,s;return tr().w(function(r){for(;;)switch(r.n){case 0:return(e=n.workbook.worksheets.getActiveWorksheet()).load("name"),(t=e.getUsedRangeOrNullObject()).load("values,rowCount,columnCount,isNullObject"),r.n=1,n.sync();case 1:if(!t.isNullObject&&0!==t.rowCount&&0!==t.columnCount){r.n=2;break}return r.a(2,{sheetName:e.name,rowCount:0,columnCount:0,headers:[],sampleData:[],dataTypes:[],hasData:!1});case 2:if(a=t.values,o=a[0].map(function(r){return String(r||"").trim()}),i=[],!(a.length>1)){r.n=5;break}A=tr().m(function r(n){var e;return tr().w(function(r){for(;;)switch(r.n){case 0:0===(e=a.slice(1).map(function(r){return r[n]}).filter(function(r){return null!=r&&""!==r})).length?i.push("empty"):e.every(function(r){return!isNaN(Number(r))})?i.push("number"):e.every(function(r){return/^\d{1,4}[-\/]\d{1,2}[-\/]\d{1,4}/.test(String(r))})?i.push("date"):i.push("text");case 1:return r.a(2)}},r)}),s=0;case 3:if(!(s<t.columnCount)){r.n=5;break}return r.d($(A(s)),4);case 4:s++,r.n=3;break;case 5:return r.a(2,{sheetName:e.name,rowCount:t.rowCount,columnCount:t.columnCount,headers:o,sampleData:a.slice(0,10),dataTypes:i,hasData:!0})}},r)}));return function(n){return r.apply(this,arguments)}}());case 1:return r.a(2,r.v);case 2:return r.p=2,n=r.v,console.error("Failed to read sheet context:",n),r.a(2,null)}},r,null,[[0,2]])})),vr.apply(this,arguments)}var wr=function(r){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:14;return'<svg width="'.concat(n,'" height="').concat(n,'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">').concat(r,"</svg>")},Er={chart:wr('<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>'),barChart:wr('<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>'),table:wr('<path d="M12 3v18"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/>'),paintbrush:wr('<path d="M18.37 2.63a2.12 2.12 0 0 1 3 3L14 13l-4 1 1-4Z"/><path d="M9 14.5A3.5 3.5 0 0 0 5.5 18H3v2h7a3 3 0 0 0 0-6"/>'),formula:wr('<path d="M6 2v20"/><path d="M6 6h12l-6 6 6 6H6"/>'),sortAsc:wr('<path d="M11 5h10"/><path d="M11 9h7"/><path d="M11 13h4"/><path d="M3 17l3 3 3-3"/><path d="M6 18V4"/>'),filter:wr('<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>'),checkSquare:wr('<polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>'),trendUp:wr('<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>'),eraser:wr('<path d="M20 20H7L3 16l9-9 9 9-4 4"/><path d="M6.5 13.5l5-5"/>'),copy:wr('<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>'),columns:wr('<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18"/>'),lock:wr('<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>'),hash:wr('<line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/>'),search:wr('<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>'),snowflake:wr('<line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/><line x1="20" y1="16" x2="4" y2="8"/><line x1="20" y1="8" x2="4" y2="16"/>'),check:wr('<path d="M20 6L9 17l-5-5"/>',16),alertCircle:wr('<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>',16),arrowRight:wr('<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>',16),settings:wr('<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.6.77 1.05 1.39 1.16V10H21a2 2 0 0 1 0 4h-.09c-.62.11-1.13.56-1.39 1.16z"/>',18),helpCircle:wr('<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>',18),refresh:wr('<polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>',14),chevronDown:wr('<polyline points="6 9 12 15 18 9"/>',14),fileText:wr('<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 12v6"/><path d="M9 15h6"/>',20),messageCircle:wr('<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>',16),zap:wr('<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',16),send:wr('<line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>',14),stop:wr('<rect x="4" y="4" width="16" height="16" rx="2" fill="currentColor"/>',16),broom:wr('<path d="M5 21h14"/><path d="M12 21V3"/><path d="M7 8l5-5 5 5"/><path d="M7 12l5 2 5-2"/>',14),pieChart:wr('<path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/>',14),palette:wr('<circle cx="13.5" cy="6.5" r="0.5" fill="currentColor"/><circle cx="17.5" cy="10.5" r="0.5" fill="currentColor"/><circle cx="8.5" cy="7.5" r="0.5" fill="currentColor"/><circle cx="6.5" cy="12" r="0.5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>',14),fileTemplate:wr('<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/>',14),play:wr('<polygon points="5 3 19 12 5 21 5 3"/>',14),trash:wr('<polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',14),sparkles:wr('<path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>',14),user:wr('<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',14),bot:wr('<rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/>',14),upload:wr('<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>',14),users:wr('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',14),filePlus:wr('<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/>',14),calendar:wr('<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',14),database:wr('<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>',14),clipboardList:wr('<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/>',14),brain:wr('<path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/>',14),crosshair:wr('<circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/>',14),dollarSign:wr('<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',14),shield:wr('<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',14),mail:wr('<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>',14),highlight:wr('<path d="m9 11-6 6v3h9l3-3"/><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"/>',14),layers:wr('<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',14)};function kr(r){return kr="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r},kr(r)}function Sr(r){return function(r){if(Array.isArray(r))return zr(r)}(r)||function(r){if("undefined"!=typeof Symbol&&null!=r[Symbol.iterator]||null!=r["@@iterator"])return Array.from(r)}(r)||Dr(r)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function Rr(r){if(null!=r){var n=r["function"==typeof Symbol&&Symbol.iterator||"@@iterator"],e=0;if(n)return n.call(r);if("function"==typeof r.next)return r;if(!isNaN(r.length))return{next:function(){return r&&e>=r.length&&(r=void 0),{value:r&&r[e++],done:!r}}}}throw new TypeError(kr(r)+" is not iterable")}function Tr(){var r,n,e="function"==typeof Symbol?Symbol:{},t=e.iterator||"@@iterator",a=e.toStringTag||"@@toStringTag";function o(e,t,a,o){var s=t&&t.prototype instanceof A?t:A,l=Object.create(s.prototype);return Or(l,"_invoke",function(e,t,a){var o,A,s,l=0,c=a||[],d=!1,p={p:0,n:0,v:r,a:u,f:u.bind(r,4),d:function(n,e){return o=n,A=0,s=r,p.n=e,i}};function u(e,t){for(A=e,s=t,n=0;!d&&l&&!a&&n<c.length;n++){var a,o=c[n],u=p.p,g=o[2];e>3?(a=g===t)&&(s=o[(A=o[4])?5:(A=3,3)],o[4]=o[5]=r):o[0]<=u&&((a=e<2&&u<o[1])?(A=0,p.v=t,p.n=o[1]):u<g&&(a=e<3||o[0]>t||t>g)&&(o[4]=e,o[5]=t,p.n=g,A=0))}if(a||e>1)return i;throw d=!0,t}return function(a,c,g){if(l>1)throw TypeError("Generator is already running");for(d&&1===c&&u(c,g),A=c,s=g;(n=A<2?r:s)||!d;){o||(A?A<3?(A>1&&(p.n=-1),u(A,s)):p.n=s:p.v=s);try{if(l=2,o){if(A||(a="next"),n=o[a]){if(!(n=n.call(o,s)))throw TypeError("iterator result is not an object");if(!n.done)return n;s=n.value,A<2&&(A=0)}else 1===A&&(n=o.return)&&n.call(o),A<2&&(s=TypeError("The iterator does not provide a '"+a+"' method"),A=1);o=r}else if((n=(d=p.n<0)?s:e.call(t,p))!==i)break}catch(n){o=r,A=1,s=n}finally{l=1}}return{value:n,done:d}}}(e,a,o),!0),l}var i={};function A(){}function s(){}function l(){}n=Object.getPrototypeOf;var c=[][t]?n(n([][t]())):(Or(n={},t,function(){return this}),n),d=l.prototype=A.prototype=Object.create(c);function p(r){return Object.setPrototypeOf?Object.setPrototypeOf(r,l):(r.__proto__=l,Or(r,a,"GeneratorFunction")),r.prototype=Object.create(d),r}return s.prototype=l,Or(d,"constructor",l),Or(l,"constructor",s),s.displayName="GeneratorFunction",Or(l,a,"GeneratorFunction"),Or(d),Or(d,a,"Generator"),Or(d,t,function(){return this}),Or(d,"toString",function(){return"[object Generator]"}),(Tr=function(){return{w:o,m:p}})()}function Or(r,n,e,t){var a=Object.defineProperty;try{a({},"",{})}catch(r){a=0}Or=function(r,n,e,t){function o(n,e){Or(r,n,function(r){return this._invoke(n,e,r)})}n?a?a(r,n,{value:e,enumerable:!t,configurable:!t,writable:!t}):r[n]=e:(o("next",0),o("throw",1),o("return",2))},Or(r,n,e,t)}function Fr(r,n){var e="undefined"!=typeof Symbol&&r[Symbol.iterator]||r["@@iterator"];if(!e){if(Array.isArray(r)||(e=Dr(r))||n&&r&&"number"==typeof r.length){e&&(r=e);var t=0,a=function(){};return{s:a,n:function(){return t>=r.length?{done:!0}:{done:!1,value:r[t++]}},e:function(r){throw r},f:a}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var o,i=!0,A=!1;return{s:function(){e=e.call(r)},n:function(){var r=e.next();return i=r.done,r},e:function(r){A=!0,o=r},f:function(){try{i||null==e.return||e.return()}finally{if(A)throw o}}}}function Dr(r,n){if(r){if("string"==typeof r)return zr(r,n);var e={}.toString.call(r).slice(8,-1);return"Object"===e&&r.constructor&&(e=r.constructor.name),"Map"===e||"Set"===e?Array.from(r):"Arguments"===e||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(e)?zr(r,n):void 0}}function zr(r,n){(null==n||n>r.length)&&(n=r.length);for(var e=0,t=Array(n);e<n;e++)t[e]=r[e];return t}function Mr(r,n){var e=Object.keys(r);if(Object.getOwnPropertySymbols){var t=Object.getOwnPropertySymbols(r);n&&(t=t.filter(function(n){return Object.getOwnPropertyDescriptor(r,n).enumerable})),e.push.apply(e,t)}return e}function Nr(r){for(var n=1;n<arguments.length;n++){var e=null!=arguments[n]?arguments[n]:{};n%2?Mr(Object(e),!0).forEach(function(n){Pr(r,n,e[n])}):Object.getOwnPropertyDescriptors?Object.defineProperties(r,Object.getOwnPropertyDescriptors(e)):Mr(Object(e)).forEach(function(n){Object.defineProperty(r,n,Object.getOwnPropertyDescriptor(e,n))})}return r}function Pr(r,n,e){return(n=function(r){var n=function(r){if("object"!=kr(r)||!r)return r;var n=r[Symbol.toPrimitive];if(void 0!==n){var e=n.call(r,"string");if("object"!=kr(e))return e;throw new TypeError("@@toPrimitive must return a primitive value.")}return String(r)}(r);return"symbol"==kr(n)?n:n+""}(n))in r?Object.defineProperty(r,n,{value:e,enumerable:!0,configurable:!0,writable:!0}):r[n]=e,r}function Ur(r,n,e,t,a,o,i){try{var A=r[o](i),s=A.value}catch(r){return void e(r)}A.done?n(s):Promise.resolve(s).then(t,a)}function jr(r){return function(){var n=this,e=arguments;return new Promise(function(t,a){var o=r.apply(n,e);function i(r){Ur(o,t,a,i,A,"next",r)}function A(r){Ur(o,t,a,i,A,"throw",r)}i(void 0)})}}try{q.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/".concat(q.version,"/pdf.worker.min.js")}catch(r){console.warn("PDF Worker setup failed:",r)}var Lr="planning",Yr="cleanup",qr=[],Qr=[],Hr=!1,Gr=[],Wr=null,Vr=null,Zr=[],Xr=null,_r={cleanup:[{icon:"eraser",label:"Smart Clean 🧹",prompt:"Analyze the used range. Perform 'Smart Cleaning': (1) Trim all whitespace. (2) Convert text-numbers to real numbers. (3) Standardize dates to Short Date format. (4) Remove completely empty rows. (5) Remove duplicate rows. (6) Convert text columns to Proper Case. Write a summary of changes in a new cell comment."},{icon:"eraser",label:"Remove Duplicates",prompt:"Find and remove duplicate rows from the data, keeping the first occurrence of each."},{icon:"eraser",label:"Trim Spaces",prompt:"Trim all leading and trailing whitespace from every cell in the used range."},{icon:"eraser",label:"Fix Empty Rows",prompt:"Find and delete all completely empty rows within the used data range."},{icon:"search",label:"Find Blanks",prompt:"Highlight all blank cells in the used range with a light yellow background color (#FFF3CD)."},{icon:"hash",label:"Fix Number Format",prompt:"Detect columns with numbers stored as text and convert them back to proper numbers."},{icon:"eraser",label:"Standardize Case",prompt:"Convert all text in column A to proper case (first letter capitalized, rest lowercase)."},{icon:"eraser",label:"Clear Formatting",prompt:"Clear all formatting from the used range while keeping data, then auto-fit all columns."},{icon:"copy",label:"Split Column",prompt:"Split the data in column A by comma delimiter into separate columns B, C, D."},{icon:"eraser",label:"Remove Hyperlinks",prompt:"Find all cells in the used range. Remove all hyperlinks while keeping the cell values. Set the font color of all cells to black and remove any underlines to ensure a consistent, professional appearance."}],formulas:[{icon:"formula",label:"Formula Doctor 🚑",prompt:"Analyze the active cell/formula. (1) Explain the logic in a cell note. (2) If there is an error (#VALUE, #REF), FIX it and explain the fix. (3) If it's a value, suggest a formula. Expertly debug."},{icon:"formula",label:"Auto SUM",prompt:"Add a SUM formula at the bottom of each numeric column with a bold TOTAL label in column A."},{icon:"formula",label:"AVERAGE Row",prompt:"Add an AVERAGE formula at the bottom of each numeric column with a bold AVERAGE label."},{icon:"formula",label:"COUNT & COUNTA",prompt:"Add COUNT and COUNTA formulas at the bottom to count numeric and non-empty cells in each column."},{icon:"formula",label:"VLOOKUP Setup",prompt:"Analyze the data and set up a VLOOKUP section: create a lookup area to the right of the data where user can type a search value in one cell, and VLOOKUP automatically returns matching data from the table. Add labels and formatting to make it clear how to use it."},{icon:"formula",label:"SUMIF by Category",prompt:"Detect the category column (text) and numeric columns in the data. Create a summary section below the data that uses SUMIF to total each unique category. Add labels, formatting, and a bold grand total row."},{icon:"formula",label:"IF Conditional",prompt:"Add a new Status column at the end of the data. Use an IF formula to classify each row: if the last numeric column value is above the average, mark it 'Above Average', otherwise 'Below Average'. Format green for above, red for below."},{icon:"trendUp",label:"Running Total",prompt:"Add a 'Running Total' column at the end of the data that calculates a cumulative sum of the main numeric column, row by row. Format it with a subtle blue background and number format with commas."},{icon:"sortAsc",label:"Rank Values",prompt:"Add a 'Rank' column at the end of the data that ranks each row by the primary numeric column (largest = rank 1). Highlight the top 3 with gold/green backgrounds. Auto-fit all columns."}],format:[{icon:"paintbrush",label:"Make Professional",prompt:'Apply professional formatting to the sheet. Use this EXACT safe pattern:\n\n// Step 1: Get used range and load properties\nconst usedRange = sheet.getUsedRange();\nusedRange.load("values,rowCount,columnCount,address");\nawait context.sync();\n\n// Step 2: Check if sheet has data\nif (!usedRange || usedRange.rowCount < 1 || usedRange.columnCount < 1) {\n  throw new Error("Sheet appears empty. Add some data first.");\n}\n\nconst rowCount = usedRange.rowCount;\nconst colCount = usedRange.columnCount;\n\n// Step 3: Format header row (row 1)\nconst headerRow = usedRange.getRow(0);\nheaderRow.format.set({\n  font: { bold: true, size: 11, color: "#FFFFFF" },\n  fill: { color: "#1B2A4A" },\n  horizontalAlignment: "Center",\n  verticalAlignment: "Center",\n  rowHeight: 28\n});\n\n// Step 4: Format data rows with alternating colors\nfor (let i = 1; i < rowCount; i++) {\n  const row = usedRange.getRow(i);\n  row.format.set({\n    fill: { color: i % 2 === 0 ? "#F4F5F7" : "#FFFFFF" },\n    rowHeight: 22\n  });\n}\n\n// Step 5: Add borders and freeze pane\nusedRange.format.borders.getItem("InsideHorizontal").style = "Thin";\nusedRange.format.borders.getItem("InsideVertical").style = "Thin";\nusedRange.format.borders.getItem("EdgeTop").style = "Thin";\nusedRange.format.borders.getItem("EdgeBottom").style = "Thin";\nusedRange.format.borders.getItem("EdgeLeft").style = "Thin";\nusedRange.format.borders.getItem("EdgeRight").style = "Thin";\n\nheaderRow.format.borders.getItem("EdgeBottom").style = "Medium";\nheaderRow.format.borders.getItem("EdgeBottom").color = "#1B2A4A";\n\nsheet.freezePanes.freezeRows(1);\nusedRange.format.autofitColumns();\nawait context.sync();'},{icon:"paintbrush",label:"Executive Style",prompt:'Apply executive presentation style using this EXACT safe pattern:\n\nconst usedRange = sheet.getUsedRange();\nusedRange.load("values,rowCount,columnCount");\nawait context.sync();\n\nif (!usedRange || usedRange.rowCount < 1) {\n  throw new Error("Sheet appears empty.");\n}\n\nconst rowCount = usedRange.rowCount;\n\n// Header styling\nconst headerRow = usedRange.getRow(0);\nheaderRow.format.font.bold = true;\nheaderRow.format.font.size = 11;\nheaderRow.format.font.color = "#FFFFFF";\nheaderRow.format.fill.color = "#34495E";\nheaderRow.format.horizontalAlignment = "Center";\nheaderRow.format.rowHeight = 30;\n\n// Data rows with subtle alternating\nfor (let i = 1; i < rowCount; i++) {\n  const row = usedRange.getRow(i);\n  row.format.fill.color = i % 2 === 0 ? "#F8F9FA" : "#FFFFFF";\n  row.format.rowHeight = 22;\n}\n\n// Light gray borders\nusedRange.format.borders.getItem("InsideHorizontal").style = "Thin";\nusedRange.format.borders.getItem("InsideHorizontal").color = "#DEE2E6";\nusedRange.format.borders.getItem("InsideVertical").style = "Thin";\nusedRange.format.borders.getItem("InsideVertical").color = "#DEE2E6";\nusedRange.format.borders.getItem("EdgeTop").style = "Thin";\nusedRange.format.borders.getItem("EdgeBottom").style = "Thin";\nusedRange.format.borders.getItem("EdgeLeft").style = "Thin";\nusedRange.format.borders.getItem("EdgeRight").style = "Thin";\n\n// Freeze header\nsheet.freezePanes.freezeRows(1);\nusedRange.format.autofitColumns();\nawait context.sync();'},{icon:"paintbrush",label:"Minimal Clean",prompt:'Apply minimal modern formatting:\n\nconst usedRange = sheet.getUsedRange();\nusedRange.load("rowCount,columnCount");\nawait context.sync();\n\nif (!usedRange || usedRange.rowCount < 1) {\n  throw new Error("Sheet appears empty.");\n}\n\n// Clear existing formatting\nusedRange.format.fill.clear();\nusedRange.format.borders.getItem("InsideHorizontal").style = "None";\nusedRange.format.borders.getItem("InsideVertical").style = "None";\nusedRange.format.borders.getItem("EdgeTop").style = "None";\nusedRange.format.borders.getItem("EdgeBottom").style = "None";\nusedRange.format.borders.getItem("EdgeLeft").style = "None";\nusedRange.format.borders.getItem("EdgeRight").style = "None";\n\n// Header: bold, dark text, bottom border only\nconst headerRow = usedRange.getRow(0);\nheaderRow.format.font.bold = true;\nheaderRow.format.font.size = 11;\nheaderRow.format.font.color = "#111827";\nheaderRow.format.borders.getItem("EdgeBottom").style = "Thin";\nheaderRow.format.borders.getItem("EdgeBottom").color = "#D1D5DB";\nheaderRow.format.rowHeight = 28;\n\n// Data rows: smaller font, gray text\nfor (let i = 1; i < usedRange.rowCount; i++) {\n  const row = usedRange.getRow(i);\n  row.format.font.size = 10;\n  row.format.font.color = "#374151";\n  row.format.rowHeight = 22;\n}\n\nusedRange.format.autofitColumns();\nawait context.sync();'},{icon:"paintbrush",label:"Dark Theme",prompt:'Apply dark theme formatting:\n\nconst usedRange = sheet.getUsedRange();\nusedRange.load("rowCount,columnCount");\nawait context.sync();\n\nif (!usedRange || usedRange.rowCount < 1) {\n  throw new Error("Sheet appears empty.");\n}\n\nconst rowCount = usedRange.rowCount;\n\n// All cells: dark background, light text\nusedRange.format.fill.color = "#1E1E1E";\nusedRange.format.font.color = "#CCCCCC";\n\n// Header: gold text\nconst headerRow = usedRange.getRow(0);\nheaderRow.format.fill.color = "#2D2D2D";\nheaderRow.format.font.bold = true;\nheaderRow.format.font.color = "#F0C75E";\nheaderRow.format.rowHeight = 28;\n\n// Alternating dark rows\nfor (let i = 1; i < rowCount; i++) {\n  const row = usedRange.getRow(i);\n  row.format.fill.color = i % 2 === 0 ? "#252525" : "#1E1E1E";\n}\n\n// Dark borders\nusedRange.format.borders.getItem("InsideHorizontal").style = "Thin";\nusedRange.format.borders.getItem("InsideHorizontal").color = "#3A3A3A";\nusedRange.format.borders.getItem("InsideVertical").style = "Thin";\nusedRange.format.borders.getItem("InsideVertical").color = "#3A3A3A";\nusedRange.format.borders.getItem("EdgeTop").style = "Thin";\nusedRange.format.borders.getItem("EdgeBottom").style = "Thin";\nusedRange.format.borders.getItem("EdgeLeft").style = "Thin";\nusedRange.format.borders.getItem("EdgeRight").style = "Thin";\n\nusedRange.format.autofitColumns();\nawait context.sync();'},{icon:"paintbrush",label:"Colorful Teal",prompt:'Apply colorful teal formatting:\n\nconst usedRange = sheet.getUsedRange();\nusedRange.load("rowCount");\nawait context.sync();\n\nif (!usedRange || usedRange.rowCount < 1) {\n  throw new Error("Sheet appears empty.");\n}\n\n// Header: teal background\nconst headerRow = usedRange.getRow(0);\nheaderRow.format.fill.color = "#0D7377";\nheaderRow.format.font.bold = true;\nheaderRow.format.font.color = "#FFFFFF";\nheaderRow.format.horizontalAlignment = "Center";\nheaderRow.format.rowHeight = 28;\n\n// Alternating light teal and white\nfor (let i = 1; i < usedRange.rowCount; i++) {\n  const row = usedRange.getRow(i);\n  row.format.fill.color = i % 2 === 0 ? "#E8F6F3" : "#FFFFFF";\n}\n\n// Thin borders\nusedRange.format.borders.getItem("InsideHorizontal").style = "Thin";\nusedRange.format.borders.getItem("InsideVertical").style = "Thin";\nusedRange.format.borders.getItem("EdgeTop").style = "Thin";\nusedRange.format.borders.getItem("EdgeBottom").style = "Thin";\nusedRange.format.borders.getItem("EdgeLeft").style = "Thin";\nusedRange.format.borders.getItem("EdgeRight").style = "Thin";\n\nsheet.freezePanes.freezeRows(1);\nusedRange.format.autofitColumns();\nawait context.sync();'},{icon:"snowflake",label:"Freeze Header",prompt:"Freeze the first row:\n\nsheet.freezePanes.freezeRows(1);\nawait context.sync();"},{icon:"table",label:"Excel Table",prompt:'Convert data to Excel Table:\n\nconst usedRange = sheet.getUsedRange();\nusedRange.load("address");\nawait context.sync();\n\nif (!usedRange) {\n  throw new Error("No data found in sheet.");\n}\n\nconst table = sheet.tables.add(usedRange, true);\ntable.style = "TableStyleMedium9";\nusedRange.format.autofitColumns();\nawait context.sync();'},{icon:"paintbrush",label:"Borders All",prompt:'Add thin borders to all cells:\n\nconst usedRange = sheet.getUsedRange();\nusedRange.format.borders.getItem("InsideHorizontal").style = "Thin";\nusedRange.format.borders.getItem("InsideVertical").style = "Thin";\nusedRange.format.borders.getItem("EdgeTop").style = "Thin";\nusedRange.format.borders.getItem("EdgeBottom").style = "Thin";\nusedRange.format.borders.getItem("EdgeLeft").style = "Thin";\nusedRange.format.borders.getItem("EdgeRight").style = "Thin";\nawait context.sync();'},{icon:"hash",label:"Currency $",prompt:"Format numeric columns as currency. First read the data to detect numeric columns, then apply $#,##0.00 format."},{icon:"hash",label:"Percentage %",prompt:"Format the last numeric column as percentage (0.00%) and auto-fit columns."}],reports:[{icon:"barChart",label:"Instant Dashboard 📊",prompt:"Analyze the dataset. Create a new sheet 'Dashboard'. Generate 3 professional charts (Bar, Line, Pie) for key trends. Add 'Big Number' cards at top for Totals. Apply modern theme. Make it executive-ready."},{icon:"barChart",label:"Sales Report",prompt:"Generate a professional monthly sales report from the existing data. Do ALL of this: (1) Add a report title row at the top: 'Monthly Sales Report' in bold, font size 14, merged across all columns. (2) Add today's date below the title, right-aligned. (3) Format the data with professional headers (dark navy background, white bold text) and alternating row colors. (4) Add SUM, AVERAGE, MAX, and MIN summary rows at the bottom with labels. (5) Create a clustered column chart from the data showing performance by category. Position it below the summary. (6) Add thin borders throughout and auto-fit all columns."},{icon:"barChart",label:"Financial Summary",prompt:"Build a financial summary report from the data. (1) Add a 'Financial Summary' title merged at top, bold, font size 14. (2) Format headers professionally with dark green (#1B4D3E) background and white text. (3) Format all currency columns as $#,##0.00. (4) Add a TOTAL row with SUM formulas, bold, with a top border. (5) Add a 'Net' or 'Difference' calculation if applicable. (6) Apply conditional formatting: positive numbers in green, negative in red. (7) Create a pie chart showing the breakdown. (8) Auto-fit columns and freeze header row."},{icon:"trendUp",label:"Performance Review",prompt:"Create a team performance report from the data. (1) Add a 'Team Performance Report' title at top, merged, bold, font size 14. (2) Professional header formatting with indigo (#2B3A67) background, white text. (3) Add RANK column based on the primary numeric metric column. (4) Add conditional formatting: top 3 rows highlighted in light green (#E6F4EA), bottom 3 in light red (#FDE8E8). (5) Add AVERAGE, MAX, MIN summary rows at bottom. (6) Create a bar chart showing individual performance, sorted high to low. (7) Auto-fit and add borders."},{icon:"barChart",label:"Inventory Report",prompt:"Generate an inventory status report from the data. (1) Title: 'Inventory Status Report', merged, bold, size 14. (2) Professional formatting with teal (#0D7377) headers. (3) If there's a quantity column, add conditional formatting: red background for items ≤ 10 (low stock), yellow for 11-50 (medium), green for 50+ (healthy). (4) Add a status column with IF formula: 'Critical' for ≤ 10, 'Low' for 11-25, 'OK' for 26-50, 'Good' for 50+. (5) Add summary showing total items, total value (if price column exists), and count by status. (6) Create a pie chart showing stock level distribution."},{icon:"barChart",label:"Attendance Summary",prompt:"Generate an attendance summary report. (1) Title: 'Attendance Summary', merged, bold, size 14. (2) Count Present (P), Absent (A), Leave (L) for each person using COUNTIF. (3) Calculate attendance percentage. (4) Format: professional headers, alternating rows, percentage column formatted as percentage. (5) Conditional formatting on attendance %: green ≥ 90%, yellow 75-89%, red < 75%. (6) Add a column chart showing attendance by person. (7) Add class/team averages at bottom."},{icon:"fileTemplate",label:"Weekly Status",prompt:"Create a weekly status report template: (1) Title: 'Weekly Status Update — Week of [Date]', merged, bold. (2) Section 1: 'Completed This Week' — 5 rows with Task, Owner, Status columns. (3) Section 2: 'In Progress' — 5 rows with Task, Owner, % Complete, ETA columns. (4) Section 3: 'Blockers & Risks' — 3 rows with Issue, Impact, Action Needed columns. (5) Section 4: 'Next Week Plans' — 4 rows. (6) Format each section with colored headers (different subtle colors), thin borders, and auto-fit."}],templates:[{icon:"fileTemplate",label:"Monthly Budget",prompt:"Create a monthly budget tracker with categories: Housing, Utilities, Food, Transport, Entertainment, Savings. Add columns for Budget, Actual, and Difference with SUM at bottom. Use professional formatting with green for under-budget and red for over-budget conditional formatting."},{icon:"fileTemplate",label:"Invoice",prompt:"Create a professional invoice template with: Company Name header, Invoice #, Date, Bill To section, items table with Description, Quantity, Unit Price, Total columns, Subtotal, Tax (10%), and Grand Total calculations. Apply clean formatting."},{icon:"fileTemplate",label:"Employee List",prompt:"Create an employee directory with 8 sample employees: Name, Department (HR/Engineering/Marketing/Sales), Email, Phone, Joining Date, Salary. Apply professional table formatting with alternating rows and currency format for salary."},{icon:"fileTemplate",label:"Project Tracker",prompt:"Create a project tracker with 6 sample tasks: Task Name, Assigned To, Priority (High/Medium/Low), Status (Not Started/In Progress/Complete), Start Date, Due Date. Add dropdown validation for Priority and Status. Use conditional formatting for status colors."},{icon:"fileTemplate",label:"Sales Dashboard",prompt:"Create a quarterly sales report with 5 products across Q1-Q4. Add Total column and row with SUM formulas. Create a column chart showing quarterly performance. Apply professional formatting."},{icon:"fileTemplate",label:"Attendance Sheet",prompt:"Create a monthly attendance sheet for 10 employees with dates as columns (1-31). Mark P for present, A for absent, L for leave. Add summary columns for Total Present, Absent, and Leave. Apply conditional formatting."},{icon:"fileTemplate",label:"Grade Book",prompt:"Create a student grade book for 8 students with 5 assignments, Midterm, Final, and Total/Grade columns. Add weighted average formulas and letter grade calculation (A/B/C/D/F). Apply professional formatting with conditional colors."},{icon:"fileTemplate",label:"Weekly Schedule",prompt:"Create a weekly schedule template with time slots from 8 AM to 6 PM (1-hour intervals) and columns for Mon-Fri. Add borders, colored header, and merge the title cell. Apply a clean, readable format."}],analysis:[{icon:"trendUp",label:"Pivot Analysis",prompt:"Create a new sheet named 'Pivot Analysis'. Select the entire current dataset. Insert a Pivot Table starting at A3. Automatically detect the categorical column for Rows and the numeric column for Values (Sum). Apply the 'PivotStyleMedium9' style."},{icon:"barChart",label:"Pareto Chart",prompt:"Create a Pareto analysis. (1) Copy the data to a new sheet 'Pareto'. (2) Sort by the numeric metric descending. (3) Calculate cumulative percentage. (4) Create a Pareto chart (combo chart: bars for values, line for cumulative %). Add data labels."},{icon:"search",label:"Find Outliers",prompt:"Analyze the numeric column. Calculate Mean and Standard Deviation. Highlight any cell that is more than 2 Standard Deviations away from the Mean in RED (#FFCCCC). Add a note to the cell 'Outlier'."},{icon:"sortAsc",label:"Correlation Matrix",prompt:"Analyze all numeric columns. Create a correlation matrix in a new sheet 'Correlations'. Calculate the correlation coefficient (CORREL) between every pair of numeric variables. Use Conditional Formatting (Color Scale) to highlight strong positive (green) and negative (red) correlations."},{icon:"calendar",label:"Date Intelligence",prompt:"Find the Date column. Insert 4 new columns to the right: Year, Quarter, Month Name, Week Number. Use formulas (=YEAR, =ROUNDUP(MONTH(.)/3,0), =TEXT(.,'mmmm'), =ISOWEEKNUM) to populate them for all rows. Copy and Paste Values to finalize."},{icon:"trendUp",label:"Forecast 12M",prompt:"Analyze the time-series data. Create a new sheet 'Forecast'. Use the FORECAST.ETS function to predict the next 12 months based on historical data. Create a Line Chart showing history (solid) and forecast (dotted) with confidence intervals."},{icon:"copy",label:"Transpose & Link",prompt:"Copy the selected table. Create a new sheet 'Transposed'. Paste the data linked/transposed (=TRANSPOSE(Original!Range)) so it updates automatically. Apply professional formatting."},{icon:"filter",label:"Advanced Filter",prompt:"Create a 'Search' area above the data. Set up a dynamic visual filter: when user types in cell B1, filter the main table rows where the text content contains that value (wildcard match). Use conditional formatting to hide non-matching rows if Filter function is not available."},{icon:"hash",label:"Frequency Dist",prompt:"Create a frequency distribution (histogram data) for the main numeric column. Create bins (groups) automatically. Count the frequency of items in each bin. Output a summary table and a Histogram chart in a new sheet."},{icon:"zap",label:"Regex Extract",prompt:"Analyze the text column. If it contains emails, extract them to a new column 'Email'. If it contains phone numbers, extract and format them. If it contains IDs (like #1234), extract them. Use Flash Fill logic or pattern matching formulas."}],extract:[{icon:"fileText",label:"📄 Import to Schema",prompt:"SCHEMA_EXTRACTION_MODE: Read the column headers in row 1 of the current sheet. For each attached PDF/resume, extract ONLY the data that matches those columns. If a column's data doesn't exist in the PDF, leave it blank. Append each candidate as a new row."},{icon:"users",label:"📋 Bulk Resume Import",prompt:"SCHEMA_EXTRACTION_MODE: Import all attached resumes/CVs. First read existing column headers. If no headers exist, create: Name, Email, Phone, Skills, Experience, Education. Extract data from each PDF and add one row per candidate. Never hallucinate — if data is missing, leave blank."},{icon:"fileTemplate",label:"📝 HR Database Setup",prompt:"Create a professional HR candidate database template with columns: Name, Email, Phone, LinkedIn, Current Company, Current Role, Skills, Years of Experience, Highest Education, Expected Salary, Notes. Apply formatting with filters and freeze header row."},{icon:"search",label:"🔍 Smart Extract",prompt:"SCHEMA_EXTRACTION_MODE: Intelligently analyze the attached documents. Read column headers from the sheet. Match document content to columns using smart aliases (e.g., 'Mobile No' matches 'Phone' column). Only extract what exists — no guessing."},{icon:"table",label:"📊 Create Schema First",prompt:"Before importing, set up your columns: Create header row with: Name, Email, Mobile No, Age, Address, Skills, Experience. Format as a proper table with filters. Now attach PDFs and click 'Import to Schema'."},{icon:"checkSquare",label:"✅ Validate & Clean",prompt:"Validate the extracted data: Check for blank required fields (Name, Email). Highlight rows with missing data in yellow. Add a 'Status' column marking 'Complete' or 'Incomplete' for each row."}],smart:[{icon:"brain",label:"Data Profiler 🔬",prompt:'Analyze the entire dataset and create a comprehensive Data Profile report on a NEW sheet called "Data Profile". For each column, calculate: (1) Column Name, (2) Data Type (text/number/date/mixed), (3) Total Count, (4) Blank Count, (5) Blank %, (6) Unique Values Count, (7) Most Common Value, (8) For numeric columns: Min, Max, Mean, Median. Create this as a formatted table with headers. Add a "Data Quality Score" at the top calculated as (100 - average blank %). Apply professional formatting: dark header row, alternating rows, conditional formatting on blank % (green < 5%, yellow 5-20%, red > 20%). Auto-fit all columns.'},{icon:"highlight",label:"Highlight Duplicates",prompt:'Find and highlight ALL duplicate values in the first data column (column A, excluding header).\n\nconst usedRange = sheet.getUsedRange();\nusedRange.load("values,rowCount,columnCount");\nawait context.sync();\n\nif (!usedRange || usedRange.rowCount < 2) throw new Error("Need at least 2 rows of data.");\n\nconst values = usedRange.values;\nconst col = 0; // Check column A\nconst seen = {};\nconst dupes = new Set();\n\n// Pass 1: find duplicates\nfor (let i = 1; i < values.length; i++) {\n  const val = String(values[i][col]).trim().toLowerCase();\n  if (val === "") continue;\n  if (seen[val] !== undefined) {\n    dupes.add(val);\n  }\n  seen[val] = i;\n}\n\n// Pass 2: highlight them\nlet count = 0;\nfor (let i = 1; i < values.length; i++) {\n  const val = String(values[i][col]).trim().toLowerCase();\n  if (dupes.has(val)) {\n    const cell = usedRange.getRow(i);\n    cell.format.fill.color = "#FECACA";\n    cell.format.font.color = "#991B1B";\n    count++;\n  }\n}\nawait context.sync();\n// Done: highlighted duplicates'},{icon:"columns",label:"Compare Columns",prompt:"Compare columns A and B to find differences. For each row, if A ≠ B, highlight both cells in light red (#FEE2E2). If they match, highlight in light green (#DCFCE7). Add a new column C with 'Match' or 'Mismatch' labels. Add a summary at the bottom showing total matches and mismatches. Format the summary row in bold."},{icon:"formula",label:"Auto Summary Row ⚡",prompt:"Analyze ALL columns. For each NUMERIC column, add 4 summary rows at the bottom: SUM, AVERAGE, MIN, MAX — with formula labels in column A. Make the summary section visually distinct: add a thick top border, bold labels, and light blue (#EFF6FF) background. Format numbers with commas and 2 decimal places. Auto-fit all columns."},{icon:"crosshair",label:"Top/Bottom 5 🎯",prompt:"Find the main numeric column in the data. Identify the Top 5 values and highlight their entire rows in green (#DCFCE7). Identify the Bottom 5 values and highlight their rows in red (#FEE2E2). Add a 'Rank' column at the end. Sort the data by the numeric column descending. Auto-fit columns."},{icon:"mail",label:"Extract Emails & Phones",prompt:'Scan ALL cells in the used range. Extract any email addresses (containing @) and phone numbers (10+ digit patterns). Create a new sheet called "Contacts" with columns: Source Cell, Name (if adjacent), Email, Phone. Remove duplicates. Format as a professional table with filters. Auto-fit columns.'},{icon:"layers",label:"Unpivot Data",prompt:'Convert wide-format data to long format (unpivot). Take the first column as the ID column. Treat all remaining columns as value columns. Create a new sheet "Unpivoted" with 3 columns: the original ID, "Category" (original column header), and "Value" (the cell value). Skip blank values. Apply professional formatting.'},{icon:"shield",label:"Data Validation Rules",prompt:"Analyze column headers and add smart data validation rules. For columns that look like: (1) Email — add text validation requiring '@', (2) Phone — allow only numbers with length 10-15, (3) Date columns — add date validation, (4) Status/Type columns — create dropdown lists from unique existing values, (5) Numeric columns — add number validation (>= 0). Highlight validated columns with a subtle blue header to indicate protection is active."},{icon:"dollarSign",label:"Number to Words 💰",prompt:'Add a new column next to the main numeric/currency column. For each row, convert the number to words in English (e.g., 1234 → "One Thousand Two Hundred Thirty Four"). This is useful for invoices and checks. Use a helper function that handles numbers up to 999,999,999. Format the words column with proper case and auto-fit.'},{icon:"copy",label:"Smart Merge Sheets",prompt:'Merge data from ALL worksheets in the workbook into a new sheet called "Merged Data". For each sheet: read the headers and data, align columns by header name (smart matching), and append all rows. Remove exact duplicate rows from the final merged data. Add a "Source Sheet" column to track where each row came from. Apply professional formatting with alternating rows.'}]},Jr=[{icon:"brain",text:"Analyze my data and tell me what's interesting"},{icon:"formula",text:"Which formula should I use for my use case?"},{icon:"paintbrush",text:"Make my sheet look professional in one click"},{icon:"barChart",text:"Generate a monthly report with charts"},{icon:"search",text:"Find all duplicates and inconsistencies"},{icon:"sparkles",text:"What can you do? Show me your best features"}];function Kr(r){if(r!==Lr){Lr=r,document.querySelectorAll(".mode-tab").forEach(function(n){n.classList.toggle("active",n.dataset.mode===r)});var n=document.getElementById("mode-indicator");"agent"===r?n.classList.add("right"):n.classList.remove("right"),document.getElementById("planning-mode").classList.toggle("active","planning"===r),document.getElementById("agent-mode").classList.toggle("active","agent"===r),"planning"===r?setTimeout(function(){return document.getElementById("chat-input").focus()},200):setTimeout(function(){return document.getElementById("prompt-input").focus()},200)}}function $r(){var r=document.getElementById("quick-actions");if(r){r.innerHTML="";var n=_r[Yr];n?n.forEach(function(n){var e=document.createElement("button");e.className="chip";var t=n.icon;e.innerHTML="".concat(Er[t]||"","<span>").concat(n.label,"</span>"),e.onclick=function(){var r=document.getElementById("prompt-input");if(r){r.value=n.prompt,r.focus();var e=document.getElementById("status-message");e&&(e.style.display="none")}},r.appendChild(e)}):console.warn("No quick actions found for category: ".concat(Yr))}}function rn(){var r=document.getElementById("chat-suggestions");r&&Jr.forEach(function(n){var e=document.createElement("button");e.className="suggestion-chip";var t=n.icon;e.innerHTML="".concat(Er[t]||"").concat(n.text),e.onclick=function(){var r=document.getElementById("chat-input");r&&(r.value=n.text,on())},r.appendChild(e)})}function nn(r){var n=function(r,n){var e=document.getElementById(r);e&&(e.style.display=n?"block":"none")};n("groq-fields","groq"===r),n("gemini-fields","gemini"===r),n("openai-fields","openai"===r),n("anthropic-fields","anthropic"===r),n("openrouter-fields","openrouter"===r),n("local-fields","local"===r)}function en(){return tn.apply(this,arguments)}function tn(){return(tn=jr(Tr().m(function r(){var n,e,t,a,o,i;return Tr().w(function(r){for(;;)switch(r.n){case 0:if(e=document.getElementById("setting-local-model"),t=document.getElementById("model-status"),a=(null===(n=document.getElementById("setting-base-url"))||void 0===n||null===(n=n.value)||void 0===n?void 0:n.trim())||"http://localhost:11434",e){r.n=1;break}return r.a(2);case 1:return e.innerHTML='<option value="" disabled selected>Loading...</option>',t&&(t.textContent="",t.className="model-status"),r.n=2,D(a);case 2:if(0!==(o=r.v).length){r.n=3;break}return e.innerHTML='<option value="" disabled selected>No models found</option>',t&&(t.textContent="Ollama not running or no models installed",t.className="model-status model-status-warn"),r.a(2);case 3:i=E(),e.innerHTML="",o.forEach(function(r){var n=document.createElement("option");n.value=r.name,n.textContent="".concat(r.name," (").concat((r.size/1e9).toFixed(1),"GB)"),(i.localModel||i.model)===r.name&&(n.selected=!0),e.appendChild(n)}),t&&(t.textContent="".concat(o.length," model").concat(o.length>1?"s":""," found"),t.className="model-status model-status-ok");case 4:return r.a(2)}},r)}))).apply(this,arguments)}function an(){var r,n,e=null===(r=document.getElementById("setting-provider"))||void 0===r?void 0:r.value,t=E(),a=function(r){var n;return(null===(n=document.getElementById(r))||void 0===n||null===(n=n.value)||void 0===n?void 0:n.trim())||""};n=Nr(Nr({},t),{},{provider:e,apiKey:a("setting-api-key"),groqModel:a("setting-groq-model"),geminiKey:a("setting-gemini-key"),geminiModel:a("setting-gemini-model"),openaiKey:a("setting-openai-key"),openaiModel:a("setting-openai-model"),anthropicKey:a("setting-anthropic-key"),anthropicModel:a("setting-anthropic-model"),openrouterKey:a("setting-openrouter-key"),openrouterModel:a("setting-openrouter-model"),baseUrl:a("setting-base-url")?"".concat(a("setting-base-url").replace(/\/v1.*$/,""),"/v1/chat/completions"):void 0,localModel:a("setting-local-model")||t.localModel}),localStorage.setItem("sheetcraft_llm_config",JSON.stringify(n));var o=document.getElementById("save-settings");if(o){var i=o.textContent;o.textContent="✓ Saved",o.classList.add("saved"),setTimeout(function(){o.textContent=i||"Save",o.classList.remove("saved")},1500)}Cn("success","Settings saved successfully"),setTimeout(function(){var r=document.getElementById("settings-panel");r&&(r.style.display="none")},800)}function on(){return An.apply(this,arguments)}function An(){return(An=jr(Tr().m(function r(){var n,e,t,a,o,i,A,s,l,c,d,p,u,g,m,h,C,f,b,B,x,I;return Tr().w(function(r){for(;;)switch(r.p=r.n){case 0:if(!Hr){r.n=1;break}return sn(),r.a(2);case 1:if(n=document.getElementById("chat-input")){r.n=2;break}return r.a(2);case 2:if(e=n.value.trim()){r.n=3;break}return r.a(2);case 3:if((t=document.querySelector(".chat-welcome"))&&t.remove(),un("user",e),qr.push({role:"user",content:e,timestamp:Date.now()}),0!==Qr.length){r.n=8;break}return a='You are SheetOS AI — a friendly, expert Excel assistant in Planning Mode.\n\nYOUR ROLE:\n- Help users plan their spreadsheet work\n- Explain Excel concepts, formulas, and best practices\n- Suggest approaches before executing\n- Answer questions about data organization, analysis, and visualization\n- Provide formula examples and explanations\n- When given sheet context, analyze the USER\'S ACTUAL DATA and answer questions directly using the data provided\n- If the user asks for details about a person or entity (e.g., "What are John\'s contact details?"), and you see that entity in the 🚨 SEARCH HITS, provide all relevant information from that row.\n\nCONTEXT AWARENESS:\nWhen a message includes [SHEET CONTEXT], you have access to the user\'s ACTUAL Excel data!\n- Analyze the real column names, data types, and sample values\n- Give SPECIFIC answers or suggestions based on their actual data structure\n- Reference their exact column names in your response\n- Suggest improvements tailored to their dataset\n- Point out data quality issues you observe (empty cells, inconsistent formats, etc.)\n- You CAN see their sheet — do NOT say "I don\'t have access to your sheet"\n- If you see 🚨 SEARCH HITS in the context, these are specific values found in the sheet. Use them to answer questions like "Where is X?", "Does Y exist?", or "Give me details on Z". Reference the exact cell address shown in the match.\n- Answering questions about existing data should be done DIRECTLY in chat. You do NOT need Agent Mode for simple information retrieval.\n\nRESPONSE FORMAT RULES:\n1. Respond in natural, conversational language\n2. Use markdown-style formatting for emphasis: **bold**, *italic*, `code`\n3. When showing formulas, wrap them in backticks: `=VLOOKUP(A2, Sheet2!A:B, 2, FALSE)`\n4. Use bullet points and numbered lists for clarity\n5. Keep responses concise but thorough (aim for 2-5 paragraphs max)\n6. If the user\'s request requires MODIFYING the sheet (formatting, inserting, complex calculations), mention that they can switch to ⚡ Agent Mode to execute it\n7. When you have sheet context, ALWAYS reference the user\'s actual column names and data\n\nEXCEL EXPERTISE AREAS:\n- Information retrieval from the current sheet\n- Formula writing & debugging (VLOOKUP, INDEX/MATCH, IF, SUMIFS, etc.)\n- Data organization best practices\n- Chart type selection guidance\n- PivotTable planning\n- Data validation strategies\n- Conditional formatting approaches\n- Dashboard design principles\n- Data cleaning strategies\n- Performance optimization tips\n- Cross-sheet referencing patterns\n\nPERSONALITY:\n- Friendly and encouraging\n- Uses concrete examples when explaining\n- Proactive — suggest improvements the user might not have thought of\n- Mentions potential pitfalls or common mistakes to avoid\n\nIf the user asks you to MODIFY or EXECUTE something (create, format, calculate), remind them:\n"💡 Switch to ⚡ Agent Mode to execute this! I can help you plan it here first."\n(Remember: Reading data and answering questions about it can be done here in Chat.)\n\nUser Message:\n',r.p=4,r.n=5,fn();case 5:(o=r.v)&&0===o.hits&&o.text.length>20&&(a+="\n\n[INITIAL SHEET OVERVIEW]\n"+o.text),r.n=7;break;case 6:r.p=6,B=r.v,console.warn("Could not load initial sheet overview:",B);case 7:Qr.push({role:"system",content:a});case 8:if(!(/\b(this|my|current|opened?)\s+(sheet|data|table|workbook|excel|spreadsheet|sheeet|spreadsheat)\b|\b(find|search|where|is|check|lookup|contains?|exist|details|about|located|who|tell|give)\b|what\s+(do|can|should)|improve|analyze|suggest|help|better|optimize|\b\d{5,}\b|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/i.test(e)||/\b[A-Z]{2,}(?:\s+[A-Z]{2,})+\b/.test(e)||/\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\b/.test(e))){r.n=12;break}return r.p=9,r.n=10,fn(e);case 10:(i=r.v)&&(A=i.text,s=i.hits,Qr.push({role:"system",content:"The following data was retrieved from the user's sheet for this query:\n".concat(A)}),(l=document.querySelector(".chat-msg.user:last-child .chat-bubble"))&&((c=document.createElement("span")).className="context-badge",c.innerHTML=s>0?"🔍 Found ".concat(s," search hits in sheet"):"📊 Sheet context loaded",l.appendChild(c))),r.n=12;break;case 11:r.p=11,x=r.v,console.warn("Could not load sheet context:",x);case 12:return Qr.push({role:"user",content:e}),n.value="",n.style.height="auto",d=gn(),Hr=!0,p=document.getElementById("chat-send"),u=document.getElementById("chat-send-icon"),p&&(u&&(u.innerHTML=Er.stop),p.classList.add("is-busy")),Wr=new AbortController,r.p=13,r.n=14,O(Qr,void 0,Wr.signal);case 14:if(g=r.v,m=mn(g),h=pn("ai","",g),d&&d.replaceWith(h),!(C=h.querySelector(".chat-bubble"))){r.n=15;break}return r.n=15,cn(C,m);case 15:Qr.push({role:"assistant",content:g}),qr.push({role:"ai",content:g,timestamp:Date.now()}),r.n=17;break;case 16:r.p=16,"AbortError"===(I=r.v).name?(d&&d.remove(),un("ai",'<p style="color:var(--text-3)"><i>Generation stopped.</i></p>')):(d&&d.remove(),un("ai",'<p style="color:var(--error)">⚠️ '.concat(I.message,"</p>")),Cn("error",(null===(f=I.message)||void 0===f?void 0:f.substring(0,80))||"Something went wrong"));case 17:return r.p=17,Hr=!1,Wr=null,p&&((b=document.getElementById("chat-send-icon"))&&(b.innerHTML=Er.send),p.classList.remove("is-busy")),r.f(17);case 18:return r.a(2)}},r,null,[[13,16,17,18],[9,11],[4,6]])}))).apply(this,arguments)}function sn(){return ln.apply(this,arguments)}function ln(){return(ln=jr(Tr().m(function r(){return Tr().w(function(r){for(;;)switch(r.n){case 0:Wr&&Wr.abort();case 1:return r.a(2)}},r)}))).apply(this,arguments)}function cn(r,n){return dn.apply(this,arguments)}function dn(){return(dn=jr(Tr().m(function r(n,e){var t,a,o,i,A,s,l,c,d,p,u;return Tr().w(function(r){for(;;)switch(r.p=r.n){case 0:n.innerHTML="",t=e.split(/(<[^>]+>)/g),a=Fr(t),r.p=1,a.s();case 2:if((o=a.n()).done){r.n=11;break}if(!(i=o.value).startsWith("<")||!i.endsWith(">")){r.n=3;break}n.innerHTML+=i,r.n=10;break;case 3:if(!(i.trim().length>0)){r.n=10;break}A=i.split(/(\s+)/),s=Fr(A),r.p=4,s.s();case 5:if((l=s.n()).done){r.n=7;break}return c=l.value,n.innerHTML+=c,(d=document.getElementById("chat-messages"))&&(d.scrollTop=d.scrollHeight),r.n=6,new Promise(function(r){return setTimeout(r,10*Math.random()+5)});case 6:r.n=5;break;case 7:r.n=9;break;case 8:r.p=8,p=r.v,s.e(p);case 9:return r.p=9,s.f(),r.f(9);case 10:r.n=2;break;case 11:r.n=13;break;case 12:r.p=12,u=r.v,a.e(u);case 13:return r.p=13,a.f(),r.f(13);case 14:return r.a(2)}},r,null,[[4,8,9,10],[1,12,13,14]])}))).apply(this,arguments)}function pn(r,n,e){var t=document.createElement("div");t.className="chat-msg ".concat(r);var a=document.createElement("div");if(a.className="chat-bubble",a.innerHTML=n,"ai"===r&&e){var o=document.createElement("div");o.className="chat-bubble-actions";var i=document.createElement("button");i.className="btn-copy",i.innerHTML="".concat(Er.copy," Copy"),i.onclick=function(){navigator.clipboard.writeText(e).then(function(){i.innerHTML="".concat(Er.check," Copied"),i.classList.add("copied"),setTimeout(function(){i.innerHTML="".concat(Er.copy," Copy"),i.classList.remove("copied")},2e3)}).catch(function(){Cn("error","Failed to copy")})},o.appendChild(i);var A=document.createElement("button");A.className="btn-execute-from-chat",A.innerHTML="".concat(Er.zap," Switch to Agent"),A.onclick=function(){var r=document.getElementById("prompt-input");r&&(r.value=function(r){var n,e=Fr(r.split("\n"));try{for(e.s();!(n=e.n()).done;){var t=n.value;if(t.includes("=")&&t.includes("(")&&!t.startsWith("#"))return"Apply this formula: ".concat(t.trim())}}catch(r){e.e(r)}finally{e.f()}var a=r.split(/[.!?]/)[0];return a.length>120?a.substring(0,120):a}(e),Kr("agent"),r.focus())};var s=document.createElement("div");s.className="chat-action-bar",s.appendChild(A),a.appendChild(o),a.appendChild(s)}return t.appendChild(a),t}function un(r,n,e){var t=document.getElementById("chat-messages");if(!t)throw new Error("Chat messages container not found.");var a=pn(r,n,e);return t.appendChild(a),t.scrollTop=t.scrollHeight,a.querySelector(".chat-bubble")}function gn(){var r=document.getElementById("chat-messages");if(!r)throw new Error("Chat messages container not found.");var n=document.getElementById("chat-skeleton-template");if(!n){var e=document.createElement("div");return e.className="chat-msg ai",e.id="typing-msg",e.innerHTML='<div class="chat-avatar">'.concat(Er.bot,'</div><div class="chat-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>'),r.appendChild(e),r.scrollTop=r.scrollHeight,e}var t=n.content.cloneNode(!0).firstElementChild;return t?(t.id="typing-msg",r.appendChild(t),r.scrollTop=r.scrollHeight,t):null}function mn(r){for(var n=r.trim(),e=(n=(n=(n=n.replace(/^### (.*$)/gm,"<h3>$1</h3>")).replace(/^## (.*$)/gm,"<h2>$1</h2>")).replace(/^# (.*$)/gm,"<h1>$1</h1>")).split("\n"),t=!1,a="",o=[],i=function(r){var n=e[r].trim();if(n.startsWith("|")&&n.endsWith("|")){if(t||(t=!0,a="<table>"),n.includes("---"))return 1;n.split("|").filter(function(r){return""!==r.trim()||-1!==n.indexOf("|"+r+"|")});var i=n.split("|").slice(1,-1).map(function(r){return r.trim()});a+="<tr>"+i.map(function(n){return 0===r||e[r-1]&&!e[r-1].includes("|")?"<th>".concat(n,"</th>"):"<td>".concat(n,"</td>")}).join("")+"</tr>"}else t&&(t=!1,a+="</table>",o.push(a),a=""),o.push(e[r])},A=0;A<e.length;A++)i(A);t&&(a+="</table>",o.push(a));var s=(n=(n=(n=(n=(n=(n=(n=(n=(n=o.join("\n")).replace(/```(\w+)?\n([\s\S]*?)```/g,'<pre style="margin:6px 0;padding:8px;background:rgba(0,0,0,0.06);border-radius:6px;font-family:var(--mono);font-size:10px;overflow-x:auto"><code>$2</code></pre>')).replace(/`([^`]+)`/g,"<code>$1</code>")).replace(/\*\*([^*]+)\*\*/g,"<strong>$1</strong>")).replace(/\*([^*]+)\*/g,"<em>$1</em>")).replace(/^[-*•]\s+(.+)$/gm,"<li>$1</li>")).replace(/^\d+\.\s+(.+)$/gm,'<li class="ol-item">$1</li>')).replace(/((?:<li>.*?<\/li>\n?)+)/g,"<ul>$1</ul>")).replace(/((?:<li class="ol-item">.*?<\/li>\n?)+)/g,function(r){return"<ol>".concat(r.replace(/ class="ol-item"/g,""),"</ol>")})).split(/\n\n+/);return(n=(n=s.map(function(r){var n=r.trim();return n?/^<(h1|h2|h3|ul|ol|table|pre|p|li|div)/i.test(n)?n:"<p>".concat(n.replace(/\n/g,"<br>"),"</p>"):""}).join("")).replace(/<p>\s*<ul>/g,"<ul>").replace(/<\/ul>\s*<\/p>/g,"</ul>")).replace(/<li>\s*<p>/g,"<li>").replace(/<\/p>\s*<\/li>/g,"</li>")}function hn(){var r=document.getElementById("chat-messages");r.innerHTML="",qr.length=0,Qr=[],Hr=!1,r.innerHTML='\n    <div class="chat-welcome">\n      <img src="assets/icon-80-v2.png" alt="SheetOS Logo" style="width: 64px; height: 64px; margin-bottom: 16px;">\n      <h2>What are you working on?</h2>\n      <div class="welcome-suggestions" id="chat-suggestions"></div>\n    </div>\n  ',rn()}function Cn(r,n){var e=arguments.length>2&&void 0!==arguments[2]?arguments[2]:3e3,t=document.getElementById("toast-container");if(t){var a=document.createElement("div");a.className="toast toast-".concat(r);var o={success:Er.check,error:Er.alertCircle,info:Er.helpCircle};a.innerHTML="".concat(o[r]||"","<span>").concat(n,"</span>"),t.appendChild(a),setTimeout(function(){a.classList.add("toast-out"),setTimeout(function(){return a.remove()},300)},e)}}function fn(r){return bn.apply(this,arguments)}function bn(){return bn=jr(Tr().m(function r(n){var e;return Tr().w(function(r){for(;;)switch(r.p=r.n){case 0:return r.p=0,r.n=1,Excel.run(function(){var r=jr(Tr().m(function r(e){var t,a,o,i,A,s,l,c,d,p,u,g,m,h,C,f,b,B,x,I,y,v,w,E;return Tr().w(function(r){for(;;)switch(r.n){case 0:return(t=e.workbook.worksheets.getActiveWorksheet()).load("name"),(a=t.getUsedRangeOrNullObject()).load("rowCount,columnCount,address,isNullObject"),r.n=1,e.sync();case 1:if(!a.isNullObject&&0!==a.rowCount&&0!==a.columnCount){r.n=2;break}return r.a(2,{text:"Sheet is empty.",hits:0});case 2:return(o=a.getRow(0)).load("values"),r.n=3,e.sync();case 3:if(i=o.values[0].map(function(r){return String(r||"").trim()}),A="",s=0,!n){r.n=16;break}if(l=new Set,(n.match(/\b[A-Z]{2,}(?:\s+[A-Z]{2,})+\b/g)||[]).forEach(function(r){return l.add(r)}),(n.match(/\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\b/g)||[]).forEach(function(r){return l.add(r)}),(n.match(/\b\d{5,}\b/g)||[]).forEach(function(r){return l.add(r)}),(n.match(/"([^"]+)"/g)||[]).forEach(function(r){return l.add(r.replace(/"/g,""))}),(n.match(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/gi)||[]).forEach(function(r){return l.add(r)}),(n.match(/\b[A-Za-z]{3,}(?:\s+[A-Za-z]{3,}){1,2}\b/g)||[]).forEach(function(r){var n=/^(this|that|sheet|data|name|about|find|search|where|exist|check|lookup|improve|analyze|suggest|help|better|optimize|what|when|where|there|from|with|tell|your|mine|ours|will|shall|should|could|would|please|show|list|their|details|contact|given|into|some|those|these)$/i;r.split(/\s+/).every(function(r){return n.test(r)})||l.add(r)}),!(l.size>0)){r.n=11;break}c=Array.from(l),d=0,p=c;case 4:if(!(d<p.length)){r.n=10;break}if(u=p[d],!/^(Name|Sheet|Data|Candidate|Find|Is|This|My|Current|Column|Details|About)$/i.test(u)){r.n=5;break}return r.a(3,9);case 5:return(g=a.find(u,{completeMatch:!1,matchCase:!1})).load("address,isNullObject"),r.n=6,e.sync();case 6:if(!g.isNullObject||!u.includes(" ")){r.n=7;break}if(m=u.split(/\s+/).sort(function(r,n){return n.length-r.length}),!((h=m[0]).length>3)){r.n=7;break}return(g=a.find(h,{completeMatch:!1,matchCase:!1})).load("address,isNullObject"),r.n=7,e.sync();case 7:if(g.isNullObject||!(s<10)){r.n=9;break}return s++,(C=g.getEntireRow().getIntersection(a)).load("values"),r.n=8,e.sync();case 8:f=C.values[0].map(function(r,n){var e=i[n]||"Col ".concat(n+1),t=""===r||null===r?"(empty)":String(r);return"".concat(e,": ").concat(t)}).join(" | "),A+="📌 MATCH [".concat(u,"] at ").concat(g.address,":\n   >> ").concat(f,"\n");case 9:d++,r.n=4;break;case 10:s>0?A+="=".repeat(40)+"\n":A="\n(I searched the sheet for your mentioned terms, but no exact matches were found in the current sheet.)\n";case 11:return b=Math.min(10,a.rowCount),(B=a.getResizedRange(b-1,0)).load("values"),r.n=12,e.sync();case 12:if(x=B.values,I=[],!(x.length>1)){r.n=15;break}y=Tr().m(function r(n){var e;return Tr().w(function(r){for(;;)switch(r.n){case 0:e=x.slice(1).map(function(r){return r[n]}).filter(function(r){return null!==r&&""!==r}),0===e.length?I.push("empty"):e.every(function(r){return!isNaN(Number(r))})?I.push("number"):e.every(function(r){return/^\d{1,4}[-\/]\d{1,2}[-\/]\d{1,4}/.test(String(r))})?I.push("date"):I.push("text");case 1:return r.a(2)}},r)}),v=0;case 13:if(!(v<a.columnCount)){r.n=15;break}return r.d(Rr(y(v)),14);case 14:v++,r.n=13;break;case 15:return w="",A&&A.length>50&&(w+="🚨 [CRITICAL DATA HIT] 🚨\n".concat(A,"\n\n")),w+="--- GENERAL SHEET INFO ---\n",w+='Sheet: "'.concat(t.name,'" (').concat(a.rowCount," rows × ").concat(a.columnCount," columns)\n"),w+="Location: ".concat(a.address,"\n\n"),w+="COLUMNS:\n",i.forEach(function(r,n){var e=I[n]||"unknown";w+="  ".concat(n+1,'. "').concat(r||"Column".concat(n+1),'" (').concat(e,")\n")}),w+="\nDATA SAMPLE (First ".concat(b," rows):\n"),x.forEach(function(r,n){w+=0===n?"  [Headers] ".concat(r.map(function(r){return'"'.concat(r,'"')}).join(" | "),"\n"):"  Row ".concat(n,": ").concat(r.map(function(r){return null===r||""===r?"(empty)":'"'.concat(r,'"')}).join(" | "),"\n")}),a.rowCount>b&&(w+="  ... (".concat(a.rowCount-b," more rows not shown)\n")),r.a(2,{text:w,hits:s});case 16:if(!((E=i.filter(function(r){return r.length>0})).length>0)){r.n=17;break}return r.a(2,{text:'Sheet: "'.concat(t.name,'" (').concat(a.rowCount," rows × ").concat(a.columnCount," columns)\nColumns: ").concat(E.join(", ")),hits:0});case 17:return r.a(2,null)}},r)}));return function(n){return r.apply(this,arguments)}}());case 1:return r.a(2,r.v);case 2:return r.p=2,e=r.v,console.error("Error reading sheet context:",e),r.a(2,null)}},r,null,[[0,2]])})),bn.apply(this,arguments)}function Bn(){return xn.apply(this,arguments)}function xn(){return xn=jr(Tr().m(function r(){return Tr().w(function(r){for(;;)if(0===r.n)return r.a(2,Excel.run(function(){var r=jr(Tr().m(function r(n){var e,t,a;return Tr().w(function(r){for(;;)switch(r.n){case 0:return e=n.workbook.worksheets.getActiveWorksheet(),(t=e.getRange("A1:Z1")).load("values"),r.n=1,n.sync();case 1:return a=t.values[0].map(function(r){return r?String(r).trim():""}).filter(function(r){return""!==r}),r.a(2,a)}},r)}));return function(n){return r.apply(this,arguments)}}()))},r)})),xn.apply(this,arguments)}function In(){return yn.apply(this,arguments)}function yn(){return(yn=jr(Tr().m(function r(){var n,e,t,a,o,i;return Tr().w(function(r){for(;;)switch(r.p=r.n){case 0:if(n=document.getElementById("detect-columns-btn"),e=document.getElementById("detected-columns"),t=document.getElementById("column-chips"),a=document.getElementById("column-count"),e&&t&&a){r.n=1;break}return r.a(2);case 1:return n&&(n.innerHTML="⏳ Loading..."),r.p=2,r.n=3,Bn();case 3:0===(o=r.v).length?(t.innerHTML='<span class="column-chip empty-warning">⚠️ No headers in Row 1 — add columns first</span>',a.textContent="0",e.style.display="block"):(t.innerHTML=o.map(function(r){return'<span class="column-chip">'.concat(r,"</span>")}).join(""),a.textContent=String(o.length),e.style.display="block"),r.n=5;break;case 4:r.p=4,i=r.v,console.error("Error detecting columns:",i),t.innerHTML='<span class="column-chip empty-warning">⚠️ Error reading Excel</span>',a.textContent="0",e.style.display="block";case 5:return r.p=5,n&&(n.innerHTML="🔍 Detect"),r.f(5);case 6:return r.a(2)}},r,null,[[2,4,5,6]])}))).apply(this,arguments)}function vn(r){var n=r.map(function(r,n){return"".concat(n+1,'. "').concat(r,'"')}).join("\n"),e=function(r){var n=r.map(function(r){var n=Y[r]||[],e=n.length>0?" (also look for: ".concat(n.slice(0,3).join(", "),")"):"";return'• "'.concat(r,'"').concat(e)}).join("\n");return"\nCOLUMNS TO EXTRACT:\n".concat(n,'\n\nRemember: If you cannot find data for a column, return "". Never guess or fabricate.\n')}(r);return"\n═══════════════════════════════════════════════════════════════════════════════\n🔒 SCHEMA-LOCKED EXTRACTION MODE — CRITICAL INSTRUCTIONS\n═══════════════════════════════════════════════════════════════════════════════\n\nThe user has PRE-DEFINED these columns in their Excel sheet. You MUST extract data ONLY for these columns:\n\n".concat(n,"\n\n").concat(e,'\n\nEXTRACTION RULES (MEMORIZE THESE):\n1. ONE ROW PER DOCUMENT: Each attached PDF/image represents ONE candidate/record.\n2. EXACT COLUMN MATCHING: Only fill data for the columns listed above.\n3. NO HALLUCINATION: If information for a column is NOT visible in the document, use "" (empty string).\n4. NO NEW COLUMNS: Do NOT add any columns that aren\'t in the list above.\n5. PROPER FORMATTING:\n   - Names: Proper Case (John Smith)\n   - Emails: lowercase\n   - Phones: Keep original format or +X-XXX-XXX-XXXX\n   - Skills: Comma-separated list\n\nBANNED BEHAVIORS:\n❌ Guessing email addresses (e.g., firstname@company.com)\n❌ Fabricating phone numbers\n❌ Making up skills not explicitly listed\n❌ Using "N/A", "Not Found", "Unknown" — use "" instead\n❌ Adding extra columns\n\nOUTPUT: Generate Excel JS code that writes the extracted data starting from the first empty row.\nThe code should use the writeData helper function and format the data professionally.\n\n═══════════════════════════════════════════════════════════════════════════════\n')}function wn(){return En.apply(this,arguments)}function En(){return En=jr(Tr().m(function r(){var n,e,t,a,o,i,A,s,l,c,d,p,u,g,m,h,C,f,b,B,x,I,y,v,w,E,k,S,R,T,F,D,z,N,P;return Tr().w(function(r){for(;;)switch(r.p=r.n){case 0:if(n=document.getElementById("status-message"),e=document.getElementById("debug-code"),t=document.getElementById("skeleton"),a=document.getElementById("cache-badge"),o=document.getElementById("prompt-input"),i=document.getElementById("run"),n&&e&&t&&a&&o&&i){r.n=1;break}return console.error("Agent UI elements not found"),r.a(2);case 1:if((A=o.value.trim())||0!==Gr.length){r.n=2;break}return kn(n,"info","Please enter a command or attach a file."),r.a(2);case 2:if(Gr.length>0&&!A&&(A=Gr.length>1?"Analyze the ".concat(Gr.length," attached files. Extract and merge all tabular data into a single master table. Standardize headers and columns."):"Analyze the attached ".concat(Gr[0].type,". Extract all tabular data and write valid Excel JS code to populate the active sheet. Format headers and auto-fit columns.")),s=A.includes("SCHEMA_EXTRACTION_MODE")||"extract"===Yr,Gr.length>0&&!s&&(A+='\n\n[FORMATTING STRICT RULE]: You are extracting data from a document. ALWAYS output the data as a clean, flat 2D HORIZONTAL table at the top of the sheet. Put Column Headers in Row A1...X1. Append the extracted data underneath. NEVER output a vertical key-value list mimicking a document. Ensure data rows have { font: { color: "#000000" } }.'),!Vr){r.n=3;break}return Vr.abort(),r.a(2);case 3:return Vr=new AbortController,l=Vr.signal,c=document.getElementById("run-text"),d=document.getElementById("run-icon"),p=c?c.innerText:"Execute",u=d?d.innerHTML:"",i.classList.add("is-busy"),i.classList.add("btn-stop"),c&&(c.innerText="Stop Agent"),d&&(d.innerHTML=Er.stop),n.style.display="none",t.style.display="flex",a.style.display="none",e.innerText="",r.p=4,m=!1,h=null,r.p=5,r.n=6,yr();case 6:h=r.v,null!==(C=h)&&void 0!==C&&C.hasData&&console.log("[Agent] Sheet context: ".concat(h.rowCount,"x").concat(h.columnCount)),r.n=8;break;case 7:r.p=7,z=r.v,console.warn("[Agent] Could not read sheet context:",z);case 8:if(f=[],!(s&&Gr.length>0)){r.n=13;break}return r.p=9,r.n=10,Bn();case 10:if(f=r.v,console.log("[Agent] Schema columns detected:",f),0!==f.length){r.n=11;break}return kn(n,"info","⚠️ No column headers found in Row 1. Add headers first or use 'HR Database Setup' to create them."),t.style.display="none",r.a(2);case 11:c&&(c.innerText="Extracting (".concat(f.length," cols)...")),r.n=13;break;case 12:r.p=12,N=r.v,console.warn("[Agent] Could not read Excel headers:",N);case 13:if((b=0!==Gr.length||s?null:j(A))&&(g=b,m=!0,a.style.display="inline-block",(B=dr(g)).isValid?g=B.sanitizedCode:(console.warn("[Agent] Cached code failed validation, regenerating..."),m=!1,g="")),m){r.n=21;break}if(!(s&&Gr.length>0)){r.n=18;break}return c&&(c.innerText="Generating..."),x=[{role:"system",content:M}],I=vn(f),y=A.replace("SCHEMA_EXTRACTION_MODE:","").trim(),v="".concat(y,"\n\nEXISTING_COLUMNS: ").concat(JSON.stringify(f),"\n\n").concat(I),w=[{type:"text",text:v}],E=0,Gr.forEach(function(r){r.data.forEach(function(r){E<20&&(w.push({type:"image_url",image_url:{url:r}}),E++)})}),x.push({role:"user",content:w}),r.n=14,O(x,void 0,l);case 14:g=r.v,c&&(c.innerText="Validating..."),k=dr(g),S=0,R=2;case 15:if(k.isValid||!(S<R)){r.n=17;break}return console.warn("[Agent] Validation failed (attempt ".concat(S+1,"):"),k.errors),T=k.errors.map(function(r){return"".concat(r.message," → ").concat(r.suggestion)}).join("\n"),r.n=16,O([{role:"system",content:M},{role:"user",content:A},{role:"assistant",content:g},{role:"user",content:"VALIDATION ERRORS:\n".concat(T,"\n\nFix these errors. Output ONLY the corrected code.")}],void 0,l);case 16:g=r.v,k=dr(g),S++,r.n=15;break;case 17:g=k.sanitizedCode,k.warnings.length>0&&console.log("[Agent] Validation warnings:",k.warnings),r.n=21;break;case 18:return c&&(c.innerText="Planning..."),r.n=19,br(A,h,Gr,{maxRetries:2,enablePlanning:!0,strictValidation:!0},l);case 19:if((F=r.v).success){r.n=20;break}throw new Error(F.error||"Agent failed to generate valid code");case 20:g=F.code;case 21:return e.innerText=g,t.style.display="none",c&&(c.innerText="Running..."),kn(n,"info",'<div class="spinner"></div><span>Executing code...</span>'),r.n=22,xr(g,function(){var r=jr(Tr().m(function r(n){return Tr().w(function(r){for(;;)switch(r.n){case 0:return r.n=1,Sn(n);case 1:return r.a(2)}},r)}));return function(n){return r.apply(this,arguments)}}(),3,l);case 22:if(!(D=r.v).success){r.n=23;break}g=D.finalCode,e.innerText=g,m||0!==Gr.length||s||L(A,g),kn(n,"success","".concat(Er.check,"<span>Done</span>")),Cn("success","Executed successfully ✓ (Press Ctrl+Z to undo)"),r.n=24;break;case 23:throw new Error(D.error||"Execution failed after retries");case 24:r.n=26;break;case 25:r.p=25,P=r.v,console.error("[Agent] Fatal error:",P),t.style.display="none","AbortError"===P.name?(kn(n,"info","Agent stopped by user."),Cn("info","Agent stopped")):(kn(n,"error",P.message||String(P)),Cn("error",(P.message||"Execution failed").substring(0,80)));case 26:return r.p=26,i.disabled=!1,c&&(c.innerText=p),d&&(d.innerHTML=u),i.classList.remove("btn-stop"),i.classList.remove("is-busy"),Vr=null,r.f(26);case 27:return r.a(2)}},r,null,[[9,12],[5,7],[4,25,26,27]])})),En.apply(this,arguments)}function kn(r,n,e){r.innerHTML=e,r.className="status-pill ".concat(n),r.style.display="flex"}function Sn(r){return Rn.apply(this,arguments)}function Rn(){return Rn=jr(Tr().m(function r(n){return Tr().w(function(r){for(;;)switch(r.n){case 0:return r.n=1,Excel.run(function(){var r=jr(Tr().m(function r(e){var t,a,o;return Tr().w(function(r){for(;;)switch(r.p=r.n){case 0:return t=e.workbook.worksheets.getActiveWorksheet(),a="\n      ".concat('\nfunction writeData(sheet, startCell, data) {\n  if (!data || data.length === 0) return null;\n  const rows = data.length;\n  const cols = Math.max(...data.map(r => r ? r.length : 0));\n  if (cols === 0) return null;\n  const normalized = data.map(r => {\n    const row = r ? [...r] : [];\n    while (row.length < cols) row.push("");\n    return row.map(cell => {\n      if (cell === null || cell === undefined) return "";\n      let val = typeof cell === "object" ? (Array.isArray(cell) ? cell.join(", ") : JSON.stringify(cell)) : String(cell);\n      if (/^[=+\\-@]/.test(val)) val = "\'" + val;\n      if (val.length > 30000) val = val.substring(0, 30000) + "...";\n      return val;\n    });\n  });\n  try {\n    const range = sheet.getRange(startCell).getResizedRange(rows - 1, cols - 1);\n    range.values = normalized;\n    range.format.font.name = "Segoe UI";\n    range.format.font.size = 10;\n    range.format.verticalAlignment = "Center";\n    return range;\n  } catch (e) {\n    console.error("writeData error:", e);\n    return null;\n  }\n}\n',"\n      \n      try {\n        // ═══ AI Generated Code ═══\n        ").concat(n,'\n        \n        // ═══ Safety Finalization ═══\n        try {\n          sheet.getUsedRange().format.autofitColumns();\n        } catch(_) { /* Sheet might be empty */ }\n        \n      } catch(_innerErr) {\n        console.error("[Agent] Runtime Error:", _innerErr);\n        try { await context.sync(); } catch(_) {}\n        throw _innerErr;\n      }\n    '),r.p=1,r.n=2,new Function("context","sheet","Excel","return (async () => { \n          try {\n            ".concat(a,'\n            await context.sync();\n          } catch (inner) {\n            // Enhance error messages for common issues\n            if (inner.code === "InvalidArgument") {\n              const original = inner.message || "";\n              if (original.includes("A0") || original.includes("row 0")) {\n                inner.message = "Invalid range: Row 0 doesn\'t exist. Excel rows start at 1.";\n              } else if (original.includes("getResizedRange")) {\n                inner.message = "Invalid range size: Check that data dimensions match the range.";\n              } else {\n                inner.message = "Invalid argument: " + original;\n              }\n            } else if (inner.message?.includes("is not a function")) {\n              const fnMatch = inner.message.match(/(\\w+) is not a function/);\n              const fn = fnMatch ? fnMatch[1] : (inner.stack?.match(/at\\s+.*\\.(.*)\\s+\\(/)?.[1] || "method");\n              inner.message = "API Error: ." + fn + "() doesn\'t exist. Use correct Excel JS API methods.";\n            } else if (inner.message?.includes("is not defined")) {\n              const varMatch = inner.message.match(/(\\w+) is not defined/);\n              const v = varMatch ? varMatch[1] : "variable";\n              inner.message = "Undefined: \'" + v + "\' was used before being declared.";\n            } else if (inner.message?.includes("Cannot read property")) {\n              inner.message = "Null reference: Tried to read property of undefined. Add null checks or ensure .load() was called.";\n            }\n            throw inner;\n          }\n        })()'))(e,t,Excel);case 2:r.n=8;break;case 3:return r.p=3,o=r.v,console.error("[Agent] Execution Error:",o),r.p=4,r.n=5,e.sync();case 5:r.n=7;break;case 6:r.p=6,r.v;case 7:throw o;case 8:return r.n=9,e.sync();case 9:return r.a(2)}},r,null,[[4,6],[1,3]])}));return function(n){return r.apply(this,arguments)}}());case 1:return r.a(2)}},r)})),Rn.apply(this,arguments)}function Tn(r){return On.apply(this,arguments)}function On(){return On=jr(Tr().m(function r(n){var e,t,a,o,i,A,s,l,c,d,p,u=arguments;return Tr().w(function(r){for(;;)switch(r.p=r.n){case 0:if(e=u.length>1&&void 0!==u[1]&&u[1],(t=n.target).files&&0!==t.files.length){r.n=1;break}return r.a(2);case 1:a=e?"agent-file-btn":"file-upload-btn",(o=document.getElementById(a))&&(o.innerHTML='<span class="btn-spinner"></span>'),r.p=2,i=[],A=0;case 3:if(!(A<t.files.length)){r.n=9;break}if("application/pdf"!==(s=t.files[A]).type){r.n=6;break}return Zr.push(s),r.n=4,s.arrayBuffer();case 4:return l=r.v,r.n=5,Mn(l);case 5:c=r.v,i.push({name:s.name,type:"pdf",data:c}),r.n=8;break;case 6:if(!s.type.startsWith("image/")){r.n=8;break}return r.n=7,zn(s);case 7:d=r.v,i.push({name:s.name,type:"image",data:[d]});case 8:A++,r.n=3;break;case 9:if(!(i.length>0)){r.n=10;break}Gr=[].concat(Sr(Gr),i),"extract"===Yr&&Zr.length>0&&Pn(!0),Fn(!0,e),r.n=11;break;case 10:throw new Error("Unsupported file type. Please upload PDF or Image.");case 11:r.n=13;break;case 12:r.p=12,p=r.v,console.error(p),kn(document.getElementById("status-message"),"error","Error reading file: "+p.message);case 13:return r.p=13,t.value="",o&&(o.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>'),r.f(13);case 14:return r.a(2)}},r,null,[[2,12,13,14]])})),On.apply(this,arguments)}function Fn(r){var n=arguments.length>1&&void 0!==arguments[1]&&arguments[1],e=n?"agent-file-preview-list":"file-preview-list",t=document.getElementById(e);t&&(t.innerHTML="",0!==Gr.length&&Gr.forEach(function(r,e){var a=document.createElement("div");a.className="file-chip";var o=document.createElement("span");o.className="file-chip-icon",o.innerHTML="pdf"===r.type?"📄":"🖼️";var i=document.createElement("span");i.className="file-chip-name",i.innerText=r.name;var A=document.createElement("button");A.className="file-chip-remove",A.innerHTML="×",A.title="Remove file",A.onclick=function(r){r.stopPropagation(),function(r,n){Gr.splice(r,1),Fn(!0,n)}(e,n)},a.appendChild(o),a.appendChild(i),a.appendChild(A),t.appendChild(a)}))}function Dn(){var r=arguments.length>0&&void 0!==arguments[0]&&arguments[0];Gr=[],Zr=[],Pn(!1),Fn(!1,r)}function zn(r){return new Promise(function(n,e){var t=new FileReader;t.onload=function(){return n(t.result)},t.onerror=e,t.readAsDataURL(r)})}function Mn(r){return Nn.apply(this,arguments)}function Nn(){return(Nn=jr(Tr().m(function r(n){var e,t,a,o,i,A,s,l;return Tr().w(function(r){for(;;)switch(r.n){case 0:return r.n=1,q.getDocument(n).promise;case 1:e=r.v,t=[],a=Math.min(e.numPages,5),o=1;case 2:if(!(o<=a)){r.n=7;break}return r.n=3,e.getPage(o);case 3:if(i=r.v,A=i.getViewport({scale:1}),s=document.createElement("canvas"),l=s.getContext("2d")){r.n=4;break}return r.a(3,6);case 4:return s.height=A.height,s.width=A.width,r.n=5,i.render({canvasContext:l,viewport:A}).promise;case 5:t.push(s.toDataURL("image/png"));case 6:o++,r.n=2;break;case 7:return r.a(2,t)}},r)}))).apply(this,arguments)}function Pn(r){var n=document.getElementById("batch-extraction-panel"),e=document.getElementById("batch-file-count");if(n&&(n.style.display=r?"block":"none",r&&e)){var t=Zr.length;e.textContent="".concat(t," PDF").concat(1!==t?"s":"")}}function Un(r){var n=r.match(/(?:extract|find|get|pull|identify|return|capture|include)[:\s]+([^.!?]+)/i);if(n)return n[1].split(/[,;&]| and /i).map(function(r){return r.trim().replace(/^["'\-•]+|["'\-•]+$/g,"")}).filter(function(r){return r.length>1&&r.length<50});var e=(r.match(/\b[A-Z][a-z]{2,}(?:\s[A-Z][a-z]{2,})?\b/g)||[]).filter(function(r){return!/^(These|This|The|And|From|With|For|All|Each|Into|Then|After|Before|Upload|File|Excel|Sheet|Row|Column|PDF|Resume|CV)$/.test(r)});return e.length>0?Array.from(new Set(e)):["Name","Email","Phone","Skills","Experience"]}function jn(r){return Ln.apply(this,arguments)}function Ln(){return Ln=jr(Tr().m(function r(n){return Tr().w(function(r){for(;;)if(0===r.n)return r.a(2,Excel.run(function(){var r=jr(Tr().m(function r(e){var t,a,o;return Tr().w(function(r){for(;;)switch(r.n){case 0:return t=e.workbook.worksheets.getActiveWorksheet(),(a=t.getRange("A1:".concat(String.fromCharCode(64+n.length),"1"))).load("values"),r.n=1,e.sync();case 1:if(!((o=a.values[0].map(function(r){return String(r||"").trim()}).filter(function(r){return r})).length>0)){r.n=2;break}return r.a(2,o);case 2:return a.values=[n.map(function(r){return r.trim()})],a.format.set({font:{bold:!0},fill:{color:"#1B2A4A"},horizontalAlignment:"Center"}),a.format.font.color="#FFFFFF",a.format.autofitColumns(),r.n=3,e.sync();case 3:return r.a(2,n)}},r)}));return function(n){return r.apply(this,arguments)}}()))},r)})),Ln.apply(this,arguments)}function Yn(r,n,e,t){return qn.apply(this,arguments)}function qn(){return(qn=jr(Tr().m(function r(n,e,t,a){var o,i,A,s,l,c,d;return Tr().w(function(r){for(;;)switch(r.p=r.n){case 0:return o=t.join(", "),i="You are a precision data extraction engine. Your ONLY output is valid JSON.\n\nGiven a document, extract the following fields: ".concat(o,"\n\nRules:\n- Output ONLY a JSON object. No markdown, no explanation, no extra text.\n- Use exact field names as keys: ").concat(JSON.stringify(t),'\n- If a field is not found in the document, use null as the value.\n- For "Skills": list as a comma-separated string.\n- For "Experience": summarize the most recent role: "Title at Company (Years)" or list companies.\n- Never hallucinate or guess information not in the document.\n\nExample output:\n{"Name": "John Smith", "Email": "john@email.com", "Phone": "9876543210", "Skills": "Python, React, SQL", "Experience": "Software Engineer at Google (3 yrs)"}'),A="Instruction: ".concat(e,"\n\nDOCUMENT TEXT:\n").concat(n.substring(0,8e3)),r.p=1,r.n=2,O([{role:"system",content:i},{role:"user",content:A}],void 0,a);case 2:if(s=r.v,l=s.replace(/^```(?:json)?\s*/i,"").replace(/\s*```$/i,"").trim(),c=l.match(/\{[\s\S]*\}/)){r.n=3;break}return r.a(2,null);case 3:return r.a(2,JSON.parse(c[0]));case 4:return r.p=4,d=r.v,console.error("[Batch] LLM extraction failed:",d),r.a(2,null)}},r,null,[[1,4]])}))).apply(this,arguments)}function Qn(r,n){return Hn.apply(this,arguments)}function Hn(){return Hn=jr(Tr().m(function r(n,e){return Tr().w(function(r){for(;;)switch(r.n){case 0:return r.n=1,Excel.run(function(){var r=jr(Tr().m(function r(t){var a,o,i,A,s,l,c;return Tr().w(function(r){for(;;)switch(r.n){case 0:return a=t.workbook.worksheets.getActiveWorksheet(),(o=a.getUsedRangeOrNullObject()).load("rowCount,isNullObject"),r.n=1,t.sync();case 1:return i=o.isNullObject?1:o.rowCount+1,A=n.map(function(r){var n,t,a,o=null!==(n=null!==(t=null!==(a=e[r])&&void 0!==a?a:e[r.toLowerCase()])&&void 0!==t?t:e[Object.keys(e).find(function(n){return n.toLowerCase()===r.toLowerCase()})||""])&&void 0!==n?n:"",i=null===o?"":o,A="object"===kr(i)&&null!==i?Array.isArray(i)?i.join(", "):JSON.stringify(i):String(i||"");return/^[=+\-@]/.test(A)&&(A="'"+A),A.length>3e4&&(A=A.substring(0,3e4)+"..."),A}),s="A".concat(i),l="".concat(String.fromCharCode(64+n.length)).concat(i),(c=a.getRange("".concat(s,":").concat(l))).values=[A],c.format.wrapText=!0,c.format.fill.color=i%2==0?"#F4F5F7":"#FFFFFF",r.n=2,t.sync();case 2:return r.a(2)}},r)}));return function(n){return r.apply(this,arguments)}}());case 1:return r.a(2)}},r)})),Hn.apply(this,arguments)}function Gn(r){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:"info",e=document.getElementById("batch-log");if(e){var t=document.createElement("div");t.className="batch-log-entry ".concat(n),t.textContent="".concat("success"===n?"✓":"error"===n?"✗":"•"," ").concat(r),e.appendChild(t),e.scrollTop=e.scrollHeight}}function Wn(){return Vn.apply(this,arguments)}function Vn(){return(Vn=jr(Tr().m(function r(){var n,e,t,a,o,i,A,s,l,c,d,p,u,g,m,h,C,f,b,B,x,I,y;return Tr().w(function(r){for(;;)switch(r.p=r.n){case 0:if(e=document.getElementById("batch-extract-btn"),t=document.getElementById("batch-btn-text"),a=document.getElementById("batch-progress-wrap"),o=document.getElementById("batch-progress-bar"),i=document.getElementById("batch-progress-label"),A=document.getElementById("batch-log"),s=document.getElementById("batch-instruction"),!Xr){r.n=1;break}return Xr.abort(),Xr=null,t&&(t.textContent="Extract All PDFs"),e&&(e.disabled=!1),r.a(2);case 1:if(l=(null==s||null===(n=s.value)||void 0===n?void 0:n.trim())||"These are documents. Extract Name, Email, Phone, Skills, and Experience.",0!==(c=Sr(Zr)).length){r.n=2;break}return Cn("error","No PDFs attached. Please upload PDFs first."),r.a(2);case 2:if(0!==(d=Un(l)).length){r.n=3;break}return Cn("error","Could not detect fields to extract. Please be more specific."),r.a(2);case 3:return Xr=new AbortController,p=Xr.signal,e&&(e.disabled=!1),t&&(t.textContent="⏹ Stop Extraction"),a&&(a.style.display="block"),A&&(A.innerHTML=""),Gn("Starting extraction of ".concat(c.length," PDF(s)…"),"info"),Gn("Detected fields: ".concat(d.join(", ")),"info"),u=0,g=0,m=[],r.p=4,r.n=5,jn(d);case 5:m=r.v,Gn("Excel headers ready: ".concat(m.join(", ")),"info"),h=0;case 6:if(!(h<c.length)){r.n=17;break}if(!p.aborted){r.n=7;break}return r.a(3,17);case 7:return C=c[h],f=Math.round(h/c.length*100),o&&(o.style.width="".concat(f,"%")),i&&(i.textContent="".concat(h," / ").concat(c.length)),Gn("[".concat(h+1,"/").concat(c.length,"] Processing: ").concat(C.name),"info"),r.p=8,r.n=9,X(C);case 9:if((b=r.v).text&&!(b.text.length<20)){r.n=10;break}throw new Error("PDF appears empty or unreadable");case 10:return r.n=11,Yn(b.text,l,d,p);case 11:if(B=r.v){r.n=12;break}throw new Error("LLM returned no data");case 12:return r.n=13,Qn(m,B);case 13:u++,Gn("✓ ".concat(C.name," → ").concat(Object.values(B).filter(function(r){return r}).length,"/").concat(d.length," fields extracted"),"success"),r.n=16;break;case 14:if(r.p=14,"AbortError"!==(I=r.v).name){r.n=15;break}return r.a(3,17);case 15:g++,Gn("✗ ".concat(C.name,": ").concat(I.message),"error");case 16:h++,r.n=6;break;case 17:r.n=19;break;case 18:r.p=18,y=r.v,Gn("Fatal error: ".concat(y.message),"error");case 19:return r.p=19,Math.round(u/c.length*100),o&&(o.style.width="100%"),i&&(i.textContent="".concat(c.length," / ").concat(c.length)),Gn(x="✅ Done! ".concat(u," rows added").concat(g>0?", ".concat(g," failed"):"","."),u>0?"success":"error"),Cn(u>0?"success":"error",x),Xr=null,e&&(e.disabled=!1),t&&(t.textContent="Extract All PDFs"),r.f(19);case 20:return r.a(2)}},r,null,[[8,14],[4,18,19,20]])}))).apply(this,arguments)}window.onerror=function(r,n,e){var t=document.getElementById("loading-status");return t&&(t.innerHTML+='<br><span style="color:#d32f2f;font-weight:bold;font-size:11px;">'.concat(r," (Line ").concat(e,")</span>"),document.getElementById("sideload-msg").style.display="none",document.getElementById("app-body").style.display="flex"),!1},Office.onReady(function(r){var n,e=document.getElementById("sideload-msg"),t=document.getElementById("app-body");e&&(e.style.display="none"),t&&(t.style.display="flex"),r.host===Office.HostType.Excel?console.log("Running in Excel"):console.warn("Running outside Excel"),(n=function(r,n){var e=document.getElementById(r);e&&(e.innerHTML=n)})("logo-icon",Er.fileText),n("settings-toggle",Er.settings),n("docs-toggle",Er.helpCircle),n("run-icon",Er.arrowRight),n("chevron-icon",Er.chevronDown),n("refresh-models",Er.refresh),n("mode-planning-icon",Er.messageCircle),n("mode-agent-icon",Er.zap),n("chat-send-icon",Er.send),n("chat-clear-icon",Er.trash),n("welcome-sparkle",Er.sparkles),document.querySelectorAll(".doc-icon[data-icon]").forEach(function(r){var n=r.getAttribute("data-icon");Er[n]&&(r.innerHTML=Er[n])}),document.querySelectorAll(".cat-icon[data-icon]").forEach(function(r){var n=r.getAttribute("data-icon");Er[n]&&(r.innerHTML=Er[n])}),document.getElementById("run").onclick=wn,document.getElementById("settings-toggle").onclick=function(){var r=document.getElementById("settings-panel");r.style.display="none"===r.style.display?"block":"none",document.getElementById("docs-panel").style.display="none"},document.getElementById("docs-toggle").onclick=function(){var r=document.getElementById("docs-panel");r.style.display="none"===r.style.display?"block":"none",document.getElementById("settings-panel").style.display="none"},document.getElementById("save-settings").onclick=an,document.getElementById("refresh-models").onclick=en,document.getElementById("mode-planning").onclick=function(){return Kr("planning")},document.getElementById("mode-agent").onclick=function(){return Kr("agent")},document.getElementById("chat-send").onclick=on;var a,o,i,A,s=document.getElementById("chat-clear");s&&(s.onclick=hn),(A=document.getElementById("chat-input"))&&(A.addEventListener("input",function(){A.style.height="auto",A.style.height=Math.min(A.scrollHeight,80)+"px"}),A.addEventListener("keydown",function(r){"Enter"!==r.key||r.shiftKey||(r.preventDefault(),on())})),o=document.getElementById("chat-messages"),i=document.getElementById("scroll-to-bottom"),o&&i&&(o.addEventListener("scroll",function(){var r=o.scrollHeight-o.scrollTop-o.clientHeight<100;i.classList.toggle("visible",!r)}),i.onclick=function(){o.scrollTo({top:o.scrollHeight,behavior:"smooth"})}),(a=document.getElementById("prompt-input"))&&a.addEventListener("keydown",function(r){"Enter"===r.key&&(r.ctrlKey||r.metaKey)&&(r.preventDefault(),wn())}),function(){var r,n=document.getElementById("prompt-input");if(n){var e=document.createElement("span");e.className="char-count",e.textContent="";var t=null===(r=n.closest(".input-card"))||void 0===r?void 0:r.querySelector(".footer-left");t&&t.appendChild(e),n.addEventListener("input",function(){var r=n.value.length;0===r?(e.textContent="",e.className="char-count"):(e.textContent="".concat(r),e.className=r>3e3?"char-count danger":r>2e3?"char-count warning":"char-count")})}}();var l=function(r,n){var e=document.getElementById(r);e&&(e.onclick=n)},c=function(r,n){var e=document.getElementById(r);e&&(e.onchange=n)};l("file-upload-btn",function(){return document.getElementById("file-input").click()}),c("file-input",function(r){return Tn(r,!1)}),l("file-remove",function(){return Dn(!1)}),l("agent-file-btn",function(){return document.getElementById("agent-file-input").click()}),c("agent-file-input",function(r){return Tn(r,!0)}),l("agent-file-remove",function(){return Dn(!0)}),l("batch-extract-btn",Wn),document.querySelectorAll(".category-tab").forEach(function(r){r.onclick=function(){!function(r){Yr=r,document.querySelectorAll(".category-tab").forEach(function(n){n.classList.toggle("active",n.dataset.category===r)});var n=document.getElementById("schema-info"),e=document.getElementById("detected-columns");n&&(n.style.display="extract"===r?"flex":"none"),e&&(e.style.display="extract"===r&&e.innerHTML.trim()?"block":"none"),$r(),Pn("extract"===r&&Zr.length>0)}(r.dataset.category)}}),l("detect-columns-btn",In),$r(),rn(),function(){var r=E(),n=document.getElementById("setting-provider");n&&(n.value=r.provider,n.onchange=function(r){var n=r.target.value;nn(n),"local"===n&&en()});var e=function(r,n){var e=document.getElementById(r);e&&(e.value=n||"")};e("setting-api-key",r.apiKey),e("setting-groq-model",r.groqModel||"llama-3.3-70b-versatile"),e("setting-gemini-key",r.geminiKey),e("setting-gemini-model",r.geminiModel||"gemini-1.5-flash"),e("setting-openai-key",r.openaiKey),e("setting-openai-model",r.openaiModel||"gpt-4o-mini"),e("setting-anthropic-key",r.anthropicKey),e("setting-anthropic-model",r.anthropicModel||"claude-3-5-sonnet-20241022"),e("setting-openrouter-key",r.openrouterKey),e("setting-openrouter-model",r.openrouterModel||"anthropic/claude-3.5-sonnet:beta"),e("setting-base-url",r.baseUrl),nn(r.provider)}()})},93942:function(r,n,e){"use strict";var t=e(71354),a=e.n(t),o=e(76314),i=e.n(o),A=e(4417),s=e.n(A),l=new URL(e(41198),e.b),c=i()(a()),d=s()(l);c.push([r.id,"/* \r\n * SheetOS AI — Redesigned Interface\r\n * A warm, human-crafted design system.\r\n * Forest green + terracotta. No AI-purple gradients.\r\n */\r\n\r\n:root {\r\n    /* ── Surface & Layout ── */\r\n    --bg: #F5F4F1;\r\n    --bg-gradient: radial-gradient(circle at 50% 0%, #FFFFFF, #F2F0EB);\r\n    --surface: #FAFAF8;\r\n    --card: #FFFFFF;\r\n    --card-border: #E3E1DC;\r\n    --card-hover: #F0EFEB;\r\n    --input-bg: #F5F4F1;\r\n\r\n    /* ── Primary: Forest Green ── */\r\n    --primary: #2D6A4F;\r\n    --primary-hover: #1B4D3E;\r\n    --primary-light: #74C69D;\r\n    --primary-bg: rgba(45, 106, 79, 0.06);\r\n    --primary-glow: rgba(45, 106, 79, 0.12);\r\n\r\n    /* ── Accent: Terracotta ── */\r\n    --accent: #C4603D;\r\n    --accent-hover: #A8502F;\r\n    --accent-bg: rgba(196, 96, 61, 0.07);\r\n\r\n    /* ── Text ── */\r\n    --text: #1A1C1E;\r\n    --text-2: #555759;\r\n    --text-3: #8C8E91;\r\n    --text-4: #C5C7CA;\r\n\r\n    /* ── Semantic ── */\r\n    --success: #2D6A4F;\r\n    --success-bg: rgba(45, 106, 79, 0.07);\r\n    --error: #B83A3A;\r\n    --error-bg: rgba(184, 58, 58, 0.07);\r\n    --warning: #C08B2D;\r\n    --warning-bg: rgba(192, 139, 45, 0.07);\r\n\r\n    /* ── Shape ── */\r\n    --radius: 10px;\r\n    --radius-lg: 14px;\r\n    --radius-xl: 20px;\r\n\r\n    /* ── Depth — warm tinted shadows ── */\r\n    --shadow-sm: 0 1px 2px rgba(30, 25, 20, 0.04);\r\n    --shadow: 0 2px 5px rgba(30, 25, 20, 0.05), 0 1px 2px rgba(30, 25, 20, 0.03);\r\n    --shadow-md: 0 4px 12px rgba(30, 25, 20, 0.06), 0 1px 3px rgba(30, 25, 20, 0.04);\r\n    --shadow-lg: 0 8px 24px rgba(30, 25, 20, 0.08), 0 2px 6px rgba(30, 25, 20, 0.04);\r\n\r\n    /* ── Typography ── */\r\n    --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;\r\n    --mono: 'JetBrains Mono', 'Cascadia Code', 'Menlo', monospace;\r\n\r\n    /* ── Chat ── */\r\n    --chat-user-bg: var(--primary);\r\n    --chat-user-text: #FFFFFF;\r\n    --chat-ai-bg: #FFFFFF;\r\n    --chat-ai-border: rgba(0, 0, 0, 0.06);\r\n    --chat-ai-text: var(--text);\r\n\r\n    /* ── Glass ── */\r\n    --glass-bg: rgba(255, 255, 255, 0.7);\r\n    --glass-border: rgba(255, 255, 255, 0.4);\r\n    --blur: 16px;\r\n}\r\n\r\n/* ── Dark mode ── */\r\n@media (prefers-color-scheme: dark) {\r\n    :root {\r\n        --bg: #141516;\r\n        --bg-gradient: radial-gradient(circle at 50% 0%, #1A1B1D, #0F1011);\r\n        --surface: #1A1B1D;\r\n        --card: #212224;\r\n        --card-border: #313335;\r\n        --card-hover: #2A2B2D;\r\n        --input-bg: #19191B;\r\n\r\n        --primary: #52B788;\r\n        --primary-hover: #74C69D;\r\n        --primary-light: #2D6A4F;\r\n        --primary-bg: rgba(82, 183, 136, 0.08);\r\n        --primary-glow: rgba(82, 183, 136, 0.14);\r\n\r\n        --accent: #E0915A;\r\n        --accent-hover: #EAA876;\r\n        --accent-bg: rgba(224, 145, 90, 0.09);\r\n\r\n        --text: #E5E3DE;\r\n        --text-2: #9B9D9F;\r\n        --text-3: #606264;\r\n        --text-4: #3A3C3E;\r\n\r\n        --success: #52B788;\r\n        --success-bg: rgba(82, 183, 136, 0.09);\r\n        --error: #E06060;\r\n        --error-bg: rgba(224, 96, 96, 0.09);\r\n        --warning: #E0B85A;\r\n        --warning-bg: rgba(224, 184, 90, 0.09);\r\n\r\n        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.18);\r\n        --shadow: 0 2px 5px rgba(0, 0, 0, 0.22);\r\n        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.28);\r\n        --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.32);\r\n\r\n        --chat-user-bg: var(--primary);\r\n        --chat-user-text: #141516;\r\n        --chat-ai-bg: #212224;\r\n        --chat-ai-border: rgba(255, 255, 255, 0.05);\r\n        --chat-ai-text: var(--text);\r\n\r\n        --glass-bg: rgba(20, 21, 22, 0.75);\r\n        --glass-border: rgba(255, 255, 255, 0.08);\r\n    }\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* RESET & BASE                                                    */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n*,\r\n*::before,\r\n*::after {\r\n    box-sizing: border-box;\r\n}\r\n\r\nhtml,\r\nbody {\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: 0;\r\n    padding: 0;\r\n    font-family: var(--font);\r\n    font-size: 13px;\r\n    line-height: 1.55;\r\n    background: var(--bg-gradient);\r\n    color: var(--text);\r\n    -webkit-font-smoothing: antialiased;\r\n    -moz-osx-font-smoothing: grayscale;\r\n    overflow-x: hidden;\r\n}\r\n\r\n#app-body {\r\n    display: flex;\r\n    flex-direction: column;\r\n    height: 100vh;\r\n    overflow: hidden;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* HEADER                                                          */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.app-header {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    padding: 12px 18px;\r\n    background: var(--glass-bg);\r\n    backdrop-filter: blur(var(--blur));\r\n    -webkit-backdrop-filter: blur(var(--blur));\r\n    border-bottom: 1px solid var(--glass-border);\r\n    position: sticky;\r\n    top: 0;\r\n    z-index: 100;\r\n}\r\n\r\n.brand {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 9px;\r\n}\r\n\r\n.logo {\r\n    color: var(--primary);\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.brand h1 {\r\n    font-size: 15px;\r\n    font-weight: 700;\r\n    margin: 0;\r\n    letter-spacing: -0.025em;\r\n    color: var(--text);\r\n}\r\n\r\n.highlight-text {\r\n    color: var(--primary);\r\n    font-weight: 700;\r\n    /* Solid color, not a gradient — feels hand-picked */\r\n}\r\n\r\n.header-actions {\r\n    display: flex;\r\n    gap: 5px;\r\n}\r\n\r\n\r\n/* ── Icon Buttons ── */\r\n/* Base Icon Button */\r\n.btn-icon {\r\n    width: 34px;\r\n    height: 34px;\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 10px;\r\n    background: var(--card);\r\n    color: var(--text-2);\r\n    cursor: pointer;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);\r\n    padding: 0;\r\n    box-shadow: var(--shadow-sm);\r\n}\r\n\r\n.btn-icon:hover {\r\n    color: var(--primary);\r\n    border-color: var(--primary-light);\r\n    background: var(--primary-bg);\r\n    transform: translateY(-2px);\r\n    box-shadow: var(--shadow);\r\n}\r\n\r\n.btn-icon:active {\r\n    transform: scale(0.95);\r\n}\r\n\r\n\r\n\r\n/* ─── Panels (Docs / Settings) ─── */\r\n.panel {\r\n    padding: 16px;\r\n    background: var(--card);\r\n    border-bottom: 1px solid var(--card-border);\r\n    animation: slideDown 0.22s ease-out;\r\n    max-height: 80vh;\r\n    overflow-y: auto;\r\n    box-shadow: var(--shadow-md);\r\n}\r\n\r\n.panel h3 {\r\n    font-size: 11px;\r\n    font-weight: 700;\r\n    /* Fixed from 650 */\r\n    text-transform: uppercase;\r\n    letter-spacing: 0.06em;\r\n    color: var(--text-3);\r\n    margin: 0 0 12px;\r\n}\r\n\r\n\r\n/* ── Docs Grid ── */\r\n.docs-grid {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 8px;\r\n}\r\n\r\n.doc-item {\r\n    display: flex;\r\n    gap: 10px;\r\n    align-items: flex-start;\r\n    padding: 5px 0;\r\n}\r\n\r\n.doc-icon {\r\n    flex-shrink: 0;\r\n    width: 18px;\r\n    height: 18px;\r\n    color: var(--primary);\r\n    display: flex;\r\n    align-items: center;\r\n    margin-top: 1px;\r\n}\r\n\r\n.doc-item strong {\r\n    font-size: 12px;\r\n    font-weight: 600;\r\n    color: var(--text);\r\n    display: block;\r\n    margin-bottom: 2px;\r\n}\r\n\r\n.doc-item p {\r\n    font-size: 11px;\r\n    color: var(--text-2);\r\n    margin: 0;\r\n    line-height: 1.45;\r\n}\r\n\r\n.docs-hint {\r\n    font-size: 11px;\r\n    color: var(--text-3);\r\n    margin: 12px 0 0;\r\n    font-style: italic;\r\n    line-height: 1.5;\r\n}\r\n\r\n\r\n/* ── Forms ── */\r\n.form-group {\r\n    margin-bottom: 12px;\r\n}\r\n\r\n.form-group label {\r\n    display: block;\r\n    font-size: 11px;\r\n    font-weight: 600;\r\n    color: var(--text-3);\r\n    margin-bottom: 4px;\r\n    text-transform: uppercase;\r\n    letter-spacing: 0.04em;\r\n}\r\n\r\n.form-input {\r\n    width: 100%;\r\n    padding: 8px 11px;\r\n    font-size: 13px;\r\n    font-family: var(--font);\r\n    color: var(--text);\r\n    background: var(--input-bg);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 9px;\r\n    outline: none;\r\n    transition: border-color 0.2s ease-out, box-shadow 0.2s ease-out;\r\n}\r\n\r\n.form-input:focus {\r\n    border-color: var(--primary);\r\n    box-shadow: 0 0 0 3px var(--primary-glow);\r\n}\r\n\r\nselect.form-input {\r\n    cursor: pointer;\r\n    appearance: none;\r\n    background-image: url("+d+');\r\n    background-repeat: no-repeat;\r\n    background-position: right 10px center;\r\n    padding-right: 28px;\r\n}\r\n\r\n.btn-save {\r\n    width: 100%;\r\n    justify-content: center;\r\n    margin-top: 6px;\r\n}\r\n\r\n/* Model selector row */\r\n.model-select-wrapper {\r\n    display: flex;\r\n    gap: 5px;\r\n    align-items: center;\r\n}\r\n\r\n.model-select-wrapper .form-input {\r\n    flex: 1;\r\n    min-width: 0;\r\n}\r\n\r\n.btn-refresh {\r\n    width: 30px;\r\n    height: 30px;\r\n    flex-shrink: 0;\r\n    padding: 0;\r\n}\r\n\r\n.model-status {\r\n    font-size: 11px;\r\n    margin-top: 4px;\r\n    min-height: 15px;\r\n    color: var(--text-3);\r\n}\r\n\r\n.model-status-ok {\r\n    color: var(--success);\r\n}\r\n\r\n.model-status-warn {\r\n    color: var(--error);\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* MODE TOGGLE                                                     */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.mode-toggle {\r\n    display: flex;\r\n    align-items: center;\r\n    padding: 5px;\r\n    margin: 10px 14px;\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 14px;\r\n    position: relative;\r\n    gap: 4px;\r\n    box-shadow: var(--shadow-sm);\r\n}\r\n\r\n.mode-tab {\r\n    flex: 1;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    gap: 8px;\r\n    padding: 10px;\r\n    font-size: 13px;\r\n    font-weight: 600;\r\n    font-family: var(--font);\r\n    color: var(--text-3);\r\n    background: transparent;\r\n    border: none;\r\n    cursor: pointer;\r\n    transition: all 0.3s ease;\r\n    position: relative;\r\n    z-index: 2;\r\n}\r\n\r\n.mode-tab.active {\r\n    color: var(--primary);\r\n}\r\n\r\n.mode-indicator {\r\n    position: absolute;\r\n    left: 5px;\r\n    top: 5px;\r\n    width: calc(50% - 7px);\r\n    height: calc(100% - 10px);\r\n    background: var(--primary-bg);\r\n    border-radius: 10px;\r\n    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);\r\n    z-index: 1;\r\n}\r\n\r\n.mode-indicator.right {\r\n    transform: translateX(calc(100% + 4px));\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* MODE CONTENT WRAPPER                                            */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.mode-content {\r\n    display: none;\r\n    flex-direction: column;\r\n    flex: 1;\r\n    overflow: hidden;\r\n    animation: fadeIn 0.2s ease-out;\r\n}\r\n\r\n.mode-content.active {\r\n    display: flex;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* PLANNING MODE — Chat                                            */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n\r\n/* ── Chat Messages Container ── */\r\n.chat-messages {\r\n    flex: 1;\r\n    overflow-y: auto;\r\n    padding: 14px 14px 6px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 14px;\r\n    scroll-behavior: smooth;\r\n}\r\n\r\n\r\n/* ── Welcome Screen ── */\r\n.chat-welcome {\r\n    text-align: center;\r\n    padding: 28px 18px 18px;\r\n    animation: fadeIn 0.35s ease-out;\r\n}\r\n\r\n.welcome-icon {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    width: 52px;\r\n    height: 52px;\r\n    background: var(--primary);\r\n    border-radius: 16px;\r\n    color: white;\r\n    margin-bottom: 14px;\r\n    box-shadow: 0 4px 14px rgba(45, 106, 79, 0.2);\r\n}\r\n\r\n.welcome-icon svg {\r\n    width: 24px;\r\n    height: 24px;\r\n}\r\n\r\n.chat-welcome h2 {\r\n    font-size: 17px;\r\n    font-weight: 700;\r\n    margin: 0 0 8px;\r\n    color: var(--text);\r\n    letter-spacing: -0.02em;\r\n}\r\n\r\n.chat-welcome p {\r\n    font-size: 12.5px;\r\n    color: var(--text-2);\r\n    margin: 0 0 18px;\r\n    line-height: 1.65;\r\n    max-width: 270px;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n}\r\n\r\n\r\n/* ── Chat Suggestions ── */\r\n.welcome-suggestions {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 7px;\r\n    max-width: 280px;\r\n    margin: 0 auto;\r\n}\r\n\r\n.suggestion-chip {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 9px;\r\n    padding: 10px 13px;\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: var(--radius);\r\n    font-size: 11.5px;\r\n    color: var(--text-2);\r\n    cursor: pointer;\r\n    transition: all 0.22s ease-out;\r\n    text-align: left;\r\n    font-family: var(--font);\r\n    line-height: 1.4;\r\n}\r\n\r\n.suggestion-chip:hover {\r\n    border-color: var(--primary);\r\n    color: var(--primary);\r\n    background: var(--primary-bg);\r\n    transform: translateX(3px);\r\n}\r\n\r\n.suggestion-chip svg {\r\n    flex-shrink: 0;\r\n    color: var(--primary);\r\n    opacity: 0.5;\r\n}\r\n\r\n.suggestion-chip:hover svg {\r\n    opacity: 1;\r\n}\r\n\r\n\r\n/* ── Chat Message Bubbles ── */\r\n.chat-msg {\r\n    display: flex;\r\n    gap: 0;\r\n    margin-bottom: 12px;\r\n    animation: msgSlideIn 0.35s cubic-bezier(0.19, 1, 0.22, 1);\r\n    max-width: 100%;\r\n}\r\n\r\n.chat-msg.user {\r\n    justify-content: flex-end;\r\n}\r\n\r\n.chat-msg.ai {\r\n    justify-content: flex-start;\r\n}\r\n\r\n.chat-bubble {\r\n    padding: 12px 16px;\r\n    border-radius: 20px;\r\n    font-size: 14px;\r\n    line-height: 1.5;\r\n    max-width: 85%;\r\n    word-wrap: break-word;\r\n    overflow-wrap: break-word;\r\n    box-shadow: var(--shadow-sm);\r\n    transition: transform 0.2s ease;\r\n}\r\n\r\n.chat-bubble:has(table) {\r\n    max-width: 95%;\r\n}\r\n\r\n.chat-msg.user .chat-bubble {\r\n    background: var(--primary);\r\n    color: white;\r\n    border-bottom-right-radius: 4px;\r\n    margin-right: 4px;\r\n}\r\n\r\n.chat-msg.ai .chat-bubble {\r\n    background: var(--card);\r\n    color: var(--text-1);\r\n    border: 1px solid var(--card-border);\r\n    border-bottom-left-radius: 4px;\r\n    margin-left: 4px;\r\n}\r\n\r\n\r\n/* ── Chat formatted text ── */\r\n.chat-bubble strong {\r\n    font-weight: 600;\r\n}\r\n\r\n.chat-bubble em {\r\n    font-style: italic;\r\n    opacity: 0.9;\r\n}\r\n\r\n.chat-bubble code {\r\n    font-family: var(--mono);\r\n    font-size: 11px;\r\n    padding: 2px 5px;\r\n    border-radius: 5px;\r\n    background: rgba(0, 0, 0, 0.06);\r\n}\r\n\r\n.chat-msg.user .chat-bubble code {\r\n    background: rgba(255, 255, 255, 0.18);\r\n}\r\n\r\n.chat-bubble ul,\r\n.chat-bubble ol {\r\n    margin: 6px 0;\r\n    padding-left: 18px;\r\n}\r\n\r\n.chat-bubble li {\r\n    margin-bottom: 3px;\r\n}\r\n\r\n.chat-bubble p {\r\n    margin: 0 0 8px;\r\n}\r\n\r\n.chat-bubble li p {\r\n    margin: 0;\r\n    display: inline;\r\n}\r\n\r\n.chat-bubble p:last-child {\r\n    margin: 0;\r\n}\r\n\r\n.chat-bubble h1,\r\n.chat-bubble h2,\r\n.chat-bubble h3 {\r\n    margin: 12px 0 6px;\r\n    font-weight: 700;\r\n    line-height: 1.3;\r\n}\r\n\r\n.chat-bubble h1 {\r\n    font-size: 1.25em;\r\n    border-bottom: 1px solid var(--border);\r\n    padding-bottom: 4px;\r\n}\r\n\r\n.chat-bubble h2 {\r\n    font-size: 1.15em;\r\n}\r\n\r\n.chat-bubble h3 {\r\n    font-size: 1.05em;\r\n    color: var(--text-2);\r\n}\r\n\r\n/* Table styling for AI responses */\r\n.chat-bubble table {\r\n    width: 100%;\r\n    border-collapse: collapse;\r\n    margin: 10px 0;\r\n    font-size: 11px;\r\n    background: var(--surface);\r\n    border-radius: 8px;\r\n    overflow: hidden;\r\n    display: block;\r\n    overflow-x: auto;\r\n}\r\n\r\n.chat-bubble th,\r\n.chat-bubble td {\r\n    padding: 6px 10px;\r\n    border: 1px solid var(--border);\r\n    text-align: left;\r\n}\r\n\r\n.chat-bubble th {\r\n    background: var(--surface-2);\r\n    font-weight: 600;\r\n    color: var(--primary);\r\n}\r\n\r\n.chat-bubble tr:nth-child(even) {\r\n    background: rgba(0, 0, 0, 0.02);\r\n}\r\n\r\n/* ── Context Badge ── */\r\n.context-badge {\r\n    display: block;\r\n    margin-top: 8px;\r\n    padding: 4px 8px;\r\n    font-size: 10px;\r\n    font-weight: 500;\r\n    color: rgba(255, 255, 255, 0.85);\r\n    background: rgba(255, 255, 255, 0.15);\r\n    border-radius: 6px;\r\n    letter-spacing: 0.2px;\r\n}\r\n\r\n.chat-msg.ai .context-badge {\r\n    color: var(--text-2);\r\n    background: var(--primary-bg);\r\n}\r\n\r\n\r\n/* ── Execute from Chat ── */\r\n.chat-action-bar {\r\n    display: flex;\r\n    gap: 6px;\r\n    margin-top: 10px;\r\n}\r\n\r\n.btn-execute-from-chat {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    gap: 5px;\r\n    padding: 5px 11px;\r\n    font-size: 10.5px;\r\n    font-weight: 600;\r\n    font-family: var(--font);\r\n    background: var(--primary-bg);\r\n    color: var(--primary);\r\n    border: 1px solid var(--primary-glow);\r\n    border-radius: 7px;\r\n    cursor: pointer;\r\n    transition: all 0.2s ease-out;\r\n}\r\n\r\n.btn-execute-from-chat:hover {\r\n    background: var(--primary);\r\n    color: white;\r\n    box-shadow: 0 2px 8px rgba(45, 106, 79, 0.25);\r\n}\r\n\r\n\r\n/* ── Typing Indicator ── */\r\n.typing-indicator {\r\n    display: flex;\r\n    gap: 4px;\r\n    align-items: center;\r\n    padding: 4px 0;\r\n}\r\n\r\n.typing-dot {\r\n    width: 6px;\r\n    height: 6px;\r\n    background: var(--text-3);\r\n    border-radius: 50%;\r\n    animation: typingBounce 0.6s ease-in-out infinite;\r\n}\r\n\r\n.typing-dot:nth-child(2) {\r\n    animation-delay: 0.15s;\r\n}\r\n\r\n.typing-dot:nth-child(3) {\r\n    animation-delay: 0.3s;\r\n}\r\n\r\n\r\n/* ── Chat Input Area ── */\r\n.chat-input-area {\r\n    padding: 12px 14px 12px;\r\n    background: var(--glass-bg);\r\n    backdrop-filter: blur(var(--blur));\r\n    -webkit-backdrop-filter: blur(var(--blur));\r\n    border-top: 1px solid var(--glass-border);\r\n}\r\n\r\n.chat-input-card {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 10px;\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: var(--radius-xl);\r\n    padding: 6px 6px 6px 16px;\r\n    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);\r\n    box-shadow: var(--shadow-md);\r\n}\r\n\r\n.chat-input-card:focus-within {\r\n    border-color: var(--primary);\r\n    box-shadow: 0 4px 20px var(--primary-glow);\r\n    transform: translateY(-2px);\r\n}\r\n\r\n#chat-input {\r\n    flex: 1;\r\n    border: none;\r\n    background: transparent;\r\n    font-family: var(--font);\r\n    font-size: 13px;\r\n    line-height: 1.4;\r\n    padding: 6px 0;\r\n    color: var(--text-1);\r\n    resize: none;\r\n    outline: none;\r\n    max-height: 120px;\r\n    min-height: 20px;\r\n}\r\n\r\n/* Agent Footer Layout */\r\n.card-footer {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    margin-top: 12px;\r\n}\r\n\r\n.footer-left {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 8px;\r\n}\r\n\r\n/* Original btn-clip (updated) */\r\n.btn-clip {\r\n    background: none;\r\n    border: none;\r\n    color: var(--text-3);\r\n    cursor: pointer;\r\n    padding: 6px;\r\n    border-radius: 6px;\r\n    display: inline-flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    transition: all 0.2s;\r\n}\r\n\r\n.btn-clip:hover {\r\n    background: var(--surface-hover);\r\n    color: var(--primary);\r\n}\r\n\r\n.file-preview {\r\n    background: var(--surface-2);\r\n    border: 1px solid var(--border);\r\n    border-radius: 6px;\r\n    padding: 6px 10px;\r\n    margin-bottom: 8px;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    font-size: 11px;\r\n    color: var(--text-1);\r\n}\r\n\r\n.file-thumb {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 8px;\r\n    padding-right: 8px;\r\n}\r\n\r\n.file-remove {\r\n    background: none;\r\n    border: none;\r\n    color: var(--text-3);\r\n    font-size: 16px;\r\n    cursor: pointer;\r\n    padding: 0 4px;\r\n    line-height: 1;\r\n}\r\n\r\n.file-center {\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n#chat-input::placeholder {\r\n    color: var(--text-3);\r\n}\r\n\r\n.btn-send {\r\n    width: 38px;\r\n    height: 38px;\r\n    border: none;\r\n    border-radius: 12px;\r\n    background: var(--primary);\r\n    color: white;\r\n    cursor: pointer;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    flex-shrink: 0;\r\n    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);\r\n    box-shadow: 0 4px 12px rgba(45, 106, 79, 0.3);\r\n}\r\n\r\n.btn-send:hover {\r\n    background: var(--primary-hover);\r\n    transform: translateY(-2px) scale(1.05);\r\n}\r\n\r\n.btn-send:disabled {\r\n    opacity: 0.35;\r\n    cursor: not-allowed;\r\n    transform: none;\r\n}\r\n\r\n.btn-send.is-busy {\r\n    background: #FF4D4D;\r\n    /* Red stop button */\r\n    box-shadow: 0 4px 12px rgba(255, 77, 77, 0.3);\r\n}\r\n\r\n.btn-send.is-busy:hover {\r\n    background: #E60000;\r\n    transform: scale(1.1);\r\n}\r\n\r\n.btn-send svg {\r\n    width: 14px;\r\n    height: 14px;\r\n}\r\n\r\n.chat-footer {\r\n    display: flex;\r\n    justify-content: center;\r\n    padding: 4px 0 0;\r\n}\r\n\r\n/* ── File Preview List ── */\r\n.file-preview-list {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    gap: 6px;\r\n    margin-bottom: 8px;\r\n    padding: 0 4px;\r\n}\r\n\r\n.file-chip {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    gap: 6px;\r\n    background: var(--surface);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 6px;\r\n    padding: 4px 8px;\r\n    font-size: 11px;\r\n    color: var(--text);\r\n    transition: all 0.2s ease;\r\n    max-width: 100%;\r\n}\r\n\r\n.file-chip:hover {\r\n    border-color: var(--primary-light);\r\n    background: var(--card);\r\n    transform: translateY(-1px);\r\n    box-shadow: var(--shadow-sm);\r\n}\r\n\r\n.file-chip-icon {\r\n    font-size: 12px;\r\n    opacity: 0.7;\r\n}\r\n\r\n.file-chip-name {\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    max-width: 140px;\r\n}\r\n\r\n.file-chip-remove {\r\n    background: none;\r\n    border: none;\r\n    cursor: pointer;\r\n    color: var(--text-3);\r\n    padding: 0 2px;\r\n    font-size: 14px;\r\n    line-height: 1;\r\n    display: flex;\r\n    align-items: center;\r\n    border-radius: 4px;\r\n    transition: color 0.2s;\r\n}\r\n\r\n.file-chip-remove:hover {\r\n    color: var(--error);\r\n    background: var(--error-bg);\r\n}\r\n\r\n/* ── Custom Scrollbar ── */\r\n::-webkit-scrollbar {\r\n    width: 6px;\r\n    height: 6px;\r\n}\r\n\r\n::-webkit-scrollbar-track {\r\n    background: transparent;\r\n}\r\n\r\n::-webkit-scrollbar-thumb {\r\n    background: rgba(0, 0, 0, 0.1);\r\n    border-radius: 3px;\r\n}\r\n\r\n::-webkit-scrollbar-thumb:hover {\r\n    background: rgba(0, 0, 0, 0.2);\r\n}\r\n\r\n@media (prefers-color-scheme: dark) {\r\n    ::-webkit-scrollbar-thumb {\r\n        background: rgba(255, 255, 255, 0.15);\r\n    }\r\n\r\n    ::-webkit-scrollbar-thumb:hover {\r\n        background: rgba(255, 255, 255, 0.25);\r\n    }\r\n\r\n    .app-header {\r\n        background: rgba(26, 27, 29, 0.85);\r\n        /* Dark mode glass */\r\n    }\r\n}\r\n\r\n.btn-text {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    gap: 4px;\r\n    padding: 5px 9px;\r\n    font-size: 11px;\r\n    font-weight: 500;\r\n    font-family: var(--font);\r\n    color: var(--text-3);\r\n    background: transparent;\r\n    border: none;\r\n    cursor: pointer;\r\n    border-radius: 7px;\r\n    transition: color 0.15s, background 0.15s;\r\n}\r\n\r\n.btn-text:hover {\r\n    color: var(--error);\r\n    background: var(--error-bg);\r\n}\r\n\r\n.btn-text svg {\r\n    width: 12px;\r\n    height: 12px;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* AGENT MODE                                                      */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.content-wrapper {\r\n    flex: 1;\r\n    display: flex;\r\n    flex-direction: column;\r\n    width: 100%;\r\n    overflow: hidden;\r\n    position: relative;\r\n    min-height: 0;\r\n}\r\n\r\n.agent-scroll-area {\r\n    flex: 1;\r\n    overflow-y: auto;\r\n    padding: 10px 14px 14px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 12px;\r\n    scroll-behavior: smooth;\r\n    min-height: 0;\r\n}\r\n\r\n\r\n/* ── Category Tabs ── */\r\n.action-categories {\r\n    display: flex;\r\n    gap: 5px;\r\n    overflow-x: auto;\r\n    padding: 2px 0;\r\n    scrollbar-width: none;\r\n    flex-shrink: 0;\r\n}\r\n\r\n.action-categories::-webkit-scrollbar {\r\n    display: none;\r\n}\r\n\r\n.category-tab {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 5px;\r\n    padding: 7px 11px;\r\n    font-size: 11px;\r\n    font-weight: 600;\r\n    font-family: var(--font);\r\n    color: var(--text-3);\r\n    background: transparent;\r\n    border: 1px solid transparent;\r\n    border-radius: 9px;\r\n    cursor: pointer;\r\n    transition: all 0.2s ease-out;\r\n    white-space: nowrap;\r\n    flex-shrink: 0;\r\n}\r\n\r\n.category-tab:hover {\r\n    color: var(--text-2);\r\n    background: var(--card);\r\n}\r\n\r\n.category-tab.active {\r\n    color: var(--primary);\r\n    background: var(--primary-bg);\r\n    border-color: var(--primary-glow);\r\n    animation: tabPulse 2s infinite ease-in-out;\r\n}\r\n\r\n.category-tab svg {\r\n    width: 12px;\r\n    height: 12px;\r\n}\r\n\r\n\r\n/* ── Schema Info Banner (Extract Mode) ── */\r\n.schema-info {\r\n    display: flex;\r\n    align-items: flex-start;\r\n    gap: 10px;\r\n    padding: 10px 12px;\r\n    margin-bottom: 10px;\r\n    background: linear-gradient(135deg, var(--primary-bg), rgba(74, 144, 226, 0.06));\r\n    border: 1px solid var(--primary-glow);\r\n    border-radius: 10px;\r\n    animation: fadeIn 0.3s ease-out;\r\n}\r\n\r\n.schema-icon {\r\n    font-size: 18px;\r\n    line-height: 1;\r\n    flex-shrink: 0;\r\n}\r\n\r\n.schema-text {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 2px;\r\n}\r\n\r\n.schema-text strong {\r\n    font-size: 11.5px;\r\n    font-weight: 600;\r\n    color: var(--primary);\r\n}\r\n\r\n.schema-text span {\r\n    font-size: 10.5px;\r\n    color: var(--text-2);\r\n    line-height: 1.4;\r\n}\r\n\r\n.btn-detect {\r\n    padding: 5px 10px;\r\n    font-size: 10px;\r\n    font-weight: 600;\r\n    font-family: var(--font);\r\n    color: var(--primary);\r\n    background: var(--card);\r\n    border: 1px solid var(--primary-glow);\r\n    border-radius: 6px;\r\n    cursor: pointer;\r\n    transition: all 0.2s ease-out;\r\n    flex-shrink: 0;\r\n    margin-left: auto;\r\n}\r\n\r\n.btn-detect:hover {\r\n    background: var(--primary-bg);\r\n    transform: translateY(-1px);\r\n}\r\n\r\n.btn-detect:active {\r\n    transform: scale(0.96);\r\n}\r\n\r\n/* ── Detected Columns Preview ── */\r\n.detected-columns {\r\n    padding: 10px 12px;\r\n    margin-bottom: 10px;\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 10px;\r\n    animation: fadeIn 0.3s ease-out;\r\n}\r\n\r\n.detected-header {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    margin-bottom: 8px;\r\n}\r\n\r\n.detected-label {\r\n    font-size: 10.5px;\r\n    font-weight: 600;\r\n    color: var(--text-2);\r\n}\r\n\r\n.column-count {\r\n    font-size: 10px;\r\n    font-weight: 700;\r\n    color: var(--primary);\r\n    background: var(--primary-bg);\r\n    padding: 2px 8px;\r\n    border-radius: 10px;\r\n}\r\n\r\n.column-chips {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    gap: 4px;\r\n}\r\n\r\n.column-chip {\r\n    padding: 3px 8px;\r\n    font-size: 10px;\r\n    font-weight: 500;\r\n    color: var(--text-2);\r\n    background: var(--input-bg);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 6px;\r\n}\r\n\r\n.column-chip.empty-warning {\r\n    color: var(--warning);\r\n    background: var(--warning-bg);\r\n    border-color: rgba(192, 139, 45, 0.2);\r\n}\r\n\r\n/* ── Extract Category Highlight ── */\r\n.category-tab[data-category="extract"].active {\r\n    color: #C4603D;\r\n    background: rgba(196, 96, 61, 0.08);\r\n    border-color: rgba(196, 96, 61, 0.15);\r\n}\r\n\r\n.category-tab[data-category="extract"]:hover {\r\n    color: #A8502F;\r\n}\r\n\r\n/* ── Smart Tools Category Highlight ── */\r\n.category-tab[data-category="smart"].active {\r\n    color: #7C3AED;\r\n    background: rgba(124, 58, 237, 0.08);\r\n    border-color: rgba(124, 58, 237, 0.15);\r\n}\r\n\r\n.category-tab[data-category="smart"]:hover {\r\n    color: #6D28D9;\r\n}\r\n\r\n\r\n/* ── Quick Action Chips ── */\r\n.quick-actions {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    gap: 6px;\r\n}\r\n\r\n.chip {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    gap: 6px;\r\n    padding: 8px 14px;\r\n    font-size: 12px;\r\n    font-weight: 500;\r\n    font-family: var(--font);\r\n    color: var(--text-2);\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 24px;\r\n    cursor: pointer;\r\n    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);\r\n    white-space: nowrap;\r\n}\r\n\r\n.chip:hover {\r\n    color: var(--primary);\r\n    border-color: var(--primary);\r\n    background: var(--card);\r\n    transform: translateY(-2px);\r\n    box-shadow: var(--shadow-md);\r\n}\r\n\r\n.chip svg {\r\n    width: 14px;\r\n    height: 14px;\r\n    flex-shrink: 0;\r\n    transition: transform 0.3s ease;\r\n}\r\n\r\n.chip:hover svg {\r\n    transform: rotate(15deg);\r\n}\r\n\r\n\r\n/* ── Input Card (Agent) ── */\r\n.input-card {\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: var(--radius-xl);\r\n    display: flex;\r\n    flex-direction: column;\r\n    box-shadow: var(--shadow-md);\r\n    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);\r\n    margin: 14px 14px 0 14px;\r\n    flex-shrink: 0;\r\n}\r\n\r\n.input-card:focus-within {\r\n    border-color: var(--primary);\r\n    box-shadow: 0 2px 16px var(--primary-glow);\r\n}\r\n\r\ntextarea {\r\n    width: 100%;\r\n    min-height: 80px;\r\n    max-height: 160px;\r\n    padding: 14px 16px;\r\n    background: transparent;\r\n    border: none;\r\n    color: var(--text);\r\n    font-family: var(--font);\r\n    font-size: 13px;\r\n    line-height: 1.6;\r\n    resize: none;\r\n    outline: none;\r\n}\r\n\r\n.card-footer {\r\n    padding: 8px 12px;\r\n    background: rgba(0, 0, 0, 0.02);\r\n    border-top: 1px solid var(--card-border);\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    gap: 8px;\r\n    flex-shrink: 0;\r\n}\r\n\r\n\r\n/* ── Cache Badge ── */\r\n.cache-badge {\r\n    font-size: 10.5px;\r\n    font-weight: 600;\r\n    color: var(--success);\r\n    background: var(--success-bg);\r\n    padding: 3px 9px;\r\n    border-radius: 10px;\r\n    animation: fadeIn 0.2s;\r\n}\r\n\r\n\r\n/* ── Primary Button ── */\r\n.btn-primary {\r\n    background: var(--primary);\r\n    color: white;\r\n    border: none;\r\n    padding: 8px 16px;\r\n    border-radius: 9px;\r\n    font-size: 12px;\r\n    font-weight: 600;\r\n    cursor: pointer;\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 6px;\r\n    transition: background 0.2s ease-out, transform 0.15s ease-out, box-shadow 0.2s ease-out;\r\n    box-shadow: 0 2px 6px rgba(45, 106, 79, 0.2);\r\n}\r\n\r\n.btn-primary:hover {\r\n    background: var(--primary-hover);\r\n    transform: translateY(-1px);\r\n    box-shadow: 0 4px 14px rgba(45, 106, 79, 0.25);\r\n}\r\n\r\n.btn-primary:active {\r\n    transform: translateY(0);\r\n}\r\n\r\n.btn-primary.btn-stop {\r\n    background: #E53E3E;\r\n    border-color: #C53030;\r\n    box-shadow: 0 4px 10px rgba(229, 62, 62, 0.2);\r\n}\r\n\r\n.btn-primary.btn-stop:hover {\r\n    background: #C53030;\r\n}\r\n\r\n.btn-primary:disabled {\r\n    opacity: 0.4;\r\n    cursor: not-allowed;\r\n    transform: none;\r\n}\r\n\r\n.btn-primary svg {\r\n    width: 13px;\r\n    height: 13px;\r\n}\r\n\r\n\r\n/* ── Skeleton Loading ── */\r\n.skeleton-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 9px;\r\n    padding: 4px 0;\r\n}\r\n\r\n.skeleton-pill {\r\n    width: 140px;\r\n    height: 28px;\r\n    border-radius: 9px;\r\n    background: linear-gradient(90deg, var(--card-border) 25%, var(--input-bg) 50%, var(--card-border) 75%);\r\n    background-size: 200% 100%;\r\n    animation: shimmer 1.6s ease-in-out infinite;\r\n}\r\n\r\n.skeleton-line {\r\n    height: 13px;\r\n    border-radius: 5px;\r\n    background: linear-gradient(90deg, var(--card-border) 25%, var(--input-bg) 50%, var(--card-border) 75%);\r\n    background-size: 200% 100%;\r\n    animation: shimmer 1.6s ease-in-out infinite;\r\n}\r\n\r\n.skeleton-line.w80 {\r\n    width: 80%;\r\n}\r\n\r\n.skeleton-line.w60 {\r\n    width: 60%;\r\n}\r\n\r\n.skeleton-line.w40 {\r\n    width: 40%;\r\n}\r\n\r\n/* Chat Skeleton Specifics */\r\n.skeleton-msg {\r\n    display: flex;\r\n    gap: 12px;\r\n    margin-bottom: 12px;\r\n    align-items: flex-start;\r\n}\r\n\r\n.skeleton-bubble {\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 20px;\r\n    border-bottom-left-radius: 4px;\r\n    padding: 14px;\r\n    flex: 1;\r\n    max-width: 85%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 10px;\r\n    box-shadow: var(--shadow-sm);\r\n    margin-left: 4px;\r\n}\r\n\r\n.sk-shimmer {\r\n    background: linear-gradient(90deg, var(--card-border) 25%, var(--input-bg) 50%, var(--card-border) 75%);\r\n    background-size: 200% 100%;\r\n    animation: shimmer 1.6s ease-in-out infinite;\r\n}\r\n\r\n\r\n/* ── Status Pill ── */\r\n.status-pill {\r\n    padding: 9px 13px;\r\n    border-radius: var(--radius);\r\n    font-size: 12px;\r\n    font-weight: 500;\r\n    display: none;\r\n    align-items: center;\r\n    gap: 7px;\r\n    animation: fadeIn 0.2s;\r\n    border: 1px solid transparent;\r\n}\r\n\r\n.status-pill.info {\r\n    background: var(--primary-bg);\r\n    color: var(--primary);\r\n    border-color: var(--primary-glow);\r\n}\r\n\r\n.status-pill.success {\r\n    background: var(--success-bg);\r\n    color: var(--success);\r\n    border-color: rgba(45, 106, 79, 0.12);\r\n}\r\n\r\n.status-pill.error {\r\n    background: var(--error-bg);\r\n    color: var(--error);\r\n    border-color: rgba(184, 58, 58, 0.12);\r\n}\r\n\r\n\r\n/* ── Generated Code (Debug Section) ── */\r\n#debug-section {\r\n    margin-top: 4px;\r\n}\r\n\r\n#debug-section details {\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: var(--radius);\r\n    overflow: hidden;\r\n}\r\n\r\n#debug-section summary {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 6px;\r\n    padding: 10px 14px;\r\n    font-size: 12px;\r\n    font-weight: 600;\r\n    color: var(--text-2);\r\n    cursor: pointer;\r\n    user-select: none;\r\n    transition: all 0.2s ease;\r\n}\r\n\r\n#debug-section summary:hover {\r\n    color: var(--text);\r\n    background: rgba(0, 0, 0, 0.02);\r\n}\r\n\r\n#debug-section summary svg {\r\n    width: 12px;\r\n    height: 12px;\r\n    transition: transform 0.2s ease;\r\n}\r\n\r\n#debug-section details[open] summary svg {\r\n    transform: rotate(180deg);\r\n}\r\n\r\n#debug-code {\r\n    margin: 0;\r\n    padding: 12px 14px;\r\n    font-family: var(--mono);\r\n    font-size: 10px;\r\n    line-height: 1.6;\r\n    color: var(--text-2);\r\n    background: var(--input-bg);\r\n    border-top: 1px solid var(--card-border);\r\n    max-height: 200px;\r\n    overflow-y: auto;\r\n    white-space: pre-wrap;\r\n    word-break: break-all;\r\n}\r\n\r\n\r\n/* ── Spinners ── */\r\n.spinner {\r\n    width: 14px;\r\n    height: 14px;\r\n    border: 2px solid transparent;\r\n    border-radius: 50%;\r\n    border-top-color: currentColor;\r\n    border-right-color: currentColor;\r\n    animation: spin 0.7s linear infinite;\r\n}\r\n\r\n.btn-spinner {\r\n    width: 13px;\r\n    height: 13px;\r\n    border: 2px solid rgba(255, 255, 255, 0.3);\r\n    border-radius: 50%;\r\n    border-top-color: white;\r\n    animation: spin 0.7s linear infinite;\r\n    display: inline-block;\r\n}\r\n\r\n\r\n/* ── Debug Section ── */\r\n#debug-section {\r\n    margin-top: auto;\r\n    padding-top: 8px;\r\n}\r\n\r\ndetails {\r\n    background: transparent;\r\n    border: none;\r\n    border-radius: var(--radius);\r\n}\r\n\r\nsummary {\r\n    padding: 5px 0;\r\n    cursor: pointer;\r\n    font-size: 11px;\r\n    font-weight: 600;\r\n    color: var(--text-3);\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 5px;\r\n    list-style: none;\r\n    user-select: none;\r\n    transition: color 0.15s;\r\n}\r\n\r\nsummary::-webkit-details-marker {\r\n    display: none;\r\n}\r\n\r\nsummary:hover {\r\n    color: var(--text-2);\r\n}\r\n\r\ndetails[open] summary svg {\r\n    transform: rotate(180deg);\r\n}\r\n\r\nsummary svg {\r\n    transition: transform 0.15s;\r\n}\r\n\r\ndetails[open] summary {\r\n    margin-bottom: 5px;\r\n}\r\n\r\npre {\r\n    margin: 0;\r\n    padding: 11px;\r\n    background: var(--input-bg);\r\n    color: var(--text-2);\r\n    font-family: var(--mono);\r\n    font-size: 11px;\r\n    overflow-x: auto;\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 9px;\r\n    line-height: 1.55;\r\n    white-space: pre-wrap;\r\n    word-break: break-all;\r\n    max-height: 180px;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* SIDELOAD — Skeleton Loading Screen                              */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.sideload-container {\r\n    height: 100vh;\r\n    display: flex;\r\n    flex-direction: column;\r\n    background: var(--bg);\r\n    overflow: hidden;\r\n}\r\n\r\n.sideload-skeleton {\r\n    display: flex;\r\n    flex-direction: column;\r\n    width: 100%;\r\n    height: 100%;\r\n    animation: fadeIn 0.3s ease-out;\r\n}\r\n\r\n.sk-shimmer {\r\n    background: linear-gradient(90deg, var(--card-border) 25%, var(--input-bg) 50%, var(--card-border) 75%);\r\n    background-size: 200% 100%;\r\n    animation: shimmer 1.8s ease-in-out infinite;\r\n    border-radius: 7px;\r\n}\r\n\r\n.sk-header {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    padding: 13px 16px;\r\n    border-bottom: 1px solid var(--card-border);\r\n}\r\n\r\n.sk-brand {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 9px;\r\n}\r\n\r\n.sk-logo {\r\n    width: 24px;\r\n    height: 24px;\r\n    border-radius: 7px;\r\n}\r\n\r\n.sk-title {\r\n    width: 105px;\r\n    height: 15px;\r\n    border-radius: 5px;\r\n}\r\n\r\n.sk-header-actions {\r\n    display: flex;\r\n    gap: 5px;\r\n}\r\n\r\n.sk-icon-btn {\r\n    width: 32px;\r\n    height: 32px;\r\n    border-radius: 9px;\r\n}\r\n\r\n.sk-mode-toggle {\r\n    display: flex;\r\n    gap: 4px;\r\n    padding: 8px 6px;\r\n    border-bottom: 1px solid var(--card-border);\r\n}\r\n\r\n.sk-mode-tab {\r\n    flex: 1;\r\n    height: 36px;\r\n    border-radius: 9px;\r\n}\r\n\r\n.sk-welcome {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    padding: 34px 20px 18px;\r\n    gap: 11px;\r\n}\r\n\r\n.sk-welcome-icon {\r\n    width: 52px;\r\n    height: 52px;\r\n    border-radius: 16px;\r\n}\r\n\r\n.sk-welcome-title {\r\n    width: 145px;\r\n    height: 19px;\r\n    border-radius: 6px;\r\n}\r\n\r\n.sk-welcome-desc {\r\n    width: 220px;\r\n    height: 13px;\r\n    border-radius: 5px;\r\n}\r\n\r\n.sk-welcome-desc.short {\r\n    width: 175px;\r\n}\r\n\r\n.sk-suggestions {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 8px;\r\n    padding: 10px 32px;\r\n}\r\n\r\n.sk-suggestion {\r\n    width: 100%;\r\n    height: 38px;\r\n    border-radius: 10px;\r\n}\r\n\r\n.sk-suggestion:nth-child(2) {\r\n    animation-delay: 0.1s;\r\n}\r\n\r\n.sk-suggestion:nth-child(3) {\r\n    animation-delay: 0.2s;\r\n}\r\n\r\n.sk-suggestion:nth-child(4) {\r\n    animation-delay: 0.3s;\r\n}\r\n\r\n.sk-input-area {\r\n    margin-top: auto;\r\n    padding: 12px 16px 8px;\r\n    border-top: 1px solid var(--card-border);\r\n}\r\n\r\n.sk-input {\r\n    width: 100%;\r\n    height: 42px;\r\n    border-radius: 14px;\r\n}\r\n\r\n.sideload-status {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    gap: 9px;\r\n    padding: 11px;\r\n    font-size: 11.5px;\r\n    font-weight: 500;\r\n    color: var(--text-3);\r\n}\r\n\r\n.sideload-pulse {\r\n    width: 8px;\r\n    height: 8px;\r\n    border-radius: 50%;\r\n    background: var(--primary);\r\n    animation: pulse 1.5s ease-in-out infinite;\r\n    box-shadow: 0 0 8px var(--primary-glow);\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* KEYFRAMES                                                       */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n@keyframes fadeIn {\r\n    from {\r\n        opacity: 0;\r\n        transform: translateY(3px);\r\n    }\r\n\r\n    to {\r\n        opacity: 1;\r\n        transform: translateY(0);\r\n    }\r\n}\r\n\r\n@keyframes slideDown {\r\n    from {\r\n        opacity: 0;\r\n        transform: translateY(-6px);\r\n    }\r\n\r\n    to {\r\n        opacity: 1;\r\n        transform: translateY(0);\r\n    }\r\n}\r\n\r\n@keyframes spin {\r\n    to {\r\n        transform: rotate(360deg);\r\n    }\r\n}\r\n\r\n@keyframes shimmer {\r\n    0% {\r\n        background-position: 200% 0;\r\n    }\r\n\r\n    100% {\r\n        background-position: -200% 0;\r\n    }\r\n}\r\n\r\n@keyframes msgSlideIn {\r\n    from {\r\n        opacity: 0;\r\n        transform: translateY(6px);\r\n    }\r\n\r\n    to {\r\n        opacity: 1;\r\n        transform: translateY(0);\r\n    }\r\n}\r\n\r\n@keyframes typingBounce {\r\n\r\n    0%,\r\n    100% {\r\n        transform: translateY(0);\r\n        opacity: 0.4;\r\n    }\r\n\r\n    50% {\r\n        transform: translateY(-4px);\r\n        opacity: 1;\r\n    }\r\n}\r\n\r\n@keyframes pulse {\r\n\r\n    0%,\r\n    100% {\r\n        opacity: 0.4;\r\n        transform: scale(0.85);\r\n    }\r\n\r\n    50% {\r\n        opacity: 1;\r\n        transform: scale(1.15);\r\n    }\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* SCROLL FIXES                                                    */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n\r\n/* Chat messages area scrolls */\r\n.chat-messages {\r\n    flex: 1;\r\n    overflow-y: auto !important;\r\n    min-height: 0;\r\n    padding-bottom: 40px;\r\n    scroll-behavior: smooth;\r\n    -webkit-overflow-scrolling: touch;\r\n}\r\n\r\n/* Content-wrapper is a flex container, NOT a scroller */\r\n.content-wrapper {\r\n    flex: 1;\r\n    display: flex;\r\n    flex-direction: column;\r\n    overflow: hidden !important;\r\n    min-height: 0;\r\n}\r\n\r\n/* Ensure parent containers occupy full height but don\'t scroll themselves */\r\n#agent-mode,\r\n#planning-mode {\r\n    display: none;\r\n    height: 100%;\r\n    overflow: hidden;\r\n    flex-direction: column;\r\n}\r\n\r\n#agent-mode.active,\r\n#planning-mode.active {\r\n    display: flex;\r\n}\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* SCROLLBAR STYLING                                               */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n::-webkit-scrollbar {\r\n    width: 6px;\r\n    height: 6px;\r\n}\r\n\r\n::-webkit-scrollbar-track {\r\n    background: transparent;\r\n}\r\n\r\n::-webkit-scrollbar-thumb {\r\n    background: rgba(0, 0, 0, 0.15);\r\n    border-radius: 4px;\r\n}\r\n\r\n::-webkit-scrollbar-thumb:hover {\r\n    background: rgba(0, 0, 0, 0.3);\r\n}\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* PRODUCTION OPTIMIZATIONS (RESPONSIVE & PERFORMANCE)             */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n\r\n/* 1. Hardware Acceleration for Animations */\r\n.chat-msg,\r\n.panel,\r\n.sideload-container {\r\n    will-change: transform, opacity;\r\n    backface-visibility: hidden;\r\n    /* sharpen animations */\r\n    transform: translateZ(0);\r\n    /* trigger GPU */\r\n}\r\n\r\n.chip,\r\n.category-tab,\r\n.btn-icon {\r\n    transform: translateZ(0);\r\n}\r\n\r\n/* 2. Responsive Tweaks for Narrow Taskpanes (< 360px) */\r\n@media (max-width: 360px) {\r\n    :root {\r\n        --radius-lg: 10px;\r\n        /* Tighter corners */\r\n    }\r\n\r\n    .app-header {\r\n        padding: 8px 12px;\r\n    }\r\n\r\n    .chat-bubble {\r\n        font-size: 11.5px;\r\n        padding: 8px 12px;\r\n        max-width: 88%;\r\n    }\r\n\r\n    .chip {\r\n        font-size: 10px;\r\n        padding: 5px 9px;\r\n    }\r\n\r\n    .category-tab {\r\n        padding: 5px 9px;\r\n        font-size: 10px;\r\n    }\r\n\r\n    /* Stack form groups tighter */\r\n    .form-group {\r\n        margin-bottom: 10px;\r\n    }\r\n\r\n    /* Ensure code blocks don\'t overflow */\r\n    .chat-bubble pre {\r\n        font-size: 10px;\r\n        padding: 8px;\r\n    }\r\n}\r\n\r\n/* 3. High-DPI Screens (Retina) Text Sharpness */\r\n@media (-webkit-min-device-pixel-ratio: 2),\r\n(min-resolution: 192dpi) {\r\n    body {\r\n        -webkit-font-smoothing: antialiased;\r\n        -moz-osx-font-smoothing: grayscale;\r\n    }\r\n}\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* ANIMATION ENHANCEMENTS                                          */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n\r\n/* Make transitions smoother */\r\n.chip,\r\n.suggestion-chip,\r\n.category-tab,\r\n.btn-icon,\r\n.btn-primary,\r\n.btn-send {\r\n    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);\r\n    /* A bit of overshoot */\r\n}\r\n\r\n/* More pronounced hover effect for chips */\r\n.chip:hover,\r\n.suggestion-chip:hover,\r\n.category-tab:hover {\r\n    transform: translateY(-2px);\r\n    box-shadow: var(--shadow-md);\r\n}\r\n\r\n/* Remove the translateX from suggestion-chip to be consistent */\r\n.suggestion-chip:hover {\r\n    transform: translateY(-2px);\r\n}\r\n\r\n/* Add hover effect to icon buttons */\r\n.btn-icon:hover {\r\n    transform: translateY(-2px) scale(1.05);\r\n    box-shadow: var(--shadow-md);\r\n}\r\n\r\n\r\n\r\n@keyframes tabPulse {\r\n    0% {\r\n        box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.15);\r\n    }\r\n\r\n    70% {\r\n        box-shadow: 0 0 0 4px rgba(74, 144, 226, 0);\r\n    }\r\n\r\n    100% {\r\n        box-shadow: 0 0 0 0 rgba(74, 144, 226, 0);\r\n    }\r\n}\r\n\r\n.chat-msg {\r\n    animation: msgSlideIn 0.4s cubic-bezier(0.19, 1, 0.22, 1) forwards;\r\n}\r\n\r\n/* Better button press feedback */\r\n.btn-primary:active,\r\n.btn-send:active,\r\n.btn-icon:active,\r\n.chip:active,\r\n.suggestion-chip:active,\r\n.category-tab:active {\r\n    transform: scale(0.95) !important;\r\n    /* Use important to override hover transforms */\r\n    transition-duration: 0.1s;\r\n}\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* BUSINESS MODULES                                                */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.modules-grid {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 12px;\r\n    margin-top: 16px;\r\n}\r\n\r\n.module-card {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 16px;\r\n    padding: 16px;\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: var(--radius-lg);\r\n    transition: all 0.2s ease;\r\n}\r\n\r\n.module-card:hover {\r\n    transform: translateY(-2px);\r\n    box-shadow: var(--shadow-md);\r\n    border-color: var(--primary-light);\r\n}\r\n\r\n.module-icon {\r\n    font-size: 24px;\r\n    width: 48px;\r\n    height: 48px;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    background: var(--bg);\r\n    border-radius: 12px;\r\n}\r\n\r\n.module-info {\r\n    flex: 1;\r\n}\r\n\r\n.module-info h3 {\r\n    margin: 0 0 4px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n.module-info p {\r\n    margin: 0;\r\n    font-size: 12px;\r\n    color: var(--text-2);\r\n    line-height: 1.4;\r\n}\r\n\r\n.module-preview-area {\r\n    margin-top: 24px;\r\n    padding: 16px;\r\n    background: var(--primary-bg);\r\n    border-radius: var(--radius-lg);\r\n    border: 1px dashed var(--primary);\r\n}\r\n\r\n.badge-gold {\r\n    background: #FFF9E6;\r\n    color: #B28B00;\r\n    border: 1px solid #FFE699;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* TOAST NOTIFICATION SYSTEM                                       */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.toast-container {\r\n    position: fixed;\r\n    bottom: 20px;\r\n    left: 50%;\r\n    transform: translateX(-50%);\r\n    z-index: 10000;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    gap: 8px;\r\n    pointer-events: none;\r\n}\r\n\r\n.toast {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 8px;\r\n    padding: 10px 16px;\r\n    border-radius: 12px;\r\n    font-size: 12px;\r\n    font-weight: 500;\r\n    font-family: var(--font);\r\n    box-shadow: var(--shadow-lg);\r\n    animation: toastIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);\r\n    pointer-events: auto;\r\n    backdrop-filter: blur(12px);\r\n    -webkit-backdrop-filter: blur(12px);\r\n    max-width: 280px;\r\n}\r\n\r\n.toast.toast-out {\r\n    animation: toastOut 0.3s ease-in forwards;\r\n}\r\n\r\n.toast.toast-success {\r\n    background: rgba(45, 106, 79, 0.92);\r\n    color: white;\r\n    border: 1px solid rgba(82, 183, 136, 0.3);\r\n}\r\n\r\n.toast.toast-error {\r\n    background: rgba(184, 58, 58, 0.92);\r\n    color: white;\r\n    border: 1px solid rgba(224, 96, 96, 0.3);\r\n}\r\n\r\n.toast.toast-info {\r\n    background: rgba(255, 255, 255, 0.92);\r\n    color: var(--text);\r\n    border: 1px solid var(--card-border);\r\n}\r\n\r\n@media (prefers-color-scheme: dark) {\r\n    .toast.toast-info {\r\n        background: rgba(33, 34, 36, 0.92);\r\n        color: var(--text);\r\n        border: 1px solid var(--card-border);\r\n    }\r\n}\r\n\r\n.toast svg {\r\n    width: 14px;\r\n    height: 14px;\r\n    flex-shrink: 0;\r\n}\r\n\r\n@keyframes toastIn {\r\n    from {\r\n        opacity: 0;\r\n        transform: translateY(16px) scale(0.95);\r\n    }\r\n\r\n    to {\r\n        opacity: 1;\r\n        transform: translateY(0) scale(1);\r\n    }\r\n}\r\n\r\n@keyframes toastOut {\r\n    from {\r\n        opacity: 1;\r\n        transform: translateY(0) scale(1);\r\n    }\r\n\r\n    to {\r\n        opacity: 0;\r\n        transform: translateY(10px) scale(0.95);\r\n    }\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* COPY-TO-CLIPBOARD BUTTON (AI Bubble)                            */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.chat-bubble-actions {\r\n    display: flex;\r\n    gap: 4px;\r\n    margin-top: 8px;\r\n    opacity: 0;\r\n    transition: opacity 0.2s ease;\r\n}\r\n\r\n.chat-msg.ai:hover .chat-bubble-actions {\r\n    opacity: 1;\r\n}\r\n\r\n.btn-copy {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    gap: 4px;\r\n    padding: 3px 8px;\r\n    font-size: 10px;\r\n    font-weight: 500;\r\n    font-family: var(--font);\r\n    color: var(--text-3);\r\n    background: var(--input-bg);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 6px;\r\n    cursor: pointer;\r\n    transition: all 0.2s ease;\r\n}\r\n\r\n.btn-copy:hover {\r\n    color: var(--primary);\r\n    border-color: var(--primary-glow);\r\n    background: var(--primary-bg);\r\n}\r\n\r\n.btn-copy.copied {\r\n    color: var(--success);\r\n    border-color: rgba(45, 106, 79, 0.2);\r\n    background: var(--success-bg);\r\n}\r\n\r\n.btn-copy svg {\r\n    width: 11px;\r\n    height: 11px;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* SMOOTH MODE CROSSFADE                                           */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.mode-content {\r\n    animation: modeFadeIn 0.3s ease-out;\r\n}\r\n\r\n@keyframes modeFadeIn {\r\n    from {\r\n        opacity: 0;\r\n        transform: translateY(4px);\r\n    }\r\n\r\n    to {\r\n        opacity: 1;\r\n        transform: translateY(0);\r\n    }\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* SCROLL-TO-BOTTOM FAB                                            */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.scroll-to-bottom {\r\n    position: absolute;\r\n    bottom: 80px;\r\n    right: 18px;\r\n    width: 32px;\r\n    height: 32px;\r\n    border-radius: 50%;\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    color: var(--text-2);\r\n    cursor: pointer;\r\n    display: none;\r\n    align-items: center;\r\n    justify-content: center;\r\n    box-shadow: var(--shadow-md);\r\n    z-index: 10;\r\n    transition: all 0.2s ease;\r\n    animation: fadeIn 0.2s ease-out;\r\n}\r\n\r\n.scroll-to-bottom:hover {\r\n    background: var(--primary-bg);\r\n    color: var(--primary);\r\n    border-color: var(--primary-glow);\r\n    transform: translateY(-2px);\r\n}\r\n\r\n.scroll-to-bottom.visible {\r\n    display: flex;\r\n}\r\n\r\n.scroll-to-bottom svg {\r\n    width: 16px;\r\n    height: 16px;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* CHARACTER COUNT INDICATOR                                       */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.char-count {\r\n    font-size: 10px;\r\n    color: var(--text-4);\r\n    font-weight: 500;\r\n    font-variant-numeric: tabular-nums;\r\n    transition: color 0.2s ease;\r\n    min-width: 28px;\r\n    text-align: right;\r\n}\r\n\r\n.char-count.warning {\r\n    color: var(--warning);\r\n}\r\n\r\n.char-count.danger {\r\n    color: var(--error);\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* KEYBOARD SHORTCUT BADGE                                         */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.kbd-hint {\r\n    font-size: 9px;\r\n    font-weight: 500;\r\n    color: var(--text-4);\r\n    background: var(--input-bg);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 4px;\r\n    padding: 1px 5px;\r\n    font-family: var(--mono);\r\n    letter-spacing: 0.02em;\r\n    pointer-events: none;\r\n    white-space: nowrap;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* STAGGERED SUGGESTION ANIMATION                                  */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.suggestion-chip:nth-child(1) {\r\n    animation-delay: 0.05s;\r\n}\r\n\r\n.suggestion-chip:nth-child(2) {\r\n    animation-delay: 0.1s;\r\n}\r\n\r\n.suggestion-chip:nth-child(3) {\r\n    animation-delay: 0.15s;\r\n}\r\n\r\n.suggestion-chip:nth-child(4) {\r\n    animation-delay: 0.2s;\r\n}\r\n\r\n.suggestion-chip {\r\n    animation: msgSlideIn 0.4s cubic-bezier(0.19, 1, 0.22, 1) both;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* ENHANCED INPUT FOCUS GLOW                                       */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.input-card:focus-within,\r\n.chat-input-card:focus-within {\r\n    border-color: var(--primary);\r\n    box-shadow: 0 0 0 3px var(--primary-glow), var(--shadow-md);\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* SETTINGS SAVE SUCCESS ANIMATION                                 */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.btn-save.saved {\r\n    background: var(--success);\r\n    box-shadow: 0 2px 8px rgba(45, 106, 79, 0.3);\r\n}\r\n\r\n@keyframes successPop {\r\n    0% {\r\n        transform: scale(1);\r\n    }\r\n\r\n    50% {\r\n        transform: scale(1.05);\r\n    }\r\n\r\n    100% {\r\n        transform: scale(1);\r\n    }\r\n}\r\n\r\n.btn-save.saved {\r\n    animation: successPop 0.3s ease;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* CHAT WELCOME STAGGER                                            */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.chat-welcome img {\r\n    animation: fadeIn 0.5s ease-out both;\r\n    animation-delay: 0.1s;\r\n}\r\n\r\n.chat-welcome h2 {\r\n    animation: fadeIn 0.5s ease-out both;\r\n    animation-delay: 0.2s;\r\n}\r\n\r\n.chat-welcome .welcome-suggestions {\r\n    animation: fadeIn 0.5s ease-out both;\r\n    animation-delay: 0.3s;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* RIPPLE EFFECT ON BUTTONS                                        */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.btn-primary,\r\n.btn-send,\r\n.chip,\r\n.category-tab {\r\n    position: relative;\r\n    overflow: hidden;\r\n}\r\n\r\n.btn-primary::after,\r\n.btn-send::after {\r\n    content: \'\';\r\n    position: absolute;\r\n    inset: 0;\r\n    background: radial-gradient(circle at var(--ripple-x, 50%) var(--ripple-y, 50%), rgba(255, 255, 255, 0.25) 0%, transparent 60%);\r\n    opacity: 0;\r\n    transition: opacity 0.4s ease;\r\n    pointer-events: none;\r\n}\r\n\r\n.btn-primary:active::after,\r\n.btn-send:active::after {\r\n    opacity: 1;\r\n    transition: opacity 0s;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* IMPROVED DARK MODE SCROLLBAR                                    */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n@media (prefers-color-scheme: dark) {\r\n    ::-webkit-scrollbar-thumb {\r\n        background: rgba(255, 255, 255, 0.12);\r\n    }\r\n\r\n    ::-webkit-scrollbar-thumb:hover {\r\n        background: rgba(255, 255, 255, 0.22);\r\n    }\r\n}\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* BATCH PDF EXTRACTION PANEL                                      */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.batch-panel {\r\n    margin: 10px 14px;\r\n    padding: 14px;\r\n    background: var(--card);\r\n    border: 1.5px solid var(--primary-glow);\r\n    border-radius: var(--radius-lg);\r\n    box-shadow: var(--shadow-md);\r\n    animation: slideDown 0.22s ease-out;\r\n}\r\n\r\n.batch-panel-header {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.batch-panel-title {\r\n    font-size: 12px;\r\n    font-weight: 700;\r\n    color: var(--primary);\r\n    letter-spacing: -0.01em;\r\n}\r\n\r\n.batch-file-count {\r\n    font-size: 11px;\r\n    font-weight: 600;\r\n    color: var(--text-3);\r\n    background: var(--primary-bg);\r\n    padding: 2px 8px;\r\n    border-radius: 20px;\r\n}\r\n\r\n.batch-instruction {\r\n    width: 100%;\r\n    padding: 9px 11px;\r\n    font-size: 12.5px;\r\n    font-family: var(--font);\r\n    color: var(--text);\r\n    background: var(--input-bg);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: var(--radius);\r\n    outline: none;\r\n    resize: none;\r\n    transition: border-color 0.2s ease-out, box-shadow 0.2s ease-out;\r\n    margin-bottom: 10px;\r\n    line-height: 1.5;\r\n}\r\n\r\n.batch-instruction:focus {\r\n    border-color: var(--primary);\r\n    box-shadow: 0 0 0 3px var(--primary-glow);\r\n}\r\n\r\n.btn-batch-extract {\r\n    width: 100%;\r\n    justify-content: center;\r\n    gap: 7px;\r\n    font-size: 13px;\r\n    padding: 10px;\r\n    background: var(--primary);\r\n    color: white;\r\n    border: none;\r\n    border-radius: var(--radius);\r\n    cursor: pointer;\r\n    font-weight: 600;\r\n    font-family: var(--font);\r\n    display: flex;\r\n    align-items: center;\r\n    transition: all 0.2s ease-out;\r\n    box-shadow: 0 3px 10px rgba(45, 106, 79, 0.3);\r\n}\r\n\r\n.btn-batch-extract:hover {\r\n    background: var(--primary-hover);\r\n    transform: translateY(-1px);\r\n    box-shadow: 0 5px 16px rgba(45, 106, 79, 0.38);\r\n}\r\n\r\n.btn-batch-extract:disabled {\r\n    opacity: 0.55;\r\n    cursor: not-allowed;\r\n    transform: none;\r\n}\r\n\r\n.batch-progress-wrap {\r\n    margin-top: 12px;\r\n}\r\n\r\n.batch-progress-bar-track {\r\n    height: 6px;\r\n    background: var(--input-bg);\r\n    border-radius: 99px;\r\n    overflow: hidden;\r\n}\r\n\r\n.batch-progress-bar {\r\n    height: 100%;\r\n    background: linear-gradient(90deg, var(--primary), var(--primary-light));\r\n    border-radius: 99px;\r\n    transition: width 0.4s ease-out;\r\n    position: relative;\r\n    overflow: hidden;\r\n}\r\n\r\n.batch-progress-bar::after {\r\n    content: \'\';\r\n    position: absolute;\r\n    top: 0;\r\n    left: -60%;\r\n    width: 60%;\r\n    height: 100%;\r\n    background: rgba(255, 255, 255, 0.3);\r\n    animation: shimmer 1.2s linear infinite;\r\n}\r\n\r\n@keyframes shimmer {\r\n    to {\r\n        left: 160%;\r\n    }\r\n}\r\n\r\n.batch-progress-label {\r\n    font-size: 11px;\r\n    color: var(--text-3);\r\n    text-align: right;\r\n    margin-top: 4px;\r\n    font-weight: 600;\r\n}\r\n\r\n.batch-log {\r\n    margin-top: 10px;\r\n    max-height: 100px;\r\n    overflow-y: auto;\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 3px;\r\n}\r\n\r\n.batch-log-entry {\r\n    font-size: 11px;\r\n    font-family: var(--mono);\r\n    color: var(--text-2);\r\n    padding: 2px 6px;\r\n    border-radius: 4px;\r\n    display: flex;\r\n    gap: 6px;\r\n    align-items: center;\r\n}\r\n\r\n.batch-log-entry.success {\r\n    color: var(--success);\r\n    background: var(--success-bg);\r\n}\r\n\r\n.batch-log-entry.error {\r\n    color: var(--error);\r\n    background: var(--error-bg);\r\n}\r\n\r\n.batch-log-entry.info {\r\n    color: var(--text-3);\r\n    background: var(--input-bg);\r\n}',"",{version:3,sources:["webpack://./src/taskpane/taskpane.css"],names:[],mappings:"AAAA;;;;EAIE;;AAEF;IACI,2BAA2B;IAC3B,aAAa;IACb,kEAAkE;IAClE,kBAAkB;IAClB,eAAe;IACf,sBAAsB;IACtB,qBAAqB;IACrB,mBAAmB;;IAEnB,gCAAgC;IAChC,kBAAkB;IAClB,wBAAwB;IACxB,wBAAwB;IACxB,qCAAqC;IACrC,uCAAuC;;IAEvC,6BAA6B;IAC7B,iBAAiB;IACjB,uBAAuB;IACvB,oCAAoC;;IAEpC,eAAe;IACf,eAAe;IACf,iBAAiB;IACjB,iBAAiB;IACjB,iBAAiB;;IAEjB,mBAAmB;IACnB,kBAAkB;IAClB,qCAAqC;IACrC,gBAAgB;IAChB,mCAAmC;IACnC,kBAAkB;IAClB,sCAAsC;;IAEtC,gBAAgB;IAChB,cAAc;IACd,iBAAiB;IACjB,iBAAiB;;IAEjB,sCAAsC;IACtC,6CAA6C;IAC7C,4EAA4E;IAC5E,gFAAgF;IAChF,gFAAgF;;IAEhF,qBAAqB;IACrB,qFAAqF;IACrF,6DAA6D;;IAE7D,eAAe;IACf,8BAA8B;IAC9B,yBAAyB;IACzB,qBAAqB;IACrB,qCAAqC;IACrC,2BAA2B;;IAE3B,gBAAgB;IAChB,oCAAoC;IACpC,wCAAwC;IACxC,YAAY;AAChB;;AAEA,oBAAoB;AACpB;IACI;QACI,aAAa;QACb,kEAAkE;QAClE,kBAAkB;QAClB,eAAe;QACf,sBAAsB;QACtB,qBAAqB;QACrB,mBAAmB;;QAEnB,kBAAkB;QAClB,wBAAwB;QACxB,wBAAwB;QACxB,sCAAsC;QACtC,wCAAwC;;QAExC,iBAAiB;QACjB,uBAAuB;QACvB,qCAAqC;;QAErC,eAAe;QACf,iBAAiB;QACjB,iBAAiB;QACjB,iBAAiB;;QAEjB,kBAAkB;QAClB,sCAAsC;QACtC,gBAAgB;QAChB,mCAAmC;QACnC,kBAAkB;QAClB,sCAAsC;;QAEtC,0CAA0C;QAC1C,uCAAuC;QACvC,2CAA2C;QAC3C,2CAA2C;;QAE3C,8BAA8B;QAC9B,yBAAyB;QACzB,qBAAqB;QACrB,2CAA2C;QAC3C,2BAA2B;;QAE3B,kCAAkC;QAClC,yCAAyC;IAC7C;AACJ;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;;;IAGI,sBAAsB;AAC1B;;AAEA;;IAEI,WAAW;IACX,YAAY;IACZ,SAAS;IACT,UAAU;IACV,wBAAwB;IACxB,eAAe;IACf,iBAAiB;IACjB,8BAA8B;IAC9B,kBAAkB;IAClB,mCAAmC;IACnC,kCAAkC;IAClC,kBAAkB;AACtB;;AAEA;IACI,aAAa;IACb,sBAAsB;IACtB,aAAa;IACb,gBAAgB;AACpB;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI,aAAa;IACb,mBAAmB;IACnB,8BAA8B;IAC9B,kBAAkB;IAClB,2BAA2B;IAC3B,kCAAkC;IAClC,0CAA0C;IAC1C,4CAA4C;IAC5C,gBAAgB;IAChB,MAAM;IACN,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,QAAQ;AACZ;;AAEA;IACI,qBAAqB;IACrB,aAAa;IACb,mBAAmB;AACvB;;AAEA;IACI,eAAe;IACf,gBAAgB;IAChB,SAAS;IACT,wBAAwB;IACxB,kBAAkB;AACtB;;AAEA;IACI,qBAAqB;IACrB,gBAAgB;IAChB,oDAAoD;AACxD;;AAEA;IACI,aAAa;IACb,QAAQ;AACZ;;;AAGA,uBAAuB;AACvB,qBAAqB;AACrB;IACI,WAAW;IACX,YAAY;IACZ,oCAAoC;IACpC,mBAAmB;IACnB,uBAAuB;IACvB,oBAAoB;IACpB,eAAe;IACf,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,4DAA4D;IAC5D,UAAU;IACV,4BAA4B;AAChC;;AAEA;IACI,qBAAqB;IACrB,kCAAkC;IAClC,6BAA6B;IAC7B,2BAA2B;IAC3B,yBAAyB;AAC7B;;AAEA;IACI,sBAAsB;AAC1B;;;;AAIA,qCAAqC;AACrC;IACI,aAAa;IACb,uBAAuB;IACvB,2CAA2C;IAC3C,mCAAmC;IACnC,gBAAgB;IAChB,gBAAgB;IAChB,4BAA4B;AAChC;;AAEA;IACI,eAAe;IACf,gBAAgB;IAChB,mBAAmB;IACnB,yBAAyB;IACzB,sBAAsB;IACtB,oBAAoB;IACpB,gBAAgB;AACpB;;;AAGA,oBAAoB;AACpB;IACI,aAAa;IACb,sBAAsB;IACtB,QAAQ;AACZ;;AAEA;IACI,aAAa;IACb,SAAS;IACT,uBAAuB;IACvB,cAAc;AAClB;;AAEA;IACI,cAAc;IACd,WAAW;IACX,YAAY;IACZ,qBAAqB;IACrB,aAAa;IACb,mBAAmB;IACnB,eAAe;AACnB;;AAEA;IACI,eAAe;IACf,gBAAgB;IAChB,kBAAkB;IAClB,cAAc;IACd,kBAAkB;AACtB;;AAEA;IACI,eAAe;IACf,oBAAoB;IACpB,SAAS;IACT,iBAAiB;AACrB;;AAEA;IACI,eAAe;IACf,oBAAoB;IACpB,gBAAgB;IAChB,kBAAkB;IAClB,gBAAgB;AACpB;;;AAGA,gBAAgB;AAChB;IACI,mBAAmB;AACvB;;AAEA;IACI,cAAc;IACd,eAAe;IACf,gBAAgB;IAChB,oBAAoB;IACpB,kBAAkB;IAClB,yBAAyB;IACzB,sBAAsB;AAC1B;;AAEA;IACI,WAAW;IACX,iBAAiB;IACjB,eAAe;IACf,wBAAwB;IACxB,kBAAkB;IAClB,2BAA2B;IAC3B,oCAAoC;IACpC,kBAAkB;IAClB,aAAa;IACb,gEAAgE;AACpE;;AAEA;IACI,4BAA4B;IAC5B,yCAAyC;AAC7C;;AAEA;IACI,eAAe;IACf,gBAAgB;IAChB,yDAAoO;IACpO,4BAA4B;IAC5B,sCAAsC;IACtC,mBAAmB;AACvB;;AAEA;IACI,WAAW;IACX,uBAAuB;IACvB,eAAe;AACnB;;AAEA,uBAAuB;AACvB;IACI,aAAa;IACb,QAAQ;IACR,mBAAmB;AACvB;;AAEA;IACI,OAAO;IACP,YAAY;AAChB;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,cAAc;IACd,UAAU;AACd;;AAEA;IACI,eAAe;IACf,eAAe;IACf,gBAAgB;IAChB,oBAAoB;AACxB;;AAEA;IACI,qBAAqB;AACzB;;AAEA;IACI,mBAAmB;AACvB;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI,aAAa;IACb,mBAAmB;IACnB,YAAY;IACZ,iBAAiB;IACjB,uBAAuB;IACvB,oCAAoC;IACpC,mBAAmB;IACnB,kBAAkB;IAClB,QAAQ;IACR,4BAA4B;AAChC;;AAEA;IACI,OAAO;IACP,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,QAAQ;IACR,aAAa;IACb,eAAe;IACf,gBAAgB;IAChB,wBAAwB;IACxB,oBAAoB;IACpB,uBAAuB;IACvB,YAAY;IACZ,eAAe;IACf,yBAAyB;IACzB,kBAAkB;IAClB,UAAU;AACd;;AAEA;IACI,qBAAqB;AACzB;;AAEA;IACI,kBAAkB;IAClB,SAAS;IACT,QAAQ;IACR,sBAAsB;IACtB,yBAAyB;IACzB,6BAA6B;IAC7B,mBAAmB;IACnB,yDAAyD;IACzD,UAAU;AACd;;AAEA;IACI,uCAAuC;AAC3C;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI,aAAa;IACb,sBAAsB;IACtB,OAAO;IACP,gBAAgB;IAChB,+BAA+B;AACnC;;AAEA;IACI,aAAa;AACjB;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;;AAEpE,kCAAkC;AAClC;IACI,OAAO;IACP,gBAAgB;IAChB,sBAAsB;IACtB,aAAa;IACb,sBAAsB;IACtB,SAAS;IACT,uBAAuB;AAC3B;;;AAGA,yBAAyB;AACzB;IACI,kBAAkB;IAClB,uBAAuB;IACvB,gCAAgC;AACpC;;AAEA;IACI,oBAAoB;IACpB,mBAAmB;IACnB,uBAAuB;IACvB,WAAW;IACX,YAAY;IACZ,0BAA0B;IAC1B,mBAAmB;IACnB,YAAY;IACZ,mBAAmB;IACnB,6CAA6C;AACjD;;AAEA;IACI,WAAW;IACX,YAAY;AAChB;;AAEA;IACI,eAAe;IACf,gBAAgB;IAChB,eAAe;IACf,kBAAkB;IAClB,uBAAuB;AAC3B;;AAEA;IACI,iBAAiB;IACjB,oBAAoB;IACpB,gBAAgB;IAChB,iBAAiB;IACjB,gBAAgB;IAChB,iBAAiB;IACjB,kBAAkB;AACtB;;;AAGA,2BAA2B;AAC3B;IACI,aAAa;IACb,sBAAsB;IACtB,QAAQ;IACR,gBAAgB;IAChB,cAAc;AAClB;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,QAAQ;IACR,kBAAkB;IAClB,uBAAuB;IACvB,oCAAoC;IACpC,4BAA4B;IAC5B,iBAAiB;IACjB,oBAAoB;IACpB,eAAe;IACf,8BAA8B;IAC9B,gBAAgB;IAChB,wBAAwB;IACxB,gBAAgB;AACpB;;AAEA;IACI,4BAA4B;IAC5B,qBAAqB;IACrB,6BAA6B;IAC7B,0BAA0B;AAC9B;;AAEA;IACI,cAAc;IACd,qBAAqB;IACrB,YAAY;AAChB;;AAEA;IACI,UAAU;AACd;;;AAGA,+BAA+B;AAC/B;IACI,aAAa;IACb,MAAM;IACN,mBAAmB;IACnB,0DAA0D;IAC1D,eAAe;AACnB;;AAEA;IACI,yBAAyB;AAC7B;;AAEA;IACI,2BAA2B;AAC/B;;AAEA;IACI,kBAAkB;IAClB,mBAAmB;IACnB,eAAe;IACf,gBAAgB;IAChB,cAAc;IACd,qBAAqB;IACrB,yBAAyB;IACzB,4BAA4B;IAC5B,+BAA+B;AACnC;;AAEA;IACI,cAAc;AAClB;;AAEA;IACI,0BAA0B;IAC1B,YAAY;IACZ,+BAA+B;IAC/B,iBAAiB;AACrB;;AAEA;IACI,uBAAuB;IACvB,oBAAoB;IACpB,oCAAoC;IACpC,8BAA8B;IAC9B,gBAAgB;AACpB;;;AAGA,8BAA8B;AAC9B;IACI,gBAAgB;AACpB;;AAEA;IACI,kBAAkB;IAClB,YAAY;AAChB;;AAEA;IACI,wBAAwB;IACxB,eAAe;IACf,gBAAgB;IAChB,kBAAkB;IAClB,+BAA+B;AACnC;;AAEA;IACI,qCAAqC;AACzC;;AAEA;;IAEI,aAAa;IACb,kBAAkB;AACtB;;AAEA;IACI,kBAAkB;AACtB;;AAEA;IACI,eAAe;AACnB;;AAEA;IACI,SAAS;IACT,eAAe;AACnB;;AAEA;IACI,SAAS;AACb;;AAEA;;;IAGI,kBAAkB;IAClB,gBAAgB;IAChB,gBAAgB;AACpB;;AAEA;IACI,iBAAiB;IACjB,sCAAsC;IACtC,mBAAmB;AACvB;;AAEA;IACI,iBAAiB;AACrB;;AAEA;IACI,iBAAiB;IACjB,oBAAoB;AACxB;;AAEA,mCAAmC;AACnC;IACI,WAAW;IACX,yBAAyB;IACzB,cAAc;IACd,eAAe;IACf,0BAA0B;IAC1B,kBAAkB;IAClB,gBAAgB;IAChB,cAAc;IACd,gBAAgB;AACpB;;AAEA;;IAEI,iBAAiB;IACjB,+BAA+B;IAC/B,gBAAgB;AACpB;;AAEA;IACI,4BAA4B;IAC5B,gBAAgB;IAChB,qBAAqB;AACzB;;AAEA;IACI,+BAA+B;AACnC;;AAEA,wBAAwB;AACxB;IACI,cAAc;IACd,eAAe;IACf,gBAAgB;IAChB,eAAe;IACf,gBAAgB;IAChB,gCAAgC;IAChC,qCAAqC;IACrC,kBAAkB;IAClB,qBAAqB;AACzB;;AAEA;IACI,oBAAoB;IACpB,6BAA6B;AACjC;;;AAGA,4BAA4B;AAC5B;IACI,aAAa;IACb,QAAQ;IACR,gBAAgB;AACpB;;AAEA;IACI,oBAAoB;IACpB,mBAAmB;IACnB,QAAQ;IACR,iBAAiB;IACjB,iBAAiB;IACjB,gBAAgB;IAChB,wBAAwB;IACxB,6BAA6B;IAC7B,qBAAqB;IACrB,qCAAqC;IACrC,kBAAkB;IAClB,eAAe;IACf,6BAA6B;AACjC;;AAEA;IACI,0BAA0B;IAC1B,YAAY;IACZ,6CAA6C;AACjD;;;AAGA,2BAA2B;AAC3B;IACI,aAAa;IACb,QAAQ;IACR,mBAAmB;IACnB,cAAc;AAClB;;AAEA;IACI,UAAU;IACV,WAAW;IACX,yBAAyB;IACzB,kBAAkB;IAClB,iDAAiD;AACrD;;AAEA;IACI,sBAAsB;AAC1B;;AAEA;IACI,qBAAqB;AACzB;;;AAGA,0BAA0B;AAC1B;IACI,uBAAuB;IACvB,2BAA2B;IAC3B,kCAAkC;IAClC,0CAA0C;IAC1C,yCAAyC;AAC7C;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,SAAS;IACT,uBAAuB;IACvB,oCAAoC;IACpC,+BAA+B;IAC/B,yBAAyB;IACzB,iDAAiD;IACjD,4BAA4B;AAChC;;AAEA;IACI,4BAA4B;IAC5B,0CAA0C;IAC1C,2BAA2B;AAC/B;;AAEA;IACI,OAAO;IACP,YAAY;IACZ,uBAAuB;IACvB,wBAAwB;IACxB,eAAe;IACf,gBAAgB;IAChB,cAAc;IACd,oBAAoB;IACpB,YAAY;IACZ,aAAa;IACb,iBAAiB;IACjB,gBAAgB;AACpB;;AAEA,wBAAwB;AACxB;IACI,aAAa;IACb,8BAA8B;IAC9B,mBAAmB;IACnB,gBAAgB;AACpB;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,QAAQ;AACZ;;AAEA,gCAAgC;AAChC;IACI,gBAAgB;IAChB,YAAY;IACZ,oBAAoB;IACpB,eAAe;IACf,YAAY;IACZ,kBAAkB;IAClB,oBAAoB;IACpB,mBAAmB;IACnB,uBAAuB;IACvB,oBAAoB;AACxB;;AAEA;IACI,gCAAgC;IAChC,qBAAqB;AACzB;;AAEA;IACI,4BAA4B;IAC5B,+BAA+B;IAC/B,kBAAkB;IAClB,iBAAiB;IACjB,kBAAkB;IAClB,aAAa;IACb,mBAAmB;IACnB,8BAA8B;IAC9B,eAAe;IACf,oBAAoB;AACxB;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,QAAQ;IACR,kBAAkB;AACtB;;AAEA;IACI,gBAAgB;IAChB,YAAY;IACZ,oBAAoB;IACpB,eAAe;IACf,eAAe;IACf,cAAc;IACd,cAAc;AAClB;;AAEA;IACI,aAAa;IACb,mBAAmB;AACvB;;AAEA;IACI,oBAAoB;AACxB;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,YAAY;IACZ,mBAAmB;IACnB,0BAA0B;IAC1B,YAAY;IACZ,eAAe;IACf,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,cAAc;IACd,4DAA4D;IAC5D,6CAA6C;AACjD;;AAEA;IACI,gCAAgC;IAChC,uCAAuC;AAC3C;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,eAAe;AACnB;;AAEA;IACI,mBAAmB;IACnB,oBAAoB;IACpB,6CAA6C;AACjD;;AAEA;IACI,mBAAmB;IACnB,qBAAqB;AACzB;;AAEA;IACI,WAAW;IACX,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,uBAAuB;IACvB,gBAAgB;AACpB;;AAEA,4BAA4B;AAC5B;IACI,aAAa;IACb,eAAe;IACf,QAAQ;IACR,kBAAkB;IAClB,cAAc;AAClB;;AAEA;IACI,oBAAoB;IACpB,mBAAmB;IACnB,QAAQ;IACR,0BAA0B;IAC1B,oCAAoC;IACpC,kBAAkB;IAClB,gBAAgB;IAChB,eAAe;IACf,kBAAkB;IAClB,yBAAyB;IACzB,eAAe;AACnB;;AAEA;IACI,kCAAkC;IAClC,uBAAuB;IACvB,2BAA2B;IAC3B,4BAA4B;AAChC;;AAEA;IACI,eAAe;IACf,YAAY;AAChB;;AAEA;IACI,mBAAmB;IACnB,gBAAgB;IAChB,uBAAuB;IACvB,gBAAgB;AACpB;;AAEA;IACI,gBAAgB;IAChB,YAAY;IACZ,eAAe;IACf,oBAAoB;IACpB,cAAc;IACd,eAAe;IACf,cAAc;IACd,aAAa;IACb,mBAAmB;IACnB,kBAAkB;IAClB,sBAAsB;AAC1B;;AAEA;IACI,mBAAmB;IACnB,2BAA2B;AAC/B;;AAEA,2BAA2B;AAC3B;IACI,UAAU;IACV,WAAW;AACf;;AAEA;IACI,uBAAuB;AAC3B;;AAEA;IACI,8BAA8B;IAC9B,kBAAkB;AACtB;;AAEA;IACI,8BAA8B;AAClC;;AAEA;IACI;QACI,qCAAqC;IACzC;;IAEA;QACI,qCAAqC;IACzC;;IAEA;QACI,kCAAkC;QAClC,oBAAoB;IACxB;AACJ;;AAEA;IACI,oBAAoB;IACpB,mBAAmB;IACnB,QAAQ;IACR,gBAAgB;IAChB,eAAe;IACf,gBAAgB;IAChB,wBAAwB;IACxB,oBAAoB;IACpB,uBAAuB;IACvB,YAAY;IACZ,eAAe;IACf,kBAAkB;IAClB,yCAAyC;AAC7C;;AAEA;IACI,mBAAmB;IACnB,2BAA2B;AAC/B;;AAEA;IACI,WAAW;IACX,YAAY;AAChB;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI,OAAO;IACP,aAAa;IACb,sBAAsB;IACtB,WAAW;IACX,gBAAgB;IAChB,kBAAkB;IAClB,aAAa;AACjB;;AAEA;IACI,OAAO;IACP,gBAAgB;IAChB,uBAAuB;IACvB,aAAa;IACb,sBAAsB;IACtB,SAAS;IACT,uBAAuB;IACvB,aAAa;AACjB;;;AAGA,wBAAwB;AACxB;IACI,aAAa;IACb,QAAQ;IACR,gBAAgB;IAChB,cAAc;IACd,qBAAqB;IACrB,cAAc;AAClB;;AAEA;IACI,aAAa;AACjB;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,QAAQ;IACR,iBAAiB;IACjB,eAAe;IACf,gBAAgB;IAChB,wBAAwB;IACxB,oBAAoB;IACpB,uBAAuB;IACvB,6BAA6B;IAC7B,kBAAkB;IAClB,eAAe;IACf,6BAA6B;IAC7B,mBAAmB;IACnB,cAAc;AAClB;;AAEA;IACI,oBAAoB;IACpB,uBAAuB;AAC3B;;AAEA;IACI,qBAAqB;IACrB,6BAA6B;IAC7B,iCAAiC;IACjC,2CAA2C;AAC/C;;AAEA;IACI,WAAW;IACX,YAAY;AAChB;;;AAGA,4CAA4C;AAC5C;IACI,aAAa;IACb,uBAAuB;IACvB,SAAS;IACT,kBAAkB;IAClB,mBAAmB;IACnB,gFAAgF;IAChF,qCAAqC;IACrC,mBAAmB;IACnB,+BAA+B;AACnC;;AAEA;IACI,eAAe;IACf,cAAc;IACd,cAAc;AAClB;;AAEA;IACI,aAAa;IACb,sBAAsB;IACtB,QAAQ;AACZ;;AAEA;IACI,iBAAiB;IACjB,gBAAgB;IAChB,qBAAqB;AACzB;;AAEA;IACI,iBAAiB;IACjB,oBAAoB;IACpB,gBAAgB;AACpB;;AAEA;IACI,iBAAiB;IACjB,eAAe;IACf,gBAAgB;IAChB,wBAAwB;IACxB,qBAAqB;IACrB,uBAAuB;IACvB,qCAAqC;IACrC,kBAAkB;IAClB,eAAe;IACf,6BAA6B;IAC7B,cAAc;IACd,iBAAiB;AACrB;;AAEA;IACI,6BAA6B;IAC7B,2BAA2B;AAC/B;;AAEA;IACI,sBAAsB;AAC1B;;AAEA,mCAAmC;AACnC;IACI,kBAAkB;IAClB,mBAAmB;IACnB,uBAAuB;IACvB,oCAAoC;IACpC,mBAAmB;IACnB,+BAA+B;AACnC;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,8BAA8B;IAC9B,kBAAkB;AACtB;;AAEA;IACI,iBAAiB;IACjB,gBAAgB;IAChB,oBAAoB;AACxB;;AAEA;IACI,eAAe;IACf,gBAAgB;IAChB,qBAAqB;IACrB,6BAA6B;IAC7B,gBAAgB;IAChB,mBAAmB;AACvB;;AAEA;IACI,aAAa;IACb,eAAe;IACf,QAAQ;AACZ;;AAEA;IACI,gBAAgB;IAChB,eAAe;IACf,gBAAgB;IAChB,oBAAoB;IACpB,2BAA2B;IAC3B,oCAAoC;IACpC,kBAAkB;AACtB;;AAEA;IACI,qBAAqB;IACrB,6BAA6B;IAC7B,qCAAqC;AACzC;;AAEA,qCAAqC;AACrC;IACI,cAAc;IACd,mCAAmC;IACnC,qCAAqC;AACzC;;AAEA;IACI,cAAc;AAClB;;AAEA,yCAAyC;AACzC;IACI,cAAc;IACd,oCAAoC;IACpC,sCAAsC;AAC1C;;AAEA;IACI,cAAc;AAClB;;;AAGA,6BAA6B;AAC7B;IACI,aAAa;IACb,eAAe;IACf,QAAQ;AACZ;;AAEA;IACI,oBAAoB;IACpB,mBAAmB;IACnB,QAAQ;IACR,iBAAiB;IACjB,eAAe;IACf,gBAAgB;IAChB,wBAAwB;IACxB,oBAAoB;IACpB,uBAAuB;IACvB,oCAAoC;IACpC,mBAAmB;IACnB,eAAe;IACf,4DAA4D;IAC5D,mBAAmB;AACvB;;AAEA;IACI,qBAAqB;IACrB,4BAA4B;IAC5B,uBAAuB;IACvB,2BAA2B;IAC3B,4BAA4B;AAChC;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,cAAc;IACd,+BAA+B;AACnC;;AAEA;IACI,wBAAwB;AAC5B;;;AAGA,6BAA6B;AAC7B;IACI,uBAAuB;IACvB,oCAAoC;IACpC,+BAA+B;IAC/B,aAAa;IACb,sBAAsB;IACtB,4BAA4B;IAC5B,iDAAiD;IACjD,wBAAwB;IACxB,cAAc;AAClB;;AAEA;IACI,4BAA4B;IAC5B,0CAA0C;AAC9C;;AAEA;IACI,WAAW;IACX,gBAAgB;IAChB,iBAAiB;IACjB,kBAAkB;IAClB,uBAAuB;IACvB,YAAY;IACZ,kBAAkB;IAClB,wBAAwB;IACxB,eAAe;IACf,gBAAgB;IAChB,YAAY;IACZ,aAAa;AACjB;;AAEA;IACI,iBAAiB;IACjB,+BAA+B;IAC/B,wCAAwC;IACxC,aAAa;IACb,8BAA8B;IAC9B,mBAAmB;IACnB,QAAQ;IACR,cAAc;AAClB;;;AAGA,sBAAsB;AACtB;IACI,iBAAiB;IACjB,gBAAgB;IAChB,qBAAqB;IACrB,6BAA6B;IAC7B,gBAAgB;IAChB,mBAAmB;IACnB,sBAAsB;AAC1B;;;AAGA,yBAAyB;AACzB;IACI,0BAA0B;IAC1B,YAAY;IACZ,YAAY;IACZ,iBAAiB;IACjB,kBAAkB;IAClB,eAAe;IACf,gBAAgB;IAChB,eAAe;IACf,aAAa;IACb,mBAAmB;IACnB,QAAQ;IACR,wFAAwF;IACxF,4CAA4C;AAChD;;AAEA;IACI,gCAAgC;IAChC,2BAA2B;IAC3B,8CAA8C;AAClD;;AAEA;IACI,wBAAwB;AAC5B;;AAEA;IACI,mBAAmB;IACnB,qBAAqB;IACrB,6CAA6C;AACjD;;AAEA;IACI,mBAAmB;AACvB;;AAEA;IACI,YAAY;IACZ,mBAAmB;IACnB,eAAe;AACnB;;AAEA;IACI,WAAW;IACX,YAAY;AAChB;;;AAGA,2BAA2B;AAC3B;IACI,aAAa;IACb,sBAAsB;IACtB,QAAQ;IACR,cAAc;AAClB;;AAEA;IACI,YAAY;IACZ,YAAY;IACZ,kBAAkB;IAClB,uGAAuG;IACvG,0BAA0B;IAC1B,4CAA4C;AAChD;;AAEA;IACI,YAAY;IACZ,kBAAkB;IAClB,uGAAuG;IACvG,0BAA0B;IAC1B,4CAA4C;AAChD;;AAEA;IACI,UAAU;AACd;;AAEA;IACI,UAAU;AACd;;AAEA;IACI,UAAU;AACd;;AAEA,4BAA4B;AAC5B;IACI,aAAa;IACb,SAAS;IACT,mBAAmB;IACnB,uBAAuB;AAC3B;;AAEA;IACI,uBAAuB;IACvB,oCAAoC;IACpC,mBAAmB;IACnB,8BAA8B;IAC9B,aAAa;IACb,OAAO;IACP,cAAc;IACd,aAAa;IACb,sBAAsB;IACtB,SAAS;IACT,4BAA4B;IAC5B,gBAAgB;AACpB;;AAEA;IACI,uGAAuG;IACvG,0BAA0B;IAC1B,4CAA4C;AAChD;;;AAGA,sBAAsB;AACtB;IACI,iBAAiB;IACjB,4BAA4B;IAC5B,eAAe;IACf,gBAAgB;IAChB,aAAa;IACb,mBAAmB;IACnB,QAAQ;IACR,sBAAsB;IACtB,6BAA6B;AACjC;;AAEA;IACI,6BAA6B;IAC7B,qBAAqB;IACrB,iCAAiC;AACrC;;AAEA;IACI,6BAA6B;IAC7B,qBAAqB;IACrB,qCAAqC;AACzC;;AAEA;IACI,2BAA2B;IAC3B,mBAAmB;IACnB,qCAAqC;AACzC;;;AAGA,yCAAyC;AACzC;IACI,eAAe;AACnB;;AAEA;IACI,uBAAuB;IACvB,oCAAoC;IACpC,4BAA4B;IAC5B,gBAAgB;AACpB;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,QAAQ;IACR,kBAAkB;IAClB,eAAe;IACf,gBAAgB;IAChB,oBAAoB;IACpB,eAAe;IACf,iBAAiB;IACjB,yBAAyB;AAC7B;;AAEA;IACI,kBAAkB;IAClB,+BAA+B;AACnC;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,+BAA+B;AACnC;;AAEA;IACI,yBAAyB;AAC7B;;AAEA;IACI,SAAS;IACT,kBAAkB;IAClB,wBAAwB;IACxB,eAAe;IACf,gBAAgB;IAChB,oBAAoB;IACpB,2BAA2B;IAC3B,wCAAwC;IACxC,iBAAiB;IACjB,gBAAgB;IAChB,qBAAqB;IACrB,qBAAqB;AACzB;;;AAGA,mBAAmB;AACnB;IACI,WAAW;IACX,YAAY;IACZ,6BAA6B;IAC7B,kBAAkB;IAClB,8BAA8B;IAC9B,gCAAgC;IAChC,oCAAoC;AACxC;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,0CAA0C;IAC1C,kBAAkB;IAClB,uBAAuB;IACvB,oCAAoC;IACpC,qBAAqB;AACzB;;;AAGA,wBAAwB;AACxB;IACI,gBAAgB;IAChB,gBAAgB;AACpB;;AAEA;IACI,uBAAuB;IACvB,YAAY;IACZ,4BAA4B;AAChC;;AAEA;IACI,cAAc;IACd,eAAe;IACf,eAAe;IACf,gBAAgB;IAChB,oBAAoB;IACpB,aAAa;IACb,mBAAmB;IACnB,QAAQ;IACR,gBAAgB;IAChB,iBAAiB;IACjB,uBAAuB;AAC3B;;AAEA;IACI,aAAa;AACjB;;AAEA;IACI,oBAAoB;AACxB;;AAEA;IACI,yBAAyB;AAC7B;;AAEA;IACI,2BAA2B;AAC/B;;AAEA;IACI,kBAAkB;AACtB;;AAEA;IACI,SAAS;IACT,aAAa;IACb,2BAA2B;IAC3B,oBAAoB;IACpB,wBAAwB;IACxB,eAAe;IACf,gBAAgB;IAChB,oCAAoC;IACpC,kBAAkB;IAClB,iBAAiB;IACjB,qBAAqB;IACrB,qBAAqB;IACrB,iBAAiB;AACrB;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI,aAAa;IACb,aAAa;IACb,sBAAsB;IACtB,qBAAqB;IACrB,gBAAgB;AACpB;;AAEA;IACI,aAAa;IACb,sBAAsB;IACtB,WAAW;IACX,YAAY;IACZ,+BAA+B;AACnC;;AAEA;IACI,uGAAuG;IACvG,0BAA0B;IAC1B,4CAA4C;IAC5C,kBAAkB;AACtB;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,8BAA8B;IAC9B,kBAAkB;IAClB,2CAA2C;AAC/C;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,QAAQ;AACZ;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,kBAAkB;AACtB;;AAEA;IACI,YAAY;IACZ,YAAY;IACZ,kBAAkB;AACtB;;AAEA;IACI,aAAa;IACb,QAAQ;AACZ;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,kBAAkB;AACtB;;AAEA;IACI,aAAa;IACb,QAAQ;IACR,gBAAgB;IAChB,2CAA2C;AAC/C;;AAEA;IACI,OAAO;IACP,YAAY;IACZ,kBAAkB;AACtB;;AAEA;IACI,aAAa;IACb,sBAAsB;IACtB,mBAAmB;IACnB,uBAAuB;IACvB,SAAS;AACb;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,mBAAmB;AACvB;;AAEA;IACI,YAAY;IACZ,YAAY;IACZ,kBAAkB;AACtB;;AAEA;IACI,YAAY;IACZ,YAAY;IACZ,kBAAkB;AACtB;;AAEA;IACI,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,sBAAsB;IACtB,QAAQ;IACR,kBAAkB;AACtB;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,mBAAmB;AACvB;;AAEA;IACI,qBAAqB;AACzB;;AAEA;IACI,qBAAqB;AACzB;;AAEA;IACI,qBAAqB;AACzB;;AAEA;IACI,gBAAgB;IAChB,sBAAsB;IACtB,wCAAwC;AAC5C;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,mBAAmB;AACvB;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,QAAQ;IACR,aAAa;IACb,iBAAiB;IACjB,gBAAgB;IAChB,oBAAoB;AACxB;;AAEA;IACI,UAAU;IACV,WAAW;IACX,kBAAkB;IAClB,0BAA0B;IAC1B,0CAA0C;IAC1C,uCAAuC;AAC3C;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI;QACI,UAAU;QACV,0BAA0B;IAC9B;;IAEA;QACI,UAAU;QACV,wBAAwB;IAC5B;AACJ;;AAEA;IACI;QACI,UAAU;QACV,2BAA2B;IAC/B;;IAEA;QACI,UAAU;QACV,wBAAwB;IAC5B;AACJ;;AAEA;IACI;QACI,yBAAyB;IAC7B;AACJ;;AAEA;IACI;QACI,2BAA2B;IAC/B;;IAEA;QACI,4BAA4B;IAChC;AACJ;;AAEA;IACI;QACI,UAAU;QACV,0BAA0B;IAC9B;;IAEA;QACI,UAAU;QACV,wBAAwB;IAC5B;AACJ;;AAEA;;IAEI;;QAEI,wBAAwB;QACxB,YAAY;IAChB;;IAEA;QACI,2BAA2B;QAC3B,UAAU;IACd;AACJ;;AAEA;;IAEI;;QAEI,YAAY;QACZ,sBAAsB;IAC1B;;IAEA;QACI,UAAU;QACV,sBAAsB;IAC1B;AACJ;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;;AAEpE,+BAA+B;AAC/B;IACI,OAAO;IACP,2BAA2B;IAC3B,aAAa;IACb,oBAAoB;IACpB,uBAAuB;IACvB,iCAAiC;AACrC;;AAEA,wDAAwD;AACxD;IACI,OAAO;IACP,aAAa;IACb,sBAAsB;IACtB,2BAA2B;IAC3B,aAAa;AACjB;;AAEA,4EAA4E;AAC5E;;IAEI,aAAa;IACb,YAAY;IACZ,gBAAgB;IAChB,sBAAsB;AAC1B;;AAEA;;IAEI,aAAa;AACjB;;AAEA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI,UAAU;IACV,WAAW;AACf;;AAEA;IACI,uBAAuB;AAC3B;;AAEA;IACI,+BAA+B;IAC/B,kBAAkB;AACtB;;AAEA;IACI,8BAA8B;AAClC;;AAEA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;;AAEpE,4CAA4C;AAC5C;;;IAGI,+BAA+B;IAC/B,2BAA2B;IAC3B,uBAAuB;IACvB,wBAAwB;IACxB,gBAAgB;AACpB;;AAEA;;;IAGI,wBAAwB;AAC5B;;AAEA,wDAAwD;AACxD;IACI;QACI,iBAAiB;QACjB,oBAAoB;IACxB;;IAEA;QACI,iBAAiB;IACrB;;IAEA;QACI,iBAAiB;QACjB,iBAAiB;QACjB,cAAc;IAClB;;IAEA;QACI,eAAe;QACf,gBAAgB;IACpB;;IAEA;QACI,gBAAgB;QAChB,eAAe;IACnB;;IAEA,8BAA8B;IAC9B;QACI,mBAAmB;IACvB;;IAEA,sCAAsC;IACtC;QACI,eAAe;QACf,YAAY;IAChB;AACJ;;AAEA,gDAAgD;AAChD;;IAEI;QACI,mCAAmC;QACnC,kCAAkC;IACtC;AACJ;;AAEA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;;AAEpE,8BAA8B;AAC9B;;;;;;IAMI,6DAA6D;IAC7D,uBAAuB;AAC3B;;AAEA,2CAA2C;AAC3C;;;IAGI,2BAA2B;IAC3B,4BAA4B;AAChC;;AAEA,gEAAgE;AAChE;IACI,2BAA2B;AAC/B;;AAEA,qCAAqC;AACrC;IACI,uCAAuC;IACvC,4BAA4B;AAChC;;;;AAIA;IACI;QACI,4CAA4C;IAChD;;IAEA;QACI,2CAA2C;IAC/C;;IAEA;QACI,yCAAyC;IAC7C;AACJ;;AAEA;IACI,kEAAkE;AACtE;;AAEA,iCAAiC;AACjC;;;;;;IAMI,iCAAiC;IACjC,+CAA+C;IAC/C,yBAAyB;AAC7B;;AAEA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI,aAAa;IACb,sBAAsB;IACtB,SAAS;IACT,gBAAgB;AACpB;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,SAAS;IACT,aAAa;IACb,uBAAuB;IACvB,oCAAoC;IACpC,+BAA+B;IAC/B,yBAAyB;AAC7B;;AAEA;IACI,2BAA2B;IAC3B,4BAA4B;IAC5B,kCAAkC;AACtC;;AAEA;IACI,eAAe;IACf,WAAW;IACX,YAAY;IACZ,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,qBAAqB;IACrB,mBAAmB;AACvB;;AAEA;IACI,OAAO;AACX;;AAEA;IACI,eAAe;IACf,eAAe;IACf,gBAAgB;AACpB;;AAEA;IACI,SAAS;IACT,eAAe;IACf,oBAAoB;IACpB,gBAAgB;AACpB;;AAEA;IACI,gBAAgB;IAChB,aAAa;IACb,6BAA6B;IAC7B,+BAA+B;IAC/B,iCAAiC;AACrC;;AAEA;IACI,mBAAmB;IACnB,cAAc;IACd,yBAAyB;AAC7B;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI,eAAe;IACf,YAAY;IACZ,SAAS;IACT,2BAA2B;IAC3B,cAAc;IACd,aAAa;IACb,sBAAsB;IACtB,mBAAmB;IACnB,QAAQ;IACR,oBAAoB;AACxB;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,QAAQ;IACR,kBAAkB;IAClB,mBAAmB;IACnB,eAAe;IACf,gBAAgB;IAChB,wBAAwB;IACxB,4BAA4B;IAC5B,+DAA+D;IAC/D,oBAAoB;IACpB,2BAA2B;IAC3B,mCAAmC;IACnC,gBAAgB;AACpB;;AAEA;IACI,yCAAyC;AAC7C;;AAEA;IACI,mCAAmC;IACnC,YAAY;IACZ,yCAAyC;AAC7C;;AAEA;IACI,mCAAmC;IACnC,YAAY;IACZ,wCAAwC;AAC5C;;AAEA;IACI,qCAAqC;IACrC,kBAAkB;IAClB,oCAAoC;AACxC;;AAEA;IACI;QACI,kCAAkC;QAClC,kBAAkB;QAClB,oCAAoC;IACxC;AACJ;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,cAAc;AAClB;;AAEA;IACI;QACI,UAAU;QACV,uCAAuC;IAC3C;;IAEA;QACI,UAAU;QACV,iCAAiC;IACrC;AACJ;;AAEA;IACI;QACI,UAAU;QACV,iCAAiC;IACrC;;IAEA;QACI,UAAU;QACV,uCAAuC;IAC3C;AACJ;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI,aAAa;IACb,QAAQ;IACR,eAAe;IACf,UAAU;IACV,6BAA6B;AACjC;;AAEA;IACI,UAAU;AACd;;AAEA;IACI,oBAAoB;IACpB,mBAAmB;IACnB,QAAQ;IACR,gBAAgB;IAChB,eAAe;IACf,gBAAgB;IAChB,wBAAwB;IACxB,oBAAoB;IACpB,2BAA2B;IAC3B,oCAAoC;IACpC,kBAAkB;IAClB,eAAe;IACf,yBAAyB;AAC7B;;AAEA;IACI,qBAAqB;IACrB,iCAAiC;IACjC,6BAA6B;AACjC;;AAEA;IACI,qBAAqB;IACrB,oCAAoC;IACpC,6BAA6B;AACjC;;AAEA;IACI,WAAW;IACX,YAAY;AAChB;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI,mCAAmC;AACvC;;AAEA;IACI;QACI,UAAU;QACV,0BAA0B;IAC9B;;IAEA;QACI,UAAU;QACV,wBAAwB;IAC5B;AACJ;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI,kBAAkB;IAClB,YAAY;IACZ,WAAW;IACX,WAAW;IACX,YAAY;IACZ,kBAAkB;IAClB,uBAAuB;IACvB,oCAAoC;IACpC,oBAAoB;IACpB,eAAe;IACf,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,4BAA4B;IAC5B,WAAW;IACX,yBAAyB;IACzB,+BAA+B;AACnC;;AAEA;IACI,6BAA6B;IAC7B,qBAAqB;IACrB,iCAAiC;IACjC,2BAA2B;AAC/B;;AAEA;IACI,aAAa;AACjB;;AAEA;IACI,WAAW;IACX,YAAY;AAChB;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI,eAAe;IACf,oBAAoB;IACpB,gBAAgB;IAChB,kCAAkC;IAClC,2BAA2B;IAC3B,eAAe;IACf,iBAAiB;AACrB;;AAEA;IACI,qBAAqB;AACzB;;AAEA;IACI,mBAAmB;AACvB;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI,cAAc;IACd,gBAAgB;IAChB,oBAAoB;IACpB,2BAA2B;IAC3B,oCAAoC;IACpC,kBAAkB;IAClB,gBAAgB;IAChB,wBAAwB;IACxB,sBAAsB;IACtB,oBAAoB;IACpB,mBAAmB;AACvB;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI,sBAAsB;AAC1B;;AAEA;IACI,qBAAqB;AACzB;;AAEA;IACI,sBAAsB;AAC1B;;AAEA;IACI,qBAAqB;AACzB;;AAEA;IACI,8DAA8D;AAClE;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;;IAEI,4BAA4B;IAC5B,2DAA2D;AAC/D;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI,0BAA0B;IAC1B,4CAA4C;AAChD;;AAEA;IACI;QACI,mBAAmB;IACvB;;IAEA;QACI,sBAAsB;IAC1B;;IAEA;QACI,mBAAmB;IACvB;AACJ;;AAEA;IACI,+BAA+B;AACnC;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI,oCAAoC;IACpC,qBAAqB;AACzB;;AAEA;IACI,oCAAoC;IACpC,qBAAqB;AACzB;;AAEA;IACI,oCAAoC;IACpC,qBAAqB;AACzB;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;;;;IAII,kBAAkB;IAClB,gBAAgB;AACpB;;AAEA;;IAEI,WAAW;IACX,kBAAkB;IAClB,QAAQ;IACR,+HAA+H;IAC/H,UAAU;IACV,6BAA6B;IAC7B,oBAAoB;AACxB;;AAEA;;IAEI,UAAU;IACV,sBAAsB;AAC1B;;;AAGA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI;QACI,qCAAqC;IACzC;;IAEA;QACI,qCAAqC;IACzC;AACJ;;AAEA,oEAAoE;AACpE,oEAAoE;AACpE,oEAAoE;AACpE;IACI,iBAAiB;IACjB,aAAa;IACb,uBAAuB;IACvB,uCAAuC;IACvC,+BAA+B;IAC/B,4BAA4B;IAC5B,mCAAmC;AACvC;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,8BAA8B;IAC9B,mBAAmB;AACvB;;AAEA;IACI,eAAe;IACf,gBAAgB;IAChB,qBAAqB;IACrB,uBAAuB;AAC3B;;AAEA;IACI,eAAe;IACf,gBAAgB;IAChB,oBAAoB;IACpB,6BAA6B;IAC7B,gBAAgB;IAChB,mBAAmB;AACvB;;AAEA;IACI,WAAW;IACX,iBAAiB;IACjB,iBAAiB;IACjB,wBAAwB;IACxB,kBAAkB;IAClB,2BAA2B;IAC3B,oCAAoC;IACpC,4BAA4B;IAC5B,aAAa;IACb,YAAY;IACZ,gEAAgE;IAChE,mBAAmB;IACnB,gBAAgB;AACpB;;AAEA;IACI,4BAA4B;IAC5B,yCAAyC;AAC7C;;AAEA;IACI,WAAW;IACX,uBAAuB;IACvB,QAAQ;IACR,eAAe;IACf,aAAa;IACb,0BAA0B;IAC1B,YAAY;IACZ,YAAY;IACZ,4BAA4B;IAC5B,eAAe;IACf,gBAAgB;IAChB,wBAAwB;IACxB,aAAa;IACb,mBAAmB;IACnB,6BAA6B;IAC7B,6CAA6C;AACjD;;AAEA;IACI,gCAAgC;IAChC,2BAA2B;IAC3B,8CAA8C;AAClD;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,eAAe;AACnB;;AAEA;IACI,gBAAgB;AACpB;;AAEA;IACI,WAAW;IACX,2BAA2B;IAC3B,mBAAmB;IACnB,gBAAgB;AACpB;;AAEA;IACI,YAAY;IACZ,wEAAwE;IACxE,mBAAmB;IACnB,+BAA+B;IAC/B,kBAAkB;IAClB,gBAAgB;AACpB;;AAEA;IACI,WAAW;IACX,kBAAkB;IAClB,MAAM;IACN,UAAU;IACV,UAAU;IACV,YAAY;IACZ,oCAAoC;IACpC,uCAAuC;AAC3C;;AAEA;IACI;QACI,UAAU;IACd;AACJ;;AAEA;IACI,eAAe;IACf,oBAAoB;IACpB,iBAAiB;IACjB,eAAe;IACf,gBAAgB;AACpB;;AAEA;IACI,gBAAgB;IAChB,iBAAiB;IACjB,gBAAgB;IAChB,aAAa;IACb,sBAAsB;IACtB,QAAQ;AACZ;;AAEA;IACI,eAAe;IACf,wBAAwB;IACxB,oBAAoB;IACpB,gBAAgB;IAChB,kBAAkB;IAClB,aAAa;IACb,QAAQ;IACR,mBAAmB;AACvB;;AAEA;IACI,qBAAqB;IACrB,6BAA6B;AACjC;;AAEA;IACI,mBAAmB;IACnB,2BAA2B;AAC/B;;AAEA;IACI,oBAAoB;IACpB,2BAA2B;AAC/B",sourcesContent:["/* \r\n * SheetOS AI — Redesigned Interface\r\n * A warm, human-crafted design system.\r\n * Forest green + terracotta. No AI-purple gradients.\r\n */\r\n\r\n:root {\r\n    /* ── Surface & Layout ── */\r\n    --bg: #F5F4F1;\r\n    --bg-gradient: radial-gradient(circle at 50% 0%, #FFFFFF, #F2F0EB);\r\n    --surface: #FAFAF8;\r\n    --card: #FFFFFF;\r\n    --card-border: #E3E1DC;\r\n    --card-hover: #F0EFEB;\r\n    --input-bg: #F5F4F1;\r\n\r\n    /* ── Primary: Forest Green ── */\r\n    --primary: #2D6A4F;\r\n    --primary-hover: #1B4D3E;\r\n    --primary-light: #74C69D;\r\n    --primary-bg: rgba(45, 106, 79, 0.06);\r\n    --primary-glow: rgba(45, 106, 79, 0.12);\r\n\r\n    /* ── Accent: Terracotta ── */\r\n    --accent: #C4603D;\r\n    --accent-hover: #A8502F;\r\n    --accent-bg: rgba(196, 96, 61, 0.07);\r\n\r\n    /* ── Text ── */\r\n    --text: #1A1C1E;\r\n    --text-2: #555759;\r\n    --text-3: #8C8E91;\r\n    --text-4: #C5C7CA;\r\n\r\n    /* ── Semantic ── */\r\n    --success: #2D6A4F;\r\n    --success-bg: rgba(45, 106, 79, 0.07);\r\n    --error: #B83A3A;\r\n    --error-bg: rgba(184, 58, 58, 0.07);\r\n    --warning: #C08B2D;\r\n    --warning-bg: rgba(192, 139, 45, 0.07);\r\n\r\n    /* ── Shape ── */\r\n    --radius: 10px;\r\n    --radius-lg: 14px;\r\n    --radius-xl: 20px;\r\n\r\n    /* ── Depth — warm tinted shadows ── */\r\n    --shadow-sm: 0 1px 2px rgba(30, 25, 20, 0.04);\r\n    --shadow: 0 2px 5px rgba(30, 25, 20, 0.05), 0 1px 2px rgba(30, 25, 20, 0.03);\r\n    --shadow-md: 0 4px 12px rgba(30, 25, 20, 0.06), 0 1px 3px rgba(30, 25, 20, 0.04);\r\n    --shadow-lg: 0 8px 24px rgba(30, 25, 20, 0.08), 0 2px 6px rgba(30, 25, 20, 0.04);\r\n\r\n    /* ── Typography ── */\r\n    --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;\r\n    --mono: 'JetBrains Mono', 'Cascadia Code', 'Menlo', monospace;\r\n\r\n    /* ── Chat ── */\r\n    --chat-user-bg: var(--primary);\r\n    --chat-user-text: #FFFFFF;\r\n    --chat-ai-bg: #FFFFFF;\r\n    --chat-ai-border: rgba(0, 0, 0, 0.06);\r\n    --chat-ai-text: var(--text);\r\n\r\n    /* ── Glass ── */\r\n    --glass-bg: rgba(255, 255, 255, 0.7);\r\n    --glass-border: rgba(255, 255, 255, 0.4);\r\n    --blur: 16px;\r\n}\r\n\r\n/* ── Dark mode ── */\r\n@media (prefers-color-scheme: dark) {\r\n    :root {\r\n        --bg: #141516;\r\n        --bg-gradient: radial-gradient(circle at 50% 0%, #1A1B1D, #0F1011);\r\n        --surface: #1A1B1D;\r\n        --card: #212224;\r\n        --card-border: #313335;\r\n        --card-hover: #2A2B2D;\r\n        --input-bg: #19191B;\r\n\r\n        --primary: #52B788;\r\n        --primary-hover: #74C69D;\r\n        --primary-light: #2D6A4F;\r\n        --primary-bg: rgba(82, 183, 136, 0.08);\r\n        --primary-glow: rgba(82, 183, 136, 0.14);\r\n\r\n        --accent: #E0915A;\r\n        --accent-hover: #EAA876;\r\n        --accent-bg: rgba(224, 145, 90, 0.09);\r\n\r\n        --text: #E5E3DE;\r\n        --text-2: #9B9D9F;\r\n        --text-3: #606264;\r\n        --text-4: #3A3C3E;\r\n\r\n        --success: #52B788;\r\n        --success-bg: rgba(82, 183, 136, 0.09);\r\n        --error: #E06060;\r\n        --error-bg: rgba(224, 96, 96, 0.09);\r\n        --warning: #E0B85A;\r\n        --warning-bg: rgba(224, 184, 90, 0.09);\r\n\r\n        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.18);\r\n        --shadow: 0 2px 5px rgba(0, 0, 0, 0.22);\r\n        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.28);\r\n        --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.32);\r\n\r\n        --chat-user-bg: var(--primary);\r\n        --chat-user-text: #141516;\r\n        --chat-ai-bg: #212224;\r\n        --chat-ai-border: rgba(255, 255, 255, 0.05);\r\n        --chat-ai-text: var(--text);\r\n\r\n        --glass-bg: rgba(20, 21, 22, 0.75);\r\n        --glass-border: rgba(255, 255, 255, 0.08);\r\n    }\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* RESET & BASE                                                    */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n*,\r\n*::before,\r\n*::after {\r\n    box-sizing: border-box;\r\n}\r\n\r\nhtml,\r\nbody {\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: 0;\r\n    padding: 0;\r\n    font-family: var(--font);\r\n    font-size: 13px;\r\n    line-height: 1.55;\r\n    background: var(--bg-gradient);\r\n    color: var(--text);\r\n    -webkit-font-smoothing: antialiased;\r\n    -moz-osx-font-smoothing: grayscale;\r\n    overflow-x: hidden;\r\n}\r\n\r\n#app-body {\r\n    display: flex;\r\n    flex-direction: column;\r\n    height: 100vh;\r\n    overflow: hidden;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* HEADER                                                          */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.app-header {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    padding: 12px 18px;\r\n    background: var(--glass-bg);\r\n    backdrop-filter: blur(var(--blur));\r\n    -webkit-backdrop-filter: blur(var(--blur));\r\n    border-bottom: 1px solid var(--glass-border);\r\n    position: sticky;\r\n    top: 0;\r\n    z-index: 100;\r\n}\r\n\r\n.brand {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 9px;\r\n}\r\n\r\n.logo {\r\n    color: var(--primary);\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.brand h1 {\r\n    font-size: 15px;\r\n    font-weight: 700;\r\n    margin: 0;\r\n    letter-spacing: -0.025em;\r\n    color: var(--text);\r\n}\r\n\r\n.highlight-text {\r\n    color: var(--primary);\r\n    font-weight: 700;\r\n    /* Solid color, not a gradient — feels hand-picked */\r\n}\r\n\r\n.header-actions {\r\n    display: flex;\r\n    gap: 5px;\r\n}\r\n\r\n\r\n/* ── Icon Buttons ── */\r\n/* Base Icon Button */\r\n.btn-icon {\r\n    width: 34px;\r\n    height: 34px;\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 10px;\r\n    background: var(--card);\r\n    color: var(--text-2);\r\n    cursor: pointer;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);\r\n    padding: 0;\r\n    box-shadow: var(--shadow-sm);\r\n}\r\n\r\n.btn-icon:hover {\r\n    color: var(--primary);\r\n    border-color: var(--primary-light);\r\n    background: var(--primary-bg);\r\n    transform: translateY(-2px);\r\n    box-shadow: var(--shadow);\r\n}\r\n\r\n.btn-icon:active {\r\n    transform: scale(0.95);\r\n}\r\n\r\n\r\n\r\n/* ─── Panels (Docs / Settings) ─── */\r\n.panel {\r\n    padding: 16px;\r\n    background: var(--card);\r\n    border-bottom: 1px solid var(--card-border);\r\n    animation: slideDown 0.22s ease-out;\r\n    max-height: 80vh;\r\n    overflow-y: auto;\r\n    box-shadow: var(--shadow-md);\r\n}\r\n\r\n.panel h3 {\r\n    font-size: 11px;\r\n    font-weight: 700;\r\n    /* Fixed from 650 */\r\n    text-transform: uppercase;\r\n    letter-spacing: 0.06em;\r\n    color: var(--text-3);\r\n    margin: 0 0 12px;\r\n}\r\n\r\n\r\n/* ── Docs Grid ── */\r\n.docs-grid {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 8px;\r\n}\r\n\r\n.doc-item {\r\n    display: flex;\r\n    gap: 10px;\r\n    align-items: flex-start;\r\n    padding: 5px 0;\r\n}\r\n\r\n.doc-icon {\r\n    flex-shrink: 0;\r\n    width: 18px;\r\n    height: 18px;\r\n    color: var(--primary);\r\n    display: flex;\r\n    align-items: center;\r\n    margin-top: 1px;\r\n}\r\n\r\n.doc-item strong {\r\n    font-size: 12px;\r\n    font-weight: 600;\r\n    color: var(--text);\r\n    display: block;\r\n    margin-bottom: 2px;\r\n}\r\n\r\n.doc-item p {\r\n    font-size: 11px;\r\n    color: var(--text-2);\r\n    margin: 0;\r\n    line-height: 1.45;\r\n}\r\n\r\n.docs-hint {\r\n    font-size: 11px;\r\n    color: var(--text-3);\r\n    margin: 12px 0 0;\r\n    font-style: italic;\r\n    line-height: 1.5;\r\n}\r\n\r\n\r\n/* ── Forms ── */\r\n.form-group {\r\n    margin-bottom: 12px;\r\n}\r\n\r\n.form-group label {\r\n    display: block;\r\n    font-size: 11px;\r\n    font-weight: 600;\r\n    color: var(--text-3);\r\n    margin-bottom: 4px;\r\n    text-transform: uppercase;\r\n    letter-spacing: 0.04em;\r\n}\r\n\r\n.form-input {\r\n    width: 100%;\r\n    padding: 8px 11px;\r\n    font-size: 13px;\r\n    font-family: var(--font);\r\n    color: var(--text);\r\n    background: var(--input-bg);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 9px;\r\n    outline: none;\r\n    transition: border-color 0.2s ease-out, box-shadow 0.2s ease-out;\r\n}\r\n\r\n.form-input:focus {\r\n    border-color: var(--primary);\r\n    box-shadow: 0 0 0 3px var(--primary-glow);\r\n}\r\n\r\nselect.form-input {\r\n    cursor: pointer;\r\n    appearance: none;\r\n    background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%238C8E91' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E\");\r\n    background-repeat: no-repeat;\r\n    background-position: right 10px center;\r\n    padding-right: 28px;\r\n}\r\n\r\n.btn-save {\r\n    width: 100%;\r\n    justify-content: center;\r\n    margin-top: 6px;\r\n}\r\n\r\n/* Model selector row */\r\n.model-select-wrapper {\r\n    display: flex;\r\n    gap: 5px;\r\n    align-items: center;\r\n}\r\n\r\n.model-select-wrapper .form-input {\r\n    flex: 1;\r\n    min-width: 0;\r\n}\r\n\r\n.btn-refresh {\r\n    width: 30px;\r\n    height: 30px;\r\n    flex-shrink: 0;\r\n    padding: 0;\r\n}\r\n\r\n.model-status {\r\n    font-size: 11px;\r\n    margin-top: 4px;\r\n    min-height: 15px;\r\n    color: var(--text-3);\r\n}\r\n\r\n.model-status-ok {\r\n    color: var(--success);\r\n}\r\n\r\n.model-status-warn {\r\n    color: var(--error);\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* MODE TOGGLE                                                     */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.mode-toggle {\r\n    display: flex;\r\n    align-items: center;\r\n    padding: 5px;\r\n    margin: 10px 14px;\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 14px;\r\n    position: relative;\r\n    gap: 4px;\r\n    box-shadow: var(--shadow-sm);\r\n}\r\n\r\n.mode-tab {\r\n    flex: 1;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    gap: 8px;\r\n    padding: 10px;\r\n    font-size: 13px;\r\n    font-weight: 600;\r\n    font-family: var(--font);\r\n    color: var(--text-3);\r\n    background: transparent;\r\n    border: none;\r\n    cursor: pointer;\r\n    transition: all 0.3s ease;\r\n    position: relative;\r\n    z-index: 2;\r\n}\r\n\r\n.mode-tab.active {\r\n    color: var(--primary);\r\n}\r\n\r\n.mode-indicator {\r\n    position: absolute;\r\n    left: 5px;\r\n    top: 5px;\r\n    width: calc(50% - 7px);\r\n    height: calc(100% - 10px);\r\n    background: var(--primary-bg);\r\n    border-radius: 10px;\r\n    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);\r\n    z-index: 1;\r\n}\r\n\r\n.mode-indicator.right {\r\n    transform: translateX(calc(100% + 4px));\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* MODE CONTENT WRAPPER                                            */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.mode-content {\r\n    display: none;\r\n    flex-direction: column;\r\n    flex: 1;\r\n    overflow: hidden;\r\n    animation: fadeIn 0.2s ease-out;\r\n}\r\n\r\n.mode-content.active {\r\n    display: flex;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* PLANNING MODE — Chat                                            */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n\r\n/* ── Chat Messages Container ── */\r\n.chat-messages {\r\n    flex: 1;\r\n    overflow-y: auto;\r\n    padding: 14px 14px 6px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 14px;\r\n    scroll-behavior: smooth;\r\n}\r\n\r\n\r\n/* ── Welcome Screen ── */\r\n.chat-welcome {\r\n    text-align: center;\r\n    padding: 28px 18px 18px;\r\n    animation: fadeIn 0.35s ease-out;\r\n}\r\n\r\n.welcome-icon {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    width: 52px;\r\n    height: 52px;\r\n    background: var(--primary);\r\n    border-radius: 16px;\r\n    color: white;\r\n    margin-bottom: 14px;\r\n    box-shadow: 0 4px 14px rgba(45, 106, 79, 0.2);\r\n}\r\n\r\n.welcome-icon svg {\r\n    width: 24px;\r\n    height: 24px;\r\n}\r\n\r\n.chat-welcome h2 {\r\n    font-size: 17px;\r\n    font-weight: 700;\r\n    margin: 0 0 8px;\r\n    color: var(--text);\r\n    letter-spacing: -0.02em;\r\n}\r\n\r\n.chat-welcome p {\r\n    font-size: 12.5px;\r\n    color: var(--text-2);\r\n    margin: 0 0 18px;\r\n    line-height: 1.65;\r\n    max-width: 270px;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n}\r\n\r\n\r\n/* ── Chat Suggestions ── */\r\n.welcome-suggestions {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 7px;\r\n    max-width: 280px;\r\n    margin: 0 auto;\r\n}\r\n\r\n.suggestion-chip {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 9px;\r\n    padding: 10px 13px;\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: var(--radius);\r\n    font-size: 11.5px;\r\n    color: var(--text-2);\r\n    cursor: pointer;\r\n    transition: all 0.22s ease-out;\r\n    text-align: left;\r\n    font-family: var(--font);\r\n    line-height: 1.4;\r\n}\r\n\r\n.suggestion-chip:hover {\r\n    border-color: var(--primary);\r\n    color: var(--primary);\r\n    background: var(--primary-bg);\r\n    transform: translateX(3px);\r\n}\r\n\r\n.suggestion-chip svg {\r\n    flex-shrink: 0;\r\n    color: var(--primary);\r\n    opacity: 0.5;\r\n}\r\n\r\n.suggestion-chip:hover svg {\r\n    opacity: 1;\r\n}\r\n\r\n\r\n/* ── Chat Message Bubbles ── */\r\n.chat-msg {\r\n    display: flex;\r\n    gap: 0;\r\n    margin-bottom: 12px;\r\n    animation: msgSlideIn 0.35s cubic-bezier(0.19, 1, 0.22, 1);\r\n    max-width: 100%;\r\n}\r\n\r\n.chat-msg.user {\r\n    justify-content: flex-end;\r\n}\r\n\r\n.chat-msg.ai {\r\n    justify-content: flex-start;\r\n}\r\n\r\n.chat-bubble {\r\n    padding: 12px 16px;\r\n    border-radius: 20px;\r\n    font-size: 14px;\r\n    line-height: 1.5;\r\n    max-width: 85%;\r\n    word-wrap: break-word;\r\n    overflow-wrap: break-word;\r\n    box-shadow: var(--shadow-sm);\r\n    transition: transform 0.2s ease;\r\n}\r\n\r\n.chat-bubble:has(table) {\r\n    max-width: 95%;\r\n}\r\n\r\n.chat-msg.user .chat-bubble {\r\n    background: var(--primary);\r\n    color: white;\r\n    border-bottom-right-radius: 4px;\r\n    margin-right: 4px;\r\n}\r\n\r\n.chat-msg.ai .chat-bubble {\r\n    background: var(--card);\r\n    color: var(--text-1);\r\n    border: 1px solid var(--card-border);\r\n    border-bottom-left-radius: 4px;\r\n    margin-left: 4px;\r\n}\r\n\r\n\r\n/* ── Chat formatted text ── */\r\n.chat-bubble strong {\r\n    font-weight: 600;\r\n}\r\n\r\n.chat-bubble em {\r\n    font-style: italic;\r\n    opacity: 0.9;\r\n}\r\n\r\n.chat-bubble code {\r\n    font-family: var(--mono);\r\n    font-size: 11px;\r\n    padding: 2px 5px;\r\n    border-radius: 5px;\r\n    background: rgba(0, 0, 0, 0.06);\r\n}\r\n\r\n.chat-msg.user .chat-bubble code {\r\n    background: rgba(255, 255, 255, 0.18);\r\n}\r\n\r\n.chat-bubble ul,\r\n.chat-bubble ol {\r\n    margin: 6px 0;\r\n    padding-left: 18px;\r\n}\r\n\r\n.chat-bubble li {\r\n    margin-bottom: 3px;\r\n}\r\n\r\n.chat-bubble p {\r\n    margin: 0 0 8px;\r\n}\r\n\r\n.chat-bubble li p {\r\n    margin: 0;\r\n    display: inline;\r\n}\r\n\r\n.chat-bubble p:last-child {\r\n    margin: 0;\r\n}\r\n\r\n.chat-bubble h1,\r\n.chat-bubble h2,\r\n.chat-bubble h3 {\r\n    margin: 12px 0 6px;\r\n    font-weight: 700;\r\n    line-height: 1.3;\r\n}\r\n\r\n.chat-bubble h1 {\r\n    font-size: 1.25em;\r\n    border-bottom: 1px solid var(--border);\r\n    padding-bottom: 4px;\r\n}\r\n\r\n.chat-bubble h2 {\r\n    font-size: 1.15em;\r\n}\r\n\r\n.chat-bubble h3 {\r\n    font-size: 1.05em;\r\n    color: var(--text-2);\r\n}\r\n\r\n/* Table styling for AI responses */\r\n.chat-bubble table {\r\n    width: 100%;\r\n    border-collapse: collapse;\r\n    margin: 10px 0;\r\n    font-size: 11px;\r\n    background: var(--surface);\r\n    border-radius: 8px;\r\n    overflow: hidden;\r\n    display: block;\r\n    overflow-x: auto;\r\n}\r\n\r\n.chat-bubble th,\r\n.chat-bubble td {\r\n    padding: 6px 10px;\r\n    border: 1px solid var(--border);\r\n    text-align: left;\r\n}\r\n\r\n.chat-bubble th {\r\n    background: var(--surface-2);\r\n    font-weight: 600;\r\n    color: var(--primary);\r\n}\r\n\r\n.chat-bubble tr:nth-child(even) {\r\n    background: rgba(0, 0, 0, 0.02);\r\n}\r\n\r\n/* ── Context Badge ── */\r\n.context-badge {\r\n    display: block;\r\n    margin-top: 8px;\r\n    padding: 4px 8px;\r\n    font-size: 10px;\r\n    font-weight: 500;\r\n    color: rgba(255, 255, 255, 0.85);\r\n    background: rgba(255, 255, 255, 0.15);\r\n    border-radius: 6px;\r\n    letter-spacing: 0.2px;\r\n}\r\n\r\n.chat-msg.ai .context-badge {\r\n    color: var(--text-2);\r\n    background: var(--primary-bg);\r\n}\r\n\r\n\r\n/* ── Execute from Chat ── */\r\n.chat-action-bar {\r\n    display: flex;\r\n    gap: 6px;\r\n    margin-top: 10px;\r\n}\r\n\r\n.btn-execute-from-chat {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    gap: 5px;\r\n    padding: 5px 11px;\r\n    font-size: 10.5px;\r\n    font-weight: 600;\r\n    font-family: var(--font);\r\n    background: var(--primary-bg);\r\n    color: var(--primary);\r\n    border: 1px solid var(--primary-glow);\r\n    border-radius: 7px;\r\n    cursor: pointer;\r\n    transition: all 0.2s ease-out;\r\n}\r\n\r\n.btn-execute-from-chat:hover {\r\n    background: var(--primary);\r\n    color: white;\r\n    box-shadow: 0 2px 8px rgba(45, 106, 79, 0.25);\r\n}\r\n\r\n\r\n/* ── Typing Indicator ── */\r\n.typing-indicator {\r\n    display: flex;\r\n    gap: 4px;\r\n    align-items: center;\r\n    padding: 4px 0;\r\n}\r\n\r\n.typing-dot {\r\n    width: 6px;\r\n    height: 6px;\r\n    background: var(--text-3);\r\n    border-radius: 50%;\r\n    animation: typingBounce 0.6s ease-in-out infinite;\r\n}\r\n\r\n.typing-dot:nth-child(2) {\r\n    animation-delay: 0.15s;\r\n}\r\n\r\n.typing-dot:nth-child(3) {\r\n    animation-delay: 0.3s;\r\n}\r\n\r\n\r\n/* ── Chat Input Area ── */\r\n.chat-input-area {\r\n    padding: 12px 14px 12px;\r\n    background: var(--glass-bg);\r\n    backdrop-filter: blur(var(--blur));\r\n    -webkit-backdrop-filter: blur(var(--blur));\r\n    border-top: 1px solid var(--glass-border);\r\n}\r\n\r\n.chat-input-card {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 10px;\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: var(--radius-xl);\r\n    padding: 6px 6px 6px 16px;\r\n    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);\r\n    box-shadow: var(--shadow-md);\r\n}\r\n\r\n.chat-input-card:focus-within {\r\n    border-color: var(--primary);\r\n    box-shadow: 0 4px 20px var(--primary-glow);\r\n    transform: translateY(-2px);\r\n}\r\n\r\n#chat-input {\r\n    flex: 1;\r\n    border: none;\r\n    background: transparent;\r\n    font-family: var(--font);\r\n    font-size: 13px;\r\n    line-height: 1.4;\r\n    padding: 6px 0;\r\n    color: var(--text-1);\r\n    resize: none;\r\n    outline: none;\r\n    max-height: 120px;\r\n    min-height: 20px;\r\n}\r\n\r\n/* Agent Footer Layout */\r\n.card-footer {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    margin-top: 12px;\r\n}\r\n\r\n.footer-left {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 8px;\r\n}\r\n\r\n/* Original btn-clip (updated) */\r\n.btn-clip {\r\n    background: none;\r\n    border: none;\r\n    color: var(--text-3);\r\n    cursor: pointer;\r\n    padding: 6px;\r\n    border-radius: 6px;\r\n    display: inline-flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    transition: all 0.2s;\r\n}\r\n\r\n.btn-clip:hover {\r\n    background: var(--surface-hover);\r\n    color: var(--primary);\r\n}\r\n\r\n.file-preview {\r\n    background: var(--surface-2);\r\n    border: 1px solid var(--border);\r\n    border-radius: 6px;\r\n    padding: 6px 10px;\r\n    margin-bottom: 8px;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    font-size: 11px;\r\n    color: var(--text-1);\r\n}\r\n\r\n.file-thumb {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 8px;\r\n    padding-right: 8px;\r\n}\r\n\r\n.file-remove {\r\n    background: none;\r\n    border: none;\r\n    color: var(--text-3);\r\n    font-size: 16px;\r\n    cursor: pointer;\r\n    padding: 0 4px;\r\n    line-height: 1;\r\n}\r\n\r\n.file-center {\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n#chat-input::placeholder {\r\n    color: var(--text-3);\r\n}\r\n\r\n.btn-send {\r\n    width: 38px;\r\n    height: 38px;\r\n    border: none;\r\n    border-radius: 12px;\r\n    background: var(--primary);\r\n    color: white;\r\n    cursor: pointer;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    flex-shrink: 0;\r\n    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);\r\n    box-shadow: 0 4px 12px rgba(45, 106, 79, 0.3);\r\n}\r\n\r\n.btn-send:hover {\r\n    background: var(--primary-hover);\r\n    transform: translateY(-2px) scale(1.05);\r\n}\r\n\r\n.btn-send:disabled {\r\n    opacity: 0.35;\r\n    cursor: not-allowed;\r\n    transform: none;\r\n}\r\n\r\n.btn-send.is-busy {\r\n    background: #FF4D4D;\r\n    /* Red stop button */\r\n    box-shadow: 0 4px 12px rgba(255, 77, 77, 0.3);\r\n}\r\n\r\n.btn-send.is-busy:hover {\r\n    background: #E60000;\r\n    transform: scale(1.1);\r\n}\r\n\r\n.btn-send svg {\r\n    width: 14px;\r\n    height: 14px;\r\n}\r\n\r\n.chat-footer {\r\n    display: flex;\r\n    justify-content: center;\r\n    padding: 4px 0 0;\r\n}\r\n\r\n/* ── File Preview List ── */\r\n.file-preview-list {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    gap: 6px;\r\n    margin-bottom: 8px;\r\n    padding: 0 4px;\r\n}\r\n\r\n.file-chip {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    gap: 6px;\r\n    background: var(--surface);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 6px;\r\n    padding: 4px 8px;\r\n    font-size: 11px;\r\n    color: var(--text);\r\n    transition: all 0.2s ease;\r\n    max-width: 100%;\r\n}\r\n\r\n.file-chip:hover {\r\n    border-color: var(--primary-light);\r\n    background: var(--card);\r\n    transform: translateY(-1px);\r\n    box-shadow: var(--shadow-sm);\r\n}\r\n\r\n.file-chip-icon {\r\n    font-size: 12px;\r\n    opacity: 0.7;\r\n}\r\n\r\n.file-chip-name {\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    max-width: 140px;\r\n}\r\n\r\n.file-chip-remove {\r\n    background: none;\r\n    border: none;\r\n    cursor: pointer;\r\n    color: var(--text-3);\r\n    padding: 0 2px;\r\n    font-size: 14px;\r\n    line-height: 1;\r\n    display: flex;\r\n    align-items: center;\r\n    border-radius: 4px;\r\n    transition: color 0.2s;\r\n}\r\n\r\n.file-chip-remove:hover {\r\n    color: var(--error);\r\n    background: var(--error-bg);\r\n}\r\n\r\n/* ── Custom Scrollbar ── */\r\n::-webkit-scrollbar {\r\n    width: 6px;\r\n    height: 6px;\r\n}\r\n\r\n::-webkit-scrollbar-track {\r\n    background: transparent;\r\n}\r\n\r\n::-webkit-scrollbar-thumb {\r\n    background: rgba(0, 0, 0, 0.1);\r\n    border-radius: 3px;\r\n}\r\n\r\n::-webkit-scrollbar-thumb:hover {\r\n    background: rgba(0, 0, 0, 0.2);\r\n}\r\n\r\n@media (prefers-color-scheme: dark) {\r\n    ::-webkit-scrollbar-thumb {\r\n        background: rgba(255, 255, 255, 0.15);\r\n    }\r\n\r\n    ::-webkit-scrollbar-thumb:hover {\r\n        background: rgba(255, 255, 255, 0.25);\r\n    }\r\n\r\n    .app-header {\r\n        background: rgba(26, 27, 29, 0.85);\r\n        /* Dark mode glass */\r\n    }\r\n}\r\n\r\n.btn-text {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    gap: 4px;\r\n    padding: 5px 9px;\r\n    font-size: 11px;\r\n    font-weight: 500;\r\n    font-family: var(--font);\r\n    color: var(--text-3);\r\n    background: transparent;\r\n    border: none;\r\n    cursor: pointer;\r\n    border-radius: 7px;\r\n    transition: color 0.15s, background 0.15s;\r\n}\r\n\r\n.btn-text:hover {\r\n    color: var(--error);\r\n    background: var(--error-bg);\r\n}\r\n\r\n.btn-text svg {\r\n    width: 12px;\r\n    height: 12px;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* AGENT MODE                                                      */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.content-wrapper {\r\n    flex: 1;\r\n    display: flex;\r\n    flex-direction: column;\r\n    width: 100%;\r\n    overflow: hidden;\r\n    position: relative;\r\n    min-height: 0;\r\n}\r\n\r\n.agent-scroll-area {\r\n    flex: 1;\r\n    overflow-y: auto;\r\n    padding: 10px 14px 14px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 12px;\r\n    scroll-behavior: smooth;\r\n    min-height: 0;\r\n}\r\n\r\n\r\n/* ── Category Tabs ── */\r\n.action-categories {\r\n    display: flex;\r\n    gap: 5px;\r\n    overflow-x: auto;\r\n    padding: 2px 0;\r\n    scrollbar-width: none;\r\n    flex-shrink: 0;\r\n}\r\n\r\n.action-categories::-webkit-scrollbar {\r\n    display: none;\r\n}\r\n\r\n.category-tab {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 5px;\r\n    padding: 7px 11px;\r\n    font-size: 11px;\r\n    font-weight: 600;\r\n    font-family: var(--font);\r\n    color: var(--text-3);\r\n    background: transparent;\r\n    border: 1px solid transparent;\r\n    border-radius: 9px;\r\n    cursor: pointer;\r\n    transition: all 0.2s ease-out;\r\n    white-space: nowrap;\r\n    flex-shrink: 0;\r\n}\r\n\r\n.category-tab:hover {\r\n    color: var(--text-2);\r\n    background: var(--card);\r\n}\r\n\r\n.category-tab.active {\r\n    color: var(--primary);\r\n    background: var(--primary-bg);\r\n    border-color: var(--primary-glow);\r\n    animation: tabPulse 2s infinite ease-in-out;\r\n}\r\n\r\n.category-tab svg {\r\n    width: 12px;\r\n    height: 12px;\r\n}\r\n\r\n\r\n/* ── Schema Info Banner (Extract Mode) ── */\r\n.schema-info {\r\n    display: flex;\r\n    align-items: flex-start;\r\n    gap: 10px;\r\n    padding: 10px 12px;\r\n    margin-bottom: 10px;\r\n    background: linear-gradient(135deg, var(--primary-bg), rgba(74, 144, 226, 0.06));\r\n    border: 1px solid var(--primary-glow);\r\n    border-radius: 10px;\r\n    animation: fadeIn 0.3s ease-out;\r\n}\r\n\r\n.schema-icon {\r\n    font-size: 18px;\r\n    line-height: 1;\r\n    flex-shrink: 0;\r\n}\r\n\r\n.schema-text {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 2px;\r\n}\r\n\r\n.schema-text strong {\r\n    font-size: 11.5px;\r\n    font-weight: 600;\r\n    color: var(--primary);\r\n}\r\n\r\n.schema-text span {\r\n    font-size: 10.5px;\r\n    color: var(--text-2);\r\n    line-height: 1.4;\r\n}\r\n\r\n.btn-detect {\r\n    padding: 5px 10px;\r\n    font-size: 10px;\r\n    font-weight: 600;\r\n    font-family: var(--font);\r\n    color: var(--primary);\r\n    background: var(--card);\r\n    border: 1px solid var(--primary-glow);\r\n    border-radius: 6px;\r\n    cursor: pointer;\r\n    transition: all 0.2s ease-out;\r\n    flex-shrink: 0;\r\n    margin-left: auto;\r\n}\r\n\r\n.btn-detect:hover {\r\n    background: var(--primary-bg);\r\n    transform: translateY(-1px);\r\n}\r\n\r\n.btn-detect:active {\r\n    transform: scale(0.96);\r\n}\r\n\r\n/* ── Detected Columns Preview ── */\r\n.detected-columns {\r\n    padding: 10px 12px;\r\n    margin-bottom: 10px;\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 10px;\r\n    animation: fadeIn 0.3s ease-out;\r\n}\r\n\r\n.detected-header {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    margin-bottom: 8px;\r\n}\r\n\r\n.detected-label {\r\n    font-size: 10.5px;\r\n    font-weight: 600;\r\n    color: var(--text-2);\r\n}\r\n\r\n.column-count {\r\n    font-size: 10px;\r\n    font-weight: 700;\r\n    color: var(--primary);\r\n    background: var(--primary-bg);\r\n    padding: 2px 8px;\r\n    border-radius: 10px;\r\n}\r\n\r\n.column-chips {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    gap: 4px;\r\n}\r\n\r\n.column-chip {\r\n    padding: 3px 8px;\r\n    font-size: 10px;\r\n    font-weight: 500;\r\n    color: var(--text-2);\r\n    background: var(--input-bg);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 6px;\r\n}\r\n\r\n.column-chip.empty-warning {\r\n    color: var(--warning);\r\n    background: var(--warning-bg);\r\n    border-color: rgba(192, 139, 45, 0.2);\r\n}\r\n\r\n/* ── Extract Category Highlight ── */\r\n.category-tab[data-category=\"extract\"].active {\r\n    color: #C4603D;\r\n    background: rgba(196, 96, 61, 0.08);\r\n    border-color: rgba(196, 96, 61, 0.15);\r\n}\r\n\r\n.category-tab[data-category=\"extract\"]:hover {\r\n    color: #A8502F;\r\n}\r\n\r\n/* ── Smart Tools Category Highlight ── */\r\n.category-tab[data-category=\"smart\"].active {\r\n    color: #7C3AED;\r\n    background: rgba(124, 58, 237, 0.08);\r\n    border-color: rgba(124, 58, 237, 0.15);\r\n}\r\n\r\n.category-tab[data-category=\"smart\"]:hover {\r\n    color: #6D28D9;\r\n}\r\n\r\n\r\n/* ── Quick Action Chips ── */\r\n.quick-actions {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    gap: 6px;\r\n}\r\n\r\n.chip {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    gap: 6px;\r\n    padding: 8px 14px;\r\n    font-size: 12px;\r\n    font-weight: 500;\r\n    font-family: var(--font);\r\n    color: var(--text-2);\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 24px;\r\n    cursor: pointer;\r\n    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);\r\n    white-space: nowrap;\r\n}\r\n\r\n.chip:hover {\r\n    color: var(--primary);\r\n    border-color: var(--primary);\r\n    background: var(--card);\r\n    transform: translateY(-2px);\r\n    box-shadow: var(--shadow-md);\r\n}\r\n\r\n.chip svg {\r\n    width: 14px;\r\n    height: 14px;\r\n    flex-shrink: 0;\r\n    transition: transform 0.3s ease;\r\n}\r\n\r\n.chip:hover svg {\r\n    transform: rotate(15deg);\r\n}\r\n\r\n\r\n/* ── Input Card (Agent) ── */\r\n.input-card {\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: var(--radius-xl);\r\n    display: flex;\r\n    flex-direction: column;\r\n    box-shadow: var(--shadow-md);\r\n    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);\r\n    margin: 14px 14px 0 14px;\r\n    flex-shrink: 0;\r\n}\r\n\r\n.input-card:focus-within {\r\n    border-color: var(--primary);\r\n    box-shadow: 0 2px 16px var(--primary-glow);\r\n}\r\n\r\ntextarea {\r\n    width: 100%;\r\n    min-height: 80px;\r\n    max-height: 160px;\r\n    padding: 14px 16px;\r\n    background: transparent;\r\n    border: none;\r\n    color: var(--text);\r\n    font-family: var(--font);\r\n    font-size: 13px;\r\n    line-height: 1.6;\r\n    resize: none;\r\n    outline: none;\r\n}\r\n\r\n.card-footer {\r\n    padding: 8px 12px;\r\n    background: rgba(0, 0, 0, 0.02);\r\n    border-top: 1px solid var(--card-border);\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    gap: 8px;\r\n    flex-shrink: 0;\r\n}\r\n\r\n\r\n/* ── Cache Badge ── */\r\n.cache-badge {\r\n    font-size: 10.5px;\r\n    font-weight: 600;\r\n    color: var(--success);\r\n    background: var(--success-bg);\r\n    padding: 3px 9px;\r\n    border-radius: 10px;\r\n    animation: fadeIn 0.2s;\r\n}\r\n\r\n\r\n/* ── Primary Button ── */\r\n.btn-primary {\r\n    background: var(--primary);\r\n    color: white;\r\n    border: none;\r\n    padding: 8px 16px;\r\n    border-radius: 9px;\r\n    font-size: 12px;\r\n    font-weight: 600;\r\n    cursor: pointer;\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 6px;\r\n    transition: background 0.2s ease-out, transform 0.15s ease-out, box-shadow 0.2s ease-out;\r\n    box-shadow: 0 2px 6px rgba(45, 106, 79, 0.2);\r\n}\r\n\r\n.btn-primary:hover {\r\n    background: var(--primary-hover);\r\n    transform: translateY(-1px);\r\n    box-shadow: 0 4px 14px rgba(45, 106, 79, 0.25);\r\n}\r\n\r\n.btn-primary:active {\r\n    transform: translateY(0);\r\n}\r\n\r\n.btn-primary.btn-stop {\r\n    background: #E53E3E;\r\n    border-color: #C53030;\r\n    box-shadow: 0 4px 10px rgba(229, 62, 62, 0.2);\r\n}\r\n\r\n.btn-primary.btn-stop:hover {\r\n    background: #C53030;\r\n}\r\n\r\n.btn-primary:disabled {\r\n    opacity: 0.4;\r\n    cursor: not-allowed;\r\n    transform: none;\r\n}\r\n\r\n.btn-primary svg {\r\n    width: 13px;\r\n    height: 13px;\r\n}\r\n\r\n\r\n/* ── Skeleton Loading ── */\r\n.skeleton-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 9px;\r\n    padding: 4px 0;\r\n}\r\n\r\n.skeleton-pill {\r\n    width: 140px;\r\n    height: 28px;\r\n    border-radius: 9px;\r\n    background: linear-gradient(90deg, var(--card-border) 25%, var(--input-bg) 50%, var(--card-border) 75%);\r\n    background-size: 200% 100%;\r\n    animation: shimmer 1.6s ease-in-out infinite;\r\n}\r\n\r\n.skeleton-line {\r\n    height: 13px;\r\n    border-radius: 5px;\r\n    background: linear-gradient(90deg, var(--card-border) 25%, var(--input-bg) 50%, var(--card-border) 75%);\r\n    background-size: 200% 100%;\r\n    animation: shimmer 1.6s ease-in-out infinite;\r\n}\r\n\r\n.skeleton-line.w80 {\r\n    width: 80%;\r\n}\r\n\r\n.skeleton-line.w60 {\r\n    width: 60%;\r\n}\r\n\r\n.skeleton-line.w40 {\r\n    width: 40%;\r\n}\r\n\r\n/* Chat Skeleton Specifics */\r\n.skeleton-msg {\r\n    display: flex;\r\n    gap: 12px;\r\n    margin-bottom: 12px;\r\n    align-items: flex-start;\r\n}\r\n\r\n.skeleton-bubble {\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 20px;\r\n    border-bottom-left-radius: 4px;\r\n    padding: 14px;\r\n    flex: 1;\r\n    max-width: 85%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 10px;\r\n    box-shadow: var(--shadow-sm);\r\n    margin-left: 4px;\r\n}\r\n\r\n.sk-shimmer {\r\n    background: linear-gradient(90deg, var(--card-border) 25%, var(--input-bg) 50%, var(--card-border) 75%);\r\n    background-size: 200% 100%;\r\n    animation: shimmer 1.6s ease-in-out infinite;\r\n}\r\n\r\n\r\n/* ── Status Pill ── */\r\n.status-pill {\r\n    padding: 9px 13px;\r\n    border-radius: var(--radius);\r\n    font-size: 12px;\r\n    font-weight: 500;\r\n    display: none;\r\n    align-items: center;\r\n    gap: 7px;\r\n    animation: fadeIn 0.2s;\r\n    border: 1px solid transparent;\r\n}\r\n\r\n.status-pill.info {\r\n    background: var(--primary-bg);\r\n    color: var(--primary);\r\n    border-color: var(--primary-glow);\r\n}\r\n\r\n.status-pill.success {\r\n    background: var(--success-bg);\r\n    color: var(--success);\r\n    border-color: rgba(45, 106, 79, 0.12);\r\n}\r\n\r\n.status-pill.error {\r\n    background: var(--error-bg);\r\n    color: var(--error);\r\n    border-color: rgba(184, 58, 58, 0.12);\r\n}\r\n\r\n\r\n/* ── Generated Code (Debug Section) ── */\r\n#debug-section {\r\n    margin-top: 4px;\r\n}\r\n\r\n#debug-section details {\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: var(--radius);\r\n    overflow: hidden;\r\n}\r\n\r\n#debug-section summary {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 6px;\r\n    padding: 10px 14px;\r\n    font-size: 12px;\r\n    font-weight: 600;\r\n    color: var(--text-2);\r\n    cursor: pointer;\r\n    user-select: none;\r\n    transition: all 0.2s ease;\r\n}\r\n\r\n#debug-section summary:hover {\r\n    color: var(--text);\r\n    background: rgba(0, 0, 0, 0.02);\r\n}\r\n\r\n#debug-section summary svg {\r\n    width: 12px;\r\n    height: 12px;\r\n    transition: transform 0.2s ease;\r\n}\r\n\r\n#debug-section details[open] summary svg {\r\n    transform: rotate(180deg);\r\n}\r\n\r\n#debug-code {\r\n    margin: 0;\r\n    padding: 12px 14px;\r\n    font-family: var(--mono);\r\n    font-size: 10px;\r\n    line-height: 1.6;\r\n    color: var(--text-2);\r\n    background: var(--input-bg);\r\n    border-top: 1px solid var(--card-border);\r\n    max-height: 200px;\r\n    overflow-y: auto;\r\n    white-space: pre-wrap;\r\n    word-break: break-all;\r\n}\r\n\r\n\r\n/* ── Spinners ── */\r\n.spinner {\r\n    width: 14px;\r\n    height: 14px;\r\n    border: 2px solid transparent;\r\n    border-radius: 50%;\r\n    border-top-color: currentColor;\r\n    border-right-color: currentColor;\r\n    animation: spin 0.7s linear infinite;\r\n}\r\n\r\n.btn-spinner {\r\n    width: 13px;\r\n    height: 13px;\r\n    border: 2px solid rgba(255, 255, 255, 0.3);\r\n    border-radius: 50%;\r\n    border-top-color: white;\r\n    animation: spin 0.7s linear infinite;\r\n    display: inline-block;\r\n}\r\n\r\n\r\n/* ── Debug Section ── */\r\n#debug-section {\r\n    margin-top: auto;\r\n    padding-top: 8px;\r\n}\r\n\r\ndetails {\r\n    background: transparent;\r\n    border: none;\r\n    border-radius: var(--radius);\r\n}\r\n\r\nsummary {\r\n    padding: 5px 0;\r\n    cursor: pointer;\r\n    font-size: 11px;\r\n    font-weight: 600;\r\n    color: var(--text-3);\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 5px;\r\n    list-style: none;\r\n    user-select: none;\r\n    transition: color 0.15s;\r\n}\r\n\r\nsummary::-webkit-details-marker {\r\n    display: none;\r\n}\r\n\r\nsummary:hover {\r\n    color: var(--text-2);\r\n}\r\n\r\ndetails[open] summary svg {\r\n    transform: rotate(180deg);\r\n}\r\n\r\nsummary svg {\r\n    transition: transform 0.15s;\r\n}\r\n\r\ndetails[open] summary {\r\n    margin-bottom: 5px;\r\n}\r\n\r\npre {\r\n    margin: 0;\r\n    padding: 11px;\r\n    background: var(--input-bg);\r\n    color: var(--text-2);\r\n    font-family: var(--mono);\r\n    font-size: 11px;\r\n    overflow-x: auto;\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 9px;\r\n    line-height: 1.55;\r\n    white-space: pre-wrap;\r\n    word-break: break-all;\r\n    max-height: 180px;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* SIDELOAD — Skeleton Loading Screen                              */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.sideload-container {\r\n    height: 100vh;\r\n    display: flex;\r\n    flex-direction: column;\r\n    background: var(--bg);\r\n    overflow: hidden;\r\n}\r\n\r\n.sideload-skeleton {\r\n    display: flex;\r\n    flex-direction: column;\r\n    width: 100%;\r\n    height: 100%;\r\n    animation: fadeIn 0.3s ease-out;\r\n}\r\n\r\n.sk-shimmer {\r\n    background: linear-gradient(90deg, var(--card-border) 25%, var(--input-bg) 50%, var(--card-border) 75%);\r\n    background-size: 200% 100%;\r\n    animation: shimmer 1.8s ease-in-out infinite;\r\n    border-radius: 7px;\r\n}\r\n\r\n.sk-header {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    padding: 13px 16px;\r\n    border-bottom: 1px solid var(--card-border);\r\n}\r\n\r\n.sk-brand {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 9px;\r\n}\r\n\r\n.sk-logo {\r\n    width: 24px;\r\n    height: 24px;\r\n    border-radius: 7px;\r\n}\r\n\r\n.sk-title {\r\n    width: 105px;\r\n    height: 15px;\r\n    border-radius: 5px;\r\n}\r\n\r\n.sk-header-actions {\r\n    display: flex;\r\n    gap: 5px;\r\n}\r\n\r\n.sk-icon-btn {\r\n    width: 32px;\r\n    height: 32px;\r\n    border-radius: 9px;\r\n}\r\n\r\n.sk-mode-toggle {\r\n    display: flex;\r\n    gap: 4px;\r\n    padding: 8px 6px;\r\n    border-bottom: 1px solid var(--card-border);\r\n}\r\n\r\n.sk-mode-tab {\r\n    flex: 1;\r\n    height: 36px;\r\n    border-radius: 9px;\r\n}\r\n\r\n.sk-welcome {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    padding: 34px 20px 18px;\r\n    gap: 11px;\r\n}\r\n\r\n.sk-welcome-icon {\r\n    width: 52px;\r\n    height: 52px;\r\n    border-radius: 16px;\r\n}\r\n\r\n.sk-welcome-title {\r\n    width: 145px;\r\n    height: 19px;\r\n    border-radius: 6px;\r\n}\r\n\r\n.sk-welcome-desc {\r\n    width: 220px;\r\n    height: 13px;\r\n    border-radius: 5px;\r\n}\r\n\r\n.sk-welcome-desc.short {\r\n    width: 175px;\r\n}\r\n\r\n.sk-suggestions {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 8px;\r\n    padding: 10px 32px;\r\n}\r\n\r\n.sk-suggestion {\r\n    width: 100%;\r\n    height: 38px;\r\n    border-radius: 10px;\r\n}\r\n\r\n.sk-suggestion:nth-child(2) {\r\n    animation-delay: 0.1s;\r\n}\r\n\r\n.sk-suggestion:nth-child(3) {\r\n    animation-delay: 0.2s;\r\n}\r\n\r\n.sk-suggestion:nth-child(4) {\r\n    animation-delay: 0.3s;\r\n}\r\n\r\n.sk-input-area {\r\n    margin-top: auto;\r\n    padding: 12px 16px 8px;\r\n    border-top: 1px solid var(--card-border);\r\n}\r\n\r\n.sk-input {\r\n    width: 100%;\r\n    height: 42px;\r\n    border-radius: 14px;\r\n}\r\n\r\n.sideload-status {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    gap: 9px;\r\n    padding: 11px;\r\n    font-size: 11.5px;\r\n    font-weight: 500;\r\n    color: var(--text-3);\r\n}\r\n\r\n.sideload-pulse {\r\n    width: 8px;\r\n    height: 8px;\r\n    border-radius: 50%;\r\n    background: var(--primary);\r\n    animation: pulse 1.5s ease-in-out infinite;\r\n    box-shadow: 0 0 8px var(--primary-glow);\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* KEYFRAMES                                                       */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n@keyframes fadeIn {\r\n    from {\r\n        opacity: 0;\r\n        transform: translateY(3px);\r\n    }\r\n\r\n    to {\r\n        opacity: 1;\r\n        transform: translateY(0);\r\n    }\r\n}\r\n\r\n@keyframes slideDown {\r\n    from {\r\n        opacity: 0;\r\n        transform: translateY(-6px);\r\n    }\r\n\r\n    to {\r\n        opacity: 1;\r\n        transform: translateY(0);\r\n    }\r\n}\r\n\r\n@keyframes spin {\r\n    to {\r\n        transform: rotate(360deg);\r\n    }\r\n}\r\n\r\n@keyframes shimmer {\r\n    0% {\r\n        background-position: 200% 0;\r\n    }\r\n\r\n    100% {\r\n        background-position: -200% 0;\r\n    }\r\n}\r\n\r\n@keyframes msgSlideIn {\r\n    from {\r\n        opacity: 0;\r\n        transform: translateY(6px);\r\n    }\r\n\r\n    to {\r\n        opacity: 1;\r\n        transform: translateY(0);\r\n    }\r\n}\r\n\r\n@keyframes typingBounce {\r\n\r\n    0%,\r\n    100% {\r\n        transform: translateY(0);\r\n        opacity: 0.4;\r\n    }\r\n\r\n    50% {\r\n        transform: translateY(-4px);\r\n        opacity: 1;\r\n    }\r\n}\r\n\r\n@keyframes pulse {\r\n\r\n    0%,\r\n    100% {\r\n        opacity: 0.4;\r\n        transform: scale(0.85);\r\n    }\r\n\r\n    50% {\r\n        opacity: 1;\r\n        transform: scale(1.15);\r\n    }\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* SCROLL FIXES                                                    */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n\r\n/* Chat messages area scrolls */\r\n.chat-messages {\r\n    flex: 1;\r\n    overflow-y: auto !important;\r\n    min-height: 0;\r\n    padding-bottom: 40px;\r\n    scroll-behavior: smooth;\r\n    -webkit-overflow-scrolling: touch;\r\n}\r\n\r\n/* Content-wrapper is a flex container, NOT a scroller */\r\n.content-wrapper {\r\n    flex: 1;\r\n    display: flex;\r\n    flex-direction: column;\r\n    overflow: hidden !important;\r\n    min-height: 0;\r\n}\r\n\r\n/* Ensure parent containers occupy full height but don't scroll themselves */\r\n#agent-mode,\r\n#planning-mode {\r\n    display: none;\r\n    height: 100%;\r\n    overflow: hidden;\r\n    flex-direction: column;\r\n}\r\n\r\n#agent-mode.active,\r\n#planning-mode.active {\r\n    display: flex;\r\n}\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* SCROLLBAR STYLING                                               */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n::-webkit-scrollbar {\r\n    width: 6px;\r\n    height: 6px;\r\n}\r\n\r\n::-webkit-scrollbar-track {\r\n    background: transparent;\r\n}\r\n\r\n::-webkit-scrollbar-thumb {\r\n    background: rgba(0, 0, 0, 0.15);\r\n    border-radius: 4px;\r\n}\r\n\r\n::-webkit-scrollbar-thumb:hover {\r\n    background: rgba(0, 0, 0, 0.3);\r\n}\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* PRODUCTION OPTIMIZATIONS (RESPONSIVE & PERFORMANCE)             */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n\r\n/* 1. Hardware Acceleration for Animations */\r\n.chat-msg,\r\n.panel,\r\n.sideload-container {\r\n    will-change: transform, opacity;\r\n    backface-visibility: hidden;\r\n    /* sharpen animations */\r\n    transform: translateZ(0);\r\n    /* trigger GPU */\r\n}\r\n\r\n.chip,\r\n.category-tab,\r\n.btn-icon {\r\n    transform: translateZ(0);\r\n}\r\n\r\n/* 2. Responsive Tweaks for Narrow Taskpanes (< 360px) */\r\n@media (max-width: 360px) {\r\n    :root {\r\n        --radius-lg: 10px;\r\n        /* Tighter corners */\r\n    }\r\n\r\n    .app-header {\r\n        padding: 8px 12px;\r\n    }\r\n\r\n    .chat-bubble {\r\n        font-size: 11.5px;\r\n        padding: 8px 12px;\r\n        max-width: 88%;\r\n    }\r\n\r\n    .chip {\r\n        font-size: 10px;\r\n        padding: 5px 9px;\r\n    }\r\n\r\n    .category-tab {\r\n        padding: 5px 9px;\r\n        font-size: 10px;\r\n    }\r\n\r\n    /* Stack form groups tighter */\r\n    .form-group {\r\n        margin-bottom: 10px;\r\n    }\r\n\r\n    /* Ensure code blocks don't overflow */\r\n    .chat-bubble pre {\r\n        font-size: 10px;\r\n        padding: 8px;\r\n    }\r\n}\r\n\r\n/* 3. High-DPI Screens (Retina) Text Sharpness */\r\n@media (-webkit-min-device-pixel-ratio: 2),\r\n(min-resolution: 192dpi) {\r\n    body {\r\n        -webkit-font-smoothing: antialiased;\r\n        -moz-osx-font-smoothing: grayscale;\r\n    }\r\n}\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* ANIMATION ENHANCEMENTS                                          */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n\r\n/* Make transitions smoother */\r\n.chip,\r\n.suggestion-chip,\r\n.category-tab,\r\n.btn-icon,\r\n.btn-primary,\r\n.btn-send {\r\n    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);\r\n    /* A bit of overshoot */\r\n}\r\n\r\n/* More pronounced hover effect for chips */\r\n.chip:hover,\r\n.suggestion-chip:hover,\r\n.category-tab:hover {\r\n    transform: translateY(-2px);\r\n    box-shadow: var(--shadow-md);\r\n}\r\n\r\n/* Remove the translateX from suggestion-chip to be consistent */\r\n.suggestion-chip:hover {\r\n    transform: translateY(-2px);\r\n}\r\n\r\n/* Add hover effect to icon buttons */\r\n.btn-icon:hover {\r\n    transform: translateY(-2px) scale(1.05);\r\n    box-shadow: var(--shadow-md);\r\n}\r\n\r\n\r\n\r\n@keyframes tabPulse {\r\n    0% {\r\n        box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.15);\r\n    }\r\n\r\n    70% {\r\n        box-shadow: 0 0 0 4px rgba(74, 144, 226, 0);\r\n    }\r\n\r\n    100% {\r\n        box-shadow: 0 0 0 0 rgba(74, 144, 226, 0);\r\n    }\r\n}\r\n\r\n.chat-msg {\r\n    animation: msgSlideIn 0.4s cubic-bezier(0.19, 1, 0.22, 1) forwards;\r\n}\r\n\r\n/* Better button press feedback */\r\n.btn-primary:active,\r\n.btn-send:active,\r\n.btn-icon:active,\r\n.chip:active,\r\n.suggestion-chip:active,\r\n.category-tab:active {\r\n    transform: scale(0.95) !important;\r\n    /* Use important to override hover transforms */\r\n    transition-duration: 0.1s;\r\n}\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* BUSINESS MODULES                                                */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.modules-grid {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 12px;\r\n    margin-top: 16px;\r\n}\r\n\r\n.module-card {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 16px;\r\n    padding: 16px;\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: var(--radius-lg);\r\n    transition: all 0.2s ease;\r\n}\r\n\r\n.module-card:hover {\r\n    transform: translateY(-2px);\r\n    box-shadow: var(--shadow-md);\r\n    border-color: var(--primary-light);\r\n}\r\n\r\n.module-icon {\r\n    font-size: 24px;\r\n    width: 48px;\r\n    height: 48px;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    background: var(--bg);\r\n    border-radius: 12px;\r\n}\r\n\r\n.module-info {\r\n    flex: 1;\r\n}\r\n\r\n.module-info h3 {\r\n    margin: 0 0 4px;\r\n    font-size: 14px;\r\n    font-weight: 600;\r\n}\r\n\r\n.module-info p {\r\n    margin: 0;\r\n    font-size: 12px;\r\n    color: var(--text-2);\r\n    line-height: 1.4;\r\n}\r\n\r\n.module-preview-area {\r\n    margin-top: 24px;\r\n    padding: 16px;\r\n    background: var(--primary-bg);\r\n    border-radius: var(--radius-lg);\r\n    border: 1px dashed var(--primary);\r\n}\r\n\r\n.badge-gold {\r\n    background: #FFF9E6;\r\n    color: #B28B00;\r\n    border: 1px solid #FFE699;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* TOAST NOTIFICATION SYSTEM                                       */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.toast-container {\r\n    position: fixed;\r\n    bottom: 20px;\r\n    left: 50%;\r\n    transform: translateX(-50%);\r\n    z-index: 10000;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    gap: 8px;\r\n    pointer-events: none;\r\n}\r\n\r\n.toast {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 8px;\r\n    padding: 10px 16px;\r\n    border-radius: 12px;\r\n    font-size: 12px;\r\n    font-weight: 500;\r\n    font-family: var(--font);\r\n    box-shadow: var(--shadow-lg);\r\n    animation: toastIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);\r\n    pointer-events: auto;\r\n    backdrop-filter: blur(12px);\r\n    -webkit-backdrop-filter: blur(12px);\r\n    max-width: 280px;\r\n}\r\n\r\n.toast.toast-out {\r\n    animation: toastOut 0.3s ease-in forwards;\r\n}\r\n\r\n.toast.toast-success {\r\n    background: rgba(45, 106, 79, 0.92);\r\n    color: white;\r\n    border: 1px solid rgba(82, 183, 136, 0.3);\r\n}\r\n\r\n.toast.toast-error {\r\n    background: rgba(184, 58, 58, 0.92);\r\n    color: white;\r\n    border: 1px solid rgba(224, 96, 96, 0.3);\r\n}\r\n\r\n.toast.toast-info {\r\n    background: rgba(255, 255, 255, 0.92);\r\n    color: var(--text);\r\n    border: 1px solid var(--card-border);\r\n}\r\n\r\n@media (prefers-color-scheme: dark) {\r\n    .toast.toast-info {\r\n        background: rgba(33, 34, 36, 0.92);\r\n        color: var(--text);\r\n        border: 1px solid var(--card-border);\r\n    }\r\n}\r\n\r\n.toast svg {\r\n    width: 14px;\r\n    height: 14px;\r\n    flex-shrink: 0;\r\n}\r\n\r\n@keyframes toastIn {\r\n    from {\r\n        opacity: 0;\r\n        transform: translateY(16px) scale(0.95);\r\n    }\r\n\r\n    to {\r\n        opacity: 1;\r\n        transform: translateY(0) scale(1);\r\n    }\r\n}\r\n\r\n@keyframes toastOut {\r\n    from {\r\n        opacity: 1;\r\n        transform: translateY(0) scale(1);\r\n    }\r\n\r\n    to {\r\n        opacity: 0;\r\n        transform: translateY(10px) scale(0.95);\r\n    }\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* COPY-TO-CLIPBOARD BUTTON (AI Bubble)                            */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.chat-bubble-actions {\r\n    display: flex;\r\n    gap: 4px;\r\n    margin-top: 8px;\r\n    opacity: 0;\r\n    transition: opacity 0.2s ease;\r\n}\r\n\r\n.chat-msg.ai:hover .chat-bubble-actions {\r\n    opacity: 1;\r\n}\r\n\r\n.btn-copy {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    gap: 4px;\r\n    padding: 3px 8px;\r\n    font-size: 10px;\r\n    font-weight: 500;\r\n    font-family: var(--font);\r\n    color: var(--text-3);\r\n    background: var(--input-bg);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 6px;\r\n    cursor: pointer;\r\n    transition: all 0.2s ease;\r\n}\r\n\r\n.btn-copy:hover {\r\n    color: var(--primary);\r\n    border-color: var(--primary-glow);\r\n    background: var(--primary-bg);\r\n}\r\n\r\n.btn-copy.copied {\r\n    color: var(--success);\r\n    border-color: rgba(45, 106, 79, 0.2);\r\n    background: var(--success-bg);\r\n}\r\n\r\n.btn-copy svg {\r\n    width: 11px;\r\n    height: 11px;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* SMOOTH MODE CROSSFADE                                           */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.mode-content {\r\n    animation: modeFadeIn 0.3s ease-out;\r\n}\r\n\r\n@keyframes modeFadeIn {\r\n    from {\r\n        opacity: 0;\r\n        transform: translateY(4px);\r\n    }\r\n\r\n    to {\r\n        opacity: 1;\r\n        transform: translateY(0);\r\n    }\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* SCROLL-TO-BOTTOM FAB                                            */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.scroll-to-bottom {\r\n    position: absolute;\r\n    bottom: 80px;\r\n    right: 18px;\r\n    width: 32px;\r\n    height: 32px;\r\n    border-radius: 50%;\r\n    background: var(--card);\r\n    border: 1px solid var(--card-border);\r\n    color: var(--text-2);\r\n    cursor: pointer;\r\n    display: none;\r\n    align-items: center;\r\n    justify-content: center;\r\n    box-shadow: var(--shadow-md);\r\n    z-index: 10;\r\n    transition: all 0.2s ease;\r\n    animation: fadeIn 0.2s ease-out;\r\n}\r\n\r\n.scroll-to-bottom:hover {\r\n    background: var(--primary-bg);\r\n    color: var(--primary);\r\n    border-color: var(--primary-glow);\r\n    transform: translateY(-2px);\r\n}\r\n\r\n.scroll-to-bottom.visible {\r\n    display: flex;\r\n}\r\n\r\n.scroll-to-bottom svg {\r\n    width: 16px;\r\n    height: 16px;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* CHARACTER COUNT INDICATOR                                       */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.char-count {\r\n    font-size: 10px;\r\n    color: var(--text-4);\r\n    font-weight: 500;\r\n    font-variant-numeric: tabular-nums;\r\n    transition: color 0.2s ease;\r\n    min-width: 28px;\r\n    text-align: right;\r\n}\r\n\r\n.char-count.warning {\r\n    color: var(--warning);\r\n}\r\n\r\n.char-count.danger {\r\n    color: var(--error);\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* KEYBOARD SHORTCUT BADGE                                         */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.kbd-hint {\r\n    font-size: 9px;\r\n    font-weight: 500;\r\n    color: var(--text-4);\r\n    background: var(--input-bg);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: 4px;\r\n    padding: 1px 5px;\r\n    font-family: var(--mono);\r\n    letter-spacing: 0.02em;\r\n    pointer-events: none;\r\n    white-space: nowrap;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* STAGGERED SUGGESTION ANIMATION                                  */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.suggestion-chip:nth-child(1) {\r\n    animation-delay: 0.05s;\r\n}\r\n\r\n.suggestion-chip:nth-child(2) {\r\n    animation-delay: 0.1s;\r\n}\r\n\r\n.suggestion-chip:nth-child(3) {\r\n    animation-delay: 0.15s;\r\n}\r\n\r\n.suggestion-chip:nth-child(4) {\r\n    animation-delay: 0.2s;\r\n}\r\n\r\n.suggestion-chip {\r\n    animation: msgSlideIn 0.4s cubic-bezier(0.19, 1, 0.22, 1) both;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* ENHANCED INPUT FOCUS GLOW                                       */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.input-card:focus-within,\r\n.chat-input-card:focus-within {\r\n    border-color: var(--primary);\r\n    box-shadow: 0 0 0 3px var(--primary-glow), var(--shadow-md);\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* SETTINGS SAVE SUCCESS ANIMATION                                 */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.btn-save.saved {\r\n    background: var(--success);\r\n    box-shadow: 0 2px 8px rgba(45, 106, 79, 0.3);\r\n}\r\n\r\n@keyframes successPop {\r\n    0% {\r\n        transform: scale(1);\r\n    }\r\n\r\n    50% {\r\n        transform: scale(1.05);\r\n    }\r\n\r\n    100% {\r\n        transform: scale(1);\r\n    }\r\n}\r\n\r\n.btn-save.saved {\r\n    animation: successPop 0.3s ease;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* CHAT WELCOME STAGGER                                            */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.chat-welcome img {\r\n    animation: fadeIn 0.5s ease-out both;\r\n    animation-delay: 0.1s;\r\n}\r\n\r\n.chat-welcome h2 {\r\n    animation: fadeIn 0.5s ease-out both;\r\n    animation-delay: 0.2s;\r\n}\r\n\r\n.chat-welcome .welcome-suggestions {\r\n    animation: fadeIn 0.5s ease-out both;\r\n    animation-delay: 0.3s;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* RIPPLE EFFECT ON BUTTONS                                        */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.btn-primary,\r\n.btn-send,\r\n.chip,\r\n.category-tab {\r\n    position: relative;\r\n    overflow: hidden;\r\n}\r\n\r\n.btn-primary::after,\r\n.btn-send::after {\r\n    content: '';\r\n    position: absolute;\r\n    inset: 0;\r\n    background: radial-gradient(circle at var(--ripple-x, 50%) var(--ripple-y, 50%), rgba(255, 255, 255, 0.25) 0%, transparent 60%);\r\n    opacity: 0;\r\n    transition: opacity 0.4s ease;\r\n    pointer-events: none;\r\n}\r\n\r\n.btn-primary:active::after,\r\n.btn-send:active::after {\r\n    opacity: 1;\r\n    transition: opacity 0s;\r\n}\r\n\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* IMPROVED DARK MODE SCROLLBAR                                    */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n@media (prefers-color-scheme: dark) {\r\n    ::-webkit-scrollbar-thumb {\r\n        background: rgba(255, 255, 255, 0.12);\r\n    }\r\n\r\n    ::-webkit-scrollbar-thumb:hover {\r\n        background: rgba(255, 255, 255, 0.22);\r\n    }\r\n}\r\n\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n/* BATCH PDF EXTRACTION PANEL                                      */\r\n/* ═══════════════════════════════════════════════════════════════ */\r\n.batch-panel {\r\n    margin: 10px 14px;\r\n    padding: 14px;\r\n    background: var(--card);\r\n    border: 1.5px solid var(--primary-glow);\r\n    border-radius: var(--radius-lg);\r\n    box-shadow: var(--shadow-md);\r\n    animation: slideDown 0.22s ease-out;\r\n}\r\n\r\n.batch-panel-header {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.batch-panel-title {\r\n    font-size: 12px;\r\n    font-weight: 700;\r\n    color: var(--primary);\r\n    letter-spacing: -0.01em;\r\n}\r\n\r\n.batch-file-count {\r\n    font-size: 11px;\r\n    font-weight: 600;\r\n    color: var(--text-3);\r\n    background: var(--primary-bg);\r\n    padding: 2px 8px;\r\n    border-radius: 20px;\r\n}\r\n\r\n.batch-instruction {\r\n    width: 100%;\r\n    padding: 9px 11px;\r\n    font-size: 12.5px;\r\n    font-family: var(--font);\r\n    color: var(--text);\r\n    background: var(--input-bg);\r\n    border: 1px solid var(--card-border);\r\n    border-radius: var(--radius);\r\n    outline: none;\r\n    resize: none;\r\n    transition: border-color 0.2s ease-out, box-shadow 0.2s ease-out;\r\n    margin-bottom: 10px;\r\n    line-height: 1.5;\r\n}\r\n\r\n.batch-instruction:focus {\r\n    border-color: var(--primary);\r\n    box-shadow: 0 0 0 3px var(--primary-glow);\r\n}\r\n\r\n.btn-batch-extract {\r\n    width: 100%;\r\n    justify-content: center;\r\n    gap: 7px;\r\n    font-size: 13px;\r\n    padding: 10px;\r\n    background: var(--primary);\r\n    color: white;\r\n    border: none;\r\n    border-radius: var(--radius);\r\n    cursor: pointer;\r\n    font-weight: 600;\r\n    font-family: var(--font);\r\n    display: flex;\r\n    align-items: center;\r\n    transition: all 0.2s ease-out;\r\n    box-shadow: 0 3px 10px rgba(45, 106, 79, 0.3);\r\n}\r\n\r\n.btn-batch-extract:hover {\r\n    background: var(--primary-hover);\r\n    transform: translateY(-1px);\r\n    box-shadow: 0 5px 16px rgba(45, 106, 79, 0.38);\r\n}\r\n\r\n.btn-batch-extract:disabled {\r\n    opacity: 0.55;\r\n    cursor: not-allowed;\r\n    transform: none;\r\n}\r\n\r\n.batch-progress-wrap {\r\n    margin-top: 12px;\r\n}\r\n\r\n.batch-progress-bar-track {\r\n    height: 6px;\r\n    background: var(--input-bg);\r\n    border-radius: 99px;\r\n    overflow: hidden;\r\n}\r\n\r\n.batch-progress-bar {\r\n    height: 100%;\r\n    background: linear-gradient(90deg, var(--primary), var(--primary-light));\r\n    border-radius: 99px;\r\n    transition: width 0.4s ease-out;\r\n    position: relative;\r\n    overflow: hidden;\r\n}\r\n\r\n.batch-progress-bar::after {\r\n    content: '';\r\n    position: absolute;\r\n    top: 0;\r\n    left: -60%;\r\n    width: 60%;\r\n    height: 100%;\r\n    background: rgba(255, 255, 255, 0.3);\r\n    animation: shimmer 1.2s linear infinite;\r\n}\r\n\r\n@keyframes shimmer {\r\n    to {\r\n        left: 160%;\r\n    }\r\n}\r\n\r\n.batch-progress-label {\r\n    font-size: 11px;\r\n    color: var(--text-3);\r\n    text-align: right;\r\n    margin-top: 4px;\r\n    font-weight: 600;\r\n}\r\n\r\n.batch-log {\r\n    margin-top: 10px;\r\n    max-height: 100px;\r\n    overflow-y: auto;\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 3px;\r\n}\r\n\r\n.batch-log-entry {\r\n    font-size: 11px;\r\n    font-family: var(--mono);\r\n    color: var(--text-2);\r\n    padding: 2px 6px;\r\n    border-radius: 4px;\r\n    display: flex;\r\n    gap: 6px;\r\n    align-items: center;\r\n}\r\n\r\n.batch-log-entry.success {\r\n    color: var(--success);\r\n    background: var(--success-bg);\r\n}\r\n\r\n.batch-log-entry.error {\r\n    color: var(--error);\r\n    background: var(--error-bg);\r\n}\r\n\r\n.batch-log-entry.info {\r\n    color: var(--text-3);\r\n    background: var(--input-bg);\r\n}"],sourceRoot:""}]),n.A=c},39046:function(r,n,e){"use strict";new URL(e(80539),e.b)},41198:function(r){"use strict";r.exports="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2710%27 height=%2710%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%238C8E91%27 stroke-width=%272%27%3E%3Cpolyline points=%276 9 12 15 18 9%27/%3E%3C/svg%3E"},80539:function(r,n,e){"use strict";r.exports=e.p+"assets/icon-80-v2.png"},17640:function(){},23237:function(){},97492:function(){},31815:function(){},66671:function(){},82787:function(){}},e={};function t(r){var a=e[r];if(void 0!==a)return a.exports;var o=e[r]={id:r,exports:{}};return n[r].call(o.exports,o,o.exports,t),o.exports}t.m=n,r=[],t.O=function(n,e,a,o){if(!e){var i=1/0;for(c=0;c<r.length;c++){e=r[c][0],a=r[c][1],o=r[c][2];for(var A=!0,s=0;s<e.length;s++)(!1&o||i>=o)&&Object.keys(t.O).every(function(r){return t.O[r](e[s])})?e.splice(s--,1):(A=!1,o<i&&(i=o));if(A){r.splice(c--,1);var l=a();void 0!==l&&(n=l)}}return n}o=o||0;for(var c=r.length;c>0&&r[c-1][2]>o;c--)r[c]=r[c-1];r[c]=[e,a,o]},t.n=function(r){var n=r&&r.__esModule?function(){return r.default}:function(){return r};return t.d(n,{a:n}),n},t.d=function(r,n){for(var e in n)t.o(n,e)&&!t.o(r,e)&&Object.defineProperty(r,e,{enumerable:!0,get:n[e]})},t.g=function(){if("object"==typeof globalThis)return globalThis;try{return this||new Function("return this")()}catch(r){if("object"==typeof window)return window}}(),t.o=function(r,n){return Object.prototype.hasOwnProperty.call(r,n)},function(){var r;t.g.importScripts&&(r=t.g.location+"");var n=t.g.document;if(!r&&n&&(n.currentScript&&"SCRIPT"===n.currentScript.tagName.toUpperCase()&&(r=n.currentScript.src),!r)){var e=n.getElementsByTagName("script");if(e.length)for(var a=e.length-1;a>-1&&(!r||!/^http(s?):/.test(r));)r=e[a--].src}if(!r)throw new Error("Automatic publicPath is not supported in this browser");r=r.replace(/^blob:/,"").replace(/#.*$/,"").replace(/\?.*$/,"").replace(/\/[^\/]+$/,"/"),t.p=r}(),function(){t.b="undefined"!=typeof document&&document.baseURI||self.location.href;var r={926:0};t.O.j=function(n){return 0===r[n]};var n=function(n,e){var a,o,i=e[0],A=e[1],s=e[2],l=0;if(i.some(function(n){return 0!==r[n]})){for(a in A)t.o(A,a)&&(t.m[a]=A[a]);if(s)var c=s(t)}for(n&&n(e);l<i.length;l++)o=i[l],t.o(r,o)&&r[o]&&r[o][0](),r[o]=0;return t.O(c)},e=self.webpackChunksheetos_ai=self.webpackChunksheetos_ai||[];e.forEach(n.bind(null,0)),e.push=n.bind(null,e.push.bind(e))}(),t.nc=void 0,t.O(void 0,[121],function(){return t(31096)});var a=t.O(void 0,[121],function(){return t(39046)});a=t.O(a)}();
+/******/ (function() { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/services/agent-orchestrator.ts":
+/*!********************************************!*\
+  !*** ./src/services/agent-orchestrator.ts ***!
+  \********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   createPlan: function() { return /* binding */ createPlan; },
+/* harmony export */   executeWithRecovery: function() { return /* binding */ executeWithRecovery; },
+/* harmony export */   fixCode: function() { return /* binding */ fixCode; },
+/* harmony export */   generateCode: function() { return /* binding */ generateCode; },
+/* harmony export */   readSheetContext: function() { return /* binding */ readSheetContext; },
+/* harmony export */   runAgent: function() { return /* binding */ runAgent; },
+/* harmony export */   validateCode: function() { return /* binding */ validateCode; }
+/* harmony export */ });
+/* harmony import */ var _llm_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./llm.service */ "./src/services/llm.service.ts");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorValues(e) { if (null != e) { var t = e["function" == typeof Symbol && Symbol.iterator || "@@iterator"], r = 0; if (t) return t.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) return { next: function next() { return e && r >= e.length && (e = void 0), { value: e && e[r++], done: !e }; } }; } throw new TypeError(_typeof(e) + " is not iterable"); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i.return) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+/**
+ * SheetOS AI — Agent Orchestrator
+ * LangChain-inspired intelligent agent system for bulletproof Excel automation.
+ * 
+ * Architecture:
+ * 1. PLANNER - Analyzes task and creates execution plan
+ * 2. CODER - Generates Excel JavaScript API code
+ * 3. VALIDATOR - Validates code syntax and API usage
+ * 4. EXECUTOR - Executes code with sandboxing
+ * 5. FIXER - Recovers from errors with context
+ * 
+ * Anti-Hallucination Strategy:
+ * - Strict API whitelist
+ * - Banned pattern detection
+ * - Syntax validation before execution
+ * - Structured output parsing
+ */
+
+
+
+// ═══════════════════════════════════════════════════════════════
+// TYPES & INTERFACES
+// ═══════════════════════════════════════════════════════════════
+
+// ═══════════════════════════════════════════════════════════════
+// BANNED PATTERNS — These cause runtime errors in Excel JS API
+// ═══════════════════════════════════════════════════════════════
+
+var BANNED_PATTERNS = [
+// Method calls that don't exist
+{
+  pattern: /\.getColumnCount\s*\(\s*\)/g,
+  message: "getColumnCount() doesn't exist",
+  fix: "load('columnCount') then use .columnCount property"
+}, {
+  pattern: /\.getRowCount\s*\(\s*\)/g,
+  message: "getRowCount() doesn't exist",
+  fix: "load('rowCount') then use .rowCount property"
+}, {
+  pattern: /\.getAddress\s*\(\s*\)/g,
+  message: "getAddress() doesn't exist",
+  fix: "load('address') then use .address property"
+}, {
+  pattern: /\.getValues\s*\(\s*\)/g,
+  message: "getValues() doesn't exist",
+  fix: "load('values') then use .values property"
+}, {
+  pattern: /\.getText\s*\(\s*\)/g,
+  message: "getText() doesn't exist",
+  fix: "load('text') then use .text property"
+}, {
+  pattern: /\.setValues\s*\(/g,
+  message: "setValues() doesn't exist",
+  fix: "Use range.values = [[...]] assignment"
+}, {
+  pattern: /\.setFormula\s*\(/g,
+  message: "setFormula() doesn't exist",
+  fix: "Use range.formulas = [[...]] assignment"
+}, {
+  pattern: /\.setValue\s*\(/g,
+  message: "setValue() doesn't exist",
+  fix: "Use range.values = [[value]] assignment"
+}, {
+  pattern: /\.clearFormat\s*\(\s*\)/g,
+  message: "clearFormat() doesn't exist",
+  fix: "Use .clear(Excel.ClearApplyTo.Formats)"
+}, {
+  pattern: /\.clearFormats\s*\(\s*\)/g,
+  message: "clearFormats() doesn't exist",
+  fix: "Use .clear(Excel.ClearApplyTo.Formats)"
+}, {
+  pattern: /\.clearValue\s*\(\s*\)/g,
+  message: "clearValue() doesn't exist",
+  fix: "Use .clear(Excel.ClearApplyTo.Contents)"
+}, {
+  pattern: /\.clearValues\s*\(\s*\)/g,
+  message: "clearValues() doesn't exist",
+  fix: "Use .clear(Excel.ClearApplyTo.Contents)"
+},
+// Google Apps Script contamination
+{
+  pattern: /SpreadsheetApp/g,
+  message: "SpreadsheetApp is Google Apps Script, not Excel",
+  fix: "Use Excel JavaScript API (sheet, context, Excel namespace)"
+}, {
+  pattern: /Logger\.log/g,
+  message: "Logger.log is Google Apps Script",
+  fix: "Use console.log or remove logging"
+}, {
+  pattern: /Browser\.msgBox/g,
+  message: "Browser.msgBox is Google Apps Script",
+  fix: "Remove - UI dialogs not supported in Excel Add-ins"
+}, {
+  pattern: /Utilities\./g,
+  message: "Utilities is Google Apps Script",
+  fix: "Use native JavaScript methods"
+},
+// Wrong chart API
+{
+  pattern: /chart\.setTitle\s*\(/g,
+  message: "chart.setTitle() doesn't exist",
+  fix: "Use chart.title.text = '...'"
+}, {
+  pattern: /chart\.add\s*\(/g,
+  message: "chart.add() doesn't exist",
+  fix: "Use sheet.charts.add()"
+},
+// Wrong range methods
+{
+  pattern: /range\.getItem\s*\(/g,
+  message: "range.getItem() doesn't exist",
+  fix: "Use range.getCell(row, col)"
+}, {
+  pattern: /range\.select\s*\(\s*\)/g,
+  message: "range.select() causes performance issues",
+  fix: "Remove - selection not needed for automation"
+}, {
+  pattern: /range\.activate\s*\(\s*\)/g,
+  message: "range.activate() causes performance issues",
+  fix: "Remove - activation not needed for automation"
+},
+// Wrong format paths
+{
+  pattern: /range\.font\.bold/g,
+  message: "range.font.bold path is wrong",
+  fix: "Use range.format.font.bold"
+}, {
+  pattern: /range\.alignment/g,
+  message: "range.alignment doesn't exist",
+  fix: "Use range.format.horizontalAlignment or range.format.verticalAlignment"
+}, {
+  pattern: /range\.format\.alignment/g,
+  message: "range.format.alignment object doesn't exist",
+  fix: "Use range.format.horizontalAlignment directly"
+}, {
+  pattern: /range\.horizontal/g,
+  message: "range.horizontal doesn't exist",
+  fix: "Use range.format.horizontalAlignment"
+},
+// UI methods that don't work in add-ins
+{
+  pattern: /message\.alert\s*\(/g,
+  message: "message.alert() doesn't exist in add-ins",
+  fix: "Remove - use status messages in add-in UI instead"
+}, {
+  pattern: /alert\s*\(/g,
+  message: "alert() doesn't work in add-ins",
+  fix: "Remove - JavaScript alert blocked in Office Add-ins"
+}, {
+  pattern: /confirm\s*\(/g,
+  message: "confirm() doesn't work in add-ins",
+  fix: "Remove - JavaScript confirm blocked in Office Add-ins"
+}, {
+  pattern: /prompt\s*\(/g,
+  message: "prompt() doesn't work in add-ins",
+  fix: "Remove - JavaScript prompt blocked in Office Add-ins"
+},
+// Variable redeclaration (context and sheet are pre-declared)
+{
+  pattern: /(?:const|let|var)\s+context\s*=/g,
+  message: "context is already declared",
+  fix: "Remove declaration - context is provided"
+}, {
+  pattern: /(?:const|let|var)\s+sheet\s*=\s*context\.workbook/g,
+  message: "sheet is already declared",
+  fix: "Remove declaration - sheet is provided"
+},
+// Invalid range references
+// Invalid range references
+{
+  pattern: /getRange\s*\(\s*["']?[A-Z]0["']?\s*\)/gi,
+  message: "Row 0 doesn't exist in Excel",
+  fix: "Use row 1 or higher (e.g., A1, B1)"
+}, {
+  pattern: /getCell\s*\(\s*-?\d+\s*,\s*-?\d+\s*\)/g,
+  message: "Negative cell indices are invalid",
+  fix: "Use 0 or positive indices"
+},
+// Invalid worksheet methods
+{
+  pattern: /sheet\.clear\s*\(/g,
+  message: "sheet.clear() doesn't exist in Excel JS API",
+  fix: "Use sheet.getUsedRange().clear()"
+}];
+
+// ═══════════════════════════════════════════════════════════════
+// ALLOWED API WHITELIST — Only these Excel JS API calls are safe
+// ═══════════════════════════════════════════════════════════════
+
+var ALLOWED_API_PATTERNS = [
+// Core objects
+/context\.workbook/, /context\.sync\(\)/, /sheet\./, /Excel\./,
+// Range operations
+/\.getRange\(/, /\.getUsedRange\(/, /\.getCell\(/, /\.getRow\(/, /\.getColumn\(/, /\.getResizedRange\(/, /\.getOffsetRange\(/, /\.getEntireRow\(/, /\.getEntireColumn\(/, /\.getLastCell\(/, /\.getLastRow\(/, /\.getLastColumn\(/, /\.getBoundingRect\(/, /\.getIntersection\(/,
+// Load operations
+/\.load\(/,
+// Value assignment (via property)
+/\.values\s*=/, /\.formulas\s*=/, /\.numberFormat\s*=/,
+// Format operations
+/\.format\./, /\.autofitColumns\(/, /\.autofitRows\(/,
+// Table operations
+/\.tables\./,
+// Chart operations
+/\.charts\./,
+// Data operations
+/\.sort\./, /\.autoFilter\./, /\.dataValidation\./, /\.conditionalFormats\./,
+// Worksheet operations
+/\.worksheets\./, /\.freezePanes\./,
+// Clear operations
+/\.clear\(/, /\.delete\(/, /\.insert\(/,
+// Borders
+/\.borders\./];
+
+// ═══════════════════════════════════════════════════════════════
+// CODE VALIDATOR
+// ═══════════════════════════════════════════════════════════════
+
+function validateCode(code) {
+  var errors = [];
+  var warnings = [];
+  var apiCallsDetected = [];
+  var sanitizedCode = code;
+
+  // 1. Remove markdown fences if present
+  sanitizedCode = sanitizedCode.replace(/^```(?:javascript|js|typescript|ts)?\n?/gi, "");
+  sanitizedCode = sanitizedCode.replace(/\n?```$/gi, "");
+  sanitizedCode = sanitizedCode.trim();
+
+  // 2. Check for banned patterns and apply auto-fixes
+  var _iterator = _createForOfIteratorHelper(BANNED_PATTERNS),
+    _step;
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var banned = _step.value;
+      var matches = sanitizedCode.match(banned.pattern);
+      if (matches) {
+        // Priority fixes (Auto-replace common hallucinations)
+        if (banned.message.includes("clearFormats")) {
+          sanitizedCode = sanitizedCode.replace(banned.pattern, ".clear(Excel.ClearApplyTo.Formats)");
+        } else if (banned.message.includes("clearValue")) {
+          sanitizedCode = sanitizedCode.replace(banned.pattern, ".clear(Excel.ClearApplyTo.Contents)");
+        } else if (banned.pattern.source.includes("redeclare")) {
+          sanitizedCode = sanitizedCode.replace(banned.pattern, "// [REMOVED] ");
+        } else {
+          // Only add error if we couldn't auto-fix it
+          errors.push({
+            type: "banned_api",
+            message: banned.message,
+            suggestion: banned.fix
+          });
+        }
+      }
+    }
+
+    // 3. Check for missing context.sync() calls
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+  var loadCalls = (sanitizedCode.match(/\.load\s*\(/g) || []).length;
+  var syncCalls = (sanitizedCode.match(/context\.sync\s*\(\s*\)/g) || []).length;
+  if (loadCalls > 0 && syncCalls === 0) {
+    errors.push({
+      type: "missing_sync",
+      message: "Code loads properties but never calls context.sync()",
+      suggestion: "Add 'await context.sync();' after .load() calls before accessing loaded properties"
+    });
+  }
+  if (loadCalls > syncCalls * 2) {
+    warnings.push("Multiple .load() calls - consider batching with a single context.sync() for performance");
+  }
+
+  // 4. Check for basic syntax errors
+  try {
+    // Try to parse as function body
+    new Function("context", "sheet", "Excel", "return (async () => { ".concat(sanitizedCode, " })();"));
+  } catch (syntaxError) {
+    errors.push({
+      type: "syntax",
+      message: syntaxError.message,
+      suggestion: "Check for missing brackets, semicolons, or typos"
+    });
+  }
+
+  // 5. Detect API calls being used
+  var _iterator2 = _createForOfIteratorHelper(ALLOWED_API_PATTERNS),
+    _step2;
+  try {
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+      var pattern = _step2.value;
+      var _match = sanitizedCode.match(pattern);
+      if (_match) {
+        apiCallsDetected.push(_match[0]);
+      }
+    }
+
+    // 6. Check for dangerous patterns
+  } catch (err) {
+    _iterator2.e(err);
+  } finally {
+    _iterator2.f();
+  }
+  if (/eval\s*\(/i.test(sanitizedCode)) {
+    errors.push({
+      type: "unsafe_pattern",
+      message: "eval() is not allowed for security reasons",
+      suggestion: "Remove eval() call"
+    });
+  }
+  if (/Function\s*\(/i.test(sanitizedCode) && !/new\s+Function/.test(sanitizedCode)) {
+    warnings.push("Direct Function constructor usage detected - ensure it's intentional");
+  }
+
+  // 7. Check for common AI mistakes with formulas
+  if (/formulas\s*=\s*[^[]/i.test(sanitizedCode)) {
+    errors.push({
+      type: "type_error",
+      message: "formulas must be a 2D array",
+      suggestion: "Use range.formulas = [[\"=SUM(A1:A10)\"]] (2D array)"
+    });
+  }
+  if (/values\s*=\s*[^[]/i.test(sanitizedCode) && !/values\s*=\s*\[\[/i.test(sanitizedCode)) {
+    var match = sanitizedCode.match(/values\s*=\s*("[^"]*"|'[^']*'|\d+)/);
+    if (match) {
+      errors.push({
+        type: "type_error",
+        message: "values must be a 2D array",
+        suggestion: "Use range.values = [[".concat(match[1], "]] (2D array)")
+      });
+    }
+  }
+
+  // 8. Auto-fix sheet redeclarations
+  sanitizedCode = sanitizedCode.replace(/(?:const|let|var)\s+sheet\s*=\s*context\.workbook\.worksheets\.getActiveWorksheet\(\)\s*;?/g, "// sheet already available");
+  return {
+    isValid: errors.length === 0,
+    errors: errors,
+    warnings: warnings,
+    sanitizedCode: sanitizedCode,
+    apiCallsDetected: apiCallsDetected
+  };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PLANNER — Analyzes task and creates execution plan
+// ═══════════════════════════════════════════════════════════════
+
+var PLANNER_PROMPT = "You are an Excel automation planning expert. Analyze the user's request and create a brief execution plan.\n\nOUTPUT FORMAT (JSON only, no markdown):\n{\n  \"understanding\": \"One sentence summary of what user wants\",\n  \"steps\": [\"Step 1\", \"Step 2\", \"Step 3\"],\n  \"dataNeeded\": [\"What data needs to be read from sheet\"],\n  \"expectedOutput\": \"What the sheet should look like after\",\n  \"complexity\": \"simple|moderate|complex\",\n  \"warnings\": [\"Any potential issues or edge cases\"]\n}\n\nRULES:\n- Keep steps actionable and specific\n- Identify if data needs to be read first\n- Flag complexity based on operations needed\n- Note any ambiguities in the request";
+function createPlan(_x, _x2, _x3) {
+  return _createPlan.apply(this, arguments);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CODER — Generates validated Excel JavaScript code
+// ═══════════════════════════════════════════════════════════════
+function _createPlan() {
+  _createPlan = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(task, sheetContext, signal) {
+    var contextInfo, messages, response, jsonMatch, _t;
+    return _regenerator().w(function (_context) {
+      while (1) switch (_context.p = _context.n) {
+        case 0:
+          contextInfo = "";
+          if (sheetContext && sheetContext.hasData) {
+            contextInfo = "\n\nCURRENT SHEET CONTEXT:\n- Sheet: \"".concat(sheetContext.sheetName, "\"\n- Size: ").concat(sheetContext.rowCount, " rows \xD7 ").concat(sheetContext.columnCount, " columns\n- Headers: ").concat(sheetContext.headers.join(", "), "\n- Data Types: ").concat(sheetContext.dataTypes.join(", "));
+          }
+          messages = [{
+            role: "system",
+            content: PLANNER_PROMPT
+          }, {
+            role: "user",
+            content: task + contextInfo
+          }];
+          _context.n = 1;
+          return (0,_llm_service__WEBPACK_IMPORTED_MODULE_0__.callLLM)(messages, undefined, signal);
+        case 1:
+          response = _context.v;
+          _context.p = 2;
+          // Extract JSON from response
+          jsonMatch = response.match(/\{[\s\S]*\}/);
+          if (!jsonMatch) {
+            _context.n = 3;
+            break;
+          }
+          return _context.a(2, JSON.parse(jsonMatch[0]));
+        case 3:
+          _context.n = 5;
+          break;
+        case 4:
+          _context.p = 4;
+          _t = _context.v;
+          console.warn("Failed to parse plan:", _t);
+        case 5:
+          return _context.a(2, {
+            understanding: task,
+            steps: ["Execute the requested operation"],
+            dataNeeded: [],
+            expectedOutput: "Modified spreadsheet",
+            complexity: "moderate",
+            warnings: []
+          });
+      }
+    }, _callee, null, [[2, 4]]);
+  }));
+  return _createPlan.apply(this, arguments);
+}
+var CODER_SYSTEM_PROMPT = "You are an Excel JavaScript API expert. Generate ONLY executable code.\n\nENVIRONMENT (pre-declared, DO NOT redeclare):\n- context: Excel.RequestContext\n- sheet: Active worksheet (already loaded)\n- Excel: Namespace for enums\n\nCRITICAL API RULES:\n1. Properties require .load() + await context.sync() before reading\n2. Writing: range.values = [[...]] (2D array always)\n3. Reading: range.load(\"values\"); await context.sync(); // then access range.values\n4. Formats: range.format.font.bold, range.format.fill.color, range.format.horizontalAlignment\n5. Always check rowCount and columnCount before using getRow or formatting\n6. Use context-aware formatting: adapt colors, fonts, borders, and row heights based on sheet type (office, banking, school, etc.)\n7. Clearing Formats ONLY: range.clear(Excel.ClearApplyTo.Formats)\n8. Clearing ALL content in sheer: sheet.getUsedRange().clear()\n9. Charts: sheet.charts.add(Excel.ChartType.xxx, dataRange, Excel.ChartSeriesBy.auto)\n10. Tables: sheet.tables.add(range, hasHeaders)\n11. Document Extraction: ALWAYS extract data as a flat HORIZONTAL table (Headers in row 1, data appended below). NEVER mimic vertical document layouts or create key-value lists (e.g., \"Name: Bob\" in column A). All data text must be a visible color (e.g. black).\n12. Memory Lifetime: If saving an object (like usedRange) to a variable used across multiple context.sync() calls, ALWAYS pin it: context.trackedObjects.add(usedRange)\n\nBANNED (will crash):\n- sheet.clear() \u2192 Worksheet lacks this method. Use sheet.getUsedRange().clear()\n- .getValues(), .getRowCount(), .getColumnCount(), .getAddress() \u2192 Use properties after load+sync\n- .setValues(), .setFormula() \u2192 Use property assignment\n- .clearFormats() \u2192 Use .clear(Excel.ClearApplyTo.formats)\n- SpreadsheetApp, Logger.log \u2192 Wrong platform\n- alert(), confirm(), prompt() \u2192 Blocked in add-ins\n- const sheet = ... \u2192 Already declared\n- const context = ... \u2192 Already declared\n\nMANDATORY HELPERS (available in environment, use them):\nfunction writeData(sheet, startCell, data): Range // Safely writes 2D array and expands matrix\nfunction formatTableStyle(usedRange, headerColor, fontColor): void // Safely styles the table and handles row bounds without throwing properties errors\n\nSAFE FORMATTING TEMPLATE (adapt details based on sheet type):\n// Step 1: Get used range, track it to prevent expiration, and load properties\nconst usedRange = sheet.getUsedRange();\ncontext.trackedObjects.add(usedRange);\nusedRange.load(\"values,rowCount,columnCount,address\");\nawait context.sync();\n\n// Step 2: Check if sheet has data\nif (!usedRange || usedRange.rowCount < 1 || usedRange.columnCount < 1) {\n  throw new Error(\"Sheet appears empty. Add some data first.\");\n}\n\n// Step 3: Format the range efficiently using the built-in helper\nformatTableStyle(usedRange, \"#1B2A4A\", \"#FFFFFF\");\nawait context.sync();\n\n// Step 5: Add borders to all cells\nusedRange.format.borders.getItem(\"InsideHorizontal\").style = \"Thin\";\nusedRange.format.borders.getItem(\"InsideVertical\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeTop\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeBottom\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeLeft\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeRight\").style = \"Thin\";\n\n// Step 6: Add medium bottom border under header\nheaderRow.format.borders.getItem(\"EdgeBottom\").style = \"Medium\";\nheaderRow.format.borders.getItem(\"EdgeBottom\").color = \"#1B2A4A\"; // Adapt color for sheet type\n\n// Step 7: Freeze first row\nsheet.freezePanes.freezeRows(1);\n\n// Step 8: Auto-fit columns\nusedRange.format.autofitColumns();\nawait context.sync();\n\nOUTPUT: Raw JavaScript code only. No markdown, no explanation.";
+function generateCode(_x4, _x5, _x6, _x7, _x8, _x9) {
+  return _generateCode.apply(this, arguments);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// FIXER — Repairs code based on validation or runtime errors
+// ═══════════════════════════════════════════════════════════════
+function _generateCode() {
+  _generateCode = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(task, plan, sheetContext, attachedFiles, previousError, signal) {
+    var prompt, i, _i, messages, contentParts, code, firstNewline;
+    return _regenerator().w(function (_context2) {
+      while (1) switch (_context2.n) {
+        case 0:
+          prompt = task; // Add plan context
+          // (Removed problematic template string, use only string concatenation below)
+          // Add plan context
+          if (plan) {
+            prompt += '\n\nPLAN:\n';
+            for (i = 0; i < plan.steps.length; i++) {
+              prompt += i + 1 + '. ' + plan.steps[i] + '\n';
+            }
+            if (plan.warnings.length > 0) {
+              prompt += '\n\nWATCH OUT FOR:\n';
+              for (_i = 0; _i < plan.warnings.length; _i++) {
+                prompt += plan.warnings[_i] + '\n';
+              }
+            }
+          }
+
+          // Add sheet context
+          if (sheetContext && sheetContext.hasData) {
+            prompt += '\n\nSHEET DATA:\n';
+            prompt += '- Headers: ' + JSON.stringify(sheetContext.headers) + '\n';
+            prompt += '- Rows: ' + sheetContext.rowCount + '\n';
+            prompt += '- Sample: ' + JSON.stringify(sheetContext.sampleData.slice(0, 3)) + '\n';
+          }
+
+          // Add error context for retry
+          if (previousError) {
+            prompt += '\n\nPREVIOUS ERROR: "' + previousError + '"\nFIX THIS ERROR. Output only corrected code.';
+          }
+          // Prepare LLM messages with coder system prompt
+          messages = [{
+            role: "system",
+            content: CODER_SYSTEM_PROMPT
+          }];
+          if (attachedFiles.length > 0) {
+            contentParts = [{
+              type: "text",
+              text: prompt
+            }];
+            attachedFiles.forEach(function (file) {
+              file.data.slice(0, 10).forEach(function (imageUrl) {
+                contentParts.push({
+                  type: "image_url",
+                  image_url: {
+                    url: imageUrl
+                  }
+                });
+              });
+            });
+            messages.push({
+              role: "user",
+              content: contentParts
+            });
+          } else {
+            messages.push({
+              role: "user",
+              content: prompt
+            });
+          }
+          _context2.n = 1;
+          return (0,_llm_service__WEBPACK_IMPORTED_MODULE_0__.callLLM)(messages, undefined, signal);
+        case 1:
+          code = _context2.v;
+          // Clean up response: remove surrounding triple-backtick fences and optional language tag
+          if (code.startsWith('```')) {
+            firstNewline = code.indexOf('\n');
+            if (firstNewline >= 0) {
+              code = code.slice(firstNewline + 1);
+            } else {
+              code = code.slice(3);
+            }
+          }
+          if (code.endsWith('```')) {
+            code = code.slice(0, -3);
+          }
+          code = code.trim();
+          return _context2.a(2, code);
+      }
+    }, _callee2);
+  }));
+  return _generateCode.apply(this, arguments);
+}
+var FIXER_SYSTEM_PROMPT = "You are an Excel JavaScript API debugger. Fix the broken code.\n\nCOMMON FIXES:\n1. .getValues() \u2192 .load(\"values\") + await context.sync() + .values\n2. .getRowCount() \u2192 .load(\"rowCount\") + await context.sync() + .rowCount\n3. range.values = \"text\" \u2192 range.values = [[\"text\"]]\n4. const sheet = ... \u2192 REMOVE (already declared)\n5. SpreadsheetApp \u2192 Use sheet (Excel JS API)\n6. chart.setTitle() \u2192 chart.title.text = \"...\"\n\nOUTPUT: Fixed code only. No explanation, no markdown fences.";
+function fixCode(_x0, _x1, _x10, _x11) {
+  return _fixCode.apply(this, arguments);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ORCHESTRATOR — Main agent loop (LangGraph-inspired)
+// ═══════════════════════════════════════════════════════════════
+function _fixCode() {
+  _fixCode = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(originalCode, errors, runtimeError, signal) {
+    var errorSummary, messages, fixedCode;
+    return _regenerator().w(function (_context3) {
+      while (1) switch (_context3.n) {
+        case 0:
+          errorSummary = "";
+          if (errors.length > 0) {
+            errorSummary = "VALIDATION ERRORS:\n" + errors.map(function (e) {
+              return "- ".concat(e.message, " \u2192 ").concat(e.suggestion);
+            }).join("\n");
+          }
+          if (runtimeError) {
+            errorSummary += (errorSummary ? "\n\n" : "") + "RUNTIME ERROR: ".concat(runtimeError);
+          }
+          messages = [{
+            role: "system",
+            content: FIXER_SYSTEM_PROMPT
+          }, {
+            role: "user",
+            content: "BROKEN CODE:\n".concat(originalCode, "\n\n").concat(errorSummary, "\n\nFix the code:")
+          }];
+          _context3.n = 1;
+          return (0,_llm_service__WEBPACK_IMPORTED_MODULE_0__.callLLM)(messages, undefined, signal);
+        case 1:
+          fixedCode = _context3.v;
+          // Clean response
+          fixedCode = fixedCode.replace(/^```(?:javascript|js|typescript|ts)?\n?/gi, "");
+          fixedCode = fixedCode.replace(/\n?```$/gi, "");
+          return _context3.a(2, fixedCode.trim());
+      }
+    }, _callee3);
+  }));
+  return _fixCode.apply(this, arguments);
+}
+var DEFAULT_CONFIG = {
+  maxRetries: 3,
+  enablePlanning: true,
+  strictValidation: true,
+  timeout: 30000
+};
+function runAgent(_x12, _x13, _x14) {
+  return _runAgent.apply(this, arguments);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// EXECUTE WITH RECOVERY — Safe code execution with auto-fix
+// ═══════════════════════════════════════════════════════════════
+function _runAgent() {
+  _runAgent = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4(task, sheetContext, attachedFiles) {
+    var config,
+      signal,
+      cfg,
+      startTime,
+      plan,
+      code,
+      validation,
+      retries,
+      attempt,
+      _args4 = arguments,
+      _t2,
+      _t3;
+    return _regenerator().w(function (_context4) {
+      while (1) switch (_context4.p = _context4.n) {
+        case 0:
+          config = _args4.length > 3 && _args4[3] !== undefined ? _args4[3] : {};
+          signal = _args4.length > 4 ? _args4[4] : undefined;
+          cfg = _objectSpread(_objectSpread({}, DEFAULT_CONFIG), config);
+          startTime = Date.now();
+          plan = null;
+          code = "";
+          validation = null;
+          retries = 0;
+          _context4.p = 1;
+          if (!(cfg.enablePlanning && !attachedFiles.length)) {
+            _context4.n = 6;
+            break;
+          }
+          _context4.p = 2;
+          _context4.n = 3;
+          return createPlan(task, sheetContext, signal);
+        case 3:
+          plan = _context4.v;
+          console.log("[Agent] Plan created:", plan);
+          _context4.n = 6;
+          break;
+        case 4:
+          _context4.p = 4;
+          _t2 = _context4.v;
+          if (!(_t2.name === 'AbortError')) {
+            _context4.n = 5;
+            break;
+          }
+          throw _t2;
+        case 5:
+          console.warn("[Agent] Planning failed, proceeding without plan:", _t2);
+        case 6:
+          _context4.n = 7;
+          return generateCode(task, plan, sheetContext, attachedFiles, undefined, signal);
+        case 7:
+          code = _context4.v;
+          console.log("[Agent] Initial code generated");
+
+          // ═══ PHASE 3: VALIDATION LOOP ═══
+          attempt = 0;
+        case 8:
+          if (!(attempt <= cfg.maxRetries)) {
+            _context4.n = 12;
+            break;
+          }
+          validation = validateCode(code);
+          if (!validation.isValid) {
+            _context4.n = 9;
+            break;
+          }
+          console.log("[Agent] Code validated successfully on attempt ".concat(attempt + 1));
+          return _context4.a(3, 12);
+        case 9:
+          if (!(attempt < cfg.maxRetries)) {
+            _context4.n = 11;
+            break;
+          }
+          console.log("[Agent] Validation failed (attempt ".concat(attempt + 1, "), fixing..."));
+          _context4.n = 10;
+          return fixCode(code, validation.errors, undefined, signal);
+        case 10:
+          code = _context4.v;
+          retries++;
+        case 11:
+          attempt++;
+          _context4.n = 8;
+          break;
+        case 12:
+          // Final validation check
+          validation = validateCode(code);
+          if (!(!validation.isValid && cfg.strictValidation)) {
+            _context4.n = 13;
+            break;
+          }
+          throw new Error("Code validation failed: ".concat(validation.errors.map(function (e) {
+            return e.message;
+          }).join("; ")));
+        case 13:
+          // Use sanitized code
+          code = validation.sanitizedCode;
+          return _context4.a(2, {
+            success: true,
+            code: code,
+            plan: plan,
+            validation: validation,
+            retries: retries,
+            duration: Date.now() - startTime
+          });
+        case 14:
+          _context4.p = 14;
+          _t3 = _context4.v;
+          return _context4.a(2, {
+            success: false,
+            code: code,
+            plan: plan,
+            validation: validation,
+            error: _t3.message,
+            retries: retries,
+            duration: Date.now() - startTime
+          });
+      }
+    }, _callee4, null, [[2, 4], [1, 14]]);
+  }));
+  return _runAgent.apply(this, arguments);
+}
+function executeWithRecovery(_x15, _x16) {
+  return _executeWithRecovery.apply(this, arguments);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// UTILITY: Read current sheet context
+// ═══════════════════════════════════════════════════════════════
+function _executeWithRecovery() {
+  _executeWithRecovery = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5(code, executor) {
+    var maxRetries,
+      signal,
+      currentCode,
+      lastError,
+      attempt,
+      validation,
+      _args5 = arguments,
+      _t4;
+    return _regenerator().w(function (_context5) {
+      while (1) switch (_context5.p = _context5.n) {
+        case 0:
+          maxRetries = _args5.length > 2 && _args5[2] !== undefined ? _args5[2] : 2;
+          signal = _args5.length > 3 ? _args5[3] : undefined;
+          currentCode = code;
+          lastError = "";
+          attempt = 0;
+        case 1:
+          if (!(attempt <= maxRetries)) {
+            _context5.n = 9;
+            break;
+          }
+          if (!(signal !== null && signal !== void 0 && signal.aborted)) {
+            _context5.n = 2;
+            break;
+          }
+          throw new DOMException("Execution cancelled", "AbortError");
+        case 2:
+          _context5.p = 2;
+          _context5.n = 3;
+          return executor(currentCode);
+        case 3:
+          return _context5.a(2, {
+            success: true,
+            finalCode: currentCode
+          });
+        case 4:
+          _context5.p = 4;
+          _t4 = _context5.v;
+          lastError = _t4.message || String(_t4);
+          console.warn("[Agent] Execution failed (attempt ".concat(attempt + 1, "):"), lastError);
+          if (!(attempt < maxRetries)) {
+            _context5.n = 8;
+            break;
+          }
+          _context5.n = 5;
+          return fixCode(currentCode, [], lastError, signal);
+        case 5:
+          currentCode = _context5.v;
+          // Re-validate fixed code
+          validation = validateCode(currentCode);
+          if (!validation.isValid) {
+            _context5.n = 6;
+            break;
+          }
+          currentCode = validation.sanitizedCode;
+          _context5.n = 8;
+          break;
+        case 6:
+          _context5.n = 7;
+          return fixCode(currentCode, validation.errors, undefined, signal);
+        case 7:
+          currentCode = _context5.v;
+        case 8:
+          attempt++;
+          _context5.n = 1;
+          break;
+        case 9:
+          return _context5.a(2, {
+            success: false,
+            error: lastError,
+            finalCode: currentCode
+          });
+      }
+    }, _callee5, null, [[2, 4]]);
+  }));
+  return _executeWithRecovery.apply(this, arguments);
+}
+function readSheetContext() {
+  return _readSheetContext.apply(this, arguments);
+}
+function _readSheetContext() {
+  _readSheetContext = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7() {
+    var _t5;
+    return _regenerator().w(function (_context8) {
+      while (1) switch (_context8.p = _context8.n) {
+        case 0:
+          _context8.p = 0;
+          _context8.n = 1;
+          return Excel.run(/*#__PURE__*/function () {
+            var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6(context) {
+              var sheet, usedRange, values, headers, dataTypes, _loop, col;
+              return _regenerator().w(function (_context7) {
+                while (1) switch (_context7.n) {
+                  case 0:
+                    sheet = context.workbook.worksheets.getActiveWorksheet();
+                    sheet.load("name");
+                    usedRange = sheet.getUsedRangeOrNullObject();
+                    usedRange.load("values,rowCount,columnCount,isNullObject");
+                    _context7.n = 1;
+                    return context.sync();
+                  case 1:
+                    if (!(usedRange.isNullObject || usedRange.rowCount === 0 || usedRange.columnCount === 0)) {
+                      _context7.n = 2;
+                      break;
+                    }
+                    return _context7.a(2, {
+                      sheetName: sheet.name,
+                      rowCount: 0,
+                      columnCount: 0,
+                      headers: [],
+                      sampleData: [],
+                      dataTypes: [],
+                      hasData: false
+                    });
+                  case 2:
+                    values = usedRange.values;
+                    headers = values[0].map(function (h) {
+                      return String(h || "").trim();
+                    }); // Detect data types
+                    dataTypes = [];
+                    if (!(values.length > 1)) {
+                      _context7.n = 5;
+                      break;
+                    }
+                    _loop = /*#__PURE__*/_regenerator().m(function _loop(col) {
+                      var colValues;
+                      return _regenerator().w(function (_context6) {
+                        while (1) switch (_context6.n) {
+                          case 0:
+                            colValues = values.slice(1).map(function (row) {
+                              return row[col];
+                            }).filter(function (v) {
+                              return v != null && v !== "";
+                            });
+                            if (colValues.length === 0) {
+                              dataTypes.push("empty");
+                            } else if (colValues.every(function (v) {
+                              return !isNaN(Number(v));
+                            })) {
+                              dataTypes.push("number");
+                            } else if (colValues.every(function (v) {
+                              return /^\d{1,4}[-\/]\d{1,2}[-\/]\d{1,4}/.test(String(v));
+                            })) {
+                              dataTypes.push("date");
+                            } else {
+                              dataTypes.push("text");
+                            }
+                          case 1:
+                            return _context6.a(2);
+                        }
+                      }, _loop);
+                    });
+                    col = 0;
+                  case 3:
+                    if (!(col < usedRange.columnCount)) {
+                      _context7.n = 5;
+                      break;
+                    }
+                    return _context7.d(_regeneratorValues(_loop(col)), 4);
+                  case 4:
+                    col++;
+                    _context7.n = 3;
+                    break;
+                  case 5:
+                    return _context7.a(2, {
+                      sheetName: sheet.name,
+                      rowCount: usedRange.rowCount,
+                      columnCount: usedRange.columnCount,
+                      headers: headers,
+                      sampleData: values.slice(0, 10),
+                      dataTypes: dataTypes,
+                      hasData: true
+                    });
+                }
+              }, _callee6);
+            }));
+            return function (_x17) {
+              return _ref.apply(this, arguments);
+            };
+          }());
+        case 1:
+          return _context8.a(2, _context8.v);
+        case 2:
+          _context8.p = 2;
+          _t5 = _context8.v;
+          console.error("Failed to read sheet context:", _t5);
+          return _context8.a(2, null);
+      }
+    }, _callee7, null, [[0, 2]]);
+  }));
+  return _readSheetContext.apply(this, arguments);
+}
+
+/***/ }),
+
+/***/ "./src/services/chat-prompt.ts":
+/*!*************************************!*\
+  !*** ./src/services/chat-prompt.ts ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CHAT_PROMPT: function() { return /* binding */ CHAT_PROMPT; },
+/* harmony export */   CONTEXT_PROMPT: function() { return /* binding */ CONTEXT_PROMPT; }
+/* harmony export */ });
+/**
+ * SheetOS AI — Planning Mode (Chat) System Prompt
+ * Conversational AI that helps users plan, learn, and strategize Excel work.
+ */
+var CHAT_PROMPT = "You are SheetOS AI \u2014 a friendly, expert Excel assistant in Planning Mode.\n\nYOUR ROLE:\n- Help users plan their spreadsheet work\n- Explain Excel concepts, formulas, and best practices\n- Suggest approaches before executing\n- Answer questions about data organization, analysis, and visualization\n- Provide formula examples and explanations\n- When given sheet context, analyze the USER'S ACTUAL DATA and answer questions directly using the data provided\n- If the user asks for details about a person or entity (e.g., \"What are John's contact details?\"), and you see that entity in the \uD83D\uDEA8 SEARCH HITS, provide all relevant information from that row.\n\nCONTEXT AWARENESS:\nWhen a message includes [SHEET CONTEXT], you have access to the user's ACTUAL Excel data!\n- Analyze the real column names, data types, and sample values\n- Give SPECIFIC answers or suggestions based on their actual data structure\n- Reference their exact column names in your response\n- Suggest improvements tailored to their dataset\n- Point out data quality issues you observe (empty cells, inconsistent formats, etc.)\n- You CAN see their sheet \u2014 do NOT say \"I don't have access to your sheet\"\n- If you see \uD83D\uDEA8 SEARCH HITS in the context, these are specific values found in the sheet. Use them to answer questions like \"Where is X?\", \"Does Y exist?\", or \"Give me details on Z\". Reference the exact cell address shown in the match.\n- Answering questions about existing data should be done DIRECTLY in chat. You do NOT need Agent Mode for simple information retrieval.\n\nRESPONSE FORMAT RULES:\n1. Respond in natural, conversational language\n2. Use markdown-style formatting for emphasis: **bold**, *italic*, `code`\n3. When showing formulas, wrap them in backticks: `=VLOOKUP(A2, Sheet2!A:B, 2, FALSE)`\n4. Use bullet points and numbered lists for clarity\n5. Keep responses concise but thorough (aim for 2-5 paragraphs max)\n6. If the user's request requires MODIFYING the sheet (formatting, inserting, complex calculations), mention that they can switch to \u26A1 Agent Mode to execute it\n7. When you have sheet context, ALWAYS reference the user's actual column names and data\n\nEXCEL EXPERTISE AREAS:\n- Information retrieval from the current sheet\n- Formula writing & debugging (VLOOKUP, INDEX/MATCH, IF, SUMIFS, etc.)\n- Data organization best practices\n- Chart type selection guidance\n- PivotTable planning\n- Data validation strategies\n- Conditional formatting approaches\n- Dashboard design principles\n- Data cleaning strategies\n- Performance optimization tips\n- Cross-sheet referencing patterns\n\nPERSONALITY:\n- Friendly and encouraging\n- Uses concrete examples when explaining\n- Proactive \u2014 suggest improvements the user might not have thought of\n- Mentions potential pitfalls or common mistakes to avoid\n\nIf the user asks you to MODIFY or EXECUTE something (create, format, calculate), remind them:\n\"\uD83D\uDCA1 Switch to \u26A1 Agent Mode to execute this! I can help you plan it here first.\"\n(Remember: Reading data and answering questions about it can be done here in Chat.)\n\nUser Message:\n";
+
+/**
+ * Prompt for generating contextual suggestions based on sheet data
+ */
+var CONTEXT_PROMPT = "You are SheetOS AI. Based on the following spreadsheet data, suggest 3-4 useful actions the user could take. Each suggestion should be a short phrase (5-8 words max). Format as a JSON array of strings. Example: [\"Add SUM to numeric columns\", \"Create a bar chart\", \"Apply professional formatting\"]. Only output the JSON array, nothing else.\n\nSheet Data:\n";
+
+/***/ }),
+
+/***/ "./src/services/document-extractor.ts":
+/*!********************************************!*\
+  !*** ./src/services/document-extractor.ts ***!
+  \********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   COLUMN_ALIASES: function() { return /* binding */ COLUMN_ALIASES; },
+/* harmony export */   buildEnhancedPrompt: function() { return /* binding */ buildEnhancedPrompt; },
+/* harmony export */   generateExcelCode: function() { return /* binding */ generateExcelCode; },
+/* harmony export */   getSchemaExtractionPrompt: function() { return /* binding */ getSchemaExtractionPrompt; },
+/* harmony export */   normalizeColumnName: function() { return /* binding */ normalizeColumnName; },
+/* harmony export */   parseExtractionResponse: function() { return /* binding */ parseExtractionResponse; },
+/* harmony export */   validateExtraction: function() { return /* binding */ validateExtraction; }
+/* harmony export */ });
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/**
+ * Document Extractor Service
+ * Schema-aware extraction from PDFs/CVs that only extracts data for specified columns.
+ * NO HALLUCINATION - if data doesn't exist, leave it blank.
+ */
+
+/**
+ * Get the schema-aware extraction prompt
+ */
+function getSchemaExtractionPrompt(schema) {
+  var columnList = schema.columns.map(function (c, i) {
+    return "".concat(i + 1, ". \"").concat(c, "\"");
+  }).join("\n");
+  return "You are a PRECISION DATA EXTRACTOR. Your job is to extract information from documents with ZERO hallucination.\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nCRITICAL RULES \u2014 MEMORIZE THESE:\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\n1. **SCHEMA LOCKED**: The user has predefined these columns in Excel. You MUST ONLY extract data for these columns:\n".concat(columnList, "\n\n2. **NO FABRICATION**: If a piece of information is NOT explicitly present in the document, return an EMPTY STRING (\"\"). Do NOT guess, infer, or make up data.\n\n3. **EXACT MATCHING**: \n   - \"Name\" \u2192 Look for full name (first + last)\n   - \"Email\" \u2192 Look for @email patterns\n   - \"Phone\" / \"Mobile\" / \"Contact\" \u2192 Look for phone numbers\n   - \"Age\" \u2192 Look for age OR calculate from DOB if present\n   - \"Address\" \u2192 Full address if available\n   - \"Skills\" \u2192 Technical skills, languages, tools\n   - \"Experience\" \u2192 Years or job titles\n   - \"Education\" \u2192 Degrees, institutions\n   - \"LinkedIn\" \u2192 LinkedIn URLs only\n\n4. **DATA CLEANING**:\n   - Names: Proper Case (John Smith, not JOHN SMITH)\n   - Phones: Keep original format or standardize to +1-XXX-XXX-XXXX\n   - Emails: Lowercase\n   - Dates: Keep as found (Jan 2020 - Dec 2022)\n\n5. **ONE ROW PER DOCUMENT**: Each uploaded PDF/image represents ONE candidate/record. Output exactly one row of data per document.\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nOUTPUT FORMAT:\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\nReturn a JSON array of objects. Each object has keys matching the column names EXACTLY.\n\nExample for columns [\"Name\", \"Email\", \"Phone\", \"Skills\"]:\n[\n  {\"Name\": \"John Smith\", \"Email\": \"john@email.com\", \"Phone\": \"+1-555-123-4567\", \"Skills\": \"Python, Excel, SQL\"},\n  {\"Name\": \"Jane Doe\", \"Email\": \"jane.doe@company.com\", \"Phone\": \"\", \"Skills\": \"JavaScript, React\"}\n]\n\nNote: Jane Doe had no phone number visible in her resume, so it's left as \"\".\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nWHAT NOT TO DO:\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\n\u274C Do NOT add columns that aren't in the schema\n\u274C Do NOT guess email addresses (e.g., firstname.lastname@company.com)\n\u274C Do NOT fabricate phone numbers\n\u274C Do NOT hallucinate skills or experience not mentioned\n\u274C Do NOT include \"N/A\", \"Not Found\", \"Unknown\" \u2014 use \"\" instead\n\u274C Do NOT include markdown formatting \u2014 ONLY raw JSON\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nNOW EXTRACT FROM THE ATTACHED DOCUMENTS:\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n");
+}
+
+/**
+ * Generate Excel code that writes extracted data to the sheet
+ */
+function generateExcelCode(columns, data) {
+  // Serialize data for JS injection
+  var serializedData = JSON.stringify(data, null, 2);
+  var serializedColumns = JSON.stringify(columns);
+  return "\n// \u2500\u2500\u2500 Schema-Aware Resume Extraction \u2500\u2500\u2500\n// Columns: ".concat(columns.join(", "), "\n// Records: ").concat(data.length, "\n\n// Extracted Data\nconst columns = ").concat(serializedColumns, ";\nconst extractedData = ").concat(serializedData, ";\n\n// Check if headers exist (row 1)\nconst headerRange = sheet.getRange(\"A1\").getResizedRange(0, columns.length - 1);\nheaderRange.load(\"values\");\nawait context.sync();\n\nconst existingHeaders = headerRange.values[0];\nconst hasHeaders = existingHeaders.some(h => h && h.toString().trim() !== \"\");\n\nlet startRow = 2; // Default: after headers\n\nif (!hasHeaders) {\n    // No headers \u2014 write them first\n    const headerData = [columns];\n    const headerWriteRange = writeData(sheet, \"A1\", headerData);\n    if (headerWriteRange) {\n        headerWriteRange.format.font.bold = true;\n        headerWriteRange.format.fill.color = \"#2D6A4F\";\n        headerWriteRange.format.font.color = \"#FFFFFF\";\n        headerWriteRange.format.rowHeight = 28;\n    }\n} else {\n    // Headers exist \u2014 find the last row with data\n    const usedRange = sheet.getUsedRange();\n    usedRange.load(\"rowCount\");\n    await context.sync();\n    startRow = usedRange.rowCount + 1;\n}\n\n// Convert extracted objects to 2D array matching column order\nconst dataRows = extractedData.map(record => {\n    return columns.map(col => {\n        const value = record[col];\n        return value !== undefined && value !== null ? String(value) : \"\";\n    });\n});\n\nif (dataRows.length > 0) {\n    const dataRange = writeData(sheet, \"A\" + startRow, dataRows);\n    \n    if (dataRange) {\n        // Apply alternating row colors\n        for (let i = 0; i < dataRows.length; i++) {\n            const row = dataRange.getRow(i);\n            if (i % 2 === 0) {\n                row.format.fill.color = \"#F0FAF5\";\n            }\n        }\n        \n        // Apply borders\n        const borderStyle = \"Thin\";\n        dataRange.format.borders.getItem(\"InsideHorizontal\").style = borderStyle;\n        dataRange.format.borders.getItem(\"InsideVertical\").style = borderStyle;\n        dataRange.format.borders.getItem(\"EdgeTop\").style = borderStyle;\n        dataRange.format.borders.getItem(\"EdgeBottom\").style = borderStyle;\n        dataRange.format.borders.getItem(\"EdgeLeft\").style = borderStyle;\n        dataRange.format.borders.getItem(\"EdgeRight\").style = borderStyle;\n    }\n}\n\n// Final autofit\nsheet.getUsedRange().format.autofitColumns();\n");
+}
+
+/**
+ * Parse LLM response to extract JSON data
+ */
+function parseExtractionResponse(response) {
+  // Clean the response - remove markdown code blocks
+  var cleaned = response.trim();
+  cleaned = cleaned.replace(/^```json?\s*/i, "");
+  cleaned = cleaned.replace(/\s*```$/i, "");
+  cleaned = cleaned.trim();
+
+  // Try to find JSON array in the response
+  var jsonMatch = cleaned.match(/\[[\s\S]*\]/);
+  if (!jsonMatch) {
+    console.warn("No JSON array found in response:", cleaned.substring(0, 200));
+    return [];
+  }
+  try {
+    var parsed = JSON.parse(jsonMatch[0]);
+    if (!Array.isArray(parsed)) {
+      console.warn("Parsed result is not an array");
+      return [];
+    }
+    return parsed;
+  } catch (e) {
+    console.error("JSON parse error:", e);
+    return [];
+  }
+}
+
+/**
+ * Validate extracted data against schema
+ */
+function validateExtraction(data, schema) {
+  var warnings = [];
+  var unmappedFields = [];
+
+  // Check each row for unmapped fields
+  data.forEach(function (row, index) {
+    Object.keys(row).forEach(function (key) {
+      if (!schema.columns.includes(key) && !unmappedFields.includes(key)) {
+        unmappedFields.push(key);
+      }
+    });
+
+    // Check for empty required fields
+    schema.columns.forEach(function (col) {
+      if (!row[col] || row[col].toString().trim() === "") {
+        warnings.push("Row ".concat(index + 1, ": \"").concat(col, "\" is empty"));
+      }
+    });
+  });
+  if (unmappedFields.length > 0) {
+    warnings.push("Found data for columns not in schema: ".concat(unmappedFields.join(", ")));
+  }
+  return {
+    success: data.length > 0,
+    data: data,
+    warnings: warnings,
+    unmappedFields: unmappedFields
+  };
+}
+
+/**
+ * Common column name mappings for intelligent matching
+ */
+var COLUMN_ALIASES = {
+  "Name": ["Full Name", "Candidate Name", "Applicant Name", "First Name", "First", "Naam"],
+  "Email": ["E-mail", "Email Address", "E-Mail", "Mail", "Contact Email"],
+  "Phone": ["Mobile", "Mobile No", "Mobile Number", "Contact", "Contact No", "Phone Number", "Tel", "Telephone"],
+  "Age": ["Years", "DOB", "Date of Birth", "Birth Date"],
+  "Address": ["Location", "City", "Current Location", "Residence"],
+  "Skills": ["Technical Skills", "Key Skills", "Skillset", "Expertise", "Technologies"],
+  "Experience": ["Work Experience", "Total Experience", "Years of Experience", "Professional Experience"],
+  "Education": ["Qualification", "Degree", "Academic", "Educational Qualification"],
+  "LinkedIn": ["LinkedIn URL", "LinkedIn Profile", "Profile URL"],
+  "Company": ["Current Company", "Organization", "Employer", "Current Employer"],
+  "Position": ["Role", "Job Title", "Designation", "Current Role", "Title"],
+  "Summary": ["Profile Summary", "About", "Objective", "Career Objective"]
+};
+
+/**
+ * Normalize column name to standard form
+ */
+function normalizeColumnName(columnName) {
+  var normalized = columnName.trim();
+
+  // Check direct match first
+  if (COLUMN_ALIASES[normalized]) {
+    return normalized;
+  }
+
+  // Check aliases
+  for (var _i = 0, _Object$entries = Object.entries(COLUMN_ALIASES); _i < _Object$entries.length; _i++) {
+    var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+      standard = _Object$entries$_i[0],
+      aliases = _Object$entries$_i[1];
+    if (aliases.some(function (alias) {
+      return alias.toLowerCase() === normalized.toLowerCase();
+    })) {
+      return standard;
+    }
+  }
+  return normalized;
+}
+
+/**
+ * Build extraction prompt with column aliases for better matching
+ */
+function buildEnhancedPrompt(columns) {
+  var columnDetails = columns.map(function (col) {
+    var aliases = COLUMN_ALIASES[col] || [];
+    var aliasHint = aliases.length > 0 ? " (also look for: ".concat(aliases.slice(0, 3).join(", "), ")") : "";
+    return "\u2022 \"".concat(col, "\"").concat(aliasHint);
+  }).join("\n");
+  return "\nCOLUMNS TO EXTRACT:\n".concat(columnDetails, "\n\nRemember: If you cannot find data for a column, return \"\". Never guess or fabricate.\n");
+}
+
+/***/ }),
+
+/***/ "./src/services/pdfService.ts":
+/*!************************************!*\
+  !*** ./src/services/pdfService.ts ***!
+  \************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   extractTextFromBase64PDF: function() { return /* binding */ extractTextFromBase64PDF; },
+/* harmony export */   extractTextFromMultiplePDFs: function() { return /* binding */ extractTextFromMultiplePDFs; },
+/* harmony export */   extractTextFromPDF: function() { return /* binding */ extractTextFromPDF; },
+/* harmony export */   extractTextFromPDFFile: function() { return /* binding */ extractTextFromPDFFile; },
+/* harmony export */   isValidPDF: function() { return /* binding */ isValidPDF; }
+/* harmony export */ });
+/* harmony import */ var pdfjs_dist__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pdfjs-dist */ "./node_modules/pdfjs-dist/build/pdf.js");
+/* harmony import */ var pdfjs_dist__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(pdfjs_dist__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorValues(e) { if (null != e) { var t = e["function" == typeof Symbol && Symbol.iterator || "@@iterator"], r = 0; if (t) return t.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) return { next: function next() { return e && r >= e.length && (e = void 0), { value: e && e[r++], done: !e }; } }; } throw new TypeError(_typeof(e) + " is not iterable"); }
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i.return) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+/**
+ * PDF Service - Extracts plain text from PDFs using pdf-parse
+ * This provides clean text extraction before LLM processing
+ */
+
+
+// Configure PDF.js worker
+pdfjs_dist__WEBPACK_IMPORTED_MODULE_0__.GlobalWorkerOptions.workerSrc = "//cdnjs.cloudflare.com/ajax/libs/pdf.js/".concat(pdfjs_dist__WEBPACK_IMPORTED_MODULE_0__.version, "/pdf.worker.min.js");
+
+/**
+ * Extract text from a PDF file using PDF.js (browser-compatible)
+ * @param fileBuffer - ArrayBuffer of the PDF file
+ * @returns Extracted text and metadata
+ */
+function extractTextFromPDF(_x) {
+  return _extractTextFromPDF.apply(this, arguments);
+}
+
+/**
+ * Extract text from a PDF file (File object from input)
+ * @param file - File object from file input
+ * @returns Extracted text and metadata
+ */
+function _extractTextFromPDF() {
+  _extractTextFromPDF = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(fileBuffer) {
+    var loadingTask, pdf, totalPages, fullText, pageNum, page, textContent, pageText, metadata, info, _t;
+    return _regenerator().w(function (_context) {
+      while (1) switch (_context.p = _context.n) {
+        case 0:
+          _context.p = 0;
+          loadingTask = pdfjs_dist__WEBPACK_IMPORTED_MODULE_0__.getDocument({
+            data: fileBuffer
+          });
+          _context.n = 1;
+          return loadingTask.promise;
+        case 1:
+          pdf = _context.v;
+          totalPages = pdf.numPages;
+          fullText = ""; // Extract text from each page
+          pageNum = 1;
+        case 2:
+          if (!(pageNum <= totalPages)) {
+            _context.n = 6;
+            break;
+          }
+          _context.n = 3;
+          return pdf.getPage(pageNum);
+        case 3:
+          page = _context.v;
+          _context.n = 4;
+          return page.getTextContent();
+        case 4:
+          textContent = _context.v;
+          // Combine text items with proper spacing
+          pageText = textContent.items.map(function (item) {
+            return item.str;
+          }).join(" ");
+          fullText += pageText + "\n\n";
+        case 5:
+          pageNum++;
+          _context.n = 2;
+          break;
+        case 6:
+          _context.n = 7;
+          return pdf.getMetadata();
+        case 7:
+          metadata = _context.v;
+          info = metadata.info;
+          return _context.a(2, {
+            text: cleanExtractedText(fullText),
+            pages: totalPages,
+            metadata: {
+              title: info === null || info === void 0 ? void 0 : info.Title,
+              author: info === null || info === void 0 ? void 0 : info.Author,
+              subject: info === null || info === void 0 ? void 0 : info.Subject,
+              creator: info === null || info === void 0 ? void 0 : info.Creator
+            }
+          });
+        case 8:
+          _context.p = 8;
+          _t = _context.v;
+          throw new Error("PDF extraction failed: ".concat(_t instanceof Error ? _t.message : String(_t)));
+        case 9:
+          return _context.a(2);
+      }
+    }, _callee, null, [[0, 8]]);
+  }));
+  return _extractTextFromPDF.apply(this, arguments);
+}
+function extractTextFromPDFFile(_x2) {
+  return _extractTextFromPDFFile.apply(this, arguments);
+}
+
+/**
+ * Extract text from a base64-encoded PDF string
+ * @param base64String - Base64-encoded PDF data
+ * @returns Extracted text and metadata
+ */
+function _extractTextFromPDFFile() {
+  _extractTextFromPDFFile = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(file) {
+    var arrayBuffer;
+    return _regenerator().w(function (_context2) {
+      while (1) switch (_context2.n) {
+        case 0:
+          _context2.n = 1;
+          return file.arrayBuffer();
+        case 1:
+          arrayBuffer = _context2.v;
+          return _context2.a(2, extractTextFromPDF(arrayBuffer));
+      }
+    }, _callee2);
+  }));
+  return _extractTextFromPDFFile.apply(this, arguments);
+}
+function extractTextFromBase64PDF(_x3) {
+  return _extractTextFromBase64PDF.apply(this, arguments);
+}
+
+/**
+ * Clean and normalize extracted text
+ * @param text - Raw extracted text
+ * @returns Cleaned text
+ */
+function _extractTextFromBase64PDF() {
+  _extractTextFromBase64PDF = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(base64String) {
+    var base64Data, binaryString, bytes, i;
+    return _regenerator().w(function (_context3) {
+      while (1) switch (_context3.n) {
+        case 0:
+          // Remove data URL prefix if present
+          base64Data = base64String.replace(/^data:application\/pdf;base64,/, ""); // Convert base64 to ArrayBuffer
+          binaryString = atob(base64Data);
+          bytes = new Uint8Array(binaryString.length);
+          for (i = 0; i < binaryString.length; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+          }
+          return _context3.a(2, extractTextFromPDF(bytes.buffer));
+      }
+    }, _callee3);
+  }));
+  return _extractTextFromBase64PDF.apply(this, arguments);
+}
+function cleanExtractedText(text) {
+  return text
+  // Remove excessive whitespace
+  .replace(/\s+/g, " ")
+  // Remove control characters except newlines
+  .replace(/[\x00-\x08\x0B-\x0C\x0E-\x1F\x7F]/g, "")
+  // Normalize line breaks
+  .replace(/\r\n/g, "\n").replace(/\r/g, "\n")
+  // Remove multiple consecutive newlines (keep max 2)
+  .replace(/\n{3,}/g, "\n\n")
+  // Trim leading/trailing whitespace
+  .trim();
+}
+
+/**
+ * Validate if a buffer is a valid PDF
+ * @param buffer - ArrayBuffer to validate
+ * @returns True if valid PDF
+ */
+function isValidPDF(buffer) {
+  var uint8Array = new Uint8Array(buffer);
+  // PDF files start with %PDF-
+  return uint8Array.length >= 5 && uint8Array[0] === 0x25 &&
+  // %
+  uint8Array[1] === 0x50 &&
+  // P
+  uint8Array[2] === 0x44 &&
+  // D
+  uint8Array[3] === 0x46 &&
+  // F
+  uint8Array[4] === 0x2d // -
+;
+}
+
+/**
+ * Extract text from multiple PDFs in parallel
+ * @param files - Array of File objects
+ * @param maxConcurrency - Maximum parallel extractions
+ * @returns Array of extraction results
+ */
+function extractTextFromMultiplePDFs(_x4) {
+  return _extractTextFromMultiplePDFs.apply(this, arguments);
+}
+function _extractTextFromMultiplePDFs() {
+  _extractTextFromMultiplePDFs = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5(files) {
+    var maxConcurrency,
+      results,
+      _loop,
+      i,
+      _args6 = arguments;
+    return _regenerator().w(function (_context6) {
+      while (1) switch (_context6.n) {
+        case 0:
+          maxConcurrency = _args6.length > 1 && _args6[1] !== undefined ? _args6[1] : 5;
+          results = [];
+          _loop = /*#__PURE__*/_regenerator().m(function _loop() {
+            var batch, batchResults;
+            return _regenerator().w(function (_context5) {
+              while (1) switch (_context5.n) {
+                case 0:
+                  batch = files.slice(i, i + maxConcurrency);
+                  _context5.n = 1;
+                  return Promise.allSettled(batch.map(/*#__PURE__*/function () {
+                    var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4(file) {
+                      var result, _t2;
+                      return _regenerator().w(function (_context4) {
+                        while (1) switch (_context4.p = _context4.n) {
+                          case 0:
+                            _context4.p = 0;
+                            _context4.n = 1;
+                            return extractTextFromPDFFile(file);
+                          case 1:
+                            result = _context4.v;
+                            return _context4.a(2, {
+                              file: file,
+                              result: result
+                            });
+                          case 2:
+                            _context4.p = 2;
+                            _t2 = _context4.v;
+                            return _context4.a(2, {
+                              file: file,
+                              error: _t2 instanceof Error ? _t2.message : String(_t2)
+                            });
+                        }
+                      }, _callee4, null, [[0, 2]]);
+                    }));
+                    return function (_x5) {
+                      return _ref.apply(this, arguments);
+                    };
+                  }()));
+                case 1:
+                  batchResults = _context5.v;
+                  batchResults.forEach(function (settled) {
+                    if (settled.status === "fulfilled") {
+                      results.push(settled.value);
+                    } else {
+                      results.push({
+                        file: batch[results.length % maxConcurrency],
+                        error: settled.reason
+                      });
+                    }
+                  });
+                case 2:
+                  return _context5.a(2);
+              }
+            }, _loop);
+          });
+          i = 0;
+        case 1:
+          if (!(i < files.length)) {
+            _context6.n = 3;
+            break;
+          }
+          return _context6.d(_regeneratorValues(_loop()), 2);
+        case 2:
+          i += maxConcurrency;
+          _context6.n = 1;
+          break;
+        case 3:
+          return _context6.a(2, results);
+      }
+    }, _callee5);
+  }));
+  return _extractTextFromMultiplePDFs.apply(this, arguments);
+}
+
+/***/ }),
+
+/***/ "./src/services/prompt.ts":
+/*!********************************!*\
+  !*** ./src/services/prompt.ts ***!
+  \********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SYSTEM_PROMPT: function() { return /* binding */ SYSTEM_PROMPT; }
+/* harmony export */ });
+/**
+ * SheetOS AI — Bulletproof System Prompt v2.0
+ * Optimized for zero hallucination + production reliability.
+ * 
+ * Key improvements:
+ * - Explicit API whitelist and blacklist
+ * - More examples for common patterns
+ * - Better error prevention
+ * - Anti-hallucination guards
+ */
+var SYSTEM_PROMPT = "You are SheetOS AI, an Excel JavaScript API expert. Generate ONLY executable JS code.\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nENVIRONMENT (Already available \u2014 DO NOT redeclare these):\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n- context: Excel.RequestContext (ready to use)\n- sheet: Active worksheet (already loaded)\n- Excel: Namespace for enums (Excel.ChartType, Excel.BorderLineStyle, etc.)\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nCRITICAL RULES (MUST FOLLOW):\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n1. OUTPUT: Raw executable JavaScript ONLY. No markdown, no explanations.\n2. NO REDECLARATIONS: Never write \"const context = ...\" or \"const sheet = ...\"\n3. LOAD BEFORE READ: Properties like .values, .rowCount require .load() + await context.sync()\n4. 2D ARRAYS: range.values and range.formulas MUST be 2D arrays: [[value]]\n5. SYNC OFTEN: Call await context.sync() after every .load() before accessing properties\n6. SAFETY: Always check if range/data exists before operating on it\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nBANNED PATTERNS (WILL CRASH \u2014 NEVER USE):\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\u274C .getValues()         \u2192 Use: range.load(\"values\"); await context.sync(); range.values\n\u274C .getRowCount()       \u2192 Use: range.load(\"rowCount\"); await context.sync(); range.rowCount\n\u274C .getColumnCount()    \u2192 Use: range.load(\"columnCount\"); await context.sync(); range.columnCount\n\u274C .getAddress()        \u2192 Use: range.load(\"address\"); await context.sync(); range.address\n\u274C .getText()           \u2192 Use: range.load(\"text\"); await context.sync(); range.text\n\u274C .setValues(x)        \u2192 Use: range.values = [[x]]\n\u274C .setFormula(x)       \u2192 Use: range.formulas = [[\"=SUM(A:A)\"]]\n\u274C .setValue(x)         \u2192 Use: range.values = [[x]]\n\u274C range.font.bold      \u2192 Use: range.format.font.bold\n\u274C range.alignment      \u2192 Use: range.format.horizontalAlignment\n\u274C chart.setTitle(x)    \u2192 Use: chart.title.text = x\n\u274C chart.add()          \u2192 Use: sheet.charts.add()\n\u274C range.getItem()      \u2192 Use: range.getCell(row, col)\n\u274C range.select()       \u2192 REMOVE (causes performance issues)\n\u274C range.activate()     \u2192 REMOVE (not needed)\n\u274C SpreadsheetApp       \u2192 WRONG PLATFORM (this is Google Apps Script)\n\u274C Logger.log()         \u2192 REMOVE or use console.log\n\u274C Browser.msgBox()     \u2192 REMOVE (not available)\n\u274C alert() / confirm()  \u2192 REMOVE (blocked in add-ins)\n\u274C message.alert()      \u2192 REMOVE (doesn't exist)\n\u274C getRange(\"A0\")       \u2192 Row 0 doesn't exist. Use A1 or higher.\n\u274C const context = ...  \u2192 ALREADY DECLARED\n\u274C const sheet = ...    \u2192 ALREADY DECLARED\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nCORRECT PATTERNS (COPY THESE):\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\n// \u2500\u2500\u2500 Read Data from Sheet \u2500\u2500\u2500\nconst usedRange = sheet.getUsedRange();\nusedRange.load(\"values,rowCount,columnCount\");\nawait context.sync();\nconst data = usedRange.values; // Now accessible\nconst rows = usedRange.rowCount;\nconst cols = usedRange.columnCount;\n\n// \u2500\u2500\u2500 Write Data (Single Cell) \u2500\u2500\u2500\nsheet.getRange(\"A1\").values = [[\"Hello World\"]];\n\n// \u2500\u2500\u2500 Write Data (Multiple Cells) \u2500\u2500\u2500\nsheet.getRange(\"A1:C2\").values = [\n  [\"Name\", \"Age\", \"City\"],\n  [\"John\", 25, \"NYC\"]\n];\n\n// \u2500\u2500\u2500 Formulas \u2500\u2500\u2500\nsheet.getRange(\"D2\").formulas = [[\"=SUM(B2:C2)\"]];\n// Multiple formulas:\nsheet.getRange(\"D2:D5\").formulas = [\n  [\"=SUM(B2:C2)\"],\n  [\"=SUM(B3:C3)\"],\n  [\"=SUM(B4:C4)\"],\n  [\"=SUM(B5:C5)\"]\n];\n\n// \u2500\u2500\u2500 Formatting \u2500\u2500\u2500\nconst r = sheet.getRange(\"A1:D1\");\nr.format.font.bold = true;\nr.format.font.color = \"#FFFFFF\";\nr.format.fill.color = \"#4472C4\";\nr.format.horizontalAlignment = \"Center\";\nr.format.verticalAlignment = \"Center\";\nr.format.rowHeight = 28;\n\n// \u2500\u2500\u2500 Borders \u2500\u2500\u2500\nconst range = sheet.getRange(\"A1:D10\");\nrange.format.borders.getItem(\"InsideHorizontal\").style = \"Thin\";\nrange.format.borders.getItem(\"InsideVertical\").style = \"Thin\";\nrange.format.borders.getItem(\"EdgeTop\").style = \"Thin\";\nrange.format.borders.getItem(\"EdgeBottom\").style = \"Thin\";\nrange.format.borders.getItem(\"EdgeLeft\").style = \"Thin\";\nrange.format.borders.getItem(\"EdgeRight\").style = \"Thin\";\n\n// \u2500\u2500\u2500 Charts \u2500\u2500\u2500\nconst chartRange = sheet.getRange(\"A1:B5\");\nconst chart = sheet.charts.add(Excel.ChartType.columnClustered, chartRange, Excel.ChartSeriesBy.auto);\nchart.title.text = \"Sales Report\";\nchart.setPosition(\"E2\", \"L15\");\n\n// \u2500\u2500\u2500 Tables \u2500\u2500\u2500\nconst tableRange = sheet.getRange(\"A1:D10\");\nconst table = sheet.tables.add(tableRange, true);\ntable.name = \"SalesTable\";\ntable.style = \"TableStyleMedium9\";\n\n// \u2500\u2500\u2500 Conditional Formatting \u2500\u2500\u2500\nconst cfRange = sheet.getRange(\"C2:C100\");\nconst cf = cfRange.conditionalFormats.add(Excel.ConditionalFormatType.cellValue);\ncf.cellValue.format.fill.color = \"#92D050\";\ncf.cellValue.rule = { formula1: \"=50\", operator: \"GreaterThan\" };\n\n// \u2500\u2500\u2500 Data Validation (Dropdown) \u2500\u2500\u2500\nsheet.getRange(\"E2:E100\").dataValidation.rule = {\n  list: { inCellDropDown: true, source: \"Yes,No,Maybe\" }\n};\n\n// \u2500\u2500\u2500 Sort \u2500\u2500\u2500\nsheet.getUsedRange().sort.apply([{ key: 0, ascending: true }]);\n\n// \u2500\u2500\u2500 Filter \u2500\u2500\u2500\nconst filterRange = sheet.getUsedRange();\nfilterRange.autoFilter.apply(filterRange, 0);\n\n// \u2500\u2500\u2500 Freeze Panes \u2500\u2500\u2500\nsheet.freezePanes.freezeRows(1);\n\n// \u2500\u2500\u2500 Number Format \u2500\u2500\u2500\nsheet.getRange(\"B2:B100\").numberFormat = [[\"$#,##0.00\"]];\nsheet.getRange(\"C2:C100\").numberFormat = [[\"0.0%\"]];\n\n// \u2500\u2500\u2500 Clear Contents \u2500\u2500\u2500\nsheet.getUsedRange().clear(Excel.ClearApplyTo.Contents);\n\n// \u2500\u2500\u2500 New Worksheet \u2500\u2500\u2500\nconst newSheet = context.workbook.worksheets.add(\"Report\");\nnewSheet.activate();\n\n// \u2500\u2500\u2500 Autofit Columns (ALWAYS DO THIS AT END) \u2500\u2500\u2500\nsheet.getUsedRange().format.autofitColumns();\n\n// \u2500\u2500\u2500 Data Cleanup (Trim Whitespace) \u2500\u2500\u2500\nconst range = sheet.getUsedRange();\nrange.load(\"values\");\nawait context.sync();\nconst cleanValues = range.values.map(row => \n  row.map(cell => (typeof cell === \"string\" ? cell.trim() : cell))\n);\nrange.values = cleanValues;\nawait context.sync();\n\n// \u2500\u2500\u2500 Data Cleanup (Remove Empty Rows) \u2500\u2500\u2500\nconst rangeToClean = sheet.getUsedRange();\nrangeToClean.load(\"values,rowCount\");\nawait context.sync();\nfor (let i = rangeToClean.rowCount - 1; i >= 0; i--) {\n  const rowVals = rangeToClean.values[i];\n  if (rowVals.every(v => v === null || v === \"\")) {\n    sheet.getRange((i + 1) + \":\" + (i + 1)).delete(Excel.DeleteShiftDirection.up);\n  }\n}\nawait context.sync();\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nMANDATORY writeData HELPER (Include this for any data writing):\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nfunction writeData(sheet, startCell, data) {\n  if (!data || data.length === 0) return null;\n  const rows = data.length;\n  const cols = Math.max(...data.map(r => r ? r.length : 0));\n  if (cols === 0) return null;\n  const normalized = data.map(r => {\n    const row = r ? [...r] : [];\n    while (row.length < cols) row.push(\"\");\n    return row;\n  });\n  const range = sheet.getRange(startCell).getResizedRange(rows - 1, cols - 1);\n  range.values = normalized;\n  range.format.autofitColumns();\n  return range;\n}\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nANTI-HALLUCINATION RULES (For Document/PDF Extraction):\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n1. EXTRACT ONLY WHAT YOU SEE: Never invent data that isn't in the image/PDF\n2. EMPTY IF MISSING: If a field (phone, email, etc.) isn't visible, use \"\" not \"N/A\"\n3. NO GUESSING: Don't make up names, numbers, or dates\n4. PRESERVE EXACT TEXT: Copy text exactly as shown (don't \"fix\" typos unless asked)\n5. ONE ROW PER DOCUMENT: Each PDF/resume = exactly one data row\n6. MATCH SCHEMA: If column headers exist, ONLY extract data for those columns\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nDESIGN BEST PRACTICES:\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n1. HEADERS: Bold, dark background (#1B4D3E or #2D6A4F), white text\n2. NUMBERS: Currency \"$#,##0.00\", Percentage \"0.0%\", Integer \"#,##0\"\n3. DATES: Format as \"Short Date\" or \"YYYY-MM-DD\" string\n4. COLORS: Professional muted tones \u2014 no neon, no pure red/blue\n5. ZEBRA STRIPES: White and light gray (#F5F5F5) alternating rows\n6. ROW HEIGHT: Headers 28px, Data 20px\n7. ALWAYS: End with sheet.getUsedRange().format.autofitColumns()\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nSCHEMA-AWARE EXTRACTION (When EXISTING_COLUMNS provided):\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nWhen given \"EXISTING_COLUMNS: [...]\":\n1. Extract ONLY data matching those columns\n2. Use intelligent matching: \"Phone\" = \"Mobile No\" = \"Contact Number\"\n3. Leave cells empty (\"\") if data not found \u2014 NEVER write \"Not Found\"\n4. Append to first empty row after existing data\n\nUser Prompt:\n";
+
+/***/ }),
+
+/***/ "./src/taskpane/taskpane.ts":
+/*!**********************************!*\
+  !*** ./src/taskpane/taskpane.ts ***!
+  \**********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   runAICommand: function() { return /* binding */ runAICommand; }
+/* harmony export */ });
+/* harmony import */ var _taskpane_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./taskpane.css */ "./src/taskpane/taskpane.css");
+/* harmony import */ var _services_llm_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/llm.service */ "./src/services/llm.service.ts");
+/* harmony import */ var _services_prompt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/prompt */ "./src/services/prompt.ts");
+/* harmony import */ var _services_chat_prompt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/chat-prompt */ "./src/services/chat-prompt.ts");
+/* harmony import */ var _services_cache__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/cache */ "./src/services/cache.ts");
+/* harmony import */ var _services_document_extractor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/document-extractor */ "./src/services/document-extractor.ts");
+/* harmony import */ var _services_pdfService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/pdfService */ "./src/services/pdfService.ts");
+/* harmony import */ var _services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/agent-orchestrator */ "./src/services/agent-orchestrator.ts");
+/* harmony import */ var pdfjs_dist__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! pdfjs-dist */ "./node_modules/pdfjs-dist/build/pdf.js");
+/* harmony import */ var pdfjs_dist__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(pdfjs_dist__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _services_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/icons */ "./src/services/icons.ts");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _regeneratorValues(e) { if (null != e) { var t = e["function" == typeof Symbol && Symbol.iterator || "@@iterator"], r = 0; if (t) return t.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) return { next: function next() { return e && r >= e.length && (e = void 0), { value: e && e[r++], done: !e }; } }; } throw new TypeError(_typeof(e) + " is not iterable"); }
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i.return) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+/* global console, Excel, document, window, Office */
+
+
+
+
+
+
+
+
+
+
+
+// Worker setup for PDF.js
+try {
+  // @ts-ignore
+  pdfjs_dist__WEBPACK_IMPORTED_MODULE_8__.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/".concat(pdfjs_dist__WEBPACK_IMPORTED_MODULE_8__.version, "/pdf.worker.min.js");
+} catch (e) {
+  console.warn("PDF Worker setup failed:", e);
+}
+
+// ─── Types ─────────────────────────────────────────────────────
+
+// ─── State ─────────────────────────────────────────────────────
+var currentMode = "planning";
+var currentCategory = "cleanup";
+var schemaExtractionMode = false; // When true, use column headers from Excel
+var chatHistory = [];
+var chatConversation = [];
+var isChatBusy = false;
+var attachedFiles = []; // Array of attached files
+var chatAbortController = null;
+var agentAbortController = null;
+var rawPDFFiles = []; // Store raw File objects for text-based batch extraction
+var batchAbortController = null;
+
+// ─── Quick Actions by Category ─────────────────────────────────
+var CATEGORIZED_ACTIONS = {
+  // ── Data Cleanup ──
+  cleanup: [{
+    icon: "eraser",
+    label: "Smart Clean 🧹",
+    prompt: "Analyze the used range. Perform 'Smart Cleaning': (1) Trim all whitespace. (2) Convert text-numbers to real numbers. (3) Standardize dates to Short Date format. (4) Remove completely empty rows. (5) Remove duplicate rows. (6) Convert text columns to Proper Case. Write a summary of changes in a new cell comment."
+  }, {
+    icon: "eraser",
+    label: "Remove Duplicates",
+    prompt: "Find and remove duplicate rows from the data, keeping the first occurrence of each."
+  }, {
+    icon: "eraser",
+    label: "Trim Spaces",
+    prompt: "Trim all leading and trailing whitespace from every cell in the used range."
+  }, {
+    icon: "eraser",
+    label: "Fix Empty Rows",
+    prompt: "Find and delete all completely empty rows within the used data range."
+  }, {
+    icon: "search",
+    label: "Find Blanks",
+    prompt: "Highlight all blank cells in the used range with a light yellow background color (#FFF3CD)."
+  }, {
+    icon: "hash",
+    label: "Fix Number Format",
+    prompt: "Detect columns with numbers stored as text and convert them back to proper numbers."
+  }, {
+    icon: "eraser",
+    label: "Standardize Case",
+    prompt: "Convert all text in column A to proper case (first letter capitalized, rest lowercase)."
+  }, {
+    icon: "eraser",
+    label: "Clear Formatting",
+    prompt: "Clear all formatting from the used range while keeping data, then auto-fit all columns."
+  }, {
+    icon: "copy",
+    label: "Split Column",
+    prompt: "Split the data in column A by comma delimiter into separate columns B, C, D."
+  }, {
+    icon: "eraser",
+    label: "Remove Hyperlinks",
+    prompt: "Find all cells in the used range. Remove all hyperlinks while keeping the cell values. Set the font color of all cells to black and remove any underlines to ensure a consistent, professional appearance."
+  }],
+  // ── Natural Language Formula Generator ──
+  formulas: [{
+    icon: "formula",
+    label: "Formula Doctor 🚑",
+    prompt: "Analyze the active cell/formula. (1) Explain the logic in a cell note. (2) If there is an error (#VALUE, #REF), FIX it and explain the fix. (3) If it's a value, suggest a formula. Expertly debug."
+  }, {
+    icon: "formula",
+    label: "Auto SUM",
+    prompt: "Add a SUM formula at the bottom of each numeric column with a bold TOTAL label in column A."
+  }, {
+    icon: "formula",
+    label: "AVERAGE Row",
+    prompt: "Add an AVERAGE formula at the bottom of each numeric column with a bold AVERAGE label."
+  }, {
+    icon: "formula",
+    label: "COUNT & COUNTA",
+    prompt: "Add COUNT and COUNTA formulas at the bottom to count numeric and non-empty cells in each column."
+  }, {
+    icon: "formula",
+    label: "VLOOKUP Setup",
+    prompt: "Analyze the data and set up a VLOOKUP section: create a lookup area to the right of the data where user can type a search value in one cell, and VLOOKUP automatically returns matching data from the table. Add labels and formatting to make it clear how to use it."
+  }, {
+    icon: "formula",
+    label: "SUMIF by Category",
+    prompt: "Detect the category column (text) and numeric columns in the data. Create a summary section below the data that uses SUMIF to total each unique category. Add labels, formatting, and a bold grand total row."
+  }, {
+    icon: "formula",
+    label: "IF Conditional",
+    prompt: "Add a new Status column at the end of the data. Use an IF formula to classify each row: if the last numeric column value is above the average, mark it 'Above Average', otherwise 'Below Average'. Format green for above, red for below."
+  }, {
+    icon: "trendUp",
+    label: "Running Total",
+    prompt: "Add a 'Running Total' column at the end of the data that calculates a cumulative sum of the main numeric column, row by row. Format it with a subtle blue background and number format with commas."
+  }, {
+    icon: "sortAsc",
+    label: "Rank Values",
+    prompt: "Add a 'Rank' column at the end of the data that ranks each row by the primary numeric column (largest = rank 1). Highlight the top 3 with gold/green backgrounds. Auto-fit all columns."
+  }],
+  // ── Smart Formatter (Canva for Excel) ──
+  format: [{
+    icon: "paintbrush",
+    label: "Make Professional",
+    prompt: "Apply professional formatting to the sheet. Use this EXACT safe pattern:\n\n// Step 1: Get used range and load properties\nconst usedRange = sheet.getUsedRange();\nusedRange.load(\"values,rowCount,columnCount,address\");\nawait context.sync();\n\n// Step 2: Check if sheet has data\nif (!usedRange || usedRange.rowCount < 1 || usedRange.columnCount < 1) {\n  throw new Error(\"Sheet appears empty. Add some data first.\");\n}\n\nconst rowCount = usedRange.rowCount;\nconst colCount = usedRange.columnCount;\n\n// Step 3: Format header row (row 1)\nconst headerRow = usedRange.getRow(0);\nheaderRow.format.set({\n  font: { bold: true, size: 11, color: \"#FFFFFF\" },\n  fill: { color: \"#1B2A4A\" },\n  horizontalAlignment: \"Center\",\n  verticalAlignment: \"Center\",\n  rowHeight: 28\n});\n\n// Step 4: Format data rows with alternating colors\nfor (let i = 1; i < rowCount; i++) {\n  const row = usedRange.getRow(i);\n  row.format.set({\n    fill: { color: i % 2 === 0 ? \"#F4F5F7\" : \"#FFFFFF\" },\n    rowHeight: 22\n  });\n}\n\n// Step 5: Add borders and freeze pane\nusedRange.format.borders.getItem(\"InsideHorizontal\").style = \"Thin\";\nusedRange.format.borders.getItem(\"InsideVertical\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeTop\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeBottom\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeLeft\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeRight\").style = \"Thin\";\n\nheaderRow.format.borders.getItem(\"EdgeBottom\").style = \"Medium\";\nheaderRow.format.borders.getItem(\"EdgeBottom\").color = \"#1B2A4A\";\n\nsheet.freezePanes.freezeRows(1);\nusedRange.format.autofitColumns();\nawait context.sync();"
+  }, {
+    icon: "paintbrush",
+    label: "Executive Style",
+    prompt: "Apply executive presentation style using this EXACT safe pattern:\n\nconst usedRange = sheet.getUsedRange();\nusedRange.load(\"values,rowCount,columnCount\");\nawait context.sync();\n\nif (!usedRange || usedRange.rowCount < 1) {\n  throw new Error(\"Sheet appears empty.\");\n}\n\nconst rowCount = usedRange.rowCount;\n\n// Header styling\nconst headerRow = usedRange.getRow(0);\nheaderRow.format.font.bold = true;\nheaderRow.format.font.size = 11;\nheaderRow.format.font.color = \"#FFFFFF\";\nheaderRow.format.fill.color = \"#34495E\";\nheaderRow.format.horizontalAlignment = \"Center\";\nheaderRow.format.rowHeight = 30;\n\n// Data rows with subtle alternating\nfor (let i = 1; i < rowCount; i++) {\n  const row = usedRange.getRow(i);\n  row.format.fill.color = i % 2 === 0 ? \"#F8F9FA\" : \"#FFFFFF\";\n  row.format.rowHeight = 22;\n}\n\n// Light gray borders\nusedRange.format.borders.getItem(\"InsideHorizontal\").style = \"Thin\";\nusedRange.format.borders.getItem(\"InsideHorizontal\").color = \"#DEE2E6\";\nusedRange.format.borders.getItem(\"InsideVertical\").style = \"Thin\";\nusedRange.format.borders.getItem(\"InsideVertical\").color = \"#DEE2E6\";\nusedRange.format.borders.getItem(\"EdgeTop\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeBottom\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeLeft\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeRight\").style = \"Thin\";\n\n// Freeze header\nsheet.freezePanes.freezeRows(1);\nusedRange.format.autofitColumns();\nawait context.sync();"
+  }, {
+    icon: "paintbrush",
+    label: "Minimal Clean",
+    prompt: "Apply minimal modern formatting:\n\nconst usedRange = sheet.getUsedRange();\nusedRange.load(\"rowCount,columnCount\");\nawait context.sync();\n\nif (!usedRange || usedRange.rowCount < 1) {\n  throw new Error(\"Sheet appears empty.\");\n}\n\n// Clear existing formatting\nusedRange.format.fill.clear();\nusedRange.format.borders.getItem(\"InsideHorizontal\").style = \"None\";\nusedRange.format.borders.getItem(\"InsideVertical\").style = \"None\";\nusedRange.format.borders.getItem(\"EdgeTop\").style = \"None\";\nusedRange.format.borders.getItem(\"EdgeBottom\").style = \"None\";\nusedRange.format.borders.getItem(\"EdgeLeft\").style = \"None\";\nusedRange.format.borders.getItem(\"EdgeRight\").style = \"None\";\n\n// Header: bold, dark text, bottom border only\nconst headerRow = usedRange.getRow(0);\nheaderRow.format.font.bold = true;\nheaderRow.format.font.size = 11;\nheaderRow.format.font.color = \"#111827\";\nheaderRow.format.borders.getItem(\"EdgeBottom\").style = \"Thin\";\nheaderRow.format.borders.getItem(\"EdgeBottom\").color = \"#D1D5DB\";\nheaderRow.format.rowHeight = 28;\n\n// Data rows: smaller font, gray text\nfor (let i = 1; i < usedRange.rowCount; i++) {\n  const row = usedRange.getRow(i);\n  row.format.font.size = 10;\n  row.format.font.color = \"#374151\";\n  row.format.rowHeight = 22;\n}\n\nusedRange.format.autofitColumns();\nawait context.sync();"
+  }, {
+    icon: "paintbrush",
+    label: "Dark Theme",
+    prompt: "Apply dark theme formatting:\n\nconst usedRange = sheet.getUsedRange();\nusedRange.load(\"rowCount,columnCount\");\nawait context.sync();\n\nif (!usedRange || usedRange.rowCount < 1) {\n  throw new Error(\"Sheet appears empty.\");\n}\n\nconst rowCount = usedRange.rowCount;\n\n// All cells: dark background, light text\nusedRange.format.fill.color = \"#1E1E1E\";\nusedRange.format.font.color = \"#CCCCCC\";\n\n// Header: gold text\nconst headerRow = usedRange.getRow(0);\nheaderRow.format.fill.color = \"#2D2D2D\";\nheaderRow.format.font.bold = true;\nheaderRow.format.font.color = \"#F0C75E\";\nheaderRow.format.rowHeight = 28;\n\n// Alternating dark rows\nfor (let i = 1; i < rowCount; i++) {\n  const row = usedRange.getRow(i);\n  row.format.fill.color = i % 2 === 0 ? \"#252525\" : \"#1E1E1E\";\n}\n\n// Dark borders\nusedRange.format.borders.getItem(\"InsideHorizontal\").style = \"Thin\";\nusedRange.format.borders.getItem(\"InsideHorizontal\").color = \"#3A3A3A\";\nusedRange.format.borders.getItem(\"InsideVertical\").style = \"Thin\";\nusedRange.format.borders.getItem(\"InsideVertical\").color = \"#3A3A3A\";\nusedRange.format.borders.getItem(\"EdgeTop\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeBottom\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeLeft\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeRight\").style = \"Thin\";\n\nusedRange.format.autofitColumns();\nawait context.sync();"
+  }, {
+    icon: "paintbrush",
+    label: "Colorful Teal",
+    prompt: "Apply colorful teal formatting:\n\nconst usedRange = sheet.getUsedRange();\nusedRange.load(\"rowCount\");\nawait context.sync();\n\nif (!usedRange || usedRange.rowCount < 1) {\n  throw new Error(\"Sheet appears empty.\");\n}\n\n// Header: teal background\nconst headerRow = usedRange.getRow(0);\nheaderRow.format.fill.color = \"#0D7377\";\nheaderRow.format.font.bold = true;\nheaderRow.format.font.color = \"#FFFFFF\";\nheaderRow.format.horizontalAlignment = \"Center\";\nheaderRow.format.rowHeight = 28;\n\n// Alternating light teal and white\nfor (let i = 1; i < usedRange.rowCount; i++) {\n  const row = usedRange.getRow(i);\n  row.format.fill.color = i % 2 === 0 ? \"#E8F6F3\" : \"#FFFFFF\";\n}\n\n// Thin borders\nusedRange.format.borders.getItem(\"InsideHorizontal\").style = \"Thin\";\nusedRange.format.borders.getItem(\"InsideVertical\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeTop\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeBottom\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeLeft\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeRight\").style = \"Thin\";\n\nsheet.freezePanes.freezeRows(1);\nusedRange.format.autofitColumns();\nawait context.sync();"
+  }, {
+    icon: "snowflake",
+    label: "Freeze Header",
+    prompt: "Freeze the first row:\n\nsheet.freezePanes.freezeRows(1);\nawait context.sync();"
+  }, {
+    icon: "table",
+    label: "Excel Table",
+    prompt: "Convert data to Excel Table:\n\nconst usedRange = sheet.getUsedRange();\nusedRange.load(\"address\");\nawait context.sync();\n\nif (!usedRange) {\n  throw new Error(\"No data found in sheet.\");\n}\n\nconst table = sheet.tables.add(usedRange, true);\ntable.style = \"TableStyleMedium9\";\nusedRange.format.autofitColumns();\nawait context.sync();"
+  }, {
+    icon: "paintbrush",
+    label: "Borders All",
+    prompt: "Add thin borders to all cells:\n\nconst usedRange = sheet.getUsedRange();\nusedRange.format.borders.getItem(\"InsideHorizontal\").style = \"Thin\";\nusedRange.format.borders.getItem(\"InsideVertical\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeTop\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeBottom\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeLeft\").style = \"Thin\";\nusedRange.format.borders.getItem(\"EdgeRight\").style = \"Thin\";\nawait context.sync();"
+  }, {
+    icon: "hash",
+    label: "Currency $",
+    prompt: "Format numeric columns as currency. First read the data to detect numeric columns, then apply $#,##0.00 format."
+  }, {
+    icon: "hash",
+    label: "Percentage %",
+    prompt: "Format the last numeric column as percentage (0.00%) and auto-fit columns."
+  }],
+  // ── Report Automation Engine ──
+  reports: [{
+    icon: "barChart",
+    label: "Instant Dashboard 📊",
+    prompt: "Analyze the dataset. Create a new sheet 'Dashboard'. Generate 3 professional charts (Bar, Line, Pie) for key trends. Add 'Big Number' cards at top for Totals. Apply modern theme. Make it executive-ready."
+  }, {
+    icon: "barChart",
+    label: "Sales Report",
+    prompt: "Generate a professional monthly sales report from the existing data. Do ALL of this: (1) Add a report title row at the top: 'Monthly Sales Report' in bold, font size 14, merged across all columns. (2) Add today's date below the title, right-aligned. (3) Format the data with professional headers (dark navy background, white bold text) and alternating row colors. (4) Add SUM, AVERAGE, MAX, and MIN summary rows at the bottom with labels. (5) Create a clustered column chart from the data showing performance by category. Position it below the summary. (6) Add thin borders throughout and auto-fit all columns."
+  }, {
+    icon: "barChart",
+    label: "Financial Summary",
+    prompt: "Build a financial summary report from the data. (1) Add a 'Financial Summary' title merged at top, bold, font size 14. (2) Format headers professionally with dark green (#1B4D3E) background and white text. (3) Format all currency columns as $#,##0.00. (4) Add a TOTAL row with SUM formulas, bold, with a top border. (5) Add a 'Net' or 'Difference' calculation if applicable. (6) Apply conditional formatting: positive numbers in green, negative in red. (7) Create a pie chart showing the breakdown. (8) Auto-fit columns and freeze header row."
+  }, {
+    icon: "trendUp",
+    label: "Performance Review",
+    prompt: "Create a team performance report from the data. (1) Add a 'Team Performance Report' title at top, merged, bold, font size 14. (2) Professional header formatting with indigo (#2B3A67) background, white text. (3) Add RANK column based on the primary numeric metric column. (4) Add conditional formatting: top 3 rows highlighted in light green (#E6F4EA), bottom 3 in light red (#FDE8E8). (5) Add AVERAGE, MAX, MIN summary rows at bottom. (6) Create a bar chart showing individual performance, sorted high to low. (7) Auto-fit and add borders."
+  }, {
+    icon: "barChart",
+    label: "Inventory Report",
+    prompt: "Generate an inventory status report from the data. (1) Title: 'Inventory Status Report', merged, bold, size 14. (2) Professional formatting with teal (#0D7377) headers. (3) If there's a quantity column, add conditional formatting: red background for items ≤ 10 (low stock), yellow for 11-50 (medium), green for 50+ (healthy). (4) Add a status column with IF formula: 'Critical' for ≤ 10, 'Low' for 11-25, 'OK' for 26-50, 'Good' for 50+. (5) Add summary showing total items, total value (if price column exists), and count by status. (6) Create a pie chart showing stock level distribution."
+  }, {
+    icon: "barChart",
+    label: "Attendance Summary",
+    prompt: "Generate an attendance summary report. (1) Title: 'Attendance Summary', merged, bold, size 14. (2) Count Present (P), Absent (A), Leave (L) for each person using COUNTIF. (3) Calculate attendance percentage. (4) Format: professional headers, alternating rows, percentage column formatted as percentage. (5) Conditional formatting on attendance %: green ≥ 90%, yellow 75-89%, red < 75%. (6) Add a column chart showing attendance by person. (7) Add class/team averages at bottom."
+  }, {
+    icon: "fileTemplate",
+    label: "Weekly Status",
+    prompt: "Create a weekly status report template: (1) Title: 'Weekly Status Update — Week of [Date]', merged, bold. (2) Section 1: 'Completed This Week' — 5 rows with Task, Owner, Status columns. (3) Section 2: 'In Progress' — 5 rows with Task, Owner, % Complete, ETA columns. (4) Section 3: 'Blockers & Risks' — 3 rows with Issue, Impact, Action Needed columns. (5) Section 4: 'Next Week Plans' — 4 rows. (6) Format each section with colored headers (different subtle colors), thin borders, and auto-fit."
+  }],
+  // ── Ready-Made Templates ──
+  templates: [{
+    icon: "fileTemplate",
+    label: "Monthly Budget",
+    prompt: "Create a monthly budget tracker with categories: Housing, Utilities, Food, Transport, Entertainment, Savings. Add columns for Budget, Actual, and Difference with SUM at bottom. Use professional formatting with green for under-budget and red for over-budget conditional formatting."
+  }, {
+    icon: "fileTemplate",
+    label: "Invoice",
+    prompt: "Create a professional invoice template with: Company Name header, Invoice #, Date, Bill To section, items table with Description, Quantity, Unit Price, Total columns, Subtotal, Tax (10%), and Grand Total calculations. Apply clean formatting."
+  }, {
+    icon: "fileTemplate",
+    label: "Employee List",
+    prompt: "Create an employee directory with 8 sample employees: Name, Department (HR/Engineering/Marketing/Sales), Email, Phone, Joining Date, Salary. Apply professional table formatting with alternating rows and currency format for salary."
+  }, {
+    icon: "fileTemplate",
+    label: "Project Tracker",
+    prompt: "Create a project tracker with 6 sample tasks: Task Name, Assigned To, Priority (High/Medium/Low), Status (Not Started/In Progress/Complete), Start Date, Due Date. Add dropdown validation for Priority and Status. Use conditional formatting for status colors."
+  }, {
+    icon: "fileTemplate",
+    label: "Sales Dashboard",
+    prompt: "Create a quarterly sales report with 5 products across Q1-Q4. Add Total column and row with SUM formulas. Create a column chart showing quarterly performance. Apply professional formatting."
+  }, {
+    icon: "fileTemplate",
+    label: "Attendance Sheet",
+    prompt: "Create a monthly attendance sheet for 10 employees with dates as columns (1-31). Mark P for present, A for absent, L for leave. Add summary columns for Total Present, Absent, and Leave. Apply conditional formatting."
+  }, {
+    icon: "fileTemplate",
+    label: "Grade Book",
+    prompt: "Create a student grade book for 8 students with 5 assignments, Midterm, Final, and Total/Grade columns. Add weighted average formulas and letter grade calculation (A/B/C/D/F). Apply professional formatting with conditional colors."
+  }, {
+    icon: "fileTemplate",
+    label: "Weekly Schedule",
+    prompt: "Create a weekly schedule template with time slots from 8 AM to 6 PM (1-hour intervals) and columns for Mon-Fri. Add borders, colored header, and merge the title cell. Apply a clean, readable format."
+  }],
+  // ── Advanced Analysis (Master Level) ──
+  analysis: [{
+    icon: "trendUp",
+    label: "Pivot Analysis",
+    prompt: "Create a new sheet named 'Pivot Analysis'. Select the entire current dataset. Insert a Pivot Table starting at A3. Automatically detect the categorical column for Rows and the numeric column for Values (Sum). Apply the 'PivotStyleMedium9' style."
+  }, {
+    icon: "barChart",
+    label: "Pareto Chart",
+    prompt: "Create a Pareto analysis. (1) Copy the data to a new sheet 'Pareto'. (2) Sort by the numeric metric descending. (3) Calculate cumulative percentage. (4) Create a Pareto chart (combo chart: bars for values, line for cumulative %). Add data labels."
+  }, {
+    icon: "search",
+    label: "Find Outliers",
+    prompt: "Analyze the numeric column. Calculate Mean and Standard Deviation. Highlight any cell that is more than 2 Standard Deviations away from the Mean in RED (#FFCCCC). Add a note to the cell 'Outlier'."
+  }, {
+    icon: "sortAsc",
+    label: "Correlation Matrix",
+    prompt: "Analyze all numeric columns. Create a correlation matrix in a new sheet 'Correlations'. Calculate the correlation coefficient (CORREL) between every pair of numeric variables. Use Conditional Formatting (Color Scale) to highlight strong positive (green) and negative (red) correlations."
+  }, {
+    icon: "calendar",
+    label: "Date Intelligence",
+    prompt: "Find the Date column. Insert 4 new columns to the right: Year, Quarter, Month Name, Week Number. Use formulas (=YEAR, =ROUNDUP(MONTH(.)/3,0), =TEXT(.,'mmmm'), =ISOWEEKNUM) to populate them for all rows. Copy and Paste Values to finalize."
+  }, {
+    icon: "trendUp",
+    label: "Forecast 12M",
+    prompt: "Analyze the time-series data. Create a new sheet 'Forecast'. Use the FORECAST.ETS function to predict the next 12 months based on historical data. Create a Line Chart showing history (solid) and forecast (dotted) with confidence intervals."
+  }, {
+    icon: "copy",
+    label: "Transpose & Link",
+    prompt: "Copy the selected table. Create a new sheet 'Transposed'. Paste the data linked/transposed (=TRANSPOSE(Original!Range)) so it updates automatically. Apply professional formatting."
+  }, {
+    icon: "filter",
+    label: "Advanced Filter",
+    prompt: "Create a 'Search' area above the data. Set up a dynamic visual filter: when user types in cell B1, filter the main table rows where the text content contains that value (wildcard match). Use conditional formatting to hide non-matching rows if Filter function is not available."
+  }, {
+    icon: "hash",
+    label: "Frequency Dist",
+    prompt: "Create a frequency distribution (histogram data) for the main numeric column. Create bins (groups) automatically. Count the frequency of items in each bin. Output a summary table and a Histogram chart in a new sheet."
+  }, {
+    icon: "zap",
+    label: "Regex Extract",
+    prompt: "Analyze the text column. If it contains emails, extract them to a new column 'Email'. If it contains phone numbers, extract and format them. If it contains IDs (like #1234), extract them. Use Flash Fill logic or pattern matching formulas."
+  }],
+  // ── Document Extraction (Resume/CV Import) ──
+  extract: [{
+    icon: "fileText",
+    label: "📄 Import to Schema",
+    prompt: "SCHEMA_EXTRACTION_MODE: Read the column headers in row 1 of the current sheet. For each attached PDF/resume, extract ONLY the data that matches those columns. If a column's data doesn't exist in the PDF, leave it blank. Append each candidate as a new row."
+  }, {
+    icon: "users",
+    label: "📋 Bulk Resume Import",
+    prompt: "SCHEMA_EXTRACTION_MODE: Import all attached resumes/CVs. First read existing column headers. If no headers exist, create: Name, Email, Phone, Skills, Experience, Education. Extract data from each PDF and add one row per candidate. Never hallucinate — if data is missing, leave blank."
+  }, {
+    icon: "fileTemplate",
+    label: "📝 HR Database Setup",
+    prompt: "Create a professional HR candidate database template with columns: Name, Email, Phone, LinkedIn, Current Company, Current Role, Skills, Years of Experience, Highest Education, Expected Salary, Notes. Apply formatting with filters and freeze header row."
+  }, {
+    icon: "search",
+    label: "🔍 Smart Extract",
+    prompt: "SCHEMA_EXTRACTION_MODE: Intelligently analyze the attached documents. Read column headers from the sheet. Match document content to columns using smart aliases (e.g., 'Mobile No' matches 'Phone' column). Only extract what exists — no guessing."
+  }, {
+    icon: "table",
+    label: "📊 Create Schema First",
+    prompt: "Before importing, set up your columns: Create header row with: Name, Email, Mobile No, Age, Address, Skills, Experience. Format as a proper table with filters. Now attach PDFs and click 'Import to Schema'."
+  }, {
+    icon: "checkSquare",
+    label: "✅ Validate & Clean",
+    prompt: "Validate the extracted data: Check for blank required fields (Name, Email). Highlight rows with missing data in yellow. Add a 'Status' column marking 'Complete' or 'Incomplete' for each row."
+  }],
+  // ── Smart Tools (Power User Headache Solvers) ──
+  smart: [{
+    icon: "brain",
+    label: "Data Profiler 🔬",
+    prompt: "Analyze the entire dataset and create a comprehensive Data Profile report on a NEW sheet called \"Data Profile\". For each column, calculate: (1) Column Name, (2) Data Type (text/number/date/mixed), (3) Total Count, (4) Blank Count, (5) Blank %, (6) Unique Values Count, (7) Most Common Value, (8) For numeric columns: Min, Max, Mean, Median. Create this as a formatted table with headers. Add a \"Data Quality Score\" at the top calculated as (100 - average blank %). Apply professional formatting: dark header row, alternating rows, conditional formatting on blank % (green < 5%, yellow 5-20%, red > 20%). Auto-fit all columns."
+  }, {
+    icon: "highlight",
+    label: "Highlight Duplicates",
+    prompt: "Find and highlight ALL duplicate values in the first data column (column A, excluding header).\n\nconst usedRange = sheet.getUsedRange();\nusedRange.load(\"values,rowCount,columnCount\");\nawait context.sync();\n\nif (!usedRange || usedRange.rowCount < 2) throw new Error(\"Need at least 2 rows of data.\");\n\nconst values = usedRange.values;\nconst col = 0; // Check column A\nconst seen = {};\nconst dupes = new Set();\n\n// Pass 1: find duplicates\nfor (let i = 1; i < values.length; i++) {\n  const val = String(values[i][col]).trim().toLowerCase();\n  if (val === \"\") continue;\n  if (seen[val] !== undefined) {\n    dupes.add(val);\n  }\n  seen[val] = i;\n}\n\n// Pass 2: highlight them\nlet count = 0;\nfor (let i = 1; i < values.length; i++) {\n  const val = String(values[i][col]).trim().toLowerCase();\n  if (dupes.has(val)) {\n    const cell = usedRange.getRow(i);\n    cell.format.fill.color = \"#FECACA\";\n    cell.format.font.color = \"#991B1B\";\n    count++;\n  }\n}\nawait context.sync();\n// Done: highlighted duplicates"
+  }, {
+    icon: "columns",
+    label: "Compare Columns",
+    prompt: "Compare columns A and B to find differences. For each row, if A \u2260 B, highlight both cells in light red (#FEE2E2). If they match, highlight in light green (#DCFCE7). Add a new column C with 'Match' or 'Mismatch' labels. Add a summary at the bottom showing total matches and mismatches. Format the summary row in bold."
+  }, {
+    icon: "formula",
+    label: "Auto Summary Row ⚡",
+    prompt: "Analyze ALL columns. For each NUMERIC column, add 4 summary rows at the bottom: SUM, AVERAGE, MIN, MAX \u2014 with formula labels in column A. Make the summary section visually distinct: add a thick top border, bold labels, and light blue (#EFF6FF) background. Format numbers with commas and 2 decimal places. Auto-fit all columns."
+  }, {
+    icon: "crosshair",
+    label: "Top/Bottom 5 🎯",
+    prompt: "Find the main numeric column in the data. Identify the Top 5 values and highlight their entire rows in green (#DCFCE7). Identify the Bottom 5 values and highlight their rows in red (#FEE2E2). Add a 'Rank' column at the end. Sort the data by the numeric column descending. Auto-fit columns."
+  }, {
+    icon: "mail",
+    label: "Extract Emails & Phones",
+    prompt: "Scan ALL cells in the used range. Extract any email addresses (containing @) and phone numbers (10+ digit patterns). Create a new sheet called \"Contacts\" with columns: Source Cell, Name (if adjacent), Email, Phone. Remove duplicates. Format as a professional table with filters. Auto-fit columns."
+  }, {
+    icon: "layers",
+    label: "Unpivot Data",
+    prompt: "Convert wide-format data to long format (unpivot). Take the first column as the ID column. Treat all remaining columns as value columns. Create a new sheet \"Unpivoted\" with 3 columns: the original ID, \"Category\" (original column header), and \"Value\" (the cell value). Skip blank values. Apply professional formatting."
+  }, {
+    icon: "shield",
+    label: "Data Validation Rules",
+    prompt: "Analyze column headers and add smart data validation rules. For columns that look like: (1) Email \u2014 add text validation requiring '@', (2) Phone \u2014 allow only numbers with length 10-15, (3) Date columns \u2014 add date validation, (4) Status/Type columns \u2014 create dropdown lists from unique existing values, (5) Numeric columns \u2014 add number validation (>= 0). Highlight validated columns with a subtle blue header to indicate protection is active."
+  }, {
+    icon: "dollarSign",
+    label: "Number to Words 💰",
+    prompt: "Add a new column next to the main numeric/currency column. For each row, convert the number to words in English (e.g., 1234 \u2192 \"One Thousand Two Hundred Thirty Four\"). This is useful for invoices and checks. Use a helper function that handles numbers up to 999,999,999. Format the words column with proper case and auto-fit."
+  }, {
+    icon: "copy",
+    label: "Smart Merge Sheets",
+    prompt: "Merge data from ALL worksheets in the workbook into a new sheet called \"Merged Data\". For each sheet: read the headers and data, align columns by header name (smart matching), and append all rows. Remove exact duplicate rows from the final merged data. Add a \"Source Sheet\" column to track where each row came from. Apply professional formatting with alternating rows."
+  }]
+};
+
+// Chat Suggestions (shown on welcome screen)
+var CHAT_SUGGESTIONS = [{
+  icon: "brain",
+  text: "Analyze my data and tell me what's interesting"
+}, {
+  icon: "formula",
+  text: "Which formula should I use for my use case?"
+}, {
+  icon: "paintbrush",
+  text: "Make my sheet look professional in one click"
+}, {
+  icon: "barChart",
+  text: "Generate a monthly report with charts"
+}, {
+  icon: "search",
+  text: "Find all duplicates and inconsistencies"
+}, {
+  icon: "sparkles",
+  text: "What can you do? Show me your best features"
+}];
+
+// ─── Initialization ────────────────────────────────────────────
+// ─── Global Error Handler ───
+window.onerror = function (msg, url, line) {
+  var statusEl = document.getElementById("loading-status");
+  if (statusEl) {
+    statusEl.innerHTML += "<br><span style=\"color:#d32f2f;font-weight:bold;font-size:11px;\">".concat(msg, " (Line ").concat(line, ")</span>");
+    document.getElementById("sideload-msg").style.display = "none";
+    document.getElementById("app-body").style.display = "flex";
+  }
+  return false;
+};
+
+// ─── Initialization ────────────────────────────────────────────
+Office.onReady(function (info) {
+  // Always show app to prevent hang
+  var sideloadMsg = document.getElementById("sideload-msg");
+  var appBody = document.getElementById("app-body");
+  if (sideloadMsg) sideloadMsg.style.display = "none";
+  if (appBody) appBody.style.display = "flex";
+  if (info.host === Office.HostType.Excel) {
+    console.log("Running in Excel");
+  } else {
+    console.warn("Running outside Excel");
+  }
+
+  // Inject Icons
+  injectIcons();
+  injectDocIcons();
+  injectCategoryIcons();
+
+  // Wire up UI Actions
+  document.getElementById("run").onclick = runAICommand;
+
+  // Settings & Docs Toggles
+  document.getElementById("settings-toggle").onclick = function () {
+    var panel = document.getElementById("settings-panel");
+    panel.style.display = panel.style.display === "none" ? "block" : "none";
+    document.getElementById("docs-panel").style.display = "none";
+  };
+  document.getElementById("docs-toggle").onclick = function () {
+    var panel = document.getElementById("docs-panel");
+    panel.style.display = panel.style.display === "none" ? "block" : "none";
+    document.getElementById("settings-panel").style.display = "none";
+  };
+  document.getElementById("save-settings").onclick = handleSaveSettings;
+  document.getElementById("refresh-models").onclick = loadOllamaModels;
+
+  // Mode Toggles
+  document.getElementById("mode-planning").onclick = function () {
+    return switchMode("planning");
+  };
+  document.getElementById("mode-agent").onclick = function () {
+    return switchMode("agent");
+  };
+
+  // Chat Actions
+  document.getElementById("chat-send").onclick = sendChatMessage;
+  var clearBtn = document.getElementById("chat-clear");
+  if (clearBtn) clearBtn.onclick = clearChat;
+  setupChatInput();
+  setupScrollToBottom();
+  setupAgentKeyboardShortcut();
+  setupCharCount();
+
+  // File Upload Handlers
+  var bindClick = function bindClick(id, handler) {
+    var el = document.getElementById(id);
+    if (el) el.onclick = handler;
+  };
+  var bindChange = function bindChange(id, handler) {
+    var el = document.getElementById(id);
+    if (el) el.onchange = handler;
+  };
+  bindClick("file-upload-btn", function () {
+    return document.getElementById("file-input").click();
+  });
+  bindChange("file-input", function (e) {
+    return handleFileSelect(e, false);
+  });
+  bindClick("file-remove", function () {
+    return clearFile(false);
+  });
+  bindClick("agent-file-btn", function () {
+    return document.getElementById("agent-file-input").click();
+  });
+  bindChange("agent-file-input", function (e) {
+    return handleFileSelect(e, true);
+  });
+  bindClick("agent-file-remove", function () {
+    return clearFile(true);
+  });
+
+  // Batch PDF Extraction
+  bindClick("batch-extract-btn", runBatchPDFExtraction);
+
+  // Category Tabs
+  document.querySelectorAll(".category-tab").forEach(function (tab) {
+    tab.onclick = function () {
+      var cat = tab.dataset.category;
+      switchCategory(cat);
+    };
+  });
+
+  // Detect Columns Button (Extract Mode)
+  bindClick("detect-columns-btn", detectAndShowColumns);
+
+  // Initial UI Build
+  buildQuickActions();
+  buildChatSuggestions();
+  loadSettingsUI();
+});
+
+// ─── Icon Injection ────────────────────────────────────────────
+function injectIcons() {
+  var el = function el(id, html) {
+    var node = document.getElementById(id);
+    if (node) node.innerHTML = html;
+  };
+  el("logo-icon", _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.fileText);
+  el("settings-toggle", _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.settings);
+  el("docs-toggle", _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.helpCircle);
+  el("run-icon", _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.arrowRight);
+  el("chevron-icon", _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.chevronDown);
+  el("refresh-models", _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.refresh);
+  el("mode-planning-icon", _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.messageCircle);
+  el("mode-agent-icon", _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.zap);
+  el("chat-send-icon", _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.send);
+  el("chat-clear-icon", _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.trash);
+  el("welcome-sparkle", _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.sparkles);
+}
+function injectDocIcons() {
+  document.querySelectorAll(".doc-icon[data-icon]").forEach(function (el) {
+    var key = el.getAttribute("data-icon");
+    if (_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons[key]) el.innerHTML = _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons[key];
+  });
+}
+function injectCategoryIcons() {
+  document.querySelectorAll(".cat-icon[data-icon]").forEach(function (el) {
+    var key = el.getAttribute("data-icon");
+    if (_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons[key]) el.innerHTML = _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons[key];
+  });
+}
+
+// ─── Mode Switching ────────────────────────────────────────────
+function switchMode(mode) {
+  if (mode === currentMode) return;
+  currentMode = mode;
+
+  // Update tabs
+  document.querySelectorAll(".mode-tab").forEach(function (tab) {
+    tab.classList.toggle("active", tab.dataset.mode === mode);
+  });
+
+  // Update indicator
+  var indicator = document.getElementById("mode-indicator");
+  if (mode === "agent") {
+    indicator.classList.add("right");
+  } else {
+    indicator.classList.remove("right");
+  }
+
+  // Show/hide content
+  document.getElementById("planning-mode").classList.toggle("active", mode === "planning");
+  document.getElementById("agent-mode").classList.toggle("active", mode === "agent");
+
+  // Focus appropriate input
+  if (mode === "planning") {
+    setTimeout(function () {
+      return document.getElementById("chat-input").focus();
+    }, 200);
+  } else {
+    setTimeout(function () {
+      return document.getElementById("prompt-input").focus();
+    }, 200);
+  }
+}
+
+// ─── Category Switching ────────────────────────────────────────
+function switchCategory(category) {
+  currentCategory = category;
+  document.querySelectorAll(".category-tab").forEach(function (tab) {
+    tab.classList.toggle("active", tab.dataset.category === category);
+  });
+
+  // Show/hide schema info banner for Extract mode
+  var schemaInfo = document.getElementById("schema-info");
+  var detectedColumns = document.getElementById("detected-columns");
+  if (schemaInfo) {
+    schemaInfo.style.display = category === "extract" ? "flex" : "none";
+  }
+  if (detectedColumns) {
+    detectedColumns.style.display = category === "extract" && detectedColumns.innerHTML.trim() ? "block" : "none";
+  }
+
+  // Update extraction mode flag
+  schemaExtractionMode = category === "extract";
+  buildQuickActions();
+  // Show/hide batch panel when switching to/from extract
+  showBatchPanel(category === "extract" && rawPDFFiles.length > 0);
+}
+
+// ─── Quick Actions (Agent Mode) ────────────────────────────────
+function buildQuickActions() {
+  var container = document.getElementById("quick-actions");
+  if (!container) return;
+  container.innerHTML = "";
+  var actions = CATEGORIZED_ACTIONS[currentCategory];
+  if (!actions) {
+    console.warn("No quick actions found for category: ".concat(currentCategory));
+    return;
+  }
+  actions.forEach(function (action) {
+    var chip = document.createElement("button");
+    chip.className = "chip";
+    var iconKey = action.icon;
+    chip.innerHTML = "".concat(_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons[iconKey] || "", "<span>").concat(action.label, "</span>");
+    chip.onclick = function () {
+      var input = document.getElementById("prompt-input");
+      if (input) {
+        input.value = action.prompt;
+        input.focus();
+        // Clear status when switching action
+        var statusEl = document.getElementById("status-message");
+        if (statusEl) statusEl.style.display = "none";
+      }
+    };
+    container.appendChild(chip);
+  });
+}
+
+// ─── Chat Suggestions (Planning Mode) ──────────────────────────
+function buildChatSuggestions() {
+  var container = document.getElementById("chat-suggestions");
+  if (!container) return;
+  CHAT_SUGGESTIONS.forEach(function (s) {
+    var btn = document.createElement("button");
+    btn.className = "suggestion-chip";
+    var iconKey = s.icon;
+    btn.innerHTML = "".concat(_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons[iconKey] || "").concat(s.text);
+    btn.onclick = function () {
+      var input = document.getElementById("chat-input");
+      if (input) {
+        input.value = s.text;
+        sendChatMessage();
+      }
+    };
+    container.appendChild(btn);
+  });
+}
+
+// ─── Panel Toggle ──────────────────────────────────────────────
+function togglePanel(panelId) {
+  var panel = document.getElementById(panelId);
+  var isHidden = (panel === null || panel === void 0 ? void 0 : panel.style.display) === "none" || !(panel !== null && panel !== void 0 && panel.style.display);
+  document.querySelectorAll(".panel").forEach(function (p) {
+    p.style.display = "none";
+  });
+  if (isHidden && panel) {
+    panel.style.display = "block";
+    if (panelId === "settings-panel") {
+      var providerSelect = document.getElementById("setting-provider");
+      if (providerSelect && providerSelect.value === "local") loadOllamaModels();
+    }
+  }
+}
+
+// ─── Settings ──────────────────────────────────────────────────
+// ─── Settings ──────────────────────────────────────────────────
+function loadSettingsUI() {
+  var config = (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.getConfig)();
+  var providerSelect = document.getElementById("setting-provider");
+  if (providerSelect) {
+    providerSelect.value = config.provider;
+    providerSelect.onchange = function (e) {
+      var p = e.target.value;
+      updateProviderFields(p);
+      if (p === "local") loadOllamaModels();
+    };
+  }
+
+  // Populate inputs (safe checks)
+  var setVal = function setVal(id, val) {
+    var el = document.getElementById(id);
+    if (el) el.value = val || "";
+  };
+  setVal("setting-api-key", config.apiKey); // Groq
+  setVal("setting-groq-model", config.groqModel || "llama-3.3-70b-versatile");
+  setVal("setting-gemini-key", config.geminiKey);
+  setVal("setting-gemini-model", config.geminiModel || "gemini-1.5-flash");
+  setVal("setting-openai-key", config.openaiKey);
+  setVal("setting-openai-model", config.openaiModel || "gpt-4o-mini");
+  setVal("setting-anthropic-key", config.anthropicKey);
+  setVal("setting-anthropic-model", config.anthropicModel || "claude-3-5-sonnet-20241022");
+  setVal("setting-openrouter-key", config.openrouterKey);
+  setVal("setting-openrouter-model", config.openrouterModel || "anthropic/claude-3.5-sonnet:beta");
+  setVal("setting-base-url", config.baseUrl);
+  // Local model is populated async
+
+  updateProviderFields(config.provider);
+}
+function updateProviderFields(p) {
+  var setDisplay = function setDisplay(id, show) {
+    var el = document.getElementById(id);
+    if (el) el.style.display = show ? "block" : "none";
+  };
+  setDisplay("groq-fields", p === "groq");
+  setDisplay("gemini-fields", p === "gemini");
+  setDisplay("openai-fields", p === "openai");
+  setDisplay("anthropic-fields", p === "anthropic");
+  setDisplay("openrouter-fields", p === "openrouter");
+  setDisplay("local-fields", p === "local");
+}
+function loadOllamaModels() {
+  return _loadOllamaModels.apply(this, arguments);
+}
+function _loadOllamaModels() {
+  _loadOllamaModels = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+    var _document$getElementB3;
+    var select, statusEl, host, models, config;
+    return _regenerator().w(function (_context) {
+      while (1) switch (_context.n) {
+        case 0:
+          select = document.getElementById("setting-local-model");
+          statusEl = document.getElementById("model-status");
+          host = ((_document$getElementB3 = document.getElementById("setting-base-url")) === null || _document$getElementB3 === void 0 || (_document$getElementB3 = _document$getElementB3.value) === null || _document$getElementB3 === void 0 ? void 0 : _document$getElementB3.trim()) || "http://localhost:11434";
+          if (select) {
+            _context.n = 1;
+            break;
+          }
+          return _context.a(2);
+        case 1:
+          select.innerHTML = "<option value=\"\" disabled selected>Loading...</option>";
+          if (statusEl) {
+            statusEl.textContent = "";
+            statusEl.className = "model-status";
+          }
+          _context.n = 2;
+          return (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.fetchOllamaModels)(host);
+        case 2:
+          models = _context.v;
+          if (!(models.length === 0)) {
+            _context.n = 3;
+            break;
+          }
+          select.innerHTML = "<option value=\"\" disabled selected>No models found</option>";
+          if (statusEl) {
+            statusEl.textContent = "Ollama not running or no models installed";
+            statusEl.className = "model-status model-status-warn";
+          }
+          return _context.a(2);
+        case 3:
+          config = (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.getConfig)();
+          select.innerHTML = "";
+          models.forEach(function (m) {
+            var opt = document.createElement("option");
+            opt.value = m.name;
+            opt.textContent = "".concat(m.name, " (").concat((m.size / 1e9).toFixed(1), "GB)");
+            if ((config.localModel || config.model) === m.name) opt.selected = true;
+            select.appendChild(opt);
+          });
+          if (statusEl) {
+            statusEl.textContent = "".concat(models.length, " model").concat(models.length > 1 ? "s" : "", " found");
+            statusEl.className = "model-status model-status-ok";
+          }
+        case 4:
+          return _context.a(2);
+      }
+    }, _callee);
+  }));
+  return _loadOllamaModels.apply(this, arguments);
+}
+function handleSaveSettings() {
+  var _document$getElementB;
+  var provider = (_document$getElementB = document.getElementById("setting-provider")) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.value;
+  var current = (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.getConfig)();
+
+  // Helper to read val
+  var getVal = function getVal(id) {
+    var _document$getElementB2;
+    return ((_document$getElementB2 = document.getElementById(id)) === null || _document$getElementB2 === void 0 || (_document$getElementB2 = _document$getElementB2.value) === null || _document$getElementB2 === void 0 ? void 0 : _document$getElementB2.trim()) || "";
+  };
+  var newConfig = _objectSpread(_objectSpread({}, current), {}, {
+    provider: provider,
+    // Groq
+    apiKey: getVal("setting-api-key"),
+    groqModel: getVal("setting-groq-model"),
+    // Gemini
+    geminiKey: getVal("setting-gemini-key"),
+    geminiModel: getVal("setting-gemini-model"),
+    // OpenAI
+    openaiKey: getVal("setting-openai-key"),
+    openaiModel: getVal("setting-openai-model"),
+    // Anthropic
+    anthropicKey: getVal("setting-anthropic-key"),
+    anthropicModel: getVal("setting-anthropic-model"),
+    // OpenRouter
+    openrouterKey: getVal("setting-openrouter-key"),
+    openrouterModel: getVal("setting-openrouter-model"),
+    // Local
+    baseUrl: getVal("setting-base-url") ? "".concat(getVal("setting-base-url").replace(/\/v1.*$/, ""), "/v1/chat/completions") : undefined,
+    localModel: getVal("setting-local-model") || current.localModel
+  });
+  (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.saveConfig)(newConfig);
+
+  // Animated save feedback
+  var btn = document.getElementById("save-settings");
+  if (btn) {
+    var originalText = btn.textContent;
+    btn.textContent = "✓ Saved";
+    btn.classList.add("saved");
+    setTimeout(function () {
+      btn.textContent = originalText || "Save";
+      btn.classList.remove("saved");
+    }, 1500);
+  }
+  showToast("success", "Settings saved successfully");
+  setTimeout(function () {
+    var panel = document.getElementById("settings-panel");
+    if (panel) panel.style.display = "none";
+  }, 800);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PLANNING MODE — Chat Functions
+// ═══════════════════════════════════════════════════════════════
+
+function setupChatInput() {
+  var input = document.getElementById("chat-input");
+  if (!input) return;
+
+  // Auto-resize textarea
+  input.addEventListener("input", function () {
+    input.style.height = "auto";
+    input.style.height = Math.min(input.scrollHeight, 80) + "px";
+  });
+
+  // Enter to send (Shift+Enter for newline)
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendChatMessage();
+    }
+  });
+}
+function sendChatMessage() {
+  return _sendChatMessage.apply(this, arguments);
+}
+function _sendChatMessage() {
+  _sendChatMessage = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+    var input, message, welcome, initialPrompt, overview, needsSheetContext, contextResult, text, hits, lastBubble, badge, skeletonEl, chatSendButton, chatSendIcon, response, formattedResponse, newBubble, bubbleContent, _error$message, sendIcon, _t, _t2, _t3;
+    return _regenerator().w(function (_context2) {
+      while (1) switch (_context2.p = _context2.n) {
+        case 0:
+          if (!isChatBusy) {
+            _context2.n = 1;
+            break;
+          }
+          stopChatGeneration();
+          return _context2.a(2);
+        case 1:
+          input = document.getElementById("chat-input");
+          if (input) {
+            _context2.n = 2;
+            break;
+          }
+          return _context2.a(2);
+        case 2:
+          message = input.value.trim();
+          if (message) {
+            _context2.n = 3;
+            break;
+          }
+          return _context2.a(2);
+        case 3:
+          // Clear welcome screen on first message
+          welcome = document.querySelector(".chat-welcome");
+          if (welcome) welcome.remove();
+
+          // Add user message
+          addChatBubble("user", message);
+          chatHistory.push({
+            role: "user",
+            content: message,
+            timestamp: Date.now()
+          });
+
+          // Build conversation context with initial sheet overview
+          if (!(chatConversation.length === 0)) {
+            _context2.n = 8;
+            break;
+          }
+          initialPrompt = _services_chat_prompt__WEBPACK_IMPORTED_MODULE_3__.CHAT_PROMPT;
+          _context2.p = 4;
+          _context2.n = 5;
+          return getSheetContext();
+        case 5:
+          overview = _context2.v;
+          if (overview && overview.hits === 0 && overview.text.length > 20) {
+            initialPrompt += "\n\n[INITIAL SHEET OVERVIEW]\n" + overview.text;
+          }
+          _context2.n = 7;
+          break;
+        case 6:
+          _context2.p = 6;
+          _t = _context2.v;
+          console.warn("Could not load initial sheet overview:", _t);
+        case 7:
+          chatConversation.push({
+            role: "system",
+            content: initialPrompt
+          });
+        case 8:
+          // 🔥 CONTEXT AWARENESS: Auto-detect if user is asking about their sheet or searching for data
+          needsSheetContext = /\b(this|my|current|opened?)\s+(sheet|data|table|workbook|excel|spreadsheet|sheeet|spreadsheat)\b|\b(find|search|where|is|check|lookup|contains?|exist|details|about|located|who|tell|give)\b|what\s+(do|can|should)|improve|analyze|suggest|help|better|optimize|\b\d{5,}\b|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/i.test(message) || /\b[A-Z]{2,}(?:\s+[A-Z]{2,})+\b/.test(message) ||
+          // ALL CAPS sequences (Names/IDs)
+          /\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\b/.test(message); // Title Case sequences (Names)
+          if (!needsSheetContext) {
+            _context2.n = 12;
+            break;
+          }
+          _context2.p = 9;
+          _context2.n = 10;
+          return getSheetContext(message);
+        case 10:
+          contextResult = _context2.v;
+          if (contextResult) {
+            text = contextResult.text, hits = contextResult.hits; // Add to persistent conversation context
+            chatConversation.push({
+              role: "system",
+              content: "The following data was retrieved from the user's sheet for this query:\n".concat(text)
+            });
+
+            // Show context indicator
+            lastBubble = document.querySelector('.chat-msg.user:last-child .chat-bubble');
+            if (lastBubble) {
+              badge = document.createElement('span');
+              badge.className = 'context-badge';
+              badge.innerHTML = hits > 0 ? "\uD83D\uDD0D Found ".concat(hits, " search hits in sheet") : '📊 Sheet context loaded';
+              lastBubble.appendChild(badge);
+            }
+          }
+          _context2.n = 12;
+          break;
+        case 11:
+          _context2.p = 11;
+          _t2 = _context2.v;
+          console.warn('Could not load sheet context:', _t2);
+        case 12:
+          chatConversation.push({
+            role: "user",
+            content: message
+          });
+
+          // Clear input
+          input.value = "";
+          input.style.height = "auto";
+
+          // Show skeleton loader
+          skeletonEl = showTypingIndicator();
+          isChatBusy = true;
+
+          // Toggle button to Stop
+          chatSendButton = document.getElementById("chat-send");
+          chatSendIcon = document.getElementById("chat-send-icon");
+          if (chatSendButton) {
+            if (chatSendIcon) chatSendIcon.innerHTML = _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.stop;
+            chatSendButton.classList.add("is-busy");
+          }
+
+          // Create AbortController
+          chatAbortController = new AbortController();
+          _context2.p = 13;
+          _context2.n = 14;
+          return (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.callLLM)(chatConversation, undefined, chatAbortController.signal);
+        case 14:
+          response = _context2.v;
+          // Format AI response
+          formattedResponse = formatChatResponse(response); // Create the real bubble
+          newBubble = createChatBubble("ai", "", response); // Replace skeleton with the real bubble
+          if (skeletonEl) skeletonEl.replaceWith(newBubble);
+
+          // Find the content part of the new bubble to apply the typewriter effect
+          bubbleContent = newBubble.querySelector('.chat-bubble'); // Stream content
+          if (!bubbleContent) {
+            _context2.n = 15;
+            break;
+          }
+          _context2.n = 15;
+          return typewriterEffect(bubbleContent, formattedResponse);
+        case 15:
+          chatConversation.push({
+            role: "assistant",
+            content: response
+          });
+          chatHistory.push({
+            role: "ai",
+            content: response,
+            timestamp: Date.now()
+          });
+          _context2.n = 17;
+          break;
+        case 16:
+          _context2.p = 16;
+          _t3 = _context2.v;
+          if (_t3.name === 'AbortError') {
+            if (skeletonEl) skeletonEl.remove();
+            addChatBubble("ai", "<p style=\"color:var(--text-3)\"><i>Generation stopped.</i></p>");
+          } else {
+            if (skeletonEl) skeletonEl.remove();
+            addChatBubble("ai", "<p style=\"color:var(--error)\">\u26A0\uFE0F ".concat(_t3.message, "</p>"));
+            showToast("error", ((_error$message = _t3.message) === null || _error$message === void 0 ? void 0 : _error$message.substring(0, 80)) || "Something went wrong");
+          }
+        case 17:
+          _context2.p = 17;
+          isChatBusy = false;
+          chatAbortController = null;
+          // Reuse outer chatSendButton reference (avoid redeclaring)
+          if (chatSendButton) {
+            sendIcon = document.getElementById("chat-send-icon");
+            if (sendIcon) sendIcon.innerHTML = _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.send;
+            chatSendButton.classList.remove("is-busy");
+          }
+          return _context2.f(17);
+        case 18:
+          return _context2.a(2);
+      }
+    }, _callee2, null, [[13, 16, 17, 18], [9, 11], [4, 6]]);
+  }));
+  return _sendChatMessage.apply(this, arguments);
+}
+function stopChatGeneration() {
+  return _stopChatGeneration.apply(this, arguments);
+}
+function _stopChatGeneration() {
+  _stopChatGeneration = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
+    return _regenerator().w(function (_context3) {
+      while (1) switch (_context3.n) {
+        case 0:
+          if (chatAbortController) {
+            chatAbortController.abort();
+          }
+        case 1:
+          return _context3.a(2);
+      }
+    }, _callee3);
+  }));
+  return _stopChatGeneration.apply(this, arguments);
+}
+function typewriterEffect(_x, _x2) {
+  return _typewriterEffect.apply(this, arguments);
+}
+function _typewriterEffect() {
+  _typewriterEffect = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4(element, html) {
+    var tokens, _iterator2, _step2, token, words, _iterator3, _step3, word, container, _t4, _t5;
+    return _regenerator().w(function (_context4) {
+      while (1) switch (_context4.p = _context4.n) {
+        case 0:
+          // 1. Reveal element immediately
+          element.innerHTML = "";
+
+          // 2. Parse into tokens (simple tag-preserving tokenizer)
+          // We split by tags so we can print text content progressively, but print tags instantly.
+          tokens = html.split(/(<[^>]+>)/g);
+          _iterator2 = _createForOfIteratorHelper(tokens);
+          _context4.p = 1;
+          _iterator2.s();
+        case 2:
+          if ((_step2 = _iterator2.n()).done) {
+            _context4.n = 11;
+            break;
+          }
+          token = _step2.value;
+          if (!(token.startsWith("<") && token.endsWith(">"))) {
+            _context4.n = 3;
+            break;
+          }
+          // It's a tag, append immediately
+          element.innerHTML += token;
+          _context4.n = 10;
+          break;
+        case 3:
+          if (!(token.trim().length > 0)) {
+            _context4.n = 10;
+            break;
+          }
+          // It's text, type it out word by word for speed
+          words = token.split(/(\s+)/); // Keep spaces
+          _iterator3 = _createForOfIteratorHelper(words);
+          _context4.p = 4;
+          _iterator3.s();
+        case 5:
+          if ((_step3 = _iterator3.n()).done) {
+            _context4.n = 7;
+            break;
+          }
+          word = _step3.value;
+          element.innerHTML += word;
+          // Scroll to bottom
+          container = document.getElementById("chat-messages");
+          if (container) container.scrollTop = container.scrollHeight;
+          // Variable delay for realism
+          _context4.n = 6;
+          return new Promise(function (r) {
+            return setTimeout(r, Math.random() * 10 + 5);
+          });
+        case 6:
+          _context4.n = 5;
+          break;
+        case 7:
+          _context4.n = 9;
+          break;
+        case 8:
+          _context4.p = 8;
+          _t4 = _context4.v;
+          _iterator3.e(_t4);
+        case 9:
+          _context4.p = 9;
+          _iterator3.f();
+          return _context4.f(9);
+        case 10:
+          _context4.n = 2;
+          break;
+        case 11:
+          _context4.n = 13;
+          break;
+        case 12:
+          _context4.p = 12;
+          _t5 = _context4.v;
+          _iterator2.e(_t5);
+        case 13:
+          _context4.p = 13;
+          _iterator2.f();
+          return _context4.f(13);
+        case 14:
+          return _context4.a(2);
+      }
+    }, _callee4, null, [[4, 8, 9, 10], [1, 12, 13, 14]]);
+  }));
+  return _typewriterEffect.apply(this, arguments);
+}
+function createChatBubble(role, htmlContent, rawContent) {
+  var msgDiv = document.createElement("div");
+  msgDiv.className = "chat-msg ".concat(role);
+  var bubbleDiv = document.createElement("div");
+  bubbleDiv.className = "chat-bubble";
+  bubbleDiv.innerHTML = htmlContent;
+
+  // If AI message, add action buttons
+  if (role === "ai" && rawContent) {
+    // Actions bar with copy + switch to agent
+    var actionsDiv = document.createElement("div");
+    actionsDiv.className = "chat-bubble-actions";
+
+    // Copy button
+    var copyBtn = document.createElement("button");
+    copyBtn.className = "btn-copy";
+    copyBtn.innerHTML = "".concat(_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.copy, " Copy");
+    copyBtn.onclick = function () {
+      navigator.clipboard.writeText(rawContent).then(function () {
+        copyBtn.innerHTML = "".concat(_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.check, " Copied");
+        copyBtn.classList.add("copied");
+        setTimeout(function () {
+          copyBtn.innerHTML = "".concat(_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.copy, " Copy");
+          copyBtn.classList.remove("copied");
+        }, 2000);
+      }).catch(function () {
+        showToast("error", "Failed to copy");
+      });
+    };
+    actionsDiv.appendChild(copyBtn);
+
+    // Execute in Agent button
+    var execBtn = document.createElement("button");
+    execBtn.className = "btn-execute-from-chat";
+    execBtn.innerHTML = "".concat(_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.zap, " Switch to Agent");
+    execBtn.onclick = function () {
+      var agentPromptInput = document.getElementById("prompt-input");
+      if (agentPromptInput) {
+        agentPromptInput.value = extractActionablePrompt(rawContent);
+        switchMode("agent");
+        agentPromptInput.focus();
+      }
+    };
+    var actionBar = document.createElement("div");
+    actionBar.className = "chat-action-bar";
+    actionBar.appendChild(execBtn);
+    bubbleDiv.appendChild(actionsDiv);
+    bubbleDiv.appendChild(actionBar);
+  }
+  msgDiv.appendChild(bubbleDiv);
+  return msgDiv;
+}
+function addChatBubble(role, htmlContent, rawContent) {
+  var container = document.getElementById("chat-messages");
+  if (!container) throw new Error("Chat messages container not found.");
+  var msgDiv = createChatBubble(role, htmlContent, rawContent);
+  container.appendChild(msgDiv);
+
+  // Scroll to bottom
+  container.scrollTop = container.scrollHeight;
+  return msgDiv.querySelector('.chat-bubble'); // Return bubble for typewriter
+}
+function showTypingIndicator() {
+  var container = document.getElementById("chat-messages");
+  if (!container) throw new Error("Chat messages container not found.");
+  var template = document.getElementById("chat-skeleton-template");
+
+  // Fallback to old indicator if template is missing
+  if (!template) {
+    var oldIndicator = document.createElement("div");
+    oldIndicator.className = "chat-msg ai";
+    oldIndicator.id = "typing-msg";
+    oldIndicator.innerHTML = "<div class=\"chat-avatar\">".concat(_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.bot, "</div><div class=\"chat-bubble\"><div class=\"typing-indicator\"><div class=\"typing-dot\"></div><div class=\"typing-dot\"></div><div class=\"typing-dot\"></div></div></div>");
+    container.appendChild(oldIndicator);
+    container.scrollTop = container.scrollHeight;
+    return oldIndicator;
+  }
+  var skeleton = template.content.cloneNode(true);
+  var skeletonElement = skeleton.firstElementChild;
+  if (skeletonElement) {
+    skeletonElement.id = 'typing-msg';
+    container.appendChild(skeletonElement);
+    container.scrollTop = container.scrollHeight;
+    return skeletonElement;
+  }
+  return null; // Should not happen
+}
+function formatChatResponse(text) {
+  var html = text.trim();
+
+  // 1. Headers (### Heading)
+  html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+  html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+  html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+
+  // 2. Tables (| col | col |)
+  var lines = html.split('\n');
+  var inTable = false;
+  var tableHtml = '';
+  var processedLines = [];
+  var _loop = function _loop(i) {
+    var line = lines[i].trim();
+    if (line.startsWith('|') && line.endsWith('|')) {
+      if (!inTable) {
+        inTable = true;
+        tableHtml = '<table>';
+      }
+
+      // Skip separator row (|---|---|)
+      if (line.includes('---')) return 1; // continue
+      var cells = line.split('|').filter(function (c) {
+        return c.trim() !== '' || line.indexOf('|' + c + '|') !== -1;
+      });
+      // Clean cells of leading/trailing pipes
+      var cleanCells = line.split('|').slice(1, -1).map(function (c) {
+        return c.trim();
+      });
+      tableHtml += '<tr>' + cleanCells.map(function (c) {
+        return i === 0 || lines[i - 1] && !lines[i - 1].includes('|') ? "<th>".concat(c, "</th>") : "<td>".concat(c, "</td>");
+      }).join('') + '</tr>';
+    } else {
+      if (inTable) {
+        inTable = false;
+        tableHtml += '</table>';
+        processedLines.push(tableHtml);
+        tableHtml = '';
+      }
+      processedLines.push(lines[i]);
+    }
+  };
+  for (var i = 0; i < lines.length; i++) {
+    if (_loop(i)) continue;
+  }
+  if (inTable) {
+    tableHtml += '</table>';
+    processedLines.push(tableHtml);
+  }
+  html = processedLines.join('\n');
+
+  // 3. Code blocks (``` ... ```)
+  html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre style="margin:6px 0;padding:8px;background:rgba(0,0,0,0.06);border-radius:6px;font-family:var(--mono);font-size:10px;overflow-x:auto"><code>$2</code></pre>');
+
+  // 4. Inline code (`code`)
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  // 5. Bold (**bold**)
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+  // 5.1 Italic (*italic*)
+  html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+  // 6. Lists
+  // 6.1 Unordered lists (- or * or •)
+  html = html.replace(/^[-*•]\s+(.+)$/gm, '<li>$1</li>');
+
+  // 6.2 Numbered lists (1.)
+  html = html.replace(/^\d+\.\s+(.+)$/gm, '<li class="ol-item">$1</li>');
+
+  // 6.3 Wrap consecutive li items
+  html = html.replace(/((?:<li>.*?<\/li>\n?)+)/g, '<ul>$1</ul>');
+  html = html.replace(/((?:<li class="ol-item">.*?<\/li>\n?)+)/g, function (match) {
+    return "<ol>".concat(match.replace(/ class="ol-item"/g, ''), "</ol>");
+  });
+
+  // 7. Paragraphs
+  var blocks = html.split(/\n\n+/);
+  html = blocks.map(function (block) {
+    var b = block.trim();
+    if (!b) return '';
+    // If it starts with a tag already, don't wrap in <p>
+    if (/^<(h1|h2|h3|ul|ol|table|pre|p|li|div)/i.test(b)) return b;
+    // Otherwise wrap in <p> and handle single newlines as <br>
+    return "<p>".concat(b.replace(/\n/g, '<br>'), "</p>");
+  }).join('');
+
+  // 8. Visual Polish: Cleanup bullet and paragraph spacing
+  html = html.replace(/<p>\s*<ul>/g, '<ul>').replace(/<\/ul>\s*<\/p>/g, '</ul>');
+  html = html.replace(/<li>\s*<p>/g, '<li>').replace(/<\/p>\s*<\/li>/g, '</li>');
+  return html;
+}
+function extractActionablePrompt(aiResponse) {
+  // Try to build a useful prompt from the AI's response for agent mode
+  // Look for formula mentions or action keywords
+  var lines = aiResponse.split('\n');
+  var _iterator = _createForOfIteratorHelper(lines),
+    _step;
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var line = _step.value;
+      if (line.includes('=') && line.includes('(') && !line.startsWith('#')) {
+        // Looks like a formula mention
+        return "Apply this formula: ".concat(line.trim());
+      }
+    }
+    // Default: use a summary
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+  var firstSentence = aiResponse.split(/[.!?]/)[0];
+  return firstSentence.length > 120 ? firstSentence.substring(0, 120) : firstSentence;
+}
+function clearChat() {
+  var container = document.getElementById("chat-messages");
+  container.innerHTML = "";
+  chatHistory.length = 0;
+  chatConversation = [];
+  isChatBusy = false;
+
+  // Re-add welcome screen
+  var welcomeHTML = "\n    <div class=\"chat-welcome\">\n      <img src=\"assets/icon-80-v2.png\" alt=\"SheetOS Logo\" style=\"width: 64px; height: 64px; margin-bottom: 16px;\">\n      <h2>What are you working on?</h2>\n      <div class=\"welcome-suggestions\" id=\"chat-suggestions\"></div>\n    </div>\n  ";
+  container.innerHTML = welcomeHTML;
+  buildChatSuggestions();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TOAST NOTIFICATION SYSTEM
+// ═══════════════════════════════════════════════════════════════
+function showToast(type, message) {
+  var duration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 3000;
+  var container = document.getElementById("toast-container");
+  if (!container) return;
+  var toast = document.createElement("div");
+  toast.className = "toast toast-".concat(type);
+  var iconMap = {
+    success: _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.check,
+    error: _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.alertCircle,
+    info: _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.helpCircle
+  };
+  toast.innerHTML = "".concat(iconMap[type] || "", "<span>").concat(message, "</span>");
+  container.appendChild(toast);
+
+  // Auto-dismiss
+  setTimeout(function () {
+    toast.classList.add("toast-out");
+    setTimeout(function () {
+      return toast.remove();
+    }, 300);
+  }, duration);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SCROLL-TO-BOTTOM BUTTON
+// ═══════════════════════════════════════════════════════════════
+function setupScrollToBottom() {
+  var chatMessages = document.getElementById("chat-messages");
+  var scrollBtn = document.getElementById("scroll-to-bottom");
+  if (!chatMessages || !scrollBtn) return;
+
+  // Show/hide based on scroll position
+  chatMessages.addEventListener("scroll", function () {
+    var isNearBottom = chatMessages.scrollHeight - chatMessages.scrollTop - chatMessages.clientHeight < 100;
+    scrollBtn.classList.toggle("visible", !isNearBottom);
+  });
+
+  // Click to scroll
+  scrollBtn.onclick = function () {
+    chatMessages.scrollTo({
+      top: chatMessages.scrollHeight,
+      behavior: "smooth"
+    });
+  };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// KEYBOARD SHORTCUTS
+// ═══════════════════════════════════════════════════════════════
+function setupAgentKeyboardShortcut() {
+  var promptInput = document.getElementById("prompt-input");
+  if (!promptInput) return;
+  promptInput.addEventListener("keydown", function (e) {
+    // Ctrl+Enter to execute
+    if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      runAICommand();
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CHARACTER COUNT INDICATOR
+// ═══════════════════════════════════════════════════════════════
+function setupCharCount() {
+  var _promptInput$closest;
+  var promptInput = document.getElementById("prompt-input");
+  if (!promptInput) return;
+
+  // Create and insert char count element
+  var charCount = document.createElement("span");
+  charCount.className = "char-count";
+  charCount.textContent = "";
+  var footerLeft = (_promptInput$closest = promptInput.closest(".input-card")) === null || _promptInput$closest === void 0 ? void 0 : _promptInput$closest.querySelector(".footer-left");
+  if (footerLeft) {
+    footerLeft.appendChild(charCount);
+  }
+  promptInput.addEventListener("input", function () {
+    var len = promptInput.value.length;
+    if (len === 0) {
+      charCount.textContent = "";
+      charCount.className = "char-count";
+    } else {
+      charCount.textContent = "".concat(len);
+      if (len > 3000) {
+        charCount.className = "char-count danger";
+      } else if (len > 2000) {
+        charCount.className = "char-count warning";
+      } else {
+        charCount.className = "char-count";
+      }
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CONTEXT AWARENESS — Read Excel Sheet Data
+// ═══════════════════════════════════════════════════════════════
+
+/**
+ * Get comprehensive sheet context for AI analysis
+ * Returns { text: string, hits: number }
+ */
+function getSheetContext(_x3) {
+  return _getSheetContext.apply(this, arguments);
+} // ═══════════════════════════════════════════════════════════════
+// SCHEMA-AWARE EXTRACTION — Read Column Headers from Excel
+// ═══════════════════════════════════════════════════════════════
+/**
+ * Read existing column headers from row 1 of the active Excel sheet
+ * Returns array of non-empty header names
+ */
+function _getSheetContext() {
+  _getSheetContext = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6(query) {
+    var _t6;
+    return _regenerator().w(function (_context7) {
+      while (1) switch (_context7.p = _context7.n) {
+        case 0:
+          _context7.p = 0;
+          _context7.n = 1;
+          return Excel.run(/*#__PURE__*/function () {
+            var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5(context) {
+              var sheet, usedRange, headerRange, headers, deepSearchContext, hitsCount, searchTerms, termsArray, _i, _termsArray, term, foundRange, words, bestWord, row, rowData, sampleSize, sampleRange, sampleData, columnTypes, _loop2, col, contextStr, overviewHeaders;
+              return _regenerator().w(function (_context6) {
+                while (1) switch (_context6.n) {
+                  case 0:
+                    sheet = context.workbook.worksheets.getActiveWorksheet();
+                    sheet.load("name");
+
+                    // Use getUsedRangeOrNullObject for robustness
+                    usedRange = sheet.getUsedRangeOrNullObject();
+                    usedRange.load("rowCount,columnCount,address,isNullObject");
+                    _context6.n = 1;
+                    return context.sync();
+                  case 1:
+                    if (!(usedRange.isNullObject || usedRange.rowCount === 0 || usedRange.columnCount === 0)) {
+                      _context6.n = 2;
+                      break;
+                    }
+                    return _context6.a(2, {
+                      text: "Sheet is empty.",
+                      hits: 0
+                    });
+                  case 2:
+                    // 1. Get Headers (Row 1)
+                    headerRange = usedRange.getRow(0);
+                    headerRange.load("values");
+                    _context6.n = 3;
+                    return context.sync();
+                  case 3:
+                    headers = headerRange.values[0].map(function (h) {
+                      return String(h || "").trim();
+                    }); // 2. Perform Deep Search if query contains potential search terms
+                    deepSearchContext = "";
+                    hitsCount = 0;
+                    if (!query) {
+                      _context6.n = 16;
+                      break;
+                    }
+                    searchTerms = new Set(); // 1. ALL CAPS sequences (e.g., MD PRAVEJ ALAM)
+                    (query.match(/\b[A-Z]{2,}(?:\s+[A-Z]{2,})+\b/g) || []).forEach(function (t) {
+                      return searchTerms.add(t);
+                    });
+
+                    // 2. Title Case sequences
+                    (query.match(/\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\b/g) || []).forEach(function (t) {
+                      return searchTerms.add(t);
+                    });
+
+                    // 3. Numbers, Quoted strings, and Emails
+                    (query.match(/\b\d{5,}\b/g) || []).forEach(function (t) {
+                      return searchTerms.add(t);
+                    });
+                    (query.match(/"([^"]+)"/g) || []).forEach(function (t) {
+                      return searchTerms.add(t.replace(/"/g, ''));
+                    });
+                    (query.match(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/gi) || []).forEach(function (t) {
+                      return searchTerms.add(t);
+                    });
+
+                    // 4. Fallback: Generic phrases
+                    (query.match(/\b[A-Za-z]{3,}(?:\s+[A-Za-z]{3,}){1,2}\b/g) || []).forEach(function (t) {
+                      var commonWords = /^(this|that|sheet|data|name|about|find|search|where|exist|check|lookup|improve|analyze|suggest|help|better|optimize|what|when|where|there|from|with|tell|your|mine|ours|will|shall|should|could|would|please|show|list|their|details|contact|given|into|some|those|these)$/i;
+                      if (!t.split(/\s+/).every(function (word) {
+                        return commonWords.test(word);
+                      })) {
+                        searchTerms.add(t);
+                      }
+                    });
+                    if (!(searchTerms.size > 0)) {
+                      _context6.n = 11;
+                      break;
+                    }
+                    termsArray = Array.from(searchTerms);
+                    _i = 0, _termsArray = termsArray;
+                  case 4:
+                    if (!(_i < _termsArray.length)) {
+                      _context6.n = 10;
+                      break;
+                    }
+                    term = _termsArray[_i];
+                    if (!/^(Name|Sheet|Data|Candidate|Find|Is|This|My|Current|Column|Details|About)$/i.test(term)) {
+                      _context6.n = 5;
+                      break;
+                    }
+                    return _context6.a(3, 9);
+                  case 5:
+                    foundRange = usedRange.find(term, {
+                      completeMatch: false,
+                      matchCase: false
+                    });
+                    foundRange.load("address,isNullObject");
+                    _context6.n = 6;
+                    return context.sync();
+                  case 6:
+                    if (!(foundRange.isNullObject && term.includes(" "))) {
+                      _context6.n = 7;
+                      break;
+                    }
+                    words = term.split(/\s+/).sort(function (a, b) {
+                      return b.length - a.length;
+                    });
+                    bestWord = words[0];
+                    if (!(bestWord.length > 3)) {
+                      _context6.n = 7;
+                      break;
+                    }
+                    foundRange = usedRange.find(bestWord, {
+                      completeMatch: false,
+                      matchCase: false
+                    });
+                    foundRange.load("address,isNullObject");
+                    _context6.n = 7;
+                    return context.sync();
+                  case 7:
+                    if (!(!foundRange.isNullObject && hitsCount < 10)) {
+                      _context6.n = 9;
+                      break;
+                    }
+                    hitsCount++;
+                    row = foundRange.getEntireRow().getIntersection(usedRange);
+                    row.load("values");
+                    _context6.n = 8;
+                    return context.sync();
+                  case 8:
+                    rowData = row.values[0].map(function (v, idx) {
+                      var header = headers[idx] || "Col ".concat(idx + 1);
+                      var val = v === "" || v === null ? "(empty)" : String(v);
+                      return "".concat(header, ": ").concat(val);
+                    }).join(" | ");
+                    deepSearchContext += "\uD83D\uDCCC MATCH [".concat(term, "] at ").concat(foundRange.address, ":\n   >> ").concat(rowData, "\n");
+                  case 9:
+                    _i++;
+                    _context6.n = 4;
+                    break;
+                  case 10:
+                    if (hitsCount > 0) {
+                      deepSearchContext += "=".repeat(40) + "\n";
+                    } else {
+                      deepSearchContext = "\n(I searched the sheet for your mentioned terms, but no exact matches were found in the current sheet.)\n";
+                    }
+                  case 11:
+                    // 3. Sample data (max 10 rows for general context)
+                    sampleSize = Math.min(10, usedRange.rowCount);
+                    sampleRange = usedRange.getResizedRange(sampleSize - 1, 0); // Headers included
+                    sampleRange.load("values");
+                    _context6.n = 12;
+                    return context.sync();
+                  case 12:
+                    sampleData = sampleRange.values; // Data type detection
+                    columnTypes = [];
+                    if (!(sampleData.length > 1)) {
+                      _context6.n = 15;
+                      break;
+                    }
+                    _loop2 = /*#__PURE__*/_regenerator().m(function _loop2(col) {
+                      var columnValues;
+                      return _regenerator().w(function (_context5) {
+                        while (1) switch (_context5.n) {
+                          case 0:
+                            columnValues = sampleData.slice(1).map(function (row) {
+                              return row[col];
+                            }).filter(function (v) {
+                              return v !== null && v !== "";
+                            });
+                            if (columnValues.length === 0) {
+                              columnTypes.push("empty");
+                            } else if (columnValues.every(function (v) {
+                              return !isNaN(Number(v));
+                            })) {
+                              columnTypes.push("number");
+                            } else if (columnValues.every(function (v) {
+                              return /^\d{1,4}[-\/]\d{1,2}[-\/]\d{1,4}/.test(String(v));
+                            })) {
+                              columnTypes.push("date");
+                            } else {
+                              columnTypes.push("text");
+                            }
+                          case 1:
+                            return _context5.a(2);
+                        }
+                      }, _loop2);
+                    });
+                    col = 0;
+                  case 13:
+                    if (!(col < usedRange.columnCount)) {
+                      _context6.n = 15;
+                      break;
+                    }
+                    return _context6.d(_regeneratorValues(_loop2(col)), 14);
+                  case 14:
+                    col++;
+                    _context6.n = 13;
+                    break;
+                  case 15:
+                    // Build context string
+                    contextStr = "";
+                    if (deepSearchContext && deepSearchContext.length > 50) {
+                      contextStr += "\uD83D\uDEA8 [CRITICAL DATA HIT] \uD83D\uDEA8\n".concat(deepSearchContext, "\n\n");
+                    }
+                    contextStr += "--- GENERAL SHEET INFO ---\n";
+                    contextStr += "Sheet: \"".concat(sheet.name, "\" (").concat(usedRange.rowCount, " rows \xD7 ").concat(usedRange.columnCount, " columns)\n");
+                    contextStr += "Location: ".concat(usedRange.address, "\n\n");
+                    contextStr += "COLUMNS:\n";
+                    headers.forEach(function (h, i) {
+                      var type = columnTypes[i] || "unknown";
+                      contextStr += "  ".concat(i + 1, ". \"").concat(h || "Column".concat(i + 1), "\" (").concat(type, ")\n");
+                    });
+                    contextStr += "\nDATA SAMPLE (First ".concat(sampleSize, " rows):\n");
+                    sampleData.forEach(function (row, i) {
+                      if (i === 0) {
+                        contextStr += "  [Headers] ".concat(row.map(function (c) {
+                          return "\"".concat(c, "\"");
+                        }).join(" | "), "\n");
+                      } else {
+                        contextStr += "  Row ".concat(i, ": ").concat(row.map(function (c) {
+                          return c === null || c === "" ? "(empty)" : "\"".concat(c, "\"");
+                        }).join(" | "), "\n");
+                      }
+                    });
+                    if (usedRange.rowCount > sampleSize) {
+                      contextStr += "  ... (".concat(usedRange.rowCount - sampleSize, " more rows not shown)\n");
+                    }
+                    return _context6.a(2, {
+                      text: contextStr,
+                      hits: hitsCount
+                    });
+                  case 16:
+                    // Even without a query, return a general sheet overview
+                    overviewHeaders = headers.filter(function (h) {
+                      return h.length > 0;
+                    });
+                    if (!(overviewHeaders.length > 0)) {
+                      _context6.n = 17;
+                      break;
+                    }
+                    return _context6.a(2, {
+                      text: "Sheet: \"".concat(sheet.name, "\" (").concat(usedRange.rowCount, " rows \xD7 ").concat(usedRange.columnCount, " columns)\nColumns: ").concat(overviewHeaders.join(", ")),
+                      hits: 0
+                    });
+                  case 17:
+                    return _context6.a(2, null);
+                }
+              }, _callee5);
+            }));
+            return function (_x12) {
+              return _ref.apply(this, arguments);
+            };
+          }());
+        case 1:
+          return _context7.a(2, _context7.v);
+        case 2:
+          _context7.p = 2;
+          _t6 = _context7.v;
+          console.error("Error reading sheet context:", _t6);
+          return _context7.a(2, null);
+      }
+    }, _callee6, null, [[0, 2]]);
+  }));
+  return _getSheetContext.apply(this, arguments);
+}
+function getExcelColumnHeaders() {
+  return _getExcelColumnHeaders.apply(this, arguments);
+}
+/**
+ * Get count of existing data rows (excluding header)
+ */
+function _getExcelColumnHeaders() {
+  _getExcelColumnHeaders = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee8() {
+    return _regenerator().w(function (_context9) {
+      while (1) switch (_context9.n) {
+        case 0:
+          return _context9.a(2, Excel.run(/*#__PURE__*/function () {
+            var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7(context) {
+              var sheet, headerRange, headers;
+              return _regenerator().w(function (_context8) {
+                while (1) switch (_context8.n) {
+                  case 0:
+                    sheet = context.workbook.worksheets.getActiveWorksheet(); // Read first row (A1:Z1) for headers - covers up to 26 columns
+                    headerRange = sheet.getRange("A1:Z1");
+                    headerRange.load("values");
+                    _context8.n = 1;
+                    return context.sync();
+                  case 1:
+                    headers = headerRange.values[0].map(function (cell) {
+                      return cell ? String(cell).trim() : "";
+                    }).filter(function (header) {
+                      return header !== "";
+                    });
+                    return _context8.a(2, headers);
+                }
+              }, _callee7);
+            }));
+            return function (_x13) {
+              return _ref2.apply(this, arguments);
+            };
+          }()));
+      }
+    }, _callee8);
+  }));
+  return _getExcelColumnHeaders.apply(this, arguments);
+}
+function getExistingDataRowCount() {
+  return _getExistingDataRowCount.apply(this, arguments);
+}
+/**
+ * Detect and display column headers in the UI
+ */
+function _getExistingDataRowCount() {
+  _getExistingDataRowCount = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee0() {
+    return _regenerator().w(function (_context1) {
+      while (1) switch (_context1.n) {
+        case 0:
+          return _context1.a(2, Excel.run(/*#__PURE__*/function () {
+            var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee9(context) {
+              var sheet, usedRange;
+              return _regenerator().w(function (_context0) {
+                while (1) switch (_context0.n) {
+                  case 0:
+                    sheet = context.workbook.worksheets.getActiveWorksheet();
+                    usedRange = sheet.getUsedRange();
+                    usedRange.load("rowCount");
+                    _context0.n = 1;
+                    return context.sync();
+                  case 1:
+                    return _context0.a(2, Math.max(0, usedRange.rowCount - 1));
+                }
+              }, _callee9);
+            }));
+            return function (_x14) {
+              return _ref3.apply(this, arguments);
+            };
+          }()));
+      }
+    }, _callee0);
+  }));
+  return _getExistingDataRowCount.apply(this, arguments);
+}
+function detectAndShowColumns() {
+  return _detectAndShowColumns.apply(this, arguments);
+}
+/**
+ * Build the schema-aware extraction prompt with existing column headers
+ */
+function _detectAndShowColumns() {
+  _detectAndShowColumns = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee1() {
+    var btn, detectedSection, columnChips, columnCount, columns, _t7;
+    return _regenerator().w(function (_context10) {
+      while (1) switch (_context10.p = _context10.n) {
+        case 0:
+          btn = document.getElementById("detect-columns-btn");
+          detectedSection = document.getElementById("detected-columns");
+          columnChips = document.getElementById("column-chips");
+          columnCount = document.getElementById("column-count");
+          if (!(!detectedSection || !columnChips || !columnCount)) {
+            _context10.n = 1;
+            break;
+          }
+          return _context10.a(2);
+        case 1:
+          // Show loading state
+          if (btn) btn.innerHTML = "⏳ Loading...";
+          _context10.p = 2;
+          _context10.n = 3;
+          return getExcelColumnHeaders();
+        case 3:
+          columns = _context10.v;
+          if (columns.length === 0) {
+            // No columns found
+            columnChips.innerHTML = '<span class="column-chip empty-warning">⚠️ No headers in Row 1 — add columns first</span>';
+            columnCount.textContent = "0";
+            detectedSection.style.display = "block";
+          } else {
+            // Show detected columns as chips
+            columnChips.innerHTML = columns.map(function (col) {
+              return "<span class=\"column-chip\">".concat(col, "</span>");
+            }).join("");
+            columnCount.textContent = String(columns.length);
+            detectedSection.style.display = "block";
+          }
+          _context10.n = 5;
+          break;
+        case 4:
+          _context10.p = 4;
+          _t7 = _context10.v;
+          console.error("Error detecting columns:", _t7);
+          columnChips.innerHTML = '<span class="column-chip empty-warning">⚠️ Error reading Excel</span>';
+          columnCount.textContent = "0";
+          detectedSection.style.display = "block";
+        case 5:
+          _context10.p = 5;
+          if (btn) btn.innerHTML = "🔍 Detect";
+          return _context10.f(5);
+        case 6:
+          return _context10.a(2);
+      }
+    }, _callee1, null, [[2, 4, 5, 6]]);
+  }));
+  return _detectAndShowColumns.apply(this, arguments);
+}
+function buildSchemaExtractionDirective(columns) {
+  var columnList = columns.map(function (c, i) {
+    return "".concat(i + 1, ". \"").concat(c, "\"");
+  }).join("\n");
+  var enhancedHints = (0,_services_document_extractor__WEBPACK_IMPORTED_MODULE_5__.buildEnhancedPrompt)(columns);
+  return "\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\uD83D\uDD12 SCHEMA-LOCKED EXTRACTION MODE \u2014 CRITICAL INSTRUCTIONS\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\nThe user has PRE-DEFINED these columns in their Excel sheet. You MUST extract data ONLY for these columns:\n\n".concat(columnList, "\n\n").concat(enhancedHints, "\n\nEXTRACTION RULES (MEMORIZE THESE):\n1. ONE ROW PER DOCUMENT: Each attached PDF/image represents ONE candidate/record.\n2. EXACT COLUMN MATCHING: Only fill data for the columns listed above.\n3. NO HALLUCINATION: If information for a column is NOT visible in the document, use \"\" (empty string).\n4. NO NEW COLUMNS: Do NOT add any columns that aren't in the list above.\n5. PROPER FORMATTING:\n   - Names: Proper Case (John Smith)\n   - Emails: lowercase\n   - Phones: Keep original format or +X-XXX-XXX-XXXX\n   - Skills: Comma-separated list\n\nBANNED BEHAVIORS:\n\u274C Guessing email addresses (e.g., firstname@company.com)\n\u274C Fabricating phone numbers\n\u274C Making up skills not explicitly listed\n\u274C Using \"N/A\", \"Not Found\", \"Unknown\" \u2014 use \"\" instead\n\u274C Adding extra columns\n\nOUTPUT: Generate Excel JS code that writes the extracted data starting from the first empty row.\nThe code should use the writeData helper function and format the data professionally.\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n");
+}
+
+// ═══════════════════════════════════════════════════════════════
+// AGENT MODE — Execute Functions (Enhanced with Orchestrator)
+// ═══════════════════════════════════════════════════════════════
+
+var MAX_EXECUTION_RETRIES = 3;
+function runAICommand() {
+  return _runAICommand.apply(this, arguments);
+}
+
+// ─── Helpers ───────────────────────────────────────────────────
+function _runAICommand() {
+  _runAICommand = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee11() {
+    var statusEl, debugEl, skeletonEl, cacheBadge, promptInput, button, userPrompt, isSchemaMode, signal, runText, runIcon, originalText, originalIcon, code, fromCache, sheetContext, _sheetContext, existingColumns, cached, validation, messages, schemaDirective, cleanPrompt, contentText, contentParts, totalImages, _validation, validationAttempts, MAX_VALIDATION_FIXES, errorSummary, orchestratorResult, recovery, _t8, _t9, _t0;
+    return _regenerator().w(function (_context12) {
+      while (1) switch (_context12.p = _context12.n) {
+        case 0:
+          statusEl = document.getElementById("status-message");
+          debugEl = document.getElementById("debug-code");
+          skeletonEl = document.getElementById("skeleton");
+          cacheBadge = document.getElementById("cache-badge");
+          promptInput = document.getElementById("prompt-input");
+          button = document.getElementById("run");
+          if (!(!statusEl || !debugEl || !skeletonEl || !cacheBadge || !promptInput || !button)) {
+            _context12.n = 1;
+            break;
+          }
+          console.error("Agent UI elements not found");
+          return _context12.a(2);
+        case 1:
+          userPrompt = promptInput.value.trim(); // Handle File Input
+          if (!(!userPrompt && attachedFiles.length === 0)) {
+            _context12.n = 2;
+            break;
+          }
+          showStatus(statusEl, "info", "Please enter a command or attach a file.");
+          return _context12.a(2);
+        case 2:
+          // Default prompt for files
+          if (attachedFiles.length > 0 && !userPrompt) {
+            userPrompt = attachedFiles.length > 1 ? "Analyze the ".concat(attachedFiles.length, " attached files. Extract and merge all tabular data into a single master table. Standardize headers and columns.") : "Analyze the attached ".concat(attachedFiles[0].type, ". Extract all tabular data and write valid Excel JS code to populate the active sheet. Format headers and auto-fit columns.");
+          }
+
+          // Detect Schema Extraction Mode
+          isSchemaMode = userPrompt.includes("SCHEMA_EXTRACTION_MODE") || currentCategory === "extract"; // Enforce table format if processing a document
+          if (attachedFiles.length > 0 && !isSchemaMode) {
+            userPrompt += "\n\n[FORMATTING STRICT RULE]: You are extracting data from a document. ALWAYS output the data as a clean, flat 2D HORIZONTAL table at the top of the sheet. Put Column Headers in Row A1...X1. Append the extracted data underneath. NEVER output a vertical key-value list mimicking a document. Ensure data rows have { font: { color: \"#000000\" } }.";
+          }
+
+          // UI: loading
+          if (!agentAbortController) {
+            _context12.n = 3;
+            break;
+          }
+          agentAbortController.abort();
+          return _context12.a(2);
+        case 3:
+          agentAbortController = new AbortController();
+          signal = agentAbortController.signal;
+          runText = document.getElementById("run-text");
+          runIcon = document.getElementById("run-icon");
+          originalText = runText ? runText.innerText : "Execute";
+          originalIcon = runIcon ? runIcon.innerHTML : "";
+          button.classList.add("is-busy");
+          button.classList.add("btn-stop");
+          if (runText) runText.innerText = "Stop Agent";
+          if (runIcon) runIcon.innerHTML = _services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.stop;
+          statusEl.style.display = "none";
+          skeletonEl.style.display = "flex";
+          cacheBadge.style.display = "none";
+          debugEl.innerText = "";
+          _context12.p = 4;
+          fromCache = false; // ─── Read Sheet Context for Intelligent Assistance ───
+          sheetContext = null;
+          _context12.p = 5;
+          _context12.n = 6;
+          return (0,_services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__.readSheetContext)();
+        case 6:
+          sheetContext = _context12.v;
+          if ((_sheetContext = sheetContext) !== null && _sheetContext !== void 0 && _sheetContext.hasData) {
+            console.log("[Agent] Sheet context: ".concat(sheetContext.rowCount, "x").concat(sheetContext.columnCount));
+          }
+          _context12.n = 8;
+          break;
+        case 7:
+          _context12.p = 7;
+          _t8 = _context12.v;
+          console.warn("[Agent] Could not read sheet context:", _t8);
+        case 8:
+          // ─── Schema Extraction Mode ───
+          existingColumns = [];
+          if (!(isSchemaMode && attachedFiles.length > 0)) {
+            _context12.n = 13;
+            break;
+          }
+          _context12.p = 9;
+          _context12.n = 10;
+          return getExcelColumnHeaders();
+        case 10:
+          existingColumns = _context12.v;
+          console.log("[Agent] Schema columns detected:", existingColumns);
+          if (!(existingColumns.length === 0)) {
+            _context12.n = 11;
+            break;
+          }
+          showStatus(statusEl, "info", "⚠️ No column headers found in Row 1. Add headers first or use 'HR Database Setup' to create them.");
+          skeletonEl.style.display = "none";
+          return _context12.a(2);
+        case 11:
+          if (runText) runText.innerText = "Extracting (".concat(existingColumns.length, " cols)...");
+          _context12.n = 13;
+          break;
+        case 12:
+          _context12.p = 12;
+          _t9 = _context12.v;
+          console.warn("[Agent] Could not read Excel headers:", _t9);
+        case 13:
+          // ─── Check Cache (Skip for files/schema mode) ───
+          cached = attachedFiles.length === 0 && !isSchemaMode ? (0,_services_cache__WEBPACK_IMPORTED_MODULE_4__.getCachedResponse)(userPrompt) : null;
+          if (cached) {
+            code = cached;
+            fromCache = true;
+            cacheBadge.style.display = "inline-block";
+
+            // Still validate cached code
+            validation = (0,_services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__.validateCode)(code);
+            if (!validation.isValid) {
+              console.warn("[Agent] Cached code failed validation, regenerating...");
+              fromCache = false;
+              code = ""; // Will regenerate
+            } else {
+              code = validation.sanitizedCode;
+            }
+          }
+
+          // ─── Generate Code (if not from cache) ───
+          if (fromCache) {
+            _context12.n = 21;
+            break;
+          }
+          if (!(isSchemaMode && attachedFiles.length > 0)) {
+            _context12.n = 18;
+            break;
+          }
+          if (runText) runText.innerText = "Generating...";
+          messages = [{
+            role: "system",
+            content: _services_prompt__WEBPACK_IMPORTED_MODULE_2__.SYSTEM_PROMPT
+          }];
+          schemaDirective = buildSchemaExtractionDirective(existingColumns);
+          cleanPrompt = userPrompt.replace("SCHEMA_EXTRACTION_MODE:", "").trim();
+          contentText = "".concat(cleanPrompt, "\n\nEXISTING_COLUMNS: ").concat(JSON.stringify(existingColumns), "\n\n").concat(schemaDirective);
+          contentParts = [{
+            type: "text",
+            text: contentText
+          }];
+          totalImages = 0;
+          attachedFiles.forEach(function (file) {
+            file.data.forEach(function (url) {
+              if (totalImages < 20) {
+                contentParts.push({
+                  type: "image_url",
+                  image_url: {
+                    url: url
+                  }
+                });
+                totalImages++;
+              }
+            });
+          });
+          messages.push({
+            role: "user",
+            content: contentParts
+          });
+          _context12.n = 14;
+          return (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.callLLM)(messages, undefined, signal);
+        case 14:
+          code = _context12.v;
+          if (runText) runText.innerText = "Validating...";
+          _validation = (0,_services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__.validateCode)(code);
+          validationAttempts = 0;
+          MAX_VALIDATION_FIXES = 2;
+        case 15:
+          if (!(!_validation.isValid && validationAttempts < MAX_VALIDATION_FIXES)) {
+            _context12.n = 17;
+            break;
+          }
+          console.warn("[Agent] Validation failed (attempt ".concat(validationAttempts + 1, "):"), _validation.errors);
+          errorSummary = _validation.errors.map(function (e) {
+            return "".concat(e.message, " \u2192 ").concat(e.suggestion);
+          }).join("\n");
+          _context12.n = 16;
+          return (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.callLLM)([{
+            role: "system",
+            content: _services_prompt__WEBPACK_IMPORTED_MODULE_2__.SYSTEM_PROMPT
+          }, {
+            role: "user",
+            content: userPrompt
+          }, {
+            role: "assistant",
+            content: code
+          }, {
+            role: "user",
+            content: "VALIDATION ERRORS:\n".concat(errorSummary, "\n\nFix these errors. Output ONLY the corrected code.")
+          }], undefined, signal);
+        case 16:
+          code = _context12.v;
+          _validation = (0,_services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__.validateCode)(code);
+          validationAttempts++;
+          _context12.n = 15;
+          break;
+        case 17:
+          code = _validation.sanitizedCode;
+          if (_validation.warnings.length > 0) {
+            console.log("[Agent] Validation warnings:", _validation.warnings);
+          }
+          _context12.n = 21;
+          break;
+        case 18:
+          if (runText) runText.innerText = "Planning...";
+          _context12.n = 19;
+          return (0,_services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__.runAgent)(userPrompt, sheetContext, attachedFiles, {
+            maxRetries: 2,
+            enablePlanning: true,
+            strictValidation: true
+          }, signal);
+        case 19:
+          orchestratorResult = _context12.v;
+          if (orchestratorResult.success) {
+            _context12.n = 20;
+            break;
+          }
+          throw new Error(orchestratorResult.error || "Agent failed to generate valid code");
+        case 20:
+          code = orchestratorResult.code;
+        case 21:
+          debugEl.innerText = code;
+          skeletonEl.style.display = "none";
+
+          // ─── EXECUTION PHASE with Advanced Recovery ───
+          if (runText) runText.innerText = "Running...";
+          showStatus(statusEl, "info", "<div class=\"spinner\"></div><span>Executing code...</span>");
+          _context12.n = 22;
+          return (0,_services_agent_orchestrator__WEBPACK_IMPORTED_MODULE_7__.executeWithRecovery)(code, /*#__PURE__*/function () {
+            var _ref4 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee10(candidateCode) {
+              return _regenerator().w(function (_context11) {
+                while (1) switch (_context11.n) {
+                  case 0:
+                    _context11.n = 1;
+                    return executeExcelCode(candidateCode);
+                  case 1:
+                    return _context11.a(2);
+                }
+              }, _callee10);
+            }));
+            return function (_x15) {
+              return _ref4.apply(this, arguments);
+            };
+          }(), MAX_EXECUTION_RETRIES, signal);
+        case 22:
+          recovery = _context12.v;
+          if (!recovery.success) {
+            _context12.n = 23;
+            break;
+          }
+          code = recovery.finalCode;
+          debugEl.innerText = code;
+          if (!fromCache && attachedFiles.length === 0 && !isSchemaMode) {
+            (0,_services_cache__WEBPACK_IMPORTED_MODULE_4__.cacheResponse)(userPrompt, code);
+          }
+          showStatus(statusEl, "success", "".concat(_services_icons__WEBPACK_IMPORTED_MODULE_9__.Icons.check, "<span>Done</span>"));
+          showToast("success", "Executed successfully \u2713 (Press Ctrl+Z to undo)");
+          _context12.n = 24;
+          break;
+        case 23:
+          throw new Error(recovery.error || "Execution failed after retries");
+        case 24:
+          _context12.n = 26;
+          break;
+        case 25:
+          _context12.p = 25;
+          _t0 = _context12.v;
+          console.error("[Agent] Fatal error:", _t0);
+          skeletonEl.style.display = "none";
+          if (_t0.name === 'AbortError') {
+            showStatus(statusEl, "info", "Agent stopped by user.");
+            showToast("info", "Agent stopped");
+          } else {
+            showStatus(statusEl, "error", _t0.message || String(_t0));
+            showToast("error", (_t0.message || "Execution failed").substring(0, 80));
+          }
+        case 26:
+          _context12.p = 26;
+          button.disabled = false;
+          if (runText) runText.innerText = originalText;
+          if (runIcon) runIcon.innerHTML = originalIcon;
+          button.classList.remove("btn-stop");
+          button.classList.remove("is-busy");
+          agentAbortController = null;
+          return _context12.f(26);
+        case 27:
+          return _context12.a(2);
+      }
+    }, _callee11, null, [[9, 12], [5, 7], [4, 25, 26, 27]]);
+  }));
+  return _runAICommand.apply(this, arguments);
+}
+function showStatus(el, type, html) {
+  el.innerHTML = html;
+  el.className = "status-pill ".concat(type);
+  el.style.display = "flex";
+}
+
+/**
+ * Execute AI-generated Excel JavaScript code with safety wrappers.
+ * Provides:
+ * - Pre-declared context, sheet, Excel variables
+ * - writeData helper function
+ * - Auto-fit columns on completion
+ * - Enhanced error messages
+ */
+function executeExcelCode(_x4) {
+  return _executeExcelCode.apply(this, arguments);
+} // ─── File Handling Logic ───────────────────────────────────────
+function _executeExcelCode() {
+  _executeExcelCode = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee13(code) {
+    return _regenerator().w(function (_context14) {
+      while (1) switch (_context14.n) {
+        case 0:
+          _context14.n = 1;
+          return Excel.run(/*#__PURE__*/function () {
+            var _ref5 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee12(context) {
+              var sheet, writeDataHelper, wrappedCode, _t1, _t10;
+              return _regenerator().w(function (_context13) {
+                while (1) switch (_context13.p = _context13.n) {
+                  case 0:
+                    sheet = context.workbook.worksheets.getActiveWorksheet(); // Mandatory writeData helper that all generated code can use
+                    writeDataHelper = "\nfunction writeData(sheet, startCell, data) {\n  if (!data || data.length === 0) return null;\n  const rows = data.length;\n  const cols = Math.max(...data.map(r => r ? r.length : 0));\n  if (cols === 0) return null;\n  const normalized = data.map(r => {\n    const row = r ? [...r] : [];\n    while (row.length < cols) row.push(\"\");\n    return row.map(cell => {\n      if (cell === null || cell === undefined) return \"\";\n      let val = typeof cell === \"object\" ? (Array.isArray(cell) ? cell.join(\", \") : JSON.stringify(cell)) : String(cell);\n      if (/^[=+\\-@]/.test(val)) val = \"'\" + val;\n      if (val.length > 30000) val = val.substring(0, 30000) + \"...\";\n      return val;\n    });\n    });\n  });\n  try {\n    const range = sheet.getRange(startCell).getResizedRange(rows - 1, cols - 1);\n    range.values = normalized;\n    range.format.font.name = \"Segoe UI\";\n    range.format.font.size = 10;\n    range.format.verticalAlignment = \"Center\";\n    return range;\n  } catch (e) {\n    console.error(\"writeData error:\", e);\n    return null;\n  }\n}\n\n  function formatTableStyle(usedRange, headerColor, fontColor) {\n    if (!usedRange) return;\n    try {\n      if (usedRange.rowCount < 1) return;\n      const headerRow = usedRange.getRow(0);\n      headerRow.format.set({\n        font: { bold: true, size: 11, color: fontColor },\n        fill: { color: headerColor },\n        horizontalAlignment: \"Center\",\n        verticalAlignment: \"Center\"\n      });\n      // Try resolving body\n      if (usedRange.rowCount > 1) {\n        const bodyRange = usedRange.getOffsetRange(1, 0).getResizedRange(-1, 0);\n        bodyRange.format.font.color = \"#000000\";\n        bodyRange.format.wrapText = true;\n      }\n    } catch (e) {\n      console.error(\"formatTableStyle error: \", e);\n    }\n  }\n  ";
+                    wrappedCode = "\n      ".concat(writeDataHelper, "\n      \n      try {\n        // \u2550\u2550\u2550 AI Generated Code \u2550\u2550\u2550\n        ").concat(code, "\n        \n        // \u2550\u2550\u2550 Safety Finalization \u2550\u2550\u2550\n        try {\n          sheet.getUsedRange().format.autofitColumns();\n        } catch(_) { /* Sheet might be empty */ }\n        \n      } catch(_innerErr) {\n        console.error(\"[Agent] Runtime Error:\", _innerErr);\n        try { await context.sync(); } catch(_) {}\n        throw _innerErr;\n      }\n    ");
+                    console.log("=== EXECUTING AI CODE ===");
+                    console.log(wrappedCode.split("\\n").map(function (l, i) {
+                      return "".concat(i + 1, ": ").concat(l);
+                    }).join("\\n"));
+                    console.log("=========================");
+                    _context13.p = 1;
+                    _context13.n = 2;
+                    return new Function("context", "sheet", "Excel", "return (async () => {\n          try {\n            ".concat(wrappedCode, "\n            await context.sync();\n          } catch (inner) {\n        // Enhance error messages for common issues\n        if (inner.code === \"InvalidArgument\") {\n          const original = inner.message || \"\";\n          if (original.includes(\"A0\") || original.includes(\"row 0\")) {\n            inner.message = \"Invalid range: Row 0 doesn't exist. Excel rows start at 1.\";\n          } else if (original.includes(\"getResizedRange\")) {\n            inner.message = \"Invalid range size: Check that data dimensions match the range.\";\n          } else {\n            inner.message = \"Invalid argument: \" + original;\n          }\n        } else if (inner.message?.includes(\"is not a function\")) {\n          const fnMatch = inner.message.match(/(\\w+) is not a function/);\n          const fn = fnMatch ? fnMatch[1] : (inner.stack?.match(/at\\s+.*\\.(.*)\\s+\\(/)?.[1] || \"method\");\n          inner.message = \"API Error: .\" + fn + \"() doesn't exist. Use correct Excel JS API methods.\";\n        } else if (inner.message?.includes(\"is not defined\")) {\n          const varMatch = inner.message.match(/(\\w+) is not defined/);\n          const v = varMatch ? varMatch[1] : \"variable\";\n          inner.message = \"Undefined: '\" + v + \"' was used before being declared.\";\n        } else if (inner.message?.includes(\"Cannot read property\")) {\n          inner.message = \"Null reference: Tried to read property of undefined. Add null checks or ensure .load() was called.\";\n        }\n        throw inner;\n      }\n    })()"))(context, sheet, Excel);
+                  case 2:
+                    _context13.n = 8;
+                    break;
+                  case 3:
+                    _context13.p = 3;
+                    _t1 = _context13.v;
+                    console.error("[Agent] Execution Error:", _t1);
+                    _context13.p = 4;
+                    _context13.n = 5;
+                    return context.sync();
+                  case 5:
+                    _context13.n = 7;
+                    break;
+                  case 6:
+                    _context13.p = 6;
+                    _t10 = _context13.v;
+                  case 7:
+                    throw _t1;
+                  case 8:
+                    _context13.n = 9;
+                    return context.sync();
+                  case 9:
+                    return _context13.a(2);
+                }
+              }, _callee12, null, [[4, 6], [1, 3]]);
+            }));
+            return function (_x16) {
+              return _ref5.apply(this, arguments);
+            };
+          }());
+        case 1:
+          return _context14.a(2);
+      }
+    }, _callee13);
+  }));
+  return _executeExcelCode.apply(this, arguments);
+}
+function handleFileSelect(_x5) {
+  return _handleFileSelect.apply(this, arguments);
+}
+function _handleFileSelect() {
+  _handleFileSelect = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee14(event) {
+    var isAgent,
+      input,
+      btnId,
+      btn,
+      newFiles,
+      i,
+      file,
+      arrayBuffer,
+      images,
+      base64,
+      icon,
+      _args15 = arguments,
+      _t11;
+    return _regenerator().w(function (_context15) {
+      while (1) switch (_context15.p = _context15.n) {
+        case 0:
+          isAgent = _args15.length > 1 && _args15[1] !== undefined ? _args15[1] : false;
+          input = event.target;
+          if (!(!input.files || input.files.length === 0)) {
+            _context15.n = 1;
+            break;
+          }
+          return _context15.a(2);
+        case 1:
+          btnId = isAgent ? "agent-file-btn" : "file-upload-btn";
+          btn = document.getElementById(btnId);
+          if (btn) btn.innerHTML = "< span class=\"btn-spinner\" > </span>";
+          _context15.p = 2;
+          newFiles = []; // Process all selected files
+          i = 0;
+        case 3:
+          if (!(i < input.files.length)) {
+            _context15.n = 9;
+            break;
+          }
+          file = input.files[i];
+          if (!(file.type === "application/pdf")) {
+            _context15.n = 6;
+            break;
+          }
+          rawPDFFiles.push(file); // Keep raw file for text extraction
+          _context15.n = 4;
+          return file.arrayBuffer();
+        case 4:
+          arrayBuffer = _context15.v;
+          _context15.n = 5;
+          return renderPdfToImages(arrayBuffer);
+        case 5:
+          images = _context15.v;
+          newFiles.push({
+            name: file.name,
+            type: "pdf",
+            data: images
+          });
+          _context15.n = 8;
+          break;
+        case 6:
+          if (!file.type.startsWith("image/")) {
+            _context15.n = 8;
+            break;
+          }
+          _context15.n = 7;
+          return fileToBase64(file);
+        case 7:
+          base64 = _context15.v;
+          newFiles.push({
+            name: file.name,
+            type: "image",
+            data: [base64]
+          });
+        case 8:
+          i++;
+          _context15.n = 3;
+          break;
+        case 9:
+          if (!(newFiles.length > 0)) {
+            _context15.n = 10;
+            break;
+          }
+          // Append to existing files
+          attachedFiles = [].concat(_toConsumableArray(attachedFiles), newFiles);
+          // Show batch panel if in extract mode and we have PDFs
+          if (currentCategory === "extract" && rawPDFFiles.length > 0) {
+            showBatchPanel(true);
+          }
+          updateFilePreview(true, isAgent);
+          _context15.n = 11;
+          break;
+        case 10:
+          throw new Error("Unsupported file type. Please upload PDF or Image.");
+        case 11:
+          _context15.n = 13;
+          break;
+        case 12:
+          _context15.p = 12;
+          _t11 = _context15.v;
+          console.error(_t11);
+          showStatus(document.getElementById("status-message"), "error", "Error reading file: " + _t11.message);
+        case 13:
+          _context15.p = 13;
+          // Reset input so same file can be selected again if needed
+          input.value = "";
+          if (btn) {
+            // Restore icon
+            icon = isAgent ? "<svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48\"></path></svg>" : "<svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48\"></path></svg>";
+            btn.innerHTML = icon;
+          }
+          return _context15.f(13);
+        case 14:
+          return _context15.a(2);
+      }
+    }, _callee14, null, [[2, 12, 13, 14]]);
+  }));
+  return _handleFileSelect.apply(this, arguments);
+}
+function updateFilePreview(show) {
+  var isAgent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var listId = isAgent ? "agent-file-preview-list" : "file-preview-list";
+  var container = document.getElementById(listId);
+  if (!container) return;
+  container.innerHTML = "";
+  if (attachedFiles.length === 0) {
+    return;
+  }
+
+  // Render chips
+  attachedFiles.forEach(function (file, index) {
+    var chip = document.createElement("div");
+    chip.className = "file-chip";
+    var icon = document.createElement("span");
+    icon.className = "file-chip-icon";
+    icon.innerHTML = file.type === "pdf" ? "📄" : "🖼️";
+    var name = document.createElement("span");
+    name.className = "file-chip-name";
+    name.innerText = file.name;
+    var remove = document.createElement("button");
+    remove.className = "file-chip-remove";
+    remove.innerHTML = "×";
+    remove.title = "Remove file";
+    remove.onclick = function (e) {
+      e.stopPropagation();
+      removeFile(index, isAgent);
+    };
+    chip.appendChild(icon);
+    chip.appendChild(name);
+    chip.appendChild(remove);
+    container.appendChild(chip);
+  });
+}
+function removeFile(index, isAgent) {
+  attachedFiles.splice(index, 1);
+  updateFilePreview(true, isAgent);
+}
+function clearFile() {
+  var isAgent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  attachedFiles = [];
+  rawPDFFiles = [];
+  showBatchPanel(false);
+  updateFilePreview(false, isAgent);
+}
+function fileToBase64(file) {
+  return new Promise(function (resolve, reject) {
+    var reader = new FileReader();
+    reader.onload = function () {
+      return resolve(reader.result);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+function renderPdfToImages(_x6) {
+  return _renderPdfToImages.apply(this, arguments);
+} // ═══════════════════════════════════════════════════════════════
+// BATCH PDF EXTRACTION ENGINE
+// ═══════════════════════════════════════════════════════════════
+/**
+ * Shows or hides the batch extraction panel and updates the file count badge.
+ */
+function _renderPdfToImages() {
+  _renderPdfToImages = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee15(buffer) {
+    var pdf, images, maxPages, i, page, viewport, canvas, context;
+    return _regenerator().w(function (_context16) {
+      while (1) switch (_context16.n) {
+        case 0:
+          _context16.n = 1;
+          return pdfjs_dist__WEBPACK_IMPORTED_MODULE_8__.getDocument(buffer).promise;
+        case 1:
+          pdf = _context16.v;
+          images = []; // Limit to 5 pages per PDF for better coverage of long CVs
+          maxPages = Math.min(pdf.numPages, 5);
+          i = 1;
+        case 2:
+          if (!(i <= maxPages)) {
+            _context16.n = 7;
+            break;
+          }
+          _context16.n = 3;
+          return pdf.getPage(i);
+        case 3:
+          page = _context16.v;
+          // Use 1.0 scale to keep image size manageable for local vision models
+          viewport = page.getViewport({
+            scale: 1.0
+          });
+          canvas = document.createElement("canvas");
+          context = canvas.getContext("2d");
+          if (context) {
+            _context16.n = 4;
+            break;
+          }
+          return _context16.a(3, 6);
+        case 4:
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
+          _context16.n = 5;
+          return page.render({
+            canvasContext: context,
+            viewport: viewport
+          }).promise;
+        case 5:
+          images.push(canvas.toDataURL("image/png"));
+        case 6:
+          i++;
+          _context16.n = 2;
+          break;
+        case 7:
+          return _context16.a(2, images);
+      }
+    }, _callee15);
+  }));
+  return _renderPdfToImages.apply(this, arguments);
+}
+function showBatchPanel(show) {
+  var panel = document.getElementById("batch-extraction-panel");
+  var badge = document.getElementById("batch-file-count");
+  if (!panel) return;
+  panel.style.display = show ? "block" : "none";
+  if (show && badge) {
+    var count = rawPDFFiles.length;
+    badge.textContent = "".concat(count, " PDF").concat(count !== 1 ? "s" : "");
+  }
+}
+
+/**
+ * Parses field names from natural language instruction using regex heuristics.
+ * E.g. "Extract Name, Email, Phone, Skills and Experience" → ["Name","Email","Phone","Skills","Experience"]
+ */
+function parseFieldsFromInstruction(instruction) {
+  // Look for explicit list patterns: "extract X, Y, Z" or "find X, Y and Z"
+  var listPattern = /(?:extract|find|get|pull|identify|return|capture|include)[:\s]+([^.!?]+)/i;
+  var match = instruction.match(listPattern);
+  if (match) {
+    return match[1].split(/[,;&]| and /i).map(function (f) {
+      return f.trim().replace(/^["'\-•]+|["'\-•]+$/g, "");
+    }).filter(function (f) {
+      return f.length > 1 && f.length < 50;
+    });
+  }
+
+  // Fallback: detect capitalised or quoted words as field names
+  var capitalWords = instruction.match(/\b[A-Z][a-z]{2,}(?:\s[A-Z][a-z]{2,})?\b/g) || [];
+  var filtered = capitalWords.filter(function (w) {
+    return !/^(These|This|The|And|From|With|For|All|Each|Into|Then|After|Before|Upload|File|Excel|Sheet|Row|Column|PDF|Resume|CV)$/.test(w);
+  });
+  if (filtered.length > 0) return Array.from(new Set(filtered));
+
+  // Default for resumes if nothing detected
+  return ["Name", "Email", "Phone", "Skills", "Experience"];
+}
+
+/**
+ * Ensures the first row of the active sheet has the given fields as headers.
+ * If the sheet is empty, writes them in row 1. If headers already exist, leaves them.
+ * Returns the final, authoritative list of headers in sheet order.
+ */
+function ensureExcelHeaders(_x7) {
+  return _ensureExcelHeaders.apply(this, arguments);
+}
+/**
+ * Calls the LLM to extract structured fields from raw PDF text.
+ * Returns a parsed object { fieldName: value } or null on failure.
+ */
+function _ensureExcelHeaders() {
+  _ensureExcelHeaders = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee17(fields) {
+    return _regenerator().w(function (_context18) {
+      while (1) switch (_context18.n) {
+        case 0:
+          return _context18.a(2, Excel.run(/*#__PURE__*/function () {
+            var _ref6 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee16(context) {
+              var sheet, headerRange, existing;
+              return _regenerator().w(function (_context17) {
+                while (1) switch (_context17.n) {
+                  case 0:
+                    sheet = context.workbook.worksheets.getActiveWorksheet();
+                    headerRange = sheet.getRange("A1:".concat(String.fromCharCode(64 + fields.length), "1"));
+                    headerRange.load("values");
+                    _context17.n = 1;
+                    return context.sync();
+                  case 1:
+                    existing = headerRange.values[0].map(function (v) {
+                      return String(v || "").trim();
+                    }).filter(function (v) {
+                      return v;
+                    });
+                    if (!(existing.length > 0)) {
+                      _context17.n = 2;
+                      break;
+                    }
+                    return _context17.a(2, existing);
+                  case 2:
+                    // Write new headers
+                    headerRange.values = [fields.map(function (f) {
+                      return f.trim();
+                    })];
+                    headerRange.format.set({
+                      font: {
+                        bold: true
+                      },
+                      fill: {
+                        color: "#1B2A4A"
+                      },
+                      horizontalAlignment: "Center"
+                    });
+                    headerRange.format.font.color = "#FFFFFF";
+                    headerRange.format.autofitColumns();
+                    _context17.n = 3;
+                    return context.sync();
+                  case 3:
+                    return _context17.a(2, fields);
+                }
+              }, _callee16);
+            }));
+            return function (_x17) {
+              return _ref6.apply(this, arguments);
+            };
+          }()));
+      }
+    }, _callee17);
+  }));
+  return _ensureExcelHeaders.apply(this, arguments);
+}
+function extractStructuredData(_x8, _x9, _x0, _x1) {
+  return _extractStructuredData.apply(this, arguments);
+}
+/**
+ * Appends a single data row to the Excel sheet below the header.
+ * Detects the next empty row automatically.
+ */
+function _extractStructuredData() {
+  _extractStructuredData = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee18(pdfText, userInstruction, fields, signal) {
+    var fieldList, systemPrompt, userMessage, response, cleaned, jsonMatch, _t12;
+    return _regenerator().w(function (_context19) {
+      while (1) switch (_context19.p = _context19.n) {
+        case 0:
+          fieldList = fields.join(", ");
+          systemPrompt = "You are a precision data extraction engine. Your ONLY output is valid JSON.\n\nGiven a document, extract the following fields: ".concat(fieldList, "\n\nRules:\n- Output ONLY a JSON object. No markdown, no explanation, no extra text.\n- Use exact field names as keys: ").concat(JSON.stringify(fields), "\n- If a field is not found in the document, use null as the value.\n- For \"Skills\": list as a comma-separated string.\n- For \"Experience\": summarize the most recent role: \"Title at Company (Years)\" or list companies.\n- Never hallucinate or guess information not in the document.\n\nExample output:\n{\"Name\": \"John Smith\", \"Email\": \"john@email.com\", \"Phone\": \"9876543210\", \"Skills\": \"Python, React, SQL\", \"Experience\": \"Software Engineer at Google (3 yrs)\"}");
+          userMessage = "Instruction: ".concat(userInstruction, "\n\nDOCUMENT TEXT:\n").concat(pdfText.substring(0, 8000));
+          _context19.p = 1;
+          _context19.n = 2;
+          return (0,_services_llm_service__WEBPACK_IMPORTED_MODULE_1__.callLLM)([{
+            role: "system",
+            content: systemPrompt
+          }, {
+            role: "user",
+            content: userMessage
+          }], undefined, signal);
+        case 2:
+          response = _context19.v;
+          // Strip markdown fences if model added them
+          cleaned = response.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
+          jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+          if (jsonMatch) {
+            _context19.n = 3;
+            break;
+          }
+          return _context19.a(2, null);
+        case 3:
+          return _context19.a(2, JSON.parse(jsonMatch[0]));
+        case 4:
+          _context19.p = 4;
+          _t12 = _context19.v;
+          console.error("[Batch] LLM extraction failed:", _t12);
+          return _context19.a(2, null);
+      }
+    }, _callee18, null, [[1, 4]]);
+  }));
+  return _extractStructuredData.apply(this, arguments);
+}
+function appendExcelRow(_x10, _x11) {
+  return _appendExcelRow.apply(this, arguments);
+}
+/**
+ * Adds a log entry to the batch log panel.
+ */
+function _appendExcelRow() {
+  _appendExcelRow = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee20(headers, data) {
+    return _regenerator().w(function (_context21) {
+      while (1) switch (_context21.n) {
+        case 0:
+          _context21.n = 1;
+          return Excel.run(/*#__PURE__*/function () {
+            var _ref7 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee19(context) {
+              var sheet, usedRange, nextRow, rowValues, startCell, endCell, range;
+              return _regenerator().w(function (_context20) {
+                while (1) switch (_context20.n) {
+                  case 0:
+                    sheet = context.workbook.worksheets.getActiveWorksheet();
+                    usedRange = sheet.getUsedRangeOrNullObject();
+                    usedRange.load("rowCount,isNullObject");
+                    _context20.n = 1;
+                    return context.sync();
+                  case 1:
+                    nextRow = usedRange.isNullObject ? 1 : usedRange.rowCount + 1; // 1-indexed
+                    rowValues = headers.map(function (h) {
+                      var _ref8, _ref9, _data$h;
+                      var rawVal = (_ref8 = (_ref9 = (_data$h = data[h]) !== null && _data$h !== void 0 ? _data$h : data[h.toLowerCase()]) !== null && _ref9 !== void 0 ? _ref9 : data[Object.keys(data).find(function (k) {
+                        return k.toLowerCase() === h.toLowerCase();
+                      }) || ""]) !== null && _ref8 !== void 0 ? _ref8 : "";
+                      var safeVal = rawVal === null ? "" : rawVal;
+                      var val = _typeof(safeVal) === "object" && safeVal !== null ? Array.isArray(safeVal) ? safeVal.join(", ") : JSON.stringify(safeVal) : String(safeVal || "");
+                      if (/^[=+\-@]/.test(val)) val = "'" + val;
+                      if (val.length > 30000) val = val.substring(0, 30000) + "...";
+                      return val;
+                    });
+                    startCell = "A".concat(nextRow);
+                    endCell = "".concat(String.fromCharCode(64 + headers.length)).concat(nextRow);
+                    range = sheet.getRange("".concat(startCell, ":").concat(endCell));
+                    range.values = [rowValues];
+                    range.format.wrapText = true;
+                    // Subtle alternating row colour
+                    range.format.fill.color = nextRow % 2 === 0 ? "#F4F5F7" : "#FFFFFF";
+                    _context20.n = 2;
+                    return context.sync();
+                  case 2:
+                    return _context20.a(2);
+                }
+              }, _callee19);
+            }));
+            return function (_x18) {
+              return _ref7.apply(this, arguments);
+            };
+          }());
+        case 1:
+          return _context21.a(2);
+      }
+    }, _callee20);
+  }));
+  return _appendExcelRow.apply(this, arguments);
+}
+function batchLog(message) {
+  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "info";
+  var log = document.getElementById("batch-log");
+  if (!log) return;
+  var entry = document.createElement("div");
+  entry.className = "batch-log-entry ".concat(type);
+  entry.textContent = "".concat(type === "success" ? "✓" : type === "error" ? "✗" : "•", " ").concat(message);
+  log.appendChild(entry);
+  log.scrollTop = log.scrollHeight;
+}
+
+/**
+ * Main batch PDF extraction orchestrator.
+ * Reads instruction, parses fields, creates headers, loops through PDFs, extracts data, appends rows.
+ */
+function runBatchPDFExtraction() {
+  return _runBatchPDFExtraction.apply(this, arguments);
+}
+function _runBatchPDFExtraction() {
+  _runBatchPDFExtraction = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee21() {
+    var _instructionEl$value;
+    var btn, btnText, progressWrap, progressBar, progressLabel, logEl, instructionEl, instruction, pdfsToProcess, fields, signal, successCount, errorCount, headers, i, file, pct, extracted, data, finalPct, msg, _t13, _t14;
+    return _regenerator().w(function (_context22) {
+      while (1) switch (_context22.p = _context22.n) {
+        case 0:
+          btn = document.getElementById("batch-extract-btn");
+          btnText = document.getElementById("batch-btn-text");
+          progressWrap = document.getElementById("batch-progress-wrap");
+          progressBar = document.getElementById("batch-progress-bar");
+          progressLabel = document.getElementById("batch-progress-label");
+          logEl = document.getElementById("batch-log");
+          instructionEl = document.getElementById("batch-instruction"); // Handle stop
+          if (!batchAbortController) {
+            _context22.n = 1;
+            break;
+          }
+          batchAbortController.abort();
+          batchAbortController = null;
+          if (btnText) btnText.textContent = "Extract All PDFs";
+          if (btn) btn.disabled = false;
+          return _context22.a(2);
+        case 1:
+          instruction = (instructionEl === null || instructionEl === void 0 || (_instructionEl$value = instructionEl.value) === null || _instructionEl$value === void 0 ? void 0 : _instructionEl$value.trim()) || "These are documents. Extract Name, Email, Phone, Skills, and Experience.";
+          pdfsToProcess = _toConsumableArray(rawPDFFiles); // snapshot
+          if (!(pdfsToProcess.length === 0)) {
+            _context22.n = 2;
+            break;
+          }
+          showToast("error", "No PDFs attached. Please upload PDFs first.");
+          return _context22.a(2);
+        case 2:
+          // Parse target fields
+          fields = parseFieldsFromInstruction(instruction);
+          if (!(fields.length === 0)) {
+            _context22.n = 3;
+            break;
+          }
+          showToast("error", "Could not detect fields to extract. Please be more specific.");
+          return _context22.a(2);
+        case 3:
+          batchAbortController = new AbortController();
+          signal = batchAbortController.signal; // Setup UI
+          if (btn) {
+            btn.disabled = false;
+          }
+          if (btnText) btnText.textContent = "⏹ Stop Extraction";
+          if (progressWrap) progressWrap.style.display = "block";
+          if (logEl) logEl.innerHTML = "";
+          batchLog("Starting extraction of ".concat(pdfsToProcess.length, " PDF(s)\u2026"), "info");
+          batchLog("Detected fields: ".concat(fields.join(", ")), "info");
+          successCount = 0;
+          errorCount = 0;
+          headers = [];
+          _context22.p = 4;
+          _context22.n = 5;
+          return ensureExcelHeaders(fields);
+        case 5:
+          headers = _context22.v;
+          batchLog("Excel headers ready: ".concat(headers.join(", ")), "info");
+          i = 0;
+        case 6:
+          if (!(i < pdfsToProcess.length)) {
+            _context22.n = 17;
+            break;
+          }
+          if (!signal.aborted) {
+            _context22.n = 7;
+            break;
+          }
+          return _context22.a(3, 17);
+        case 7:
+          file = pdfsToProcess[i];
+          pct = Math.round(i / pdfsToProcess.length * 100);
+          if (progressBar) progressBar.style.width = "".concat(pct, "%");
+          if (progressLabel) progressLabel.textContent = "".concat(i, " / ").concat(pdfsToProcess.length);
+          batchLog("[".concat(i + 1, "/").concat(pdfsToProcess.length, "] Processing: ").concat(file.name), "info");
+          _context22.p = 8;
+          _context22.n = 9;
+          return (0,_services_pdfService__WEBPACK_IMPORTED_MODULE_6__.extractTextFromPDFFile)(file);
+        case 9:
+          extracted = _context22.v;
+          if (!(!extracted.text || extracted.text.length < 20)) {
+            _context22.n = 10;
+            break;
+          }
+          throw new Error("PDF appears empty or unreadable");
+        case 10:
+          _context22.n = 11;
+          return extractStructuredData(extracted.text, instruction, fields, signal);
+        case 11:
+          data = _context22.v;
+          if (data) {
+            _context22.n = 12;
+            break;
+          }
+          throw new Error("LLM returned no data");
+        case 12:
+          _context22.n = 13;
+          return appendExcelRow(headers, data);
+        case 13:
+          successCount++;
+          batchLog("\u2713 ".concat(file.name, " \u2192 ").concat(Object.values(data).filter(function (v) {
+            return v;
+          }).length, "/").concat(fields.length, " fields extracted"), "success");
+          _context22.n = 16;
+          break;
+        case 14:
+          _context22.p = 14;
+          _t13 = _context22.v;
+          if (!(_t13.name === "AbortError")) {
+            _context22.n = 15;
+            break;
+          }
+          return _context22.a(3, 17);
+        case 15:
+          errorCount++;
+          batchLog("\u2717 ".concat(file.name, ": ").concat(_t13.message), "error");
+        case 16:
+          i++;
+          _context22.n = 6;
+          break;
+        case 17:
+          _context22.n = 19;
+          break;
+        case 18:
+          _context22.p = 18;
+          _t14 = _context22.v;
+          batchLog("Fatal error: ".concat(_t14.message), "error");
+        case 19:
+          _context22.p = 19;
+          // Final UI update
+          finalPct = Math.round(successCount / pdfsToProcess.length * 100);
+          if (progressBar) progressBar.style.width = "100%";
+          if (progressLabel) progressLabel.textContent = "".concat(pdfsToProcess.length, " / ").concat(pdfsToProcess.length);
+          msg = "\u2705 Done! ".concat(successCount, " rows added").concat(errorCount > 0 ? ", ".concat(errorCount, " failed") : "", ".");
+          batchLog(msg, successCount > 0 ? "success" : "error");
+          showToast(successCount > 0 ? "success" : "error", msg);
+          batchAbortController = null;
+          if (btn) btn.disabled = false;
+          if (btnText) btnText.textContent = "Extract All PDFs";
+          return _context22.f(19);
+        case 20:
+          return _context22.a(2);
+      }
+    }, _callee21, null, [[8, 14], [4, 18, 19, 20]]);
+  }));
+  return _runBatchPDFExtraction.apply(this, arguments);
+}
+
+/***/ }),
+
+/***/ "./src/taskpane/taskpane.html":
+/*!************************************!*\
+  !*** ./src/taskpane/taskpane.html ***!
+  \************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// Imports
+var ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/icon-80-v2.png */ "./assets/icon-80-v2.png"), __webpack_require__.b);
+// Module
+var code = "<!DOCTYPE html>\r\n<html>\r\n\r\n<head>\r\n    <meta charset=\"UTF-8\" />\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\" />\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n    <title>SheetOS AI</title>\r\n    <" + "script type=\"text/javascript\" src=\"https://appsforoffice.microsoft.com/lib/1/hosted/office.js\"><" + "/script>\r\n    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\r\n    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\r\n    <link\r\n        href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap\"\r\n        rel=\"stylesheet\">\r\n</head>\r\n\r\n<body>\r\n    <main id=\"app-body\" style=\"display: none;\">\r\n        <header class=\"app-header\">\r\n            <div class=\"brand\">\r\n                <h1>SheetOS <span class=\"highlight-text\">AI</span></h1>\r\n            </div>\r\n            <div class=\"header-actions\">\r\n                <button id=\"docs-toggle\" class=\"btn-icon\" title=\"What can I do?\"></button>\r\n                <button id=\"settings-toggle\" class=\"btn-icon\" title=\"Settings\"></button>\r\n            </div>\r\n        </header>\r\n\r\n        <!-- Docs Panel -->\r\n        <div id=\"docs-panel\" class=\"panel\" style=\"display: none;\">\r\n            <h3>What can SheetOS AI do?</h3>\r\n            <div class=\"docs-grid\">\r\n                <div class=\"doc-item\"><span class=\"doc-icon\" data-icon=\"paintbrush\"></span>\r\n                    <div><strong>Smart Formatter</strong>\r\n                        <p>Say \"make this professional\" and get instant clean formatting, spacing, fonts, colors,\r\n                            alignment</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"doc-item\"><span class=\"doc-icon\" data-icon=\"formula\"></span>\r\n                    <div><strong>Formula Generator</strong>\r\n                        <p>Describe what you need in plain English — get VLOOKUP, SUMIF, INDEX/MATCH, any formula</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"doc-item\"><span class=\"doc-icon\" data-icon=\"barChart\"></span>\r\n                    <div><strong>Report Automation</strong>\r\n                        <p>Generate monthly sales, financial, or performance reports with charts in one click</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"doc-item\"><span class=\"doc-icon\" data-icon=\"table\"></span>\r\n                    <div><strong>Tables & Charts</strong>\r\n                        <p>Create formatted tables, column/bar/line/pie charts, dashboards</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"doc-item\"><span class=\"doc-icon\" data-icon=\"sortAsc\"></span>\r\n                    <div><strong>Sort & Filter</strong>\r\n                        <p>Sort by any column, apply AutoFilter, multi-column sorting</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"doc-item\"><span class=\"doc-icon\" data-icon=\"checkSquare\"></span>\r\n                    <div><strong>Validation</strong>\r\n                        <p>Dropdown lists, number constraints, date limits, error alerts</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"doc-item\"><span class=\"doc-icon\" data-icon=\"trendUp\"></span>\r\n                    <div><strong>Conditional Formatting</strong>\r\n                        <p>Color scales, data bars, icon sets, highlight rules</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"doc-item\"><span class=\"doc-icon\" data-icon=\"eraser\"></span>\r\n                    <div><strong>Data Cleanup</strong>\r\n                        <p>Remove duplicates, trim spaces, fix formats, standardize case</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"doc-item\"><span class=\"doc-icon\" data-icon=\"snowflake\"></span>\r\n                    <div><strong>Freeze & Protect</strong>\r\n                        <p>Freeze header rows, protect sheets with custom permissions</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"doc-item\"><span class=\"doc-icon\" data-icon=\"columns\"></span>\r\n                    <div><strong>Worksheets</strong>\r\n                        <p>Add, rename, delete, copy sheets, change tab colors</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"doc-item\"><span class=\"doc-icon\" data-icon=\"fileTemplate\"></span>\r\n                    <div><strong>Templates</strong>\r\n                        <p>Budget trackers, invoices, employee lists, project trackers, grade books</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <p class=\"docs-hint\">Just describe what you need in plain English — SheetOS handles the rest.</p>\r\n        </div>\r\n\r\n        <!-- Settings Panel -->\r\n        <div id=\"settings-panel\" class=\"panel\" style=\"display: none;\">\r\n            <h3>AI Provider</h3>\r\n\r\n            <div class=\"form-group\">\r\n                <label for=\"setting-provider\">Provider</label>\r\n                <select id=\"setting-provider\" class=\"form-input\">\r\n                    <option value=\"groq\">Groq (Llama)</option>\r\n                    <option value=\"gemini\">Google Gemini</option>\r\n                    <option value=\"openai\">OpenAI (GPT-4)</option>\r\n                    <option value=\"anthropic\">Anthropic (Claude)</option>\r\n                    <option value=\"openrouter\">OpenRouter</option>\r\n                    <option value=\"local\">Ollama (Local)</option>\r\n                </select>\r\n            </div>\r\n\r\n            <!-- Groq Fields -->\r\n            <div id=\"groq-fields\">\r\n                <div class=\"form-group\">\r\n                    <label for=\"setting-api-key\">Groq API Key</label>\r\n                    <input id=\"setting-api-key\" type=\"password\" class=\"form-input\" placeholder=\"gsk_...\" />\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"setting-groq-model\">Model</label>\r\n                    <select id=\"setting-groq-model\" class=\"form-input\">\r\n                        <option value=\"llama-3.1-8b-instant\" selected>Llama 3.1 8B — Fast (131K TPM)</option>\r\n                        <option value=\"llama-3.3-70b-versatile\">Llama 3.3 70B — Smart (12K TPM)</option>\r\n                        <option value=\"gemma2-9b-it\">Gemma 2 9B (15K TPM)</option>\r\n                        <option value=\"mixtral-8x7b-32768\">Mixtral 8x7B (5K TPM)</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n\r\n            <!-- Gemini Fields -->\r\n            <div id=\"gemini-fields\" style=\"display: none;\">\r\n                <div class=\"form-group\">\r\n                    <label for=\"setting-gemini-key\">Gemini API Key</label>\r\n                    <input id=\"setting-gemini-key\" type=\"password\" class=\"form-input\" placeholder=\"AIzaSy...\" />\r\n                    <div style=\"font-size:10px; color:var(--text-3); margin-top:4px\">Get free key at <a\r\n                            href=\"https://aistudio.google.com/app/apikey\" target=\"_blank\">aistudio.google.com</a></div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"setting-gemini-model\">Model</label>\r\n                    <select id=\"setting-gemini-model\" class=\"form-input\">\r\n                        <option value=\"gemini-1.5-flash\" selected>Gemini 1.5 Flash (Latest)</option>\r\n                        <option value=\"gemini-1.5-flash-001\">Gemini 1.5 Flash-001</option>\r\n                        <option value=\"gemini-1.5-flash-002\">Gemini 1.5 Flash-002</option>\r\n                        <option value=\"gemini-1.5-flash-8b\">Gemini 1.5 Flash-8B</option>\r\n                        <option value=\"gemini-1.5-pro\">Gemini 1.5 Pro</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n\r\n            <!-- OpenAI Fields -->\r\n            <div id=\"openai-fields\" style=\"display: none;\">\r\n                <div class=\"form-group\">\r\n                    <label for=\"setting-openai-key\">OpenAI API Key</label>\r\n                    <input id=\"setting-openai-key\" type=\"password\" class=\"form-input\" placeholder=\"sk-...\" />\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"setting-openai-model\">Model</label>\r\n                    <select id=\"setting-openai-model\" class=\"form-input\">\r\n                        <option value=\"gpt-4o-mini\" selected>GPT-4o Mini (Fast)</option>\r\n                        <option value=\"gpt-4o\">GPT-4o (Smart)</option>\r\n                        <option value=\"gpt-3.5-turbo\">GPT-3.5 Turbo</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n\r\n            <!-- Anthropic Fields -->\r\n            <div id=\"anthropic-fields\" style=\"display: none;\">\r\n                <div class=\"form-group\">\r\n                    <label for=\"setting-anthropic-key\">Anthropic API Key</label>\r\n                    <input id=\"setting-anthropic-key\" type=\"password\" class=\"form-input\" placeholder=\"sk-ant-...\" />\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"setting-anthropic-model\">Model</label>\r\n                    <select id=\"setting-anthropic-model\" class=\"form-input\">\r\n                        <option value=\"claude-3-5-sonnet-20241022\" selected>Claude 3.5 Sonnet (Best for Code)</option>\r\n                        <option value=\"claude-3-5-haiku-20241022\">Claude 3.5 Haiku (Fast)</option>\r\n                        <option value=\"claude-3-opus-20240229\">Claude 3 Opus</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n\r\n            <!-- OpenRouter Fields -->\r\n            <div id=\"openrouter-fields\" style=\"display: none;\">\r\n                <div class=\"form-group\">\r\n                    <label for=\"setting-openrouter-key\">OpenRouter API Key</label>\r\n                    <input id=\"setting-openrouter-key\" type=\"password\" class=\"form-input\" placeholder=\"sk-or-v1-...\" />\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"setting-openrouter-model\">Model</label>\r\n                    <select id=\"setting-openrouter-model\" class=\"form-input\">\r\n                        <option value=\"anthropic/claude-3.5-sonnet:beta\" selected>Claude 3.5 Sonnet</option>\r\n                        <option value=\"google/gemini-2.5-pro\">Gemini 2.5 Pro</option>\r\n                        <option value=\"openai/gpt-4o\">GPT-4o</option>\r\n                        <option value=\"meta-llama/llama-3.3-70b-instruct\">Llama 3.3 70B</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n\r\n            <!-- Local Fields -->\r\n            <div id=\"local-fields\" style=\"display: none;\">\r\n                <div class=\"form-group\">\r\n                    <label for=\"setting-base-url\">Ollama Host</label>\r\n                    <input id=\"setting-base-url\" type=\"text\" class=\"form-input\" placeholder=\"http://localhost:11434\" />\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label>Model</label>\r\n                    <div class=\"model-select-wrapper\">\r\n                        <select id=\"setting-local-model\" class=\"form-input\">\r\n                            <option value=\"\" disabled selected>Click refresh →</option>\r\n                        </select>\r\n                        <button id=\"refresh-models\" class=\"btn-icon btn-refresh\" title=\"Refresh models\"></button>\r\n                    </div>\r\n                    <div id=\"model-status\" class=\"model-status\"></div>\r\n                </div>\r\n            </div>\r\n\r\n            <button id=\"save-settings\" class=\"btn-primary btn-save\">Save</button>\r\n        </div>\r\n\r\n        <!-- ═══════════════════════════════════════════════════ -->\r\n        <!-- MODE TOGGLE -->\r\n        <!-- ═══════════════════════════════════════════════════ -->\r\n        <div class=\"mode-toggle\">\r\n            <button id=\"mode-planning\" class=\"mode-tab active\" data-mode=\"planning\">\r\n                <span id=\"mode-planning-icon\"></span>\r\n                <span>Planning</span>\r\n            </button>\r\n            <button id=\"mode-agent\" class=\"mode-tab\" data-mode=\"agent\">\r\n                <span id=\"mode-agent-icon\"></span>\r\n                <span>Agent</span>\r\n            </button>\r\n            <div class=\"mode-indicator\" id=\"mode-indicator\"></div>\r\n        </div>\r\n\r\n        <!-- ═══════════════════════════════════════════════════ -->\r\n        <!-- PLANNING MODE (Chat) -->\r\n        <!-- ═══════════════════════════════════════════════════ -->\r\n        <div id=\"planning-mode\" class=\"mode-content active\">\r\n            <!-- Chat Messages Area -->\r\n            <div style=\"position: relative; flex: 1; display: flex; flex-direction: column; overflow: hidden;\">\r\n                <div id=\"chat-messages\" class=\"chat-messages\">\r\n                    <!-- Welcome message -->\r\n                    <div class=\"chat-welcome\">\r\n                        <img src=\"" + ___HTML_LOADER_IMPORT_0___ + "\" alt=\"SheetOS Logo\"\r\n                            style=\"width: 64px; height: 64px; margin-bottom: 16px;\">\r\n                        <h2>What are you working on?</h2>\r\n                        <div class=\"welcome-suggestions\" id=\"chat-suggestions\">\r\n                            <!-- Dynamically populated -->\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <button id=\"scroll-to-bottom\" class=\"scroll-to-bottom\" title=\"Scroll to bottom\">\r\n                    <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"\r\n                        stroke-linecap=\"round\" stroke-linejoin=\"round\">\r\n                        <polyline points=\"6 9 12 15 18 9\" />\r\n                    </svg>\r\n                </button>\r\n            </div>\r\n\r\n            <!-- Chat Input -->\r\n            <div class=\"chat-input-area\">\r\n                <!-- File Preview -->\r\n                <div id=\"file-preview-list\" class=\"file-preview-list\"></div>\r\n\r\n                <div class=\"chat-input-card\">\r\n                    <input type=\"file\" id=\"file-input\" accept=\"image/png, image/jpeg, application/pdf\" multiple\r\n                        style=\"display: none;\" />\r\n                    <button id=\"file-upload-btn\" class=\"btn-clip\" title=\"Attach Images or PDFs\">\r\n                        <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\"\r\n                            stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\r\n                            <path\r\n                                d=\"M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48\">\r\n                            </path>\r\n                        </svg>\r\n                    </button>\r\n                    <textarea id=\"chat-input\" placeholder=\"Ask or upload file...\" rows=\"1\"\r\n                        spellcheck=\"false\"></textarea>\r\n                    <button id=\"chat-send\" class=\"btn-send\" title=\"Send message\">\r\n                        <span id=\"chat-send-icon\"></span>\r\n                    </button>\r\n                </div>\r\n                <div class=\"chat-footer\">\r\n                    <button id=\"chat-clear\" class=\"btn-text\" title=\"Clear conversation\">\r\n                        <span id=\"chat-clear-icon\"></span>\r\n                        <span>Clear</span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <!-- ═══════════════════════════════════════════════════ -->\r\n        <!-- AGENT MODE (Execute) -->\r\n        <!-- ═══════════════════════════════════════════════════ -->\r\n        <div id=\"agent-mode\" class=\"mode-content\">\r\n            <div class=\"content-wrapper\">\r\n                <!-- Input Card (pinned at top, never scrolls) -->\r\n                <div class=\"input-card\">\r\n                    <textarea id=\"prompt-input\" placeholder=\"Describe what you want to do in Excel...\"\r\n                        spellcheck=\"false\"></textarea>\r\n\r\n                    <!-- File Preview (Agent Mode) -->\r\n                    <div id=\"agent-file-preview-list\" class=\"file-preview-list\"></div>\r\n\r\n                    <!-- Batch PDF Extraction Panel (shown in Extract mode with PDFs attached) -->\r\n                    <div id=\"batch-extraction-panel\" class=\"batch-panel\" style=\"display:none;\">\r\n                        <div class=\"batch-panel-header\">\r\n                            <span class=\"batch-panel-title\">🧠 Batch PDF Extraction</span>\r\n                            <span id=\"batch-file-count\" class=\"batch-file-count\">0 PDFs</span>\r\n                        </div>\r\n                        <textarea id=\"batch-instruction\" class=\"batch-instruction\"\r\n                            placeholder=\"Describe what to extract, e.g: These are resumes. Extract Name, Email, Phone, Skills, and Experience.\"\r\n                            rows=\"2\"></textarea>\r\n                        <button id=\"batch-extract-btn\" class=\"btn-primary btn-batch-extract\">\r\n                            <span id=\"batch-icon\">🚀</span>\r\n                            <span id=\"batch-btn-text\">Extract All PDFs</span>\r\n                        </button>\r\n                        <div id=\"batch-progress-wrap\" class=\"batch-progress-wrap\" style=\"display:none;\">\r\n                            <div class=\"batch-progress-bar-track\">\r\n                                <div id=\"batch-progress-bar\" class=\"batch-progress-bar\" style=\"width:0%\"></div>\r\n                            </div>\r\n                            <div id=\"batch-progress-label\" class=\"batch-progress-label\">0 / 0</div>\r\n                        </div>\r\n                        <div id=\"batch-log\" class=\"batch-log\"></div>\r\n                    </div>\r\n\r\n                    <div class=\"card-footer\">\r\n                        <div class=\"footer-left\">\r\n                            <input type=\"file\" id=\"agent-file-input\" accept=\"image/png, image/jpeg, application/pdf\"\r\n                                multiple style=\"display: none;\" />\r\n                            <button id=\"agent-file-btn\" class=\"btn-clip\" title=\"Extract from Images/PDFs\">\r\n                                <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\"\r\n                                    stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\r\n                                    <path\r\n                                        d=\"M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48\">\r\n                                    </path>\r\n                                </svg>\r\n                            </button>\r\n                            <span id=\"cache-badge\" class=\"cache-badge\" style=\"display:none;\">⚡ cached</span>\r\n                        </div>\r\n                        <span class=\"kbd-hint\">Ctrl+↵</span>\r\n                        <button id=\"run\" class=\"btn-primary\">\r\n                            <span id=\"run-text\">Execute</span>\r\n                            <span id=\"run-icon\"></span>\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n\r\n                <!-- Scrollable content area (categories, actions, status, code) -->\r\n                <div class=\"agent-scroll-area\">\r\n                    <!-- Category Tabs for Quick Actions -->\r\n                    <div class=\"action-categories\" id=\"action-categories\">\r\n                        <button class=\"category-tab active\" data-category=\"cleanup\">\r\n                            <span class=\"cat-icon\" data-icon=\"broom\"></span>\r\n                            <span>Cleanup</span>\r\n                        </button>\r\n                        <button class=\"category-tab\" data-category=\"formulas\">\r\n                            <span class=\"cat-icon\" data-icon=\"formula\"></span>\r\n                            <span>Formulas</span>\r\n                        </button>\r\n                        <button class=\"category-tab\" data-category=\"format\">\r\n                            <span class=\"cat-icon\" data-icon=\"palette\"></span>\r\n                            <span>Format</span>\r\n                        </button>\r\n                        <button class=\"category-tab\" data-category=\"reports\">\r\n                            <span class=\"cat-icon\" data-icon=\"barChart\"></span>\r\n                            <span>Reports</span>\r\n                        </button>\r\n                        <button class=\"category-tab\" data-category=\"templates\">\r\n                            <span class=\"cat-icon\" data-icon=\"fileTemplate\"></span>\r\n                            <span>Templates</span>\r\n                        </button>\r\n                        <button class=\"category-tab\" data-category=\"analysis\">\r\n                            <span class=\"cat-icon\" data-icon=\"trendUp\"></span>\r\n                            <span>Analysis</span>\r\n                        </button>\r\n                        <button class=\"category-tab\" data-category=\"extract\">\r\n                            <span class=\"cat-icon\" data-icon=\"upload\"></span>\r\n                            <span>Extract</span>\r\n                        </button>\r\n                        <button class=\"category-tab\" data-category=\"smart\">\r\n                            <span class=\"cat-icon\" data-icon=\"brain\"></span>\r\n                            <span>Smart Tools</span>\r\n                        </button>\r\n                    </div>\r\n\r\n                    <!-- Schema Info Banner (shown in Extract mode) -->\r\n                    <div id=\"schema-info\" class=\"schema-info\" style=\"display: none;\">\r\n                        <div class=\"schema-icon\">📋</div>\r\n                        <div class=\"schema-text\">\r\n                            <strong>Schema-Aware Mode</strong>\r\n                            <span>Data will only be extracted for columns defined in Row 1 of your sheet</span>\r\n                        </div>\r\n                        <button id=\"detect-columns-btn\" class=\"btn-detect\" title=\"Detect column headers\">\r\n                            🔍 Detect\r\n                        </button>\r\n                    </div>\r\n\r\n                    <!-- Detected Columns Preview (shown after detection) -->\r\n                    <div id=\"detected-columns\" class=\"detected-columns\" style=\"display: none;\">\r\n                        <div class=\"detected-header\">\r\n                            <span class=\"detected-label\">Detected Columns:</span>\r\n                            <span id=\"column-count\" class=\"column-count\">0</span>\r\n                        </div>\r\n                        <div id=\"column-chips\" class=\"column-chips\"></div>\r\n                    </div>\r\n\r\n                    <!-- Quick Actions -->\r\n                    <div id=\"quick-actions\" class=\"quick-actions\"></div>\r\n\r\n                    <!-- Skeleton (shown during loading) -->\r\n                    <div id=\"skeleton\" class=\"skeleton-container\" style=\"display: none;\">\r\n                        <div class=\"skeleton-pill\"></div>\r\n                        <div class=\"skeleton-line w80\"></div>\r\n                        <div class=\"skeleton-line w60\"></div>\r\n                    </div>\r\n\r\n                    <!-- Status Message -->\r\n                    <div id=\"status-message\" class=\"status-pill\"></div>\r\n\r\n                    <!-- Debug -->\r\n                    <div id=\"debug-section\">\r\n                        <details>\r\n                            <summary>\r\n                                <span id=\"chevron-icon\"></span>\r\n                                <span>Generated Code</span>\r\n                            </summary>\r\n                            <pre id=\"debug-code\"></pre>\r\n                        </details>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <!-- Toast Notification Container -->\r\n        <div id=\"toast-container\" class=\"toast-container\"></div>\r\n    </main>\r\n\r\n    <section id=\"sideload-msg\" class=\"sideload-container\">\r\n        <!-- High-Fidelity Skeleton Screen -->\r\n        <div class=\"sideload-skeleton\">\r\n            <!-- Header Skeleton -->\r\n            <div class=\"sk-header\">\r\n                <div class=\"sk-brand\">\r\n                    <div class=\"sk-logo sk-shimmer\"></div>\r\n                    <div class=\"sk-title sk-shimmer\"></div>\r\n                </div>\r\n                <div class=\"sk-header-actions\">\r\n                    <div class=\"sk-icon-btn sk-shimmer\"></div>\r\n                    <div class=\"sk-icon-btn sk-shimmer\"></div>\r\n                </div>\r\n            </div>\r\n\r\n            <!-- Mode Toggle Skeleton -->\r\n            <div style=\"padding: 0 16px;\">\r\n                <div class=\"sk-mode-toggle\">\r\n                    <div class=\"sk-mode-tab sk-shimmer\"></div>\r\n                    <div class=\"sk-mode-tab sk-shimmer\"></div>\r\n                </div>\r\n            </div>\r\n\r\n            <!-- Welcome/Chat Skeleton -->\r\n            <div class=\"sk-welcome\">\r\n                <div class=\"sk-welcome-icon sk-shimmer\"></div>\r\n                <div class=\"sk-welcome-title sk-shimmer\"></div>\r\n                <div class=\"sk-welcome-desc sk-shimmer\"></div>\r\n                <div class=\"sk-welcome-desc short sk-shimmer\"></div>\r\n            </div>\r\n\r\n            <div class=\"sk-suggestions\">\r\n                <div class=\"sk-suggestion sk-shimmer\"></div>\r\n                <div class=\"sk-suggestion sk-shimmer\"></div>\r\n                <div class=\"sk-suggestion sk-shimmer\"></div>\r\n            </div>\r\n\r\n            <div class=\"sk-input-area\">\r\n                <div style=\"padding: 0 16px;\">\r\n                    <div class=\"sk-input sk-shimmer\"></div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"sideload-status\">\r\n                <div class=\"sideload-pulse\"></div>\r\n                <span id=\"loading-status\">Initializing SheetOS AI...</span>\r\n            </div>\r\n        </div>\r\n\r\n        <!-- Connection Trouble Overlay -->\r\n        <div id=\"debug-fallback\"\r\n            style=\"display:none; position:fixed; inset:0; background:rgba(255,255,255,0.98); padding:30px; z-index: 10000; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-family: 'Segoe UI', system-ui, sans-serif;\">\r\n\r\n            <div\r\n                style=\"background:#FFF5F5; border:1px solid #FFD1D1; padding:24px; border-radius:16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); max-width: 320px;\">\r\n                <div style=\"font-size: 48px; margin-bottom: 16px;\">🌐</div>\r\n                <h3 style=\"color:#E53E3E; margin:0 0 12px; font-size: 18px;\">Connection Blocked</h3>\r\n                <p style=\"color:#718096; font-size: 13px; line-height: 1.6; margin-bottom: 20px;\">\r\n                    Windows is preventing the Add-in from connecting to the local server.\r\n                </p>\r\n\r\n                <div\r\n                    style=\"text-align: left; background:#fff; padding:12px; border-radius:8px; border:1px solid #EDF2F7; font-size: 12px; margin-bottom: 20px;\">\r\n                    <strong style=\"color:#2D3748; display: block; margin-bottom: 8px;\">Quick Fix:</strong>\r\n                    <ol style=\"margin:0; padding-left:20px; color:#4A5568;\">\r\n                        <li style=\"margin-bottom:6px;\">Open <b>PowerShell</b> as Admin</li>\r\n                        <li style=\"margin-bottom:6px;\">Paste and run this:</li>\r\n                    </ol>\r\n                    <code\r\n                        style=\"display:block; background:#f4f4f4; padding:8px; border-radius:4px; font-size:10px; word-break: break-all; margin-top:8px; color:#c53030; border: 1px solid #e2e8f0;\">\r\n                        npx office-addin-dev-settings loopback --add  5552d631-21e7-4926-b20c-84c6c296efd5\r\n                    </code>\r\n                </div>\r\n\r\n                <a href=\"https://localhost:3000/taskpane.html\" target=\"_blank\"\r\n                    style=\"display:block; background:#E53E3E; color:white; text-decoration:none; padding:10px; border-radius:8px; font-weight:600; font-size:13px; margin-bottom:12px;\">\r\n                    Open Debug & Trust Cert\r\n                </a>\r\n\r\n                <button onclick=\"location.reload()\"\r\n                    style=\"background:none; border:none; color:#718096; font-size:12px; cursor:pointer; text-decoration:underline;\">\r\n                    Try Refreshing\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </section>\r\n\r\n    <template id=\"chat-skeleton-template\">\r\n        <div class=\"chat-msg ai skeleton-msg\">\r\n            <div class=\"chat-bubble skeleton-bubble\">\r\n                <div class=\"skeleton-line w80 sk-shimmer\"></div>\r\n                <div class=\"skeleton-line w60 sk-shimmer\"></div>\r\n                <div class=\"skeleton-line w40 sk-shimmer\"></div>\r\n            </div>\r\n        </div>\r\n    </template>\r\n\r\n    <!-- Fallback Script -->\r\n    <" + "script>\r\n        setTimeout(function () {\r\n            var app = document.getElementById(\"app-body\");\r\n            var fb = document.getElementById(\"debug-fallback\");\r\n            if ((!app || app.style.display === \"none\") && fb) {\r\n                fb.style.display = \"block\";\r\n            }\r\n        }, 30000); // 30 seconds timeout before red box\r\n    <" + "/script>\r\n</body>\r\n\r\n</html>";
+// Exports
+/* harmony default export */ __webpack_exports__["default"] = (code);
+
+/***/ }),
+
+/***/ "?4a14":
+/*!************************!*\
+  !*** canvas (ignored) ***!
+  \************************/
+/***/ (function() {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ "?fe90":
+/*!********************!*\
+  !*** fs (ignored) ***!
+  \********************/
+/***/ (function() {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ "?d446":
+/*!**********************!*\
+  !*** http (ignored) ***!
+  \**********************/
+/***/ (function() {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ "?4c38":
+/*!***********************!*\
+  !*** https (ignored) ***!
+  \***********************/
+/***/ (function() {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ "?9f5f":
+/*!*********************!*\
+  !*** url (ignored) ***!
+  \*********************/
+/***/ (function() {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ "?afbb":
+/*!**********************!*\
+  !*** zlib (ignored) ***!
+  \**********************/
+/***/ (function() {
+
+/* (ignored) */
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Check if module exists (development only)
+/******/ 		if (__webpack_modules__[moduleId] === undefined) {
+/******/ 			var e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			id: moduleId,
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/chunk loaded */
+/******/ 	!function() {
+/******/ 		var deferred = [];
+/******/ 		__webpack_require__.O = function(result, chunkIds, fn, priority) {
+/******/ 			if(chunkIds) {
+/******/ 				priority = priority || 0;
+/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/ 				deferred[i] = [chunkIds, fn, priority];
+/******/ 				return;
+/******/ 			}
+/******/ 			var notFulfilled = Infinity;
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				var chunkIds = deferred[i][0];
+/******/ 				var fn = deferred[i][1];
+/******/ 				var priority = deferred[i][2];
+/******/ 				var fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every(function(key) { return __webpack_require__.O[key](chunkIds[j]); })) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 						if(priority < notFulfilled) notFulfilled = priority;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					var r = fn();
+/******/ 					if (r !== undefined) result = r;
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	!function() {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = function(module) {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				function() { return module['default']; } :
+/******/ 				function() { return module; };
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	!function() {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = function(exports, definition) {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	!function() {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	!function() {
+/******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	!function() {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = function(exports) {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	!function() {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript && document.currentScript.tagName.toUpperCase() === 'SCRIPT')
+/******/ 				scriptUrl = document.currentScript.src;
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) {
+/******/ 					var i = scripts.length - 1;
+/******/ 					while (i > -1 && (!scriptUrl || !/^http(s?):/.test(scriptUrl))) scriptUrl = scripts[i--].src;
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/^blob:/, "").replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	!function() {
+/******/ 		__webpack_require__.b = (typeof document !== 'undefined' && document.baseURI) || self.location.href;
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"taskpane": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		__webpack_require__.O.j = function(chunkId) { return installedChunks[chunkId] === 0; };
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = function(parentChunkLoadingFunction, data) {
+/******/ 			var chunkIds = data[0];
+/******/ 			var moreModules = data[1];
+/******/ 			var runtime = data[2];
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some(function(id) { return installedChunks[id] !== 0; })) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			return __webpack_require__.O(result);
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = self["webpackChunksheetos_ai"] = self["webpackChunksheetos_ai"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/nonce */
+/******/ 	!function() {
+/******/ 		__webpack_require__.nc = undefined;
+/******/ 	}();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
+/******/ 	__webpack_require__.O(undefined, ["vendor"], function() { return __webpack_require__("./src/taskpane/taskpane.ts"); })
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["vendor"], function() { return __webpack_require__("./src/taskpane/taskpane.html"); })
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/ 	
+/******/ })()
+;
+//# sourceMappingURL=taskpane.js.map
