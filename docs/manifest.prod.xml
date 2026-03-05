@@ -6,14 +6,15 @@
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="SheetOS AI"/>
   <Description DefaultValue="Your professional AI assistant for Excel automation, analysis, and formatting."/>
-  <IconUrl DefaultValue="https://iamnishant51.github.io/excel-plugin/assets/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://iamnishant51.github.io/excel-plugin/assets/icon-64.png"/>
+  <IconUrl DefaultValue="https://ik.imagekit.io/9pfz6g8ri/excel_plugin_assets/icon-32-v2.png"/>
+  <HighResolutionIconUrl DefaultValue="https://ik.imagekit.io/9pfz6g8ri/excel_plugin_assets/icon-64-v2.png"/>
   <SupportUrl DefaultValue="https://iamnishant51.github.io/excel-plugin/help.html"/>
   <AppDomains>
     <AppDomain>https://iamnishant51.github.io/excel-plugin</AppDomain>
     <AppDomain>https://api.groq.com</AppDomain>
     <AppDomain>https://api.openai.com</AppDomain>
     <AppDomain>https://generativelanguage.googleapis.com</AppDomain>
+    <AppDomain>https://ik.imagekit.io</AppDomain>
   </AppDomains>
   <Hosts>
     <Host Name="Workbook"/>
@@ -65,9 +66,9 @@
     </Hosts>
     <Resources>
       <bt:Images>
-        <bt:Image id="Icon.16x16" DefaultValue="https://iamnishant51.github.io/excel-plugin/assets/icon-16.png"/>
-        <bt:Image id="Icon.32x32" DefaultValue="https://iamnishant51.github.io/excel-plugin/assets/icon-32.png"/>
-        <bt:Image id="Icon.80x80" DefaultValue="https://iamnishant51.github.io/excel-plugin/assets/icon-80.png"/>
+        <bt:Image id="Icon.16x16" DefaultValue="https://ik.imagekit.io/9pfz6g8ri/excel_plugin_assets/icon-16-v2.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://ik.imagekit.io/9pfz6g8ri/excel_plugin_assets/icon-32-v2.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://ik.imagekit.io/9pfz6g8ri/excel_plugin_assets/icon-80-v2.png"/>
       </bt:Images>
       <bt:Urls>
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://iamnishant51.github.io/excel-plugin/help.html"/>

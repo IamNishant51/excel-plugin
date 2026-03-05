@@ -204,17 +204,6 @@ module.exports = "data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%
 
 /***/ }),
 
-/***/ "./assets/icon-80-v2.png":
-/*!*******************************!*\
-  !*** ./assets/icon-80-v2.png ***!
-  \*******************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
-
-"use strict";
-module.exports = __webpack_require__.p + "assets/icon-80-v2.png";
-
-/***/ }),
-
 /***/ "?4a14":
 /*!************************!*\
   !*** canvas (ignored) ***!

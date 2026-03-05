@@ -661,7 +661,7 @@ function clearChat(): void {
     if (container) {
         container.innerHTML = `
       <div class="chat-welcome">
-        <img src="../../assets/icon-80-v2.png" alt="DocOS Logo" style="width: 64px; height: 64px; margin-bottom: 16px;">
+        <img src="https://ik.imagekit.io/9pfz6g8ri/excel_plugin_assets/icon-80-v2.png" alt="DocOS Logo" style="width: 64px; height: 64px; margin-bottom: 16px;">
         <h2>What are you working on?</h2>
         <div class="welcome-suggestions" id="chat-suggestions"></div>
       </div>`;
