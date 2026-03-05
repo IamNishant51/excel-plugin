@@ -294,7 +294,7 @@ export async function callLLM(messages: ChatMessage[], config?: LLMConfig, signa
             "Content-Type": "application/json",
             "Authorization": `Bearer ${currentConfig.openrouterKey}`,
             "HTTP-Referer": window.location.origin,
-            "X-Title": "SheetOS AI Plugin"
+            "X-Title": "DocOS AI"
           },
           body: JSON.stringify({ messages, model, temperature: 0, top_p: 1, max_tokens: 4096 }),
           signal

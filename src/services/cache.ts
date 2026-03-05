@@ -5,7 +5,7 @@
 
 const CACHE_KEY = "sheetcraft_cache";
 const CACHE_VERSION_KEY = "sheetcraft_cache_ver";
-const CACHE_VERSION = 2; // Bump this when prompt changes significantly
+const CACHE_VERSION = 4; // Bump this when prompt changes significantly
 const MAX_ENTRIES = 50;
 
 // Auto-clear cache if version changed (prompt was updated)

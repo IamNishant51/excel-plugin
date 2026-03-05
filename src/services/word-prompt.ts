@@ -153,14 +153,14 @@ if (extractedUrls.length > 0) {
   await context.sync();
 } else {
   // Fallback: search the document for any URLs and make them clickable
-  const searchResults = body.search("http", { matchCase: false });
-  searchResults.load("items/text");
+  const urlResults = body.search("http", { matchCase: false });
+  urlResults.load("items/text");
   await context.sync();
-  for (let i = 0; i < searchResults.items.length; i++) {
-    const itemText = searchResults.items[i].text.trim();
+  for (let i = 0; i < urlResults.items.length; i++) {
+    const itemText = urlResults.items[i].text.trim();
     let url = itemText;
     if (!url.startsWith("http")) url = "https://" + url;
-    searchResults.items[i].hyperlink = url; // ONLY set hyperlink, do NOT insert text
+    urlResults.items[i].hyperlink = url; // ONLY set hyperlink, do NOT insert text
   }
   await context.sync();
 }

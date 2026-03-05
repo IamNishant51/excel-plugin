@@ -15,7 +15,7 @@ import { Icons } from "../services/icons";
 
 // ─── Types ─────────────────────────────────────────────────────
 type Mode = "planning" | "agent";
-type WordActionCategory = "resume" | "writing" | "format" | "cleanup" | "templates" | "smart";
+type WordActionCategory = "resume" | "writing" | "format" | "insert" | "layout" | "cleanup" | "templates" | "smart";
 
 interface ChatMessage {
     role: "user" | "ai";
@@ -44,20 +44,24 @@ const WORD_ACTIONS: Record<WordActionCategory, { icon: string; label: string; pr
         { icon: "sortAsc", label: "Add Section Headers", prompt: "DO NOT use body.clear(). Identify paragraphs that look like resume sections ('Work Experience', 'Education', 'Skills'). Set their font.bold=true, font.size=12, text.toUpperCase(), spaceBefore=12, spaceAfter=4. DO NOT use 'Heading 1' style to prevent huge gaps. Keep existing text." },
         { icon: "checkSquare", label: "Resume Checklist ✅", prompt: "DO NOT use body.clear(). Read paragraphs. At the END, insert standard paragraphs (not Heading style) analyzing: Contact info ✅/❌, Summary ✅/❌, Experience ✅/❌, Education ✅/❌, Skills ✅/❌, Action verbs ✅/❌, Compact format ✅/❌. Use font.size=10.5, lineSpacing=12." },
         { icon: "trendUp", label: "Add Action Verbs", prompt: "DO NOT use body.clear(). Read all paragraphs. For bullet-point paragraphs in work experience sections, use search and replace to ensure each starts with a strong action verb. Use body.search() to find weak starts and replace with stronger alternatives via insertText with Word.InsertLocation.replace." },
-        { icon: "users", label: "Add Summary", prompt: "DO NOT use body.clear(). Read the document to understand the background. Insert a 'Professional Summary' heading and 3-4 sentence summary paragraph at the START of the document (using Word.InsertLocation.start). Set the heading style to 'Heading 1'. Use industry-relevant keywords." },
-        { icon: "barChart", label: "Quantify Achievements", prompt: "DO NOT use body.clear(). Read all paragraphs. At the END of the document, insert a section with 'Heading 1' title 'Suggested Metrics'. For each work experience bullet that lacks numbers, insert a paragraph suggesting how to add quantified achievements. Example: 'Line: Managed team → Suggestion: Managed team of [X] members'." },
+        { icon: "users", label: "Add Summary", prompt: "DO NOT use body.clear(). Read the document to understand the background. Insert a 'Professional Summary' heading and 3-4 sentence summary paragraph at the START of the document (using Word.InsertLocation.start). Set the heading font to bold, size 12. Do NOT use 'Heading 1' style. Use industry-relevant keywords." },
+        { icon: "barChart", label: "Quantify Achievements", prompt: "DO NOT use body.clear(). Read all paragraphs. At the END of the document, insert a section titled 'Suggested Metrics' (bold, size 12). For each work experience bullet that lacks numbers, insert a paragraph suggesting how to add quantified achievements. Example: 'Line: Managed team → Suggestion: Managed team of [X] members, achieving [Y]% growth'." },
+        { icon: "scissors", label: "Trim to One Page", prompt: "DO NOT use body.clear(). Load all paragraphs. Make everything ultra-compact: font.size=10 for body, lineSpacing=11 (tight single), spaceAfter=1, spaceBefore=0. Delete ALL empty paragraphs. Name: font.size=16 (slightly smaller). Section headings: font.size=11, spaceBefore=8, spaceAfter=2. This forces content into minimum space." },
+        { icon: "link", label: "Add LinkedIn/Portfolio", prompt: "DO NOT use body.clear(). Read the first few paragraphs (contact info area). After the name/contact paragraph, insert a new paragraph with 'LinkedIn: [your-linkedin-url] | Portfolio: [your-portfolio-url]' in font.size=10, font.color='#0563C1'. Set hyperlink on each URL placeholder." },
     ],
 
     // ── Writing Tools ──
     writing: [
         { icon: "brain", label: "Improve Writing ✍️", prompt: "DO NOT use body.clear(). Read all paragraphs. Use body.search() to find and replace weak phrases with stronger alternatives. For example, search for passive voice patterns and replace with active voice. Use insertText with Word.InsertLocation.replace for each match. Preserve all original meaning." },
-        { icon: "sortAsc", label: "Make Formal", prompt: "DO NOT use body.clear(). Read all paragraphs. Use body.search() to find casual words/phrases and replace them with formal equivalents. Examples: 'got' → 'received', 'a lot' → 'significantly', 'things' → 'elements'. Use insertText with Word.InsertLocation.replace." },
+        { icon: "sortAsc", label: "Make Formal", prompt: "DO NOT use body.clear(). Read all paragraphs. Use body.search() to find casual words/phrases and replace them with formal equivalents. Examples: 'got' → 'received', 'a lot' → 'significantly', 'things' → 'elements', 'stuff' → 'materials'. Use insertText with Word.InsertLocation.replace." },
         { icon: "columns", label: "Make Concise", prompt: "DO NOT use body.clear(). Read all paragraphs. Use body.search() to find and remove filler words: 'very', 'really', 'basically', 'actually', 'in order to' → 'to', 'due to the fact that' → 'because'. Use insertText with Word.InsertLocation.replace." },
         { icon: "trendUp", label: "Expand Content", prompt: "DO NOT use body.clear(). Read the document. At the END, insert new paragraphs expanding on the key topics identified. Add supporting details, examples, and transitions as new paragraphs using body.insertParagraph with Word.InsertLocation.end." },
         { icon: "search", label: "Proofread", prompt: "DO NOT use body.clear(). Read all paragraphs. At the END of the document, insert a 'Proofreading Report' section listing any spotted issues: potential spelling errors, grammar issues, inconsistent formatting. Use insertParagraph with Word.InsertLocation.end." },
-        { icon: "barChart", label: "Summarize", prompt: "DO NOT use body.clear(). Read all paragraphs. Insert an 'Executive Summary' heading at the START (Word.InsertLocation.start) followed by 3-5 sentence summary paragraphs. Set heading style to 'Heading 1'. Do not modify existing content." },
+        { icon: "barChart", label: "Summarize", prompt: "DO NOT use body.clear(). Read all paragraphs. Insert an 'Executive Summary' heading at the START (Word.InsertLocation.start) followed by 3-5 sentence summary paragraphs. Set heading font to bold, size 14. Do not modify existing content." },
         { icon: "copy", label: "Add Bullet Points", prompt: "DO NOT use body.clear(). Read paragraphs. Identify long paragraphs (text.length > 200) that contain lists of items. After each such paragraph, insert bullet-point style paragraphs breaking down the key points. Use startNewList() for bullet formatting." },
         { icon: "hash", label: "Add Headings", prompt: "DO NOT use body.clear(). Read all paragraphs. Every 3-5 paragraphs where a topic change is detected, insert a new paragraph BEFORE the topic change with style='Heading 2'. Use descriptive heading text based on the content that follows." },
+        { icon: "highlight", label: "Highlight Key Points", prompt: "DO NOT use body.clear(). Read all paragraphs. For each paragraph, identify the most important sentence or phrase. Use body.search() to find those key phrases and set their font.bold=true and font.highlightColor='Yellow'. Sync after changes." },
+        { icon: "type", label: "Fix Capitalization", prompt: "DO NOT use body.clear(). Read all paragraphs. For each paragraph, check if the first letter of the first word is capitalized. If not, use body.search() and insertText with Word.InsertLocation.replace to fix it. Also check for common capitalization issues: proper nouns, sentence beginnings after periods." },
     ],
 
     // ── Format Tools ──
@@ -66,10 +70,38 @@ const WORD_ACTIONS: Record<WordActionCategory, { icon: string; label: string; pr
         { icon: "paintbrush", label: "Academic Style", prompt: "DO NOT use body.clear(). Load all paragraphs. Body: font.name='Times New Roman', font.size=12, lineSpacing=24 (double-spaced), firstLineIndent=36. Headings: font.bold=true, firstLineIndent=0, alignment=Word.Alignment.centered. Remove empty gap paragraphs. Sync." },
         { icon: "paintbrush", label: "Modern Clean", prompt: "DO NOT use body.clear(). Load all paragraphs. Body: font.name='Arial', font.size=10.5, lineSpacing=13, spaceAfter=4. Headings: font.size=12, font.bold=true, font.color='#2563EB', spaceBefore=12, spaceAfter=4. Title/Name: font.size=18, font.bold=true. Sync." },
         { icon: "paintbrush", label: "Business Letter", prompt: "DO NOT use body.clear(). Load all paragraphs. Set all to font.name='Calibri', font.size=11, lineSpacing=15. Set spaceAfter=12 for paragraphs to add spacing between them. Ensure first paragraph is right-aligned (for sender info) using alignment=Word.Alignment.right." },
-        { icon: "formula", label: "Consistent Fonts", prompt: "DO NOT use body.clear(). Load all paragraphs. Sync. Force EVERYTHING to font.name='Calibri' or 'Arial', font.color='#000000'. First line font.size=18. Headings font.size=12. Body font.size=10.5. Fix spacing to lineSpacing=12, spaceAfter=2. Sync." },
-        { icon: "table", label: "Format Tables", prompt: "DO NOT use body.clear(). Load body.tables, tables.load('items'). For each table: set table.styleBuiltIn = Word.BuiltInStyleName.gridTable5Dark_Accent1. Then table.autoFitWindow(). Then await context.sync()." },
-        { icon: "snowflake", label: "Add Header/Footer", prompt: "DO NOT use body.clear(). Load context.document.sections, sections.load('items'), await context.sync(). Get header via sections.items[0].getHeader(Word.HeaderFooterType.primary). Insert a paragraph 'Document' with font.size=9, font.color='#888888', alignment=Word.Alignment.right. Then await context.sync()." },
-        { icon: "hash", label: "Number Headings", prompt: "DO NOT use body.clear(). Load all paragraphs with styles. For each paragraph whose style includes 'Heading', prepend a number using search and replace. Use a counter to add '1. ', '2. ', etc. to Heading 1 paragraphs, and '1.1. ', '1.2. ' for Heading 2." },
+        { icon: "formula", label: "Consistent Fonts", prompt: "DO NOT use body.clear(). Load all paragraphs. Sync. Force EVERYTHING to font.name='Calibri', font.color='#000000'. First line font.size=18. Headings font.size=12. Body font.size=10.5. Fix spacing to lineSpacing=12, spaceAfter=2. Sync." },
+        { icon: "table", label: "Format Tables", prompt: "DO NOT use body.clear(). Load body.tables with tables.load('items'). Sync. For each table: set table.styleBuiltIn = Word.BuiltInStyleName.gridTable5Dark_Accent1, then table.autoFitWindow(). Sync." },
+        { icon: "snowflake", label: "Add Header/Footer", prompt: "DO NOT use body.clear(). Load context.document.sections, sections.load('items'), await context.sync(). Get header via sections.items[0].getHeader(Word.HeaderFooterType.primary). Insert a paragraph 'Document' with font.size=9, font.color='#888888', alignment=Word.Alignment.right. Get footer via sections.items[0].getFooter(Word.HeaderFooterType.primary). Insert 'Page' paragraph centered, font.size=9. Sync." },
+        { icon: "hash", label: "Number Headings", prompt: "DO NOT use body.clear(). Load all paragraphs with styles. Sync. For each paragraph whose style includes 'Heading 1': prepend number using search and replace with a counter '1. ', '2. ', etc. For 'Heading 2' paragraphs: use '1.1', '1.2' etc." },
+        { icon: "alignCenter", label: "Center Everything", prompt: "DO NOT use body.clear(). Load all paragraphs. Sync. Set every paragraph alignment = Word.Alignment.centered. Sync." },
+        { icon: "indent", label: "Block Indent", prompt: "DO NOT use body.clear(). Load all paragraphs. Sync. For all paragraphs that are not headings: set leftIndent=36 (0.5 inch). Keep headings at leftIndent=0. Sync." },
+    ],
+
+    // ── Insert Tools ──
+    insert: [
+        { icon: "divider", label: "Page Break", prompt: "Insert a page break at the end of the document using body.insertBreak(Word.BreakType.page, Word.InsertLocation.end). Then await context.sync()." },
+        { icon: "table", label: "Blank Table 📊", prompt: "Insert a blank 4x3 table at the end of the document. Use body.insertTable(4, 3, Word.InsertLocation.end, [['Column 1','Column 2','Column 3'],['','',''],['','',''],['','',' ']]). Set table style: table.styleBuiltIn = Word.BuiltInStyleName.gridTable4_Accent1. Then table.autoFitWindow(). Sync." },
+        { icon: "minus", label: "Horizontal Line", prompt: "Insert a horizontal rule at the end of the document. Use body.insertHtml('<hr style=\"border:none;border-top:2px solid #cccccc;margin:12px 0;\">', Word.InsertLocation.end). Sync." },
+        { icon: "calendar", label: "Date & Time", prompt: "Insert today's date in a formatted paragraph at the end. Calculate the date: const now = new Date(); const dateStr = now.toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'long', day:'numeric'}); Insert with body.insertParagraph(dateStr, Word.InsertLocation.end). Set font.size=11, alignment right. Sync." },
+        { icon: "hash", label: "Page Numbers", prompt: "DO NOT use body.clear(). Load sections. Get footer via sections.items[0].getFooter(Word.HeaderFooterType.primary). Insert 'Page ' paragraph with font.size=9, alignment=Word.Alignment.centered, font.color='#666666'. Sync." },
+        { icon: "footprint", label: "Footnote", prompt: "Get the current selection with context.document.getSelection(). Insert a footnote: selection.insertFootnote('Enter footnote text here.'). Sync." },
+        { icon: "list", label: "Bullet List", prompt: "Insert a new bulleted list at the end with 5 items: const b1 = body.insertParagraph('First item', Word.InsertLocation.end); b1.startNewList(); body.insertParagraph('Second item', Word.InsertLocation.end); body.insertParagraph('Third item', Word.InsertLocation.end); body.insertParagraph('Fourth item', Word.InsertLocation.end); body.insertParagraph('Fifth item', Word.InsertLocation.end); Sync." },
+        { icon: "hash", label: "Numbered List", prompt: "Insert a new numbered list at the end using HTML: body.insertHtml('<ol><li>First item</li><li>Second item</li><li>Third item</li><li>Fourth item</li><li>Fifth item</li></ol>', Word.InsertLocation.end). Sync." },
+        { icon: "bookmark", label: "Table of Contents", prompt: "DO NOT use body.clear(). Read all paragraphs and their styles. Identify paragraphs with 'Heading' in their style name. At the START, insert 'Table of Contents' with style='Heading 1', then for each heading found, insert a paragraph with the heading text prefixed by its level number. Use Word.InsertLocation.start in reverse order. Sync." },
+        { icon: "checkSquare", label: "Checkbox List ☑️", prompt: "Insert a checkbox-style list at the end using HTML. Use body.insertHtml('<p>☐ Task item 1</p><p>☐ Task item 2</p><p>☐ Task item 3</p><p>☐ Task item 4</p><p>☐ Task item 5</p>', Word.InsertLocation.end). Sync." },
+    ],
+
+    // ── Layout Tools ──
+    layout: [
+        { icon: "minimize", label: "Narrow Margins", prompt: "Load context.document.sections and sections.load('items'). Sync. Set narrow margins on all sections: for each section, load pageSetup and try to apply smaller margins. Insert a small note paragraph at the end: 'Margins adjusted to narrow.' Sync. Note: If pageSetup is read-only in your API version, insert the note explaining to manually set margins to 0.5 inch all around." },
+        { icon: "maximize", label: "Wide Margins", prompt: "DO NOT use body.clear(). Insert a small note paragraph at the end explaining: 'For wide margins, go to Layout → Margins → Wide (1.27\" top/bottom, 2\" left/right). API margin control may be limited in your Word version.' Set font.size=10, font.italic=true, font.color='#666666'." },
+        { icon: "rotateCw", label: "Landscape Note", prompt: "DO NOT use body.clear(). Insert a note paragraph at the end: 'To switch to Landscape orientation, go to Layout → Orientation → Landscape. For section-specific orientation changes, insert a Section Break first.' Set font.italic=true, font.color='#666666'. Sync." },
+        { icon: "alignLeft", label: "Single Spacing", prompt: "DO NOT use body.clear(). Load all paragraphs. Sync. Set every paragraph: lineSpacing=12 (single spacing), spaceAfter=0, spaceBefore=0. Sync." },
+        { icon: "alignCenter", label: "1.5 Spacing", prompt: "DO NOT use body.clear(). Load all paragraphs. Sync. Set every paragraph: lineSpacing=18 (1.5 spacing), spaceAfter=6, spaceBefore=0. Sync." },
+        { icon: "columns", label: "Double Spacing", prompt: "DO NOT use body.clear(). Load all paragraphs. Sync. Set every paragraph: lineSpacing=24 (double spacing), spaceAfter=0, spaceBefore=0. Sync." },
+        { icon: "divider", label: "Section Break", prompt: "Insert a section break (next page) at the end using body.insertBreak(Word.BreakType.sectionNext, Word.InsertLocation.end). Sync." },
+        { icon: "indent", label: "First Line Indent", prompt: "DO NOT use body.clear(). Load all paragraphs. Sync. For all paragraphs that are Normal style (not headings): set firstLineIndent=36 (0.5 inch). Sync." },
     ],
 
     // ── Cleanup Tools ──
@@ -77,32 +109,37 @@ const WORD_ACTIONS: Record<WordActionCategory, { icon: string; label: string; pr
         { icon: "eraser", label: "Smart Clean 🧹", prompt: "DO NOT use body.clear(). Load all paragraphs. For each paragraph: if text.trim() is empty and the next paragraph is also empty, delete the empty one with paragraph.delete(). For non-empty paragraphs: set font.name='Calibri', font.size=11, lineSpacing=15, spaceAfter=6. Use body.search('  ') to find double spaces and replace with single space via insertText(Word.InsertLocation.replace). Then await context.sync()." },
         { icon: "eraser", label: "Remove Formatting", prompt: "DO NOT use body.clear(). Load all paragraphs. For each: set style='Normal', font.name='Calibri', font.size=11, font.bold=false, font.italic=false, font.underline='None', font.color='#000000', lineSpacing=15, spaceAfter=6. Then await context.sync()." },
         { icon: "eraser", label: "Fix Spacing", prompt: "DO NOT use body.clear(). Load all paragraphs. For empty paragraphs that are consecutive, delete the extras (keep max 1 between sections). For all paragraphs: set lineSpacing=15, spaceAfter=6, spaceBefore=0. Then await context.sync()." },
-        { icon: "search", label: "Find & Replace", prompt: "DO NOT use body.clear(). Use body.search() to find and replace: double spaces → single space, triple dots → ellipsis, straight quotes. For each search, load items, sync, then loop and use insertText with Word.InsertLocation.replace." },
-        { icon: "eraser", label: "Remove Empty Lines", prompt: "DO NOT use body.clear(). Load all paragraphs. Loop through and identify paragraphs where text.trim() === ''. Delete consecutive empty paragraphs but keep at most one between content sections using paragraph.delete()." },
+        { icon: "search", label: "Find & Replace", prompt: "DO NOT use body.clear(). Use body.search() to find and replace: double spaces → single space, triple dots '...' → ellipsis '…'. For each search, load items, sync, then loop and use insertText with Word.InsertLocation.replace." },
+        { icon: "eraser", label: "Remove Empty Lines", prompt: "DO NOT use body.clear(). Load all paragraphs. Loop through BACKWARDS and identify paragraphs where text.trim() === ''. Delete consecutive empty paragraphs but keep at most one between content sections using paragraph.delete(). Sync." },
         { icon: "eraser", label: "Fix Bullets", prompt: "DO NOT use body.clear(). Load all paragraphs. Identify paragraphs that start with '- ', '* ', '• '. Standardize them: use search to find the bullet character and replace with '• '. Ensure consistent font and spacing on all bullet paragraphs." },
+        { icon: "paintbrush", label: "Normalize Fonts", prompt: "DO NOT use body.clear(). Load all paragraphs with font info. Sync. Force every paragraph to the same font family: font.name='Calibri'. Keep existing bold/italic/size but make the font family consistent. Sync." },
+        { icon: "scissors", label: "Remove Hyperlinks", prompt: "DO NOT use body.clear(). Load all paragraphs. For each paragraph, search for text that contains URLs. When found, set the range's hyperlink to an empty string or remove it. This keeps the text but removes the clickable link. Sync." },
     ],
 
     // ── Templates (these are the ONLY prompts that may clear the document) ──
     templates: [
-        { icon: "fileTemplate", label: "Modern Resume", prompt: "First clear the document with body.clear(), await context.sync(). Then create a resume template: Insert '[Your Name]' paragraph with font.size=18, font.bold=true, alignment=Word.Alignment.centered. Insert '[email] | [phone] | [city, state]' centered. Then insert section headings using style='Heading 1': 'Professional Summary', 'Work Experience', 'Education', 'Skills'. Under each heading, insert placeholder paragraphs with font.name='Calibri', font.size=11. Finish with await context.sync()." },
-        { icon: "fileTemplate", label: "Cover Letter", prompt: "First clear the document with body.clear(), await context.sync(). Then create a cover letter: Insert today's date, blank line, '[Hiring Manager Name]', '[Company Name]', '[Address]'. Then 'Dear [Hiring Manager]:'. Three body paragraphs. 'Sincerely,' and '[Your Name]'. All in Calibri 11pt with lineSpacing=15. Finish with await context.sync()." },
-        { icon: "fileTemplate", label: "Business Letter", prompt: "First clear the document with body.clear(), await context.sync(). Then create: Sender info (right-aligned), date, recipient info (left-aligned), subject line bold, salutation, body (3 paragraphs), closing. All Calibri 11pt. Finish with await context.sync()." },
-        { icon: "fileTemplate", label: "Meeting Notes", prompt: "First clear the document with body.clear(), await context.sync(). Then create: 'Meeting Notes' in style='Heading 1'. Date/Time line. 'Attendees' heading with bullet list. 'Agenda' heading with numbered items. 'Action Items' heading with a table (columns: Action, Owner, Due Date). All in Calibri. Finish with await context.sync()." },
-        { icon: "fileTemplate", label: "Project Proposal", prompt: "First clear the document with body.clear(), await context.sync(). Then create sections with style='Heading 1': Executive Summary, Problem Statement, Proposed Solution, Scope, Timeline (insert a table), Budget (insert a table), Team, Conclusion. Add placeholder text under each. Calibri formatting. Finish with await context.sync()." },
-        { icon: "fileTemplate", label: "Report Template", prompt: "First clear the document with body.clear(), await context.sync(). Then create: Title page (large centered title), sections with style='Heading 1': Executive Summary, Introduction, Methodology, Findings, Analysis, Recommendations, Conclusion, References. Add placeholder text. Calibri, lineSpacing=28 (double-spaced). Finish with await context.sync()." },
+        { icon: "fileTemplate", label: "Modern Resume", prompt: "First clear the document with body.clear(), await context.sync(). Then create a resume template: Insert '[Your Name]' paragraph with font.size=18, font.bold=true, alignment=Word.Alignment.centered. Insert '[email] | [phone] | [city, state]' centered. Then insert section headings using font.bold=true, font.size=12: 'PROFESSIONAL SUMMARY', 'WORK EXPERIENCE', 'EDUCATION', 'SKILLS'. Under each heading, insert placeholder paragraphs with font.name='Calibri', font.size=11. Finish with await context.sync()." },
+        { icon: "fileTemplate", label: "Cover Letter", prompt: "First clear the document with body.clear(), await context.sync(). Then create a cover letter: Insert today's date (calculate with new Date()), blank line, '[Hiring Manager Name]', '[Company Name]', '[Address]'. Then 'Dear [Hiring Manager]:'. Three body paragraphs with placeholder text about qualifications. 'Sincerely,' and '[Your Name]'. All in Calibri 11pt with lineSpacing=15. Finish with await context.sync()." },
+        { icon: "fileTemplate", label: "Business Letter", prompt: "First clear the document with body.clear(), await context.sync(). Then create: Sender info (right-aligned), date, recipient info (left-aligned), subject line bold, salutation 'Dear Sir/Madam:', body (3 paragraphs), closing 'Yours faithfully,'. All Calibri 11pt. Finish with await context.sync()." },
+        { icon: "fileTemplate", label: "Meeting Notes", prompt: "First clear the document with body.clear(), await context.sync(). Then create: 'Meeting Notes' in bold font.size=16, centered. Date/Time line. 'Attendees' heading (bold, size 12) with bullet list. 'Agenda' heading with numbered items. 'Discussion' heading with placeholder paragraphs. 'Action Items' heading with a table (columns: Action, Owner, Due Date, Status). All in Calibri. Finish with await context.sync()." },
+        { icon: "fileTemplate", label: "Project Proposal", prompt: "First clear the document with body.clear(), await context.sync(). Then create sections with bold font.size=14 headings: Executive Summary, Problem Statement, Proposed Solution, Scope, Timeline (insert a table with Phase/Duration/Deliverable columns), Budget (insert a table with Item/Cost columns), Team, Conclusion. Add placeholder text under each. Calibri formatting. Finish with await context.sync()." },
+        { icon: "fileTemplate", label: "Report Template", prompt: "First clear the document with body.clear(), await context.sync(). Then create: Title page (large centered title font.size=24, subtitle font.size=14). Insert page break. Sections with style='Heading 1': Executive Summary, Introduction, Methodology, Findings, Analysis, Recommendations, Conclusion, References. Add placeholder text. Calibri, lineSpacing=24 (double-spaced). Finish with await context.sync()." },
+        { icon: "fileTemplate", label: "Invoice Template", prompt: "First clear the document with body.clear(), await context.sync(). Then create: 'INVOICE' title centered, font.size=24, font.bold=true. Company info line. Invoice # and date line right-aligned. Bill-To section. Then insert a table with columns: Description, Qty, Unit Price, Total. Add 3 sample rows. Below table: Subtotal, Tax, Total lines right-aligned. 'Thank you for your business!' at bottom. Sync." },
+        { icon: "fileTemplate", label: "SOP Document", prompt: "First clear the document with body.clear(), await context.sync(). Then create a Standard Operating Procedure: 'Standard Operating Procedure' title centered, bold, size 16. Doc info table (SOP Number, Version, Date, Author). Then sections: 1. Purpose, 2. Scope, 3. Responsibilities, 4. Procedure (with numbered sub-steps), 5. Safety, 6. References, 7. Revision History (table). All Calibri 11pt. Sync." },
     ],
 
     // ── Smart Tools ──
     smart: [
-        { icon: "brain", label: "Document Analyzer 🔬", prompt: "DO NOT use body.clear(). Read all paragraphs with body.paragraphs.load('items/text,items/style'). Calculate word count, paragraph count, estimated reading time (250 WPM). At the END, insert an 'Analysis Report' section with these stats as formatted paragraphs. Use insertParagraph with Word.InsertLocation.end." },
-        { icon: "zap", label: "Make Links Clickable 🔗", prompt: "DO NOT use body.clear(). DO NOT insert or append any URL text. Get the user's selection with context.document.getSelection(), load its text, sync. Extract any URL from the selected text. Then ONLY set selection.hyperlink = url (with https:// prefix). If no text is selected, search the entire document body for URLs using body.search() with a URL pattern, load items and their text, sync, then for each found range set range.hyperlink = url. NEVER use insertText, insertParagraph, or insertHtml to write URL text — that duplicates the URL." },
-        { icon: "trendUp", label: "Readability Score", prompt: "DO NOT use body.clear(). Read all paragraphs. Analyze average sentence length and word complexity. At the END, insert a 'Readability Report' section with findings. Use insertParagraph with Word.InsertLocation.end." },
-        { icon: "search", label: "Extract Key Points", prompt: "DO NOT use body.clear(). Read all paragraphs. At the START of the document, insert 'Key Takeaways' heading (style='Heading 1') followed by numbered key points extracted from the content. Use insertParagraph with Word.InsertLocation.start." },
-        { icon: "copy", label: "Compare Sections", prompt: "DO NOT use body.clear(). Read all paragraphs. Identify sections by headings. At the END, insert a comparison table using body.insertTable() showing: Section Name, Approximate Word Count, Number of Paragraphs. Use Word.InsertLocation.end." },
-        { icon: "shield", label: "Consistency Check", prompt: "DO NOT use body.clear(). Read all paragraphs. At the END, insert a 'Consistency Report' section listing any found issues: inconsistent formatting, mixed fonts, spacing problems. Use insertParagraph with Word.InsertLocation.end." },
-        { icon: "mail", label: "Extract Contacts", prompt: "DO NOT use body.clear(). Read all paragraphs. Search for email addresses (contains @), phone numbers, URLs. At the END, insert a 'Contact Information' table using body.insertTable() with columns: Type, Value. Use Word.InsertLocation.end." },
-        { icon: "layers", label: "Create TOC", prompt: "DO NOT use body.clear(). Read all paragraphs and identify those with 'Heading' in their style. At the START of the document, insert 'Table of Contents' (style='Heading 1') followed by a paragraph listing each heading found. Use Word.InsertLocation.start." },
-        { icon: "dollarSign", label: "Word Count Stats", prompt: "DO NOT use body.clear(). Read all paragraphs. Count total words, unique words (approximate), paragraphs. At the END, insert a stats table using body.insertTable() with this data. Use Word.InsertLocation.end." },
+        { icon: "brain", label: "Document Analyzer 🔬", prompt: "DO NOT use body.clear(). Read all paragraphs with body.paragraphs.load('items/text,items/style'). Sync. Calculate word count, paragraph count, estimated reading time (250 WPM), avg words per paragraph, sentence count (approx by counting periods). At the END, insert a styled 'Document Analysis Report' section with these stats as a formatted table using body.insertTable. Use Word.InsertLocation.end." },
+        { icon: "zap", label: "Make Links Clickable 🔗", prompt: "DO NOT use body.clear(). DO NOT use getSelection(). DO NOT insert or append any URL text. DO NOT use body.search('http') because that only matches the 4-char substring, NOT the full URL. Instead: 1) Load paragraphs: const paras = body.paragraphs; paras.load('items/text'); await context.sync(); 2) Extract full URLs with JS regex: const urlRegex = /https?:\\/\\/[^\\s,)>\\]]+/g; const foundUrls = []; for (let i = 0; i < paras.items.length; i++) { const txt = paras.items[i].text || ''; let m; while ((m = urlRegex.exec(txt)) !== null) foundUrls.push(m[0]); } 3) For each URL, search and hyperlink: for (let j = 0; j < foundUrls.length; j++) { const sr = body.search(foundUrls[j], {matchCase:false, matchWholeWord:false}); sr.load('items'); await context.sync(); for (let k = 0; k < sr.items.length; k++) sr.items[k].hyperlink = foundUrls[j]; await context.sync(); } NEVER use insertText, insertParagraph, or insertHtml to write URL text." },
+        { icon: "trendUp", label: "Readability Score", prompt: "DO NOT use body.clear(). Read all paragraphs. Count total words, total sentences (periods+exclamation+question marks), and total syllables (approximate: count vowel groups in each word). Calculate Flesch-Kincaid grade level and reading ease. At the END, insert a 'Readability Report' section with the scores and interpretation. Use insertParagraph with Word.InsertLocation.end." },
+        { icon: "search", label: "Extract Key Points", prompt: "DO NOT use body.clear(). Read all paragraphs. At the START of the document, insert 'Key Takeaways' heading (bold, font.size=14) followed by numbered key points extracted from the content. Use insertParagraph with Word.InsertLocation.start. Insert in reverse order so they appear correctly." },
+        { icon: "copy", label: "Compare Sections", prompt: "DO NOT use body.clear(). Read all paragraphs. Identify sections by headings. At the END, insert a comparison table using body.insertTable() showing: Section Name, Word Count, Paragraph Count, Avg Sentence Length. Style the table. Use Word.InsertLocation.end." },
+        { icon: "shield", label: "Consistency Check", prompt: "DO NOT use body.clear(). Read all paragraphs with font info loaded. At the END, insert a 'Consistency Report' section listing any found issues: mixed fonts (list all unique font names found), inconsistent sizes, paragraphs with different spacing values, headings without consistent styling. Use insertParagraph with Word.InsertLocation.end." },
+        { icon: "mail", label: "Extract Contacts", prompt: "DO NOT use body.clear(). Read all paragraphs. Search body text for email addresses (pattern with @), phone numbers (digits with dashes/spaces), and URLs (http/www). At the END, insert a 'Contact Information' table using body.insertTable() with columns: Type, Value. Use Word.InsertLocation.end." },
+        { icon: "layers", label: "Create TOC", prompt: "DO NOT use body.clear(). Read all paragraphs and identify those with 'Heading' in their style. At the START of the document, insert 'Table of Contents' (bold, font.size=14) followed by a paragraph listing each heading found with indentation based on heading level. Use Word.InsertLocation.start, inserting in reverse order." },
+        { icon: "dollarSign", label: "Word Count Stats", prompt: "DO NOT use body.clear(). Read all paragraphs. Count total words, total characters (with and without spaces), unique words (approximate), paragraphs, sentences. At the END, insert a stats table using body.insertTable() with these metrics. Style with gridTable4_Accent1. Use Word.InsertLocation.end." },
+        { icon: "globe", label: "Translate Structure", prompt: "DO NOT use body.clear(). Read all paragraphs. At the END, insert a 'Document Structure Map' section. For each paragraph, insert a line showing: [Paragraph #] [Style: X] [Words: Y] [First 40 chars...]. This gives the user a complete structural overview. Use insertParagraph with Word.InsertLocation.end." },
     ],
 };
 
@@ -174,6 +211,7 @@ Office.onReady((info) => {
     setupChatInput();
     setupScrollToBottom();
     setupAgentKeyboardShortcut();
+    setupDiffDismiss();
 
     // Category Tabs
     document.querySelectorAll(".category-tab").forEach((tab) => {
@@ -683,6 +721,108 @@ function setupAgentKeyboardShortcut(): void {
     });
 }
 
+// ─── Diff dismiss handler ──────────────────────────────────────
+function setupDiffDismiss(): void {
+    const dismissBtn = document.getElementById("ai-diff-dismiss");
+    if (dismissBtn) {
+        dismissBtn.onclick = () => {
+            const diffView = document.getElementById("ai-diff-view");
+            if (diffView) diffView.classList.remove("active");
+        };
+    }
+}
+
+// ─── Hardcoded Actions — deterministic code for well-defined ops (bypasses LLM) ──
+
+/**
+ * Some operations are too critical or specific to trust LLM generation.
+ * This map intercepts known prompts and runs battle-tested code directly.
+ * Returns the number of items affected, or -1 if the prompt is not hardcoded.
+ */
+async function tryHardcodedAction(userPrompt: string): Promise<{ handled: boolean; message?: string }> {
+    const lower = userPrompt.toLowerCase();
+
+    // ── Make Links Clickable ──────────────────────────────────
+    const isLinkAction = lower.includes("clickable") || lower.includes("hyperlink") ||
+        (lower.includes("link") && (lower.includes("make") || lower.includes("all")));
+
+    if (isLinkAction) {
+        let count = 0;
+        // @ts-ignore
+        await Word.run(async (ctx: any) => {
+            const body = ctx.document.body;
+            const paras = body.paragraphs;
+            paras.load("items/text");
+            await ctx.sync();
+
+            // Step 1: Extract all full URLs from every paragraph via JS regex
+            const urlRegex = /https?:\/\/[^\s,)>\]"']+/g;
+            const foundUrls: string[] = [];
+            for (let i = 0; i < paras.items.length; i++) {
+                const txt = paras.items[i].text || "";
+                let m: RegExpExecArray | null;
+                while ((m = urlRegex.exec(txt)) !== null) {
+                    // Clean trailing punctuation
+                    let url = m[0].replace(/[.,;:!?)]+$/, "");
+                    if (!foundUrls.includes(url)) foundUrls.push(url);
+                }
+            }
+
+            console.log(`[HardcodedAction] Found ${foundUrls.length} unique URLs:`, foundUrls);
+
+            // Step 2: For each full URL, search the document to get its Range, then set .hyperlink
+            for (let j = 0; j < foundUrls.length; j++) {
+                const url = foundUrls[j];
+                const searchResults = body.search(url, { matchCase: false, matchWholeWord: false });
+                searchResults.load("items");
+                await ctx.sync();
+
+                for (let k = 0; k < searchResults.items.length; k++) {
+                    searchResults.items[k].hyperlink = url;
+                    // Optional: make it look like a hyperlink visually
+                    searchResults.items[k].font.color = "#0563C1";
+                    searchResults.items[k].font.underline = "Single";
+                    count++;
+                }
+                await ctx.sync();
+            }
+
+            // Step 3: Also find www. links that don't start with http
+            const wwwRegex = /(?<![\/\/])www\.[^\s,)>\]"']+/g;
+            for (let i = 0; i < paras.items.length; i++) {
+                const txt = paras.items[i].text || "";
+                let m: RegExpExecArray | null;
+                while ((m = wwwRegex.exec(txt)) !== null) {
+                    let url = m[0].replace(/[.,;:!?)]+$/, "");
+                    const fullUrl = "https://" + url;
+                    const searchResults = body.search(url, { matchCase: false, matchWholeWord: false });
+                    searchResults.load("items");
+                    await ctx.sync();
+                    for (let k = 0; k < searchResults.items.length; k++) {
+                        searchResults.items[k].hyperlink = fullUrl;
+                        searchResults.items[k].font.color = "#0563C1";
+                        searchResults.items[k].font.underline = "Single";
+                        count++;
+                    }
+                    await ctx.sync();
+                }
+            }
+        });
+
+        if (count === 0) {
+            return { handled: true, message: "⚠️ No URLs found in the document. Make sure your document contains links starting with http:// or https://" };
+        }
+        return { handled: true, message: `✅ Made ${count} link${count !== 1 ? "s" : ""} clickable!` };
+    }
+
+    // Not a hardcoded action — fall through to LLM
+    return { handled: false };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MAIN EXECUTION — Run AI Command
+// ═══════════════════════════════════════════════════════════════
+
 async function runWordAICommand(): Promise<void> {
     const statusEl = document.getElementById("status-message");
     const debugEl = document.getElementById("debug-code");
@@ -730,8 +870,51 @@ async function runWordAICommand(): Promise<void> {
     skeletonEl.style.display = "flex";
     cacheBadge.style.display = "none";
     debugEl.innerText = "";
+    hideEditingOverlay();
+    hideDiffView();
+
+    // Capture document text BEFORE execution for diff
+    let beforeText = "";
+    try {
+        // @ts-ignore
+        await Word.run(async (ctx: any) => {
+            const b = ctx.document.body;
+            b.load("text");
+            await ctx.sync();
+            beforeText = b.text || "";
+        });
+    } catch (e) { console.warn("[Diff] Could not capture before-text:", e); }
 
     try {
+        // ═══ HARDCODED ACTIONS — bypass LLM for deterministic operations ═══
+        try {
+            const hardcoded = await tryHardcodedAction(userPrompt);
+            if (hardcoded.handled) {
+                skeletonEl.style.display = "none";
+                debugEl.innerText = "// Executed via hardcoded action (no LLM needed)";
+                hideEditingOverlay();
+                const isError = hardcoded.message?.startsWith("⚠️") || hardcoded.message?.startsWith("❌");
+                showStatus(statusEl, isError ? "info" : "success", hardcoded.message || "✅ Done!");
+                if (!isError) showToast("success", hardcoded.message || "Done!");
+                // Show diff
+                try {
+                    let afterText = "";
+                    // @ts-ignore
+                    await Word.run(async (ctx: any) => {
+                        const b = ctx.document.body;
+                        b.load("text");
+                        await ctx.sync();
+                        afterText = b.text || "";
+                    });
+                    if (beforeText || afterText) showDiffView(beforeText, afterText);
+                } catch (e) { /* ignore diff errors */ }
+                return;
+            }
+        } catch (hardcodedErr: any) {
+            console.warn("[HardcodedAction] Failed, falling back to LLM:", hardcodedErr);
+            // Fall through to normal LLM pipeline
+        }
+
         let code: string;
         let fromCache = false;
 
@@ -796,6 +979,9 @@ async function runWordAICommand(): Promise<void> {
 
         if (runText) runText.innerText = "Executing...";
 
+        // Show live editing animation
+        showEditingOverlay(code);
+
         // Execute the code in Word
         // @ts-ignore
         const executionResult = await executeWordWithRecovery(code, async (codeToRun: string) => {
@@ -811,9 +997,27 @@ async function runWordAICommand(): Promise<void> {
             });
         }, 2, signal);
 
+        // Hide editing overlay
+        hideEditingOverlay();
+
         if (executionResult.success) {
             showStatus(statusEl, "success", "✅ Done! Document updated successfully.");
             showToast("success", "Document updated!");
+
+            // Capture AFTER text and show diff
+            try {
+                let afterText = "";
+                // @ts-ignore
+                await Word.run(async (ctx: any) => {
+                    const b = ctx.document.body;
+                    b.load("text");
+                    await ctx.sync();
+                    afterText = b.text || "";
+                });
+                if (beforeText || afterText) {
+                    showDiffView(beforeText, afterText);
+                }
+            } catch (e) { console.warn("[Diff] Could not capture after-text:", e); }
         } else {
             showStatus(statusEl, "error", `❌ Error: ${executionResult.error}`);
             showToast("error", executionResult.error?.substring(0, 80) || "Execution failed");
@@ -821,6 +1025,7 @@ async function runWordAICommand(): Promise<void> {
 
     } catch (error: any) {
         skeletonEl.style.display = "none";
+        hideEditingOverlay();
         if (error.name === 'AbortError') {
             showStatus(statusEl, "info", "⏹ Agent stopped.");
         } else {
@@ -834,6 +1039,304 @@ async function runWordAICommand(): Promise<void> {
         if (runText) runText.innerText = originalText;
         if (runIcon) runIcon.innerHTML = originalIcon;
     }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// AI EDITING ANIMATION SYSTEM
+// ═══════════════════════════════════════════════════════════════
+
+let editAnimInterval: ReturnType<typeof setInterval> | null = null;
+
+/** Show the live editing overlay with animated code lines */
+function showEditingOverlay(code: string): void {
+    const overlay = document.getElementById("ai-editing-overlay");
+    const linesEl = document.getElementById("ai-edit-lines");
+    const phaseEl = document.getElementById("ai-edit-phase");
+    const progressBar = document.getElementById("ai-edit-progress-bar");
+    if (!overlay || !linesEl) return;
+
+    linesEl.innerHTML = "";
+    if (progressBar) progressBar.style.width = "0%";
+    overlay.classList.add("active");
+
+    // Parse the generated code into display lines
+    const codeLines = code.split("\n").filter(l => l.trim().length > 0);
+    const displayLines: { text: string; type: "added" | "removed" | "context" }[] = [];
+
+    for (const line of codeLines) {
+        const trimmed = line.trim();
+        // Heuristic: lines with .delete(), search/replace removals = removed
+        if (/\.delete\(\)/.test(trimmed) || /insertText\(.*replace/i.test(trimmed)) {
+            displayLines.push({ text: trimmed, type: "removed" });
+        }
+        // Lines that set properties, insert text = added
+        else if (/\.font\.|\.style|\.hyperlink|\.alignment|insertParagraph|insertText|insertTable|insertHtml|\.spaceAfter|\.spaceBefore|\.lineSpacing/i.test(trimmed)) {
+            displayLines.push({ text: trimmed, type: "added" });
+        }
+        // Everything else is context
+        else {
+            displayLines.push({ text: trimmed, type: "context" });
+        }
+    }
+
+    // Show only a subset (max 12 lines)
+    const toShow = displayLines.slice(0, 12);
+    let lineIndex = 0;
+
+    const phases = ["Analyzing...", "Reading document...", "Applying changes...", "Formatting...", "Finalizing..."];
+    let phaseIndex = 0;
+
+    // Animate lines appearing one by one
+    editAnimInterval = setInterval(() => {
+        if (lineIndex < toShow.length) {
+            const item = toShow[lineIndex];
+            const lineDiv = document.createElement("div");
+            lineDiv.className = `ai-edit-line ${item.type}`;
+            lineDiv.style.animationDelay = "0ms";
+
+            const gutter = document.createElement("span");
+            gutter.className = "line-gutter";
+            gutter.textContent = item.type === "added" ? "+" : item.type === "removed" ? "−" : " ";
+
+            const content = document.createElement("span");
+            content.className = "line-content";
+
+            // Truncate long lines
+            const displayText = item.text.length > 50 ? item.text.substring(0, 50) + "..." : item.text;
+            content.textContent = displayText;
+
+            // Add typing cursor to last added line
+            if (item.type === "added" && lineIndex === toShow.length - 1) {
+                const cursor = document.createElement("span");
+                cursor.className = "typing-cursor";
+                content.appendChild(cursor);
+            }
+
+            lineDiv.appendChild(gutter);
+            lineDiv.appendChild(content);
+            linesEl.appendChild(lineDiv);
+
+            // Keep scrolled to bottom
+            linesEl.scrollTop = linesEl.scrollHeight;
+
+            lineIndex++;
+        }
+
+        // Update phase text
+        phaseIndex++;
+        if (phaseEl && phaseIndex % 4 === 0) {
+            const pi = Math.min(Math.floor(phaseIndex / 4), phases.length - 1);
+            phaseEl.textContent = phases[pi];
+        }
+
+        // Update progress bar
+        if (progressBar) {
+            const progress = Math.min(95, (lineIndex / Math.max(toShow.length, 1)) * 85 + 10);
+            progressBar.style.width = progress + "%";
+        }
+    }, 250);
+}
+
+/** Hide the editing overlay and clean up */
+function hideEditingOverlay(): void {
+    if (editAnimInterval) {
+        clearInterval(editAnimInterval);
+        editAnimInterval = null;
+    }
+
+    const overlay = document.getElementById("ai-editing-overlay");
+    const progressBar = document.getElementById("ai-edit-progress-bar");
+
+    if (progressBar) progressBar.style.width = "100%";
+
+    // Brief delay to show completion
+    setTimeout(() => {
+        if (overlay) overlay.classList.remove("active");
+    }, 300);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// DIFF VIEW SYSTEM
+// ═══════════════════════════════════════════════════════════════
+
+/** Compute a simple line-level diff between two texts */
+function computeSimpleDiff(before: string, after: string): { type: "added" | "removed" | "context" | "separator"; text: string }[] {
+    const beforeLines = before.split(/\r?\n/).map(l => l.trimEnd());
+    const afterLines = after.split(/\r?\n/).map(l => l.trimEnd());
+
+    const result: { type: "added" | "removed" | "context" | "separator"; text: string }[] = [];
+
+    // Simple LCS-based diff for reasonable-sized documents
+    const beforeSet = new Map<string, number[]>();
+    beforeLines.forEach((line, i) => {
+        if (!beforeSet.has(line)) beforeSet.set(line, []);
+        beforeSet.get(line)!.push(i);
+    });
+
+    const afterSet = new Map<string, number[]>();
+    afterLines.forEach((line, i) => {
+        if (!afterSet.has(line)) afterSet.set(line, []);
+        afterSet.get(line)!.push(i);
+    });
+
+    // Find lines only in before (removed), only in after (added), in both (context)
+    const usedBefore = new Set<number>();
+    const usedAfter = new Set<number>();
+
+    // Match identical lines in order
+    let bIdx = 0;
+    let aIdx = 0;
+    while (bIdx < beforeLines.length && aIdx < afterLines.length) {
+        if (beforeLines[bIdx] === afterLines[aIdx]) {
+            usedBefore.add(bIdx);
+            usedAfter.add(aIdx);
+            bIdx++;
+            aIdx++;
+        } else {
+            // Try to find next match
+            let foundInAfter = -1;
+            for (let j = aIdx; j < Math.min(aIdx + 10, afterLines.length); j++) {
+                if (afterLines[j] === beforeLines[bIdx]) { foundInAfter = j; break; }
+            }
+            let foundInBefore = -1;
+            for (let j = bIdx; j < Math.min(bIdx + 10, beforeLines.length); j++) {
+                if (beforeLines[j] === afterLines[aIdx]) { foundInBefore = j; break; }
+            }
+
+            if (foundInAfter >= 0 && (foundInBefore < 0 || (foundInAfter - aIdx) <= (foundInBefore - bIdx))) {
+                // Lines in after before match are additions
+                for (let j = aIdx; j < foundInAfter; j++) {
+                    usedAfter.add(j);
+                }
+                aIdx = foundInAfter;
+            } else if (foundInBefore >= 0) {
+                // Lines in before before match are removals
+                for (let j = bIdx; j < foundInBefore; j++) {
+                    usedBefore.add(j);
+                }
+                bIdx = foundInBefore;
+            } else {
+                usedBefore.add(bIdx);
+                usedAfter.add(aIdx);
+                bIdx++;
+                aIdx++;
+            }
+        }
+    }
+
+    // Build diff output (simplified: walk both arrays)
+    bIdx = 0;
+    aIdx = 0;
+    let contextCount = 0;
+    const MAX_CONTEXT = 2; // Show max 2 unchanged lines between changes
+
+    while (bIdx < beforeLines.length || aIdx < afterLines.length) {
+        const bLine = bIdx < beforeLines.length ? beforeLines[bIdx] : null;
+        const aLine = aIdx < afterLines.length ? afterLines[aIdx] : null;
+
+        if (bLine !== null && aLine !== null && bLine === aLine) {
+            // Context (matching line)
+            contextCount++;
+            if (contextCount <= MAX_CONTEXT) {
+                result.push({ type: "context", text: bLine || " " });
+            } else if (contextCount === MAX_CONTEXT + 1) {
+                result.push({ type: "separator", text: "···" });
+            }
+            bIdx++;
+            aIdx++;
+        } else {
+            contextCount = 0;
+            // Check if current before line was removed
+            if (bLine !== null && (aLine === null || bLine !== aLine)) {
+                // Is this line NOT in the after set at roughly similar position?
+                const afterOccurrences = afterSet.get(bLine) || [];
+                const stillExists = afterOccurrences.some(j => j >= aIdx - 3 && j <= aIdx + 10);
+                if (!stillExists && bLine.trim().length > 0) {
+                    result.push({ type: "removed", text: bLine });
+                }
+                bIdx++;
+            }
+            if (aLine !== null && (bLine === null || aLine !== bLine)) {
+                const beforeOccurrences = beforeSet.get(aLine) || [];
+                const existedBefore = beforeOccurrences.some(j => j >= bIdx - 3 && j <= bIdx + 10);
+                if (!existedBefore && aLine.trim().length > 0) {
+                    result.push({ type: "added", text: aLine });
+                }
+                aIdx++;
+            }
+        }
+    }
+
+    // Limit total lines for display
+    return result.slice(0, 30);
+}
+
+/** Show the diff view with before/after comparison */
+function showDiffView(before: string, after: string): void {
+    const diffView = document.getElementById("ai-diff-view");
+    const diffBody = document.getElementById("ai-diff-body");
+    const diffStats = document.getElementById("ai-diff-stats");
+    if (!diffView || !diffBody) return;
+
+    const diff = computeSimpleDiff(before, after);
+
+    // Don't show if no meaningful changes
+    const addedCount = diff.filter(d => d.type === "added").length;
+    const removedCount = diff.filter(d => d.type === "removed").length;
+    if (addedCount === 0 && removedCount === 0) return;
+
+    // Stats
+    if (diffStats) {
+        diffStats.innerHTML = `
+            <span class="stat-added">+${addedCount}</span>
+            <span class="stat-removed">−${removedCount}</span>
+        `;
+    }
+
+    // Build diff lines
+    diffBody.innerHTML = "";
+    diff.forEach((item, index) => {
+        if (item.type === "separator") {
+            const sep = document.createElement("div");
+            sep.className = "diff-separator";
+            sep.textContent = item.text;
+            diffBody.appendChild(sep);
+            return;
+        }
+
+        const lineEl = document.createElement("div");
+        lineEl.className = `diff-line diff-${item.type}`;
+        lineEl.style.animationDelay = `${index * 40}ms`;
+
+        const gutter = document.createElement("span");
+        gutter.className = "diff-gutter";
+        gutter.textContent = item.type === "added" ? "+" : item.type === "removed" ? "−" : " ";
+
+        const text = document.createElement("span");
+        text.className = "diff-text";
+
+        // For added lines, wrap in highlight span
+        if (item.type === "added") {
+            const highlight = document.createElement("span");
+            highlight.className = "diff-highlight";
+            highlight.textContent = item.text || " ";
+            text.appendChild(highlight);
+        } else {
+            text.textContent = item.text || " ";
+        }
+
+        lineEl.appendChild(gutter);
+        lineEl.appendChild(text);
+        diffBody.appendChild(lineEl);
+    });
+
+    diffView.classList.add("active");
+}
+
+/** Hide the diff view */
+function hideDiffView(): void {
+    const diffView = document.getElementById("ai-diff-view");
+    if (diffView) diffView.classList.remove("active");
 }
 
 // ─── Status & Toast ──────────────────────────────────────────
