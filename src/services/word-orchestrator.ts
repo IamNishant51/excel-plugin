@@ -83,8 +83,9 @@ export interface DocumentContext {
 
 export interface WordAttachedFile {
     name: string;
-    type: "image" | "pdf";
+    type: "image" | "pdf" | "docx";
     data: string[];
+    extractedText?: string;
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -427,13 +428,21 @@ WORD CAPABILITIES TO CONSIDER:
 
 SAFETY RULES:
 - NEVER plan to use body.clear() unless user explicitly requests a template/blank document
-- Always plan to READ existing content before modifying it
+- Always plan to READ existing content before modifying it (unless document is empty and creating new content)
 - Plan to preserve all user content unless explicitly asked to remove something
 - For reformatting: plan to modify paragraphs IN-PLACE, never delete and recreate
 
+ATTACHED FILE DATA RULES:
+- When the user attaches a file (PDF/DOCX), its text content is provided in [ATTACHED FILE DATA] section
+- Treat this as the SOURCE DATA for the task — use ALL of it, never skip or summarize
+- For resume creation: plan separate steps for EVERY section (name, contact, summary, skills, experience, projects, education)
+- Each step should specify the exact data to include and the formatting to apply
+- Plan to make URLs clickable with hyperlinks
+- Mark complexity as "complex" when building a full document from file data
+
 RULES:
 - Keep steps actionable and specific to Word document operations
-- Identify if document content needs to be read first (usually yes)
+- Identify if document content needs to be read first (usually yes for editing, no for creation from file)
 - Flag complexity based on operations needed
 - Note any ambiguities in the request
 - Suggest the safest approach when multiple options exist`;
@@ -670,14 +679,27 @@ for (let i = allParas.items.length - 1; i >= 0; i--) {
 }
 await context.sync();
 
-═══ ATS RESUME RULES ═══
-- NEVER body.clear(). Modify paragraphs in-place.
-- First paragraph = Name: font.size=18, bold=true. DO NOT shrink.
-- Section headings: font.size=12, bold=true, NOT "Heading 1" style (huge gaps).
-- Body text: Calibri 10.5pt, lineSpacing=12, spaceAfter=2.
+═══ CREATING DOCUMENTS FROM ATTACHED FILE DATA ═══
+When the user attaches a file (PDF, DOCX) and asks you to create/build something from it:
+1. The file's extracted text will be provided in [ATTACHED FILE CONTENT] section.
+2. Use ALL data from the file — names, contacts, dates, skills, every detail. Do NOT skip or summarize.
+3. Generate code that creates a COMPLETE, fully-formatted Word document using insertParagraph, font styling, tables, etc.
+4. Structure the output professionally with proper sections, headings, spacing, and formatting.
+5. For resumes: Include name (large, bold), contact info, summary, skills, experience with bullet points, projects with descriptions & links, education — ALL from the source data.
+6. Make all URLs clickable by setting .hyperlink on the range after inserting the text.
+7. Use body.insertParagraph() for each new paragraph/line. Format each one appropriately.
+8. Use insertHtml() for complex layouts like contact info rows, horizontal rules, or multi-column sections.
+
+═══ ATS RESUME FORMATTING RULES ═══
+- Name: font.size=22, bold=true, alignment=centered, font.color="#1a1a1a".
+- Contact line: font.size=10, centered, include phone | email | location, separated by " | ".
+- Section headings: font.size=13, bold=true, font.color="#2B547E", spaceAfter=4, spaceBefore=12. Add a horizontal rule below via insertHtml.
+- Body text: Calibri 10.5pt, lineSpacing=14, spaceAfter=2.
+- Bullet points: Use "List Bullet" style for items under experience/projects.
+- Links (GitHub, LinkedIn, NPM, Live Demo): Insert the text first, then search for the URL and set .hyperlink.
 - Delete consecutive empty paragraphs to save space.
 
-═══ CONTENT PRESERVATION ═══
+═══ CONTENT PRESERVATION (when editing existing docs) ═══
 - Reformatting: Read → modify font/style/spacing → sync. NEVER delete text content.
 - Adding: Word.InsertLocation.end or .start. Do NOT replace existing.
 - Only delete truly empty paragraphs (p.text.trim() === "").
@@ -713,8 +735,18 @@ export async function generateWordCode(
         }
     }
 
+    // When files are attached and document is mostly empty, this is a CREATION task
+    const isCreationTask = attachedFiles.length > 0 && attachedFiles.some(f => f.extractedText);
+    const docIsEmpty = !docContext || !docContext.hasContent || docContext.wordCount < 20;
+
     if (docContext && docContext.hasContent) {
-        prompt += '\n\nDOCUMENT DATA (EXISTING CONTENT — DO NOT DELETE THIS):\n';
+        if (isCreationTask && docIsEmpty) {
+            // Document is empty/near-empty and we have file data — this is a creation task
+            prompt += '\n\nDOCUMENT IS EMPTY. You are creating NEW content from the attached file data.\n';
+            prompt += 'Use body.insertParagraph() to add content. Do NOT try to read or modify existing paragraphs.\n';
+        } else {
+            prompt += '\n\nDOCUMENT DATA (EXISTING CONTENT — DO NOT DELETE THIS):\n';
+        }
         prompt += '- Paragraphs: ' + docContext.paragraphCount + '\n';
         prompt += '- Word Count: ~' + docContext.wordCount + '\n';
         prompt += '- Headings: ' + JSON.stringify(docContext.headings) + '\n';
@@ -766,7 +798,11 @@ export async function generateWordCode(
             prompt += '🚨 DO NOT use getSelection(). DO NOT use body.search("http"). Search for the FULL URL string.\n';
         }
         prompt += '- Full text: "' + docContext.sampleText + '"\n';
-        prompt += '\n⚠️ PRESERVE ALL EXISTING CONTENT. Modify paragraphs in-place. NEVER use body.clear().\n';
+        if (isCreationTask && docIsEmpty) {
+            prompt += '\nThis is a CREATION task. Generate NEW content using insertParagraph. Do NOT use body.clear().\n';
+        } else {
+            prompt += '\n⚠️ PRESERVE ALL EXISTING CONTENT. Modify paragraphs in-place. NEVER use body.clear().\n';
+        }
     }
 
     if (previousError) {
@@ -776,13 +812,30 @@ export async function generateWordCode(
     const messages: any[] = [{ role: "system", content: CODER_SYSTEM_PROMPT }];
 
     if (attachedFiles.length > 0) {
-        const contentParts: any[] = [{ type: "text", text: prompt }];
+        // Include extracted text content directly in the prompt for reliable data usage
+        const textParts: string[] = [];
         attachedFiles.forEach((file) => {
-            file.data.slice(0, 10).forEach((imageUrl) => {
-                contentParts.push({ type: "image_url", image_url: { url: imageUrl } });
-            });
+            if (file.extractedText) {
+                textParts.push(`\n[FILE: "${file.name}"]\n${file.extractedText}`);
+            }
         });
-        messages.push({ role: "user", content: contentParts });
+        if (textParts.length > 0) {
+            prompt += "\n\n[ATTACHED FILE CONTENT — Use this as source data for the task]" + textParts.join("\n");
+        }
+
+        // Also send images for vision-capable models (PDFs rendered as images)
+        const hasImages = attachedFiles.some(f => f.data && f.data.length > 0);
+        if (hasImages) {
+            const contentParts: any[] = [{ type: "text", text: prompt }];
+            attachedFiles.forEach((file) => {
+                file.data.slice(0, 10).forEach((imageUrl) => {
+                    contentParts.push({ type: "image_url", image_url: { url: imageUrl } });
+                });
+            });
+            messages.push({ role: "user", content: contentParts });
+        } else {
+            messages.push({ role: "user", content: prompt });
+        }
     } else {
         messages.push({ role: "user", content: prompt });
     }
@@ -916,9 +969,19 @@ export async function runWordAgent(
 
     try {
         // ═══ PHASE 1: PLANNING ═══
-        if (cfg.enablePlanning && !attachedFiles.length) {
+        if (cfg.enablePlanning) {
             try {
-                plan = await createWordPlan(task, docContext, signal);
+                // Include attached file content in planner context
+                let plannerTask = task;
+                if (attachedFiles.length > 0) {
+                    const fileTexts = attachedFiles
+                        .filter(f => f.extractedText)
+                        .map(f => `[File: "${f.name}"]\n${f.extractedText}`);
+                    if (fileTexts.length > 0) {
+                        plannerTask += "\n\n[ATTACHED FILE DATA — Use this as source data for the task]\n" + fileTexts.join("\n\n");
+                    }
+                }
+                plan = await createWordPlan(plannerTask, docContext, signal);
                 console.log("[WordAgent] Plan created:", plan);
             } catch (e) {
                 if ((e as any).name === 'AbortError') throw e;

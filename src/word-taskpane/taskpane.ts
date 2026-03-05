@@ -10,8 +10,14 @@ import {
     executeWordWithRecovery,
     readDocumentContext,
     DocumentContext,
+    WordAttachedFile,
 } from "../services/word-orchestrator";
 import { Icons } from "../services/icons";
+import * as pdfjsLib from "pdfjs-dist";
+import { extractTextFromPDFFile } from "../services/pdfService";
+
+// Configure PDF.js worker
+pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
 // ─── Types ─────────────────────────────────────────────────────
 type Mode = "planning" | "agent";
@@ -29,7 +35,7 @@ let currentCategory: WordActionCategory = "resume";
 const chatHistory: ChatMessage[] = [];
 let chatConversation: { role: "system" | "user" | "assistant"; content: string }[] = [];
 let isChatBusy = false;
-let attachedFiles: { name: string; type: "image" | "pdf"; data: string[] }[] = [];
+let attachedFiles: { name: string; type: "image" | "pdf" | "docx"; data: string[]; extractedText?: string }[] = [];
 let chatAbortController: AbortController | null = null;
 let agentAbortController: AbortController | null = null;
 
@@ -198,6 +204,22 @@ Office.onReady((info) => {
 
     document.getElementById("save-settings").onclick = handleSaveSettings;
     document.getElementById("refresh-models").onclick = loadOllamaModels;
+
+    // File Upload Handlers
+    const bindClick = (id: string, handler: () => void) => {
+        const el = document.getElementById(id);
+        if (el) el.onclick = handler;
+    };
+    const bindChange = (id: string, handler: (e: Event) => void) => {
+        const el = document.getElementById(id);
+        if (el) el.onchange = handler;
+    };
+
+    bindClick("file-upload-btn", () => document.getElementById("file-input").click());
+    bindChange("file-input", (e) => handleFileSelect(e, false));
+
+    bindClick("agent-file-btn", () => document.getElementById("agent-file-input").click());
+    bindChange("agent-file-input", (e) => handleFileSelect(e, true));
 
     // Mode Toggles
     document.getElementById("mode-planning").onclick = () => switchMode("planning");
@@ -537,6 +559,33 @@ async function sendChatMessage(): Promise<void> {
     }
 
     chatConversation.push({ role: "user", content: message });
+
+    // Include attached file content in the conversation
+    if (attachedFiles.length > 0) {
+        const fileTexts: string[] = [];
+        for (const file of attachedFiles) {
+            if (file.extractedText) {
+                fileTexts.push(`[ATTACHED FILE: "${file.name}"]\n${file.extractedText}`);
+            }
+        }
+        if (fileTexts.length > 0) {
+            chatConversation.push({
+                role: "system",
+                content: `[UPLOADED FILE CONTENT]\nThe user has attached ${attachedFiles.length} file(s). Here is the extracted text content:\n\n${fileTexts.join("\n\n---\n\n")}\n\nUse this data to answer the user's request. If they ask you to create a resume, use the information from these files as the source material.`
+            });
+
+            const lastBubble = document.querySelector('.chat-msg.user:last-child .chat-bubble');
+            if (lastBubble) {
+                const badge = document.createElement('span');
+                badge.className = 'context-badge';
+                badge.innerHTML = `📎 ${attachedFiles.length} file(s) attached`;
+                lastBubble.appendChild(badge);
+            }
+        }
+        // Clear attached files after including them
+        attachedFiles = [];
+        updateFilePreview(false, false);
+    }
 
     input.value = "";
     input.style.height = "auto";
@@ -949,10 +998,11 @@ async function runWordAICommand(): Promise<void> {
         if (!fromCache) {
             if (runText) runText.innerText = "Generating...";
 
-            const wordAttachedFiles = attachedFiles.map(f => ({
+            const wordAttachedFiles: WordAttachedFile[] = attachedFiles.map(f => ({
                 name: f.name,
-                type: f.type as "image" | "pdf",
-                data: f.data
+                type: f.type as "image" | "pdf" | "docx",
+                data: f.data,
+                extractedText: f.extractedText
             }));
 
             const result = await runWordAgent(
@@ -962,6 +1012,10 @@ async function runWordAICommand(): Promise<void> {
                 { enablePlanning: true, strictValidation: true },
                 signal
             );
+
+            // Clear attached files after use
+            attachedFiles = [];
+            updateFilePreview(false, true);
 
             if (!result.success) {
                 throw new Error(result.error || "Code generation failed");
@@ -1363,4 +1417,250 @@ function showToast(type: string, message: string): void {
         toast.classList.add("toast-exit");
         setTimeout(() => toast.remove(), 300);
     }, 3000);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// FILE HANDLING — Attach PDFs, Images, and Word Documents
+// ═══════════════════════════════════════════════════════════════
+
+const PAPERCLIP_SVG = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>`;
+
+async function handleFileSelect(event: Event, isAgent: boolean = false): Promise<void> {
+    const input = event.target as HTMLInputElement;
+    if (!input.files || input.files.length === 0) return;
+
+    const btnId = isAgent ? "agent-file-btn" : "file-upload-btn";
+    const btn = document.getElementById(btnId);
+    if (btn) btn.innerHTML = `<span class="btn-spinner"></span>`;
+
+    try {
+        const newFiles: typeof attachedFiles = [];
+
+        for (let i = 0; i < input.files.length; i++) {
+            const file = input.files[i];
+
+            if (file.type === "application/pdf") {
+                // Extract actual text from the PDF for content-based tasks
+                let extractedText = "";
+                try {
+                    const pdfResult = await extractTextFromPDFFile(file);
+                    extractedText = pdfResult.text;
+                } catch (e) {
+                    console.warn("PDF text extraction failed, falling back to image mode:", e);
+                }
+
+                // Also render pages as images for vision model fallback
+                const arrayBuffer = await file.arrayBuffer();
+                const images = await renderPdfToImages(arrayBuffer);
+                newFiles.push({ name: file.name, type: "pdf", data: images, extractedText });
+
+            } else if (file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || file.name.endsWith(".docx")) {
+                // Extract text from DOCX using the Word API or manual parsing
+                let extractedText = "";
+                try {
+                    extractedText = await extractTextFromDocx(file);
+                } catch (e) {
+                    console.warn("DOCX text extraction failed:", e);
+                }
+                newFiles.push({ name: file.name, type: "docx", data: [], extractedText });
+
+            } else if (file.type.startsWith("image/")) {
+                const base64 = await fileToBase64(file);
+                newFiles.push({ name: file.name, type: "image", data: [base64] });
+            }
+        }
+
+        if (newFiles.length > 0) {
+            attachedFiles = [...attachedFiles, ...newFiles];
+            updateFilePreview(true, isAgent);
+        } else {
+            showToast("error", "Unsupported file type. Use PDF, DOCX, or images.");
+        }
+    } catch (error: any) {
+        console.error("File handling error:", error);
+        showToast("error", "Error reading file: " + error.message);
+    } finally {
+        // Reset input so the same file can be selected again
+        input.value = "";
+        if (btn) btn.innerHTML = PAPERCLIP_SVG;
+    }
+}
+
+/**
+ * Extract text from a DOCX file.
+ * DOCX is a ZIP archive with word/document.xml containing paragraph data.
+ * We parse the ZIP structure, decompress the XML, and extract <w:t> text nodes.
+ */
+async function extractTextFromDocx(file: File): Promise<string> {
+    const arrayBuffer = await file.arrayBuffer();
+    const uint8 = new Uint8Array(arrayBuffer);
+
+    const entries = parseZipEntries(uint8);
+    const docEntry = entries.find(e => e.name === "word/document.xml");
+
+    if (!docEntry) {
+        throw new Error("Not a valid DOCX file — word/document.xml not found.");
+    }
+
+    const xmlText = await decompressZipEntry(uint8, docEntry);
+
+    // Extract text from <w:t> elements within <w:p> paragraphs
+    const textParts: string[] = [];
+    const paragraphRegex = /<w:p[\s>][\s\S]*?<\/w:p>/g;
+    const textRunRegex = /<w:t[^>]*>([\s\S]*?)<\/w:t>/g;
+
+    let pMatch: RegExpExecArray | null;
+    while ((pMatch = paragraphRegex.exec(xmlText)) !== null) {
+        const paraXml = pMatch[0];
+        const paraTexts: string[] = [];
+        let tMatch: RegExpExecArray | null;
+        textRunRegex.lastIndex = 0;
+        while ((tMatch = textRunRegex.exec(paraXml)) !== null) {
+            paraTexts.push(tMatch[1]);
+        }
+        if (paraTexts.length > 0) {
+            textParts.push(paraTexts.join(""));
+        }
+    }
+
+    return textParts.join("\n");
+}
+
+interface ZipEntry {
+    name: string;
+    compressionMethod: number;
+    compressedSize: number;
+    uncompressedSize: number;
+    offset: number;
+}
+
+function parseZipEntries(data: Uint8Array): ZipEntry[] {
+    const entries: ZipEntry[] = [];
+    let pos = 0;
+    const view = new DataView(data.buffer, data.byteOffset, data.byteLength);
+
+    while (pos < data.length - 4) {
+        const sig = view.getUint32(pos, true);
+        if (sig !== 0x04034b50) break;
+
+        const compressionMethod = view.getUint16(pos + 8, true);
+        const compressedSize = view.getUint32(pos + 18, true);
+        const uncompressedSize = view.getUint32(pos + 22, true);
+        const nameLength = view.getUint16(pos + 26, true);
+        const extraLength = view.getUint16(pos + 28, true);
+
+        const nameBytes = data.slice(pos + 30, pos + 30 + nameLength);
+        const name = new TextDecoder("utf-8").decode(nameBytes);
+
+        const dataOffset = pos + 30 + nameLength + extraLength;
+        entries.push({ name, compressionMethod, compressedSize, uncompressedSize, offset: dataOffset });
+        pos = dataOffset + compressedSize;
+    }
+
+    return entries;
+}
+
+async function decompressZipEntry(zipData: Uint8Array, entry: ZipEntry): Promise<string> {
+    const raw = zipData.slice(entry.offset, entry.offset + entry.compressedSize);
+
+    if (entry.compressionMethod === 0) {
+        return new TextDecoder("utf-8").decode(raw);
+    }
+
+    if (entry.compressionMethod === 8 && typeof DecompressionStream !== "undefined") {
+        const ds = new DecompressionStream("deflate-raw");
+        const writer = ds.writable.getWriter();
+        writer.write(raw);
+        writer.close();
+
+        const reader = ds.readable.getReader();
+        const chunks: Uint8Array[] = [];
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            chunks.push(value);
+        }
+
+        const totalLength = chunks.reduce((sum, c) => sum + c.length, 0);
+        const result = new Uint8Array(totalLength);
+        let off = 0;
+        for (const chunk of chunks) {
+            result.set(chunk, off);
+            off += chunk.length;
+        }
+        return new TextDecoder("utf-8").decode(result);
+    }
+
+    // Fallback for environments without DecompressionStream
+    return new TextDecoder("utf-8", { fatal: false }).decode(raw);
+}
+
+function updateFilePreview(show: boolean, isAgent: boolean = false): void {
+    const listId = isAgent ? "agent-file-preview-list" : "file-preview-list";
+    const container = document.getElementById(listId);
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    if (attachedFiles.length === 0) return;
+
+    attachedFiles.forEach((file, index) => {
+        const chip = document.createElement("div");
+        chip.className = "file-chip";
+
+        const icon = document.createElement("span");
+        icon.className = "file-chip-icon";
+        icon.textContent = file.type === "pdf" ? "PDF" : file.type === "docx" ? "DOC" : "IMG";
+
+        const name = document.createElement("span");
+        name.className = "file-chip-name";
+        name.textContent = file.name;
+
+        const remove = document.createElement("button");
+        remove.className = "file-chip-remove";
+        remove.innerHTML = "&times;";
+        remove.title = "Remove file";
+        remove.onclick = (e) => {
+            e.stopPropagation();
+            removeFile(index, isAgent);
+        };
+
+        chip.appendChild(icon);
+        chip.appendChild(name);
+        chip.appendChild(remove);
+        container.appendChild(chip);
+    });
+}
+
+function removeFile(index: number, isAgent: boolean): void {
+    attachedFiles.splice(index, 1);
+    updateFilePreview(true, isAgent);
+}
+
+function fileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
+
+async function renderPdfToImages(buffer: ArrayBuffer): Promise<string[]> {
+    const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
+    const images: string[] = [];
+    const maxPages = Math.min(pdf.numPages, 5);
+
+    for (let i = 1; i <= maxPages; i++) {
+        const page = await pdf.getPage(i);
+        const viewport = page.getViewport({ scale: 1.0 });
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        if (!ctx) continue;
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        await page.render({ canvasContext: ctx, viewport }).promise;
+        images.push(canvas.toDataURL("image/png"));
+    }
+    return images;
 }
