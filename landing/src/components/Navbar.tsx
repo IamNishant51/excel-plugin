@@ -29,10 +29,10 @@ export default function Navbar() {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 ${menuOpen ? 'bg-bg border-b border-border' : scrolled ? 'bg-bg/80 backdrop-blur-md border-b border-border' : 'bg-transparent'}`}>
       <div className="max-w-[1100px] mx-auto px-6 h-14 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 text-fg font-semibold text-[15px] tracking-tight">
+        <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="flex items-center gap-2.5 text-fg font-semibold text-[15px] tracking-tight">
           <Logo size={26} />
           SheetOS
-        </Link>
+        </a>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-1">
