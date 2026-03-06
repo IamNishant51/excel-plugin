@@ -277,7 +277,7 @@ export default function CursorBackground() {
                 width: "100%",
                 height: "100%",
                 pointerEvents: "none",
-                zIndex: 9999,
+                zIndex: 1,
             }}
             aria-hidden="true"
         />
