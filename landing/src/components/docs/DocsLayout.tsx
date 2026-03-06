@@ -5,18 +5,15 @@ import Logo from '../Logo';
 
 export default function DocsLayout() {
   return (
-    <div className="min-h-screen pt-20 bg-bg">
+    <div className="min-h-screen pt-14 bg-bg">
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-40 bg-bg/70 backdrop-blur-2xl border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <Logo size={40} />
-            <div className="flex items-baseline gap-1.5">
-              <span className="font-heading text-xl font-bold text-t-white">SheetOS</span>
-              <span className="text-accent font-heading text-lg font-bold">AI</span>
-            </div>
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur-md border-b border-border">
+        <div className="max-w-[1100px] mx-auto px-6 h-14 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2.5 text-fg font-semibold text-[15px] tracking-tight">
+            <Logo size={26} />
+            SheetOS
           </Link>
-          <Link href="/" className="text-sm font-medium text-t-500 hover:text-t-white">
+          <Link href="/" className="text-[14px] text-fg-muted hover:text-fg rounded-md hover:bg-surface px-3 py-1.5 transition-colors">
             ← Back to Home
           </Link>
         </div>
