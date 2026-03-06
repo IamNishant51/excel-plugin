@@ -934,6 +934,27 @@ export async function fixWordCode(
 }
 
 // ═══════════════════════════════════════════════════════════════
+// SMART TASK CLASSIFICATION — Skip planner for simple Word tasks
+// ═══════════════════════════════════════════════════════════════
+
+const SIMPLE_WORD_PATTERNS = [
+  /\b(bold|italic|underline|font|color|highlight|style)\b/i,
+  /\b(heading|header|footer|title)\b/i,
+  /\b(align|alignment|center|left|right|justify)\b/i,
+  /\b(margin|spacing|indent)\b/i,
+  /\b(insert|add)\s+(paragraph|line|break|page break)\b/i,
+  /\b(find|replace|search)\b/i,
+  /\b(bullet|numbered|list)\b/i,
+  /\b(hyperlink|link)\b/i,
+  /\b(delete|remove)\s+(paragraph|text|line)\b/i,
+];
+
+function isLikelySimpleWordTask(task: string): boolean {
+  if (task.length > 150) return false;
+  return SIMPLE_WORD_PATTERNS.some((p) => p.test(task));
+}
+
+// ═══════════════════════════════════════════════════════════════
 // ORCHESTRATOR — Main agent loop
 // ═══════════════════════════════════════════════════════════════
 
@@ -980,8 +1001,10 @@ export async function runWordAgent(
     let retries = 0;
 
     try {
-        // ═══ PHASE 1: PLANNING ═══
-        if (cfg.enablePlanning) {
+        // ═══ PHASE 1: SMART PLANNING (skip for simple tasks) ═══
+        const isSimpleWordTask = !attachedFiles.length && isLikelySimpleWordTask(task);
+
+        if (cfg.enablePlanning && !isSimpleWordTask) {
             try {
                 // Include attached file content in planner context
                 let plannerTask = task;
@@ -999,13 +1022,15 @@ export async function runWordAgent(
                 if ((e as any).name === 'AbortError') throw e;
                 console.warn("[WordAgent] Planning failed:", e);
             }
+        } else if (isSimpleWordTask) {
+            console.log("[WordAgent] Simple task detected — skipping planner (saved 1 API call)");
         }
 
         // ═══ PHASE 2: CODE GENERATION ═══
         code = await generateWordCode(task, plan, docContext, attachedFiles, undefined, signal);
         console.log("[WordAgent] Initial code generated");
 
-        // ═══ PHASE 3: VALIDATION LOOP ═══
+        // ═══ PHASE 3: VALIDATION LOOP (local-first fix) ═══
         for (let attempt = 0; attempt <= cfg.maxRetries; attempt++) {
             validation = validateWordCode(code, isTemplateTask);
 
@@ -1015,6 +1040,16 @@ export async function runWordAgent(
             }
 
             if (attempt < cfg.maxRetries) {
+                // Try local sanitization first before burning an API call
+                const localFixed = validation.sanitizedCode;
+                const localValidation = validateWordCode(localFixed, isTemplateTask);
+                if (localValidation.isValid) {
+                    console.log("[WordAgent] Sanitized code resolved errors (saved 1 API call)");
+                    code = localValidation.sanitizedCode;
+                    validation = localValidation;
+                    break;
+                }
+
                 console.log(`[WordAgent] Validation failed (attempt ${attempt + 1}), fixing...`);
                 code = await fixWordCode(code, validation.errors, undefined, signal);
                 retries++;
@@ -1079,12 +1114,22 @@ export async function executeWordWithRecovery(
             console.warn(`[WordAgent] Execution failed (attempt ${attempt + 1}):`, lastError);
 
             if (attempt < maxRetries) {
-                currentCode = await fixWordCode(currentCode, [], lastError, signal);
+                // Try sanitization first before burning API call
                 const validation = validateWordCode(currentCode);
-                if (validation.isValid) {
-                    currentCode = validation.sanitizedCode;
-                } else {
-                    currentCode = await fixWordCode(currentCode, validation.errors, undefined, signal);
+                if (validation.sanitizedCode !== currentCode) {
+                    const reValidation = validateWordCode(validation.sanitizedCode);
+                    if (reValidation.isValid) {
+                        console.log("[WordAgent] Sanitization resolved runtime error (saved 1 API call)");
+                        currentCode = reValidation.sanitizedCode;
+                        continue;
+                    }
+                }
+
+                // LLM fix only as last resort — combine errors + runtime error in 1 call
+                currentCode = await fixWordCode(currentCode, validation.errors, lastError, signal);
+                const fixedValidation = validateWordCode(currentCode);
+                if (fixedValidation.isValid) {
+                    currentCode = fixedValidation.sanitizedCode;
                 }
             }
         }

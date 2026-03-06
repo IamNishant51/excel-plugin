@@ -80,9 +80,17 @@ export class SafeSheetOS implements ISafeSheetOS {
         sheet.getRange(`${index + 1}:${index + count}`).delete(Excel.DeleteShiftDirection.up);
     }
 
-    async batchUpdate(operations: any[]): Promise<void> {
+    async batchUpdate(operations: { address: string; values: any[][] }[]): Promise<void> {
+        // Write all ranges THEN sync once — O(1) sync instead of O(n)
+        const sheet = this.context.workbook.worksheets.getActiveWorksheet();
         for (const op of operations) {
-            await this.updateValues(op.address, op.values);
+            const range = sheet.getRange(op.address);
+            range.values = op.values;
+
+            if (this.onAction) {
+                this.onAction({ type: "UPDATE", address: op.address, values: op.values });
+            }
         }
+        await this.context.sync();
     }
 }

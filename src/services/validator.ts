@@ -60,7 +60,7 @@ function detectFieldType(header: string): string {
     normalized.includes("cost") ||
     normalized.includes("salary") ||
     normalized.includes("balance") ||
-    normalized.includes("account") && normalized.includes("number")
+    (normalized.includes("account") && normalized.includes("number"))
   ) {
     return "number";
   }

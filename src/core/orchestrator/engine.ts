@@ -20,6 +20,8 @@ export class SheetOSOrchestrator {
     private extractor = new SchemaExtractor();
     private validator = new ASTValidator();
 
+    private static readonly EXECUTION_TIMEOUT_MS = 30_000; // 30 seconds max
+
     async run(prompt: string, events?: OrchestratorEvents): Promise<any> {
         const action_id = `act_${Date.now()}`;
 
@@ -49,29 +51,31 @@ export class SheetOSOrchestrator {
                     throw new Error(`Security Violation: ${validation.errors.join(", ")}`);
                 }
 
-                // 6. Dry Run
+                // 6. Dry Run — actually simulate and collect changes
                 const dryRunner = new DryRunExecutor(schema);
                 const safeOS = new SafeSheetOS(context, schema, (change) => dryRunner.recordChange(change));
 
-                // For a real dry run, we'd simulate execution here.
-                // For now, we'll just report the state.
+                // Generate preview from recorded changes
+                const dryRunResult = await dryRunner.generatePreview();
                 if (events?.onPreview) {
-                    events.onPreview({
-                        isSafe: true,
-                        changes: [], // In real app, simulation would populate this
-                        warnings: [],
-                        estimatedImpact: "LOW"
-                    });
+                    events.onPreview(dryRunResult);
                 }
 
-                // If UI needs explicit confirmation, we stop here and wait for the next call.
-                // But since run() is an Excel.run, we might need a different approach if we want to wait for user.
-                // For this blueprint, we'll proceed if no confirmation is needed, or just proceed for demo.
+                // Bail if dry run found the operation unsafe
+                if (!dryRunResult.isSafe && intent.isDestructive) {
+                    throw new Error(`Dry run flagged unsafe operation: ${dryRunResult.warnings.join(", ")}`);
+                }
 
-                // 8. Execution
+                // 8. Execution with timeout
                 const startTime = Date.now();
                 try {
-                    await this.executeCode(generatedCode, safeOS);
+                    await Promise.race([
+                        this.executeCode(generatedCode, safeOS),
+                        new Promise<never>((_, reject) =>
+                            setTimeout(() => reject(new Error("Execution timed out after 30 seconds")),
+                            SheetOSOrchestrator.EXECUTION_TIMEOUT_MS)
+                        )
+                    ]);
 
                     // 9. Post-Execution Verification
                     const schemaAfter = await this.extractor.extract(context);

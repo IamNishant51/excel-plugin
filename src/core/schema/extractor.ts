@@ -41,9 +41,24 @@ export class SchemaExtractor {
 
         const columnTypes: Record<string, any> = {};
         if (values.length > 1) {
-            const sampleRow = values[1];
+            // Sample up to 5 data rows for more reliable type detection
+            const sampleCount = Math.min(values.length - 1, 5);
             headers.forEach((h, i) => {
-                columnTypes[h] = this.detectType(sampleRow[i]);
+                const typeCounts: Record<string, number> = {};
+                for (let row = 1; row <= sampleCount; row++) {
+                    const t = this.detectType(values[row][i]);
+                    typeCounts[t] = (typeCounts[t] || 0) + 1;
+                }
+                // Pick the most common non-empty type
+                let bestType = "empty";
+                let bestCount = 0;
+                for (const [type, count] of Object.entries(typeCounts)) {
+                    if (type !== "empty" && count > bestCount) {
+                        bestType = type;
+                        bestCount = count;
+                    }
+                }
+                columnTypes[h] = bestType === "empty" ? (typeCounts["empty"] ? "empty" : "string") : bestType;
             });
         }
 

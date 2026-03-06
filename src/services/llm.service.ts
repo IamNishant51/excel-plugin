@@ -2,7 +2,15 @@
  * LLM Service — Abstraction layer for AI providers.
  * Stores separate model configs per provider to avoid cross-contamination.
  * Includes auto-retry with backoff for 429 rate limits.
+ * 
+ * Rate-limit defense stack:
+ *  1. Cache check (memory + localStorage) — instant, no API call
+ *  2. In-flight dedup — identical prompts share one call
+ *  3. Token bucket — proactive throttle before 429s happen
+ *  4. Exponential backoff + jitter — graceful recovery from 429s
  */
+
+import { hashMessages, getCachedResponse, cacheResponse, deduplicateRequest } from "./cache";
 
 export interface LLMConfig {
   provider: "groq" | "local" | "gemini" | "openai" | "anthropic" | "openrouter";
@@ -123,7 +131,7 @@ function resolveModel(cfg: LLMConfig, hasImages: boolean = false): string {
 }
 
 async function callGemini(messages: ChatMessage[], model: string, apiKey: string, signal?: AbortSignal): Promise<string> {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
 
   const contents: any[] = [];
   const systemParts: any[] = [];
@@ -183,7 +191,7 @@ async function callGemini(messages: ChatMessage[], model: string, apiKey: string
 
   const response = await fetch(url, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
     body: JSON.stringify(payload),
     signal
   });
@@ -199,12 +207,92 @@ async function callGemini(messages: ChatMessage[], model: string, apiKey: string
   return text;
 }
 
+// ═══════════════════════════════════════════════════════════════
+// TOKEN BUCKET RATE LIMITER — Proactive throttle (no 429s)
+// ═══════════════════════════════════════════════════════════════
 
+class TokenBucket {
+  private tokens: number;
+  private lastRefill: number;
+  private queue: Array<() => void> = [];
+
+  constructor(
+    private maxTokens: number,
+    private refillRate: number, // tokens per second
+  ) {
+    this.tokens = maxTokens;
+    this.lastRefill = Date.now();
+  }
+
+  private refill(): void {
+    const now = Date.now();
+    const elapsed = (now - this.lastRefill) / 1000;
+    this.tokens = Math.min(this.maxTokens, this.tokens + elapsed * this.refillRate);
+    this.lastRefill = now;
+  }
+
+  async acquire(): Promise<void> {
+    this.refill();
+    if (this.tokens >= 1) {
+      this.tokens -= 1;
+      return;
+    }
+    // Wait until a token is available
+    const waitMs = ((1 - this.tokens) / this.refillRate) * 1000;
+    await new Promise<void>((resolve) => {
+      setTimeout(() => {
+        this.refill();
+        this.tokens = Math.max(0, this.tokens - 1);
+        resolve();
+      }, Math.ceil(waitMs));
+    });
+  }
+}
+
+// Per-provider rate limiters — each provider has its own token bucket
+// to respect their individual rate limits without cross-contamination
+const providerRateLimiters: Record<string, TokenBucket> = {
+  groq:       new TokenBucket(5, 0.5),  // Groq free tier: conservative
+  gemini:     new TokenBucket(10, 1),   // Gemini allows higher burst
+  openai:     new TokenBucket(8, 0.8),  // OpenAI tier-dependent
+  anthropic:  new TokenBucket(5, 0.5),  // Anthropic conservative
+  openrouter: new TokenBucket(8, 0.8),  // OpenRouter aggregated
+  local:      new TokenBucket(20, 5),   // Local Ollama — generous
+};
+
+function getRateLimiter(provider: string): TokenBucket {
+  return providerRateLimiters[provider] || providerRateLimiters.groq;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CORE LLM CALL — Cache + Dedup + Rate Limit + Retry
+// ═══════════════════════════════════════════════════════════════
 
 /**
- * Core LLM dispatcher with automatic failover and retry logic.
+ * Core LLM dispatcher with cache, dedup, rate limiting, and retry.
+ *
+ * Call chain:
+ *  1. Hash messages → check cache → return if hit
+ *  2. Dedup: if identical hash is in-flight, await that Promise
+ *  3. Token bucket: wait if bucket is empty
+ *  4. Actual API call with retry + backoff
+ *  5. Cache response on success
  */
 export async function callLLM(messages: ChatMessage[], config?: LLMConfig, signal?: AbortSignal): Promise<string> {
+  const cacheKey = hashMessages(messages);
+
+  // Layer 1: Cache hit — zero API calls
+  const cached = getCachedResponse(cacheKey);
+  if (cached) return cached;
+
+  // Layer 2: In-flight dedup — share one API call for identical prompts
+  return deduplicateRequest(cacheKey, () => _callLLMRaw(messages, config, signal, cacheKey));
+}
+
+/**
+ * Raw LLM dispatcher (called after cache miss and dedup check).
+ */
+async function _callLLMRaw(messages: ChatMessage[], config?: LLMConfig, signal?: AbortSignal, cacheKey?: string): Promise<string> {
   const primaryConfig = config || getConfig();
   let currentConfig = { ...primaryConfig };
   let failoverOccurred = false;
@@ -215,6 +303,9 @@ export async function callLLM(messages: ChatMessage[], config?: LLMConfig, signa
 
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     try {
+      // Layer 3: Token bucket — proactive throttle per provider
+      await getRateLimiter(currentConfig.provider).acquire();
+
       const model = resolveModel(currentConfig, hasImages);
       let content = "";
 
@@ -231,6 +322,13 @@ export async function callLLM(messages: ChatMessage[], config?: LLMConfig, signa
           body: JSON.stringify({ messages, model, temperature: 0, top_p: 1, max_tokens: 4096 }),
           signal
         });
+
+        if (!resp.ok) {
+          const errText = await resp.text();
+          if (resp.status === 429) throw new Error("RATE_LIMIT");
+          throw new Error(`OpenAI Error (${resp.status}): ${errText.substring(0, 100)}`);
+        }
+
         const data = await resp.json();
         content = data.choices?.[0]?.message?.content || "";
       }
@@ -343,13 +441,20 @@ export async function callLLM(messages: ChatMessage[], config?: LLMConfig, signa
       cleanContent = cleanContent.trim();
       cleanContent = cleanContent.replace(/(?:const|let|var)\s+sheet\s*=\s*.*?;/g, "// sheet redeclaration removed");
 
+      // Layer 4: Cache successful response for future hits
+      if (cacheKey) {
+        cacheResponse(cacheKey, cleanContent);
+      }
+
       return cleanContent;
 
     } catch (err: any) {
       if (err.message === "RATE_LIMIT" || err.message.includes("429")) {
         if (attempt < MAX_RETRIES) {
-          const waitMs = BASE_DELAY_MS * Math.pow(2, attempt);
-          console.warn(`Rate limit retry ${attempt + 1}/${MAX_RETRIES} in ${waitMs}ms...`);
+          // Exponential backoff with jitter to prevent thundering herd
+          const jitter = Math.random() * 1000;
+          const waitMs = BASE_DELAY_MS * Math.pow(2, attempt) + jitter;
+          console.warn(`Rate limit retry ${attempt + 1}/${MAX_RETRIES} in ${Math.round(waitMs)}ms...`);
           await sleep(waitMs);
           continue;
         }

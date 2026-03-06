@@ -13,15 +13,20 @@ import {
   readSheetContext,
   SheetContext
 } from "../services/agent-orchestrator";
-import * as pdfjsLib from 'pdfjs-dist';
 import { Icons } from "../services/icons";
 
-// Worker setup for PDF.js
-try {
-  // @ts-ignore
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
-} catch (e) {
-  console.warn("PDF Worker setup failed:", e);
+// Lazy PDF.js loader — avoids blocking init with heavy library
+let _pdfjsLib: typeof import('pdfjs-dist') | null = null;
+async function getPdfJs(): Promise<typeof import('pdfjs-dist')> {
+  if (_pdfjsLib) return _pdfjsLib;
+  const lib = await import('pdfjs-dist');
+  try {
+    lib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${lib.version}/pdf.worker.min.js`;
+  } catch (e) {
+    console.warn("PDF Worker setup failed:", e);
+  }
+  _pdfjsLib = lib;
+  return lib;
 }
 
 // ─── Types ─────────────────────────────────────────────────────
@@ -429,6 +434,9 @@ const CHAT_SUGGESTIONS = [
   { icon: "barChart", text: "Generate a monthly report with charts" },
   { icon: "search", text: "Find all duplicates and inconsistencies" },
   { icon: "sparkles", text: "What can you do? Show me your best features" },
+  { icon: "trendUp", text: "Create a pivot summary of my data" },
+  { icon: "hash", text: "Help me write a VLOOKUP or INDEX/MATCH formula" },
+  { icon: "zap", text: "Clean up my data — fix formatting and errors" },
 ];
 
 // ─── Initialization ────────────────────────────────────────────
@@ -457,79 +465,80 @@ Office.onReady((info) => {
     console.warn("Running outside Excel");
   }
 
-  // Inject Icons
+  // ── Critical UI (immediate) ──
   injectIcons();
-  injectDocIcons();
-  injectCategoryIcons();
 
-  // Wire up UI Actions
+  // Wire up primary actions
   document.getElementById("run").onclick = runAICommand;
-
-  // Settings & Docs Toggles
-  document.getElementById("settings-toggle").onclick = () => {
-    const panel = document.getElementById("settings-panel");
-    panel.style.display = panel.style.display === "none" ? "block" : "none";
-    document.getElementById("docs-panel").style.display = "none";
-  };
-  document.getElementById("docs-toggle").onclick = () => {
-    const panel = document.getElementById("docs-panel");
-    panel.style.display = panel.style.display === "none" ? "block" : "none";
-    document.getElementById("settings-panel").style.display = "none";
-  };
-
-  document.getElementById("save-settings").onclick = handleSaveSettings;
-  document.getElementById("refresh-models").onclick = loadOllamaModels;
-
-  // Mode Toggles
   document.getElementById("mode-planning").onclick = () => switchMode("planning");
   document.getElementById("mode-agent").onclick = () => switchMode("agent");
-
-  // Chat Actions
   document.getElementById("chat-send").onclick = sendChatMessage;
   const clearBtn = document.getElementById("chat-clear");
   if (clearBtn) clearBtn.onclick = clearChat;
 
   setupChatInput();
-  setupScrollToBottom();
   setupAgentKeyboardShortcut();
-  setupCharCount();
 
-  // File Upload Handlers
-  const bindClick = (id: string, handler: () => void) => {
-    const el = document.getElementById(id);
-    if (el) el.onclick = handler;
-  };
-  const bindChange = (id: string, handler: (e: Event) => void) => {
-    const el = document.getElementById(id);
-    if (el) el.onchange = handler;
-  };
+  // ── Deferred UI (non-critical, after first paint) ──
+  requestAnimationFrame(() => {
+    injectDocIcons();
+    injectCategoryIcons();
 
-  bindClick("file-upload-btn", () => document.getElementById("file-input").click());
-  bindChange("file-input", (e) => handleFileSelect(e, false));
-  bindClick("file-remove", () => clearFile(false));
-
-  bindClick("agent-file-btn", () => document.getElementById("agent-file-input").click());
-  bindChange("agent-file-input", (e) => handleFileSelect(e, true));
-  bindClick("agent-file-remove", () => clearFile(true));
-
-  // Batch PDF Extraction
-  bindClick("batch-extract-btn", runBatchPDFExtraction);
-
-  // Category Tabs
-  document.querySelectorAll(".category-tab").forEach((tab) => {
-    (tab as HTMLElement).onclick = () => {
-      const cat = (tab as HTMLElement).dataset.category as ActionCategory;
-      switchCategory(cat);
+    // Settings & Docs Toggles
+    document.getElementById("settings-toggle").onclick = () => {
+      const panel = document.getElementById("settings-panel");
+      panel.style.display = panel.style.display === "none" ? "block" : "none";
+      document.getElementById("docs-panel").style.display = "none";
     };
+    document.getElementById("docs-toggle").onclick = () => {
+      const panel = document.getElementById("docs-panel");
+      panel.style.display = panel.style.display === "none" ? "block" : "none";
+      document.getElementById("settings-panel").style.display = "none";
+    };
+
+    document.getElementById("save-settings").onclick = handleSaveSettings;
+    document.getElementById("refresh-models").onclick = loadOllamaModels;
+
+    setupScrollToBottom();
+    setupCharCount();
+
+    // File Upload Handlers
+    const bindClick = (id: string, handler: () => void) => {
+      const el = document.getElementById(id);
+      if (el) el.onclick = handler;
+    };
+    const bindChange = (id: string, handler: (e: Event) => void) => {
+      const el = document.getElementById(id);
+      if (el) el.onchange = handler;
+    };
+
+    bindClick("file-upload-btn", () => document.getElementById("file-input").click());
+    bindChange("file-input", (e) => handleFileSelect(e, false));
+    bindClick("file-remove", () => clearFile(false));
+
+    bindClick("agent-file-btn", () => document.getElementById("agent-file-input").click());
+    bindChange("agent-file-input", (e) => handleFileSelect(e, true));
+    bindClick("agent-file-remove", () => clearFile(true));
+
+    // Batch PDF Extraction
+    bindClick("batch-extract-btn", runBatchPDFExtraction);
+
+    // Category Tabs
+    document.querySelectorAll(".category-tab").forEach((tab) => {
+      (tab as HTMLElement).onclick = () => {
+        const cat = (tab as HTMLElement).dataset.category as ActionCategory;
+        switchCategory(cat);
+      };
+    });
+
+    // Detect Columns Button (Extract Mode)
+    bindClick("detect-columns-btn", detectAndShowColumns);
+
+    // Initial UI Build
+    buildQuickActions();
+    buildChatSuggestions();
+    loadSettingsUI();
   });
-
-  // Detect Columns Button (Extract Mode)
-  bindClick("detect-columns-btn", detectAndShowColumns);
-
-  // Initial UI Build
-  buildQuickActions();
-  buildChatSuggestions();
-  loadSettingsUI();
 });
 
 // ─── Icon Injection ────────────────────────────────────────────
@@ -887,6 +896,45 @@ async function sendChatMessage(): Promise<void> {
   addChatBubble("user", message);
   chatHistory.push({ role: "user", content: message, timestamp: Date.now() });
 
+  // Include attached file content in chat context
+  if (attachedFiles.length > 0) {
+    try {
+      let fileContent = "[UPLOADED FILE CONTENT]\n";
+      for (const file of attachedFiles) {
+        if (file.type === "pdf" && rawPDFFiles.length > 0) {
+          // Extract text from raw PDF for chat
+          for (const rawFile of rawPDFFiles) {
+            if (rawFile.name === file.name) {
+              const text = await extractTextFromPDFFile(rawFile);
+              fileContent += `File: ${file.name}\n${text}\n\n`;
+            }
+          }
+        } else {
+          fileContent += `File: ${file.name} (${file.type})\n`;
+        }
+      }
+
+      // Show file badge on the user bubble
+      const lastBubble = document.querySelector('.chat-msg.user:last-child .chat-bubble');
+      if (lastBubble) {
+        const badge = document.createElement('span');
+        badge.className = 'context-badge';
+        badge.innerHTML = `${Icons.fileText} ${attachedFiles.length} file${attachedFiles.length > 1 ? "s" : ""} attached`;
+        lastBubble.appendChild(badge);
+      }
+
+      // Add file content to conversation
+      chatConversation.push({ role: "system", content: fileContent });
+
+      // Clear attached files after including in chat
+      attachedFiles = [];
+      rawPDFFiles = [];
+      updateFilePreview(false, false);
+    } catch (e) {
+      console.warn("Could not extract file text for chat:", e);
+    }
+  }
+
   // Build conversation context with initial sheet overview
   if (chatConversation.length === 0) {
     let initialPrompt = CHAT_PROMPT;
@@ -1025,7 +1073,7 @@ async function typewriterEffect(element: HTMLElement, html: string): Promise<voi
         const container = document.getElementById("chat-messages");
         if (container) container.scrollTop = container.scrollHeight;
         // Variable delay for realism
-        await new Promise(r => setTimeout(r, Math.random() * 10 + 5));
+        await new Promise(r => setTimeout(r, Math.random() * 30 + 20));
       }
     }
   }
@@ -1650,6 +1698,154 @@ The code should use the writeData helper function and format the data profession
 
 
 // ═══════════════════════════════════════════════════════════════
+// HARDCODED ACTIONS — Deterministic Excel operations (bypasses LLM)
+// ═══════════════════════════════════════════════════════════════
+
+async function tryHardcodedAction(userPrompt: string): Promise<{ handled: boolean; message?: string }> {
+  const lower = userPrompt.toLowerCase();
+
+  // Skip hardcoded actions when files are attached — user wants extraction, not formatting
+  if (attachedFiles.length > 0) return { handled: false };
+
+  // ── Remove Duplicates ──
+  if (lower.includes("remove duplicate") || lower.includes("delete duplicate") || (lower.includes("duplicate") && lower.includes("remove"))) {
+    let removed = 0;
+    await Excel.run(async (context) => {
+      const sheet = context.workbook.worksheets.getActiveWorksheet();
+      const usedRange = sheet.getUsedRange();
+      usedRange.load("values,rowCount,columnCount");
+      await context.sync();
+
+      if (usedRange.rowCount < 2) return;
+
+      const vals = usedRange.values;
+      const seen = new Set<string>();
+      const keepRows: any[][] = [vals[0]]; // Keep header
+      seen.add(JSON.stringify(vals[0]));
+
+      for (let i = 1; i < vals.length; i++) {
+        const key = JSON.stringify(vals[i]);
+        if (!seen.has(key)) {
+          seen.add(key);
+          keepRows.push(vals[i]);
+        } else {
+          removed++;
+        }
+      }
+
+      if (removed > 0) {
+        // Clear old data and write deduplicated
+        usedRange.clear();
+        await context.sync();
+        const newRange = sheet.getRangeByIndexes(0, 0, keepRows.length, keepRows[0].length);
+        newRange.values = keepRows;
+        // Format header
+        const headerRow = newRange.getRow(0);
+        headerRow.format.font.bold = true;
+        headerRow.format.fill.color = "#1B2A4A";
+        headerRow.format.font.color = "#FFFFFF";
+        newRange.format.autofitColumns();
+        await context.sync();
+      }
+    });
+    if (removed === 0) return { handled: true, message: `${Icons.checkCircle} No duplicates found.` };
+    return { handled: true, message: `${Icons.checkCircle} Removed ${removed} duplicate row${removed !== 1 ? "s" : ""}!` };
+  }
+
+  // ── Trim Spaces ──
+  if ((lower.includes("trim") && lower.includes("space")) || lower.includes("trim whitespace") || lower.includes("trim all")) {
+    let trimmed = 0;
+    await Excel.run(async (context) => {
+      const sheet = context.workbook.worksheets.getActiveWorksheet();
+      const usedRange = sheet.getUsedRange();
+      usedRange.load("values,rowCount,columnCount");
+      await context.sync();
+
+      const vals = usedRange.values;
+      const newVals = vals.map(row => row.map(cell => {
+        if (typeof cell === "string" && cell !== cell.trim()) {
+          trimmed++;
+          return cell.trim();
+        }
+        return cell;
+      }));
+
+      if (trimmed > 0) {
+        usedRange.values = newVals;
+        await context.sync();
+      }
+    });
+    if (trimmed === 0) return { handled: true, message: `${Icons.checkCircle} No extra spaces found.` };
+    return { handled: true, message: `${Icons.checkCircle} Trimmed spaces in ${trimmed} cell${trimmed !== 1 ? "s" : ""}!` };
+  }
+
+  // ── Freeze Header Row ──
+  if ((lower.includes("freeze") && (lower.includes("header") || lower.includes("row") || lower.includes("first") || lower.includes("top"))) || lower.includes("freeze pane")) {
+    await Excel.run(async (context) => {
+      const sheet = context.workbook.worksheets.getActiveWorksheet();
+      sheet.freezePanes.freezeRows(1);
+      await context.sync();
+    });
+    return { handled: true, message: `${Icons.checkCircle} Header row frozen!` };
+  }
+
+  // ── Clear Formatting ──
+  if ((lower.includes("clear") && lower.includes("format")) || lower.includes("remove format") || lower.includes("strip format")) {
+    await Excel.run(async (context) => {
+      const sheet = context.workbook.worksheets.getActiveWorksheet();
+      const usedRange = sheet.getUsedRange();
+      usedRange.clear(Excel.ClearApplyTo.formats);
+      usedRange.format.autofitColumns();
+      await context.sync();
+    });
+    return { handled: true, message: `${Icons.checkCircle} All formatting cleared!` };
+  }
+
+  // ── Auto-fit Columns ──
+  if ((lower.includes("auto") && lower.includes("fit")) || lower.includes("autofit") || lower.includes("resize column")) {
+    await Excel.run(async (context) => {
+      const sheet = context.workbook.worksheets.getActiveWorksheet();
+      const usedRange = sheet.getUsedRange();
+      usedRange.format.autofitColumns();
+      usedRange.format.autofitRows();
+      await context.sync();
+    });
+    return { handled: true, message: `${Icons.checkCircle} Columns and rows auto-fitted!` };
+  }
+
+  // ── Sort A-Z / Z-A ──
+  if ((lower.includes("sort") && (lower.includes("a-z") || lower.includes("a to z") || lower.includes("ascending"))) && !lower.includes("chart") && !lower.includes("formula")) {
+    await Excel.run(async (context) => {
+      const sheet = context.workbook.worksheets.getActiveWorksheet();
+      const usedRange = sheet.getUsedRange();
+      usedRange.load("columnCount");
+      await context.sync();
+      const sortRange = usedRange.sort;
+      sortRange.apply([{ key: 0, ascending: true }], true);
+      await context.sync();
+    });
+    return { handled: true, message: `${Icons.checkCircle} Data sorted A to Z!` };
+  }
+
+  if ((lower.includes("sort") && (lower.includes("z-a") || lower.includes("z to a") || lower.includes("descending"))) && !lower.includes("chart") && !lower.includes("formula")) {
+    await Excel.run(async (context) => {
+      const sheet = context.workbook.worksheets.getActiveWorksheet();
+      const usedRange = sheet.getUsedRange();
+      usedRange.load("columnCount");
+      await context.sync();
+      const sortRange = usedRange.sort;
+      sortRange.apply([{ key: 0, ascending: false }], true);
+      await context.sync();
+    });
+    return { handled: true, message: `${Icons.checkCircle} Data sorted Z to A!` };
+  }
+
+  // Not a hardcoded action — fall through to LLM
+  return { handled: false };
+}
+
+
+// ═══════════════════════════════════════════════════════════════
 // AGENT MODE — Execute Functions (Enhanced with Orchestrator)
 // ═══════════════════════════════════════════════════════════════
 
@@ -1681,6 +1877,22 @@ export async function runAICommand(): Promise<void> {
     userPrompt = attachedFiles.length > 1
       ? `Analyze the ${attachedFiles.length} attached files. Extract and merge all tabular data into a single master table. Standardize headers and columns.`
       : `Analyze the attached ${attachedFiles[0].type}. Extract all tabular data and write valid Excel JS code to populate the active sheet. Format headers and auto-fit columns.`;
+  }
+
+  // ═══ HARDCODED ACTIONS — bypass LLM for deterministic operations ═══
+  try {
+    const hardcoded = await tryHardcodedAction(userPrompt);
+    if (hardcoded.handled) {
+      skeletonEl.style.display = "none";
+      debugEl.innerText = "// Executed via hardcoded action (no LLM needed)";
+      const isError = hardcoded.message?.includes('alertTriangle');
+      showStatus(statusEl, isError ? "error" : "success", hardcoded.message || "Done");
+      if (!isError) showToast("success", "Done ✓ (Press Ctrl+Z to undo)");
+      return;
+    }
+  } catch (e: any) {
+    console.warn("[Hardcoded] Error:", e);
+    // Fall through to LLM
   }
 
   // Detect Schema Extraction Mode
@@ -2148,6 +2360,7 @@ function fileToBase64(file: File): Promise<string> {
 }
 
 async function renderPdfToImages(buffer: ArrayBuffer): Promise<string[]> {
+  const pdfjsLib = await getPdfJs();
   // @ts-ignore
   const pdf = await pdfjsLib.getDocument(buffer).promise;
   const images: string[] = [];
@@ -2446,6 +2659,11 @@ async function runBatchPDFExtraction(): Promise<void> {
     batchAbortController = null;
     if (btn) btn.disabled = false;
     if (btnText) btnText.textContent = "Extract All PDFs";
+
+    // Clear processed files to free memory
+    rawPDFFiles = [];
+    attachedFiles = [];
+    updateFilePreview(false, true);
+    showBatchPanel(false);
   }
 }
-

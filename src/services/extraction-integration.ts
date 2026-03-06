@@ -23,7 +23,7 @@ import { getConfig, LLMConfig } from "./llm.service";
  * Default pipeline configuration for production use
  */
 const PRODUCTION_CONFIG: Partial<PipelineConfig> = {
-  maxConcurrency: 5,        // Max 5 documents at a time
+  maxConcurrency: 3,        // Max 3 documents at a time (reduced to prevent rate limits)
   confidenceThreshold: 0.8, // Mark for review if confidence < 0.8
   retryCount: 1,            // One retry on failure
   llmTemperature: 0,        // MUST be 0 for deterministic output

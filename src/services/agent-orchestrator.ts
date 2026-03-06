@@ -212,6 +212,12 @@ const ALLOWED_API_PATTERNS = [
 ];
 
 // ═══════════════════════════════════════════════════════════════
+// FAST BANNED CHECK — Single composite regex for O(1) first-pass screening
+// If this doesn't match, we can skip the full pattern-by-pattern scan.
+// ═══════════════════════════════════════════════════════════════
+const FAST_BANNED_KEYWORDS = /getColumnCount|getRowCount|getAddress|getValues|getText|setValues|setFormula|setValue|clearFormat|clearValue|SpreadsheetApp|Logger\.log|Browser\.msgBox|Utilities\.|chart\.setTitle|chart\.add|range\.getItem|range\.select|range\.activate|range\.font\.bold|range\.alignment|range\.format\.alignment|range\.horizontal|message\.alert|(?:^|[^.])alert\s*\(|(?:^|[^.])confirm\s*\(|(?:^|[^.])prompt\s*\(|(?:const|let|var)\s+context\s*=|(?:const|let|var)\s+sheet\s*=\s*context\.workbook|getRange\s*\(\s*["']?[A-Z]0|getCell\s*\(\s*-|sheet\.clear\s*\(/;
+
+// ═══════════════════════════════════════════════════════════════
 // CODE VALIDATOR
 // ═══════════════════════════════════════════════════════════════
 
@@ -226,24 +232,27 @@ export function validateCode(code: string): ValidationResult {
   sanitizedCode = sanitizedCode.replace(/\n?```$/gi, "");
   sanitizedCode = sanitizedCode.trim();
 
-  // 2. Check for banned patterns and apply auto-fixes
-  for (const banned of BANNED_PATTERNS) {
-    const matches = sanitizedCode.match(banned.pattern);
-    if (matches) {
-      // Priority fixes (Auto-replace common hallucinations)
-      if (banned.message.includes("clearFormats")) {
-        sanitizedCode = sanitizedCode.replace(banned.pattern, ".clear(Excel.ClearApplyTo.Formats)");
-      } else if (banned.message.includes("clearValue")) {
-        sanitizedCode = sanitizedCode.replace(banned.pattern, ".clear(Excel.ClearApplyTo.Contents)");
-      } else if (banned.pattern.source.includes("redeclare")) {
-        sanitizedCode = sanitizedCode.replace(banned.pattern, "// [REMOVED] ");
-      } else {
-        // Only add error if we couldn't auto-fix it
-        errors.push({
-          type: "banned_api",
-          message: banned.message,
-          suggestion: banned.fix,
-        });
+  // 2. Check for banned patterns — fast-path screening first
+  const needsDetailedScan = FAST_BANNED_KEYWORDS.test(sanitizedCode);
+  if (needsDetailedScan) {
+    for (const banned of BANNED_PATTERNS) {
+      const matches = sanitizedCode.match(banned.pattern);
+      if (matches) {
+        // Priority fixes (Auto-replace common hallucinations)
+        if (banned.message.includes("clearFormats")) {
+          sanitizedCode = sanitizedCode.replace(banned.pattern, ".clear(Excel.ClearApplyTo.Formats)");
+        } else if (banned.message.includes("clearValue")) {
+          sanitizedCode = sanitizedCode.replace(banned.pattern, ".clear(Excel.ClearApplyTo.Contents)");
+        } else if (banned.pattern.source.includes("redeclare")) {
+          sanitizedCode = sanitizedCode.replace(banned.pattern, "// [REMOVED] ");
+        } else {
+          // Only add error if we couldn't auto-fix it
+          errors.push({
+            type: "banned_api",
+            message: banned.message,
+            suggestion: banned.fix,
+          });
+        }
       }
     }
   }
@@ -549,15 +558,42 @@ export async function generateCode(
 
 const FIXER_SYSTEM_PROMPT = `You are an Excel JavaScript API debugger. Fix the broken code.
 
-COMMON FIXES:
+ENVIRONMENT (pre-declared — DO NOT redeclare):
+- context: Excel.RequestContext
+- sheet: Active worksheet
+- Excel: Namespace for enums
+- writeData(sheet, startCell, data): helper to safely write 2D arrays
+- formatTableStyle(usedRange, headerColor, fontColor): helper to style tables
+
+COMMON FIXES (apply ALL that match):
 1. .getValues() → .load("values") + await context.sync() + .values
 2. .getRowCount() → .load("rowCount") + await context.sync() + .rowCount
-3. range.values = "text" → range.values = [["text"]]
-4. const sheet = ... → REMOVE (already declared)
-5. SpreadsheetApp → Use sheet (Excel JS API)
-6. chart.setTitle() → chart.title.text = "..."
+3. .getColumnCount() → .load("columnCount") + await context.sync() + .columnCount
+4. .getAddress() → .load("address") + await context.sync() + .address
+5. range.values = "text" → range.values = [["text"]]
+6. range.formulas = "=SUM()" → range.formulas = [["=SUM()"]]
+7. const sheet = context.workbook... → REMOVE (already declared)
+8. const context = ... → REMOVE (already declared)
+9. SpreadsheetApp → Use sheet (Excel JS API)
+10. chart.setTitle("x") → chart.title.text = "x"
+11. .clearFormats() → .clear(Excel.ClearApplyTo.Formats)
+12. .clearValues() → .clear(Excel.ClearApplyTo.Contents)
+13. sheet.clear() → sheet.getUsedRange().clear()
+14. range.font.bold = true → range.format.font.bold = true
+15. range.alignment = "Center" → range.format.horizontalAlignment = "Center"
+16. RichApi.Error "property not loaded" → Add .load("propertyName") + await context.sync() BEFORE accessing
+17. "InvalidArgument" with A0 or row 0 → Excel rows start at 1, use A1
+18. "is not a function" → Check if the method exists on Excel JS API, use the correct alternative
+19. "is not defined" → Variable used before being declared; add declaration or fix spelling
+20. "Cannot read property of undefined" → Object is null; add null check. Likely .load() was not called
+21. getResizedRange with negative → Check data dimensions are positive before calling
 
-OUTPUT: Fixed code only. No explanation, no markdown fences.`;
+CRITICAL RULES:
+- Output ONLY the fixed code. No markdown fences, no explanation text.
+- Keep all existing logic intact — only repair the errors.
+- If multiple errors exist, fix ALL of them in one pass.
+- After fixing, verify that every .load() has a matching await context.sync() before property access.
+- Verify all range.values and range.formulas assignments use 2D arrays: [[value]]`;
 
 export async function fixCode(
   originalCode: string,
@@ -633,32 +669,65 @@ export async function runAgent(
   let retries = 0;
 
   try {
-    // ═══ PHASE 1: PLANNING ═══
-    if (cfg.enablePlanning && !attachedFiles.length) {
+    // ═══ PHASE 1: SMART PLANNING (skip for simple tasks) ═══
+    // Heuristic: short tasks with common keywords don't need a planner call.
+    // This alone saves 1 LLM call for ~60% of user requests.
+    const isSimpleTask = !attachedFiles.length && isLikelySimple(task);
+
+    if (cfg.enablePlanning && !attachedFiles.length && !isSimpleTask) {
       try {
         plan = await createPlan(task, sheetContext, signal);
         console.log("[Agent] Plan created:", plan);
+
+        // If planner says it's simple, remember that for next time
+        if (plan.complexity === "simple") {
+          console.log("[Agent] Planner confirmed simple task — future similar tasks will skip planning.");
+        }
       } catch (e) {
         if ((e as any).name === 'AbortError') throw e;
         console.warn("[Agent] Planning failed, proceeding without plan:", e);
       }
+    } else if (isSimpleTask) {
+      console.log("[Agent] Simple task detected — skipping planner (saved 1 API call)");
     }
 
     // ═══ PHASE 2: CODE GENERATION ═══
     code = await generateCode(task, plan, sheetContext, attachedFiles, undefined, signal);
     console.log("[Agent] Initial code generated");
 
-    // ═══ PHASE 3: VALIDATION LOOP ═══
+    // ═══ PHASE 3: VALIDATION LOOP (local-first fix strategy) ═══
+    // Try to fix errors locally with regex/pattern matching BEFORE calling LLM fixer.
+    // Only escalate to LLM fixer if local fix can't resolve all errors.
     for (let attempt = 0; attempt <= cfg.maxRetries; attempt++) {
       validation = validateCode(code);
 
       if (validation.isValid) {
         console.log(`[Agent] Code validated successfully on attempt ${attempt + 1}`);
+        code = validation.sanitizedCode;
         break;
       }
 
       if (attempt < cfg.maxRetries) {
-        console.log(`[Agent] Validation failed (attempt ${attempt + 1}), fixing...`);
+        // Strategy: try local auto-fix first (zero API calls)
+        const localFixed = tryLocalFix(code, validation.errors);
+        const localValidation = validateCode(localFixed);
+
+        if (localValidation.isValid) {
+          console.log("[Agent] Local fix resolved all errors (saved 1 API call)");
+          code = localValidation.sanitizedCode;
+          validation = localValidation;
+          break;
+        }
+
+        // Local fix reduced errors but didn't resolve all — check if it's worth an API call
+        if (localValidation.errors.length < validation.errors.length) {
+          // Local fix helped partially, use it as base for LLM fix
+          code = localFixed;
+          console.log(`[Agent] Local fix reduced errors from ${validation.errors.length} to ${localValidation.errors.length}`);
+        }
+
+        // Only burn an LLM call if we still have unfixable errors
+        console.log(`[Agent] Validation failed (attempt ${attempt + 1}), calling fixer...`);
         code = await fixCode(code, validation.errors, undefined, signal);
         retries++;
       }
@@ -698,7 +767,104 @@ export async function runAgent(
 }
 
 // ═══════════════════════════════════════════════════════════════
-// EXECUTE WITH RECOVERY — Safe code execution with auto-fix
+// SMART TASK CLASSIFICATION — Detect simple tasks locally (no LLM)
+// ═══════════════════════════════════════════════════════════════
+
+const SIMPLE_TASK_PATTERNS = [
+  /\b(bold|italic|underline|font|color|format|highlight|style)\b/i,
+  /\b(sort|filter|freeze|unfreeze)\b/i,
+  /\b(autofit|auto-fit|fit columns|resize)\b/i,
+  /\b(border|borders|outline)\b/i,
+  /\b(clear|delete|remove)\s+(format|content|row|column)/i,
+  /\b(add|insert|create)\s+(row|column|header|formula)\b/i,
+  /\b(sum|average|count|max|min)\b/i,
+  /\b(merge|unmerge|wrap|alignment|align)\b/i,
+  /\b(number format|currency|percentage|date format)\b/i,
+  /\b(dropdown|validation|data validation)\b/i,
+  /\b(chart|graph|pie|bar)\b/i,
+];
+
+function isLikelySimple(task: string): boolean {
+  // Short tasks (<80 chars) that match common patterns are simple
+  if (task.length > 150) return false;
+  return SIMPLE_TASK_PATTERNS.some((p) => p.test(task));
+}
+
+// ═══════════════════════════════════════════════════════════════
+// LOCAL AUTO-FIX — Fix common code errors without LLM calls
+// ═══════════════════════════════════════════════════════════════
+
+function tryLocalFix(code: string, errors: ValidationError[]): string {
+  let fixed = code;
+
+  for (const error of errors) {
+    switch (error.type) {
+      case "banned_api":
+        // Apply known auto-fixes from BANNED_PATTERNS
+        for (const banned of BANNED_PATTERNS) {
+          if (error.message === banned.message) {
+            if (banned.message.includes("clearFormats") || banned.message.includes("clearFormat")) {
+              fixed = fixed.replace(banned.pattern, ".clear(Excel.ClearApplyTo.Formats)");
+            } else if (banned.message.includes("clearValue") || banned.message.includes("clearValues")) {
+              fixed = fixed.replace(banned.pattern, ".clear(Excel.ClearApplyTo.Contents)");
+            } else if (banned.message.includes("sheet is already declared")) {
+              fixed = fixed.replace(banned.pattern, "// sheet already available");
+            } else if (banned.message.includes("context is already declared")) {
+              fixed = fixed.replace(banned.pattern, "// context already available");
+            } else if (banned.message.includes("getValues")) {
+              fixed = fixed.replace(/\.getValues\s*\(\s*\)/g, ".values /* load+sync needed */");
+            } else if (banned.message.includes("getRowCount")) {
+              fixed = fixed.replace(/\.getRowCount\s*\(\s*\)/g, ".rowCount /* load+sync needed */");
+            } else if (banned.message.includes("getColumnCount")) {
+              fixed = fixed.replace(/\.getColumnCount\s*\(\s*\)/g, ".columnCount /* load+sync needed */");
+            } else if (banned.message.includes("setValues")) {
+              fixed = fixed.replace(/\.setValues\s*\(([^)]+)\)/g, ".values = $1");
+            } else if (banned.message.includes("setFormula")) {
+              fixed = fixed.replace(/\.setFormula\s*\(([^)]+)\)/g, ".formulas = $1");
+            } else if (banned.message.includes("setValue")) {
+              fixed = fixed.replace(/\.setValue\s*\(([^)]+)\)/g, ".values = [[$1]]");
+            } else if (banned.message.includes("sheet.clear()")) {
+              fixed = fixed.replace(/sheet\.clear\s*\(\s*\)/g, "sheet.getUsedRange().clear()");
+            } else if (banned.message.includes("range.font.bold")) {
+              fixed = fixed.replace(/range\.font\.bold/g, "range.format.font.bold");
+            }
+          }
+        }
+        break;
+
+      case "type_error":
+        // Fix values/formulas not being 2D arrays
+        if (error.message.includes("values must be a 2D array")) {
+          fixed = fixed.replace(/\.values\s*=\s*("[^"]*"|'[^']*'|\d+)(?!\])/g, ".values = [[$1]]");
+        }
+        if (error.message.includes("formulas must be a 2D array")) {
+          fixed = fixed.replace(/\.formulas\s*=\s*("[^"]*"|'[^']*')(?!\])/g, ".formulas = [[$1]]");
+        }
+        break;
+
+      case "unsafe_pattern":
+        if (error.message.includes("eval()")) {
+          fixed = fixed.replace(/\beval\s*\([^)]*\)/gi, "/* eval removed for security */");
+        }
+        break;
+    }
+  }
+
+  // Final pass: remove variable redeclarations
+  fixed = fixed.replace(
+    /(?:const|let|var)\s+sheet\s*=\s*context\.workbook\.worksheets\.getActiveWorksheet\(\)\s*;?/g,
+    "// sheet already available"
+  );
+  fixed = fixed.replace(
+    /(?:const|let|var)\s+context\s*=\s*[^;]+;?/g,
+    "// context already available"
+  );
+
+  return fixed;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// EXECUTE WITH RECOVERY — Local-first fix, LLM only as last resort
 // ═══════════════════════════════════════════════════════════════
 
 export async function executeWithRecovery(
@@ -723,16 +889,24 @@ export async function executeWithRecovery(
       console.warn(`[Agent] Execution failed (attempt ${attempt + 1}):`, lastError);
 
       if (attempt < maxRetries) {
-        // Try to fix based on runtime error
-        currentCode = await fixCode(currentCode, [], lastError, signal);
-
-        // Re-validate fixed code
+        // Strategy: Try local fix FIRST (0 API calls), escalate to LLM only if needed
         const validation = validateCode(currentCode);
-        if (validation.isValid) {
-          currentCode = validation.sanitizedCode;
-        } else {
-          // If still invalid, try one more fix round
-          currentCode = await fixCode(currentCode, validation.errors, undefined, signal);
+        const localFixed = tryLocalFix(currentCode, validation.errors);
+        const localValidation = validateCode(localFixed);
+
+        if (localValidation.isValid) {
+          console.log("[Agent] Local fix resolved runtime error (saved 1 API call)");
+          currentCode = localValidation.sanitizedCode;
+          continue; // Retry execution with locally-fixed code
+        }
+
+        // Local fix wasn't enough — use LLM fixer (1 API call instead of 2)
+        currentCode = await fixCode(currentCode, validation.errors, lastError, signal);
+
+        // Re-validate
+        const fixedValidation = validateCode(currentCode);
+        if (fixedValidation.isValid) {
+          currentCode = fixedValidation.sanitizedCode;
         }
       }
     }

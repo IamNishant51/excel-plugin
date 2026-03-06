@@ -11,7 +11,7 @@
  * 5. Excel writing → with status column and highlighting
  * 
  * CRITICAL CONFIGURATIONS:
- * - Max concurrency: 5 documents at a time
+ * - Max concurrency: 3 documents at a time
  * - LLM temperature: 0 (deterministic)
  * - LLM top_p: 1 (deterministic)
  * - Confidence threshold: 0.8 (mark for review if below)
@@ -37,7 +37,7 @@ import { LLMConfig } from "./llm.service";
  * Default pipeline configuration - STRICT DETERMINISTIC SETTINGS
  */
 const DEFAULT_CONFIG: PipelineConfig = {
-  maxConcurrency: 5,      // Max 5 documents at a time
+  maxConcurrency: 3,      // Max 3 documents at a time (reduced from 5 to prevent rate limits)
   retryCount: 1,          // One retry on failure
   llmTemperature: 0,      // MUST be 0 for determinism
   topP: 1,                // MUST be 1 for determinism
@@ -140,7 +140,9 @@ export async function processDocuments(
     // Step 3: Extract text from all PDFs with controlled concurrency
     const pdfExtractions = await extractTextFromMultiplePDFs(files, fullConfig.maxConcurrency);
     
-    // Step 4: Process each document INDIVIDUALLY (never batch LLM calls)
+    // Step 4: Process documents with BATCHED LLM extraction
+    // The llmExtractor now batches multiple docs into single LLM calls,
+    // so we process in larger groups but with smarter API usage.
     const extractionResults: Array<{
       documentId: string;
       data: ExtractedData;
@@ -334,9 +336,9 @@ export async function processDocuments(
       // Wait for batch to complete
       await Promise.allSettled(batchPromises);
       
-      // Brief pause between batches to avoid rate limiting
+      // Longer pause between batches — gives token bucket time to refill
       if (batchEnd < pdfExtractions.length) {
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise(resolve => setTimeout(resolve, 2000));
       }
     }
     

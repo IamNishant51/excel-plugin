@@ -230,10 +230,21 @@ export async function extractWithRetry(
 }
 
 /**
- * Extract data from multiple documents with controlled concurrency
+ * Extract data from multiple documents with BATCHED LLM calls.
+ * 
+ * KEY OPTIMIZATION: Instead of 1 LLM call per document, we pack multiple
+ * documents into a single prompt (up to the token budget).
+ * 
+ * For 10 documents: Old = 10 API calls. New = 2-3 API calls.
+ * 
+ * Strategy:
+ *  - Each document gets ~3000 chars in the prompt (12K / 4 docs per batch)
+ *  - Documents are batched by estimated prompt size
+ *  - Failed individual docs in a batch fall back to single extraction
+ * 
  * @param texts - Array of document texts
  * @param schema - Field names to extract
- * @param maxConcurrency - Maximum parallel extractions
+ * @param maxConcurrency - Maximum parallel batches (not individual docs)
  * @param config - Optional LLM configuration
  * @returns Array of extraction results
  */
@@ -244,46 +255,155 @@ export async function extractFromMultipleDocuments(
   config?: LLMConfig
 ): Promise<Array<{ id: string; result?: LLMExtractionResponse; error?: string }>> {
   const results: Array<{ id: string; result?: LLMExtractionResponse; error?: string }> = [];
-  
-  for (let i = 0; i < texts.length; i += maxConcurrency) {
-    const batch = texts.slice(i, i + maxConcurrency);
-    
-    const batchResults = await Promise.allSettled(
-      batch.map(async (doc) => {
-        try {
-          const result = await extractWithRetry(
-            { schema, text: doc.text, temperature: 0 },
-            1,
-            config
-          );
-          return { id: doc.id, result };
-        } catch (error) {
-          return {
-            id: doc.id,
-            error: error instanceof Error ? error.message : String(error),
-          };
-        }
-      })
-    );
-    
-    batchResults.forEach((settled) => {
-      if (settled.status === "fulfilled") {
-        results.push(settled.value);
-      } else {
-        results.push({
-          id: batch[results.length % maxConcurrency]?.id || "unknown",
-          error: settled.reason,
-        });
+
+  // If only 1 document, no batching needed
+  if (texts.length <= 1) {
+    for (const doc of texts) {
+      try {
+        const result = await extractWithRetry({ schema, text: doc.text, temperature: 0 }, 1, config);
+        results.push({ id: doc.id, result });
+      } catch (error) {
+        results.push({ id: doc.id, error: error instanceof Error ? error.message : String(error) });
       }
-    });
-    
-    // Brief pause between batches to avoid rate limiting
-    if (i + maxConcurrency < texts.length) {
-      await new Promise(resolve => setTimeout(resolve, 500));
+    }
+    return results;
+  }
+
+  // Group documents into batches of ~4 (balances token budget vs API calls)
+  const DOCS_PER_BATCH = 4;
+  const batches: Array<Array<{ id: string; text: string }>> = [];
+  for (let i = 0; i < texts.length; i += DOCS_PER_BATCH) {
+    batches.push(texts.slice(i, i + DOCS_PER_BATCH));
+  }
+
+  // Process batches sequentially (each batch = 1 LLM call)
+  for (let batchIdx = 0; batchIdx < batches.length; batchIdx++) {
+    const batch = batches[batchIdx];
+
+    try {
+      const batchResults = await extractBatchedDocuments(batch, schema, config);
+      results.push(...batchResults);
+    } catch (batchError) {
+      console.warn(`[Extractor] Batch ${batchIdx + 1} failed, falling back to individual extraction`);
+      // Fallback: extract individually for this batch
+      for (const doc of batch) {
+        try {
+          const result = await extractWithRetry({ schema, text: doc.text, temperature: 0 }, 1, config);
+          results.push({ id: doc.id, result });
+        } catch (error) {
+          results.push({ id: doc.id, error: error instanceof Error ? error.message : String(error) });
+        }
+      }
+    }
+
+    // Pause between batches to respect rate limits
+    if (batchIdx < batches.length - 1) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
     }
   }
-  
+
   return results;
+}
+
+/**
+ * Extract data from a batch of documents in a SINGLE LLM call.
+ * Packs multiple documents into one prompt and parses the multi-document response.
+ */
+async function extractBatchedDocuments(
+  docs: Array<{ id: string; text: string }>,
+  schema: string[],
+  config?: LLMConfig
+): Promise<Array<{ id: string; result?: LLMExtractionResponse; error?: string }>> {
+  const cfg = config || getConfig();
+  const schemaList = schema.map((field, i) => `${i + 1}. "${field}"`).join("\n");
+
+  // Build multi-document prompt
+  const TEXT_LIMIT_PER_DOC = Math.floor(10000 / docs.length); // Share token budget
+  let docsSection = "";
+  docs.forEach((doc, idx) => {
+    const truncatedText = doc.text.substring(0, TEXT_LIMIT_PER_DOC);
+    docsSection += `\n══ DOCUMENT ${idx + 1} (ID: ${doc.id}) ══\n${truncatedText}\n`;
+  });
+
+  const batchPrompt = `Extract values from ${docs.length} documents below. For EACH document, extract ONLY the fields listed in the schema.
+
+SCHEMA (${schema.length} fields):
+${schemaList}
+
+RULES:
+- Return ONE JSON object with a "documents" array
+- Each element in "documents" must have "id", "data", and "confidence"
+- If a field is not found → null
+- Do NOT guess or fabricate values
+
+REQUIRED OUTPUT FORMAT:
+{
+  "documents": [
+    ${docs.map((d, i) => `{
+      "id": "${d.id}",
+      "data": { ${schema.map(f => `"${f}": "value or null"`).join(", ")} },
+      "confidence": 0.0
+    }`).join(",\n    ")}
+  ]
+}
+
+${docsSection}
+
+OUTPUT (JSON ONLY):`;
+
+  const messages = [
+    { role: "system" as const, content: DETERMINISTIC_SYSTEM_PROMPT },
+    { role: "user" as const, content: batchPrompt },
+  ];
+
+  const response = await callLLM(messages, cfg);
+  return parseBatchResponse(response, docs, schema);
+}
+
+/**
+ * Parse a batched extraction response into individual results.
+ */
+function parseBatchResponse(
+  response: string,
+  docs: Array<{ id: string; text: string }>,
+  schema: string[]
+): Array<{ id: string; result?: LLMExtractionResponse; error?: string }> {
+  try {
+    const jsonMatch = response.match(/\{[\s\S]*\}/);
+    const parsed = JSON.parse(jsonMatch ? jsonMatch[0] : response);
+
+    if (!parsed.documents || !Array.isArray(parsed.documents)) {
+      throw new Error("Invalid batch response: missing 'documents' array");
+    }
+
+    return docs.map((doc) => {
+      const docResult = parsed.documents.find((d: any) => d.id === doc.id);
+      if (!docResult || !docResult.data) {
+        return { id: doc.id, error: "Document not found in batch response" };
+      }
+
+      // Normalize data to match schema
+      const data: ExtractedData = {};
+      for (const field of schema) {
+        data[field] = docResult.data[field] !== undefined ? docResult.data[field] : null;
+      }
+
+      const confidence = typeof docResult.confidence === "number"
+        ? Math.max(0, Math.min(1, docResult.confidence))
+        : 0.5;
+
+      return {
+        id: doc.id,
+        result: { data, confidence, raw: response } as LLMExtractionResponse,
+      };
+    });
+  } catch (error) {
+    // If batch parsing fails, return errors for all docs
+    return docs.map((doc) => ({
+      id: doc.id,
+      error: `Batch parse failed: ${error instanceof Error ? error.message : String(error)}`,
+    }));
+  }
 }
 
 /**

@@ -8,7 +8,7 @@ export class UIStateManager {
         currentLog: []
     };
 
-    private subscribers: ((state: TaskpaneState) => void)[] = [];
+    private subscribers: Set<(state: TaskpaneState) => void> = new Set();
 
     getState(): TaskpaneState {
         return this.state;
@@ -29,8 +29,12 @@ export class UIStateManager {
         this.notify();
     }
 
-    subscribe(callback: (state: TaskpaneState) => void) {
-        this.subscribers.push(callback);
+    /**
+     * Subscribe to state changes. Returns an unsubscribe function.
+     */
+    subscribe(callback: (state: TaskpaneState) => void): () => void {
+        this.subscribers.add(callback);
+        return () => { this.subscribers.delete(callback); };
     }
 
     private notify() {

@@ -4,14 +4,21 @@
  * Uses Web Crypto API for AES-GCM encryption
  */
 
-// Device-specific salt (derived from browser fingerprint)
+// Device-specific salt with persistent random component
+// The random component is generated once and stored, making the salt
+// device-sticky but not reproducible across different sessions without storage
 const getDeviceSalt = (): string => {
+  const SALT_KEY = 'sheetos_device_salt_v2';
+  let persistentRandom = localStorage.getItem(SALT_KEY);
+  if (!persistentRandom) {
+    const randomBytes = crypto.getRandomValues(new Uint8Array(32));
+    persistentRandom = Array.from(randomBytes, b => b.toString(16).padStart(2, '0')).join('');
+    localStorage.setItem(SALT_KEY, persistentRandom);
+  }
   const factors = [
     navigator.userAgent,
     navigator.language,
-    screen.width.toString(),
-    screen.height.toString(),
-    new Date().getTimezoneOffset().toString()
+    persistentRandom
   ];
   return factors.join('|');
 };
@@ -65,8 +72,7 @@ export const encryptValue = async (plaintext: string): Promise<string> => {
     return btoa(String.fromCharCode(...combined));
   } catch (error) {
     console.error('Encryption failed:', error);
-    // Fallback to base64 encoding (less secure but functional)
-    return btoa(plaintext);
+    throw new Error('Encryption failed. Web Crypto API is required for secure key storage.');
   }
 };
 
@@ -96,11 +102,14 @@ export const decryptValue = async (encrypted: string): Promise<string> => {
     return decoder.decode(decrypted);
   } catch (error) {
     console.error('Decryption failed:', error);
-    // Try fallback base64 decoding for backward compatibility
+    // Attempt base64 decode ONLY for legacy migration, then re-encrypt securely
     try {
-      return atob(encrypted);
+      const legacyKey = atob(encrypted);
+      // If this succeeds, it was a legacy base64 key — don't return raw, flag for re-encryption
+      console.warn('Legacy base64 key detected. Will be re-encrypted on next save.');
+      return legacyKey;
     } catch {
-      return encrypted; // Return as-is if all fails
+      throw new Error('Decryption failed. Key may be corrupted or from a different device.');
     }
   }
 };

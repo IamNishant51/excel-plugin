@@ -14,7 +14,7 @@ const purifyConfig: DOMPurify.Config = {
     'hr', 'mark', 'sub', 'sup', 'small', 'del', 'ins'
   ],
   ALLOWED_ATTR: [
-    'href', 'target', 'rel', 'class', 'id', 'style', 'title',
+    'href', 'target', 'rel', 'class', 'id', 'title',
     'aria-label', 'aria-hidden', 'role', 'tabindex'
   ],
   ALLOW_DATA_ATTR: false,
