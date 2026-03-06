@@ -23,14 +23,14 @@ export default function Footer() {
   return (
     <footer className="border-t border-border py-12">
       <div className="max-w-[1100px] mx-auto px-6">
-        <div className="grid sm:grid-cols-[1.5fr_1fr_1fr_1fr] gap-8 mb-10">
+        <div className="grid grid-cols-2 sm:grid-cols-[1.5fr_1fr_1fr_1fr] gap-x-6 gap-y-8 mb-10">
           {/* Brand */}
-          <div>
+          <div className="col-span-2 sm:col-span-1">
             <div className="flex items-center gap-2 text-fg font-semibold text-[15px] mb-3">
               <Logo size={18} />
-              SheetOS AI
+              SheetOS
             </div>
-            <p className="text-[13px] text-fg-muted leading-relaxed max-w-[240px]">
+            <p className="text-[13px] text-fg-muted leading-relaxed max-w-[280px]">
               AI-powered automation for Excel &amp; Word. Stop writing formulas, start describing them.
             </p>
           </div>
@@ -53,8 +53,8 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-8 border-t border-border text-[13px] text-fg-faint">
-          <span>© {new Date().getFullYear()} SheetOS AI. All rights reserved.</span>
-          <span>Built with ❤ in India.</span>
+          <span>© {new Date().getFullYear()} SheetOS. All rights reserved.</span>
+          <span>Built in India.</span>
         </div>
       </div>
     </footer>
