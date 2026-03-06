@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+    title: "Terms of Service",
+    description:
+        "Terms of Service for SheetOS AI — AI-powered Excel and Word automation add-in.",
+};
 
 export default function TermsPage() {
     return (

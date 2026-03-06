@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useFadeIn } from '@/hooks/useFadeIn';
 
 const steps = [
   { num: '01', title: 'Intent', desc: 'Classify task' },
@@ -12,15 +12,7 @@ const steps = [
 ];
 
 export default function Pipeline() {
-  const ref = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const el = ref.current?.querySelector('.fade-in');
-    if (!el) return;
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { el.classList.add('visible'); obs.disconnect(); } }, { threshold: 0.2 });
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
+  const ref = useFadeIn({ threshold: 0.2 });
 
   return (
     <section ref={ref} className="py-20 sm:py-28 border-t border-border">
@@ -34,14 +26,11 @@ export default function Pipeline() {
         </div>
 
         <div className="fade-in grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-          {steps.map((s, i) => (
+          {steps.map((s) => (
             <div key={s.num} className="text-center p-4 rounded-xl border border-border bg-surface hover:bg-surface-hover transition-colors">
               <div className="text-[12px] font-mono text-fg-faint mb-2">{s.num}</div>
               <div className="text-[14px] font-semibold text-fg mb-1">{s.title}</div>
               <div className="text-[12px] text-fg-muted">{s.desc}</div>
-              {i < steps.length - 1 && (
-                <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 text-fg-faint">→</div>
-              )}
             </div>
           ))}
         </div>

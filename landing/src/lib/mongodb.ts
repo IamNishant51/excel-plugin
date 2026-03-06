@@ -11,14 +11,17 @@ function getClientPromise(): Promise<MongoClient> {
     throw new Error('MONGODB_URI environment variable is not set');
   }
 
-  if (process.env.NODE_ENV === 'development') {
-    if (!global._mongoClientPromise) {
-      global._mongoClientPromise = new MongoClient(uri).connect();
-    }
-    return global._mongoClientPromise;
+  // Always reuse the cached client to prevent connection leaks
+  if (!global._mongoClientPromise) {
+    const client = new MongoClient(uri, {
+      maxPoolSize: 10,
+      minPoolSize: 1,
+      maxIdleTimeMS: 30_000,
+    });
+    global._mongoClientPromise = client.connect();
   }
 
-  return new MongoClient(uri).connect();
+  return global._mongoClientPromise;
 }
 
 export default getClientPromise;

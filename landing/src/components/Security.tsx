@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useFadeIn } from '@/hooks/useFadeIn';
 
 const items = [
   { icon: '✓', title: 'AST Code Validation', body: 'Every generated line is parsed and validated before execution.' },
@@ -12,17 +12,7 @@ const items = [
 ];
 
 export default function Security() {
-  const ref = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const els = ref.current?.querySelectorAll('.fade-in');
-    if (!els) return;
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-    }, { threshold: 0.1 });
-    els.forEach(el => obs.observe(el));
-    return () => obs.disconnect();
-  }, []);
+  const ref = useFadeIn({ threshold: 0.1 });
 
   return (
     <section ref={ref} id="security" className="py-20 sm:py-28 border-t border-border">
@@ -43,7 +33,7 @@ export default function Security() {
           <div className="grid sm:grid-cols-2 gap-4">
             {items.map(item => (
               <div key={item.title} className="fade-in p-5 rounded-xl border border-border hover:bg-surface transition-colors">
-                <div className="w-6 h-6 rounded-full bg-accent/10 text-accent text-[12px] flex items-center justify-center mb-3 font-bold">
+                <div className="w-6 h-6 rounded-full bg-accent/10 text-accent text-[12px] flex items-center justify-center mb-3 font-bold" aria-hidden="true">
                   {item.icon}
                 </div>
                 <h3 className="text-[14px] font-semibold text-fg mb-1">{item.title}</h3>

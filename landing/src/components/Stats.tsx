@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useFadeIn } from '@/hooks/useFadeIn';
 
 const stats = [
   { value: '6+', label: 'LLM Providers' },
@@ -10,15 +10,7 @@ const stats = [
 ];
 
 export default function Stats() {
-  const ref = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const el = ref.current?.querySelector('.fade-in');
-    if (!el) return;
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { el.classList.add('visible'); obs.disconnect(); } }, { threshold: 0.2 });
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
+  const ref = useFadeIn({ threshold: 0.2 });
 
   return (
     <section ref={ref} className="py-12 border-y border-border">

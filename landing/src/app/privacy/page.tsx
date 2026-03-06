@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+    title: "Privacy Policy",
+    description:
+        "Privacy Policy for SheetOS AI — learn how we handle your data, API keys, and spreadsheet content.",
+};
 
 export default function PrivacyPage() {
     return (

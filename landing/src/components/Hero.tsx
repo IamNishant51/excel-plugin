@@ -1,10 +1,12 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useFadeIn } from '@/hooks/useFadeIn';
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
 
+  // Hero uses staggered entrance (not scroll-triggered), so it needs custom logic
   useEffect(() => {
     const els = ref.current?.querySelectorAll('.fade-in');
     if (!els) return;
@@ -21,7 +23,7 @@ export default function Hero() {
       <div className="max-w-[1100px] mx-auto px-6 text-center">
 
         <div className="fade-in inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface border border-border text-[13px] text-fg-muted font-medium mb-8">
-          <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+          <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true" />
           Now available for Excel &amp; Word
         </div>
 
@@ -49,7 +51,7 @@ export default function Hero() {
           <div className="rounded-xl border border-border bg-surface overflow-hidden shadow-sm">
             {/* Title bar */}
             <div className="flex items-center gap-2 px-4 py-3 border-b border-border">
-              <div className="flex gap-1.5">
+              <div className="flex gap-1.5" aria-hidden="true">
                 <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
                 <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
                 <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
@@ -59,7 +61,7 @@ export default function Hero() {
             {/* Content */}
             <div className="p-6 sm:p-8 flex flex-col gap-4">
               <div className="flex items-start gap-3">
-                <div className="w-7 h-7 rounded-md bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className="w-7 h-7 rounded-md bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5" aria-hidden="true">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F7B5F" strokeWidth="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg>
                 </div>
                 <div className="bg-surface-hover rounded-lg px-4 py-3 text-[14px] text-fg leading-relaxed flex-1">
@@ -68,15 +70,15 @@ export default function Hero() {
               </div>
               <div className="ml-10 space-y-2">
                 <div className="flex items-center gap-2 text-[13px] text-fg-muted">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F7B5F" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F7B5F" strokeWidth="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
                   Parsed 1,402 rows — 3 operations planned
                 </div>
                 <div className="flex items-center gap-2 text-[13px] text-fg-muted">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F7B5F" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F7B5F" strokeWidth="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
                   AST validated — 0 banned patterns detected
                 </div>
                 <div className="flex items-center gap-2 text-[13px] text-accent font-medium">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" aria-hidden="true" />
                   Applying conditional formatting...
                 </div>
               </div>

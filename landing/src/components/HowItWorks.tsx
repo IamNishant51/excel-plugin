@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useFadeIn } from '@/hooks/useFadeIn';
 
 const steps = [
   {
@@ -24,17 +24,7 @@ const steps = [
 ];
 
 export default function HowItWorks() {
-  const ref = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const els = ref.current?.querySelectorAll('.fade-in');
-    if (!els) return;
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-    }, { threshold: 0.15 });
-    els.forEach(el => obs.observe(el));
-    return () => obs.disconnect();
-  }, []);
+  const ref = useFadeIn({ threshold: 0.15 });
 
   return (
     <section ref={ref} id="how-it-works" className="py-20 sm:py-28">
@@ -49,7 +39,7 @@ export default function HowItWorks() {
         <div className="grid md:grid-cols-3 gap-6">
           {steps.map(step => (
             <div key={step.num} className="fade-in p-6 rounded-xl border border-border bg-surface hover:bg-surface-hover transition-colors">
-              <div className="w-8 h-8 rounded-full bg-fg text-bg text-[13px] font-semibold flex items-center justify-center mb-4">
+              <div className="w-8 h-8 rounded-full bg-fg text-bg text-[13px] font-semibold flex items-center justify-center mb-4" aria-hidden="true">
                 {step.num}
               </div>
               <h3 className="text-lg font-semibold text-fg mb-2">{step.title}</h3>

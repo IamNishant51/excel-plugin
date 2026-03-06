@@ -1,19 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
+import { useFadeIn } from '@/hooks/useFadeIn';
 
 export default function Waitlist() {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useFadeIn({ threshold: 0.2 });
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'ok' | 'err'>('idle');
-
-  useEffect(() => {
-    const el = ref.current?.querySelector('.fade-in');
-    if (!el) return;
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { el.classList.add('visible'); obs.disconnect(); } }, { threshold: 0.2 });
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -42,12 +35,14 @@ export default function Waitlist() {
         </p>
 
         {status === 'ok' ? (
-          <div className="p-5 rounded-xl bg-accent/10 border border-accent/20">
+          <div className="p-5 rounded-xl bg-accent/10 border border-accent/20" role="status">
             <p className="text-[14px] font-medium text-accent">You&apos;re on the list! We&apos;ll notify you when spots open.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
+            <label htmlFor="waitlist-email" className="sr-only">Email address</label>
             <input
+              id="waitlist-email"
               type="email"
               required
               placeholder="you@company.com"
@@ -65,7 +60,7 @@ export default function Waitlist() {
           </form>
         )}
         {status === 'err' && (
-          <p className="text-red-500 text-[13px] mt-3">Something went wrong. Please try again.</p>
+          <p className="text-red-500 text-[13px] mt-3" role="alert">Something went wrong. Please try again.</p>
         )}
       </div>
     </section>
