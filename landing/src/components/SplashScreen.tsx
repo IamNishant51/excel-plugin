@@ -33,11 +33,14 @@ export default function SplashScreen() {
             }}
         >
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--fg)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="3" />
-                    <path d="M3 9h18" />
-                    <path d="M9 21V9" />
-                </svg>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                    src="https://ik.imagekit.io/9pfz6g8ri/excel_plugin_assets/icon-64-v2.png"
+                    alt="SheetOS AI"
+                    width={32}
+                    height={32}
+                    style={{ borderRadius: '6px' }}
+                />
                 <span style={{ fontSize: '20px', fontWeight: 600, color: 'var(--fg)', letterSpacing: '-0.02em' }}>
                     SheetOS
                 </span>

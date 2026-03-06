@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -21,11 +22,14 @@ export default function Navbar() {
       <div className="max-w-[1100px] mx-auto px-6 h-14 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 text-fg font-semibold text-[15px] tracking-tight">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="3" />
-            <path d="M3 9h18" />
-            <path d="M9 21V9" />
-          </svg>
+          <div className="relative w-[26px] h-[26px] rounded-md overflow-hidden">
+            <Image
+              src="https://ik.imagekit.io/9pfz6g8ri/excel_plugin_assets/icon-64-v2.png"
+              alt="SheetOS AI"
+              fill
+              className="object-cover"
+            />
+          </div>
           SheetOS
         </Link>
 

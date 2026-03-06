@@ -10,7 +10,7 @@ export default function DocsLayout() {
       <nav className="fixed top-0 left-0 right-0 z-40 bg-bg/70 backdrop-blur-2xl border-b border-border">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <div className="relative w-10 h-10 rounded-xl overflow-hidden ring-2 ring-accent/20">
+            <div className="relative w-10 h-10 rounded-xl overflow-hidden">
               <Image
                 src="https://ik.imagekit.io/9pfz6g8ri/excel_plugin_assets/icon-64-v2.png"
                 alt="SheetOS AI"
@@ -49,7 +49,7 @@ export default function DocsLayout() {
         {/* Installation */}
         <section className="mb-16">
           <h2 className="font-heading text-3xl font-bold text-t-white mb-6">Installation</h2>
-          
+
           <div className="space-y-6">
             <div>
               <h3 className="font-heading text-xl font-semibold text-t-white mb-3">Step 1: Download Manifest</h3>
@@ -79,7 +79,7 @@ export default function DocsLayout() {
         {/* Features */}
         <section className="mb-16">
           <h2 className="font-heading text-3xl font-bold text-t-white mb-6">Excel Features</h2>
-          
+
           <div className="space-y-6">
             <div className="p-6 rounded-xl border border-border bg-card">
               <h3 className="font-heading text-xl font-semibold text-accent mb-3">Data Cleaning</h3>
@@ -106,7 +106,7 @@ export default function DocsLayout() {
         {/* Word Features */}
         <section className="mb-16">
           <h2 className="font-heading text-3xl font-bold text-t-white mb-6">Word Features</h2>
-          
+
           <div className="space-y-6">
             <div className="p-6 rounded-xl border border-border bg-card">
               <h3 className="font-heading text-xl font-semibold text-purple-brand mb-3">Resume Optimization</h3>
@@ -123,7 +123,7 @@ export default function DocsLayout() {
         {/* Security */}
         <section className="mb-16">
           <h2 className="font-heading text-3xl font-bold text-t-white mb-6">Security & Privacy</h2>
-          
+
           <div className="p-6 rounded-xl border border-accent/20 bg-accent/5 space-y-4">
             <div>
               <h4 className="font-semibold text-t-white mb-2">AST Validation</h4>
