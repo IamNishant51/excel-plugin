@@ -7,6 +7,7 @@ import Logo from './Logo';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -17,8 +18,15 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', fn);
   }, []);
 
+  const navLinks = [
+    { label: 'Features', href: '#features' },
+    { label: 'How it works', href: '#how-it-works' },
+    { label: 'Security', href: '#security' },
+    { label: 'Docs', href: '/docs' },
+  ];
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 ${scrolled ? 'bg-bg/80 backdrop-blur-md border-b border-border' : 'bg-transparent'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 ${menuOpen ? 'bg-bg border-b border-border' : scrolled ? 'bg-bg/80 backdrop-blur-md border-b border-border' : 'bg-transparent'}`}>
       <div className="max-w-[1100px] mx-auto px-6 h-14 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 text-fg font-semibold text-[15px] tracking-tight">
@@ -26,14 +34,9 @@ export default function Navbar() {
           SheetOS
         </Link>
 
-        {/* Links */}
+        {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-1">
-          {[
-            { label: 'Features', href: '#features' },
-            { label: 'How it works', href: '#how-it-works' },
-            { label: 'Security', href: '#security' },
-            { label: 'Docs', href: '/docs' },
-          ].map(link => (
+          {navLinks.map(link => (
             <a key={link.href} href={link.href} className="px-3 py-1.5 text-[14px] text-fg-muted hover:text-fg rounded-md hover:bg-surface transition-colors">
               {link.label}
             </a>
@@ -62,8 +65,39 @@ export default function Navbar() {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
             Download
           </a>
+
+          {/* Hamburger (mobile only) */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden w-8 h-8 flex items-center justify-center rounded-md text-fg-muted hover:text-fg hover:bg-surface transition-colors"
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="4" y1="7" x2="20" y2="7" /><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="17" x2="20" y2="17" /></svg>
+            )}
+          </button>
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div className="md:hidden border-t border-border bg-bg">
+          <div className="max-w-[1100px] mx-auto px-6 py-3 flex flex-col gap-1">
+            {navLinks.map(link => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className="px-3 py-2.5 text-[14px] text-fg-muted hover:text-fg rounded-md hover:bg-surface transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
