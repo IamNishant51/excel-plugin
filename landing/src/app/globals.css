@@ -1,0 +1,82 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@source "../components";
+
+/* ── Theme tokens ── */
+@theme {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-faint: var(--fg-faint);
+  --color-fg-on-accent: #ffffff;
+
+  --color-accent: #0F7B5F;
+  --color-accent-light: #E6F4F0;
+  --color-accent-hover: #0a6b52;
+
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* ── Light mode ── */
+:root {
+  --bg: #ffffff;
+  --surface: #f7f7f5;
+  --surface-hover: #efedeb;
+  --border: #e3e2de;
+
+  --fg: #1a1a1a;
+  --fg-muted: #6b6b6b;
+  --fg-faint: #9b9a97;
+}
+
+/* ── Dark mode ── */
+.dark {
+  --bg: #191919;
+  --surface: #202020;
+  --surface-hover: #2c2c2c;
+  --border: #363636;
+
+  --fg: #ffffffeb;
+  --fg-muted: #9b9a97;
+  --fg-faint: #6b6b6b;
+}
+
+/* ── Base styles (inside @layer so they don't override utilities) ── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: rgba(15, 123, 95, 0.15);
+    color: var(--fg);
+  }
+}
+
+/* ── Scroll-triggered fade-in ── */
+@layer components {
+  .fade-in {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
