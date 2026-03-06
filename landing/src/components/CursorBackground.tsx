@@ -99,15 +99,21 @@ export default function CursorBackground() {
 
     /* ── Initialise particles spread across the viewport ── */
     const initParticles = useCallback((w: number, h: number) => {
+        const isMobile = w < 768;
+        const count = isMobile ? 10 : PARTICLE_COUNT;
+        const sizeMin = isMobile ? 5 : 8;
+        const sizeRange = isMobile ? 8 : 16;
+        const baseOpMin = isMobile ? 0.08 : 0.12;
+        const baseOpRange = isMobile ? 0.1 : 0.2;
         const arr: Particle[] = [];
-        for (let i = 0; i < PARTICLE_COUNT; i++) {
-            const baseOp = 0.12 + Math.random() * 0.2;
+        for (let i = 0; i < count; i++) {
+            const baseOp = baseOpMin + Math.random() * baseOpRange;
             arr.push({
                 x: Math.random() * w,
                 y: Math.random() * h,
                 vx: (Math.random() - 0.5) * DRIFT_SPEED,
                 vy: (Math.random() - 0.5) * DRIFT_SPEED,
-                size: 8 + Math.random() * 16,
+                size: sizeMin + Math.random() * sizeRange,
                 opacity: baseOp,
                 baseOpacity: baseOp,
                 rotation: Math.random() * Math.PI * 2,

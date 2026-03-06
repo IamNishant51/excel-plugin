@@ -86,7 +86,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
         <meta name="theme-color" content="#0F7B5F" />
         <link rel="dns-prefetch" href="https://ik.imagekit.io" />
