@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import SplashScreen from "@/components/SplashScreen";
+import CursorBackground from "@/components/CursorBackground";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -96,6 +97,7 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >
         <Providers>
+          <CursorBackground />
           <SplashScreen />
           {children}
         </Providers>
