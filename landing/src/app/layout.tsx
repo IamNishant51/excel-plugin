@@ -78,7 +78,11 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "https://ik.imagekit.io/9pfz6g8ri/excel_plugin_assets/icon-32-v2.png", sizes: "32x32", type: "image/png" },
+      { url: "https://ik.imagekit.io/9pfz6g8ri/excel_plugin_assets/icon-64-v2.png", sizes: "64x64", type: "image/png" },
+    ],
+    apple: "https://ik.imagekit.io/9pfz6g8ri/excel_plugin_assets/icon-80-v2.png",
   },
 };
 
