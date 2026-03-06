@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
+import Logo from '../Logo';
 
 export default function DocsLayout() {
   return (
@@ -10,14 +10,7 @@ export default function DocsLayout() {
       <nav className="fixed top-0 left-0 right-0 z-40 bg-bg/70 backdrop-blur-2xl border-b border-border">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <div className="relative w-10 h-10 rounded-xl overflow-hidden">
-              <Image
-                src="https://ik.imagekit.io/9pfz6g8ri/excel_plugin_assets/icon-64-v2.png"
-                alt="SheetOS AI"
-                fill
-                className="object-cover"
-              />
-            </div>
+            <Logo size={40} />
             <div className="flex items-baseline gap-1.5">
               <span className="font-heading text-xl font-bold text-t-white">SheetOS</span>
               <span className="text-accent font-heading text-lg font-bold">AI</span>

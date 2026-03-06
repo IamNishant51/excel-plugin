@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Logo from './Logo';
 
 export default function SplashScreen() {
     const ref = useRef<HTMLDivElement>(null);
@@ -33,14 +34,7 @@ export default function SplashScreen() {
             }}
         >
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                    src="https://ik.imagekit.io/9pfz6g8ri/excel_plugin_assets/icon-64-v2.png"
-                    alt="SheetOS AI"
-                    width={32}
-                    height={32}
-                    style={{ borderRadius: '6px' }}
-                />
+                <Logo size={32} />
                 <span style={{ fontSize: '20px', fontWeight: 600, color: 'var(--fg)', letterSpacing: '-0.02em' }}>
                     SheetOS
                 </span>
